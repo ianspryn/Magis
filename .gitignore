@@ -1,0 +1,9 @@
+# Custom
+.recommenders
+.metadata
+.settings
+.classpath
+.project
+bin
+
+/bin/
