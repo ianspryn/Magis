@@ -1,4 +1,5 @@
 # Custom
+/.idea/
 .recommenders
 .metadata
 .settings
