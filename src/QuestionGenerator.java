@@ -58,7 +58,7 @@ public class QuestionGenerator {
         random = rand.nextInt(comparableStrings.length);
         String secondPart = comparableStrings[random];
 
-        question = firstPart+".compareTo("+secondPart+");\nWhat would be the value of the number returned from this compareTo?";
+        question = firstPart+".compareTo("+secondPart+");\n\nWhat would be the value of the number returned from this compareTo?";
 
         if(firstPart.compareTo(secondPart)>0){
             correctAnswer = comparableStringAnswers[0];
