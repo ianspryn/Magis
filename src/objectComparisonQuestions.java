@@ -9,6 +9,12 @@ public class objectComparisonQuestions {
             "Valentine", "Programming", "Computer"};
     private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "Unknown"};
 
+    private String[] equalsStrings = {"Programming is fun!", "programming is Fun!",
+            "programming is fun!", "PROGRAMMING IS FUN!"};
+    private String[] equalsAnswers = {"True", "False", "Unknown"};
+
+    private String[] answers;
+
     private char[] characters = {'+','-','*','/','%','<','=','>'};
     private String correctAnswer;
     private String question = "";
@@ -18,6 +24,8 @@ public class objectComparisonQuestions {
     }
 
     public void generateComparableQuestion(){
+        answers = comparableStringAnswers;
+
         int random = rand.nextInt(comparableStrings.length);
         String firstPart = comparableStrings[random];
         random = rand.nextInt(comparableStrings.length);
@@ -36,7 +44,46 @@ public class objectComparisonQuestions {
         }
     }
 
-    public String[] getComparableStringAnswers() { return comparableStringAnswers; }
+    public void generateEqualsQuestion(){
+        answers = equalsAnswers;
+
+        int random = rand.nextInt(equalsStrings.length);
+        String firstPart = equalsStrings[random];
+        random = rand.nextInt(equalsStrings.length);
+        String secondPart = equalsStrings[random];
+
+        random = rand.nextInt(2);
+
+        if(random == 0) {
+            question = firstPart + ".equals" + secondPart + ");\n\nWill this statement return true or false?";
+            if(firstPart.equals(secondPart)){
+                correctAnswer = equalsAnswers[0];
+            }
+            else{
+                correctAnswer = equalsAnswers[1];
+            }
+        }
+        else if(random == 1){
+            question = firstPart + "==" + secondPart + "\n\nWill this statement return true or false?";
+            if(firstPart == secondPart){
+                correctAnswer = equalsAnswers[0];
+            }
+            else{
+                correctAnswer = equalsAnswers[1];
+            }
+        }
+        else{
+            question = firstPart + ".equalsIgnoreCase" + secondPart + ");\n\nWill this statement return true or false?";
+            if(firstPart.equalsIgnoreCase(secondPart)){
+                correctAnswer = equalsAnswers[0];
+            }
+            else{
+                correctAnswer = equalsAnswers[1];
+            }
+        }
+    }
+
+    public String[] getAnswers() { return answers; }
 
     public String getQuestion(){
         return question;

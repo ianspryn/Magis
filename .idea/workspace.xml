@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6017aa8b-d12b-4e6d-b7c8-272ebf0db33f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/commentQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/methodQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/objectComparisonQuestions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuestionGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/objectComparisonQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/objectComparisonQuestions.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +17,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/commentQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="48" selection-start-line="48" selection-end-line="54" selection-end-column="5" />
+            <state relative-caret-position="294">
+              <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
               <folding>
-                <element signature="e#505#506#0" expanded="true" />
-                <element signature="e#540#541#0" expanded="true" />
                 <element signature="e#1521#1522#0" expanded="true" />
                 <element signature="e#1552#1553#0" expanded="true" />
                 <element signature="e#1591#1592#0" expanded="true" />
@@ -37,15 +32,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/objectComparisonQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+            <state relative-caret-position="170">
+              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
               <folding>
                 <element signature="e#606#607#0" expanded="true" />
                 <element signature="e#641#642#0" expanded="true" />
-                <element signature="e#1331#1332#0" expanded="true" />
-                <element signature="e#1362#1363#0" expanded="true" />
-                <element signature="e#1401#1402#0" expanded="true" />
-                <element signature="e#1437#1438#0" expanded="true" />
+                <element signature="e#2367#2368#0" expanded="true" />
+                <element signature="e#2398#2399#0" expanded="true" />
+                <element signature="e#2437#2438#0" expanded="true" />
+                <element signature="e#2473#2474#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,7 +102,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551292827565" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551292905175" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -138,7 +133,7 @@
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2574899" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26153848" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -174,13 +169,12 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/QuestionGenerator.java" />
     <entry file="file://$PROJECT_DIR$/src/commentQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="48" selection-start-line="48" selection-end-line="54" selection-end-column="5" />
+        <state relative-caret-position="294">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
           <folding>
-            <element signature="e#505#506#0" expanded="true" />
-            <element signature="e#540#541#0" expanded="true" />
             <element signature="e#1521#1522#0" expanded="true" />
             <element signature="e#1552#1553#0" expanded="true" />
             <element signature="e#1591#1592#0" expanded="true" />
@@ -189,28 +183,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/QuestionGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
-          <folding>
-            <element signature="e#1018#1019#0" expanded="true" />
-            <element signature="e#1053#1054#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/objectComparisonQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        <state relative-caret-position="170">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
           <folding>
             <element signature="e#606#607#0" expanded="true" />
             <element signature="e#641#642#0" expanded="true" />
-            <element signature="e#1331#1332#0" expanded="true" />
-            <element signature="e#1362#1363#0" expanded="true" />
-            <element signature="e#1401#1402#0" expanded="true" />
-            <element signature="e#1437#1438#0" expanded="true" />
+            <element signature="e#2367#2368#0" expanded="true" />
+            <element signature="e#2398#2399#0" expanded="true" />
+            <element signature="e#2437#2438#0" expanded="true" />
+            <element signature="e#2473#2474#0" expanded="true" />
           </folding>
         </state>
       </provider>
