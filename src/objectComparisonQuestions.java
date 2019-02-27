@@ -55,7 +55,7 @@ public class objectComparisonQuestions {
         random = rand.nextInt(2);
 
         if(random == 0) {
-            question = firstPart + ".equals" + secondPart + ");\n\nWill this statement return true or false?";
+            question = firstPart + ".equals(" + secondPart + ");\n\nWill this statement return true or false?";
             if(firstPart.equals(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
@@ -73,7 +73,7 @@ public class objectComparisonQuestions {
             }
         }
         else{
-            question = firstPart + ".equalsIgnoreCase" + secondPart + ");\n\nWill this statement return true or false?";
+            question = firstPart + ".equalsIgnoreCase(" + secondPart + ");\n\nWill this statement return true or false?";
             if(firstPart.equalsIgnoreCase(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
