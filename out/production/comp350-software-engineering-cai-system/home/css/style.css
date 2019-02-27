@@ -1,0 +1,11 @@
+.button {
+    -fx-background-color: #D81B60; /* Pink 600 */
+}
+
+.button:hover {
+    -fx-background-color: #E91E63; /* Pink 500 */
+}
+
+.button:pressed {
+    -fx-background-color: #AD1457; /* Pink 800 */
+}
