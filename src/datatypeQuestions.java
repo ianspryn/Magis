@@ -1,10 +1,12 @@
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class datatypeQuestions {
 
     Random rand;
+    DecimalFormat df;
 
     private String[] dataTypeString = {"Cat","Dog","Mouse","Bug","Tree","Liquid","Programming","Sum",
         "Four","One","Two","Ten","Five","Zero Point Four", "Four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
@@ -22,6 +24,7 @@ public class datatypeQuestions {
     private String question = "";
 
     public datatypeQuestions(){
+        df = new DecimalFormat("###.##");
         rand = new Random();
     }
 
@@ -36,7 +39,7 @@ public class datatypeQuestions {
             correctAnswer = dataTypeMatchingAnswers[0];
         }
         else if(dataTypeSelector == 1){
-            question = question + (rand.nextDouble()*100);
+            question = question + (df.format(rand.nextDouble()*100));
             correctAnswer = dataTypeMatchingAnswers[1];
         }
         else if(dataTypeSelector == 2){
