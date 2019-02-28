@@ -31,7 +31,8 @@ public class objectComparisonQuestions {
         random = rand.nextInt(comparableStrings.length);
         String secondPart = comparableStrings[random];
 
-        question = firstPart+".compareTo("+secondPart+");\n\nWhat would be the value of the number returned from this compareTo?";
+        question = "String sent1 = \""+firstPart+"\";\nString sent2 = \""+secondPart+"\";\n";
+        question += "sent1.compareTo(sent2);\n\nWhat would be the value of the number returned from this compareTo?";
 
         if(firstPart.compareTo(secondPart)>0){
             correctAnswer = comparableStringAnswers[0];
@@ -52,10 +53,12 @@ public class objectComparisonQuestions {
         random = rand.nextInt(equalsStrings.length);
         String secondPart = equalsStrings[random];
 
-        random = rand.nextInt(2);
+        question = "String sent1 = \""+firstPart+"\";\nString sent2 = \""+secondPart+"\";\n";
+
+        random = rand.nextInt(3);
 
         if(random == 0) {
-            question = firstPart + ".equals(" + secondPart + ");\n\nWill this statement return true or false?";
+            question += "sent1.equals(sent2);\n\nWill this statement return true or false?";
             if(firstPart.equals(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
@@ -64,7 +67,7 @@ public class objectComparisonQuestions {
             }
         }
         else if(random == 1){
-            question = firstPart + "==" + secondPart + "\n\nWill this statement return true or false?";
+            question += "sent1 == sent2\n\nWill this statement return true or false?";
             if(firstPart == secondPart){
                 correctAnswer = equalsAnswers[0];
             }
@@ -73,7 +76,7 @@ public class objectComparisonQuestions {
             }
         }
         else{
-            question = firstPart + ".equalsIgnoreCase(" + secondPart + ");\n\nWill this statement return true or false?";
+            question += "sent1.equalsIgnoreCase(sent2);\n\nWill this statement return true or false?";
             if(firstPart.equalsIgnoreCase(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
