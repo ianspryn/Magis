@@ -1,31 +1,41 @@
 package com.magis.app.data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 
 public class ReadXML {
-    public String GetName() {
-        //get string of URLs from XML
+
+    private String studentID;
+
+    public ReadXML(String studentID) {
+        this.studentID = studentID;
+    }
+
+    /*
+    get string of URLs from XML
+     */
+    public String getName() {
         String name = null;
         try {
-            File inputFile = new File("student.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
+            Document doc = getDocument("src/com/magis/app/data/student.xml");
             doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("student");
-            Node nNode = nList.item(0);
+            NodeList studentList = doc.getElementsByTagName("student");
+            Node currentStudent = getCurrentStudent(studentList);
 
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) nNode;
+            if (currentStudent.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) currentStudent;
                 name = eElement
                         .getElementsByTagName("firstname")
                         .item(0)
@@ -35,8 +45,6 @@ public class ReadXML {
                         .item(0)
                         .getTextContent();
             }
-
-
             return name;
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,117 +52,65 @@ public class ReadXML {
         }
     }
 
-    public ArrayList GetChapterImages() {
-        //get string of URLs from XML
-        ArrayList<String> images = new ArrayList<String>();
+    private ArrayList<String> getChapterContent(String elementTagName) {
+        ArrayList<String> content = new ArrayList<>();
         try {
-            File inputFile = new File("chapters.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
+            Document doc = getDocument("src/com/magis/app/data/chapters.xml");
             doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("chapter");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    images.add(eElement
-                            .getElementsByTagName("image")
-                            .item(0)
-                            .getTextContent());
-                }
+            NodeList chapterList = doc.getElementsByTagName("chapter");
+            for (int i = 0; i < chapterList.getLength(); i++) {
+                Node chapter = chapterList.item(i);
+                Element chapterElement = (Element) chapter;
+                String description = chapterElement.getElementsByTagName(elementTagName).item(0).getTextContent();
+                content.add(description);
             }
-
-            return images;
+            return content;
         } catch (Exception e) {
             e.printStackTrace();
-            return images;
+            return content;
         }
     }
 
-    public ArrayList GetChapterDescription() {
-        ArrayList<String> description = new ArrayList<String>();
-
-        //get string of descriptions from XML
-        try {
-            File inputFile = new File("chapters.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("chapter");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    description.add(eElement
-                            .getElementsByTagName("description")
-                            .item(0)
-                            .getTextContent());
-                }
-            }
-
-            return description;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return description;
-        }
-
+    /*
+    get string of URLs from XML
+     */
+    public ArrayList getChapterImages() {
+        return getChapterContent("image");
     }
 
-    public ArrayList GetChapterText() {
-        ArrayList<String> text = new ArrayList<String>();
-
-        //get string of descriptions from XML
-        try {
-            File inputFile = new File("chapters.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("chapter");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    text.add(eElement
-                            .getElementsByTagName("text")
-                            .item(0)
-                            .getTextContent());
-                }
-            }
-
-            return text;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return text;
-        }
-
-
+    /*
+    get string of descriptions from XML
+     */
+    public ArrayList getChapterDescriptions() {
+        return getChapterContent("description");
     }
 
-    public ArrayList GetChapterProgress() {
-        ArrayList<Double> progress = new ArrayList<Double>();
+    /*
+    get individual score progress
+     */
+    public Double getChapterProgress(int index) {
+        return getAllChaptersProgress().get(index);
+    }
 
-        //get numbers of progress from XML
+    /*
+    get numbers of progress from XML
+     */
+    public ArrayList<Double> getAllChaptersProgress() {
+        ArrayList<Double> progress = new ArrayList<>();
+
         try {
-            File inputFile = new File("student.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
+            Document doc = getDocument("src/com/magis/app/data/student.xml");
             doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("chapter");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    progress.add(Double.parseDouble(eElement
-                            .getElementsByTagName("chapter")
-                            .item(0)
-                            .getTextContent()));
-                }
-            }
+            NodeList studentList = doc.getElementsByTagName("student");
+            Node currentStudent = getCurrentStudent(studentList);
 
+            Element currentStudentElement = (Element) currentStudent;
+            Element quizzesElement = (Element) currentStudentElement.getElementsByTagName("chapters").item(0);
+            NodeList quizList = quizzesElement.getElementsByTagName("chapter");
+            for (int temp = 0; temp < quizList.getLength(); temp++) {
+                Node nNode = quizList.item(temp);
+                progress.add(Double.parseDouble(nNode.getTextContent()));
+            }
             return progress;
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,34 +119,79 @@ public class ReadXML {
 
     }
 
-    public ArrayList GetQuizProgress() {
-        ArrayList<Double> progress = new ArrayList<Double>();
+    /*
+    get individual score progress
+     */
+    public Double getQuizScore(int index) {
+       return getAllQuizScores().get(index);
+    }
 
-        //get numbers of progress from XML
+    /*
+    get numbers of progress from XML
+     */
+    public ArrayList<Double> getAllQuizScores() {
+        ArrayList<Double> progress = new ArrayList<>();
+
         try {
-            File inputFile = new File("student.txt");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
+            Document doc = getDocument("src/com/magis/app/data/student.xml");
             doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName("quiz");
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    progress.add(Double.parseDouble(eElement
-                            .getElementsByTagName("quiz")
-                            .item(0)
-                            .getTextContent()));
-                }
+            NodeList studentList = doc.getElementsByTagName("student");
+            Node currentStudent = getCurrentStudent(studentList);
+
+            Element currentStudentElement = (Element) currentStudent;
+            Element quizzesElement = (Element) currentStudentElement.getElementsByTagName("quizzes").item(0);
+            NodeList quizList = quizzesElement.getElementsByTagName("quiz");
+            for (int temp = 0; temp < quizList.getLength(); temp++) {
+                Node nNode = quizList.item(temp);
+                progress.add(Double.parseDouble(nNode.getTextContent()));
             }
 
             return progress;
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            return progress;
+        }catch (Exception e) {
             e.printStackTrace();
             return progress;
         }
+    }
 
+    /*
+    get greatest student ID
+    used for determining next student ID when adding a new student
+     */
+    public String getLastStudentID() {
+        try {
+            Document doc = getDocument("src/com/magis/app/data/student.xml");
+            doc.getDocumentElement().normalize();
+            NodeList studentList = doc.getElementsByTagName("student");
+            Node node = studentList.item(studentList.getLength() - 1);
+            Element e = (Element)node;
+            return e.getAttribute("id");
+        } catch (FileNotFoundException e) {
+            //File doesn't exist? Then it's the first student
+            return "1";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return "1";
+        }
+    }
+
+    private Document getDocument(String filePath) throws ParserConfigurationException, IOException, SAXException {
+        File inputFile = new File(filePath);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        return dBuilder.parse(inputFile);
+    }
+
+    private Node getCurrentStudent(NodeList studentList) {
+        Node currentStudent = null;
+        for (int i = 0; i < studentList.getLength(); i++) {
+            currentStudent = studentList.item(i);
+            if (currentStudent.getAttributes().getNamedItem("id").getNodeValue().equals(this.studentID)) {
+                break;
+            }
+        }
+        return currentStudent;
     }
 }
-//anything else that might be relevant for the homepage of each chapter

@@ -1,3 +1,15 @@
+font-face {
+    src: url('RobotoMono-Bold.ttf');
+    src: url('RobotoMono-BoldItalic.ttf');
+    src: url('RobotoMono-Italic.ttf');
+    src: url('RobotoMono-Light.ttf');
+    src: url('RobotoMono-LightMedium.ttf');
+    src: url('RobotoMono-MediumItalic.ttf');
+    src: url('RobotoMono-Regular.ttf');
+    src: url('RobotoMono-Thin.ttf');
+    src: url('RobotoMono-ThinItalic.ttf');
+}
+
 .borderpane-home {
     -fx-background-color: #ffffff;
 }
@@ -65,9 +77,12 @@
 
 .chapter-box {
     -fx-background-color: #efefef;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 8);
-    -fx-padding: 25px;
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+    -fx-padding: 20px;
     -fx-alignment: center;
     -fx-background-radius: 25px;
 
+}
+.chapter-description-text {
+    -fx-font-family: "Roboto Mono Thin Italic";
 }
