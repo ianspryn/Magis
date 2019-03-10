@@ -16,18 +16,18 @@ public class UIComponents {
         hBox.setSpacing(5);
         hBox.getStyleClass().add("title-bar");
 
-        Button minimize = UIComponents.CreateIconButton(com.magis.app.icons.MaterialIcons.minimize, 12);
+        Button minimize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.minimize, 12);
         minimize.setOnAction(e -> Main.window.setIconified(true));
-        Button maximize = UIComponents.CreateIconButton(com.magis.app.icons.MaterialIcons.maximize, 12);
+        Button maximize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.maximize, 12);
         maximize.setOnAction(e -> Main.window.setFullScreen(!Main.window.isFullScreen()));
-        Button close = UIComponents.CreateIconButton(com.magis.app.icons.MaterialIcons.close, 12);
+        Button close = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.close, 12);
 
         hBox.getChildren().addAll(minimize, maximize, close);
 
         return hBox;
     }
 
-    public static Button CreateIconButton(String svg, float scale) {
+    public static Button CreateSVGIconButton(String svg, float scale) {
         SVGPath path = new SVGPath();
         path.setContent(svg);
         path.getStyleClass().add("button-icon");

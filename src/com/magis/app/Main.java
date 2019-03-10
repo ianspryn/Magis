@@ -1,19 +1,24 @@
 package com.magis.app;
 
+import com.magis.app.home.HomePage;
+import com.magis.app.parsers.LessonModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application{
 
     public static Stage window;
     public static Scene scene;
-    private double xOffset = 0, yOffset = 0;
+    public static LessonModel lessonModel;
+    public static String studentID = "1";
+
+    public static int width = 900, height = 700;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         window = primaryStage;
+        lessonModel = new LessonModel();
 //        Button button = new Button();
 //        button.setOnAction(e -> System.out.println("hi"));
 //        button.setText("woo");
@@ -24,10 +29,19 @@ public class Main extends Application{
 //        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Magis");
 
-        scene = com.magis.app.home.HomePage.Page();
-
-        primaryStage.setScene(scene);
+        HomePage.Page();
         primaryStage.show();
+    }
+
+    public static void setScene(Scene newScene) {
+        scene = newScene;
+        window.setScene(newScene);
+    }
+
+    public static void setScene(Scene newScene, String windowTitle) {
+        scene = newScene;
+        window.setScene(newScene);
+        window.setTitle(windowTitle);
     }
 
     public static void main(String[] args) { launch(args); }

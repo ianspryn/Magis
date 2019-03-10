@@ -1,4 +1,4 @@
-package com.magis.app.data;
+package com.magis.app.resources;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,91 +15,80 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 
-public class ReadXML {
+public class ReadStudentXML {
 
     private String studentID;
 
-    public ReadXML(String studentID) {
+    public ReadStudentXML(String studentID) {
         this.studentID = studentID;
     }
 
     /*
     get string of URLs from XML
      */
-    public String getName() {
-        String name = null;
+    public String getFullName() {
+       return getFirstName() + " " + getLastName();
+    }
+
+    public String getFirstName() {
+        String firstName = null;
         try {
-            Document doc = getDocument("src/com/magis/app/data/student.xml");
+            Document doc = getDocument("src/com/magis/app/resources/student.xml");
             doc.getDocumentElement().normalize();
             NodeList studentList = doc.getElementsByTagName("student");
             Node currentStudent = getCurrentStudent(studentList);
 
             if (currentStudent.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) currentStudent;
-                name = eElement
+                firstName = eElement
                         .getElementsByTagName("firstname")
                         .item(0)
-                        .getTextContent()
-                        + " " + eElement
+                        .getTextContent();
+            }
+            return firstName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return firstName;
+        }
+    }
+
+    public String getLastName() {
+        String firstName = null;
+        try {
+            Document doc = getDocument("src/com/magis/app/resources/student.xml");
+            doc.getDocumentElement().normalize();
+            NodeList studentList = doc.getElementsByTagName("student");
+            Node currentStudent = getCurrentStudent(studentList);
+
+            if (currentStudent.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) currentStudent;
+                firstName = eElement
                         .getElementsByTagName("lastname")
                         .item(0)
                         .getTextContent();
             }
-            return name;
+            return firstName;
         } catch (Exception e) {
             e.printStackTrace();
-            return name;
+            return firstName;
         }
-    }
-
-    private ArrayList<String> getChapterContent(String elementTagName) {
-        ArrayList<String> content = new ArrayList<>();
-        try {
-            Document doc = getDocument("src/com/magis/app/data/chapters.xml");
-            doc.getDocumentElement().normalize();
-            NodeList chapterList = doc.getElementsByTagName("chapter");
-            for (int i = 0; i < chapterList.getLength(); i++) {
-                Node chapter = chapterList.item(i);
-                Element chapterElement = (Element) chapter;
-                String description = chapterElement.getElementsByTagName(elementTagName).item(0).getTextContent();
-                content.add(description);
-            }
-            return content;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return content;
-        }
-    }
-
-    /*
-    get string of URLs from XML
-     */
-    public ArrayList getChapterImages() {
-        return getChapterContent("image");
-    }
-
-    /*
-    get string of descriptions from XML
-     */
-    public ArrayList getChapterDescriptions() {
-        return getChapterContent("description");
     }
 
     /*
     get individual score progress
      */
-    public Double getChapterProgress(int index) {
+    public int getChapterProgress(int index) {
         return getAllChaptersProgress().get(index);
     }
 
     /*
     get numbers of progress from XML
      */
-    public ArrayList<Double> getAllChaptersProgress() {
-        ArrayList<Double> progress = new ArrayList<>();
+    public ArrayList<Integer> getAllChaptersProgress() {
+        ArrayList<Integer> progress = new ArrayList<>();
 
         try {
-            Document doc = getDocument("src/com/magis/app/data/student.xml");
+            Document doc = getDocument("src/com/magis/app/resources/student.xml");
             doc.getDocumentElement().normalize();
             NodeList studentList = doc.getElementsByTagName("student");
             Node currentStudent = getCurrentStudent(studentList);
@@ -109,7 +98,7 @@ public class ReadXML {
             NodeList quizList = quizzesElement.getElementsByTagName("chapter");
             for (int temp = 0; temp < quizList.getLength(); temp++) {
                 Node nNode = quizList.item(temp);
-                progress.add(Double.parseDouble(nNode.getTextContent()));
+                progress.add(Integer.parseInt(nNode.getTextContent()));
             }
             return progress;
         } catch (Exception e) {
@@ -133,7 +122,7 @@ public class ReadXML {
         ArrayList<Double> progress = new ArrayList<>();
 
         try {
-            Document doc = getDocument("src/com/magis/app/data/student.xml");
+            Document doc = getDocument("src/com/magis/app/resources/student.xml");
             doc.getDocumentElement().normalize();
             NodeList studentList = doc.getElementsByTagName("student");
             Node currentStudent = getCurrentStudent(studentList);
@@ -161,7 +150,7 @@ public class ReadXML {
      */
     public String getLastStudentID() {
         try {
-            Document doc = getDocument("src/com/magis/app/data/student.xml");
+            Document doc = getDocument("src/com/magis/app/resources/student.xml");
             doc.getDocumentElement().normalize();
             NodeList studentList = doc.getElementsByTagName("student");
             Node node = studentList.item(studentList.getLength() - 1);

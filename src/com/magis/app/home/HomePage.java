@@ -3,7 +3,9 @@ package com.magis.app.home;
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.data.ReadXML;
+import com.magis.app.lesson.LessonPage;
+import com.magis.app.resources.ReadChapterXML;
+import com.magis.app.resources.ReadStudentXML;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -14,20 +16,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
 
 public class HomePage {
-    public static Scene Page() {
-//        Stage window = new Stage();
-//        window.setTitle("Home");
 
+    public static void Page() {
         /*
         Master
          */
@@ -37,9 +34,9 @@ public class HomePage {
         /*
         Top
          */
-        HBox hBox = UIComponents.CreateTitleBar();
-        hBox.setId("toolbar");
-        borderPane.setTop(hBox);
+//        HBox hBox = UIComponents.CreateTitleBar();
+//        hBox.setId("toolbar");
+//        borderPane.setTop(hBox);
 
         /*
         Middle
@@ -48,33 +45,21 @@ public class HomePage {
         vBox.getStyleClass().add("chapter-box-container");
         vBox.setMaxWidth(750);
 
-        ReadXML readXML = new ReadXML("1");
-        ArrayList<String> images = readXML.getChapterImages();
-//        ArrayList<String> description = readXML.getChapterDescriptions();
-
-//        ArrayList<String> images = new ArrayList<String>();
-//        images.add("https://i.imgur.com/vtFDQjM.jpg");
-//        images.add("https://i.imgur.com/GaXWWQv.jpg");
-//        images.add("https://i.imgur.com/XbYAHWT.png");
-//        images.add("https://i.imgur.com/EluEuRa.jpg");
-//        images.add("https://i.imgur.com/FAZsYAa.png");
-//        images.add("https://i.imgur.com/xTPmAr8.jpg");
-//        images.add("https://i.imgur.com/agyRhd6.jpg");
-//        images.add("https://i.imgur.com/VsSM73J.png");
-//        images.add("https://i.imgur.com/3GaAzX5.jpg");
-//        images.add("https://i.imgur.com/ME7VfCR.jpg");
-
+        ReadStudentXML readStudentXML = new ReadStudentXML(Main.studentID);
+        int numChapters = ReadChapterXML.getNumChapters();
+        String firstName = readStudentXML.getFirstName();
+        ArrayList<String> images = ReadChapterXML.getChapterImages();
+        ArrayList<String> titles = ReadChapterXML.getChapterTitles();
+        ArrayList<String> descriptions = ReadChapterXML.getChapterDescriptions();
+        ArrayList<Integer> chapterProgresses = readStudentXML.getAllChaptersProgress();
 
         //for each chapter
-        for (int i = 0; i < 10; i++) {
-            int lol = i;
+        for (int i = 0; i < numChapters; i++) {
+            int chapterIndex = i;
             //master box
             HBox chapterBox = new HBox();
 
-            //TODO: go to chapter
-            chapterBox.setOnMouseClicked(e -> {
-                System.out.println("Clicked on " + lol);
-            });
+            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex));
             chapterBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             chapterBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -83,32 +68,44 @@ public class HomePage {
             //Left image
             ImageView imageView = new ImageView(images.get(i));
             imageView.setPreserveRatio(true);
-            imageView.setFitHeight(300);
+            imageView.setFitHeight(150);
 
             //Separator
             Separator separator = new Separator();
+            separator.getStyleClass().add("separator-home");
             separator.setOrientation(Orientation.VERTICAL);
             separator.setMaxHeight(200);
-            separator.setPadding(new Insets(0, 35, 0, 35));
+            separator.setPadding(new Insets(0, 35, 0, 15));
 
-            //Progress and text description
+            //Progress, title, and text description
             VBox chapterInfo = new VBox();
             chapterBox.setAlignment(Pos.CENTER_LEFT);
 
+            AnchorPane topContent = new AnchorPane();
+
             //Progress
             RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(25);
+            progressIndicator.setProgress(chapterProgresses.get(i));
 
-            //text
-            String descriptionText = "hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world " + lol;
+            //Title
+            Label title = new Label();
+            title.getStyleClass().add("chapter-title-text");
+            title.setTextAlignment(TextAlignment.RIGHT);
+            title.setWrapText(true);
+            title.setText(titles.get(i));
 
+            topContent.getChildren().addAll(progressIndicator, title);
+            topContent.setLeftAnchor(progressIndicator, 0.0);
+            topContent.setRightAnchor(title, 5.0);
+
+            //Text description
             Label description = new Label();
             description.setWrapText(true);
             description.getStyleClass().add("chapter-description-text");
             description.setTextAlignment(TextAlignment.LEFT);
-            description.setText(descriptionText);
+            description.setText(descriptions.get(i));
 
-            chapterInfo.getChildren().addAll(progressIndicator, description);
+            chapterInfo.getChildren().addAll(topContent, description);
 
             
             chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
@@ -129,15 +126,9 @@ public class HomePage {
         scrollPane.setContent(contentHolder);
         borderPane.setCenter(scrollPane);
 
-
-
-
-        Scene scene = new Scene(borderPane, 300, 200);
+        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
-//        window.setScene(scene);
-//        window.show();
-
-        return scene;
+        Main.setScene(scene, "Home");
     }
 }

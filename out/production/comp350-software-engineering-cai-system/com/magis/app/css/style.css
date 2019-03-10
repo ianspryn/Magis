@@ -1,17 +1,63 @@
-font-face {
+@font-face {
     src: url('RobotoMono-Bold.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-BoldItalic.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-Italic.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-Light.ttf');
-    src: url('RobotoMono-LightMedium.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-MediumItalic.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-Regular.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-Thin.ttf');
+}
+
+@font-face {
     src: url('RobotoMono-ThinItalic.ttf');
 }
 
 .borderpane-home {
     -fx-background-color: #ffffff;
+
+}
+
+.separator-home {
+
+}
+
+.borderpane-lesson {
+
+}
+
+.lesson-side-panel-text {
+    -fx-font-size: 18px;
+    -fx-font-family: "Roboto Mono Light";
+    -fx-text-fill: #ffb5d6;
+
+}
+
+.lesson-text {
+    -fx-font-size: 15px;
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #200310;
+}
+
+.sidebar {
+    -fx-background-color: #AD1457; /* Pink 800 */
 }
 
 .button {
@@ -67,22 +113,29 @@ font-face {
 
 .chapter-box-scrollpane {
     -fx-alignment: center;
-
 }
 
 .chapter-box-container {
     -fx-alignment: center;
+    -fx-padding: 100px 0 0 0;
     -fx-spacing: 50px;
 }
 
 .chapter-box {
-    -fx-background-color: #efefef;
+    -fx-background-color: #ffffff;
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
     -fx-padding: 20px;
     -fx-alignment: center;
     -fx-background-radius: 25px;
 
 }
+
+.chapter-title-text {
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
 .chapter-description-text {
-    -fx-font-family: "Roboto Mono Thin Italic";
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #939393
 }
