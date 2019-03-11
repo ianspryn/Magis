@@ -9,3 +9,7 @@
 .button:pressed {
     -fx-background-color: #AD1457; /* Pink 800 */
 }
+
+.menu-bar {
+  -fx-background-color: derive(#FF1d1d,20%); // your color here
+}
