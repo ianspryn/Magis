@@ -24,6 +24,7 @@ public class objectComparisonQuestions {
     }
 
     public void generateComparableQuestion(){
+        question = "";
         answers = comparableStringAnswers;
 
         int random = rand.nextInt(comparableStrings.length);
@@ -46,6 +47,7 @@ public class objectComparisonQuestions {
     }
 
     public void generateEqualsQuestion(){
+        question = "";
         answers = equalsAnswers;
 
         int random = rand.nextInt(equalsStrings.length);

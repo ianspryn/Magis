@@ -20,6 +20,7 @@ public class commentQuestions {
     }
 
     public void generateGeneralCommentQuestion(){
+        question = "";
         int random;
 
         do {

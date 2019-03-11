@@ -29,6 +29,7 @@ public class datatypeQuestions {
     }
 
     public void datatypeMatchingQuestion(){
+        question = "";
         answers = dataTypeMatchingAnswers;
         question = "<x> = ";
 
