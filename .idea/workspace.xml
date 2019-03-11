@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6017aa8b-d12b-4e6d-b7c8-272ebf0db33f" name="Default Changelist" comment="" />
+    <list default="true" id="6017aa8b-d12b-4e6d-b7c8-272ebf0db33f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +16,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/questionGeneratorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="17">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/datatypeQuestions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,6 +77,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -79,7 +94,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -88,7 +102,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551379328887" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551381196273" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="groovy.util.GroovyTestCase" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
@@ -115,7 +129,17 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.questionGeneratorTest.testObjectComparisonQuestion">
+  <component name="RunManager" selected="JUnit.questionGeneratorTest.testCommentQuestion">
+    <configuration name="questionGeneratorTest.testCommentQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="comp350-software-engineering-cai-system" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="questionGeneratorTest" />
+      <option name="METHOD_NAME" value="testCommentQuestion" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="questionGeneratorTest.testDataTypeQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="comp350-software-engineering-cai-system" />
       <option name="PACKAGE_NAME" value="" />
@@ -148,6 +172,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.questionGeneratorTest.testCommentQuestion" />
         <item itemvalue="JUnit.questionGeneratorTest.testObjectComparisonQuestion" />
         <item itemvalue="JUnit.questionGeneratorTest.testDataTypeQuestion" />
         <item itemvalue="JUnit.questionGeneratorTest.testQuestion" />
@@ -168,9 +193,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="questionGeneratorTest_testObjectComparisonQuestion - 2019.02.28 at 13h 35m 57s.xml">
-      <configuration name="questionGeneratorTest.testObjectComparisonQuestion" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="questionGeneratorTest_testObjectComparisonQuestion - 2019.02.28 at 13h 36m 00s.xml">
       <configuration name="questionGeneratorTest.testObjectComparisonQuestion" configurationId="JUnit" />
     </history-entry>
@@ -198,12 +220,14 @@
     <history-entry file="questionGeneratorTest_testObjectComparisonQuestion - 2019.02.28 at 13h 36m 41s.xml">
       <configuration name="questionGeneratorTest.testObjectComparisonQuestion" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="questionGeneratorTest_testCommentQuestion - 2019.02.28 at 14h 09m 43s.xml">
+      <configuration name="questionGeneratorTest.testCommentQuestion" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19271255" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19595142" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -212,7 +236,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34051725" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34051725" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -255,30 +279,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/datatypeQuestions.java">
+    <entry file="file://$PROJECT_DIR$/src/objectComparisonQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="41" column="67" selection-start-line="41" selection-start-column="67" selection-end-line="41" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="67">
+          <caret line="57" column="31" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/questionGeneratorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        <state relative-caret-position="17">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/objectComparisonQuestions.java">
+    <entry file="file://$PROJECT_DIR$/src/datatypeQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="57" column="31" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
+        <state relative-caret-position="34">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
