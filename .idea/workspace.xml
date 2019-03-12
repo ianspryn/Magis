@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/QuizPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comp350-software-engineering-cai-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/comp350-software-engineering-cai-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/home/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/home/fxml/Main.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -112,10 +101,28 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="56" column="53" lean-forward="true" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+            <state relative-caret-position="130">
+              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-272">
+              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#705#713#0" expanded="true" />
+                <element signature="e#815#826#0" expanded="true" />
+                <element signature="e#2541#2542#0" expanded="true" />
+                <element signature="e#2572#2573#0" expanded="true" />
+                <element signature="e#2611#2612#0" expanded="true" />
+                <element signature="e#2647#2648#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -276,34 +283,6 @@
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="parsers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="quizzes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -313,20 +292,6 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="quizzes" type="462c0819:PsiDirectoryNode" />
               <item name="generator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="UI" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -345,7 +310,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552337242452" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552406814737" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -434,6 +399,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="QuestionGeneratorTest.testDataTypeQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="comp350-software-engineering-cai-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.magis.app.quizzes.questions.generator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
+      <option name="METHOD_NAME" value="testDataTypeQuestion" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ReadChapterXMLTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="comp350-software-engineering-cai-system" />
       <extension name="coverage">
@@ -504,6 +489,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.QuestionGeneratorTest.testDataTypeQuestion" />
         <item itemvalue="JUnit.ReadChapterXMLTest" />
         <item itemvalue="JUnit.ReadXMLTest" />
       </list>
@@ -524,12 +510,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 46m 02s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 46m 09s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 47m 38s.xml">
       <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
     </history-entry>
@@ -554,6 +534,12 @@
     <history-entry file="ReadChapterXMLTest - 2019.03.09 at 12h 03m 56s.xml">
       <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.12 at 11h 40m 07s.xml">
+      <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.12 at 11h 40m 25s.xml">
+      <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="1302000" />
@@ -569,7 +555,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.22591093" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -770,22 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#705#713#0" expanded="true" />
-            <element signature="e#815#826#0" expanded="true" />
-            <element signature="e#2541#2542#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2611#2612#0" expanded="true" />
-            <element signature="e#2647#2648#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -862,10 +831,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-272">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#705#713#0" expanded="true" />
+            <element signature="e#815#826#0" expanded="true" />
+            <element signature="e#2541#2542#0" expanded="true" />
+            <element signature="e#2572#2573#0" expanded="true" />
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2647#2648#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="56" column="53" lean-forward="true" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+        <state relative-caret-position="130">
+          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
