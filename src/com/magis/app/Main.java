@@ -1,7 +1,7 @@
 package com.magis.app;
 
 import com.magis.app.home.HomePage;
-import com.magis.app.parsers.LessonModel;
+import com.magis.app.models.LessonModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

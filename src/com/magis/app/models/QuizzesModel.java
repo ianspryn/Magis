@@ -1,6 +1,6 @@
-package com.magis.app.parsers;
+package com.magis.app.models;
 
-import com.magis.app.models.ChapterModel;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -13,13 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class LessonModel {
+public class QuizzesModel {
 
     private Document document;
 
     private ArrayList<ChapterModel> chapters;
 
-    public LessonModel() throws ParserConfigurationException, IOException, SAXException {
+    public QuizzesModel(ArrayList<ChapterModel> chapterModels) throws ParserConfigurationException, IOException, SAXException {
+        this.chapters = new ArrayList<>();
         File file = new File("src/com/magis/app/resources/chapters.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -35,12 +36,13 @@ public class LessonModel {
         }
     }
 
-    public ArrayList<ChapterModel> getChapters() {
-        return chapters;
-    }
+    public class ChapterModel {
+        Node chapter;
+        int chapterID;
 
-    public ChapterModel getChapters(int index) {
-        return chapters.get(index);
+        public ChapterModel(Node chapter, int chapterID) {
+            this.chapter = chapter;
+            this.chapterID = chapterID;
+        }
     }
-
 }

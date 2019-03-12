@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/lesson/LessonPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/lesson/LessonPageContent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/lesson/LessonSidePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/ChapterModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/LessonContent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/LessonModelObsolete.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/PageModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/parsers/LessonModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/parsers/StudentModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPageContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPageContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/ChapterModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/LessonContent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/LessonModelObsolete.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/PageModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/parsers/LessonModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/models/LessonModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/parsers/StudentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java" afterDir="false" />
+    </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -74,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/ReadStudentXMLTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
+            <state relative-caret-position="-68">
               <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
             </state>
           </provider>
@@ -90,19 +113,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="221">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/LessonModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="34" column="9" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="34" selection-end-column="9" />
+              <folding>
+                <element signature="e#2588#2589#0" expanded="true" />
+                <element signature="e#2624#2625#0" expanded="true" />
+                <element signature="e#2664#2665#0" expanded="true" />
+                <element signature="e#2700#2701#0" expanded="true" />
+                <element signature="e#2746#2747#0" expanded="true" />
+                <element signature="e#2788#2789#0" expanded="true" />
+                <element signature="e#2842#2843#0" expanded="true" />
+                <element signature="e#2878#2879#0" expanded="true" />
+                <element signature="e#2930#2931#0" expanded="true" />
+                <element signature="e#2977#2978#0" expanded="true" />
+                <element signature="e#4163#4164#0" expanded="true" />
+                <element signature="e#4215#4216#0" expanded="true" />
+                <element signature="e#4994#4995#0" expanded="true" />
+                <element signature="e#5048#5049#0" expanded="true" />
+                <element signature="e#5099#5100#0" expanded="true" />
+                <element signature="e#5150#5151#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+            <state relative-caret-position="221">
+              <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,19 +161,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
-              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#705#713#0" expanded="true" />
-                <element signature="e#815#826#0" expanded="true" />
-                <element signature="e#2541#2542#0" expanded="true" />
-                <element signature="e#2572#2573#0" expanded="true" />
-                <element signature="e#2611#2612#0" expanded="true" />
-                <element signature="e#2647#2648#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-34">
+              <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -162,6 +212,7 @@
       <find>lesson-side-panel-text</find>
       <find>scroll</find>
       <find>getTi</find>
+      <find>data</find>
     </findStrings>
     <replaceStrings>
       <replace>progressIndicator</replace>
@@ -181,8 +232,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/magis/app/UI/UI.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/UI/RingProgressIndicatorSkin.java" />
         <option value="$PROJECT_DIR$/src/credits.txt" />
         <option value="$PROJECT_DIR$/src/com/magis/app/css/fillprogress.css" />
         <option value="$PROJECT_DIR$/src/com/magis/app/UI/ProgressCircleIndicator.java" />
@@ -200,8 +249,6 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/resources/ReadStudentXMLTest.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/resources/ReadChapterXMLTest.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/resources/ReadChapterXML.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/models/LessonModel.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/models/LessonModelObsolete.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/parsers/LessonParser.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/parsers/LessonModel.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/models/PagesModel.java" />
@@ -216,9 +263,7 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/home/HomePage.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPageContent.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/models/PageModel.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/css/style.css" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/commentQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/CommentQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java" />
@@ -232,6 +277,12 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/testCommentQuestion.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/questionGeneratorTest.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/models/LessonModelObsolete.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/models/PageModel.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/models/LessonModel.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java" />
       </list>
     </option>
   </component>
@@ -259,6 +310,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -282,7 +334,14 @@
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="quizzes" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
@@ -290,13 +349,11 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="quizzes" type="462c0819:PsiDirectoryNode" />
-              <item name="generator" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -310,7 +367,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552406814737" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552419906375" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -326,12 +383,11 @@
       <recent name="com.magis.app.resources" />
       <recent name="com.magis.app.data" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\src\com\magis\app\data" />
-      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\src\com\magis\app" />
-      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\test\com.magis.app\data" />
-      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\test\com.magis.app\3" />
-      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\src\com\magis\app\css" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.magis.app.models" />
+      <recent name="com.magis.app.lesson" />
+      <recent name="com.magis.app.UI" />
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.magis.app" />
@@ -339,11 +395,12 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.magis.app.models" />
-      <recent name="com.magis.app.lesson" />
-      <recent name="com.magis.app.UI" />
-      <recent name="" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\src\com\magis\app\data" />
+      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\src\com\magis\app" />
+      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\test\com.magis.app\data" />
+      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\test\com.magis.app\3" />
+      <recent name="C:\Users\frees\Documents\GitHub\comp350-software-engineering-cai-system\src\com\magis\app\css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -555,8 +612,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.22995952" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.22591093" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -566,7 +624,7 @@
       <window_info anchor="bottom" id="Statistic" order="0" weight="0.32922733" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32922733" />
-      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.32614943" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.32614943" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.39977604" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -577,7 +635,7 @@
       <window_info anchor="bottom" id="Changes" order="11" />
       <window_info anchor="bottom" id="Profiler" order="12" />
       <window_info anchor="bottom" id="Event Log" order="13" weight="0.32922733" />
-      <window_info anchor="bottom" id="Messages" order="14" weight="0.32902297" />
+      <window_info active="true" anchor="bottom" id="Messages" order="14" visible="true" weight="0.3275862" />
       <window_info anchor="bottom" id="Terminal" order="15" weight="0.32922733" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -601,7 +659,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/credits.txt" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/RingProgressIndicatorSkin.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/RingProgressIndicator.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/css/fillprogress.css" />
@@ -617,7 +674,6 @@
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/ReadChapterXMLTest.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/org/w3c/dom/Element.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/org/w3c/dom/NamedNodeMap.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/LessonModelObsolete.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/ReadStudentXML.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/CreateStudentXML.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/ReadChapterXML.java" />
@@ -632,31 +688,8 @@
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/PageLabels.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/UIComponents.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/awt/ScrollPane.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/parsers/StudentModel.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/LessonContent.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/parsers/LessonModel.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/PageModel.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/css/style.css" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonPageContent.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/ReadStudentXMLTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -716,22 +749,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/ReadStudentXMLTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
+        <state relative-caret-position="-68">
           <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/QuizPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -754,7 +773,104 @@
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
-          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/QuizPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/LessonModelObsolete.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/LessonContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/PageModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="42" column="13" lean-forward="true" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+          <folding>
+            <element signature="e#1746#1747#0" expanded="true" />
+            <element signature="e#1784#1785#0" expanded="true" />
+            <element signature="e#1823#1824#0" expanded="true" />
+            <element signature="e#1858#1859#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/LessonModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="34" column="9" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="34" selection-end-column="9" />
+          <folding>
+            <element signature="e#2588#2589#0" expanded="true" />
+            <element signature="e#2624#2625#0" expanded="true" />
+            <element signature="e#2664#2665#0" expanded="true" />
+            <element signature="e#2700#2701#0" expanded="true" />
+            <element signature="e#2746#2747#0" expanded="true" />
+            <element signature="e#2788#2789#0" expanded="true" />
+            <element signature="e#2842#2843#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
+            <element signature="e#2930#2931#0" expanded="true" />
+            <element signature="e#2977#2978#0" expanded="true" />
+            <element signature="e#4163#4164#0" expanded="true" />
+            <element signature="e#4215#4216#0" expanded="true" />
+            <element signature="e#4994#4995#0" expanded="true" />
+            <element signature="e#5048#5049#0" expanded="true" />
+            <element signature="e#5099#5100#0" expanded="true" />
+            <element signature="e#5150#5151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
