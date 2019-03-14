@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,14 +61,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="136" column="44" selection-start-line="136" selection-start-column="44" selection-end-line="136" selection-end-column="44" />
+            <state relative-caret-position="83">
+              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#5700#5701#0" expanded="true" />
+                <element signature="e#5731#5732#0" expanded="true" />
+                <element signature="e#5770#5771#0" expanded="true" />
+                <element signature="e#5806#5807#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="23" column="32" lean-forward="true" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -75,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="739">
-              <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+            <state relative-caret-position="68">
+              <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -84,19 +98,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="884">
               <caret line="55" column="83" selection-start-line="55" selection-start-column="83" selection-end-line="55" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#705#713#0" expanded="true" />
-                <element signature="e#815#826#0" expanded="true" />
-                <element signature="e#2541#2542#0" expanded="true" />
-                <element signature="e#2572#2573#0" expanded="true" />
-                <element signature="e#2611#2612#0" expanded="true" />
-                <element signature="e#2647#2648#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -203,9 +211,9 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/testCommentQuestion.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/questionGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" />
       </list>
     </option>
   </component>
@@ -217,10 +225,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1416" />
-    <option name="height" value="1026" />
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1944" />
+    <option name="height" value="1302" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -233,7 +241,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,7 +279,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,7 +292,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552405447954" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552576128712" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -332,7 +340,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.QuestionGeneratorTest.testDataTypeQuestion">
+  <component name="RunManager" selected="JUnit.QuestionGeneratorTest.testSubstringQuestion">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -384,6 +392,26 @@
       <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
       <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
       <option name="METHOD_NAME" value="testDataTypeQuestion" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionGeneratorTest.testSubstringQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="comp350-software-engineering-cai-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.magis.app.quizzes.questions.generator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
+      <option name="METHOD_NAME" value="testSubstringQuestion" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -463,6 +491,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.QuestionGeneratorTest.testSubstringQuestion" />
         <item itemvalue="JUnit.QuestionGeneratorTest.testDataTypeQuestion" />
         <item itemvalue="JUnit.ReadChapterXMLTest" />
         <item itemvalue="JUnit.ReadXMLTest" />
@@ -484,35 +513,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 47m 38s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 57m 48s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 47m 57s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 58m 16s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 56m 46s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 59m 19s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 57m 17s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 59m 41s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 58m 03s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 59m 51s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 21h 58m 22s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 00m 17s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.08 at 22h 00m 19s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 01m 24s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ReadChapterXMLTest - 2019.03.09 at 12h 03m 56s.xml">
-      <configuration name="ReadChapterXMLTest" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 03m 46s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.12 at 11h 42m 36s.xml">
-      <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 04m 56s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.12 at 11h 43m 00s.xml">
-      <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 07m 34s.xml">
+      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -531,7 +560,7 @@
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2340081" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.24210526" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -541,7 +570,7 @@
       <window_info anchor="bottom" id="Statistic" order="0" weight="0.32922733" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32922733" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.95689654" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.38936782" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.39977604" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -551,9 +580,9 @@
       <window_info anchor="bottom" id="Problems" order="10" />
       <window_info anchor="bottom" id="Changes" order="11" />
       <window_info anchor="bottom" id="Profiler" order="12" />
-      <window_info anchor="bottom" id="Event Log" order="13" weight="0.32922733" />
-      <window_info anchor="bottom" id="Messages" order="14" weight="0.32902297" />
-      <window_info anchor="bottom" id="Terminal" order="15" weight="0.32922733" />
+      <window_info anchor="bottom" id="Event Log" order="13" weight="0.32902297" />
+      <window_info anchor="bottom" id="Messages" order="14" weight="0.3275862" />
+      <window_info anchor="bottom" id="Terminal" order="15" weight="0.32902297" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -576,7 +605,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/credits.txt" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/RingProgressIndicatorSkin.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/RingProgressIndicator.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/css/fillprogress.css" />
@@ -684,45 +712,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="136" column="44" selection-start-line="136" selection-start-column="44" selection-end-line="136" selection-end-column="44" />
+        <state relative-caret-position="884">
+          <caret line="55" column="83" selection-start-line="55" selection-start-column="83" selection-end-line="55" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/application/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="304" column="25" selection-start-line="304" selection-start-column="25" selection-end-line="304" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+        <state relative-caret-position="68">
+          <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="55" column="83" selection-start-line="55" selection-start-column="83" selection-end-line="55" selection-end-column="83" />
+        <state relative-caret-position="121">
+          <caret line="23" column="32" lean-forward="true" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#705#713#0" expanded="true" />
-            <element signature="e#815#826#0" expanded="true" />
-            <element signature="e#2541#2542#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2611#2612#0" expanded="true" />
-            <element signature="e#2647#2648#0" expanded="true" />
+            <element signature="e#5700#5701#0" expanded="true" />
+            <element signature="e#5731#5732#0" expanded="true" />
+            <element signature="e#5770#5771#0" expanded="true" />
+            <element signature="e#5806#5807#0" expanded="true" />
           </folding>
         </state>
       </provider>

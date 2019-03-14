@@ -23,6 +23,7 @@ public class OperatorQuestions {
     }
 
     public void getIntegerDivisionQuestion(){
+        answers = new String[5];
         question = "";
         int firstInt, secondInt = 100;
         double firstDouble;
@@ -58,6 +59,7 @@ public class OperatorQuestions {
     }
 
     public void getIncrementalQuestion(){
+        answers = new String[5];
         question = "";
         int number;
         int extraNumber;
@@ -134,6 +136,44 @@ public class OperatorQuestions {
         shuffler.add((""+(divisor++)));
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
+        answers = shuffler.toArray(answers);
+    }
+
+    public void getSubstringQuestion(){
+        answers = new String[4];
+        question = "";
+        int addString = rand.nextInt(manipulativeStrings.length);
+        String message = manipulativeStrings[addString];
+        ArrayList<String> shuffler = new ArrayList();
+
+        int endPoint = rand.nextInt(message.length()-1)+1;
+        int startPoint = rand.nextInt(endPoint);
+
+        question += "String message = \""+message+"\".substring("+startPoint+", "+endPoint+");" +
+                "\n\nWhat does message equal after this method?";
+
+        correctAnswer = "\""+message.substring(startPoint, endPoint)+"\"";
+        shuffler.add(correctAnswer);
+        if(startPoint<endPoint)
+            shuffler.add("\""+message.substring(startPoint+1, endPoint)+"\"");
+        else{
+            if(endPoint == message.length()-1)
+                shuffler.add("\""+message.substring(startPoint-1, endPoint)+"\"");
+            else if(endPoint == 0)
+                shuffler.add("\""+message.substring(startPoint, endPoint+1)+"\"");
+            else
+                shuffler.add("\""+message.substring(startPoint-1, endPoint)+"\"");
+        }
+
+        String reverseMessage = "\"";
+        for(int i=message.length()-2; i>=0; i--){
+            reverseMessage+=message.substring(i,i+1);
+        }
+        reverseMessage+="\"";
+        shuffler.add(reverseMessage);
+        Collections.shuffle(shuffler);
+        shuffler.add("Unknown");
+
         answers = shuffler.toArray(answers);
     }
 
