@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/lesson/LessonPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/lesson/LessonPageContent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/lesson/LessonSidePanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/ChapterModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/LessonContent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/LessonModelObsolete.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/models/PageModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/parsers/LessonModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/parsers/StudentModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPageContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPageContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/lesson/LessonSidePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/ChapterModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/LessonContent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/LessonModelObsolete.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/models/PageModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/parsers/LessonModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/models/LessonModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/parsers/StudentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -151,8 +130,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+            <state relative-caret-position="238">
+              <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -367,7 +346,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552419906375" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552485732415" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -612,7 +591,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.22591093" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -869,8 +847,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/QuizzesModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        <state relative-caret-position="238">
+          <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
