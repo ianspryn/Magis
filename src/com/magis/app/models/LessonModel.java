@@ -20,12 +20,13 @@ public class LessonModel {
     private ArrayList<ChapterModel> chapters;
 
     public LessonModel() throws ParserConfigurationException, IOException, SAXException {
+        this.chapters = new ArrayList<>();
+
         File file = new File("src/com/magis/app/resources/chapters.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         this.document = dBuilder.parse(file);
         this.document.getDocumentElement().normalize();
-        this.chapters = new ArrayList<>();
 
         NodeList chapters = this.document.getElementsByTagName("chapter");
         for (int i = 0; i < chapters.getLength(); i++) {

@@ -1,6 +1,6 @@
 <?xml version = "1.0"?>
-<class>
-    <student id = "1">
+<students>
+    <student username = "johnisgreat">
       <firstname>John</firstname>
       <lastname>Doe</lastname>
       <chapters>
@@ -16,9 +16,11 @@
         <chapter>00</chapter>
       </chapters>
       <quizzes>
-        <quiz>1</quiz>
-        <quiz>2</quiz>
-        <quiz>3</quiz>
+        <quiz id = "1">
+          <score></score>
+        </quiz>
+        <quiz id = "2">2</quiz>
+        <quiz id = "3">3</quiz>
       </quizzes>
       <exams>
         <exam>1</exam>
@@ -26,7 +28,7 @@
         <exam>3</exam>
       </exams>
    </student>
-   <student id = "2">
+   <student username = "thisjohnisevencooler">
       <firstname>John</firstname>
       <lastname>Doe</lastname>
       <chapters>
@@ -52,4 +54,4 @@
         <exam>3</exam>
       </exams>
    </student>
-</class>
+</students>

@@ -12,7 +12,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class QuizzesModel {
@@ -25,14 +24,14 @@ public class QuizzesModel {
         return chapters.get(chapterID);
     }
 
-    public QuizzesModel(ArrayList<ChapterModel> chapterModels) throws ParserConfigurationException, IOException, SAXException {
+    public QuizzesModel() throws ParserConfigurationException, IOException, SAXException {
         this.chapters = new ArrayList<>();
-        File file = new File("src/com/magis/app/resources/chapters.xml");
+
+        File file = new File("src/com/magis/app/resources/quizzes.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         this.document = dBuilder.parse(file);
         this.document.getDocumentElement().normalize();
-        this.chapters = new ArrayList<>();
 
         NodeList chapters = this.document.getElementsByTagName("chapter");
         for (int i = 0; i < chapters.getLength(); i++) {
@@ -75,13 +74,38 @@ public class QuizzesModel {
             Node question;
             String statement;
             String correctAnswer;
-            ArrayList<String> possibleAnswers;
+            ArrayList<String> incorrectAnswers;
+
+            public String getStatement() {
+                return statement;
+            }
+
+            public String getCorrectAnswer() {
+                return correctAnswer;
+            }
+
+            public ArrayList<String> getIncorrectAnswers() {
+                return incorrectAnswers;
+            }
 
             public QuestionsModel(Node question) {
                 this.question = question;
 
                 Element questionElement = (Element) question;
                 statement = questionElement.getElementsByTagName("statement").item(0).getNodeValue();
+                NodeList answers = questionElement.getElementsByTagName("answers");
+                for (int i = 0; i < answers.getLength(); i++) {
+                    Element answer = (Element) answers.item(i);
+                    if (answer.hasAttribute("id")) {
+                        if (answer.getAttribute("id").equals("correct")) {
+                            this.correctAnswer = answer.getNodeValue();
+                        } else {
+                            System.err.println("FAILED to add \"" + answer.getNodeValue() + "\" to list of answer choices. Unknown answer ID with question \"" + statement + "\"");
+                        }
+                    } else {
+                        incorrectAnswers.add(answer.getNodeName());
+                    }
+                }
 
             }
         }

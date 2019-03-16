@@ -177,7 +177,7 @@ public class ReadStudentXML {
         Node currentStudent = null;
         for (int i = 0; i < studentList.getLength(); i++) {
             currentStudent = studentList.item(i);
-            if (currentStudent.getAttributes().getNamedItem("id").getNodeValue().equals(this.studentID)) {
+            if (currentStudent.getAttributes().getNamedItem("username").getNodeValue().equals(this.studentID)) {
                 break;
             }
         }
