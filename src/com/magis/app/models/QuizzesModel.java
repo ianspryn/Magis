@@ -2,6 +2,7 @@ package com.magis.app.models;
 
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -11,6 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class QuizzesModel {
@@ -18,6 +20,10 @@ public class QuizzesModel {
     private Document document;
 
     private ArrayList<ChapterModel> chapters;
+
+    public ChapterModel getChapters(int chapterID) {
+        return chapters.get(chapterID);
+    }
 
     public QuizzesModel(ArrayList<ChapterModel> chapterModels) throws ParserConfigurationException, IOException, SAXException {
         this.chapters = new ArrayList<>();
@@ -39,10 +45,45 @@ public class QuizzesModel {
     public class ChapterModel {
         Node chapter;
         int chapterID;
+        private ArrayList<QuestionsModel> questions;
 
-        public ChapterModel(Node chapter, int chapterID) {
+        public ArrayList<QuestionsModel> getQuestions() {
+            return questions;
+        }
+
+        public int getNumQuestions() {
+            return questions.size();
+        }
+
+        public ChapterModel(Node chapter) throws ParserConfigurationException {
             this.chapter = chapter;
-            this.chapterID = chapterID;
+            this.questions = new ArrayList<>();
+
+            Element chapterElement = (Element) chapter;
+            NodeList questions = chapterElement.getElementsByTagName("question");
+            for (int i = 0; i < questions.getLength(); i++) {
+                Node question = questions.item(i);
+                QuestionsModel questionsModel = new QuestionsModel(question);
+                this.questions.add(questionsModel);
+            }
+
+
+        }
+
+        public class QuestionsModel {
+
+            Node question;
+            String statement;
+            String correctAnswer;
+            ArrayList<String> possibleAnswers;
+
+            public QuestionsModel(Node question) {
+                this.question = question;
+
+                Element questionElement = (Element) question;
+                statement = questionElement.getElementsByTagName("statement").item(0).getNodeValue();
+
+            }
         }
     }
 }
