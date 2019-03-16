@@ -1,20 +1,24 @@
 package com.magis.app.lesson;
 
 import com.magis.app.Main;
-import com.magis.app.models.LessonModel;
+import com.magis.app.lesson.PageLabels;
+import com.magis.app.models.PageModel;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
 public class LessonSidePanel {
 
     private LessonPageContent lessonPageContent;
-    private ArrayList<LessonModel.ChapterModel.PageModel> pages;
+    private ArrayList<PageModel> pages;
     private VBox vBox;
     private HBox currentPage;
     private PageLabels pageLabels;
@@ -23,7 +27,7 @@ public class LessonSidePanel {
     private int currentPageIndex;
 
 
-    public LessonSidePanel(LessonPageContent lessonPageContent, ArrayList<LessonModel.ChapterModel.PageModel> pages) {
+    public LessonSidePanel(LessonPageContent lessonPageContent, ArrayList<PageModel> pages) {
         this.lessonPageContent = lessonPageContent;
         this.pages = pages;
         this.vBox = new VBox();

@@ -1,7 +1,7 @@
 package com.magis.app.lesson;
 
 import com.magis.app.Main;
-import com.magis.app.models.LessonModel;
+import com.magis.app.models.LessonContent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -31,9 +31,9 @@ public class LessonPageContent {
     public void update(int pageIndex) {
         pageContent.getChildren().clear();
         
-        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapters(chapterIndex).getPages(pageIndex).getLessonContent();
+        ArrayList<LessonContent> lessonContents = Main.lessonModel.getChapters(chapterIndex).getPages(pageIndex).getLessonContent();
         for (int i = 0; i < lessonContents.size(); i++) {
-            LessonModel.ChapterModel.PageModel.LessonContent currentLesson = lessonContents.get(i);
+            LessonContent currentLesson = lessonContents.get(i);
             String type = currentLesson.getType();
             switch (type) {
                 case "text":
