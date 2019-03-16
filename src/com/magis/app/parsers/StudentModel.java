@@ -1,4 +1,4 @@
-package com.magis.app.models;
+package com.magis.app.parsers;
 
 public class StudentModel {
 }

@@ -23,6 +23,8 @@ public class LessonPage {
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
+        //Home Button
+
         //Home icon
         Button homeButton = UIComponents.CreateSVGIconButton(MaterialIcons.home, 50);
 
