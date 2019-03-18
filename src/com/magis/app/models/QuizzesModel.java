@@ -17,20 +17,31 @@ import java.util.ArrayList;
 public class QuizzesModel {
 
     private Document document;
-
+    private String filePath;
     private ArrayList<ChapterModel> chapters;
 
     public ChapterModel getChapters(int chapterID) {
         return chapters.get(chapterID);
     }
 
-    public QuizzesModel() throws ParserConfigurationException, IOException, SAXException {
+    public QuizzesModel() {
         this.chapters = new ArrayList<>();
-
-        File file = new File("src/com/magis/app/resources/quizzes.xml");
+        this.filePath = "src/com/magis/app/resources/quizzes.xml";
+        File file = new File(filePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        this.document = dBuilder.parse(file);
+        DocumentBuilder dBuilder = null;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert dBuilder != null;
+            this.document = dBuilder.parse(file);
+        } catch (SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        assert this.document != null;
         this.document.getDocumentElement().normalize();
 
         NodeList chapters = this.document.getElementsByTagName("chapter");
@@ -42,8 +53,7 @@ public class QuizzesModel {
     }
 
     public class ChapterModel {
-        Node chapter;
-        int chapterID;
+        private int chapterID;
         private ArrayList<QuestionsModel> questions;
 
         public ArrayList<QuestionsModel> getQuestions() {
@@ -54,8 +64,7 @@ public class QuizzesModel {
             return questions.size();
         }
 
-        public ChapterModel(Node chapter) throws ParserConfigurationException {
-            this.chapter = chapter;
+        ChapterModel(Node chapter) {
             this.questions = new ArrayList<>();
 
             Element chapterElement = (Element) chapter;
@@ -71,10 +80,9 @@ public class QuizzesModel {
 
         public class QuestionsModel {
 
-            Node question;
-            String statement;
-            String correctAnswer;
-            ArrayList<String> incorrectAnswers;
+            private String statement;
+            private String correctAnswer;
+            private ArrayList<String> incorrectAnswers;
 
             public String getStatement() {
                 return statement;
@@ -88,16 +96,15 @@ public class QuizzesModel {
                 return incorrectAnswers;
             }
 
-            public QuestionsModel(Node question) {
-                this.question = question;
-
+            QuestionsModel(Node question) {
+                this.incorrectAnswers = new ArrayList<>();
                 Element questionElement = (Element) question;
-                statement = questionElement.getElementsByTagName("statement").item(0).getNodeValue();
+                this.statement = questionElement.getElementsByTagName("statement").item(0).getNodeValue();
                 NodeList answers = questionElement.getElementsByTagName("answers");
                 for (int i = 0; i < answers.getLength(); i++) {
                     Element answer = (Element) answers.item(i);
                     if (answer.hasAttribute("id")) {
-                        if (answer.getAttribute("id").equals("correct")) {
+                        if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
                             this.correctAnswer = answer.getNodeValue();
                         } else {
                             System.err.println("FAILED to add \"" + answer.getNodeValue() + "\" to list of answer choices. Unknown answer ID with question \"" + statement + "\"");

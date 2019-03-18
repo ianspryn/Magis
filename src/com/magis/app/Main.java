@@ -16,7 +16,7 @@ public class Main extends Application{
     public static int width = 900, height = 700;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         window = primaryStage;
         lessonModel = new LessonModel();
 //        Button button = new Button();

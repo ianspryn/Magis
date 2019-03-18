@@ -27,7 +27,7 @@ public class ReadStudentXML {
     get string of URLs from XML
      */
     public String getFullName() {
-       return getFirstName() + " " + getLastName();
+        return getFirstName() + " " + getLastName();
     }
 
     public String getFirstName() {
@@ -112,7 +112,7 @@ public class ReadStudentXML {
     get individual score progress
      */
     public Double getQuizScore(int index) {
-       return getAllQuizScores().get(index);
+        return getAllQuizScores().get(index);
     }
 
     /*
@@ -121,27 +121,20 @@ public class ReadStudentXML {
     public ArrayList<Double> getAllQuizScores() {
         ArrayList<Double> progress = new ArrayList<>();
 
-        try {
-            Document doc = getDocument("src/com/magis/app/resources/student.xml");
-            doc.getDocumentElement().normalize();
-            NodeList studentList = doc.getElementsByTagName("student");
-            Node currentStudent = getCurrentStudent(studentList);
+        Document doc = getDocument("src/com/magis/app/resources/student.xml");
+        doc.getDocumentElement().normalize();
+        NodeList studentList = doc.getElementsByTagName("student");
+        Node currentStudent = getCurrentStudent(studentList);
 
-            Element currentStudentElement = (Element) currentStudent;
-            Element quizzesElement = (Element) currentStudentElement.getElementsByTagName("quizzes").item(0);
-            NodeList quizList = quizzesElement.getElementsByTagName("quiz");
-            for (int temp = 0; temp < quizList.getLength(); temp++) {
-                Node nNode = quizList.item(temp);
-                progress.add(Double.parseDouble(nNode.getTextContent()));
-            }
-
-            return progress;
-        } catch (FileNotFoundException e) {
-            return progress;
-        }catch (Exception e) {
-            e.printStackTrace();
-            return progress;
+        Element currentStudentElement = (Element) currentStudent;
+        Element quizzesElement = (Element) currentStudentElement.getElementsByTagName("quizzes").item(0);
+        NodeList quizList = quizzesElement.getElementsByTagName("quiz");
+        for (int temp = 0; temp < quizList.getLength(); temp++) {
+            Node nNode = quizList.item(temp);
+            progress.add(Double.parseDouble(nNode.getTextContent()));
         }
+
+        return progress;
     }
 
     /*
@@ -149,28 +142,35 @@ public class ReadStudentXML {
     used for determining next student ID when adding a new student
      */
     public String getLastStudentID() {
-        try {
-            Document doc = getDocument("src/com/magis/app/resources/student.xml");
-            doc.getDocumentElement().normalize();
-            NodeList studentList = doc.getElementsByTagName("student");
+        Document doc = getDocument("src/com/magis/app/resources/student.xml");
+        doc.getDocumentElement().normalize();
+        NodeList studentList = doc.getElementsByTagName("student");
+        if (studentList.item(studentList.getLength() - 1) != null) {
             Node node = studentList.item(studentList.getLength() - 1);
-            Element e = (Element)node;
+            Element e = (Element) node;
             return e.getAttribute("id");
-        } catch (FileNotFoundException e) {
+        } else {
             //File doesn't exist? Then it's the first student
-            return "1";
-        }
-        catch (Exception e) {
-            e.printStackTrace();
             return "1";
         }
     }
 
-    private Document getDocument(String filePath) throws ParserConfigurationException, IOException, SAXException {
+    private Document getDocument(String filePath) {
         File inputFile = new File(filePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        return dBuilder.parse(inputFile);
+        DocumentBuilder dBuilder = null;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document document = null;
+        try {
+            document = dBuilder.parse(inputFile);
+        } catch (SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        return document;
     }
 
     private Node getCurrentStudent(NodeList studentList) {

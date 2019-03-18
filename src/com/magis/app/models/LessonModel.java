@@ -16,16 +16,26 @@ import java.util.ArrayList;
 public class LessonModel {
 
     private Document document;
-
     private ArrayList<ChapterModel> chapters;
 
-    public LessonModel() throws ParserConfigurationException, IOException, SAXException {
+    public LessonModel() {
         this.chapters = new ArrayList<>();
 
         File file = new File("src/com/magis/app/resources/chapters.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        this.document = dBuilder.parse(file);
+        DocumentBuilder dBuilder = null;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        try {
+            this.document = dBuilder.parse(file);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.document.getDocumentElement().normalize();
 
         NodeList chapters = this.document.getElementsByTagName("chapter");
@@ -34,6 +44,10 @@ public class LessonModel {
             ChapterModel chapterModel = new ChapterModel(chapter);
             this.chapters.add(chapterModel);
         }
+    }
+
+    public int getNumChapters() {
+        return chapters.size();
     }
 
     public ArrayList<ChapterModel> getChapters() {
@@ -46,16 +60,14 @@ public class LessonModel {
 
     public class ChapterModel {
 
-        Node chapter;
         private String image;
         private String title;
         private String description;
         private ArrayList<PageModel> pages;
 
         public ChapterModel(Node chapter) {
-            this.chapter = chapter;
 
-            Element chapterElement = (Element) this.chapter;
+            Element chapterElement = (Element) chapter;
             this.image = chapterElement.getElementsByTagName("image").item(0).getTextContent();
             this.title = chapterElement.getElementsByTagName("title").item(0).getTextContent();
             this.description = chapterElement.getElementsByTagName("description").item(0).getTextContent();
@@ -91,15 +103,11 @@ public class LessonModel {
         }
 
         public class PageModel {
-
-            private Node page;
             private String title;
             private ArrayList<LessonContent> lessonContent = new ArrayList<>();
 
             public PageModel(Node page) {
-                this.page = page;
-
-                Element pageElement = (Element) this.page;
+                Element pageElement = (Element) page;
                 NodeList contents = pageElement.getChildNodes();
                 for (int i = 0; i < contents.getLength(); i++) {
                     Node contentNode = contents.item(i);
