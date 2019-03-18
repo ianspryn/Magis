@@ -20,10 +20,10 @@ public class OperatorQuestions {
 
     public OperatorQuestions(){
         rand = new Random();
+        answers = new String[5];
     }
 
     public void getIntegerDivisionQuestion(){
-        answers = new String[5];
         question = "";
         int firstInt, secondInt = 100;
         double firstDouble;
@@ -59,7 +59,6 @@ public class OperatorQuestions {
     }
 
     public void getIncrementalQuestion(){
-        answers = new String[5];
         question = "";
         int number;
         int extraNumber;
@@ -140,7 +139,6 @@ public class OperatorQuestions {
     }
 
     public void getSubstringQuestion(){
-        answers = new String[4];
         question = "";
         int addString = rand.nextInt(manipulativeStrings.length);
         String message = manipulativeStrings[addString];
@@ -171,6 +169,7 @@ public class OperatorQuestions {
         }
         reverseMessage+="\"";
         shuffler.add(reverseMessage);
+        shuffler.add("A random String of size "+(endPoint-startPoint));
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
 
