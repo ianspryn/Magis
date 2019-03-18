@@ -345,7 +345,7 @@ public class StudentModel {
             //exams
             Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
             if (examsElement.getElementsByTagName("exams") != null) {
-                NodeList examsList = examsElement.getElementsByTagName("exams");
+                NodeList examsList = examsElement.getElementsByTagName("exam");
                 for (int i = 0; i < examsList.getLength(); i++) {
                     Node examNode = examsList.item(i);
                     Exam exam = new Exam(examNode);
@@ -595,7 +595,6 @@ public class StudentModel {
             Exam(Node exam) {
                 Element examElement = (Element) exam;
                 this.examChapterNumber = Integer.parseInt(examElement.getAttributes().getNamedItem("chapter").getNodeValue());
-
                 this.scores = new ArrayList<>();
                 if (examElement.getElementsByTagName("score") != null) {
                     NodeList scores = examElement.getElementsByTagName("score");

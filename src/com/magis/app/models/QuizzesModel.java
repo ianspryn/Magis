@@ -21,7 +21,12 @@ public class QuizzesModel {
     private ArrayList<ChapterModel> chapters;
 
     public ChapterModel getChapters(int chapterID) {
-        return chapters.get(chapterID);
+        for (ChapterModel chapter : chapters) {
+            if (chapterID == chapter.getChapterID()) {
+                return chapter;
+            }
+        }
+        return null;
     }
 
     public QuizzesModel() {
@@ -64,10 +69,15 @@ public class QuizzesModel {
             return questions.size();
         }
 
-        ChapterModel(Node chapter) {
-            this.questions = new ArrayList<>();
+        public int getChapterID() {
+            return chapterID;
+        }
 
+        ChapterModel(Node chapter) {
+            this.chapterID = Integer.parseInt(chapter.getAttributes().getNamedItem("id").getNodeValue());
+            this.questions = new ArrayList<>();
             Element chapterElement = (Element) chapter;
+
             NodeList questions = chapterElement.getElementsByTagName("question");
             for (int i = 0; i < questions.getLength(); i++) {
                 Node question = questions.item(i);
