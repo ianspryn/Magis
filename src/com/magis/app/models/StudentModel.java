@@ -60,15 +60,22 @@ public class StudentModel {
         }
         assert this.document != null;
         this.document.getDocumentElement().normalize();
+    }
 
+    public void initializeStudent(String username) {
         if (this.document.getElementsByTagName("student") != null) {
             NodeList students = this.document.getElementsByTagName("student");
             for (int i = 0; i < students.getLength(); i++) {
                 Node student = students.item(i);
-                Element studentElement = (Element) student;
-                String username = studentElement.getAttributes().getNamedItem("username").getNodeValue();
-                Student s = new Student(student, username);
-                this.students.add(s);
+                if (student.getAttributes().getNamedItem("id").getNodeValue().equals(username)) {
+                    Node studentNode = students.item(i);
+                    Element studentElement = (Element) studentNode;
+                    String studentUsername = studentElement.getAttributes().getNamedItem("username").getNodeValue();
+                    Student s = new Student(studentNode, studentUsername);
+                    if (!this.students.contains(s)) {
+                        this.students.add(s);
+                    }
+                }
             }
         }
     }
@@ -169,8 +176,8 @@ public class StudentModel {
             chapters.appendChild(chapter);
         }
 
-        //quizzes
-        Element quizzes = document.createElement("quizzes");
+        //quiz
+        Element quizzes = document.createElement("quiz");
         student.appendChild(quizzes);
 
         //exams
@@ -251,7 +258,7 @@ public class StudentModel {
             }
             Element studentElement = (Element) student;
             assert studentElement != null;
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("quiz").item(0);
             Element newQuiz = document.createElement("quiz");
             newQuiz.setAttribute("chapter", Integer.toString(chapter));
             quizzesElement.appendChild(newQuiz);
@@ -331,8 +338,8 @@ public class StudentModel {
                 }
             }
 
-            //quizzes
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+            //quiz
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("quiz").item(0);
             if (quizzesElement.getElementsByTagName("quiz") != null) {
                 NodeList quizzesList = quizzesElement.getElementsByTagName("quiz");
                 for (int i = 0; i < quizzesList.getLength(); i++) {
@@ -379,7 +386,7 @@ public class StudentModel {
             private int quizChapterNumber;
             private ArrayList<Double> scores;
 
-            int getQuizChapterNumber() {
+            private int getQuizChapterNumber() {
                 return quizChapterNumber;
             }
 
@@ -454,7 +461,7 @@ public class StudentModel {
                 }
                 Element studentElement = (Element) student;
                 assert studentElement != null;
-                Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+                Element quizzesElement = (Element) studentElement.getElementsByTagName("quiz").item(0);
                 NodeList quizzes = quizzesElement.getElementsByTagName("quiz");
                 Node quiz = null;
                 for (int i = 0; i < quizzes.getLength(); i++) {
@@ -495,7 +502,7 @@ public class StudentModel {
             private int examChapterNumber;
             private ArrayList<Double> scores;
 
-            int getExamChapterNumber() {
+            private int getExamChapterNumber() {
                 return examChapterNumber;
             }
 

@@ -41,7 +41,6 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         int result = studentModel.addStudent("ianspryn", "Ian", "Spryn");
-
         Assert.assertEquals(0, result);
         Files.deleteIfExists(file.toPath());
     }
@@ -113,19 +112,6 @@ public class StudentModelTest {
     /*
     Quiz Class
      */
-    @Test
-    public void getQuizChapterNumber() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
-        Files.deleteIfExists(file.toPath());
-        StudentModel studentModel = new StudentModel(new LessonModel());
-        studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.getStudent("ianspryn").getQuiz(1).addScore(100);
-        int expectedChapter = 1;
-        int actualChapter = studentModel.getStudent("ianspryn").getQuiz(expectedChapter).getQuizChapterNumber();
-
-        Assert.assertEquals(expectedChapter, actualChapter);
-        Files.deleteIfExists(file.toPath());
-    }
 
     @Test
     public void getQuizScores() throws IOException {
@@ -241,19 +227,6 @@ public class StudentModelTest {
     /*
     Exam Class
      */
-    @Test
-    public void getExamChapterNumber() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
-        Files.deleteIfExists(file.toPath());
-        StudentModel studentModel = new StudentModel(new LessonModel());
-        studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.getStudent("ianspryn").getExam(1).addScore(12.5);
-        int expectedChapter = 1;
-        int actualChapter = studentModel.getStudent("ianspryn").getExam(expectedChapter).getExamChapterNumber();
-
-        Assert.assertEquals(expectedChapter, actualChapter);
-        Files.deleteIfExists(file.toPath());
-    }
 
     @Test
     public void getExamScores() throws IOException {
@@ -445,20 +418,6 @@ public class StudentModelTest {
     /*
     Quiz Class
      */
-    @Test
-    public void getQuizChapterNumberXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
-        Files.deleteIfExists(file.toPath());
-        StudentModel studentModel = new StudentModel(new LessonModel());
-        studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.getStudent("ianspryn").getQuiz(1).addScore(100);
-        StudentModel studentModel2 = new StudentModel(new LessonModel());
-        int expectedChapter = 1;
-        int actualChapter = studentModel2.getStudent("ianspryn").getQuiz(expectedChapter).getQuizChapterNumber();
-
-        Assert.assertEquals(expectedChapter, actualChapter);
-        Files.deleteIfExists(file.toPath());
-    }
 
     @Test
     public void getQuizScoresXML() throws IOException {
@@ -581,20 +540,6 @@ public class StudentModelTest {
     /*
     Exam Class
      */
-    @Test
-    public void getExamChapterNumberXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
-        Files.deleteIfExists(file.toPath());
-        StudentModel studentModel = new StudentModel(new LessonModel());
-        studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.getStudent("ianspryn").getExam(1).addScore(12.5);
-        StudentModel studentModel2 = new StudentModel(new LessonModel());
-        int expectedQuiz = 1;
-        int actualQuiz = studentModel2.getStudent("ianspryn").getExam(expectedQuiz).getExamChapterNumber();
-
-        Assert.assertEquals(expectedQuiz, actualQuiz);
-        Files.deleteIfExists(file.toPath());
-    }
 
     @Test
     public void getExamScoresXML() throws IOException {

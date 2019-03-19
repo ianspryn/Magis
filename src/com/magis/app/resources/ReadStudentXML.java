@@ -127,7 +127,7 @@ public class ReadStudentXML {
         Node currentStudent = getCurrentStudent(studentList);
 
         Element currentStudentElement = (Element) currentStudent;
-        Element quizzesElement = (Element) currentStudentElement.getElementsByTagName("quizzes").item(0);
+        Element quizzesElement = (Element) currentStudentElement.getElementsByTagName("quiz").item(0);
         NodeList quizList = quizzesElement.getElementsByTagName("quiz");
         for (int temp = 0; temp < quizList.getLength(); temp++) {
             Node nNode = quizList.item(temp);

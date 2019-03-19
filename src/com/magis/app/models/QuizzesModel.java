@@ -20,7 +20,7 @@ public class QuizzesModel {
     private String filePath;
     private ArrayList<ChapterModel> chapters;
 
-    public ChapterModel getChapters(int chapterID) {
+    public ChapterModel getChapter(int chapterID) {
         for (ChapterModel chapter : chapters) {
             if (chapterID == chapter.getChapterID()) {
                 return chapter;
@@ -31,7 +31,7 @@ public class QuizzesModel {
 
     public QuizzesModel() {
         this.chapters = new ArrayList<>();
-        this.filePath = "src/com/magis/app/resources/quizzes.xml";
+        this.filePath = "src/com/magis/app/resources/quiz.xml";
         File file = new File(filePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;
@@ -57,6 +57,18 @@ public class QuizzesModel {
         }
     }
 
+    public void initializeQuiz(int chapter) {
+        NodeList chapters = document.getElementsByTagName("chapter");
+        ChapterModel chapterModel = null;
+        for (int i = 0; i < chapters.getLength(); i++) {
+            Node chapterNode = chapters.item(i);
+            if (Integer.parseInt(chapterNode.getAttributes().getNamedItem("id").getNodeValue()) == chapter) {
+                chapterModel = new ChapterModel(chapterNode);
+            }
+        }
+        this.chapters.add(chapterModel);
+    }
+
     public class ChapterModel {
         private int chapterID;
         private ArrayList<QuestionsModel> questions;
@@ -64,12 +76,18 @@ public class QuizzesModel {
         public ArrayList<QuestionsModel> getQuestions() {
             return questions;
         }
+        public QuestionsModel getQuestion(int index) {
+            if (index > questions.size() - 1) {
+                return null;
+            }
+            return questions.get(index);
+        }
 
         public int getNumQuestions() {
             return questions.size();
         }
 
-        public int getChapterID() {
+        int getChapterID() {
             return chapterID;
         }
 
@@ -98,6 +116,10 @@ public class QuizzesModel {
                 return statement;
             }
 
+            public int getNumAnswers() {
+                return incorrectAnswers.size() + 1;
+            }
+
             public String getCorrectAnswer() {
                 return correctAnswer;
             }
@@ -109,18 +131,18 @@ public class QuizzesModel {
             QuestionsModel(Node question) {
                 this.incorrectAnswers = new ArrayList<>();
                 Element questionElement = (Element) question;
-                this.statement = questionElement.getElementsByTagName("statement").item(0).getNodeValue();
-                NodeList answers = questionElement.getElementsByTagName("answers");
+                this.statement = questionElement.getElementsByTagName("statement").item(0).getTextContent();
+                NodeList answers = questionElement.getElementsByTagName("answer");
                 for (int i = 0; i < answers.getLength(); i++) {
                     Element answer = (Element) answers.item(i);
                     if (answer.hasAttribute("id")) {
                         if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
-                            this.correctAnswer = answer.getNodeValue();
+                            this.correctAnswer = answer.getTextContent();
                         } else {
                             System.err.println("FAILED to add \"" + answer.getNodeValue() + "\" to list of answer choices. Unknown answer ID with question \"" + statement + "\"");
                         }
                     } else {
-                        incorrectAnswers.add(answer.getNodeName());
+                        incorrectAnswers.add(answer.getTextContent());
                     }
                 }
 

@@ -37,7 +37,6 @@ public class LessonModel {
             e.printStackTrace();
         }
         this.document.getDocumentElement().normalize();
-
         NodeList chapters = this.document.getElementsByTagName("chapter");
         for (int i = 0; i < chapters.getLength(); i++) {
             Node chapter = chapters.item(i);
@@ -45,8 +44,7 @@ public class LessonModel {
             this.chapters.add(chapterModel);
         }
     }
-
-    public int getNumChapters() {
+    int getNumChapters() {
         return chapters.size();
     }
 
@@ -59,13 +57,11 @@ public class LessonModel {
     }
 
     public class ChapterModel {
-
         private String image;
         private String title;
         private String description;
         private ArrayList<PageModel> pages;
-
-        public ChapterModel(Node chapter) {
+        ChapterModel(Node chapter) {
 
             Element chapterElement = (Element) chapter;
             this.image = chapterElement.getElementsByTagName("image").item(0).getTextContent();
@@ -106,7 +102,7 @@ public class LessonModel {
             private String title;
             private ArrayList<LessonContent> lessonContent = new ArrayList<>();
 
-            public PageModel(Node page) {
+            PageModel(Node page) {
                 Element pageElement = (Element) page;
                 NodeList contents = pageElement.getChildNodes();
                 for (int i = 0; i < contents.getLength(); i++) {
@@ -143,7 +139,7 @@ public class LessonModel {
                 String content;
                 String type;
 
-                public LessonContent(String content, String type) {
+                LessonContent(String content, String type) {
                     this.content = content;
                     this.type = type;
                 }

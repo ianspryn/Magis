@@ -2,18 +2,11 @@
         <chapter id = "1">
                 <questions>
                         <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
-                                <answer></answer>
-                                <answer></answer>
-                                <answer></answer>
-                        </question>
-                        <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
-                                <answer></answer>
-                                <answer></answer>
-                                <answer></answer>
+                                <statement>my statement</statement>
+                                <answer id = "correct">blah1</answer>
+                                <answer>asdf1</answer>
+                                <answer>asdf2</answer>
+                                <answer>asdf3</answer>
                         </question>
                 </questions>
         </chapter>
