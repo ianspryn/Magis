@@ -30,6 +30,11 @@
     src: url('RobotoMono-ThinItalic.ttf');
 }
 
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
 .borderpane-home {
     -fx-background-color: #ffffff;
 

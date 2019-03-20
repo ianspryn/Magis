@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -94,43 +95,77 @@ public class QuizPage {
 
         //Quiz area
         BorderPane quizArea = new BorderPane();
+        //remove the thin border around the nodes
+        quizArea.setStyle("-fx-box-border: transparent");
 
         AnchorPane navigationContent = new AnchorPane();
+//        navigationContent.setMinHeight(180);
+        navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
         StackPane leftStackPane = new StackPane();
         Circle leftCircle = new Circle();
         leftCircle.getStyleClass().add("navigation-circle");
         leftCircle.setRadius((35));
-        leftCircle.setFill(Color.WHITE);
+        leftCircle.setFill(Paint.valueOf("ffffff"));
         Text leftChevron = new Text("<");
         leftChevron.getStyleClass().add("navigation-text");
         leftStackPane.getChildren().addAll(leftCircle, leftChevron);
         leftStackPane.setAlignment(Pos.CENTER);
-
-//        StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
+        StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
+        leftStackPane.setOnMouseClicked(e -> {
+            leftCircle.setFill(Paint.valueOf("eaeaea"));
+//            lessonPageContent.update(index);
+//            update(index);
+        });
+        leftStackPane.setOnMouseEntered(e -> {
+            Main.scene.setCursor(Cursor.HAND);
+            leftCircle.setFill(Paint.valueOf("efefef"));
+        });
+        leftStackPane.setOnMouseExited(e -> {
+            Main.scene.setCursor(Cursor.DEFAULT);
+            leftCircle.setFill(Paint.valueOf("ffffff"));
+        });
 
         //Right navigation
         StackPane rightStackPane = new StackPane();
         Circle rightCircle = new Circle();
         rightCircle.getStyleClass().add("navigation-circle");
         rightCircle.setRadius((35));
-        rightCircle.setFill(Color.WHITE);
+        rightCircle.setFill(Paint.valueOf("ffffff"));
         Text rightChevron = new Text(">");
         rightChevron.getStyleClass().add("navigation-text");
         rightStackPane.getChildren().addAll(rightCircle, rightChevron);
         rightStackPane.setAlignment(Pos.CENTER);
+        StackPane.setMargin(rightChevron, new Insets(0,0,8,0)); //center ">"
+        rightStackPane.setOnMouseClicked(e -> {
+            rightCircle.setFill(Paint.valueOf("eaeaea"));
+//            lessonPageContent.update(index);
+//            update(index);
+        });
+        rightStackPane.setOnMouseEntered(e -> {
+            Main.scene.setCursor(Cursor.HAND);
+            rightCircle.setFill(Paint.valueOf("efefef"));
+        });
+        rightStackPane.setOnMouseExited(e -> {
+            Main.scene.setCursor(Cursor.DEFAULT);
+            rightCircle.setFill(Paint.valueOf("ffffff"));
+        });
 
-//        StackPane.setMargin(rightChevron, new Insets(0,0,8,0)); //center ">"
-
-//        navigationContent.getChildren().addAll(leftStackPane, rightStackPane, new Text("STUFF"));
+        navigationContent.getChildren().addAll(leftStackPane, rightStackPane, new Text("STUFF"));
         navigationContent.setLeftAnchor(leftStackPane, 10.0);
         navigationContent.setRightAnchor(rightStackPane, 10.0);
+
+//        navigationContent.setPrefHeight(120);
+//        navigationContent.setAlignment(Pos.TOP_CENTER);
+
         //TODO: Add submit button here
+
 
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);
+//        quizArea.getBottom().minHeight(navigationContent.getPrefWidth());
 
         borderPane.setCenter(quizArea);
 
