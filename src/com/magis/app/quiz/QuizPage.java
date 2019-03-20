@@ -5,6 +5,7 @@ import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -90,8 +95,39 @@ public class QuizPage {
         //Quiz area
         BorderPane quizArea = new BorderPane();
 
-        HBox navigationContent = new HBox();
-        //TODO: COMPLETE THIS
+        AnchorPane navigationContent = new AnchorPane();
+
+        //Left navigation
+        StackPane leftStackPane = new StackPane();
+        Circle leftCircle = new Circle();
+        leftCircle.getStyleClass().add("navigation-circle");
+        leftCircle.setRadius((35));
+        leftCircle.setFill(Color.WHITE);
+        Text leftChevron = new Text("<");
+        leftChevron.getStyleClass().add("navigation-text");
+        leftStackPane.getChildren().addAll(leftCircle, leftChevron);
+        leftStackPane.setAlignment(Pos.CENTER);
+
+//        StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
+
+        //Right navigation
+        StackPane rightStackPane = new StackPane();
+        Circle rightCircle = new Circle();
+        rightCircle.getStyleClass().add("navigation-circle");
+        rightCircle.setRadius((35));
+        rightCircle.setFill(Color.WHITE);
+        Text rightChevron = new Text(">");
+        rightChevron.getStyleClass().add("navigation-text");
+        rightStackPane.getChildren().addAll(rightCircle, rightChevron);
+        rightStackPane.setAlignment(Pos.CENTER);
+
+//        StackPane.setMargin(rightChevron, new Insets(0,0,8,0)); //center ">"
+
+//        navigationContent.getChildren().addAll(leftStackPane, rightStackPane, new Text("STUFF"));
+        navigationContent.setLeftAnchor(leftStackPane, 10.0);
+        navigationContent.setRightAnchor(rightStackPane, 10.0);
+        //TODO: Add submit button here
+
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);

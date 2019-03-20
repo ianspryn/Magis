@@ -140,6 +140,9 @@ public class LessonSidePanel {
     private void setLabelText(int index) {
         String title = pages.get(index).getTitle();
         if (title != null) {
+            if (title.length() > 23) {
+                title = title.substring(0, 24);
+            }
             pageLabels.getLabel(index).setText(title);
         } else {
             pageLabels.getLabel(index).setText("Page " + (index + 1));

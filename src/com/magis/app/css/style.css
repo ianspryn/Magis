@@ -85,6 +85,17 @@
     -fx-background-color: #C2185B;
 }
 
+.navigation-circle {
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+}
+
+/* the chevron text for navigating pages */
+.navigation-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #939393;
+    -fx-font-size: 2.0em;
+}
+
 /* set default fill of svg path */
 .icon-button .button-icon {
     -fx-fill: #fff;

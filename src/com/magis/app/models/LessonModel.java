@@ -127,7 +127,7 @@ public class LessonModel {
             public String getTitle() {
                 if (title != null) {
                     if (title.length() > 24) {
-                        System.err.println("Lesson page title of \"" + title + "\" too long. Must be less than 24 characters. Title will be clipped.");
+                        System.err.println("Lesson page title of \"" + title + "\" too long. Must be less than 25 characters. Title will be clipped.");
                     }
                     return title;
                 } else {
