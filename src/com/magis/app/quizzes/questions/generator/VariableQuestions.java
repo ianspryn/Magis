@@ -44,7 +44,7 @@ public class VariableQuestions {
             case 0:
                 selector = rand.nextInt(correctVariables.size());
                 word = correctVariables.get(selector);
-                wrongVariables.remove(selector);
+                correctVariables.remove(selector);
                 correctAnswer = answers[0];
                 question = "<datatype> "+word+" = ...;\n\n";
                 break;
