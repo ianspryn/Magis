@@ -7,120 +7,120 @@
 		<pages>
 			<page>
 				<text>
-					This line inside the main method is a comment:
-					// Display a greeting in the console window
+This line inside the main method is a comment:
+// Display a greeting in the console window
 
-					This comment is purely for the beneﬁt of the human reader, to explain in more detail
-					what the next statement does. Any text enclosed between // and the end of the line is
-					completely ignored by the compiler. Comments are used to explain the program to other
-					programmers or to yourself.
+This comment is purely for the beneﬁt of the human reader, to explain in more detail
+what the next statement does. Any text enclosed between // and the end of the line is
+completely ignored by the compiler. Comments are used to explain the program to other
+programmers or to yourself.
 
-					There are three kinds of comments:
+There are three kinds of comments:
 
-					/* comment */
-					// one-line-comment
-					/** documentationComment */
+/* comment */
+// one-line-comment
+/** documentationComment */
 
-					The one-line comment extends to the end of the line. The other comments can span
-					multiple lines and extend to the */ delimiter.
+The one-line comment extends to the end of the line. The other comments can span
+multiple lines and extend to the */ delimiter.
 
-					A documentation comment is delimited by /** and */. You can comment
+A documentation comment is delimited by /** and */. You can comment
 
-					• Classes
-					• Methods
-					• Instance variables
+• Classes
+• Methods
+• Instance variables
 
-					Each comment is placed immediately above the feature it documents. Each /** . . . */
-					documentation comment contains introductory text followed by tagged documentation.
+Each comment is placed immediately above the feature it documents. Each /** . . . */
+documentation comment contains introductory text followed by tagged documentation.
 				</text>
 			</page>
 			<page title = "Commenting the Public Interface">
 				<text>
-					When you implement classes and methods, you should get into the habit of thoroughly
-					commenting their behaviors. In Java there is a very useful standard form for
-					documentation comments. If you use this form in your classes, a program called
-					javadoc can automatically generate a neat set of HTML pages that describe them.
-					A documentation comment is placed before the class or method declaration that
-					is being documented. It starts with a /**, a special comment delimiter used by the
-					javadoc utility. Then you describe the method’s purpose. Then, for each method
-					parameter, you supply a line that starts with @param, followed by the parameter name
-					and a short explanation. Finally, you supply a line that starts with @return, describing
-					the return value. You omit the @param tag for methods that have no parameters,
-					and you omit the @return tag for methods whose return type is void.
-					The javadoc utility copies the first sentence of each comment to a summary table
-					in the HTML documentation. Therefore, it is best to write that first sentence with
-					some care. It should start with an uppercase letter and end with a period. It does not
-					have to be a grammatically complete sentence, but it should be meaningful when it
-					is pulled out of the comment and displayed in a summary.
+When you implement classes and methods, you should get into the habit of thoroughly
+commenting their behaviors. In Java there is a very useful standard form for
+documentation comments. If you use this form in your classes, a program called
+javadoc can automatically generate a neat set of HTML pages that describe them.
+A documentation comment is placed before the class or method declaration that
+is being documented. It starts with a /**, a special comment delimiter used by the
+javadoc utility. Then you describe the method’s purpose. Then, for each method
+parameter, you supply a line that starts with @param, followed by the parameter name
+and a short explanation. Finally, you supply a line that starts with @return, describing
+the return value. You omit the @param tag for methods that have no parameters,
+and you omit the @return tag for methods whose return type is void.
+The javadoc utility copies the first sentence of each comment to a summary table
+in the HTML documentation. Therefore, it is best to write that first sentence with
+some care. It should start with an uppercase letter and end with a period. It does not
+have to be a grammatically complete sentence, but it should be meaningful when it
+is pulled out of the comment and displayed in a summary.
 
-					Here are two typical examples.
-					/**
+Here are two typical examples.
+/**
 
-					Withdraws money from the bank account.
-					@param amount the amount to withdraw
-					*/
-					public void withdraw(double amount)
-					{
+Withdraws money from the bank account.
+@param amount the amount to withdraw
+*/
+public void withdraw(double amount)
+{
 
-					implementation—filled in later
-					}
-					/**
+implementation—filled in later
+}
+/**
 
-					Gets the current balance of the bank account.
-					@return the current balance
-					*/
-					public double getBalance()
-					{
+Gets the current balance of the bank account.
+@return the current balance
+*/
+public double getBalance()
+{
 
-					implementation—filled in later
-					}
+implementation—filled in later
+}
 
-					The comments you have just seen explain individual methods. Supply a brief comment for each
-					class, explaining its purpose. The comment syntax for class comments
-					is very simple: Just place the documentation comment above the class.
-					/**
+The comments you have just seen explain individual methods. Supply a brief comment for each
+class, explaining its purpose. The comment syntax for class comments
+is very simple: Just place the documentation comment above the class.
+/**
 
-					A bank account has a balance that can be changed by
-					deposits and withdrawals.
-					*/
-					public class BankAccount
-					{
-					. . .
-					}
+A bank account has a balance that can be changed by
+deposits and withdrawals.
+*/
+public class BankAccount
+{
+. . .
+}
 
-					Your first reaction may well be “Whoa! Am I supposed to write all this stuff?”
-					These comments do seem pretty repetitive. But you should take the time to write
-					them, even if it feels silly.
-					It is always a good idea to write the method comment first, before writing the
-					code in the method body. This is an excellent test to see that you firmly understand
-					what you need to program. If you can’t explain what a class or method does, you
-					aren’t ready to implement it.
-					What about very simple methods? You can easily spend more time pondering
-					whether a comment is too trivial to write than it takes to write it. In practical
-					programming, very simple methods are rare. It is harmless to have a trivial method
-					overcommented, whereas a complicated method without any comment can cause
-					real grief to future maintenance programmers. According to the standard Java documentation
-					style, every class, every method, every parameter, and every return
-					value should have a comment.
+Your first reaction may well be “Whoa! Am I supposed to write all this stuff?”
+These comments do seem pretty repetitive. But you should take the time to write
+them, even if it feels silly.
+It is always a good idea to write the method comment first, before writing the
+code in the method body. This is an excellent test to see that you firmly understand
+what you need to program. If you can’t explain what a class or method does, you
+aren’t ready to implement it.
+What about very simple methods? You can easily spend more time pondering
+whether a comment is too trivial to write than it takes to write it. In practical
+programming, very simple methods are rare. It is harmless to have a trivial method
+overcommented, whereas a complicated method without any comment can cause
+real grief to future maintenance programmers. According to the standard Java documentation
+style, every class, every method, every parameter, and every return
+value should have a comment.
 				</text>
 			</page>
 			<page title = "Self Check">
 				<text>
-					SELF CHECK
+SELF CHECK
 
-					1. Provide documentation comments for the Counter class of Section 3.1.
+1. Provide documentation comments for the Counter class of Section 3.1.
 
-					2. Suppose we enhance the BankAccount class so that each account has an account
-					number. Supply a documentation comment for the constructor
-					public BankAccount(int accountNumber, double initialBalance)
+2. Suppose we enhance the BankAccount class so that each account has an account
+number. Supply a documentation comment for the constructor
+public BankAccount(int accountNumber, double initialBalance)
 
-					3. Why is the following documentation comment questionable?
+3. Why is the following documentation comment questionable?
 
-					/**
-					Each account has an account number.
-					@return the account number of this account
-					*/
-					public int getAccountNumber()
+/**
+Each account has an account number.
+@return the account number of this account
+*/
+public int getAccountNumber()
 				</text>
 			</page>
 		</pages>
@@ -157,12 +157,15 @@ calculator, such as 1.3 or –0.333333333.
 			</page>
 			<page>
 				<text>
-When a value such as 13 or 1.3 occurs in a Java program, it is called a number literal. Do not use commas when you write number literals in Java. For example,
+When a value such as 13 or 1.3 occurs in a Java program, it is called a number literal.
+Do not use commas when you write number literals in Java. For example,
 13,000 must be written as 13000. To write numbers in exponential notation in Java,
 use the notation En instead of “ × 10n ”. For example, 1.3 × 10–4 is written as 1.3E-4.
 Table 1 shows how to write integer and floating-point literals in Java.
 You may wonder why Java has separate integer and floating-point number types.
-Pocket calculators don’t need a separate integer type; they use floating-point numbers for all calculations. However, integers have several advantages over floatingpoint numbers. They take less storage space, are processed faster, and don’t cause
+Pocket calculators don’t need a separate integer type; they use floating-point numbers for
+all calculations. However, integers have several advantages over floating
+point numbers. They take less storage space, are processed faster, and don’t cause
 rounding errors. You will want to use the int type for quantities that can never have
 fractional parts, such as the length of a string. Use the double type for quantities that
 can have fractional parts, such as a grade point average.
@@ -202,10 +205,11 @@ primitive types shown in Table 1.
 Six of the primitive types are number types; four of them for integers and two for
 ﬂoating-point numbers.
 
-The largest number that can be represented in an int is denoted by Integer.MAX_VALUE. Its value is about 2.14
-billion. Similarly, Integer.MIN_VALUE is the smallest integer, about –2.14 billion.
-Generally, you will use the int type for integer quantities. However, occasionally,
-calculations involving integers can overflow. This happens if the result of a computation exceeds the range for the number type. For example:
+The largest number that can be represented in an int is denoted by Integer.MAX_VALUE.
+Its value is about 2.14 billion. Similarly, Integer.MIN_VALUE is the smallest integer,
+about –2.14 billion. Generally, you will use the int type for integer quantities. However,
+occasionally, calculations involving integers can overflow. This happens if the result of
+a computation exceeds the range for the number type. For example:
 
 int n = 1000000;
 System.out.println(n * n); // Prints –727379968, which is clearly wrong
@@ -217,8 +221,10 @@ Unfortunately, there is no warning when an integer overﬂow occurs.
 If you run into this problem, the simplest remedy is to use the long type.
 
 Overﬂow is not usually a problem for double-precision ﬂoating-point numbers.
-The double type has a range of about ±10308 and about 15 signiﬁcant digits. However, you want to avoid the float type—it has less than 7 signiﬁcant digits. (Some
-programmers use float to save on memory if they need to store a huge set of numbers that do not require much precision.)
+The double type has a range of about ±10308 and about 15 signiﬁcant digits. However,
+you want to avoid the float type—it has less than 7 signiﬁcant digits. (Some
+programmers use float to save on memory if they need to store a huge set of numbers
+that do not require much precision.)
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%201/2.png</image>
 			</page>
@@ -233,10 +239,12 @@ double f = 4.35;
 System.out.println(100 * f); // Prints 434.99999999999994
 
 This problem is caused because computers represent numbers in the binary number
-system. In the binary number system, there is no exact representation of the fraction 1/10, just as there is no exact representation of the fraction 1/3 = 0.33333 in the
+system. In the binary number system, there is no exact representation of the fraction 1/10,
+just as there is no exact representation of the fraction 1/3 = 0.33333 in the
 decimal number system. (See Special Topic 4.2 on page 130 for more information.)
 For this reason, the double type is not appropriate for ﬁnancial calculations. In
-this book, we will continue to use double values for bank balances and other ﬁnancial quantities so that we keep our programs as simple as possible. However,
+this book, we will continue to use double values for bank balances and other ﬁnancial
+quantities so that we keep our programs as simple as possible. However,
 professional programs need to use the BigDecimal type for this purpose—see Special
 Topic 4.1 on page 130.
 In Java, it is legal to assign an integer value to a ﬂoating-point variable:
@@ -244,24 +252,25 @@ In Java, it is legal to assign an integer value to a ﬂoating-point variable:
 int dollars = 100;
 double balance = dollars; // OK
 
-But the opposite assignment is an error: You cannot assign a ﬂoating-point expression to an integer variable.
+But the opposite assignment is an error:
+You cannot assign a ﬂoating-point expression to an integer variable.
 
 double balance = 13.75;
 int dollars = balance; // Error
-
-You will see in Section 4.3.5 how to convert a value of type double into an integer.
 				</text>
 			</page>
 			<page title = "Self Check">
 				<text>
 SELF CHECK
 
-5. Which are the most commonly used number types in Java?
-6. Suppose you want to write a program that works with population data from
+1. Which are the most commonly used number types in Java?
+
+2. Suppose you want to write a program that works with population data from
 various countries. Which Java data type should you use?
-7. Which of the following initializations are incorrect, and why?
-a. int dollars = 100.0;
-b. double balance = 100;
+
+3. Which of the following initializations are incorrect, and why?
+	a. int dollars = 100.0;
+	b. double balance = 100;
 				</text>
 			</page>
 			<page>
@@ -273,7 +282,7 @@ You do not need to call a constructor to create a string object. You can obtain 
 string literal simply by enclosing a sequence of characters in double quotation
 marks. For example, the string literal "Harry" is an object of the String class.
 The number of characters in a string is called the length of the string. As you
-have seen in Chapter 2, you can use the length method to obtain the length of a
+have seen, you can use the length method to obtain the length of a
 string. For example, "Hello".length() is 5, and the length of "Hello, World!" is 13.
 (The quotation marks are not part of the string and do not contribute to the length,
 but you must count spaces and punctuation marks.)
@@ -306,7 +315,8 @@ after the mathematician George Boole (1815–1864), a pioneer in the study of lo
 		<pages>
 			<page title = "Assignment Operator">
 				<text>
-You can change the value of a variable with the assignment operator (=). For example, consider the variable declaration
+You can change the value of a variable with the assignment operator (=).
+For example, consider the variable declaration
 
 int width = 10;
 
@@ -327,7 +337,8 @@ width = height;
 
 // ERROR—uninitialized variable height
 
-The compiler will complain about an “uninitialized variable” when you use a variable that has never been assigned a value. (See Figure 2.)
+The compiler will complain about an “uninitialized variable” when you use a
+variable that has never been assigned a value. (See Figure 2.)
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/4.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/5.png</image>
@@ -362,14 +373,17 @@ width (figure 3.2) ”
 
 In Java, it is not a problem that the variable width is used on both sides of the =
 symbol. Of course, in mathematics, the equation width = width + 10 has no solution.
-
-
+				</text>
+			</page>
+			<page title = "Self Check">
+				<text>
 SELF CHECK
 1. Is 12 = 12 a valid expression in the Java language?
 2. How do you change the value of the greeting variable to "Hello, Nina!"?
-
-Common Error: Confusing Variable Declarations and Assignment Statements
-
+				</text>
+			</page>
+			<page title = "Common Error: Confusing Variable Declarations and Assignment Statements">
+				<text>
 Suppose your program declares a variable as follows:
 int width = 20;
 
@@ -387,8 +401,8 @@ to declare another variable with the same name.
 				<text>
 Java supports the same four basic arithmetic operations as a calculator—addition,
 subtraction, multiplication, and division. As you have already seen, addition and
-subtraction use the familiar + and - operators, and the * operator denotes multiplication. Division is indicated with a /, not a fraction bar.
-For example,
+subtraction use the familiar + and - operators, and the * operator denotes multiplication.
+Division is indicated with a /, not a fraction bar. For example,
 
 a+b/2
 
@@ -438,7 +452,7 @@ is always an integer, with the remainder discarded. That is,
 7 / 4
 
 evaluates to 1, because 7 divided by 4 is 1 with a remainder of 3 (which is discarded).
-Discarding the remainder is often useful, but it can also be a source of subtle programming errors—see Common Error 4.1 on page 142.
+Discarding the remainder is often useful, but it can also be a source of subtle programming errors.
 If you are interested only in the remainder of an integer division, use the % operator:
 
 7 % 4
@@ -508,7 +522,8 @@ the fractional part. For example, if balance is 13.75, then dollars is set to 13
 The cast tells the compiler that you agree to information loss, in this case, to the
 loss of the fractional part. You can also cast to other types, such as (float) or (byte).
 If you want to round a ﬂoating-point number to the nearest whole number, use
-the Math.round method. This method returns a long integer, because large ﬂoatingpoint numbers cannot be stored in an int.
+the Math.round method. This method returns a long integer, because large ﬂoatingpoint
+numbers cannot be stored in an int.
 
 long rounded = Math.round(balance);
 				</text>
@@ -520,18 +535,18 @@ long rounded = Math.round(balance);
 				<text>
 SELF CHECK
 
-3. What is the value of n after the following sequence of statements?
+1. What is the value of n after the following sequence of statements?
   n--;
   n++;
   n--;
 
-4. What is the value of 1729 / 100? Of 1729 % 100?
-5. Why doesn’t the following statement compute the average of s1, s2, and s3?
+2. What is the value of 1729 / 100? Of 1729 % 100?
+3. Why doesn’t the following statement compute the average of s1, s2, and s3?
 double average = s1 + s2 + s3 / 3; // Error
-6. What is the value of Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) in mathematical
+4. What is the value of Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) in mathematical
 notation?
-7. When does the cast (long) x yield a different result from the call Math.round(x)?
-8. When does the cast (long) x yield a different result from the call Math.round(x)?
+5. When does the cast (long) x yield a different result from the call Math.round(x)?
+6. When does the cast (long) x yield a different result from the call Math.round(x)?
 How do you round the double value x to the nearest int value, assuming that you
 know that it is less than 2 · 10^9?
 				</text>
@@ -635,15 +650,16 @@ message.
 				<text>
 SELF CHECK
 
-9. Assuming the String variable s holds the value "Agent", what is the effect of the
+1. Assuming the String variable s holds the value "Agent", what is the effect of the
 assignment s = s + s.length()?
-10. Assuming the String variable river holds the value "Mississippi", what is the
+2. Assuming the String variable river holds the value "Mississippi", what is the
 value of river.substring(1, 2)? Of river.substring(2, river.length() - 3)?
 				</text>
 			</page>
 			<page title = "Operators">
 				<text>
-Suppose you want to find whether amount is between 0 and 1000. Then two conditions have to be true: amount must be greater than 0, and it must be less than 1000. In
+Suppose you want to find whether amount is between 0 and 1000. Then two conditions
+have to be true: amount must be greater than 0, and it must be less than 1000. In
 Java you use the &amp;&amp; operator to represent the and when combining test conditions.
 That is, you can write the test as follows:
 
@@ -652,7 +668,9 @@ if (0 &lt; amount &amp;&amp; amount &lt; 1000) . . .
 The &amp;&amp; (and) operator combines several tests into a new test that passes only when
 all conditions are true. An operator that combines Boolean values is called a Boolean operator.
 The &amp;&amp; operator has a lower precedence than the relational operators. For that
-reason, you can write relational expressions on either side of the &amp;&amp; operator without using parentheses. For example, in the expression
+reason, you can write relational expressions on either side of the &amp;&amp; operator
+without using parentheses. For example, in the expression
+
 0 &lt; amount &amp;&amp; amount &lt; 1000
 
 the expressions 0 &lt; amount and amount &lt; 1000 are evaluated first. Then the &amp;&amp; operator
@@ -702,14 +720,16 @@ if (married == true) . . . // Don’t
 Just use the simpler test
 
 if (married) . . .
-
+				</text>
+			</page>
+			<page title = "Self Check">
+				<text>
 SELF CHECK
 
-11. When does the statement
+1. When does the statement print false?
 System.out.println(x &gt; 0 || x &lt; 0);
 
-12. print false?
-Rewrite the following expression, avoiding the comparison with false:
+2. Rewrite the following expression, avoiding the comparison with false:
 if (Character.isDigit(ch) == false) . . .
 				</text>
 			</page>
@@ -723,25 +743,30 @@ if (Character.isDigit(ch) == false) . . .
 			<page title = "What is an Object?">
 				<text>
 An object is a value that you can manipulate by calling one or more of its
-methods. A method consists of a sequence of instructions that can access the internal data of an object. When you call the method, you do not know exactly what
+methods. A method consists of a sequence of instructions that can access the
+internal data of an object. When you call the method, you do not know exactly what
 those instructions are, or even how the object is organized internally. However, the
 behavior of the method is well-defined, and that is what matters to us when we use
 it.
-For example, System.out refers to an object. You manipulate it by calling the println method. When the println method is called,
-some activities occur inside the object, and the ultimate effect is that text appears in
-the console window. You don’t know how that happens, and that’s OK. What matters is that the method carries out the work that you requested.
-Figure 4 shows a representation of the System.out object. The internal data is symbolized by a sequence of zeroes and ones. Think of each method (symbolized by
-the gears) as a piece of machinery that carries out its assigned task.
-
-you encountered two objects:
+For example, System.out refers to an object. You manipulate it by calling the
+println method. When the println method is called, some activities occur inside
+the object, and the ultimate effect is that text appears in the console window.
+You don’t know how that happens, and that’s OK. What matters is that the method
+carries out the work that you requested. Figure 4 shows a representation of the
+System.out object. The internal data is symbolized by a sequence of zeroes and ones.
+Think of each method (symbolized by the gears) as a piece of machinery that carries
+out its assigned task. You encountered two objects:
 
 • System.out
 • "Hello, World!"
 
-The type of an object is a class. The System.out object belongs to the class PrintStream. The "Hello, World!" object belongs to the class String. A class specifies the
+The type of an object is a class. The System.out object belongs to the class
+PrintStream. The "Hello, World!" object belongs to the class String. A class specifies the
 methods that you can apply to its objects.
+
 You can use the println method with any object that belongs to the PrintStream
-class. System.out is one such object. It is possible to obtain other objects of the PrintStream class. For example, you can construct a PrintStream object to send output to a
+class. System.out is one such object. It is possible to obtain other objects of the
+PrintStream class. For example, you can construct a PrintStream object to send output to a
 file. However, we won’t discuss files until later.
 Just as the PrintStream class provides methods such as println and print for its
 objects, the String class provides methods that you can apply to String objects. One
@@ -760,7 +785,8 @@ int n = greeting.length();
 sets n to the number of characters in the String object "Hello, World!". After the
 instructions in the length method are executed, n is set to 13. (The quotation marks
 are not part of the string, and the length method does not count them.)
-The length method—unlike the println method—requires no input inside the parentheses. However, the length method yields an output, namely the character count.
+The length method—unlike the println method—requires no input inside the parentheses.
+However, the length method yields an output, namely the character count.
 In the next section, you will see in greater detail how to supply method inputs
 and obtain method outputs.
 Let us look at another method of the String class. When you apply the toUpperCase
@@ -778,7 +804,8 @@ System.out.length(); // This method call is an error
 
 The PrintStream class (to which System.out belongs) has no length method.
 Let us summarize. In Java, every object belongs to a class. The class declares the
-methods for the objects. For example, the String class declares the length and toUpperCase methods (as well as other methods—you will learn about most of them in
+methods for the objects. For example, the String class declares the length and
+toUpperCase methods (as well as other methods—you will learn about most of them in
 Chapter 4). The methods form the public interface of the class, telling you what you
 can do with the objects of the class. A class also declares a private implementation,
 describing the data inside its objects and the instructions for its methods. Those
@@ -793,7 +820,8 @@ called println, as
 
 public void println(int output)
 
-That method is used to print an integer value. We say that the println name is overloaded because it refers to more than one method.
+That method is used to print an integer value. We say that the println name is
+overloaded because it refers to more than one method.
 				</text>
 			</page>
 			<page title = "Self Check">
@@ -813,7 +841,8 @@ the System.out object.
 
 To learn about object construction, let us turn to another class: the Rectangle class
 in the Java class library. Objects of type Rectangle describe rectangular shapes—see
-Figure 10. These objects are useful for a variety of purposes. You can assemble rectangles into bar charts, and you can program simple games by moving rectangles
+Figure 10. These objects are useful for a variety of purposes. You can assemble
+rectangles into bar charts, and you can program simple games by moving rectangles
 inside a window.
 
 Note that a Rectangle object isn’t a rectangular shape—it’s an object that contains a
@@ -860,8 +889,9 @@ origin (0, 0), width 0, and height 0.
 				<text>
 SELF CHECK
 
-4. How do you construct a square with center (100, 100) and side length 20?
-5. The getWidth method returns the width of a Rectangle object. What does the following statement print?
+1. How do you construct a square with center (100, 100) and side length 20?
+2. The getWidth method returns the width of a Rectangle object. What does
+the following statement print?
 System.out.println(new Rectangle().getWidth());
 				</text>
 			</page>
@@ -869,7 +899,8 @@ System.out.println(new Rectangle().getWidth());
 				<text>
 In this section we introduce a useful terminology for the methods of a class. A
 method that accesses an object and returns some information about it, without
-changing the object, is called an accessor method. In contrast, a method whose purpose is to modify the internal data of an object is called a mutator method.
+changing the object, is called an accessor method. In contrast, a method whose
+purpose is to modify the internal data of an object is called a mutator method.
 For example, the length method of the String class is an accessor method. It
 returns information about a string, namely its length. But it doesn’t modify the
 string at all when counting the characters.
@@ -879,9 +910,10 @@ and the height values. For example,
 
 double width = box.getWidth();
 
-Now let us consider a mutator method. Programs that manipulate rectangles frequently need to move them around, for example, to display animations. The
-Rectangle class has a method for that purpose, called translate. (Mathematicians use
-the term “translation” for a rigid motion of the plane.) 
+Now let us consider a mutator method. Programs that manipulate rectangles frequently
+need to move them around, for example, to display animations. The Rectangle class
+has a method for that purpose, called translate. (Mathematicians use the term “translation”
+for a rigid motion of the plane.)
 
 box.translate(15, 25);
 
@@ -898,8 +930,8 @@ This method is a mutator because it modifies the implicit parameter object.
 				<text>
 SELF CHECK
 
-6. Is the toUpperCase method of the String class an accessor or a mutator?
-7. Which call to translate is needed to move the rectangle declared by Rectangle
+1. Is the toUpperCase method of the String class an accessor or a mutator?
+2. Which call to translate is needed to move the rectangle declared by Rectangle
 box = new Rectangle(5, 10, 20, 30) so that its top-left corner is the origin (0, 0)?
 				</text>
 			</page>
@@ -915,7 +947,8 @@ refers to an object. For example, after the statement
 
 Rectangle box = new Rectangle(5, 10, 20, 30);
 
-the variable box refers to the Rectangle object that the new operator constructed. Technically speaking, the new operator returned a reference to the new object, and that
+the variable box refers to the Rectangle object that the new operator constructed.
+Technically speaking, the new operator returned a reference to the new object, and that
 reference is stored in the box variable.
 
 It is very important that you remember that the box variable does not contain the
@@ -932,7 +965,8 @@ However, number variables actually store numbers. When you declare
 int luckyNumber = 13;
 
 then the luckyNumber variable holds the number 13, not a reference to the number
-(see Figure 19). The reason is again efficiency. Because numbers require little storage, it is more efficient to store them directly in a variable.
+(see Figure 19). The reason is again efficiency. Because numbers require little
+storage, it is more efficient to store them directly in a variable.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/17.png</image>
 				<text>
@@ -971,8 +1005,8 @@ apparent when you have multiple variables that refer to the same object.
 				<text>
 SELF CHECK
 
-8. What is the effect of the assignment: String greeting2 = greeting?
-9. After calling greeting2.toUpperCase(), what are the contents of greeting and
+1. What is the effect of the assignment: String greeting2 = greeting?
+2. After calling greeting2.toUpperCase(), what are the contents of greeting and
 greeting2?
 				</text>
 			</page>
@@ -1029,9 +1063,11 @@ Unfortunately, such roundoff errors are unavoidable. It plainly does not make se
 in most circumstances to compare floating-point numbers exactly. Instead, test
 whether they are close enough.
 To test whether a number x is close to zero, you can test whether the absolute
-value | x| (that is, the number with its sign removed) is less than a very small threshold number. That threshold value is often called ε (the Greek letter epsilon). It is
+value | x| (that is, the number with its sign removed) is less than a very small
+threshold number. That threshold value is often called ε (the Greek letter epsilon). It is
 common to set ε to 10–14 when testing double numbers.
-Similarly, you can test whether two numbers are approximately equal by checking whether their difference is close to 0.
+Similarly, you can test whether two numbers are approximately equal by checking
+whether their difference is close to 0.
 
 |x−y| ≤ε
 
@@ -1054,7 +1090,8 @@ Do not use the == operator to compare strings. The expression
 
 if (string1 == string2) // Not useful
 
-has an unrelated meaning. It tests whether the two string variables refer to the identical string object. You can have strings with identical contents stored in different
+has an unrelated meaning. It tests whether the two string variables refer to the
+identical string object. You can have strings with identical contents stored in different
 objects, so this test never makes sense in actual programming; see Common Error
 5.2 on page 180.
 In Java, letter case matters. For example, "Harry" and "HARRY" are not the same
@@ -1062,11 +1099,13 @@ string. To ignore the letter case, use the equalsIgnoreCase method:
 
 if (string1.equalsIgnoreCase(string2)) . . .
 
-If two strings are not identical to each other, you still may want to know the relationship between them. The compareTo method compares strings in dictionary order. If
+If two strings are not identical to each other, you still may want to know the
+relationship between them. The compareTo method compares strings in dictionary order. If
 
 string1.compareTo(string2) &lt; 0
 
-then the string string1 comes before the string string2 in the dictionary. For example, this is the case if string1 is "Harry", and string2 is "Hello". If
+then the string string1 comes before the string string2 in the dictionary.
+For example, this is the case if string1 is "Harry", and string2 is "Hello". If
 
 string1.compareTo(string2) &gt; 0
 
@@ -1084,11 +1123,13 @@ characters.
 Let us investigate the comparison process closely. When Java compares two
 strings, corresponding letters are compared until one of the strings ends or the first
 difference is encountered. If one of the strings ends, the longer string is considered
-the later one. If a character mismatch is found, the characters are compared to determine which string comes later in the dictionary sequence. This process is called lexicographic comparison. For example, let’s compare "car" with "cargo". The first
-three letters match, and we reach the end of the first string. Therefore "car" comes
-before "cargo" in the lexicographic ordering. Now compare "cathode" with "cargo".
-The first two letters match. In the third character position, t comes after r, so the
-string "cathode" comes after "cargo" in lexicographic ordering. (See Figure 3.)
+the later one. If a character mismatch is found, the characters are compared to determine
+which string comes later in the dictionary sequence. This process is called lexicographic
+comparison. For example, let’s compare "car" with "cargo". The first three letters match,
+and we reach the end of the first string. Therefore "car" comes before "cargo" in the
+lexicographic ordering. Now compare "cathode" with "cargo". The first two letters match.
+In the third character position, t comes after r, so the string "cathode" comes after
+"cargo" in lexicographic ordering. (See Figure 3.)
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/27.png</image>
 			</page>
@@ -1099,12 +1140,14 @@ string "cathode" comes after "cargo" in lexicographic ordering. (See Figure 3.)
 				<text>
 Common Error 5.2: Using == to Compare Strings
 
-It is an extremely common error in Java to write == when equals is intended. This is particularly true for strings. If you write
+It is an extremely common error in Java to write == when equals is intended.
+This is particularly true for strings. If you write
 
 if (nickname == "Rob")
 
 then the test succeeds only if the variable nickname refers to the exact same string object as the
-string constant "Rob". For efficiency, Java makes only one string object for every string constant. Therefore, the following test will pass:
+string constant "Rob". For efficiency, Java makes only one string object for every string constant.
+Therefore, the following test will pass:
 
 String nickname = "Rob";
 . . .
@@ -1125,7 +1168,8 @@ never to use == to compare strings. Always use equals or compareTo to compare st
 
 5.2.4 Comparing Objects
 
-If you compare two object references with the == operator, you test whether the references refer to the same object. Here is an example:
+If you compare two object references with the == operator, you test whether the references
+refer to the same object. Here is an example:
 
 Rectangle box1 = new Rectangle(5, 10, 20, 30);
 Rectangle box2 = box1;
@@ -1141,8 +1185,8 @@ box1 == box3
 
 is false. The two object variables refer to different objects (see Figure 4). It does not
 matter that the objects have identical contents.
-You can use the equals method to test whether two rectangles have the same contents, that is, whether they have the same upper-left corner and the same width and
-height. For example, the test
+You can use the equals method to test whether two rectangles have the same contents, that is,
+whether they have the same upper-left corner and the same width and height. For example, the test
 
 box1.equals(box3)
 
@@ -1154,7 +1198,7 @@ However, you must be careful when using the equals method. It works correctly
 only if the implementors of the class have supplied it. The Rectangle class has an
 equals method that is suitable for comparing rectangles.
 For your own classes, you need to supply an appropriate equals method. You will
-learn how to do that in Chapter 10. Until that point, you should not use the equals
+learn how to do that later on. Until that point, you should not use the equals
 method to compare objects of your own classes.
 
 5.2.5 Testing for null
@@ -1176,29 +1220,32 @@ System.out.println(firstName + " " + middleInitial + ". " + lastName);
 Note that the null reference is not the same as the empty string "". The empty string
 is a valid string of length 0, whereas a null indicates that a string variable refers to no
 string at all.
-
+				</text>
+			</page>
+			<page title = "Self Check">
+				<text>
 SELF CHECK
 
-10. What is the value of s.length() if s is
-  a. the empty string ""?
-  b. the string " " containing a space?
-  c. null?
+1. What is the value of s.length() if s is
+	a. the empty string ""?
+	b. the string " " containing a space?
+	c. null?
 
-11. Which of the following comparisons are syntactically incorrect? Which of them
+2. Which of the following comparisons are syntactically incorrect? Which of them
 are syntactically correct, but logically questionable?
-  String a = "1";
-  String b = "one";
-  double x = 1;
-  double y = 3 * (1.0 / 3);
+String a = "1";
+String b = "one";
+double x = 1;
+double y = 3 * (1.0 / 3);
 
-  a. a == "1"
-  b. a == null
-  c. a.equals("")
-  d. a == b
-  e. a == x
-  f. x == y
-  g. x - y == null
-  h. x.equals(y)
+	a. a == "1"
+	b. a == null
+	c. a.equals("")
+	d. a == b
+	e. a == x
+	f. x == y
+	g. x - y == null
+	h. x.equals(y)
 				</text>
 			</page>
 		</pages>
