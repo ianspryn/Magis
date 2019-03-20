@@ -52,7 +52,7 @@ public class LessonModel {
         return chapters;
     }
 
-    public ChapterModel getChapters(int index) {
+    public ChapterModel getChapter(int index) {
         return chapters.get(index);
     }
 

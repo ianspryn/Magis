@@ -32,7 +32,7 @@ public class QuizPageContent {
     public void initialize(int pageIndex) {
         pageContent.getChildren().clear();
 
-        QuizzesModel.ChapterModel chapterModels = Main.quizzesModel.getChapter(chapterIndex + 1);
+        QuizzesModel.ChapterModel chapterModels = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle());
         int numPages = chapterModels.getNumQuestions() / 2 + 1;
         int numQuestions = chapterModels.getNumQuestions();
 

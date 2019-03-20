@@ -1,6 +1,6 @@
 <!-- TEST XML FILE -->
 <quizzes>
-        <chapter id = "1">
+        <chapter id = "Primitive Types">
                 <questions>
                         <question>
                                 <statement>my statement</statement>

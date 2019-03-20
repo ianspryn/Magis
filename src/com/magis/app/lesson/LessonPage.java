@@ -4,7 +4,6 @@ import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
-import com.magis.app.models.QuizzesModel;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -50,7 +49,7 @@ public class LessonPage {
          lessonPageContent.initialize();
 
         //Lesson Side Panel
-        LessonSidePanel panel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapters(chapterIndex).getPages());
+        LessonSidePanel panel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
         panel.initialize();
 
         sideBar.getChildren().addAll(home, panel.getvBox());
@@ -79,6 +78,6 @@ public class LessonPage {
         Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
-        Main.setScene(scene, Main.lessonModel.getChapters(chapterIndex).getTitle());
+        Main.setScene(scene, Main.lessonModel.getChapter(chapterIndex).getTitle());
     }
 }

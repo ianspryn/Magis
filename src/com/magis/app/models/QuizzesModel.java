@@ -20,21 +20,20 @@ public class QuizzesModel {
     private String filePath;
     private ArrayList<ChapterModel> chapters;
 
-    public ChapterModel getChapter(int chapterID) {
+    public ChapterModel getChapter(String chapterName) {
         for (ChapterModel chapter : chapters) {
-            if (chapterID == chapter.getChapterID()) {
+            if (chapterName.equals(chapter.getChapterName())) {
                 return chapter;
             }
         }
         return null;
     }
 
-    public boolean hasQuiz(int chapterID) {
+    public boolean hasQuiz(String chapterName) {
         NodeList chapters = document.getElementsByTagName("chapter");
-        ChapterModel chapterModel = null;
         for (int i = 0; i < chapters.getLength(); i++) {
             Node chapterNode = chapters.item(i);
-            if (Integer.parseInt(chapterNode.getAttributes().getNamedItem("id").getNodeValue()) == chapterID) {
+            if (chapterName.equals(chapterNode.getAttributes().getNamedItem("id").getNodeValue())) {
                 return true;
             }
         }
@@ -69,12 +68,12 @@ public class QuizzesModel {
         }
     }
 
-    public void initializeQuiz(int chapter) {
+    public void initializeQuiz(String chapterName) {
         NodeList chapters = document.getElementsByTagName("chapter");
         ChapterModel chapterModel = null;
         for (int i = 0; i < chapters.getLength(); i++) {
             Node chapterNode = chapters.item(i);
-            if (Integer.parseInt(chapterNode.getAttributes().getNamedItem("id").getNodeValue()) == chapter) {
+            if (chapterName.equals(chapterNode.getAttributes().getNamedItem("id").getNodeValue())) {
                 chapterModel = new ChapterModel(chapterNode);
             }
         }
@@ -82,7 +81,7 @@ public class QuizzesModel {
     }
 
     public class ChapterModel {
-        private int chapterID;
+        private String chapterName;
         private ArrayList<QuestionsModel> questions;
 
         public ArrayList<QuestionsModel> getQuestions() {
@@ -99,12 +98,12 @@ public class QuizzesModel {
             return questions.size();
         }
 
-        int getChapterID() {
-            return chapterID;
+        String getChapterName() {
+            return chapterName;
         }
 
         ChapterModel(Node chapter) {
-            this.chapterID = Integer.parseInt(chapter.getAttributes().getNamedItem("id").getNodeValue());
+            this.chapterName = chapter.getAttributes().getNamedItem("id").getNodeValue();
             this.questions = new ArrayList<>();
             Element chapterElement = (Element) chapter;
 

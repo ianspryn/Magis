@@ -21,7 +21,8 @@ public class QuizPage {
     public static void Page (int chapterIndex) {
 
         //read all content for given quiz from XML file
-        Main.quizzesModel.initializeQuiz(chapterIndex + 1);
+        String chapterName = Main.lessonModel.getChapter(chapterIndex).getTitle();
+        Main.quizzesModel.initializeQuiz(chapterName);
 
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-quiz");
@@ -54,10 +55,10 @@ public class QuizPage {
 
         Grader grader = new Grader();
 
-        int numQuestions = Main.quizzesModel.getChapter(chapterIndex + 1).getNumQuestions();
+        int numQuestions = Main.quizzesModel.getChapter(chapterName).getNumQuestions();
         //Save each correct answer into the grader for future grading
         for (int i = 0; i < numQuestions; i++) {
-            grader.addCorrectAnswer(i,Main.quizzesModel.getChapter(chapterIndex + 1).getQuestion(i).getCorrectAnswer());
+            grader.addCorrectAnswer(i,Main.quizzesModel.getChapter(chapterName).getQuestion(i).getCorrectAnswer());
         }
 
         int numPages = numQuestions / 2 + 1;
@@ -80,7 +81,7 @@ public class QuizPage {
         quizPageScrollPane.setContent(quizPages.get(0).getPageContent());
 
         //Quiz Side Panel
-        QuizSidePanel panel = new QuizSidePanel(quizPages, Main.quizzesModel.getChapter(chapterIndex + 1).getNumQuestions(), quizPageScrollPane);
+        QuizSidePanel panel = new QuizSidePanel(quizPages, Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()).getNumQuestions(), quizPageScrollPane);
         panel.initialize();
 
         sideBar.getChildren().addAll(home, panel.getvBox());

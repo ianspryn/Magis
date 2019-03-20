@@ -42,7 +42,7 @@ public class LessonPageContent {
 
         pageContent.getChildren().clear();
         
-        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapters(chapterIndex).getPages(pageIndex).getLessonContent();
+        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getLessonContent();
         for (int i = 0; i < lessonContents.size(); i++) {
             LessonModel.ChapterModel.PageModel.LessonContent currentLesson = lessonContents.get(i);
             String type = currentLesson.getType();

@@ -30,7 +30,7 @@ public class LessonSidePanel {
         this.pages = pages;
         this.vBox = new VBox();
         this.currentPage = new HBox();
-        if (Main.quizzesModel.hasQuiz(chapterIndex + 1)) {
+        if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
             this.pageLabels = new PageLabels(pages.size() + 1);
         } else {
             this.pageLabels = new PageLabels(pages.size());
@@ -87,7 +87,7 @@ public class LessonSidePanel {
         currentPageIndex = 0;
 
         //if there exists a quiz for this chapter
-        if (Main.quizzesModel.hasQuiz(chapterIndex + 1)) {
+        if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
             //then add it to the side panel
             pageLabels.getLabel(pages.size()).setPadding(new Insets(0, 0, 0, 15));
             pageLabels.getLabel(pages.size()).getStyleClass().add("lesson-side-panel-text");
@@ -113,7 +113,7 @@ public class LessonSidePanel {
 
     /**
      * Updates the position of the side marker that indicates which page the user is currently on
-     * @param index
+     * @param index the page index, starting at 0
      */
     public void update(int index) {
         if (index == currentPageIndex) {
