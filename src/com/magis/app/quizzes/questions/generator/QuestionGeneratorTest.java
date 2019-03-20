@@ -73,4 +73,116 @@ class QuestionGeneratorTest {
 
         System.out.println("\nCorrect Answer: "+correctAnswer);
     }
+
+    @Test
+    void testIntegerDivision(){
+        OperatorQuestions objc  = new OperatorQuestions();
+        objc.getIntegerDivisionQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testIncremental(){
+        OperatorQuestions objc  = new OperatorQuestions();
+        objc.getIncrementalQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testModular(){
+        OperatorQuestions objc  = new OperatorQuestions();
+        objc.getModularQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testMathMethod(){
+        MethodQuestions objc  = new MethodQuestions();
+        objc.getMathMethodQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testStringMethod(){
+        MethodQuestions objc  = new MethodQuestions();
+        objc.getStringMethodQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testVariableNames(){
+        VariableQuestions objc  = new VariableQuestions();
+        objc.getVariableNameQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testInstanceVariable(){
+        VariableQuestions objc  = new VariableQuestions();
+        objc.getInstanceVariableQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
 }
