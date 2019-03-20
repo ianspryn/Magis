@@ -54,4 +54,21 @@ class QuestionGeneratorTest {
 
         System.out.println("\nCorrect Answer: "+correctAnswer);
     }
+
+    @Test
+    void testSubstringQuestion(){
+        OperatorQuestions objc  = new OperatorQuestions();
+        objc.getSubstringQuestion();
+        String[] answers = objc.getAnswers();
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
 }

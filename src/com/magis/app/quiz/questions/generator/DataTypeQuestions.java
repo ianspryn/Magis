@@ -14,8 +14,8 @@ public class DataTypeQuestions {
             "Four","One","Two","Ten","Five","Zero Point Four", "Four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
     private Character[] dataTypeChar = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r',
             's','t','u','v','w','x','y','z'};
-    private ArrayList<String> dataTypeMatchingString = new ArrayList<String>(Arrays.asList(dataTypeString));
-    private ArrayList<Character> dataTypeMatchingChar = new ArrayList<Character>(Arrays.asList(dataTypeChar));
+    private ArrayList<String> dataTypeMatchingString;
+    private ArrayList<Character> dataTypeMatchingChar;
 
     private String[] dataTypeMatchingAnswers = {"int", "double", "String", "char", "None"};
 
@@ -28,6 +28,8 @@ public class DataTypeQuestions {
     public DataTypeQuestions(){
         df = new DecimalFormat("###.##");
         rand = new Random();
+        dataTypeMatchingString = new ArrayList<>(Arrays.asList(dataTypeString));
+        dataTypeMatchingChar = new ArrayList<>(Arrays.asList(dataTypeChar));
     }
 
     public void datatypeMatchingQuestion(){
@@ -47,13 +49,13 @@ public class DataTypeQuestions {
         }
         else if(dataTypeSelector == 2){
             int stringSelector = rand.nextInt(dataTypeMatchingString.size());
-            question = question + dataTypeMatchingString.get(stringSelector);
+            question = question + "\"" + dataTypeMatchingString.get(stringSelector) + "\"";
             dataTypeMatchingString.remove(stringSelector);
             correctAnswer = dataTypeMatchingAnswers[2];
         }
         else{
             int charSelector = rand.nextInt(dataTypeMatchingChar.size());
-            question = question + dataTypeMatchingChar.get(charSelector);
+            question = question + "\'" + dataTypeMatchingChar.get(charSelector)+"\'";
             dataTypeMatchingChar.remove(charSelector);
             correctAnswer = dataTypeMatchingAnswers[3];
         }
