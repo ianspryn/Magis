@@ -2,7 +2,9 @@ package com.magis.app.lesson;
 
 import com.magis.app.Main;
 import com.magis.app.models.LessonModel;
+import com.magis.app.quiz.QuizPage;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -28,7 +30,16 @@ public class LessonPageContent {
         update(0);
     }
 
+    /**
+     * Update the page content of the lesson page
+     * @param pageIndex the page to load. If it's -1, then it is the optional quiz page
+     */
     public void update(int pageIndex) {
+        if (pageIndex == -1) {
+            showQuizPage();
+            return;
+        }
+
         pageContent.getChildren().clear();
         
         ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapters(chapterIndex).getPages(pageIndex).getLessonContent();
@@ -64,5 +75,12 @@ public class LessonPageContent {
                     break;
             }
         }
+    }
+
+    private void showQuizPage() {
+        pageContent.getChildren().clear();
+        Button button = new Button("Click to begin quiz");
+        button.setOnAction(e -> QuizPage.Page(chapterIndex));
+        pageContent.getChildren().add(button);
     }
 }

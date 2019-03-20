@@ -29,6 +29,18 @@ public class QuizzesModel {
         return null;
     }
 
+    public boolean hasQuiz(int chapterID) {
+        NodeList chapters = document.getElementsByTagName("chapter");
+        ChapterModel chapterModel = null;
+        for (int i = 0; i < chapters.getLength(); i++) {
+            Node chapterNode = chapters.item(i);
+            if (Integer.parseInt(chapterNode.getAttributes().getNamedItem("id").getNodeValue()) == chapterID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public QuizzesModel() {
         this.chapters = new ArrayList<>();
         this.filePath = "src/com/magis/app/resources/quiz.xml";
@@ -96,7 +108,9 @@ public class QuizzesModel {
             this.questions = new ArrayList<>();
             Element chapterElement = (Element) chapter;
 
-            NodeList questions = chapterElement.getElementsByTagName("question");
+
+            Element questionsElement = (Element) chapterElement.getElementsByTagName("questions").item(0);
+            NodeList questions = questionsElement.getElementsByTagName("question");
             for (int i = 0; i < questions.getLength(); i++) {
                 Node question = questions.item(i);
                 QuestionsModel questionsModel = new QuestionsModel(question);

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QuizzesModelTest {
 
@@ -28,6 +29,12 @@ public class QuizzesModelTest {
         Assert.assertEquals("my statement", actualString);
     }
 
+    @Test
+    public void getNumAnswers() {
+        QuizzesModel quizzesModel = new QuizzesModel();
+        int actualNumAnswers = quizzesModel.getChapter(1).getQuestion(0).getNumAnswers();
+        Assert.assertEquals(4, actualNumAnswers);
+    }
 
     @Test
     public void getCorrectAnswer() {
