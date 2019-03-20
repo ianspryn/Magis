@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class VariableQuestions {
     Random rand;
 
+    private String chapterTitle = "Variables";
+
     private String[] names1 = {"calculation", "value", "num1", "product", "quotient", "publicNumber", "interest_on_loan",
             "sum", "difference_of_nums", "totalSum", "num3", "square_root", "x", "y"};
     private String[] names2 = {"4sum", "public", "void", "return", "32unit", "difference of nums", "Public Number", "interest on loan",
@@ -89,5 +91,9 @@ public class VariableQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public String getChapter(){
+        return chapterTitle;
     }
 }

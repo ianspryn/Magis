@@ -9,6 +9,10 @@ public class OperatorQuestions {
     Random rand;
     DecimalFormat df = new DecimalFormat("####.##");
 
+    private String chatperTitle = "Operators";
+
+    private String chapterTitle = "Operators";
+
     private String[] incrementalEquations = {"++", "--", "+=", "-=", "*=", "/="};
 
     private String[] manipulativeStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
@@ -192,5 +196,9 @@ public class OperatorQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public String getChapter(){
+        return chapterTitle;
     }
 }

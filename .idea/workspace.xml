@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,16 +63,95 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-762">
-              <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
+            <state relative-caret-position="948">
+              <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+              <folding>
+                <element signature="e#626#627#0" expanded="true" />
+                <element signature="e#661#662#0" expanded="true" />
+                <element signature="e#1596#1597#0" expanded="true" />
+                <element signature="e#1627#1628#0" expanded="true" />
+                <element signature="e#1666#1667#0" expanded="true" />
+                <element signature="e#1702#1703#0" expanded="true" />
+                <element signature="e#1781#1782#0" expanded="true" />
+                <element signature="e#1807#1808#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1161">
+              <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="79" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6627#6628#0" expanded="true" />
-                <element signature="e#6658#6659#0" expanded="true" />
-                <element signature="e#6697#6698#0" expanded="true" />
-                <element signature="e#6733#6734#0" expanded="true" />
+                <element signature="e#2811#2812#0" expanded="true" />
+                <element signature="e#2841#2842#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="597">
+              <caret line="202" column="5" selection-start-line="202" selection-start-column="5" selection-end-line="202" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6880#6881#0" expanded="true" />
+                <element signature="e#6915#6916#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/chapters.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="1254" column="20" selection-start-line="1254" selection-start-column="8" selection-end-line="1254" selection-end-column="20" />
+              <folding>
+                <element signature="e#13573#13577#0" expanded="true" />
+                <element signature="e#13764#13768#0" expanded="true" />
+                <element signature="e#13867#13871#0" expanded="true" />
+                <element signature="e#28316#28321#0" expanded="true" />
+                <element signature="e#28321#28326#0" expanded="true" />
+                <element signature="e#28440#28444#0" expanded="true" />
+                <element signature="e#28452#28457#0" expanded="true" />
+                <element signature="e#28457#28462#0" expanded="true" />
+                <element signature="e#28470#28474#0" expanded="true" />
+                <element signature="e#28492#28497#0" expanded="true" />
+                <element signature="e#28497#28502#0" expanded="true" />
+                <element signature="e#28679#28684#0" expanded="true" />
+                <element signature="e#28684#28689#0" expanded="true" />
+                <element signature="e#28829#28834#0" expanded="true" />
+                <element signature="e#28834#28839#0" expanded="true" />
+                <element signature="e#28910#28914#0" expanded="true" />
+                <element signature="e#28922#28927#0" expanded="true" />
+                <element signature="e#28927#28932#0" expanded="true" />
+                <element signature="e#28940#28944#0" expanded="true" />
+                <element signature="e#28969#28973#0" expanded="true" />
+                <element signature="e#28992#28996#0" expanded="true" />
+                <element signature="e#29032#29037#0" expanded="true" />
+                <element signature="e#29037#29042#0" expanded="true" />
+                <element signature="e#31269#31273#0" expanded="true" />
+                <element signature="e#31281#31285#0" expanded="true" />
+                <element signature="e#45444#45448#0" expanded="true" />
+                <element signature="e#45495#45499#0" expanded="true" />
+                <element signature="e#45709#45713#0" expanded="true" />
+                <element signature="e#45718#45722#0" expanded="true" />
+                <element signature="e#45841#45845#0" expanded="true" />
+                <element signature="e#45848#45852#0" expanded="true" />
+                <element signature="e#46493#46497#0" expanded="true" />
+                <element signature="e#46553#46557#0" expanded="true" />
+                <element signature="e#47952#47956#0" expanded="true" />
+                <element signature="e#49053#49057#0" expanded="true" />
+                <element signature="e#49244#49248#0" expanded="true" />
+                <element signature="e#74556#74560#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,34 +160,45 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+            <state relative-caret-position="566">
+              <caret line="125" column="5" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="175" column="43" lean-forward="true" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#4745#4746#0" expanded="true" />
+                <element signature="e#4780#4781#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="583">
+              <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+              <folding>
+                <element signature="e#900#901#0" expanded="true" />
+                <element signature="e#935#936#0" expanded="true" />
+                <element signature="e#3307#3308#0" expanded="true" />
+                <element signature="e#3338#3339#0" expanded="true" />
+                <element signature="e#3377#3378#0" expanded="true" />
+                <element signature="e#3413#3414#0" expanded="true" />
+                <element signature="e#3521#3522#0" expanded="true" />
+                <element signature="e#3556#3557#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-146">
-              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+            <state relative-caret-position="566">
+              <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3313#3314#0" expanded="true" />
+                <element signature="e#3348#3349#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,6 +238,12 @@
       <find>lesson-side-panel-text</find>
       <find>scroll</find>
       <find>getTi</find>
+      <find>&lt;title&gt;Operato</find>
+      <find>&lt;title&gt;Object</find>
+      <find>&lt;title&gt;</find>
+      <find>&lt;title&gt;com</find>
+      <find>&lt;title&gt;meth</find>
+      <find>&lt;title&gt;varia</find>
     </findStrings>
     <replaceStrings>
       <replace>progressIndicator</replace>
@@ -207,19 +301,19 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/lesson/LessonPage.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/commentQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/CommentQuestions.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/d.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/objectComparisonStrings.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/objectComparisonQuestions.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/operatorQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/testCommentQuestion.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/questionGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" />
       </list>
     </option>
   </component>
@@ -243,55 +337,55 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
+      <pane id="ProjectPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
+              <item name="CAIProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CAIProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="CAIProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="quizzes" type="462c0819:PsiDirectoryNode" />
+              <item name="CAIProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="magis" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="quizzes" type="462c0819:PsiDirectoryNode" />
-              <item name="generator" type="462c0819:PsiDirectoryNode" />
+              <item name="CAIProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="magis" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
-              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="CAIProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="home" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -593,8 +687,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26234818" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2672065" />
       <window_info id="Structure" order="1" weight="0.24939272" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -675,7 +770,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/RingProgressIndicator.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/css/fillprogress.css" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/UI/ProgressCircleIndicator.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/css/ringprogress.css" />
@@ -735,21 +829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#626#627#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-            <element signature="e#1596#1597#0" expanded="true" />
-            <element signature="e#1627#1628#0" expanded="true" />
-            <element signature="e#1666#1667#0" expanded="true" />
-            <element signature="e#1702#1703#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/objectComparisonStrings.java" />
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/QuizPage.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -773,10 +852,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="175" column="43" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1161">
+          <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="79" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2811#2812#0" expanded="true" />
+            <element signature="e#2841#2842#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="202" column="5" selection-start-line="202" selection-start-column="5" selection-end-line="202" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6880#6881#0" expanded="true" />
+            <element signature="e#6915#6916#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+        <state relative-caret-position="583">
+          <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
           <folding>
             <element signature="e#900#901#0" expanded="true" />
             <element signature="e#935#936#0" expanded="true" />
@@ -784,60 +897,95 @@
             <element signature="e#3338#3339#0" expanded="true" />
             <element signature="e#3377#3378#0" expanded="true" />
             <element signature="e#3413#3414#0" expanded="true" />
+            <element signature="e#3521#3522#0" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/CommentQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+        <state relative-caret-position="948">
+          <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-762">
-          <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6627#6628#0" expanded="true" />
-            <element signature="e#6658#6659#0" expanded="true" />
-            <element signature="e#6697#6698#0" expanded="true" />
-            <element signature="e#6733#6734#0" expanded="true" />
+            <element signature="e#626#627#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#1596#1597#0" expanded="true" />
+            <element signature="e#1627#1628#0" expanded="true" />
+            <element signature="e#1666#1667#0" expanded="true" />
+            <element signature="e#1702#1703#0" expanded="true" />
+            <element signature="e#1781#1782#0" expanded="true" />
+            <element signature="e#1807#1808#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+        <state relative-caret-position="566">
+          <caret line="125" column="5" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4745#4746#0" expanded="true" />
+            <element signature="e#4780#4781#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/chapters.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="1254" column="20" selection-start-line="1254" selection-start-column="8" selection-end-line="1254" selection-end-column="20" />
+          <folding>
+            <element signature="e#13573#13577#0" expanded="true" />
+            <element signature="e#13764#13768#0" expanded="true" />
+            <element signature="e#13867#13871#0" expanded="true" />
+            <element signature="e#28316#28321#0" expanded="true" />
+            <element signature="e#28321#28326#0" expanded="true" />
+            <element signature="e#28440#28444#0" expanded="true" />
+            <element signature="e#28452#28457#0" expanded="true" />
+            <element signature="e#28457#28462#0" expanded="true" />
+            <element signature="e#28470#28474#0" expanded="true" />
+            <element signature="e#28492#28497#0" expanded="true" />
+            <element signature="e#28497#28502#0" expanded="true" />
+            <element signature="e#28679#28684#0" expanded="true" />
+            <element signature="e#28684#28689#0" expanded="true" />
+            <element signature="e#28829#28834#0" expanded="true" />
+            <element signature="e#28834#28839#0" expanded="true" />
+            <element signature="e#28910#28914#0" expanded="true" />
+            <element signature="e#28922#28927#0" expanded="true" />
+            <element signature="e#28927#28932#0" expanded="true" />
+            <element signature="e#28940#28944#0" expanded="true" />
+            <element signature="e#28969#28973#0" expanded="true" />
+            <element signature="e#28992#28996#0" expanded="true" />
+            <element signature="e#29032#29037#0" expanded="true" />
+            <element signature="e#29037#29042#0" expanded="true" />
+            <element signature="e#31269#31273#0" expanded="true" />
+            <element signature="e#31281#31285#0" expanded="true" />
+            <element signature="e#45444#45448#0" expanded="true" />
+            <element signature="e#45495#45499#0" expanded="true" />
+            <element signature="e#45709#45713#0" expanded="true" />
+            <element signature="e#45718#45722#0" expanded="true" />
+            <element signature="e#45841#45845#0" expanded="true" />
+            <element signature="e#45848#45852#0" expanded="true" />
+            <element signature="e#46493#46497#0" expanded="true" />
+            <element signature="e#46553#46557#0" expanded="true" />
+            <element signature="e#47952#47956#0" expanded="true" />
+            <element signature="e#49053#49057#0" expanded="true" />
+            <element signature="e#49244#49248#0" expanded="true" />
+            <element signature="e#74556#74560#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        <state relative-caret-position="566">
+          <caret line="97" column="5" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="175" column="43" lean-forward="true" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3313#3314#0" expanded="true" />
+            <element signature="e#3348#3349#0" expanded="true" />
           </folding>
         </state>
       </provider>

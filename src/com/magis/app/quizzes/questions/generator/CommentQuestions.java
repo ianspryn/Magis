@@ -5,6 +5,8 @@ import java.util.Random;
 public class CommentQuestions {
     Random rand;
 
+    private String chapterTitle = "Comments";
+
     private String[] commentQuestions = {
             "This is a comment",
             "This is\nA comment",
@@ -55,5 +57,9 @@ public class CommentQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public String getChapter(){
+        return chapterTitle;
     }
 }

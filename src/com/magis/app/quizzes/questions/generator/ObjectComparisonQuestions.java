@@ -6,6 +6,8 @@ public class ObjectComparisonQuestions {
 
     Random rand;
 
+    private String chapterTitle = "Object and Object Comparison";
+
     private String[] comparableStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
@@ -98,5 +100,9 @@ public class ObjectComparisonQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public String getChapter(){
+        return chapterTitle;
     }
 }

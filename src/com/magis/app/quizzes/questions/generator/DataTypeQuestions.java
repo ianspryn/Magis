@@ -10,6 +10,8 @@ public class DataTypeQuestions {
     Random rand;
     DecimalFormat df;
 
+    private String chapterTitle = "Primitive Types";
+
     private String[] dataTypeString = {"Cat","Dog","Mouse","Bug","Tree","Liquid","Programming","Sum",
             "Four","One","Two","Ten","Five","Zero Point Four", "Four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
     private Character[] dataTypeChar = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r',
@@ -71,5 +73,9 @@ public class DataTypeQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public String getChapter(){
+        return chapterTitle;
     }
 }

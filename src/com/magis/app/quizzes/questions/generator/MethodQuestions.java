@@ -11,6 +11,8 @@ public class MethodQuestions {
     Random rand;
     DecimalFormat df = new DecimalFormat("####.##");
 
+    private String chapterTitle = "Methods";
+
     private String[] dataTypeString = {"Cat","DOG","Mouse","Bug","Tree","LIQUID","Programming","SUM",
             "Four","ONE","Two","Ten","five","zero POINT four", "four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
 
@@ -117,5 +119,9 @@ public class MethodQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public String getChapter(){
+        return chapterTitle;
     }
 }
