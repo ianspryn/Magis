@@ -1,11 +1,13 @@
 package com.magis.app.quizzes.questions.generator;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
 public class OperatorQuestions {
     Random rand;
+    DecimalFormat df = new DecimalFormat("####.##");
 
     private String[] incrementalEquations = {"++", "--", "+=", "-=", "*=", "/="};
 
@@ -38,19 +40,20 @@ public class OperatorQuestions {
             question += "int value2 = " + firstInt+";\n";
             correctAnswer = ""+(secondInt/firstInt);
             shuffler.add(correctAnswer);
-            shuffler.add(""+(secondInt/(double)firstInt));
+            shuffler.add(""+(df.format(secondInt/(double)firstInt)));
         }
         else{
             firstDouble = rand.nextDouble()*100;
-            question += "double value2 = " + firstDouble+";\n";
-            correctAnswer = ""+(secondInt/firstDouble);
+            question += "double value2 = " + df.format(firstDouble)+";\n";
+            correctAnswer = ""+(df.format(secondInt/firstDouble));
             shuffler.add(correctAnswer);
             shuffler.add(""+(secondInt/(int)firstDouble));
         }
 
-        for(int i=2; i<5; i++){
+        for(int i=2; i<4; i++){
             shuffler.add(""+(rand.nextInt(50)));
         }
+        shuffler.add(""+(df.format(rand.nextDouble()*10)));
         Collections.shuffle(shuffler);
 
         answers = shuffler.toArray(answers);
@@ -72,12 +75,12 @@ public class OperatorQuestions {
         switch(incrementSelector){
             case 0:
                 question += "\nvalue++;";
-                correctAnswer = ""+(number++);
+                correctAnswer = ""+(number+1);
                 shuffler.add(correctAnswer);
                 break;
             case 1:
                 question += "\nvalue--;";
-                correctAnswer = ""+(number--);
+                correctAnswer = ""+(number-1);
                 shuffler.add(correctAnswer);
                 break;
             case 2:
@@ -110,9 +113,14 @@ public class OperatorQuestions {
                 break;
         }
 
-        shuffler.add(""+(number+=25));
-        shuffler.add(""+(number*=11));
-        shuffler.add(""+(number-=14));
+        shuffler.add(""+(number+25));
+        if(number == 0){
+            shuffler.add(""+(number + 1));
+        }
+        else {
+            shuffler.add("" + (number * 11));
+        }
+        shuffler.add(""+(number-14));
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
 
@@ -123,8 +131,8 @@ public class OperatorQuestions {
 
     public void getModularQuestion(){
         question = "";
-        int divisor = rand.nextInt(11);
-        int divider = rand.nextInt(11);
+        int divisor = rand.nextInt(26);
+        int divider = rand.nextInt(divisor)+1;
         ArrayList<String> shuffler = new ArrayList<>();
 
         question += ""+divisor+" % "+divider+"\n\nWhat is the result of this operation?";
@@ -132,7 +140,7 @@ public class OperatorQuestions {
         shuffler.add(correctAnswer);
         shuffler.add((""+(divisor+divider)));
         shuffler.add((""+(divisor*divider)));
-        shuffler.add((""+(divisor++)));
+        shuffler.add((""+(divisor+1)));
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
         answers = shuffler.toArray(answers);

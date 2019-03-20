@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java" afterDir="false" />
+    </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -60,10 +67,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2346">
-              <caret line="140" column="39" selection-start-line="140" selection-start-column="39" selection-end-line="140" selection-end-column="39" />
+            <state relative-caret-position="-762">
+              <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#6627#6628#0" expanded="true" />
+                <element signature="e#6658#6659#0" expanded="true" />
+                <element signature="e#6697#6698#0" expanded="true" />
+                <element signature="e#6733#6734#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,20 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
-              <caret line="95" column="72" selection-start-line="95" selection-start-column="72" selection-end-line="95" selection-end-column="72" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+            <state relative-caret-position="186">
+              <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,10 +93,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="342">
+              <caret line="175" column="43" lean-forward="true" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,17 +105,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+            <state relative-caret-position="-146">
+              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
               <folding>
-                <element signature="e#900#901#0" expanded="true" />
-                <element signature="e#935#936#0" expanded="true" />
-                <element signature="e#3307#3308#0" expanded="true" />
-                <element signature="e#3338#3339#0" expanded="true" />
-                <element signature="e#3377#3378#0" expanded="true" />
-                <element signature="e#3413#3414#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -221,11 +215,11 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/operatorQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/testCommentQuestion.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/questionGeneratorTest.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/DataTypeQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java" />
       </list>
     </option>
   </component>
@@ -259,34 +253,40 @@
         <subPane>
           <expand>
             <path>
-              <item name="CAIProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CAIProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CAIProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CAIProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="quizzes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="CAIProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="quizzes" type="462c0819:PsiDirectoryNode" />
               <item name="generator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="comp350-software-engineering-cai-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="comp350-software-engineering-cai-system" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -304,7 +304,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553006640984" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553112518917" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -352,7 +352,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.QuestionGeneratorTest.testSubstringQuestion">
+  <component name="RunManager" selected="JUnit.QuestionGeneratorTest.testInstanceVariable">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -393,7 +393,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuestionGeneratorTest.testDataTypeQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QuestionGeneratorTest.testInstanceVariable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="comp350-software-engineering-cai-system" />
       <extension name="coverage">
         <pattern>
@@ -403,7 +403,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
       <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
-      <option name="METHOD_NAME" value="testDataTypeQuestion" />
+      <option name="METHOD_NAME" value="testInstanceVariable" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -413,7 +413,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuestionGeneratorTest.testSubstringQuestion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QuestionGeneratorTest.testMathMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="comp350-software-engineering-cai-system" />
       <extension name="coverage">
         <pattern>
@@ -423,7 +423,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
       <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
-      <option name="METHOD_NAME" value="testSubstringQuestion" />
+      <option name="METHOD_NAME" value="testMathMethod" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -433,17 +433,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReadChapterXMLTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QuestionGeneratorTest.testModular" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="comp350-software-engineering-cai-system" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.magis.app.resources.*" />
+          <option name="PATTERN" value="com.magis.app.quizzes.questions.generator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.magis.app.resources" />
-      <option name="MAIN_CLASS_NAME" value="com.magis.app.resources.ReadChapterXMLTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
+      <option name="METHOD_NAME" value="testModular" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -452,17 +453,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReadXMLTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QuestionGeneratorTest.testStringMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="comp350-software-engineering-cai-system" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.magis.app.resources.images.data.*" />
+          <option name="PATTERN" value="com.magis.app.quizzes.questions.generator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.magis.app.resources.images.data" />
-      <option name="MAIN_CLASS_NAME" value="com.magis.app.resources.images.data.ReadXMLTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
+      <option name="METHOD_NAME" value="testStringMethod" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionGeneratorTest.testVariableNames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="comp350-software-engineering-cai-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.magis.app.quizzes.questions.generator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.magis.app.quizzes.questions.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.magis.app.quizzes.questions.generator.QuestionGeneratorTest" />
+      <option name="METHOD_NAME" value="testVariableNames" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -503,10 +525,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.QuestionGeneratorTest.testSubstringQuestion" />
-        <item itemvalue="JUnit.QuestionGeneratorTest.testDataTypeQuestion" />
-        <item itemvalue="JUnit.ReadChapterXMLTest" />
-        <item itemvalue="JUnit.ReadXMLTest" />
+        <item itemvalue="JUnit.QuestionGeneratorTest.testInstanceVariable" />
+        <item itemvalue="JUnit.QuestionGeneratorTest.testVariableNames" />
+        <item itemvalue="JUnit.QuestionGeneratorTest.testStringMethod" />
+        <item itemvalue="JUnit.QuestionGeneratorTest.testMathMethod" />
+        <item itemvalue="JUnit.QuestionGeneratorTest.testModular" />
       </list>
     </recent_temporary>
   </component>
@@ -525,35 +548,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 58m 16s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 06m 12s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 59m 19s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 06m 20s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 59m 41s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 06m 40s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 10h 59m 51s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 07m 00s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 00m 17s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 07m 08s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 01m 24s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 07m 14s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 03m 46s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 07m 18s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 04m 56s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 07m 25s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 07m 34s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testVariableNames - 2019.03.20 at 16h 07m 30s.xml">
+      <configuration name="QuestionGeneratorTest.testVariableNames" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QuestionGeneratorTest_testSubstringQuestion - 2019.03.14 at 11h 08m 54s.xml">
-      <configuration name="QuestionGeneratorTest.testSubstringQuestion" configurationId="JUnit" />
+    <history-entry file="QuestionGeneratorTest_testInstanceVariable - 2019.03.20 at 16h 08m 11s.xml">
+      <configuration name="QuestionGeneratorTest.testInstanceVariable" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -571,7 +594,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2582996" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26234818" />
       <window_info id="Structure" order="1" weight="0.24939272" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -582,7 +605,7 @@
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32922733" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.38936782" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.39977604" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.3994253" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32922733" />
@@ -743,16 +766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -760,22 +773,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2346">
-          <caret line="140" column="39" selection-start-line="140" selection-start-column="39" selection-end-line="140" selection-end-column="39" />
+        <state relative-caret-position="425">
+          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="95" column="72" selection-start-line="95" selection-start-column="72" selection-end-line="95" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
+            <element signature="e#935#936#0" expanded="true" />
+            <element signature="e#3307#3308#0" expanded="true" />
+            <element signature="e#3338#3339#0" expanded="true" />
+            <element signature="e#3377#3378#0" expanded="true" />
+            <element signature="e#3413#3414#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -790,25 +798,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/ObjectComparisonQuestions.java">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/OperatorQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+        <state relative-caret-position="-762">
+          <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
           <folding>
-            <element signature="e#900#901#0" expanded="true" />
-            <element signature="e#935#936#0" expanded="true" />
-            <element signature="e#3307#3308#0" expanded="true" />
-            <element signature="e#3338#3339#0" expanded="true" />
-            <element signature="e#3377#3378#0" expanded="true" />
-            <element signature="e#3413#3414#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#6627#6628#0" expanded="true" />
+            <element signature="e#6658#6659#0" expanded="true" />
+            <element signature="e#6697#6698#0" expanded="true" />
+            <element signature="e#6733#6734#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/VariableQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="-146">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/QuestionGeneratorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="175" column="43" lean-forward="true" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
