@@ -1282,11 +1282,7 @@ It is an error to store a value whose type does not match the type of the variab
 For example, the following is an error:
 String greeting = 20; // ERROR: Types don’t match
 				</text>
-				<image>
-					////////////////////////////////////////////
-					// put 2.png here
-					////////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/2.png</image>
 				<text>
 You cannot use a String variable to store an integer. The compiler checks type
 mismatches to protect you from errors.
@@ -1319,16 +1315,8 @@ follow so that other programmers will find your programs easy to read:
 If you violate these conventions, the compiler won’t complain, but you will confuse
 other programmers who read your code.
 				</text>
-				<image>
-					////////////////////////////////////
-					// 4.png
-					///////////////////////////////////
-				</image>
-				<image>
-					//////////////////////////////////
-					// 5.png
-					///////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/5.png</image>
 				<text>
 Table 3 shows examples of legal and illegal variable names in Java.
 				</text>
@@ -1394,16 +1382,8 @@ counter object contains. In this simple example, that is very straightforward. E
 counter needs to store a variable that keeps track of how many times the counter
 has been advanced.
 				</text>
-				<image>
-					///////////////////////////
-					// 8.png
-					////////////////////////////
-				</image>
-				<image>
-					////////////////////////////
-					// 9.png
-					//////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/8.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/9.png</image>
 				<text>
 					An object stores its data in instance variables. An instance of a class is an object
 					of the class. Thus, an instance variable is a storage location that is present in each
@@ -1428,11 +1408,7 @@ variable value is set to 0 when a Counter object is constructed.
 In order to gain a better understanding of how methods affect instance variables,
 we will have a quick look at the implementation of the methods of the Counter class.
 				</text>
-				<image>
-					//////////////////////////////////
-					// 11.png
-					////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/11.png</image>
 				<text>
 The count method advances the counter value by 1. We will cover the syntax of the
 method header in another section. For now, focus on the body of the method inside the
@@ -1559,11 +1535,7 @@ balance = balance + amount;
 actually means
 this.balance = this.balance + amount;
 				</text>
-				<image>
-					/////////////////////////////////////////
-					// 14.png
-					////////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/14.png</image>
 			</page>
 			<page title="Instance Variables">
 				<text>
@@ -1674,11 +1646,7 @@ Every BankAccount object has its own balance and accountNumber instance variable
 there is only a single copy of the lastAssignedNumber variable (see Figure 4). That
 variable is stored in a separate location, outside any BankAccount objects.
 				</text>
-				<image>
-					////////////////////////////////////////////////
-					// 17.png
-					///////////////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/17.png</image>
 				<text>
 A static variable is sometimes called a class variable because there is a single variable for the entire class.
 Every method of a class can access its static variables. Here is the constructor of
@@ -1945,16 +1913,8 @@ explicit parameters at all. An example of the latter is the length method of the
 class (see Figure 7). All the information that the length method requires to do its
 job—namely, the character sequence of the string—is stored in the implicit parameter object.
 				</text>
-				<image>
-					/////////////////////////////////////
-					// 20 png
-					///////////////////////////////////////////
-				</image>
-				<image>
-					////////////////////////////////////////////
-					// 21.png
-					//////////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/20.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/21.png</image>
 				<text>
 The length method differs from the println method in another way: it has an
 output. We say that the method returns a value, namely the number of characters in the
@@ -1983,16 +1943,8 @@ river = river.replace("issipp", "our");
 Or you can pass it to another method:
 System.out.println(river.replace("issipp", "our"));
 				</text>
-				<image>
-					///////////////////////
-					// 23.png
-					///////////////////////////////
-				</image>
-				<image>
-					///////////////////////////////////
-					// 24.png
-					///////////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/23.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/24.png</image>
 				<text>
 
 As Figure 9 shows, this method call has
@@ -2041,11 +1993,7 @@ SELF CHECK
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
 		<pages>
 			<page >
-				<image>
-					/////////////////////////////////
-					// 0.png
-					//////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%205/0.png</image>
 				<text>
 Imagine that you are a member of a team that works on banking software. A
 fundamental concept in banking is a bank account. Your task is to understand the
@@ -2207,11 +2155,7 @@ number in parentheses after the method name:
 
 double root = Math.sqrt(100);
 				</text>
-				<image>
-					////////////////////////////
-					// 2png
-					////////////////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%205/2.png</image>
 				<text>
 This call makes it appear as if the sqrt method is applied to an object called Math.
 However, Math is a class, not an object. A method such as Math.sqrt that does not
@@ -2280,11 +2224,7 @@ is not overridden.
 				</text>
 			</page>
 			<page title="Overloaded Methods">
-				<image>
-					///////////////////////////
-					// 5.png
-					///////////////////////////////////
-				</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%205/5.png</image>
 				<text>
 Let’s implement the deposit method of the CheckingAccount class. It increments the
 transaction count and deposits the money:
