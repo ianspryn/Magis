@@ -18,11 +18,13 @@ public class QuizPageContent {
     private VBox pageContent;
     private int chapterIndex;
     private Grader grader;
+    private boolean isLastPage;
 
     public QuizPageContent(int chapterIndex, Grader grader) {
         pageContent = new VBox();
         this.chapterIndex = chapterIndex;
         this.grader = grader;
+        this.isLastPage = false;
     }
 
     public VBox getPageContent() {
@@ -41,6 +43,7 @@ public class QuizPageContent {
         if (pageIndex + 1 == numPages) {
             //will that page have 1 or 2 questions?
             questionsPerPage = (numQuestions % 2 == 0) ? 2 : 1;
+            isLastPage = true;
         }
 
         //max 2 questions per page
