@@ -1,0 +1,20 @@
+<quizzes>
+        <chapter id = "1">
+                <questions>
+                        <question>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
+                                <answer></answer>
+                                <answer></answer>
+                                <answer></answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
+                                <answer></answer>
+                                <answer></answer>
+                                <answer></answer>
+                        </question>
+                </questions>
+        </chapter>
+</quizzes>
