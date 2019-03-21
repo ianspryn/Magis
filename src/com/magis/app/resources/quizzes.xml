@@ -247,7 +247,7 @@ int dollars = balance.int;          </answer>
                 </question>
             </questions>
         </chapter>
-        <chapter id = "Objects">
+        <chapter id = "Object and Object Comparison">
             <questions>
                 <question>
                 <statement>An object is</statement>
@@ -334,7 +334,21 @@ Rectangle t = new Rectangle();                    </statement>
     <chapter id = "Comments">
         <questions>
             <question>
+
+            </question>
+        </questions>
+    </chapter>
+    <chapter id = "Variables">
+        <questions>
+            <question>
                 
+            </question>
+        </questions>
+    </chapter>
+    <chapter id = "Methods">
+        <questions>
+            <question>
+
             </question>
         </questions>
     </chapter>
