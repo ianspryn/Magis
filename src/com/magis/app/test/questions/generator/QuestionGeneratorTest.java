@@ -2,13 +2,15 @@ package com.magis.app.test.questions.generator;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 class QuestionGeneratorTest {
 
     @Test
     void testCommentQuestion(){
         CommentQuestions cq = new CommentQuestions();
         cq.generateGeneralCommentQuestion();
-        String[] answers = cq.getCommentAnswers();
+        String[] answers = cq.getCommentAnswers().toArray(new String[0]);
         String question = cq.getQuestion();
         String correctAnswer = cq.getCorrectAnswer();
 
@@ -25,7 +27,7 @@ class QuestionGeneratorTest {
     void testDataTypeQuestion(){
         DataTypeQuestions dtq = new DataTypeQuestions();
         dtq.datatypeMatchingQuestion();
-        String[] answers = dtq.getAnswers();
+        String[] answers = dtq.getAnswers().toArray(new String[0]);
         String question = dtq.getQuestion();
         String correctAnswer = dtq.getCorrectAnswer();
 
@@ -42,7 +44,7 @@ class QuestionGeneratorTest {
     void testObjectComparisonQuestion(){
         ObjectComparisonQuestions objc  = new ObjectComparisonQuestions();
         objc.generateEqualsQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
 
@@ -59,14 +61,14 @@ class QuestionGeneratorTest {
     void testSubstringQuestion(){
         OperatorQuestions objc  = new OperatorQuestions();
         objc.getSubstringQuestion();
-        String[] answers = objc.getAnswers();
+        ArrayList<String> answers = objc.getAnswers();
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
 
         System.out.println(question+"\n");
 
-        for(int i=0; i<answers.length; i++){
-            System.out.println((i+1)+". "+answers[i]);
+        for(int i=0; i<answers.size(); i++){
+            System.out.println((i+1)+". "+answers.get(i));
         }
 
         System.out.println("\nCorrect Answer: "+correctAnswer);
@@ -76,7 +78,7 @@ class QuestionGeneratorTest {
     void testIntegerDivision(){
         OperatorQuestions objc  = new OperatorQuestions();
         objc.getIntegerDivisionQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");
@@ -92,7 +94,7 @@ class QuestionGeneratorTest {
     void testIncremental(){
         OperatorQuestions objc  = new OperatorQuestions();
         objc.getIncrementalQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");
@@ -108,7 +110,7 @@ class QuestionGeneratorTest {
     void testModular(){
         OperatorQuestions objc  = new OperatorQuestions();
         objc.getModularQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");
@@ -124,7 +126,7 @@ class QuestionGeneratorTest {
     void testMathMethod(){
         MethodQuestions objc  = new MethodQuestions();
         objc.getMathMethodQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");
@@ -140,7 +142,7 @@ class QuestionGeneratorTest {
     void testStringMethod(){
         MethodQuestions objc  = new MethodQuestions();
         objc.getStringMethodQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");
@@ -156,7 +158,7 @@ class QuestionGeneratorTest {
     void testVariableNames(){
         VariableQuestions objc  = new VariableQuestions();
         objc.getVariableNameQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");
@@ -172,7 +174,7 @@ class QuestionGeneratorTest {
     void testInstanceVariable(){
         VariableQuestions objc  = new VariableQuestions();
         objc.getInstanceVariableQuestion();
-        String[] answers = objc.getAnswers();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
         System.out.println(question+"\n");

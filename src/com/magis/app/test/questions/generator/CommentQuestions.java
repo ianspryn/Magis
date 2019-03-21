@@ -1,11 +1,13 @@
 package com.magis.app.test.questions.generator;
 
+import java.util.Arrays;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class CommentQuestions {
     Random rand;
 
-    private String chapterTitle = "Comments";
+    private static String chapterTitle = "Comments";
 
     private String[] commentQuestions = {
             "This is a comment",
@@ -15,12 +17,14 @@ public class CommentQuestions {
             "This code will do [x]\nIt will also do [y]"
     };
     private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "Unknown"};
+    private ArrayList<String> answers;
 
     private String correctAnswer;
     private String question = "";
 
     public CommentQuestions(){
         rand = new Random();
+        answers = new ArrayList<>(Arrays.asList(generalCommentAnswers));
     }
 
     public void generateGeneralCommentQuestion(){
@@ -49,7 +53,7 @@ public class CommentQuestions {
         }
     }
 
-    public String[] getCommentAnswers(){ return generalCommentAnswers; }
+    public ArrayList<String> getCommentAnswers(){ return answers; }
 
     public String getQuestion(){
         return question;
@@ -59,7 +63,7 @@ public class CommentQuestions {
         return correctAnswer;
     }
 
-    public String getChapter(){
+    public static String getChapter(){
         return chapterTitle;
     }
 }

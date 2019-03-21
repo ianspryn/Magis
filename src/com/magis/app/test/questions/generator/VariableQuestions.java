@@ -1,4 +1,4 @@
-package com.magis.app.quizzes.questions.generator;
+package com.magis.app.test.questions.generator;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class VariableQuestions {
     Random rand;
 
-    private String chapterTitle = "Variables";
+    private static String chapterTitle = "Variables";
 
     private String[] names1 = {"calculation", "value", "num1", "product", "quotient", "publicNumber", "interest_on_loan",
             "sum", "difference_of_nums", "totalSum", "num3", "square_root", "x", "y"};
@@ -20,7 +20,7 @@ public class VariableQuestions {
     private ArrayList<String> wrongVariables;
 
     private String[] dataTypeMatchingAnswers = {"int", "double", "String", "char", "None"};
-    private String[] answers;
+    private ArrayList<String> answers;
     private char[] characters = {'+','-','*','/','%','<','=','>'};
     private String correctAnswer;
     private String question = "";
@@ -29,14 +29,15 @@ public class VariableQuestions {
         rand = new Random();
         correctVariables = new ArrayList<>(Arrays.asList(names1));
         wrongVariables = new ArrayList<>(Arrays.asList(names2));
+        answers = new ArrayList<>();
     }
 
     public void getVariableNameQuestion(){
+        answers.clear();
         question = "";
-        answers = new String[3];
-        answers[0] = "True";
-        answers[1] = "False";
-        answers[2] = "Unknown";
+        answers.add("True");
+        answers.add("False");
+        answers.add("Unknown");
 
         int rightWrong = rand.nextInt(2);
         int selector;
@@ -47,14 +48,14 @@ public class VariableQuestions {
                 selector = rand.nextInt(correctVariables.size());
                 word = correctVariables.get(selector);
                 correctVariables.remove(selector);
-                correctAnswer = answers[0];
+                correctAnswer = answers.get(0);
                 question = "<datatype> "+word+" = ...;\n\n";
                 break;
             case 1:
                 selector = rand.nextInt(wrongVariables.size());
                 word = wrongVariables.get(selector);
                 wrongVariables.remove(selector);
-                correctAnswer = answers[1];
+                correctAnswer = answers.get(1);
                 question = "<datatype> "+word+" = ...;\n\n";
                 break;
         }
@@ -63,7 +64,6 @@ public class VariableQuestions {
 
     public void getInstanceVariableQuestion(){
         question = "";
-        answers = new String[4];
         ArrayList<String> shuffler = new ArrayList<>();
 
         int selector = rand.nextInt(names1.length);
@@ -80,10 +80,10 @@ public class VariableQuestions {
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
 
-        answers = shuffler.toArray(answers);
+        answers = shuffler;
     }
 
-    public String[] getAnswers() { return answers; }
+    public ArrayList<String> getAnswers() { return answers; }
 
     public String getQuestion(){
         return question;
@@ -93,7 +93,7 @@ public class VariableQuestions {
         return correctAnswer;
     }
 
-    public String getChapter(){
+    public static String getChapter(){
         return chapterTitle;
     }
 }

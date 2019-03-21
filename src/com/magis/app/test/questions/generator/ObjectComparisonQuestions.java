@@ -1,12 +1,14 @@
 package com.magis.app.test.questions.generator;
 
+import java.util.Arrays;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class ObjectComparisonQuestions {
 
     Random rand;
 
-    private String chapterTitle = "Object and Object Comparison";
+    private static String chapterTitle = "Object and Object Comparison";
 
     private String[] comparableStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
@@ -17,7 +19,9 @@ public class ObjectComparisonQuestions {
             "programming is fun!", "PROGRAMMING IS FUN!"};
     private String[] equalsAnswers = {"True", "False", "Unknown"};
 
-    private String[] answers;
+    private ArrayList<String> answers;
+    private ArrayList<String> cAnswers;
+    private ArrayList<String> eAnswers;
 
     private char[] characters = {'+','-','*','/','%','<','=','>'};
     private String correctAnswer;
@@ -25,11 +29,14 @@ public class ObjectComparisonQuestions {
 
     public ObjectComparisonQuestions(){
         rand = new Random();
+        answers = new ArrayList<>();
+        cAnswers = new ArrayList<>(Arrays.asList(comparableStringAnswers));
+        eAnswers = new ArrayList<>(Arrays.asList(equalsAnswers));
     }
 
     public void generateComparableQuestion(){
         question = "";
-        answers = comparableStringAnswers;
+        answers = cAnswers;
 
         int random = rand.nextInt(comparableStrings.length);
         String firstPart = comparableStrings[random];
@@ -52,7 +59,7 @@ public class ObjectComparisonQuestions {
 
     public void generateEqualsQuestion(){
         question = "";
-        answers = equalsAnswers;
+        answers = eAnswers;
 
         int random = rand.nextInt(equalsStrings.length);
         String firstPart = equalsStrings[random];
@@ -92,7 +99,7 @@ public class ObjectComparisonQuestions {
         }
     }
 
-    public String[] getAnswers() { return answers; }
+    public ArrayList<String> getAnswers() { return answers; }
 
     public String getQuestion(){
         return question;
@@ -102,7 +109,7 @@ public class ObjectComparisonQuestions {
         return correctAnswer;
     }
 
-    public String getChapter(){
+    public static String getChapter(){
         return chapterTitle;
     }
 }
