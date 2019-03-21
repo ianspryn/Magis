@@ -1,6 +1,7 @@
 package com.magis.app.test.quiz;
 
 import com.magis.app.Main;
+import com.magis.app.UI.TestPageContent;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.test.Grader;
 import com.magis.app.test.questions.generator.*;
@@ -23,8 +24,9 @@ public class QuizPageContent {
     private int numPages;
     private int numQuestions;
     private ArrayList<ToggleGroup> toggleGroups;
+    private TestPageContent testPageContent;
 
-    public QuizPageContent(int chapterIndex, Grader grader) {
+    public QuizPageContent(int chapterIndex, Grader grader, TestPageContent testPageContent) {
         pageContent = new VBox();
         this.chapterIndex = chapterIndex;
         this.grader = grader;
@@ -32,11 +34,8 @@ public class QuizPageContent {
         numPages = chapterModel.getNumQuestions() / 2 + 1;
         numQuestions = chapterModel.getNumQuestions();
         toggleGroups = new ArrayList<>();
-        Main.lessonModel.getChapter(chapterIndex).getTitle();
-    }
-
-    public VBox getPageContent() {
-        return pageContent;
+        this.testPageContent = testPageContent;
+        testPageContent.add(pageContent);
     }
 
     public void initialize(int pageIndex) {
@@ -181,6 +180,7 @@ public class QuizPageContent {
             answers.add(correctAnswerPosition, correctAnswer);
 
             ToggleGroup toggleGroup = new ToggleGroup();
+            toggleGroups.add(toggleGroup);
 
             for (int j = 0; j < numAnswers; j++) {
                 RadioButton radioButton = new RadioButton();
