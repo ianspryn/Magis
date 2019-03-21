@@ -1,8 +1,6 @@
-package com.magis.app.quizzes.questions.generator;
+package com.magis.app.test.questions.generator;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.Scanner;
 
 class QuestionGeneratorTest {
 

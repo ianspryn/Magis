@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class LessonSidePanel {
 
+    private int chapterIndex;
     private LessonPageContent lessonPageContent;
     private ArrayList<LessonModel.ChapterModel.PageModel> pages;
     private VBox vBox;
@@ -23,13 +24,19 @@ public class LessonSidePanel {
     private int currentPageIndex;
 
 
-    public LessonSidePanel(LessonPageContent lessonPageContent, ArrayList<LessonModel.ChapterModel.PageModel> pages) {
+    public LessonSidePanel(int chapterIndex, LessonPageContent lessonPageContent, ArrayList<LessonModel.ChapterModel.PageModel> pages) {
+        this.chapterIndex = chapterIndex;
         this.lessonPageContent = lessonPageContent;
         this.pages = pages;
         this.vBox = new VBox();
         this.currentPage = new HBox();
-        this.pageLabels = new PageLabels(pages.size());
+        if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
+            this.pageLabels = new PageLabels(pages.size() + 1);
+        } else {
+            this.pageLabels = new PageLabels(pages.size());
+        }
         line = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
+        currentPageIndex = 0;
     }
 
     public VBox getvBox() {
@@ -78,12 +85,34 @@ public class LessonSidePanel {
             vBox.getChildren().add(pageLabels.getLabel(i));
         }
         currentPageIndex = 0;
+
+        //if there exists a test for this chapter
+        if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
+            //then add it to the side panel
+            pageLabels.getLabel(pages.size()).setPadding(new Insets(0, 0, 0, 15));
+            pageLabels.getLabel(pages.size()).getStyleClass().add("lesson-side-panel-text");
+            pageLabels.getLabel(pages.size()).setText("Quiz");
+
+            //listeners
+            pageLabels.getLabel(pages.size()).setOnMouseClicked(e -> {
+                lessonPageContent.update(-1);
+                update(pages.size());
+            });
+            pageLabels.getLabel(pages.size()).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            pageLabels.getLabel(pages.size()).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+            vBox.getChildren().addAll(pageLabels.getLabel(pages.size()));
+        }
     }
 
+    /**
+     * Updates the position of the side marker that indicates which page the user is currently on
+     * @param index the page index, starting at 0
+     */
     public void update(int index) {
         if (index == currentPageIndex) {
             return; //in case user clicked on current page
         }
+        LessonPage.currentPage = index;
         //update padding
         pageLabels.getLabel(currentPageIndex).setPadding(new Insets(0, 0, 0, 15));
         pageLabels.getLabel(index).setPadding(new Insets(0, 0, 0, 10));
@@ -105,6 +134,9 @@ public class LessonSidePanel {
     private void setLabelText(int index) {
         String title = pages.get(index).getTitle();
         if (title != null) {
+            if (title.length() > 23) {
+                title = title.substring(0, 24);
+            }
             pageLabels.getLabel(index).setText(title);
         } else {
             pageLabels.getLabel(index).setText("Page " + (index + 1));

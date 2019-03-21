@@ -1,4 +1,4 @@
-package com.magis.app.quizzes.questions.generator;
+package com.magis.app.test.questions.generator;
 
 import java.util.Random;
 

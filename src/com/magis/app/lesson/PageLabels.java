@@ -16,6 +16,10 @@ public class PageLabels {
         }
     }
 
+    public ArrayList<Label> getLabels() {
+        return labels;
+    }
+
     public Label getLabel(int index) {
         return labels.get(index);
     }
