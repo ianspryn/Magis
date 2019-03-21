@@ -31,6 +31,7 @@ public class QuizPageContent {
         numPages = chapterModel.getNumQuestions() / 2 + 1;
         numQuestions = chapterModel.getNumQuestions();
         toggleGroups = new ArrayList<>();
+        Main.lessonModel.getChapter(chapterIndex).getTitle();
     }
 
     public VBox getPageContent() {
@@ -39,6 +40,8 @@ public class QuizPageContent {
 
     public void initialize(int pageIndex) {
         pageContent.getChildren().clear();
+
+        Random rand = new Random();
 
         int questionsPerPage = 2;
         //if we're on the last page
@@ -60,6 +63,10 @@ public class QuizPageContent {
             Label statement = new Label();
             statement.setWrapText(true);
             statement.setPrefWidth(700);
+
+            //Decide if the question is to be conceptual or calculation based
+            int typeOfQuestion = rand.nextInt();
+
             //set the question statement
             statement.setText(chapterModel.getQuestion(question).getStatement());
             //add the statement for thr question to the questionBox
@@ -68,7 +75,6 @@ public class QuizPageContent {
             String correctAnswer = chapterModel.getQuestion(question).getCorrectAnswer();
             ArrayList<String> answers = shuffle(chapterModel.getQuestion(question).getIncorrectAnswers());
             //choose which radio button will be the correct answer;
-            Random rand = new Random();
             int correctAnswerPosition = rand.nextInt(numAnswers);
             //insert the correct answer into the random position of the array of possible answers
             answers.add(correctAnswerPosition, correctAnswer);
