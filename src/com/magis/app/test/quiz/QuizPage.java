@@ -1,6 +1,7 @@
 package com.magis.app.test.quiz;
 
 import com.magis.app.Main;
+import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
@@ -21,14 +22,17 @@ import java.util.ArrayList;
 
 public class QuizPage {
 
+    public static boolean notSubmitted = true;
     static ArrayList<QuizPageContent> quizPages;
     static ScrollPane quizPageScrollPane;
     static QuizSidePanel sidePanel;
+    static TestPageContent testPageContent;
     static Button submitButton;
     static int currentPage;
     static int numPages;
 
     public static void Page (int chapterIndex) {
+        testPageContent = new TestPageContent();
         currentPage = 0;
 
 //        Main.window.setOnCloseRequest(e -> );
@@ -79,7 +83,7 @@ public class QuizPage {
         //That way, if the user decides to go back and change an answer, the answers won't be blank (otherwise even though they answers would be saved, the user wouldn't know that)
         quizPages = new ArrayList<>();
         for (int i = 0; i < numPages; i++) {
-            QuizPageContent quizPageContent = new QuizPageContent(chapterIndex, grader);
+            QuizPageContent quizPageContent = new QuizPageContent(chapterIndex, grader, testPageContent);
             quizPageContent.initialize(i);
             quizPages.add(quizPageContent);
         }
@@ -91,10 +95,10 @@ public class QuizPage {
         quizPageScrollPane.setFitToHeight(true);
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        quizPageScrollPane.setContent(quizPages.get(0).getPageContent());
+        quizPageScrollPane.setContent(testPageContent.getPageContent(0));
 
         //Quiz Side Panel
-        sidePanel = new QuizSidePanel(quizPages, Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()).getNumQuestions(), quizPageScrollPane);
+        sidePanel = new QuizSidePanel(quizPages, Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()).getNumQuestions(), quizPageScrollPane, testPageContent);
         sidePanel.initialize();
 
 
@@ -192,6 +196,7 @@ public class QuizPage {
         alert.getButtonTypes().setAll(cancelButton, okButton);
         alert.showAndWait().ifPresent(type -> {
             if (type.getText().equals("Submit")) {
+                notSubmitted = true;
                 grader.grade();
                 Main.studentModel.getStudent(Main.username).getQuiz(chapterIndex + 1).addScore(grader.getGrade());
 
@@ -229,14 +234,10 @@ public class QuizPage {
         //increment or decrement currentPage value
         currentPage += move;
         //update the page with new content
-        quizPageScrollPane.setContent(quizPages.get(currentPage).getPageContent());
+        quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
         //update the side panel to reflect the page change
         sidePanel.update(currentPage);
-
-        System.out.println(currentPage);
-        System.out.println(numPages);
-
-        if (currentPage + 1 == numPages) {
+        if (currentPage + 1 == numPages && notSubmitted) {
             submitButton.setVisible(true);
         } else {
             submitButton.setVisible(false);

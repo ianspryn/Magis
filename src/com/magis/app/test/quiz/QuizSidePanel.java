@@ -1,6 +1,7 @@
 package com.magis.app.test.quiz;
 
 import com.magis.app.Main;
+import com.magis.app.UI.TestPageContent;
 import com.magis.app.lesson.PageLabels;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -14,9 +15,10 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class QuizSidePanel {
-    private ArrayList<QuizPageContent> quizPages;
+    private ArrayList<QuizPageContent> quizPagesContent;
     private int numQuestions;
     private ScrollPane quizPageScrollPane;
+    private TestPageContent testPageContent;
     private VBox vBox;
     private HBox currentPage;
     private int numPages;
@@ -25,14 +27,15 @@ public class QuizSidePanel {
     private int currentPageIndex;
     private int numAdditionalPages;
 
-    public QuizSidePanel(ArrayList<QuizPageContent> quizPages, int numQuestions, ScrollPane quizPageScrollPane) {
-        this.quizPages = quizPages;
+    public QuizSidePanel(ArrayList<QuizPageContent> quizPages, int numQuestions, ScrollPane quizPageScrollPane, TestPageContent testPageContent) {
+        this.quizPagesContent = quizPages;
         this.numQuestions = numQuestions;
         this.quizPageScrollPane = quizPageScrollPane;
         this.vBox = new VBox();
         this.currentPage = new HBox();
         this.numPages = numQuestions / 2 + 1;
         this.pageLabels = new PageLabels(numPages);
+        this.testPageContent = testPageContent;
         line = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
         currentPageIndex = 0;
         numAdditionalPages = -1; //yes, it starts at -1 instead of 0. Leave it as such.
@@ -57,7 +60,7 @@ public class QuizSidePanel {
 
         //listeners
         pageLabels.getLabel(0).setOnMouseClicked(e -> {
-            quizPageScrollPane.setContent(quizPages.get(0).getPageContent());
+            quizPageScrollPane.setContent(testPageContent.getPageContent(0));
             update(0);
         });
         pageLabels.getLabel(0).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
@@ -76,7 +79,7 @@ public class QuizSidePanel {
 
             //listeners
             pageLabels.getLabel(i).setOnMouseClicked(e -> {
-                quizPageScrollPane.setContent(quizPages.get(index).getPageContent());
+                quizPageScrollPane.setContent(testPageContent.getPageContent(index));
                 update(index);
             });
             pageLabels.getLabel(i).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
@@ -98,7 +101,7 @@ public class QuizSidePanel {
         }
         //update the variable the navigation buttons use
         QuizPage.currentPage = index;
-        if (QuizPage.currentPage + 1 == QuizPage.numPages) {
+        if (QuizPage.currentPage + 1 == QuizPage.numPages && QuizPage.notSubmitted) {
             QuizPage.submitButton.setVisible(true);
         } else {
             QuizPage.submitButton.setVisible(false);
@@ -128,6 +131,7 @@ public class QuizSidePanel {
     public void insertCustomPage(int position, String pageName, VBox pageContent) {
         QuizPage.numPages++;
         numAdditionalPages++;
+        testPageContent.add(0, pageContent);
         //clear the current elements in the side sidePanel
         vBox.getChildren().clear();
         currentPage.getChildren().clear();
@@ -137,19 +141,19 @@ public class QuizSidePanel {
         Label newLabel = new Label();
         newLabel.setPadding(new Insets( 0, 0, 0, 10));
         newLabel.getStyleClass().add("lesson-side-panel-text");
-        newLabel.setText(pageName);
         pageLabels.getLabels().add(position, newLabel);
+        pageLabels.getLabel(position).setText(pageName);
 
         //listeners
         newLabel.setOnMouseClicked(e -> {
-            quizPageScrollPane.setContent(pageContent);
+            quizPageScrollPane.setContent(testPageContent.getPageContent(0));
             update(0);
         });
         newLabel.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         newLabel.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
         //add line and first page text to hbox
-        currentPage.getChildren().addAll(line, newLabel);
+        currentPage.getChildren().addAll(line, pageLabels.getLabel(position));
 
         //add first page to the list of pages
         vBox.getChildren().add(currentPage);
@@ -161,7 +165,7 @@ public class QuizSidePanel {
 
             //listeners
             pageLabels.getLabel(i).setOnMouseClicked(e -> {
-                quizPageScrollPane.setContent(quizPages.get(index).getPageContent());
+                quizPageScrollPane.setContent(testPageContent.getPageContent(index));
                 update(index);
             });
             pageLabels.getLabel(i).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
