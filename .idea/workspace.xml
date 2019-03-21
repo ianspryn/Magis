@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fa61e1bd-477f-4905-912d-9205416eb7f9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comp350-software-engineering-cai-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/comp350-software-engineering-cai-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/resources/chapters.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/resources/chapters.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/quizzes/questions/generator/MethodQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/MethodQuestions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/home/HomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/home/HomePage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/magis/app/resources/students.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/resources/students.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/CommentQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/CommentQuestions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/DataTypeQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/DataTypeQuestions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/ObjectComparisonQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/ObjectComparisonQuestions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/OperatorQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/OperatorQuestions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/QuestionGeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/QuestionGeneratorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/VariableQuestions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/VariableQuestions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,15 +15,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="174" column="44" selection-start-line="174" selection-start-column="44" selection-end-line="174" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="284">
+              <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -39,8 +28,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/QuestionGeneratorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="323">
+              <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2">
+              <caret line="174" column="57" lean-forward="true" selection-start-line="174" selection-start-column="57" selection-end-line="174" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -49,67 +59,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/VariableQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/Grader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="85" column="28" selection-start-line="85" selection-start-column="28" selection-end-line="85" selection-end-column="28" />
+            <state relative-caret-position="-66">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/MethodQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizSidePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
+            <state relative-caret-position="147">
+              <caret line="119" selection-start-line="119" selection-end-line="119" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/DataTypeQuestions.java">
+        <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="906">
-              <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/students.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="67" selection-start-column="67" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="219" selection-start-line="219" selection-end-line="219" />
-              <folding>
-                <element signature="e#7677#7678#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+            <state relative-caret-position="140">
+              <caret line="154" selection-start-line="154" selection-end-line="154" />
             </state>
           </provider>
         </entry>
@@ -120,6 +91,8 @@
     <findStrings>
       <find>String[] answers</find>
       <find>numan</find>
+      <find>chapters</find>
+      <find>grader</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,14 +109,14 @@
         <option value="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/MethodQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/VariableQuestions.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/test/questions/generator/QuestionGeneratorTest.java" />
-        <option value="$PROJECT_DIR$/src/com/magis/app/home/HomePage.java" />
         <option value="$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java" />
+        <option value="$PROJECT_DIR$/src/com/magis/app/home/HomePage.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="width" value="980" />
+    <option name="x" value="-12" />
+    <option name="width" value="981" />
     <option name="height" value="1230" />
   </component>
   <component name="ProjectView">
@@ -151,6 +124,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -224,12 +198,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553193692505" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553195400372" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -297,47 +270,46 @@
     <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.21 at 14h 38m 06s.xml">
       <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.21 at 14h 41m 18s.xml">
+      <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuestionGeneratorTest_testDataTypeQuestion - 2019.03.21 at 14h 47m 13s.xml">
+      <configuration name="QuestionGeneratorTest.testDataTypeQuestion" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24939272" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2534413" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32902297" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3275862" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3275862" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.95689654" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32902297" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/MethodQuestions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/CommentQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -372,16 +344,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="219" selection-start-line="219" selection-end-line="219" />
-          <folding>
-            <element signature="e#7677#7678#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/MethodQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="482">
@@ -396,6 +358,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/students.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="67" selection-start-column="67" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/models/StudentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="334" column="43" selection-start-line="334" selection-start-column="35" selection-end-line="334" selection-end-column="43" />
+          <folding>
+            <element signature="e#7620#7621#0" expanded="true" />
+            <element signature="e#7677#7678#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/DataTypeQuestions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="906">
@@ -405,8 +385,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/questions/generator/QuestionGeneratorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        <state relative-caret-position="323">
+          <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -415,32 +395,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="284">
+          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizSidePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="147">
+          <caret line="119" selection-start-line="119" selection-end-line="119" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/magis/app/resources/students.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="67" selection-start-column="67" selection-end-column="67" />
+        <state relative-caret-position="140">
+          <caret line="154" selection-start-line="154" selection-end-line="154" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/Grader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="174" column="44" selection-start-line="174" selection-start-column="44" selection-end-line="174" selection-end-column="44" />
+        <state relative-caret-position="2">
+          <caret line="174" column="57" lean-forward="true" selection-start-line="174" selection-start-column="57" selection-end-line="174" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
         </state>
       </provider>
     </entry>
