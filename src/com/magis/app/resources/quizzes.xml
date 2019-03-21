@@ -3,12 +3,354 @@
         <chapter id = "Primitive Types">
                 <questions>
                         <question>
-                                <statement>my statement</statement>
-                                <answer id = "correct">blah1</answer>
-                                <answer>asdf1</answer>
-                                <answer>asdf2</answer>
-                                <answer>asdf3</answer>
+                                <statement>How is 0 different from '0'?</statement>
+                                <answer id = "correct"> '0' is a string, 0 is an int</answer>
+                                <answer>'0' is an int, 0 is a string</answer>
+                                <answer>There is no difference</answer>
+                                <answer>'0' is a double, 0 is a int</answer>
                         </question>
+                        <question>
+                                <statement>Which statement returns the maximum integer value?</statement>
+                                <answer id = "correct">Integer.MAX_VALUE</answer>
+                                <answer>Integer.return.max</answer>
+                                <answer>Max.value.Integer</answer>
+                                <answer>Integer.MAXIMUM</answer>
+                        </question>
+                        <question>
+                                <statement>What will
+int n = 1000000;
+system.out.println(n*n);
+print out, and why?</statement>
+                                <answer>1000000000000 because that's what n*n is</answer>
+                                <answer id = "correct">A negative number because of overflow</answer>
+                                <answer>An incorrect positive number because of overflow</answer>
+                                <answer>Because the integer value overflows, it will return to 0</answer>
+                        </question>
+                        <question>
+                                <statement>If
+double x = 4.35;
+double x = x*100;
+Will x be exactly 435?                                </statement>
+                                <answer>Yes it will</answer>
+                                <answer>No, because you can't multiply a double by an int</answer>
+                                <answer>No, it will be exactly 435.0 because it is a double</answer>
+                                <answer id = "correct">No, because doubles have a slight roundoff error.</answer>
+                        </question>
+                        <question>
+                                <statement>What is roundoff error?</statement>
+                                <answer>When a integer tries to calculate a round surface and cannot get decimals</answer>
+                                <answer id = "correct">When a value cannot be converted exactly, so the computer rounds it to the nearest value</answer>
+                                <answer>When an integer cannot represent all decimal values</answer>
+                                <answer>4th answer</answer>
+                        </question>
+                        <question>
+                                <statement>Which input will correctly compute the length of string "Hello"</statement>
+                                <answer>Length("Hello");</answer>
+                                <answer>Length.get("Hello");</answer>
+                                <answer>"Hello".get.Length();</answer>
+                        </question>
+                    <question>
+                        <statement>What is the length of string "" ?</statement>
+                        <answer id = "correct">0</answer>
+                        <answer>1</answer>
+                        <answer>2</answer>
+                        <answer>3</answer>
+                    </question>
+                    <question>
+                        <statement>A boolean can be two values, what are they?</statement>
+                        <answer>0 or 1</answer>
+                        <answer id = "correct">true or false</answer>
+                        <answer>-1 or 1</answer>
+                        <answer>a or b</answer>
+                    </question>
+                    <question>
+                        <statement> double amount = 0;
+bool lessThanThousand = amount > 1000;
+system.out.println(lessThanThousand);
+What will be printed from this code?
+                        </statement>
+                        <answer>0</answer>
+                        <answer>true</answer>
+                        <answer id = "correct">false</answer>
+                        <answer>1</answer>
+                    </question>
+                        <question>
+                            <statement>
+What is the problem with this code?
+double x = 100.0;
+int y = x;</statement>
+                            <answer id = "correct">Cannot cast a double to an int</answer>
+                            <answer>y is uninitialized</answer>
+                            <answer>double should be capitalized</answer>
+                            <answer>int should be Integer</answer>
+                        </question>
+                    <question>
+                        <statement>
+                            What does an object's 'type' tell you in java?
+                        </statement>
+                        <answer id = "correct">The set of values that can be contained, and the operations that can be performed</answer>
+                        <answer>The exact value of an object</answer>
+                        <answer>The position of an objects decimal point</answer>
+                        <answer>Nothing at all</answer>
+                    </question>
+                    <question>
+                        <statement>What does DOUBLE stand for?</statement>
+                            <answer>Double the storage space of integers</answer>
+                            <answer id = "correct">Double precision floating point number</answer>
+                            <answer></answer>
+                    </question>Which of the following is NOT a primitive type?
+                    <question>
+                        <answer>int</answer>
+                        <answer>short</answer>
+                        <answer id = "correct">tall</answer>
+                        <answer>byte</answer>
+                    </question>
+                    <question>
+                        <statement>What warning will you recieve when integer overflow occurs?</statement>
+                        <answer>Int_max_value warning</answer>
+                        <answer>Display_overflow error</answer>
+                        <answer>truncation_deletion_error</answer>
+                        <answer id = "correct">There is no warning</answer>
+                    </question>
+                    <question>
+                        <statement>What is the simplest remedy to overflowing an int?</statement>
+                        <answer>use two ints</answer>
+                        <answer id = "correct">change the int to a long</answer>
+                        <answer>use smaller numbers</answer>
+                        <answer>Just let it overflow and figure out how to use that new value.</answer>
+                    </question>
+                    <question>
+                        <statement>A string literal is </statement>
+                            <answer id = "correct">enclosed in a double quotation marks</answer>
+                            <answer>enclosed in brackets</answer>
+                            <answer>enclosed in parentheses</answer>
+                            <answer>not a real thing</answer>
+                    </question>
+                    <question>
+                        <statement>Which of the following is a string of length 5?</statement>
+                        <answer>"A dog!"</answer>
+                        <answer>"An dog!"</answer>
+                        <answer>" aaaaa "</answer>
+                        <answer id = "correct">" !!! "</answer>
+                    </question>
+                    <question>
+                        <statement>To what class do strings belong?</statement>
+                        <answer>Char</answer>
+                        <answer>Writing</answer>
+                        <answer id = "correct">String</answer>
+                        <answer>No class</answer>
+                    </question>
                 </questions>
         </chapter>
+        <chapter id = "Operators">
+            <questions>
+                <question>
+                    <statement>If you want to change the value of
+int width = 10;
+to 20 what do you type?</statement>
+                    <answer>int width = 20;</answer>
+                    <answer id = "correct">width = 20</answer>
+                    <answer>width = 10;</answer>
+                    <answer>int width = new int width(20);</answer>
+                </question>
+                <question>
+                    <statement>What is wrong with the following code?
+int height;
+width = height;</statement>
+                    <answer>int should be Int</answer>
+                    <answer id = "correct">Height is uninitialized</answer>
+                    <answer>height isn't spelled right</answer>
+                    <answer>Nothing</answer>
+                </question>
+                <question>
+                    <statement>What is wrong with this code?
+int width = 20;
+width = width + 10;</statement>
+                    <answer>A variable cannot be on both sides of the equals mark</answer>
+                    <answer>There should be a double equals mark if you are using width twice</answer>
+                    <answer>Need more ;</answer>
+                    <answer id ="correct">Nothing</answer>
+                </question>
+                <question>
+                    <statement>What will be the value of i after the following code is run?
+int i = 2;
+i++;
+                    </statement>
+                    <answer>2</answer>
+                    <answer>4</answer>
+                    <answer id= "correct">3</answer>
+                    <answer>1</answer>
+                </question>
+                <question>
+                    <statement>What will be the value of i after the following code is run?
+int i = 2;
+ i--;</statement>
+                    <answer>2</answer>
+                    <answer>4</answer>
+                    <answer>3</answer>
+                    <answer id = "correct">1</answer>
+                </question>
+                <question>
+                    <statement>What will be the value of sum after the following code is run?
+ int a = 11;
+ int b = 3;
+ double sum = a/b;
+                    </statement>
+                    <answer>approximately 3.6667</answer>
+                    <answer>4</answer>
+                    <answer id = "correct">3</answer>
+                    <answer>2</answer>
+                </question>
+                <question>
+                    <statement>What will be the value of sum after the following code is run?
+double a = 11;
+int b = 3;
+double sum = a/b;</statement>
+                    <answer>Approximately 3.6667</answer>
+                    <answer>4</answer>
+                    <answer id = "correct">3</answer>
+                    <answer>2</answer>
+                </question>
+                <question>
+                    <statement>What will be the value of sum after the following code is run?
+double a = 11;
+int b = 3;
+double sum = a%b;                    </statement>
+                    <answer>Approximately 3.6667</answer>
+                    <answer>4</answer>
+                    <answer>3</answer>
+                    <answer id = "correct">2</answer>
+                </question>
+                <question>
+                    <statement>How do you compute x^n?</statement>
+                        <answer>Math.sqrt(x);</answer>
+                        <answer>Math.exp(x,n);</answer>
+                        <answer>Math.sqr(x);</answer>
+                        <answer id = "correct">Math.pow(x,n);</answer>
+                </question>
+                <question>
+                    <statement>How do you take the Square root of a number?</statement>
+                    <answer id = "correct">Math.sqrt(x);</answer>
+                    <answer>Math.exp(x,n);</answer>
+                    <answer>Math.sqr(x);</answer>
+                    <answer>Math.pow(x,n);</answer>
+                </question>
+                <question>
+                    <statement>Which one correctly converts the value of a double into an int?</statement>
+                        <answer>double balance = 100.5;
+int dollars = balance.cast.int;                        </answer>
+                        <answer id = "correct">double balance = 100.5;
+int dollars = (int) balance;</answer>
+                        <answer>double balance = 100.5;
+int dollars = int(balance);                        </answer>
+                        <answer>double balance = 100.5;
+int dollars = balance.int;          </answer>
+                </question>
+            </questions>
+        </chapter>
+        <chapter id = "Object and Object Comparison">
+            <questions>
+                <question>
+                <statement>An object is</statement>
+                    <answer id = "correct">a value who you can manipulate by calling one of its methods.</answer>
+                    <answer>a sequence of instructions that can access internal data.</answer>
+                    <answer>another name for primitive types.</answer>
+                    <answer>Not real</answer>
+                </question>
+                <question>
+                    <statement>What is the type of an object called?</statement>
+                        <answer>object group</answer>
+                        <answer id = "correct">class</answer>
+                        <answer>Method</answer>
+                        <answer>object band</answer>
+                </question>
+                <question>
+                    <statement>Length and ToUpperCase in the string object are examples of what?</statement>
+                    <answer>object group</answer>
+                    <answer>class</answer>
+                    <answer id = "correct">Method</answer>
+                    <answer>object band</answer>
+                </question>
+                <question>
+                    <statement>If the name of a method is 'overloaded' what does that mean?</statement>
+                    <answer id = "correct">Multiple methods with the same name</answer>
+                    <answer>The method requires too much processing power</answer>
+                    <answer>The name is too long</answer>
+                    <answer>The name cannot be used</answer>
+                </question>
+                <question>
+                    <statement>What will
+system.out.length();
+do?                    </statement>
+                    <answer>measure the length of the output.</answer>
+                    <answer id = "correct">Cause an error</answer>
+                    <answer>Nothing</answer>
+                    <answer>Be ignored</answer>
+                </question>
+                <question>
+                    <statement> What will goodmeal be equal to after this code?
+String meal = "lunch";
+String goodMeal = meal.toUpperCase();
+                    </statement>
+                    <answer>Lunch</answer>
+                    <answer>LuNcH</answer>
+                    <answer id = "correct">LUNCH</answer>
+                    <answer>This code results in an error</answer>
+                </question>
+                <question>
+                    <statement>How do you create a new Rectangle object with it's top left corner at (3,5) and with
+a width of 5 and height of 10?                        </statement>
+                    <answer>Rectangle t = Rectangle.create(3,5,5,10);</answer>
+                    <answer>Rectangle t = Create.Object.Rectangle(3,5,5,10);</answer>
+                    <answer>Rectangle t = new Rectangle.topLeft(3,5).width(5).height(10);</answer>
+                    <answer id = "correct">Rectangle t = new Rectangle(3,5,5,10)</answer>
+                </question>
+                <question>
+                    <statement>In the code,
+Rectangle box = new Rectangle(5, 10, 20, 30);
+                    5, 10,20 and 30 are examples of what?</statement>
+                    <answer id = "correct">construction parameters</answer>
+                    <answer>constructors</answer>
+                    <answer>Methods</answer>
+                    <answer>Objects</answer>
+                </question>
+                <question>
+                    <statement>What would the width of this rectangle be?
+Rectangle t = new Rectangle();                    </statement>
+                    <answer>Default: 1</answer>
+                    <answer id = "correct">0</answer>
+                    <answer>The width would be uninitialized</answer>
+                    <answer>5</answer>
+                </question>
+                <question>
+                    <statement>What is a mutator method?</statement>
+                    <answer>Any method that changes variables</answer>
+                    <answer>A method that modifies the name of the object</answer>
+                    <answer id = "correct">A method that modifies the implicit parameter object</answer>
+                    <answer>Not a real thing</answer>
+                </question>
+
+            </questions>
+        </chapter>
+    <chapter id = "Comments">
+        <questions>
+            <question>
+
+            </question>
+        </questions>
+    </chapter>
+    <chapter id = "Variables">
+        <questions>
+            <question>
+                
+            </question>
+        </questions>
+    </chapter>
+    <chapter id = "Methods">
+        <questions>
+            <question>
+
+            </question>
+        </questions>
+    </chapter>
 </quizzes>
