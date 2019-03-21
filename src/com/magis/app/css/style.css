@@ -90,7 +90,7 @@
     -fx-background-color: #C2185B;
 }
 
-.navigation-circle {
+.circle-shadow {
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }
 
@@ -99,6 +99,20 @@
     -fx-font-family: "Roboto Mono Regular";
     -fx-text-fill: #939393;
     -fx-font-size: 2.0em;
+}
+
+/*text for grade result inside circle*/
+.grade-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-fill: #ffffff;
+    -fx-font-size: 3.5em;
+}
+
+/* Main text below the grade circle */
+.grade-main-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 2.0em;
+    -fx-fill: #515151;
 }
 
 /* set default fill of svg path */

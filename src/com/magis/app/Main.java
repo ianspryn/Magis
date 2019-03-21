@@ -6,16 +6,19 @@ import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class Main extends Application{
 
     public static Stage window;
     public static Scene scene;
-    public static StudentModel studentModel;
     public static LessonModel lessonModel;
+    public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
-    public static String studentID = "1";
+    public static String username = "ianspryn";
 
     public static int width = 900, height = 700;
 
@@ -23,6 +26,10 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         window = primaryStage;
         lessonModel = new LessonModel();
+        studentModel = new StudentModel(lessonModel);
+        int result = studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        System.out.println(result);
         quizzesModel = new QuizzesModel();
 //        Button button = new Button();
 //        button.setOnAction(e -> System.out.println("hi"));

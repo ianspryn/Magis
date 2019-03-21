@@ -1,4 +1,4 @@
-package com.magis.app.quiz;
+package com.magis.app.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +11,11 @@ public class Grader {
     private int numCorrectAnswers;
     private int numTotalQuestions;
 
-    public Grader() {
+    public Grader(int numTotalQuestions) {
         this.studentAnswers = new HashMap<>();
         this.correctAnswers = new HashMap<>();
         this.numTotalQuestions = 0;
-        this.numTotalQuestions = correctAnswers.size();
+        this.numTotalQuestions = numTotalQuestions;
     }
 
     public void addStudentAnswer(int key, String answer) {
@@ -25,8 +25,12 @@ public class Grader {
     public void addCorrectAnswer(int key, String answer) {
         correctAnswers.put(key, answer);
     }
+
+    public String getCorrectAnswer(int key) {
+        return correctAnswers.get(key);
+    }
     
-    private void grade() {
+    public void grade() {
         for (Map.Entry<Integer, String> student : studentAnswers.entrySet()) {
             //if the student's answer matches the correct answer
             if (student.getValue().equals(correctAnswers.get(student.getKey()))) {
@@ -36,8 +40,7 @@ public class Grader {
     }
     
     public Double getGrade() {
-        grade();
-        return (double) numCorrectAnswers / (double) numTotalQuestions;
+        return 100.0 * (double) numCorrectAnswers / (double) numTotalQuestions;
     }
 
 }

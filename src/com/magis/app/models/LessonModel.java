@@ -94,6 +94,10 @@ public class LessonModel {
             return pages;
         }
 
+        public int getNumPages() {
+            return pages.size();
+        }
+
         public PageModel getPages(int index) {
             return pages.get(index);
         }

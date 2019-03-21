@@ -86,19 +86,12 @@ public class LessonSidePanel {
         }
         currentPageIndex = 0;
 
-        //if there exists a quiz for this chapter
+        //if there exists a test for this chapter
         if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
             //then add it to the side panel
             pageLabels.getLabel(pages.size()).setPadding(new Insets(0, 0, 0, 15));
             pageLabels.getLabel(pages.size()).getStyleClass().add("lesson-side-panel-text");
             pageLabels.getLabel(pages.size()).setText("Quiz");
-
-
-
-//            Label quizLabel = new Label();
-//            quizLabel.setPadding(new Insets(0, 0, 0, 15));
-//            quizLabel.getStyleClass().add("lesson-side-panel-text");
-//            quizLabel.setText("Quiz");
 
             //listeners
             pageLabels.getLabel(pages.size()).setOnMouseClicked(e -> {
@@ -119,6 +112,7 @@ public class LessonSidePanel {
         if (index == currentPageIndex) {
             return; //in case user clicked on current page
         }
+        LessonPage.currentPage = index;
         //update padding
         pageLabels.getLabel(currentPageIndex).setPadding(new Insets(0, 0, 0, 15));
         pageLabels.getLabel(index).setPadding(new Insets(0, 0, 0, 10));

@@ -1,4 +1,4 @@
-package com.magis.app.quiz.questions.generator;
+package com.magis.app.test.questions.generator;
 
 import org.junit.jupiter.api.Test;
 

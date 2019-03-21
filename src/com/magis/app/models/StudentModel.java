@@ -26,7 +26,7 @@ public class StudentModel {
     private ArrayList<Student> students;
     private LessonModel lessonModel;
 
-    Student getStudent(String username) {
+    public Student getStudent(String username) {
         for (Student student : students) {
             if (username.equals(student.getUsername())) {
                 return student;
@@ -35,7 +35,7 @@ public class StudentModel {
         return null;
     }
 
-    StudentModel(LessonModel lessonModel) {
+    public StudentModel(LessonModel lessonModel) {
         this.students = new ArrayList<>();
         this.filePath = "src/com/magis/app/resources/students.xml";
         this.lessonModel = lessonModel;
@@ -67,7 +67,7 @@ public class StudentModel {
             NodeList students = this.document.getElementsByTagName("student");
             for (int i = 0; i < students.getLength(); i++) {
                 Node student = students.item(i);
-                if (student.getAttributes().getNamedItem("id").getNodeValue().equals(username)) {
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
                     Node studentNode = students.item(i);
                     Element studentElement = (Element) studentNode;
                     String studentUsername = studentElement.getAttributes().getNamedItem("username").getNodeValue();
@@ -121,7 +121,7 @@ public class StudentModel {
      * @param lastName last name of the student
      * @return 0 if succeeded, or -1 if student username already exists
      */
-    int addStudent(String username, String firstName, String lastName) {
+    public int addStudent(String username, String firstName, String lastName) {
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = null;
@@ -176,8 +176,8 @@ public class StudentModel {
             chapters.appendChild(chapter);
         }
 
-        //quiz
-        Element quizzes = document.createElement("quiz");
+        //test
+        Element quizzes = document.createElement("test");
         student.appendChild(quizzes);
 
         //exams
@@ -204,34 +204,34 @@ public class StudentModel {
             return username;
         }
 
-        String getFirstName() {
+        public String getFirstName() {
             return firstName;
         }
 
-        String getLastName() {
+        public String getLastName() {
             return lastName;
         }
 
-        String getFullName() {
+        public String getFullName() {
             return fullName;
         }
 
-        ChapterModel getChapter(int chapter) {
-            return chapters.get(chapter - 1);
+        public ChapterModel getChapter(int chapterIndex) {
+            return chapters.get(chapterIndex);
         }
 
         /**
          * This method will return a Quiz if it already exists. If it doesn't exist, this method will create a new Quiz and return that
-         * @param chapter the chapter's number (not index)
+         * @param chapterID the chapter's number (not index)
          * @return a Quiz Class
          */
-        Quiz getQuiz(int chapter) {
+        public Quiz getQuiz(int chapterID) {
             for (Quiz quiz : quizzes) {
-                if (quiz.getQuizChapterNumber() == chapter) {
+                if (quiz.getQuizChapterNumber() == chapterID) {
                     return quiz;
                 }
             }
-            //create the quiz node since it didn't exist
+            //create the test node since it didn't exist
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = null;
             try {
@@ -258,9 +258,9 @@ public class StudentModel {
             }
             Element studentElement = (Element) student;
             assert studentElement != null;
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("quiz").item(0);
-            Element newQuiz = document.createElement("quiz");
-            newQuiz.setAttribute("chapter", Integer.toString(chapter));
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("test").item(0);
+            Element newQuiz = document.createElement("test");
+            newQuiz.setAttribute("chapter", Integer.toString(chapterID));
             quizzesElement.appendChild(newQuiz);
             UpdateModel.updateXML(new DOMSource(document), filePath);
             Quiz q = new Quiz(newQuiz);
@@ -273,7 +273,7 @@ public class StudentModel {
          * @param chapter the chapter's number (not index)
          * @return an Exam Class
          */
-        Exam getExam(int chapter) {
+        public Exam getExam(int chapter) {
             for (Exam exam : exams) {
                 if (exam.getExamChapterNumber() == chapter) {
                     return exam;
@@ -338,10 +338,10 @@ public class StudentModel {
                 }
             }
 
-            //quiz
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("quiz").item(0);
-            if (quizzesElement.getElementsByTagName("quiz") != null) {
-                NodeList quizzesList = quizzesElement.getElementsByTagName("quiz");
+            //test
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("test").item(0);
+            if (quizzesElement.getElementsByTagName("test") != null) {
+                NodeList quizzesList = quizzesElement.getElementsByTagName("test");
                 for (int i = 0; i < quizzesList.getLength(); i++) {
                     Node quizNode = quizzesList.item(i);
                     Quiz quiz = new Quiz(quizNode);
@@ -361,7 +361,7 @@ public class StudentModel {
             }
         }
 
-        class ChapterModel {
+        public class ChapterModel {
             private Node chapter;
             private int progress;
 
@@ -370,18 +370,18 @@ public class StudentModel {
                 this.progress = Integer.parseInt(chapter.getTextContent());
             }
 
-            void setProgress(int progress) {
+            public void setProgress(int progress) {
                 this.progress = progress;
                 chapter.setTextContent(Integer.toString(progress));
                 UpdateModel.updateXML(new DOMSource(document), filePath);
             }
 
-            int getProgress() {
+            public int getProgress() {
                 return progress;
             }
         }
 
-        class Quiz {
+        public class Quiz {
             Node quiz;
             private int quizChapterNumber;
             private ArrayList<Double> scores;
@@ -390,15 +390,15 @@ public class StudentModel {
                 return quizChapterNumber;
             }
 
-            ArrayList<Double> getScores() {
+            public ArrayList<Double> getScores() {
                 return scores;
             }
 
             /**
-             * This method returns the most recent score for a given quiz. If the quiz has not been taken, it will return -1.0
+             * This method returns the most recent score for a given test. If the test has not been taken, it will return -1.0
              * @return a Double of the most recent score
              */
-            Double getLastScore() {
+            public Double getLastScore() {
                 if (scores.size() > 0) {
                     return scores.get(scores.size() - 1);
                 }
@@ -406,10 +406,10 @@ public class StudentModel {
             }
 
             /**
-             * This method calculates the average scores for a given quiz. If the quiz as not been taken, it will return 0.0
+             * This method calculates the average scores for a given test. If the test as not been taken, it will return 0.0
              * @return a Double of the average score
              */
-            Double getAverageScore() {
+            public Double getAverageScore() {
                 if (scores.size() == 0) {
                     return 0.0;
                 }
@@ -421,18 +421,18 @@ public class StudentModel {
             }
 
             /**
-             * Add a new score value to the quiz
-             * @param scoreValue student's score on quiz
+             * Add a new score value to the test
+             * @param scoreValue student's score on test
              */
-            void addScore(int scoreValue) {
+            public void addScore(int scoreValue) {
                 addScore(new Double(scoreValue));
             }
 
             /**
-             * Add a new score value to the quiz
-             * @param scoreValue student's score on quiz
+             * Add a new score value to the test
+             * @param scoreValue student's score on test
              */
-            void addScore(Double scoreValue) {
+            public void addScore(Double scoreValue) {
                 //add score to the XML file
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = null;
@@ -461,12 +461,12 @@ public class StudentModel {
                 }
                 Element studentElement = (Element) student;
                 assert studentElement != null;
-                Element quizzesElement = (Element) studentElement.getElementsByTagName("quiz").item(0);
-                NodeList quizzes = quizzesElement.getElementsByTagName("quiz");
+                Element quizzesElement = (Element) studentElement.getElementsByTagName("test").item(0);
+                NodeList quizzes = quizzesElement.getElementsByTagName("test");
                 Node quiz = null;
                 for (int i = 0; i < quizzes.getLength(); i++) {
                     quiz = quizzes.item(i);
-                    //find which quiz to add score to
+                    //find which test to add score to
                     if (Integer.parseInt(quiz.getAttributes().getNamedItem("chapter").getNodeValue()) == quizChapterNumber) {
                         break;
                     }
@@ -506,7 +506,7 @@ public class StudentModel {
                 return examChapterNumber;
             }
 
-            ArrayList<Double> getScores() {
+            public ArrayList<Double> getScores() {
                 return scores;
             }
 
@@ -514,7 +514,7 @@ public class StudentModel {
              * This method returns the most recent score for a given exam. If the exam has not been taken, it will return -1.0
              * @return a Double of the most recent score
              */
-            Double getLastScore() {
+            public Double getLastScore() {
                 if (scores.size() > 0) {
                     return scores.get(scores.size() - 1);
                 }
@@ -526,7 +526,7 @@ public class StudentModel {
              * This method calculates the average scores for a given exam. If the exam as not been taken, it will return 0.0
              * @return a Double of the average score
              */
-            Double getAverageScore() {
+            public Double getAverageScore() {
                 if (scores.size() == 0) {
                     return 0.0;
                 }
@@ -541,7 +541,7 @@ public class StudentModel {
              * Add a new score value to the exam
              * @param scoreValue student's score on exam
              */
-            void addScore(int scoreValue) {
+            public void addScore(int scoreValue) {
                 addScore(new Double(scoreValue));
             }
 
@@ -549,7 +549,7 @@ public class StudentModel {
              * Add a new score value to the exam
              * @param scoreValue student's score on exam
              */
-            void addScore(Double scoreValue) {
+            public void addScore(Double scoreValue) {
                 //add score to the XML file
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = null;
