@@ -46,7 +46,12 @@ public class DataTypeQuestions {
             correctAnswer = dataTypeMatchingAnswers[0];
         }
         else if(dataTypeSelector == 1){
-            question = question + (df.format(rand.nextDouble()*100));
+            int zeroPoint = rand.nextInt(2);
+            if(zeroPoint == 0)
+                question = question + (df.format(rand.nextDouble()*100));
+            else{
+                question = question + (double)rand.nextInt(100);
+            }
             correctAnswer = dataTypeMatchingAnswers[1];
         }
         else if(dataTypeSelector == 2){
