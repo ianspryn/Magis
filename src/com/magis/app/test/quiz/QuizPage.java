@@ -27,6 +27,7 @@ public class QuizPage {
     static ScrollPane quizPageScrollPane;
     static QuizSidePanel sidePanel;
     static TestPageContent testPageContent;
+    static AnchorPane sideBar;
     static Button submitButton;
     static int currentPage;
     static int numPages;
@@ -44,7 +45,7 @@ public class QuizPage {
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-test");
 
-        AnchorPane sideBar = new AnchorPane();
+        sideBar = new AnchorPane();
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
@@ -211,6 +212,8 @@ public class QuizPage {
                 sidePanel.insertCustomPage(0,"Results");
                 //reinitialize with the added page
                 sidePanel.initialize(false);
+                //set the new page
+                sideBar.getChildren().set(1, sidePanel.getvBox());
                 //we added a new page, so increment the number of pages
                 numPages++;
                 //disable all the buttons so the user can't change it
