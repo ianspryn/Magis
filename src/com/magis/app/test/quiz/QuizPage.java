@@ -197,9 +197,6 @@ public class QuizPage {
                 for (int i = 0; i < quizPages.size(); i++) {
                     quizPages.get(i).colorize(grader, i);
                 }
-//                for (QuizPageContent quizPage : quizPages) {
-//                    quizPage.colorize(grader);
-//                }
                 //reset currentPage
                 currentPage = 0;
                 //jump to the new page
