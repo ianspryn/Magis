@@ -133,6 +133,10 @@ public class QuizzesModel {
                 return incorrectAnswers.size() + 1;
             }
 
+            public int getNumIncorrectAnswers() {
+                return incorrectAnswers.size();
+            }
+
             public String getCorrectAnswer() {
                 return correctAnswer;
             }

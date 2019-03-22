@@ -81,7 +81,7 @@ public class ObjectComparisonQuestions {
         }
         else if(random == 1){
             question += "sent1 == sent2\n\nWill this statement return true or false?";
-            if(firstPart == secondPart){
+            if(firstPart.equals(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
             else{

@@ -8,15 +8,11 @@ import com.magis.app.icons.MaterialIcons;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -33,18 +29,22 @@ public class QuizPage {
     static int numPages;
 
     public static void Page (int chapterIndex) {
+        ArrayList<Integer> usedBankQuestions = new ArrayList<>();;
         testPageContent = new TestPageContent();
         currentPage = 0;
 
 //        Main.window.setOnCloseRequest(e -> );
 
-        //read all content for given test from XML file
+        //get the title of the current chapter
         String chapterName = Main.lessonModel.getChapter(chapterIndex).getTitle();
+        //initialize the quiz
         Main.quizzesModel.initializeQuiz(chapterName);
 
+        //main borderpane
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-test");
 
+        //create instance of sideBar
         sideBar = new AnchorPane();
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
@@ -71,20 +71,21 @@ public class QuizPage {
 
         sideBar.setTopAnchor(home, 0.0);
 
-        Grader grader = new Grader(Main.quizzesModel.getChapter(chapterName).getNumQuestions());
 
-        int numQuestions = Main.quizzesModel.getChapter(chapterName).getNumQuestions();
-        numPages = numQuestions / 2 + 1;
+        int numQuestions = 7;
+
+        Grader grader = new Grader(numQuestions);
+        numPages = (int) Math.ceil((double) numQuestions / 2);
         //Save each correct answer into the grader for future grading
-        for (int i = 0; i < numQuestions; i++) {
-            grader.addCorrectAnswer(i,Main.quizzesModel.getChapter(chapterName).getQuestion(i).getCorrectAnswer());
-        }
+//        for (int i = 0; i < numQuestions; i++) {
+//            grader.addCorrectAnswer(i,Main.quizzesModel.getChapter(chapterName).getQuestion(i).getCorrectAnswer());
+//        }
 
         //Since the user as the ability to jump between pages, we need to store the test page in memory to hold the user's answers.
         //That way, if the user decides to go back and change an answer, the answers won't be blank (otherwise even though they answers would be saved, the user wouldn't know that)
         quizPages = new ArrayList<>();
         for (int i = 0; i < numPages; i++) {
-            QuizPageContent quizPageContent = new QuizPageContent(chapterIndex, grader, testPageContent);
+            QuizPageContent quizPageContent = new QuizPageContent(numQuestions, numPages, chapterIndex, grader, testPageContent, usedBankQuestions);
             quizPageContent.initialize(i);
             quizPages.add(quizPageContent);
         }
@@ -99,7 +100,7 @@ public class QuizPage {
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
 
         //Quiz Side Panel
-        sidePanel = new QuizSidePanel(quizPages, Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()).getNumQuestions(), quizPageScrollPane, testPageContent);
+        sidePanel = new QuizSidePanel(quizPages, numQuestions, quizPageScrollPane, testPageContent);
         sidePanel.initialize(true);
 
 
@@ -112,63 +113,34 @@ public class QuizPage {
         quizArea.setStyle("-fx-box-border: transparent");
 
         //Bottom navigation
-        AnchorPane navigationContent = new AnchorPane();
+//        AnchorPane navigationContent = new AnchorPane();
+        BorderPane navigationContent = new BorderPane();
         navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
-        StackPane leftStackPane = new StackPane();
-        Circle leftCircle = new Circle();
-        leftCircle.getStyleClass().add("circle-shadow");
-        leftCircle.setRadius((35));
-        leftCircle.setFill(Paint.valueOf("ffffff"));
-        Text leftChevron = new Text("<");
-        leftChevron.getStyleClass().add("navigation-text");
-        leftStackPane.getChildren().addAll(leftCircle, leftChevron);
-        leftStackPane.setAlignment(Pos.CENTER);
-        StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
-        leftStackPane.setOnMouseClicked(e -> {
+        StackPane leftButton = UIComponents.createNavigationButton("<");
+        leftButton.setOnMouseClicked(e -> {
             if (currentPage > 0) {
                 updatePage(-1);
             }
         });
-        leftStackPane.setOnMousePressed(e ->  leftCircle.setFill(Paint.valueOf("ededed")));
-        leftStackPane.setOnMouseReleased(e ->  leftCircle.setFill(Paint.valueOf("ffffff")));
-        leftStackPane.setOnMouseEntered(e -> {
-            Main.scene.setCursor(Cursor.HAND);
-        });
-        leftStackPane.setOnMouseExited(e -> {
-            Main.scene.setCursor(Cursor.DEFAULT);
-        });
-
         //Right navigation
-        StackPane rightStackPane = new StackPane();
-        Circle rightCircle = new Circle();
-        rightCircle.getStyleClass().add("circle-shadow");
-        rightCircle.setRadius((35));
-        rightCircle.setFill(Paint.valueOf("ffffff"));
-        Text rightChevron = new Text(">");
-        rightChevron.getStyleClass().add("navigation-text");
-        rightStackPane.getChildren().addAll(rightCircle, rightChevron);
-        rightStackPane.setAlignment(Pos.CENTER);
-        StackPane.setMargin(rightChevron, new Insets(0,0,8,0)); //center ">"
-        rightStackPane.setOnMouseClicked(e -> {
+        StackPane rightButton = UIComponents.createNavigationButton(">");
+        rightButton.setOnMouseClicked(e -> {
             if (currentPage < numPages - 1) {
                 updatePage(1);
             }
         });
-        rightStackPane.setOnMousePressed(e ->  rightCircle.setFill(Paint.valueOf("ededed")));
-        rightStackPane.setOnMouseReleased(e ->  rightCircle.setFill(Paint.valueOf("ffffff")));
-        rightStackPane.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        rightStackPane.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        submitButton = new Button();
+        //Quiz submit button
+        submitButton = new Button("Submit");
+        submitButton.getStyleClass().add("submit-test-button");
         submitButton.setVisible(false);
         submitButton.setOnAction(e -> confirmSubmit(grader, chapterIndex));
 
-        navigationContent.getChildren().addAll(leftStackPane, submitButton, rightStackPane);
-        navigationContent.setTopAnchor(submitButton,0.0);
-        navigationContent.setLeftAnchor(leftStackPane, 10.0);
-        navigationContent.setRightAnchor(rightStackPane, 10.0);
+        navigationContent.setLeft(leftButton);
+        navigationContent.setRight(rightButton);
+        navigationContent.setCenter(submitButton);
 
 
 
@@ -198,6 +170,7 @@ public class QuizPage {
         alert.showAndWait().ifPresent(type -> {
             if (type.getText().equals("Submit")) {
                 notSubmitted = true;
+                submitButton.setVisible(false);
                 grader.grade();
                 Main.studentModel.getStudent(Main.username).getQuiz(chapterIndex + 1).addScore(grader.getGrade());
 
@@ -220,11 +193,13 @@ public class QuizPage {
                 for (QuizPageContent quizPage : quizPages) {
                     quizPage.disableInput();
                 }
-
                 //color code the questions to show the user which ones they answered correctly or wrong
-                for (QuizPageContent quizPage : quizPages) {
-                    quizPage.colorize(grader);
+                for (int i = 0; i < quizPages.size(); i++) {
+                    quizPages.get(i).colorize(grader, i);
                 }
+//                for (QuizPageContent quizPage : quizPages) {
+//                    quizPage.colorize(grader);
+//                }
                 //reset currentPage
                 currentPage = 0;
                 //jump to the new page

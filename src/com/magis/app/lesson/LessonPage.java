@@ -49,13 +49,23 @@ public class LessonPage {
         magisLogo.setFitWidth(175);
 
         HBox home = new HBox();
-        home.setPickOnBounds(true);
+//        home.setPickOnBounds(true);
         home.setSpacing(20);
-        home.setMinWidth(300);
+//        home.setMinWidth(300);
         home.setPadding(new Insets(15,0,0,20));
         home.getChildren().addAll(homeButton, magisLogo);
 
         //listeners
+        homeButton.setPickOnBounds(true);
+        homeButton.setOnMouseClicked(e -> HomePage.Page());
+        homeButton.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
+        homeButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+        magisLogo.setPickOnBounds(true);
+        magisLogo.setOnMouseClicked(e -> HomePage.Page());
+        magisLogo.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
+        magisLogo.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
         home.setOnMouseClicked(e -> HomePage.Page());
         home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
         home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
@@ -74,6 +84,8 @@ public class LessonPage {
 
         //Lesson area
         BorderPane lessonArea = new BorderPane();
+        //remove the thin border around the nodes
+        lessonArea.setStyle("-fx-box-border: transparent");
 
         //Lesson content
         ScrollPane lessonPageScrollPane = new ScrollPane();
@@ -83,64 +95,28 @@ public class LessonPage {
         lessonPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         lessonPageScrollPane.setContent(lessonPageContent.getPageContent());
 
-        //Lesson navigation
         //Bottom navigation
-        AnchorPane navigationContent = new AnchorPane();
+        BorderPane navigationContent = new BorderPane();
         navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
-        StackPane leftStackPane = new StackPane();
-        Circle leftCircle = new Circle();
-        leftCircle.getStyleClass().add("navigation-circle");
-        leftCircle.setRadius((35));
-        leftCircle.setFill(Paint.valueOf("ffffff"));
-        Text leftChevron = new Text("<");
-        leftChevron.getStyleClass().add("navigation-text");
-        leftStackPane.getChildren().addAll(leftCircle, leftChevron);
-        leftStackPane.setAlignment(Pos.CENTER);
-        StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
-        leftStackPane.setOnMouseClicked(e -> {
+        StackPane leftButton = UIComponents.createNavigationButton("<");
+        leftButton.setOnMouseClicked(e -> {
             if (currentPage > 0) {
                 updatePage(-1);
             }
         });
-        leftStackPane.setOnMousePressed(e ->  leftCircle.setFill(Paint.valueOf("ededed")));
-        leftStackPane.setOnMouseReleased(e ->  leftCircle.setFill(Paint.valueOf("ffffff")));
-        leftStackPane.setOnMouseEntered(e -> {
-            Main.scene.setCursor(Cursor.HAND);
-        });
-        leftStackPane.setOnMouseExited(e -> {
-            Main.scene.setCursor(Cursor.DEFAULT);
-        });
 
         //Right navigation
-        StackPane rightStackPane = new StackPane();
-        Circle rightCircle = new Circle();
-        rightCircle.getStyleClass().add("navigation-circle");
-        rightCircle.setRadius((35));
-        rightCircle.setFill(Paint.valueOf("ffffff"));
-        Text rightChevron = new Text(">");
-        rightChevron.getStyleClass().add("navigation-text");
-        rightStackPane.getChildren().addAll(rightCircle, rightChevron);
-        rightStackPane.setAlignment(Pos.CENTER);
-        StackPane.setMargin(rightChevron, new Insets(0,0,8,0)); //center ">"
-        rightStackPane.setOnMouseClicked(e -> {
+        StackPane rightButton = UIComponents.createNavigationButton(">");
+        rightButton.setOnMouseClicked(e -> {
             if (currentPage < numPages - 1) {
                 updatePage(1);
             }
         });
-        rightStackPane.setOnMousePressed(e ->  rightCircle.setFill(Paint.valueOf("ededed")));
-        rightStackPane.setOnMouseReleased(e ->  rightCircle.setFill(Paint.valueOf("ffffff")));
-        rightStackPane.setOnMouseEntered(e -> {
-            Main.scene.setCursor(Cursor.HAND);
-        });
-        rightStackPane.setOnMouseExited(e -> {
-            Main.scene.setCursor(Cursor.DEFAULT);
-        });
 
-        navigationContent.getChildren().addAll(leftStackPane, rightStackPane);
-        navigationContent.setLeftAnchor(leftStackPane, 10.0);
-        navigationContent.setRightAnchor(rightStackPane, 10.0);
+        navigationContent.setLeft(leftButton);
+        navigationContent.setRight(rightButton);
 
         lessonArea.setCenter(lessonPageScrollPane);
         lessonArea.setBottom(navigationContent);

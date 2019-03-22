@@ -32,8 +32,7 @@ public class QuizSidePanel {
         this.quizPageScrollPane = quizPageScrollPane;
         this.vBox = new VBox();
         this.currentPage = new HBox();
-        this.numQuizQuestionPages = numQuestions / 2 + 1;
-        this.pageLabels = new PageLabels(numQuizQuestionPages);
+        this.pageLabels = new PageLabels(quizPages.size());
         this.testPageContent = testPageContent;
         line = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
         currentPageIndex = 0;
@@ -97,7 +96,6 @@ public class QuizSidePanel {
      * @param index
      */
     public void update(int index) {
-        System.out.println(numQuizQuestionPages);
         if (index == currentPageIndex) {
             return; //in case user clicked on current page
         }

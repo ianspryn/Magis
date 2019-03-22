@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -129,14 +130,9 @@ public class HomePage {
         scrollPane.setContent(contentHolder);
         borderPane.setCenter(scrollPane);
 
-        Double width = Main.window.getWidth();
-        Double height = Main.window.getHeight();
-        //
-        if (Main.window.getWidth() > Screen.getPrimary().getVisualBounds().getWidth() / 4) {
-            width = Screen.getPrimary().getVisualBounds().getWidth() / 4;
-        }
 
-        Scene scene = new Scene(borderPane, width, height);
+
+        Scene scene = new Scene(borderPane, Main.width, Main.height);
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");

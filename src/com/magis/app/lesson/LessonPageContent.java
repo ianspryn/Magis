@@ -4,6 +4,7 @@ import com.magis.app.Main;
 import com.magis.app.models.LessonModel;
 import com.magis.app.test.quiz.QuizPage;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -41,6 +42,7 @@ public class LessonPageContent {
         }
 
         pageContent.getChildren().clear();
+        pageContent.setAlignment(Pos.TOP_LEFT);
         
         ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getLessonContent();
         for (int i = 0; i < lessonContents.size(); i++) {
@@ -79,7 +81,9 @@ public class LessonPageContent {
 
     private void showQuizPage() {
         pageContent.getChildren().clear();
+        pageContent.setAlignment(Pos.CENTER);
         Button button = new Button("Click to begin test");
+        button.getStyleClass().addAll("start-test-button","drop-shadow");
         button.setOnAction(e -> QuizPage.Page(chapterIndex));
         pageContent.getChildren().add(button);
     }

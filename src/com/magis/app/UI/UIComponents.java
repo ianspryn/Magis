@@ -2,9 +2,14 @@ package com.magis.app.UI;
 
 import com.magis.app.Main;
 import javafx.geometry.*;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 
 public class UIComponents {
 
@@ -25,6 +30,25 @@ public class UIComponents {
         hBox.getChildren().addAll(minimize, maximize, close);
 
         return hBox;
+    }
+
+    public static StackPane createNavigationButton(String chevron) {
+        StackPane button = new StackPane();
+        Circle leftCircle = new Circle();
+        leftCircle.getStyleClass().add("drop-shadow");
+        leftCircle.setRadius((35));
+        leftCircle.setFill(Paint.valueOf("ffffff"));
+        Text leftChevron = new Text(chevron);
+        leftChevron.getStyleClass().add("navigation-text");
+        button.getChildren().addAll(leftCircle, leftChevron);
+        button.setAlignment(Pos.CENTER);
+        button.setOnMousePressed(e ->  leftCircle.setFill(Paint.valueOf("ededed")));
+        button.setOnMouseReleased(e ->  leftCircle.setFill(Paint.valueOf("ffffff")));
+        button.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        button.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
+
+        return button;
     }
 
     public static Button CreateSVGIconButton(String svg, float scale) {
