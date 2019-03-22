@@ -11,6 +11,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class Main extends Application{
 
     public static Stage window;
@@ -19,17 +21,21 @@ public class Main extends Application{
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
     public static String username = "ianspryn";
-
-    public static int width = 900, height = 700;
+    public static double width, height;
 
     @Override
     public void start(Stage primaryStage) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        width = screenSize.width;
+        width = width * 3 / 4;
+        height = screenSize.height;
+        height = height * 3 / 4;
+
         window = primaryStage;
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
         int result = studentModel.addStudent("ianspryn","Ian","Spryn");
         studentModel.initializeStudent("ianspryn");
-        System.out.println(result);
         quizzesModel = new QuizzesModel();
 //        Button button = new Button();
 //        button.setOnAction(e -> System.out.println("hi"));
@@ -48,6 +54,7 @@ public class Main extends Application{
     public static void setScene(Scene newScene) {
         scene = newScene;
         window.setScene(newScene);
+        window.setTitle("Magis");
     }
 
     public static void setScene(Scene newScene, String windowTitle) {

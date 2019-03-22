@@ -1,5 +1,6 @@
 package com.magis.app.test;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,15 +8,14 @@ public class Grader {
 
     private HashMap<Integer, String> studentAnswers;
     private HashMap<Integer, String> correctAnswers;
-    private Double grade;
     private int numCorrectAnswers;
-    private int numTotalQuestions;
+    private int numQuestions;
 
-    public Grader(int numTotalQuestions) {
+    public Grader(int numQuestions) {
         this.studentAnswers = new HashMap<>();
         this.correctAnswers = new HashMap<>();
-        this.numTotalQuestions = 0;
-        this.numTotalQuestions = numTotalQuestions;
+        this.numQuestions = 0;
+        this.numQuestions = numQuestions;
     }
 
     public void addStudentAnswer(int key, String answer) {
@@ -40,7 +40,8 @@ public class Grader {
     }
     
     public Double getGrade() {
-        return 100.0 * (double) numCorrectAnswers / (double) numTotalQuestions;
+        Double grade = 100.0 * (double) numCorrectAnswers / (double) numQuestions;
+        return Double.parseDouble(new DecimalFormat("#.##").format(grade));
     }
 
 }

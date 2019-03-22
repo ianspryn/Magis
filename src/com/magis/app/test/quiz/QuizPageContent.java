@@ -12,7 +12,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class QuizPageContent {
@@ -22,43 +24,31 @@ public class QuizPageContent {
     private Grader grader;
     private QuizzesModel.ChapterModel chapterModel;
     private int numPages;
+    private int numBankQuestions;
     private int numQuestions;
     private ArrayList<ToggleGroup> toggleGroups;
-    private TestPageContent testPageContent;
+    private ArrayList<Integer> usedBankQuestions;
 
-    public QuizPageContent(int chapterIndex, Grader grader, TestPageContent testPageContent) {
+    public QuizPageContent(int numQuestions, int numPages, int chapterIndex,  Grader grader, TestPageContent testPageContent, ArrayList<Integer> usedBankQuestions) {
         pageContent = new VBox();
+        this.numQuestions = numQuestions;
         this.chapterIndex = chapterIndex;
         this.grader = grader;
-        chapterModel = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle());
-        numPages = chapterModel.getNumQuestions() / 2 + 1;
-        numQuestions = chapterModel.getNumQuestions();
-        toggleGroups = new ArrayList<>();
-        this.testPageContent = testPageContent;
+        this.chapterModel = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        this.numPages = numPages;
+        this.numBankQuestions = chapterModel.getNumQuestions();
+        this.toggleGroups = new ArrayList<>();
         testPageContent.add(pageContent);
+        this.usedBankQuestions = usedBankQuestions;
     }
 
     public void initialize(int pageIndex) {
         pageContent.getChildren().clear();
-
-        String correctAnswer = "";
-        ArrayList<String> answers = null;
         Random rand = new Random();
-
-        int questionsPerPage = 2;
-        //if we're on the last page
-        if (pageIndex + 1 == numPages) {
-            //will that page have 1 or 2 questions?
-            questionsPerPage = (numQuestions % 2 == 0) ? 2 : 1;
-        }
-
         //max 2 questions per page
-        for (int i = 0; i < questionsPerPage; i++) {
-            //get the current question index
-            int question = pageIndex * 2 + i;
-            //get the total number of answers for the question
-            int numAnswers = 0;
-
+        for (int i = 0, questionIndex = pageIndex * 2 + i; i < 2 && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
+            ArrayList<String> answers = new ArrayList<>();
+            String correctAnswer;
             VBox questionBox = new VBox();
             questionBox.setSpacing(15);
             questionBox.setPadding(new Insets(40,0,20,20));
@@ -66,25 +56,34 @@ public class QuizPageContent {
             statement.setWrapText(true);
             statement.setPrefWidth(700);
 
-            //Decide if the question is to be conceptual or calculation based
-            int typeOfQuestion = rand.nextInt();
+            //Decide if the question is to be conceptual (0) or calculation-based (1)
+            int typeOfQuestion = 1; //default
+            //if we're not out of bank questions, then randomly choose if the question should be conceptual or calculation-based
+            if (numBankQuestions > usedBankQuestions.size()) {
+                 typeOfQuestion = rand.nextInt(2);
+            }
 
             if(typeOfQuestion == 0) {
-                numAnswers = chapterModel.getQuestion(question).getNumAnswers();
+                //grab a random question from the question bank that hasn't been used before
+                int question;
+                do {
+                    question = rand.nextInt(numBankQuestions);
+                } while (usedBankQuestions.contains(question));
+                usedBankQuestions.add(question);
                 //set the question statement
                 statement.setText(chapterModel.getQuestion(question).getStatement());
-                //add the statement for thr question to the questionBox
+                //add the statement for the question to the questionBox
                 questionBox.getChildren().add(statement);
 
+                //add the incorrect answers and the correct answer to the ArrayList of possible answers
                 correctAnswer = chapterModel.getQuestion(question).getCorrectAnswer();
-                answers = shuffle(chapterModel.getQuestion(question).getIncorrectAnswers());
-
-                //choose which radio button will be the correct answer;
-                int correctAnswerPosition = rand.nextInt(numAnswers);
-                //insert the correct answer into the random position of the array of possible answers
-                answers.add(correctAnswerPosition, correctAnswer);
-            }
-            else {
+                answers = chapterModel.getQuestion(question).getIncorrectAnswers();
+                answers.add(correctAnswer);
+                //shuffle the order
+                Collections.shuffle(answers);
+                //add the correct answer to the grader for future grading
+                grader.addCorrectAnswer(questionIndex, correctAnswer);
+            } else {
                 int typeSelector;
                 String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
                 switch (chapterTitle) {
@@ -94,7 +93,8 @@ public class QuizPageContent {
                         statement.setText(cQuestion.getQuestion());
                         questionBox.getChildren().add(statement);
                         correctAnswer = cQuestion.getCorrectAnswer();
-                        grader.addCorrectAnswer(question, correctAnswer);
+                        //add the correct answer to the grader for future grading
+                        grader.addCorrectAnswer(questionIndex, correctAnswer);
                         answers = cQuestion.getCommentAnswers();
                         break;
                     case "Primitive Types":
@@ -103,13 +103,14 @@ public class QuizPageContent {
                         statement.setText(dtQuestion.getQuestion());
                         questionBox.getChildren().add(statement);
                         correctAnswer = dtQuestion.getCorrectAnswer();
-                        grader.addCorrectAnswer(question, correctAnswer);
+                        //add the correct answer to the grader for future grading
+                        grader.addCorrectAnswer(questionIndex, correctAnswer);
                         answers = dtQuestion.getAnswers();
                         break;
                     case "Object and Object Comparison":
                         ObjectComparisonQuestions objcQuestion = new ObjectComparisonQuestions();
 
-                        typeSelector = rand.nextInt(1);
+                        typeSelector = rand.nextInt(2);
                         if (typeSelector == 0) {
                             objcQuestion.generateComparableQuestion();
                         } else {
@@ -119,13 +120,14 @@ public class QuizPageContent {
                         statement.setText(objcQuestion.getQuestion());
                         questionBox.getChildren().add(statement);
                         correctAnswer = objcQuestion.getCorrectAnswer();
-                        grader.addCorrectAnswer(question, correctAnswer);
+                        //add the correct answer to the grader for future grading
+                        grader.addCorrectAnswer(questionIndex, correctAnswer);
                         answers = objcQuestion.getAnswers();
                         break;
                     case "Operators":
                         OperatorQuestions opQuestion = new OperatorQuestions();
 
-                        typeSelector = rand.nextInt(4);
+                        typeSelector = rand.nextInt(5);
                         if (typeSelector == 0) {
                             opQuestion.getIncrementalQuestion();
                         } else if (typeSelector == 1) {
@@ -139,13 +141,14 @@ public class QuizPageContent {
                         statement.setText(opQuestion.getQuestion());
                         questionBox.getChildren().add(statement);
                         correctAnswer = opQuestion.getCorrectAnswer();
-                        grader.addCorrectAnswer(question, correctAnswer);
+                        //add the correct answer to the grader for future grading
+                        grader.addCorrectAnswer(questionIndex, correctAnswer);
                         answers = opQuestion.getAnswers();
                         break;
                     case "Methods":
                         MethodQuestions mQuestion = new MethodQuestions();
 
-                        typeSelector = rand.nextInt(1);
+                        typeSelector = rand.nextInt(2);
                         if (typeSelector == 0) {
                             mQuestion.getMathMethodQuestion();
                         } else {
@@ -155,13 +158,14 @@ public class QuizPageContent {
                         statement.setText(mQuestion.getQuestion());
                         questionBox.getChildren().add(statement);
                         correctAnswer = mQuestion.getCorrectAnswer();
-                        grader.addCorrectAnswer(question, correctAnswer);
+                        //add the correct answer to the grader for future grading
+                        grader.addCorrectAnswer(questionIndex, correctAnswer);
                         answers = mQuestion.getAnswers();
                         break;
                     case "Variables":
                         VariableQuestions vQuestion = new VariableQuestions();
 
-                        typeSelector = rand.nextInt(1);
+                        typeSelector = rand.nextInt(2);
                         if (typeSelector == 0) {
                             vQuestion.getInstanceVariableQuestion();
                         } else {
@@ -171,79 +175,65 @@ public class QuizPageContent {
                         statement.setText(vQuestion.getQuestion());
                         questionBox.getChildren().add(statement);
                         correctAnswer = vQuestion.getCorrectAnswer();
-                        grader.addCorrectAnswer(question, correctAnswer);
+                        //add the correct answer to the grader for future grading
+                        grader.addCorrectAnswer(questionIndex, correctAnswer);
                         answers = vQuestion.getAnswers();
                         break;
                 }
 
-                numAnswers = answers.size();
             }
 
+            /*
+            Add each possible answer to a radio button
+             */
             ToggleGroup toggleGroup = new ToggleGroup();
             toggleGroups.add(toggleGroup);
 
-            for (int j = 0; j < numAnswers; j++) {
+            for (int j = 0; j < answers.size(); j++) {
                 RadioButton radioButton = new RadioButton();
+                radioButton.setId(Integer.toString(questionIndex));
+                radioButton.getStyleClass().addAll("test-radio-button");
                 radioButton.setUserData(answers.get(j));
                 radioButton.setText(answers.get(j));
                 radioButton.setToggleGroup(toggleGroup);
                 questionBox.getChildren().add(radioButton);
             }
+            //every time the student clicks a radio button, update the grader with the new answer the student selected
+            int index = questionIndex;
+            toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> grader.addStudentAnswer(index, newVal.getUserData().toString()));
 
-            toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> grader.addStudentAnswer(question, newVal.getUserData().toString()));
             pageContent.getChildren().add(questionBox);
         }
     }
 
-    private ArrayList<String> shuffle(ArrayList<String> text) {
-        int n = text.size();
-        Random rand = new Random();
-        for (int i = 0; i < n; i++) {
-            int change = i + rand.nextInt(n - i);
-            swap(text, i, change);
-        }
-        return text;
-    }
-
-    private static void swap (ArrayList<String> text, int i, int change) {
-        String temp = text.get(i);
-        text.set(i, text.get(change));
-        text.set(change, temp);
-    }
-
+    /**
+     * Disable input of all radio buttons used for the quiz so that the student cannot modify the quiz after submitting it
+     */
     public void disableInput() {
         for (int i = 0; i < toggleGroups.size(); i++) {
             toggleGroups.get(i).getToggles().stream().map((toggle) -> (ToggleButton)toggle).forEach((button) -> button.setDisable(true));
         }
-
-
     }
 
-    public void colorize(Grader grader) {
-
+    /**
+     * Colorize each quiz question to indicate if the student answered the question correctly or not
+     * @param grader the current grader instance being used to grade the quiz
+     */
+    public void colorize(Grader grader, int page) {
         for (int i = 0; i < toggleGroups.size(); i++) {
             int index = i;
             toggleGroups.get(i).getToggles().stream().map((toggle) -> (ToggleButton)toggle).forEach((button) -> {
 
                 //highlight the correct answer as green
-                if (button.getText().equals(grader.getCorrectAnswer(index))) {
+                if (button.getText().equals(grader.getCorrectAnswer(index + page * 2))) {
                     button.setStyle("-fx-text-fill: #57d154;");
                 }
 
                 //if the user selected the wrong answer, highlight their answer as red
-                if (!button.getText().equals(grader.getCorrectAnswer(index)) && button.isSelected()) {
+                if (!button.getText().equals(grader.getCorrectAnswer(index + page * 2)) && button.isSelected()) {
                     button.setStyle("-fx-text-fill: #f44336;");
                 }
             });
         }
-//        int index = 0;
-//        for (int i = 0; i < numQuestions; i++) {
-//            if (toggleGroups.get(i).getSelectedToggle().getUserData().toString().equals(grader.getCorrectAnswer(i))) {
-//                toggleGroups.get(i).getSelectedToggle()
-//            }
-//            ObservableList toggleButtons = toggleGroups.get(i).getToggles();
-//            toggleButtons.forEach((toggleButton) -> {
-//            });
-//        }
     }
 }

@@ -24,7 +24,7 @@ public class TestResult {
 
         Circle circle = new Circle();
         circle.setRadius(85);
-        circle.getStyleClass().add("circle-shadow");
+        circle.getStyleClass().add("drop-shadow");
         circle.setFill(Paint.valueOf(calculateColor(grade)));
 
         Text gradeText = new Text(grade.toString() + "%");
