@@ -21,7 +21,7 @@ public class Main extends Application{
     public static LessonModel lessonModel;
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
-    public static String username = "ianspryn";
+    public static String username = "";
     public static double width, height;
 
     @Override
@@ -33,10 +33,11 @@ public class Main extends Application{
         height = height * 3 / 4;
 
         window = primaryStage;
+
+        Login.Page();
+
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
-        int result = studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.initializeStudent("ianspryn");
         quizzesModel = new QuizzesModel();
 //        Button button = new Button();
 //        button.setOnAction(e -> System.out.println("hi"));
@@ -49,7 +50,6 @@ public class Main extends Application{
 //        primaryStage.setTitle("Magis");
 
 //        HomePage.Page();
-        Login.Page();
         primaryStage.show();
     }
 

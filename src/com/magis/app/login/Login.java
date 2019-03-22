@@ -3,7 +3,6 @@ package com.magis.app.login;
 import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.home.HomePage;
-import com.sun.corba.se.impl.protocol.INSServerRequestDispatcher;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,15 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
-import java.util.Stack;
 
 public class Login {
 
@@ -49,21 +45,26 @@ public class Login {
         gridPane.setPadding(new Insets(25,25,25,25));
 
         Label userName = new Label("Username:");
-        TextField userTextField = new TextField();
-        userTextField.getStyleClass().add("sign-in-field");
+        TextField userNameTextField = new TextField();
+        userNameTextField.getStyleClass().add("sign-in-field");
 
-        gridPane.add(userName, 0, 1);
-        gridPane.add(userTextField,1,1);
 
-        Button signIn = new Button("Sign In");
-        userTextField.setOnKeyPressed(e -> {
+        userNameTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {
-                attemptSignIn(userTextField.getText());
+                attemptSignIn(userNameTextField.getText());
             }
         });
-        signIn.setOnMouseClicked(e -> attemptSignIn(userTextField.getText()));
+        gridPane.add(userName, 0, 1);
+        gridPane.add(userNameTextField,1,1);
+        Button signIn = new Button("Sign In");
+        signIn.setOnMouseClicked(e -> attemptSignIn(userNameTextField.getText()));
 
         Button createAccount = new Button("Create Account");
+        createAccount.setOnMouseClicked(e -> Signup.Page(userNameTextField.getText()));
+
+
+
+
 
         boxBackground.getChildren().addAll(rectangle, magisLogo, gridPane, signIn, createAccount);
         StackPane.setAlignment(magisLogo, Pos.TOP_CENTER);
@@ -85,7 +86,8 @@ public class Login {
         Main.setScene(scene, "Login");
     }
 
-    public static void attemptSignIn(String username) {
+    private static void attemptSignIn(String username) {
+        Main.studentModel.initializeStudent(username);
         //if that student exists
         if (username.length() == 0) {
             Alert.showAlert("Error", "Please enter a username.");
