@@ -87,7 +87,7 @@ public class HomePage {
 
             //Progress
             RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(Main.studentModel.getStudent("ianspryn").getChapter(i).getProgress());
+            progressIndicator.setProgress(Main.studentModel.getStudent(Main.username).getChapter(i).getProgress());
 
             //Title
             Label title = new Label();
