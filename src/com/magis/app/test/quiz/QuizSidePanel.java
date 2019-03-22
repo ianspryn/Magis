@@ -21,7 +21,7 @@ public class QuizSidePanel {
     private TestPageContent testPageContent;
     private VBox vBox;
     private HBox currentPage;
-    private int numPages;
+    private int numQuizQuestionPages;
     private PageLabels pageLabels;
     private ImageView line;
     private int currentPageIndex;
@@ -33,8 +33,8 @@ public class QuizSidePanel {
         this.quizPageScrollPane = quizPageScrollPane;
         this.vBox = new VBox();
         this.currentPage = new HBox();
-        this.numPages = numQuestions / 2 + 1;
-        this.pageLabels = new PageLabels(numPages);
+        this.numQuizQuestionPages = numQuestions / 2 + 1;
+        this.pageLabels = new PageLabels(numQuizQuestionPages);
         this.testPageContent = testPageContent;
         line = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
         currentPageIndex = 0;
@@ -45,18 +45,21 @@ public class QuizSidePanel {
         return vBox;
     }
 
-    public int getNumPages() {
-        return numPages;
+    public int getNumQuizQuestionPages() {
+        return numQuizQuestionPages;
     }
 
-    public void initialize() {
+    public void initialize(boolean firstTime) {
+
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(200,0,0,15));
         line.setPreserveRatio(false);
         line.setFitHeight(25);
         line.setFitWidth(5);
         pageLabels.getLabel(0).setPadding(new Insets( 0, 0, 0, 10));
-        setLabelText(0);
+        if (firstTime) {
+            setLabelText(0);
+        }
 
         //listeners
         pageLabels.getLabel(0).setOnMouseClicked(e -> {
@@ -72,10 +75,12 @@ public class QuizSidePanel {
         //add first page to the list of pages
         vBox.getChildren().add(currentPage);
 
-        for (int i = 1; i < numPages; i++) {
+        for (int i = 1; i < numQuizQuestionPages; i++) {
             int index = i;
             pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            setLabelText(i);
+            if (firstTime) {
+                setLabelText(i);
+            }
 
             //listeners
             pageLabels.getLabel(i).setOnMouseClicked(e -> {
@@ -96,6 +101,7 @@ public class QuizSidePanel {
      * @param index
      */
     public void update(int index) {
+        System.out.println(numQuizQuestionPages);
         if (index == currentPageIndex) {
             return; //in case user clicked on current page
         }
@@ -128,52 +134,59 @@ public class QuizSidePanel {
         pageLabels.getLabel(index).setText("Page " + (index + 1));
     }
 
-    public void insertCustomPage(int position, String pageName, VBox pageContent) {
+    public void insertCustomPage(int position, String pageName) {
         QuizPage.numPages++;
         numAdditionalPages++;
-        testPageContent.add(0, pageContent);
         //clear the current elements in the side sidePanel
         vBox.getChildren().clear();
         currentPage.getChildren().clear();
-
 
         //create the new label
         Label newLabel = new Label();
         newLabel.setPadding(new Insets( 0, 0, 0, 10));
         newLabel.getStyleClass().add("lesson-side-panel-text");
-        pageLabels.getLabels().add(position, newLabel);
-        pageLabels.getLabel(position).setText(pageName);
 
         //listeners
-        newLabel.setOnMouseClicked(e -> {
-            quizPageScrollPane.setContent(testPageContent.getPageContent(0));
-            update(0);
-        });
-        newLabel.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        newLabel.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+//        newLabel.setOnMouseClicked(e -> {
+//            quizPageScrollPane.setContent(testPageContent.getPageContent(0));
+//            update(0);
+//        });
+//        newLabel.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+//        newLabel.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+
+        pageLabels.getLabels().add(position, newLabel);
+        pageLabels.getLabel(position).setText(pageName);
+        pageLabels.getLabel(position).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        pageLabels.getLabel(position).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+//        vBox.getChildren().add(0, pageLabels.getLabel(position));
+        initialize(false);
+//        if (position <= currentPageIndex) {
+//            currentPageIndex++;
+//        }
+//        update(currentPageIndex);
 
         //add line and first page text to hbox
-        currentPage.getChildren().addAll(line, pageLabels.getLabel(position));
+//        currentPage.getChildren().addAll(line, pageLabels.getLabel(position));
 
         //add first page to the list of pages
-        vBox.getChildren().add(currentPage);
-
-        for (int i = 0; i < numPages - numAdditionalPages; i++) {
+//        vBox.getChildren().add(currentPage);
+/*
+        for (int i = 0; i < testPageContent.getNumPages(); i++) {
             int index = i;
-            pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            setLabelText(i);
+//            pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
+//            setLabelText(i);
 
             //listeners
             pageLabels.getLabel(i).setOnMouseClicked(e -> {
                 quizPageScrollPane.setContent(testPageContent.getPageContent(index));
                 update(index);
             });
-            pageLabels.getLabel(i).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-            pageLabels.getLabel(i).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
             //add page to the list of pages
-            vBox.getChildren().add(pageLabels.getLabel(i));
+//            vBox.getChildren().add(pageLabels.getLabel(i));
         }
-        currentPageIndex = 0;
+//        currentPageIndex = 0;
+*/
     }
 }

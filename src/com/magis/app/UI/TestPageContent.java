@@ -12,6 +12,10 @@ public class TestPageContent {
         return pageContent.get(index);
     }
 
+    public int getNumPages() {
+        return pageContent.size();
+    }
+
     public TestPageContent() {
         pageContent = new ArrayList<>();
     }

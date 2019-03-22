@@ -99,7 +99,7 @@ public class QuizPage {
 
         //Quiz Side Panel
         sidePanel = new QuizSidePanel(quizPages, Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()).getNumQuestions(), quizPageScrollPane, testPageContent);
-        sidePanel.initialize();
+        sidePanel.initialize(true);
 
 
         sideBar.getChildren().addAll(home, sidePanel.getvBox());
@@ -205,8 +205,12 @@ public class QuizPage {
                  */
                 //create the new pageContent
                 VBox result = TestResult.createTestResultPage(Main.lessonModel.getChapter(chapterIndex).getTitle(), "quiz", grader.getGrade());
+                //add new page to testPageContent
+                testPageContent.add(0, result);
                 //add new page to the side panel
-                sidePanel.insertCustomPage(0,"Results", result);
+                sidePanel.insertCustomPage(0,"Results");
+                //reinitialize with the added page
+                sidePanel.initialize(false);
                 //we added a new page, so increment the number of pages
                 numPages++;
                 //disable all the buttons so the user can't change it
@@ -218,9 +222,10 @@ public class QuizPage {
                 for (QuizPageContent quizPage : quizPages) {
                     quizPage.colorize(grader);
                 }
+                //reset currentPage
+                currentPage = 0;
                 //jump to the new page
-                sidePanel.update(0);
-                quizPageScrollPane.setContent(result);
+                quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
 
             }
         });
