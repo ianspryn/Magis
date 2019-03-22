@@ -132,7 +132,7 @@ public class HomePage {
 
 
 
-        Scene scene = new Scene(borderPane, Main.width, Main.height);
+        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");

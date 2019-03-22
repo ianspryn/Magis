@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class QuizPage {
 
-    public static boolean notSubmitted = true;
     static ArrayList<QuizPageContent> quizPages;
     static ScrollPane quizPageScrollPane;
     static QuizSidePanel sidePanel;
@@ -136,7 +135,7 @@ public class QuizPage {
         submitButton = new Button("Submit");
         submitButton.getStyleClass().add("submit-test-button");
         submitButton.setVisible(false);
-        submitButton.setOnAction(e -> confirmSubmit(grader, chapterIndex));
+        submitButton.setOnAction(e -> confirmSubmit(grader, chapterIndex, navigationContent));
 
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
@@ -160,7 +159,7 @@ public class QuizPage {
      * @param grader the current Grader Class used to grade this quiz
      * @param chapterIndex used to add the grade score to the correct chapter should the user confirm submission
      */
-    private static void confirmSubmit(Grader grader, int chapterIndex) {
+    private static void confirmSubmit(Grader grader, int chapterIndex, BorderPane navigationContent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Submit Quiz");
         alert.setContentText("Do you wish to submit your quiz?");
@@ -169,8 +168,7 @@ public class QuizPage {
         alert.getButtonTypes().setAll(cancelButton, okButton);
         alert.showAndWait().ifPresent(type -> {
             if (type.getText().equals("Submit")) {
-                notSubmitted = true;
-                submitButton.setVisible(false);
+                navigationContent.setCenter(null);
                 grader.grade();
                 Main.studentModel.getStudent(Main.username).getQuiz(chapterIndex + 1).addScore(grader.getGrade());
 
@@ -220,10 +218,5 @@ public class QuizPage {
         quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
         //update the side panel to reflect the page change
         sidePanel.update(currentPage);
-        if (currentPage + 1 == numPages && notSubmitted) {
-            submitButton.setVisible(true);
-        } else {
-            submitButton.setVisible(false);
-        }
     }
 }

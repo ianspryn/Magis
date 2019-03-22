@@ -44,7 +44,7 @@ public class LessonPage {
         Button homeButton = UIComponents.CreateSVGIconButton(MaterialIcons.home, 50);
 
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
+            ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 

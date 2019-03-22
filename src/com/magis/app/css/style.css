@@ -104,6 +104,10 @@
     -fx-background-color: #C2185B;
 }
 
+.login-box {
+-fx-background-color: #ffffff;
+}
+
 .drop-shadow {
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }
@@ -164,6 +168,12 @@
 }
 
 .chapter-box-container {
+    -fx-alignment: center;
+    -fx-padding: 100px 0 0 0;
+    -fx-spacing: 50px;
+}
+
+.welcome-box-container {
     -fx-alignment: center;
     -fx-padding: 100px 0 0 0;
     -fx-spacing: 50px;
