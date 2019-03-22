@@ -4,6 +4,7 @@ import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.test.Grader;
+import com.magis.app.test.questions.generator.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -40,6 +41,8 @@ public class QuizPageContent {
     public void initialize(int pageIndex) {
         pageContent.getChildren().clear();
 
+        String correctAnswer = "";
+        ArrayList<String> answers = null;
         Random rand = new Random();
 
         int questionsPerPage = 2;
@@ -54,7 +57,7 @@ public class QuizPageContent {
             //get the current question index
             int question = pageIndex * 2 + i;
             //get the total number of answers for the question
-            int numAnswers = chapterModel.getQuestion(question).getNumAnswers();
+            int numAnswers = 0;
 
             VBox questionBox = new VBox();
             questionBox.setSpacing(15);
@@ -66,17 +69,115 @@ public class QuizPageContent {
             //Decide if the question is to be conceptual or calculation based
             int typeOfQuestion = rand.nextInt();
 
-            //set the question statement
-            statement.setText(chapterModel.getQuestion(question).getStatement());
-            //add the statement for thr question to the questionBox
-            questionBox.getChildren().add(statement);
+            if(typeOfQuestion == 0) {
+                numAnswers = chapterModel.getQuestion(question).getNumAnswers();
+                //set the question statement
+                statement.setText(chapterModel.getQuestion(question).getStatement());
+                //add the statement for thr question to the questionBox
+                questionBox.getChildren().add(statement);
 
-            String correctAnswer = chapterModel.getQuestion(question).getCorrectAnswer();
-            ArrayList<String> answers = shuffle(chapterModel.getQuestion(question).getIncorrectAnswers());
-            //choose which radio button will be the correct answer;
-            int correctAnswerPosition = rand.nextInt(numAnswers);
-            //insert the correct answer into the random position of the array of possible answers
-            answers.add(correctAnswerPosition, correctAnswer);
+                correctAnswer = chapterModel.getQuestion(question).getCorrectAnswer();
+                answers = shuffle(chapterModel.getQuestion(question).getIncorrectAnswers());
+
+                //choose which radio button will be the correct answer;
+                int correctAnswerPosition = rand.nextInt(numAnswers);
+                //insert the correct answer into the random position of the array of possible answers
+                answers.add(correctAnswerPosition, correctAnswer);
+            }
+            else {
+                int typeSelector;
+                String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
+                switch (chapterTitle) {
+                    case "Comments":
+                        CommentQuestions cQuestion = new CommentQuestions();
+                        cQuestion.generateGeneralCommentQuestion();
+                        statement.setText(cQuestion.getQuestion());
+                        questionBox.getChildren().add(statement);
+                        correctAnswer = cQuestion.getCorrectAnswer();
+                        grader.addCorrectAnswer(question, correctAnswer);
+                        answers = cQuestion.getCommentAnswers();
+                        break;
+                    case "Primitive Types":
+                        DataTypeQuestions dtQuestion = new DataTypeQuestions();
+                        dtQuestion.datatypeMatchingQuestion();
+                        statement.setText(dtQuestion.getQuestion());
+                        questionBox.getChildren().add(statement);
+                        correctAnswer = dtQuestion.getCorrectAnswer();
+                        grader.addCorrectAnswer(question, correctAnswer);
+                        answers = dtQuestion.getAnswers();
+                        break;
+                    case "Object and Object Comparison":
+                        ObjectComparisonQuestions objcQuestion = new ObjectComparisonQuestions();
+
+                        typeSelector = rand.nextInt(1);
+                        if (typeSelector == 0) {
+                            objcQuestion.generateComparableQuestion();
+                        } else {
+                            objcQuestion.generateEqualsQuestion();
+                        }
+
+                        statement.setText(objcQuestion.getQuestion());
+                        questionBox.getChildren().add(statement);
+                        correctAnswer = objcQuestion.getCorrectAnswer();
+                        grader.addCorrectAnswer(question, correctAnswer);
+                        answers = objcQuestion.getAnswers();
+                        break;
+                    case "Operators":
+                        OperatorQuestions opQuestion = new OperatorQuestions();
+
+                        typeSelector = rand.nextInt(4);
+                        if (typeSelector == 0) {
+                            opQuestion.getIncrementalQuestion();
+                        } else if (typeSelector == 1) {
+                            opQuestion.getIntegerDivisionQuestion();
+                        } else if (typeSelector == 2) {
+                            opQuestion.getModularQuestion();
+                        } else {
+                            opQuestion.getSubstringQuestion();
+                        }
+
+                        statement.setText(opQuestion.getQuestion());
+                        questionBox.getChildren().add(statement);
+                        correctAnswer = opQuestion.getCorrectAnswer();
+                        grader.addCorrectAnswer(question, correctAnswer);
+                        answers = opQuestion.getAnswers();
+                        break;
+                    case "Methods":
+                        MethodQuestions mQuestion = new MethodQuestions();
+
+                        typeSelector = rand.nextInt(1);
+                        if (typeSelector == 0) {
+                            mQuestion.getMathMethodQuestion();
+                        } else {
+                            mQuestion.getStringMethodQuestion();
+                        }
+
+                        statement.setText(mQuestion.getQuestion());
+                        questionBox.getChildren().add(statement);
+                        correctAnswer = mQuestion.getCorrectAnswer();
+                        grader.addCorrectAnswer(question, correctAnswer);
+                        answers = mQuestion.getAnswers();
+                        break;
+                    case "Variables":
+                        VariableQuestions vQuestion = new VariableQuestions();
+
+                        typeSelector = rand.nextInt(1);
+                        if (typeSelector == 0) {
+                            vQuestion.getInstanceVariableQuestion();
+                        } else {
+                            vQuestion.getVariableNameQuestion();
+                        }
+
+                        statement.setText(vQuestion.getQuestion());
+                        questionBox.getChildren().add(statement);
+                        correctAnswer = vQuestion.getCorrectAnswer();
+                        grader.addCorrectAnswer(question, correctAnswer);
+                        answers = vQuestion.getAnswers();
+                        break;
+                }
+
+                numAnswers = answers.size();
+            }
 
             ToggleGroup toggleGroup = new ToggleGroup();
             toggleGroups.add(toggleGroup);

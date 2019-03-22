@@ -1990,6 +1990,7 @@ SELF CHECK
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/1-primitive-types.png</image>
 		<title>Methods</title>
+		<image></image>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
 		<pages>
 			<page >

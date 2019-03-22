@@ -10,6 +10,8 @@ public class DataTypeQuestions {
     Random rand;
     DecimalFormat df;
 
+    private static String chapterTitle = "Primitive Types";
+
     private String[] dataTypeString = {"Cat","Dog","Mouse","Bug","Tree","Liquid","Programming","Sum",
             "Four","One","Two","Ten","Five","Zero Point Four", "Four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
     private Character[] dataTypeChar = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r',
@@ -19,7 +21,7 @@ public class DataTypeQuestions {
 
     private String[] dataTypeMatchingAnswers = {"int", "double", "String", "char", "None"};
 
-    private String[] answers;
+    private ArrayList<String> answers;
 
     private char[] characters = {'+','-','*','/','%','<','=','>'};
     private String correctAnswer;
@@ -30,11 +32,11 @@ public class DataTypeQuestions {
         rand = new Random();
         dataTypeMatchingString = new ArrayList<>(Arrays.asList(dataTypeString));
         dataTypeMatchingChar = new ArrayList<>(Arrays.asList(dataTypeChar));
+        answers = new ArrayList<>(Arrays.asList(dataTypeMatchingAnswers));
     }
 
     public void datatypeMatchingQuestion(){
         question = "";
-        answers = dataTypeMatchingAnswers;
         question = "<x> = ";
 
         int dataTypeSelector = rand.nextInt(4);
@@ -63,7 +65,7 @@ public class DataTypeQuestions {
         question = question + "\n\nWhat data type would best be used to initialize this value?";
     }
 
-    public String[] getAnswers() { return answers; }
+    public ArrayList<String> getAnswers() { return answers; }
 
     public String getQuestion(){
         return question;
@@ -71,5 +73,9 @@ public class DataTypeQuestions {
 
     public String getCorrectAnswer(){
         return correctAnswer;
+    }
+
+    public static String getChapter(){
+        return chapterTitle;
     }
 }

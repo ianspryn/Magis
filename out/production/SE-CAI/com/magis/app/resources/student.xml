@@ -1,0 +1,55 @@
+<?xml version = "1.0"?>
+<class>
+    <student id = "1">
+      <firstname>John</firstname>
+      <lastname>Doe</lastname>
+      <chapters>
+        <chapter>42</chapter>
+        <chapter>25</chapter>
+        <chapter>0</chapter>
+        <chapter>0</chapter>
+        <chapter>0</chapter>
+        <chapter>0</chapter>
+        <chapter>0</chapter>
+        <chapter>0</chapter>
+        <chapter>0</chapter>
+        <chapter>00</chapter>
+      </chapters>
+      <quizzes>
+        <quiz>1</quiz>
+        <quiz>2</quiz>
+        <quiz>3</quiz>
+      </quizzes>
+      <exams>
+        <exam>1</exam>
+        <exam>2</exam>
+        <exam>3</exam>
+      </exams>
+   </student>
+   <student id = "2">
+      <firstname>John</firstname>
+      <lastname>Doe</lastname>
+      <chapters>
+        <chapter>1</chapter>
+        <chapter>2</chapter>
+        <chapter>3</chapter>
+        <chapter>4</chapter>
+        <chapter>5</chapter>
+        <chapter>6</chapter>
+        <chapter>7</chapter>
+        <chapter>8</chapter>
+        <chapter>9</chapter>
+        <chapter>10</chapter>
+      </chapters>
+      <quizzes>
+        <quiz>0</quiz>
+        <quiz>0</quiz>
+        <quiz>0</quiz>
+      </quizzes>
+      <exams>
+        <exam>1</exam>
+        <exam>2</exam>
+        <exam>3</exam>
+      </exams>
+   </student>
+</class>
