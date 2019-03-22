@@ -693,7 +693,10 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question>
                                 <statement>When overriding a method, what should you make sure match exactly?</statement>
-                                <answer></answer>
+                                <answer>Name</answer>
+                                <answer id = "correct">Name and parameters</answer>
+                                <answer>parameters</answer>
+                                <answer>method bod</answer>
                         </question>
                         <question>
                                 <statement>In the following method declaration, what keyword is the access specifier?
