@@ -48,7 +48,7 @@
 
 }
 
-.borderpane-quiz {
+.borderpane-test {
 
 }
 
@@ -71,6 +71,8 @@
 
 .button {
     -fx-background-color: #D81B60; /* Pink 600 */
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #ffffff
 }
 
 .button:hover {
@@ -79,6 +81,18 @@
 
 .button:pressed {
     -fx-background-color: #AD1457; /* Pink 800 */
+}
+
+.start-test-button {
+    -fx-font-size: 28px;
+}
+
+.submit-test-button {
+    -fx-font-size: 16px;
+}
+
+.test-radio-button:disabled {
+    -fx-opacity: 0.8;
 }
 
 .menu-bar {
@@ -90,7 +104,7 @@
     -fx-background-color: #C2185B;
 }
 
-.circle-shadow {
+.drop-shadow {
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }
 

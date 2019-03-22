@@ -101,7 +101,10 @@ public class QuizSidePanel {
         }
         //update the variable the navigation buttons use
         QuizPage.currentPage = index;
-        if (QuizPage.currentPage + 1 == QuizPage.numPages && QuizPage.notSubmitted) {
+
+        //choose whether or not to display the quiz submit button
+        if (QuizPage.currentPage + 1 == QuizPage.numPages) {
+            System.out.println("I CALLED IN SIDE PANEL");
             QuizPage.submitButton.setVisible(true);
         } else {
             QuizPage.submitButton.setVisible(false);
