@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fa61e1bd-477f-4905-912d-9205416eb7f9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/home/HomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/comp350-software-engineering-cai-system/com/magis/app/home/HomePage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/resources/students.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/resources/students.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/magis/app/test/quiz/QuizPageContent.java" afterDir="false" />
-    </list>
+    <list default="true" id="fa61e1bd-477f-4905-912d-9205416eb7f9" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+            <state relative-caret-position="461">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
             </state>
           </provider>
         </entry>
@@ -202,7 +197,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553195400372" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553195603906" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -279,7 +274,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2534413" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -433,8 +427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/magis/app/home/HomePage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+        <state relative-caret-position="461">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
         </state>
       </provider>
     </entry>
