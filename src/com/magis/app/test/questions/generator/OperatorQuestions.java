@@ -1,4 +1,4 @@
-package com.magis.app.quizzes.questions.generator;
+package com.magis.app.test.questions.generator;
 
 import java.text.DecimalFormat;
 import java.util.Collections;
@@ -9,7 +9,7 @@ public class OperatorQuestions {
     Random rand;
     DecimalFormat df = new DecimalFormat("####.##");
 
-    private String chatperTitle = "Operators";
+    private static String chatperTitle = "Operators";
 
     private String chapterTitle = "Operators";
 
@@ -19,14 +19,14 @@ public class OperatorQuestions {
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
 
-    private String[] answers;
+    private ArrayList<String> answers;
     private char[] characters = {'+','-','*','/','%'};
     private String correctAnswer;
     private String question = "";
 
     public OperatorQuestions(){
         rand = new Random();
-        answers = new String[5];
+        answers = new ArrayList<>();
     }
 
     public void getIntegerDivisionQuestion(){
@@ -60,7 +60,7 @@ public class OperatorQuestions {
         shuffler.add(""+(df.format(rand.nextDouble()*10)));
         Collections.shuffle(shuffler);
 
-        answers = shuffler.toArray(answers);
+        answers = shuffler;
 
         question+="quotient = value1 / value2; \n\nWhat is the value of \"quotient\"?";
     }
@@ -128,7 +128,7 @@ public class OperatorQuestions {
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
 
-        answers = shuffler.toArray(answers);
+        answers = shuffler;
 
         question+="\n\nWhat is the value of \"value\" after this incremental equation?";
     }
@@ -147,7 +147,7 @@ public class OperatorQuestions {
         shuffler.add((""+(divisor+1)));
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
-        answers = shuffler.toArray(answers);
+        answers = shuffler;
     }
 
     public void getSubstringQuestion(){
@@ -185,10 +185,10 @@ public class OperatorQuestions {
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
 
-        answers = shuffler.toArray(answers);
+        answers = shuffler;
     }
 
-    public String[] getAnswers() { return answers; }
+    public ArrayList<String> getAnswers() { return answers; }
 
     public String getQuestion(){
         return question;
@@ -198,7 +198,7 @@ public class OperatorQuestions {
         return correctAnswer;
     }
 
-    public String getChapter(){
-        return chapterTitle;
+    public static String getChapter(){
+        return chatperTitle;
     }
 }

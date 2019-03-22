@@ -18,7 +18,9 @@ import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -43,15 +45,16 @@ public class HomePage {
          */
         VBox vBox = new VBox();
         vBox.getStyleClass().add("chapter-box-container");
+        vBox.setMinWidth(750);
         vBox.setMaxWidth(750);
 
-        ReadStudentXML readStudentXML = new ReadStudentXML(Main.studentID);
-        int numChapters = ReadChapterXML.getNumChapters();
-        String firstName = readStudentXML.getFirstName();
-        ArrayList<String> images = ReadChapterXML.getChapterImages();
-        ArrayList<String> titles = ReadChapterXML.getChapterTitles();
-        ArrayList<String> descriptions = ReadChapterXML.getChapterDescriptions();
-        ArrayList<Integer> chapterProgresses = readStudentXML.getAllChaptersProgress();
+//        ReadStudentXML readStudentXML = new ReadStudentXML("0");
+        int numChapters = Main.lessonModel.getChapters().size();
+//        String firstName = readStudentXML.getFirstName();
+//        ArrayList<String> images = ReadChapterXML.getChapterImages();
+//        ArrayList<String> titles = ReadChapterXML.getChapterTitles();
+//        ArrayList<String> descriptions = ReadChapterXML.getChapterDescriptions();
+//        ArrayList<Integer> chapterProgresses = readStudentXML.getAllChaptersProgress();
 
         //for each chapter
         for (int i = 0; i < numChapters; i++) {
@@ -66,7 +69,7 @@ public class HomePage {
             chapterBox.getStyleClass().add("chapter-box");
 
             //Left image
-            ImageView imageView = new ImageView(images.get(i));
+            ImageView imageView = new ImageView(Main.lessonModel.getChapter(i).getImage());
             imageView.setPreserveRatio(true);
             imageView.setFitHeight(150);
 
@@ -85,14 +88,14 @@ public class HomePage {
 
             //Progress
             RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(chapterProgresses.get(i));
+            progressIndicator.setProgress(Main.studentModel.getStudent(Main.username).getChapter(i).getProgress());
 
             //Title
             Label title = new Label();
             title.getStyleClass().add("chapter-title-text");
             title.setTextAlignment(TextAlignment.RIGHT);
             title.setWrapText(true);
-            title.setText(titles.get(i));
+            title.setText(Main.lessonModel.getChapter(i).getTitle());
 
             topContent.getChildren().addAll(progressIndicator, title);
             topContent.setLeftAnchor(progressIndicator, 0.0);
@@ -100,10 +103,11 @@ public class HomePage {
 
             //Text description
             Label description = new Label();
+            description.setMinWidth(400);
             description.setWrapText(true);
             description.getStyleClass().add("chapter-description-text");
             description.setTextAlignment(TextAlignment.LEFT);
-            description.setText(descriptions.get(i));
+            description.setText(Main.lessonModel.getChapter(i).getDescription());
 
             chapterInfo.getChildren().addAll(topContent, description);
 
@@ -126,7 +130,9 @@ public class HomePage {
         scrollPane.setContent(contentHolder);
         borderPane.setCenter(scrollPane);
 
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+
+
+        Scene scene = new Scene(borderPane, Main.width, Main.height);
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");

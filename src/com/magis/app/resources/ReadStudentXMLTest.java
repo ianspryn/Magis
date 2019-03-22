@@ -59,11 +59,11 @@ public class ReadStudentXMLTest {
     @Test
     public void getQuizScoresTest() {
         ReadStudentXML readStudentXML = new ReadStudentXML("1");
-        ArrayList<Double> quizzes = new ArrayList<>();
+        ArrayList<Double> test = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            quizzes.add(i + 1.0);
+            test.add(i + 1.0);
         }
-        Assert.assertEquals(quizzes, readStudentXML.getAllQuizScores());
+        Assert.assertEquals(test, readStudentXML.getAllQuizScores());
     }
 
     @Test

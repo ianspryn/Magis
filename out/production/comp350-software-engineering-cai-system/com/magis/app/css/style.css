@@ -30,6 +30,11 @@
     src: url('RobotoMono-ThinItalic.ttf');
 }
 
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
 .borderpane-home {
     -fx-background-color: #ffffff;
 
@@ -40,6 +45,10 @@
 }
 
 .borderpane-lesson {
+
+}
+
+.borderpane-test {
 
 }
 
@@ -62,6 +71,8 @@
 
 .button {
     -fx-background-color: #D81B60; /* Pink 600 */
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #ffffff
 }
 
 .button:hover {
@@ -72,6 +83,18 @@
     -fx-background-color: #AD1457; /* Pink 800 */
 }
 
+.start-test-button {
+    -fx-font-size: 28px;
+}
+
+.submit-test-button {
+    -fx-font-size: 16px;
+}
+
+.test-radio-button:disabled {
+    -fx-opacity: 0.8;
+}
+
 .menu-bar {
     -fx-background-color: #AD1457
 }
@@ -79,6 +102,31 @@
 
 .title-bar {
     -fx-background-color: #C2185B;
+}
+
+.drop-shadow {
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+}
+
+/* the chevron text for navigating pages */
+.navigation-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #939393;
+    -fx-font-size: 2.0em;
+}
+
+/*text for grade result inside circle*/
+.grade-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-fill: #ffffff;
+    -fx-font-size: 3.5em;
+}
+
+/* Main text below the grade circle */
+.grade-main-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 2.0em;
+    -fx-fill: #515151;
 }
 
 /* set default fill of svg path */
