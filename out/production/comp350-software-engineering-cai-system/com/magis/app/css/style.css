@@ -104,6 +104,16 @@
     -fx-background-color: #C2185B;
 }
 
+.login-box {
+-fx-background-color: #ffffff;
+}
+
+.sign-in-field {
+    -fx-control-inner-background: #f9f9f9;
+    -fx-padding: 1em 1em 1em 1em;
+    -fx-background-radius: 25px;
+}
+
 .drop-shadow {
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }
@@ -168,6 +178,7 @@
     -fx-padding: 100px 0 0 0;
     -fx-spacing: 50px;
 }
+
 
 .chapter-box {
     -fx-background-color: #ffffff;

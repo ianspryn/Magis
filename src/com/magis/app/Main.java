@@ -1,6 +1,7 @@
 package com.magis.app;
 
 import com.magis.app.home.HomePage;
+import com.magis.app.login.Login;
 import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
@@ -45,9 +46,10 @@ public class Main extends Application{
 //        layout.getChildren().add(button);
 
 //        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Magis");
+//        primaryStage.setTitle("Magis");
 
-        HomePage.Page();
+//        HomePage.Page();
+        Login.Page();
         primaryStage.show();
     }
 

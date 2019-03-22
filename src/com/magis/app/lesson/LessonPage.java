@@ -89,8 +89,8 @@ public class LessonPage {
 
         //Lesson content
         ScrollPane lessonPageScrollPane = new ScrollPane();
-//        lessonPageScrollPane.setFitToWidth(true);
-//        lessonPageScrollPane.setFitToHeight(true);
+        lessonPageScrollPane.setFitToWidth(true);
+        lessonPageScrollPane.setFitToHeight(true);
         lessonPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         lessonPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         lessonPageScrollPane.setContent(lessonPageContent.getPageContent());
