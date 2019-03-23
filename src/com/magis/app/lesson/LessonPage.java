@@ -36,41 +36,11 @@ public class LessonPage {
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
 
-        AnchorPane sideBar = new AnchorPane();
+        BorderPane sideBar = new BorderPane();
         sideBar.getStyleClass().add("sidebar");
-        sideBar.setPrefWidth(300);
 
         //Home icon
-        Button homeButton = UIComponents.CreateSVGIconButton(MaterialIcons.home, 50);
-
-        //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
-        magisLogo.setPreserveRatio(true);
-        magisLogo.setFitWidth(175);
-
-        HBox home = new HBox();
-//        home.setPickOnBounds(true);
-        home.setSpacing(20);
-//        home.setMinWidth(300);
-        home.setPadding(new Insets(15,0,0,20));
-        home.getChildren().addAll(homeButton, magisLogo);
-
-        //listeners
-        homeButton.setPickOnBounds(true);
-        homeButton.setOnMouseClicked(e -> HomePage.Page());
-        homeButton.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
-        homeButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        magisLogo.setPickOnBounds(true);
-        magisLogo.setOnMouseClicked(e -> HomePage.Page());
-        magisLogo.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
-        magisLogo.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        home.setOnMouseClicked(e -> HomePage.Page());
-        home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
-        home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        sideBar.setTopAnchor(home, 0.0);
+        HBox homeBox = UIComponents.getHomeBox();
 
          lessonPageContent = new LessonPageContent(chapterIndex);
          lessonPageContent.initialize();
@@ -79,7 +49,11 @@ public class LessonPage {
         panel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
         panel.initialize();
 
-        sideBar.getChildren().addAll(home, panel.getvBox());
+        sideBar.setTop(homeBox);
+        sideBar.setLeft(panel.getvBox());
+
+//        sideBar.getChildren().addAll(home, panel.getvBox());
+        borderPane.setCenter(lessonPageContent.getPageContent());
         borderPane.setLeft(sideBar);
 
         //Lesson area

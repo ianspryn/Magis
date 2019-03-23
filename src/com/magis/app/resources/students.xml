@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><students>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<students>
         <student username="ianspryn">
                 <firstname>Ian</firstname>
                 <lastname>Spryn</lastname>
@@ -10,7 +11,12 @@
                         <chapter>0</chapter>
                         <chapter>0</chapter>
                 </chapters>
-                <test><test chapter="2"><score>100.0</score><score>60.0</score><score>40.0</score><score>80.0</score><score>180.0</score><score>45.0</score><score>28.571428571428573</score><score>42.857142857142854</score><score>71.43</score><score>71.43</score><score>71.43</score><score>71.43</score><score>71.43</score><score>57.14</score><score>71.43</score><score>71.43</score><score>71.43</score><score>71.43</score><score>71.43</score><score>100.0</score><score>100.0</score></test><test chapter="3"><score>85.71</score></test><test chapter="1"><score>85.71</score></test></test>
+                <quizzes>
+                        <quiz chapter="2">
+                                <score>100.0</score>
+                                <score>71.43</score>
+                        </quiz>
+                </quizzes>
                 <exams/>
         </student>
 </students>
