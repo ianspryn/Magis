@@ -70,7 +70,7 @@ public class Login {
         StackPane.setMargin(gridPane, new Insets(0,57,0,0));
 
         StackPane.setAlignment(signIn, Pos.CENTER);
-        StackPane.setMargin(signIn, new Insets(100,0,0,0));
+        StackPane.setMargin(signIn, new Insets(120,0,0,0));
 
         StackPane.setAlignment(createAccount, Pos.BOTTOM_CENTER);
         StackPane.setMargin(createAccount, new Insets(0,0,20,0));

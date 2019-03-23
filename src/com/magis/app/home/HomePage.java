@@ -2,10 +2,7 @@ package com.magis.app.home;
 
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
-import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
-import com.magis.app.resources.ReadChapterXML;
-import com.magis.app.resources.ReadStudentXML;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -17,19 +14,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Screen;
-
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 
 public class HomePage {
 
-    static String[] greetings = {"Hello:!", "Hey there:!", "Welcome:!", "Good day:!", "How goes it:?", "What's happening:?"};
-    static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
+    private static String[] greetings = {"Hello:!", "Hey there:!", "Welcome:!", "Good day:!", "How goes it:?", "What's happening:?"};
+    private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
 
     public static void Page() {
         Random rand = new Random();
