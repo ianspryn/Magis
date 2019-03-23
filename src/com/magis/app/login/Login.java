@@ -32,7 +32,7 @@ public class Login {
         rectangle.setWidth(450);
         rectangle.setFill(Color.valueOf("#eee"));
 
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
 
         /*
@@ -62,10 +62,6 @@ public class Login {
         Button createAccount = new Button("Create Account");
         createAccount.setOnMouseClicked(e -> Signup.Page(userNameTextField.getText()));
 
-
-
-
-
         boxBackground.getChildren().addAll(rectangle, magisLogo, gridPane, signIn, createAccount);
         StackPane.setAlignment(magisLogo, Pos.TOP_CENTER);
         StackPane.setMargin(magisLogo, new Insets(50,0,0,0));
@@ -83,7 +79,7 @@ public class Login {
 
         Scene scene = new Scene(content, Main.width, Main.height);
         scene.getStylesheets().add("com/magis/app/css/style.css");
-        Main.setScene(scene, "Login");
+        Main.setScene(scene, "Magis");
     }
 
     private static void attemptSignIn(String username) {

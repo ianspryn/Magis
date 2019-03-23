@@ -30,7 +30,7 @@ public class Signup {
         rectangle.setWidth(550);
         rectangle.setFill(Color.valueOf("#eee"));
 
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
 
         /*
@@ -94,13 +94,14 @@ public class Signup {
 
         Scene scene = new Scene(content, Main.width, Main.height);
         scene.getStylesheets().add("com/magis/app/css/style.css");
-        Main.setScene(scene, "Signup");
+        Main.setScene(scene, "Magis");
     }
 
     private static void attemptSignUp(String username, String firstName, String lastName) {
         //if that student exists
         if (username.length() == 0 || firstName.length() == 0 || lastName.length() == 0) {
             Alert.showAlert("Error", "Please fill in all of the fields.");
+            return;
         }
 
         int result = Main.studentModel.addStudent(username, firstName, lastName);

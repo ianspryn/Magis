@@ -60,20 +60,6 @@ public class StudentModel {
         }
         assert this.document != null;
         this.document.getDocumentElement().normalize();
-/*
-        if (this.document.getElementsByTagName("student") != null) {
-            NodeList students = this.document.getElementsByTagName("student");
-            for (int i = 0; i < students.getLength(); i++) {
-                Node studentNode = students.item(i);
-                Element studentElement = (Element) studentNode;
-                String studentUsername = studentElement.getAttributes().getNamedItem("username").getNodeValue();
-                Student s = new Student(studentNode, studentUsername);
-                if (!this.students.contains(s)) {
-                    this.students.add(s);
-                }
-            }
-        }
-        */
     }
 
     public void initializeStudent(String username) {

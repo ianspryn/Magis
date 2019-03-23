@@ -114,6 +114,15 @@
     -fx-background-radius: 25px;
 }
 
+/*
+The greeting ("Hello, Ian!") on the home page
+*/
+.greeting-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #181818;
+    -fx-font-size: 3.0em;
+}
+
 .drop-shadow {
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }
@@ -170,12 +179,12 @@
 }
 
 .chapter-box-scrollpane {
-    -fx-alignment: center;
+   -fx-alignment: center;
 }
 
 .chapter-box-container {
     -fx-alignment: center;
-    -fx-padding: 100px 0 0 0;
+    -fx-padding: 50px 0 50px 0;
     -fx-spacing: 50px;
 }
 
@@ -191,6 +200,11 @@
 
 .chapter-title-text {
     -fx-font-size: 1.5em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.page-title-text {
+    -fx-font-size: 2.5em;
     -fx-font-family: "Roboto Mono Bold";
 }
 
