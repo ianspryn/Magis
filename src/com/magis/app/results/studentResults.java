@@ -1,38 +1,50 @@
 package com.magis.app.results;
 
-/*There will be a page to see all of your results. Things like average score, worst score, etc.
-Eventually you'll also be able to go back in history and see your quiz answers.
-Right now I don't save them though.All your information will come from the student XML file.
-You can access the information
- via `Main.studentModel.getStudent(Main.username).getStuff`
-calling stuff through `studentModel` should be pretty self explanatory. Let me know if you have any questions
-create a new folder (or package, as Intellij calls it) and name it `results`
-Minor change: Please make your class non-static. Meaning, I will create an instance of your class and
-I will pass in the student username as a parameter. That way, you won't have to say `Main.username`
-when traversing the studentModel.
-*/
+import com.magis.app.Main;
+import com.magis.app.models.QuizzesModel;
+import com.magis.app.models.StudentModel;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.ArrayList;
+
 public class StudentResults {
 
-    private int numQuizzes; // this is the number of quizzes that exist
-
-    // these three arrays are of size numQuizzes
-    private double[] quizzesAverageScores = double[numQuizzes];
-    private double[] quizzesWorstScores;
-    private double[] quizzesBestScores;
-
+    private String UN;
     public StudentResults(String username){
-        Main.studentModel.getStudent(Main.username).getStuff
+
+        this.UN = username;
     }
 
-    public double[] getQuizzesAverageScores() {
-        return quizzesAverageScores;
+    // return all exam results in a nice String
+    public ArrayList<double[]> quizResults() {
+
+        // each quizzesRes element has double[](avg, best, worst) scores
+        ArrayList<double[]> quizzesRes = new ArrayList<double[]>();
+
+        for (int i = 0; i < Main.lessonModel.getChapters().size(); i++) {
+            // default quiz vals
+            double [] quizRes = new double[3];
+            Arrays.fill(quizRes, 0.0);
+            String title = Main.lessonModel.getChapter(i).getTitle();
+            if (Main.quizzesModel.hasQuiz(title)) {
+                StudentModel.Student.Quiz quiz = Main.studentModel.getStudent(Main.username).getQuiz(i);
+
+                quizRes[0] = quiz.getAverageScore();
+                ArrayList allScores = quiz.getScores();
+                quizRes[1] = Collections.max(allScores);
+            }
+        }
+
+        return quizzesRes;
     }
 
-    public double[] getQuizzesWorstScores() {
-        return quizzesWorstScores;
-    }
+    // return all quiz results in a nice String
+    private  quizResults() {
+        String results = "";
+        // for each quiz
 
-    public double[] getQuizzesBestScores() {
-        return quizzesBestScores;
+
+        return results;
     }
 }
