@@ -1,13 +1,21 @@
 <?xml version = "1.0"?>
 <!--
 STRUCTURE:
+
 <lesson>
 	<chapter>
 		<image></image>
 		<title></title>
 		<description>
+		<pages>
+			<page>
+				<text></text>
+				<image></image>
+			</page>
+		</pages>
 	</chapter>
 </lesson>
+
 -->
 <lesson>
 	<chapter>
@@ -36,9 +44,9 @@ multiple lines and extend to the */ delimiter.
 
 A documentation comment is delimited by /** and */. You can comment
 
-• Classes
-• Methods
-• Instance variables
+	• Classes
+	• Methods
+	• Instance variables
 
 Each comment is placed immediately above the feature it documents. Each /** . . . */
 documentation comment contains introductory text followed by tagged documentation.
@@ -136,7 +144,7 @@ public int getAccountNumber()
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/1-primitive-types.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/primitive-types.png</image>
 		<title>Primitive Types</title>
 		<description>Become familiar with basic programming terminology and learn about the concepts of types, variables, and assignment</description>
 		<pages>

@@ -43,7 +43,7 @@ public class QuizPage {
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
-        HBox homeBox = UIComponents.getHomeBox();
+        HBox homeBox = UIComponents.getHomeBox(true);
         sideBar.setTop(homeBox);
 
         int numQuestions = 7;
