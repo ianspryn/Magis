@@ -98,8 +98,9 @@ int y = x;</statement>
                             <answer>Double the storage space of integers</answer>
                             <answer id = "correct">Double precision floating point number</answer>
                             <answer></answer>
-                    </question>Which of the following is NOT a primitive type?
+                    </question>
                     <question>
+                        <statement>Which of the following is NOT a primitive type?</statement>
                         <answer>int</answer>
                         <answer>short</answer>
                         <answer id = "correct">tall</answer>
@@ -335,21 +336,325 @@ Rectangle t = new Rectangle();                    </statement>
     <chapter id = "Comments">
         <questions>
             <question>
-
+                <statement>Why do we include comments in code?</statement>
+                    <answer>To help the processor read the code</answer>
+                    <answer>To import new java libraries</answer>
+                    <answer>To waste time and space</answer>
+                    <answer id = "correct">To explain in more detail what the code does, and improve readability for humans.</answer>
             </question>
-        </questions>
+            <question>
+                <statement>What should you use to comment a single line?</statement>
+                <answer id = "correct">//</answer>
+                <answer>/* */</answer>
+                <answer>// /*</answer>
+                <answer>/** */</answer>
+            </question>
+            <question>
+                <statement>Is the following code properly commented
+/*This code adds 1 to
+the value of the integer dogs */                </statement>
+            <answer>No, /* and */ locations should be switched</answer>
+            <answer>No, /* and */ only span over 1 line not multiples</answer>
+            <answer>No, /* and */ should be \* and *\</answer>
+            <answer id = "correct">Yes</answer>
+            </question>
+            <question>
+            <statement>Is the following code properly commented
+\*This code adds 1 to
+the value of the integer dogs *\                </statement>
+            <answer>No, \* and *\ locations should be switched</answer>
+            <answer>No, \* and *\ only span over 1 line not multiples</answer>
+            <answer>No, \* and *\ should be /* and */</answer>
+            <answer id = "correct">Yes</answer>
+        </question>
+     <question>
+    <statement>Is the following code properly commented
+\*This code adds 1 to
+the value of the integer dogs *\                </statement>
+    <answer>No, \* and *\ locations should be switched</answer>
+    <answer>No, \* and *\ only span over 1 line not multiples</answer>
+    <answer>No, \* and *\ should be /* and */</answer>
+    <answer id = "correct">Yes</answer>
+     </question>
+            <question>
+                <statement>Is the following code properly commented
+\\This code adds 1 to
+the value of the integer cats\\                </statement>
+                <answer>No, \\ works for only one line, and must be at the beginning of the line</answer>
+                <answer>No, \\ should be //</answer>
+                <answer id = "correct">No, \\ should be // and needs to be at the beginning of each line</answer>
+                <answer>Yes</answer>
+            </question>
+            <question>
+                <statement>@param and @return are both parts of what comment based utility?</statement>
+                <answer>Good practice commenting</answer>
+                <answer>javaComments</answer>
+                <answer>javaTalk</answer>
+                <answer id = "correct">javadoc</answer>
+            </question>
+            <question>
+                <statement>What symbols the end of a documentation comment?</statement>
+                <answer>/*</answer>
+                <answer id = "correct">*/</answer>
+                <answer>**/</answer>
+                <answer>/**</answer>
+            </question>
+            <question>
+                <statement>What symbols the start of a documentation </statement>
+                <answer>/*</answer>
+                <answer>*/</answer>
+                <answer>**/</answer>
+                <answer id = "correct">/**</answer>
+            </question>
+            <question>
+                <statement>If you start a multi-line comment, what symbolizes the end?</statement>
+                <answer>/*</answer>
+                <answer id = "correct">*/</answer>
+                <answer>**/</answer>
+                <answer>/**</answer>
+            </question>
+            <question>
+                <statement>When do you exclude the @param tag in javadoc commentating?</statement>
+                <answer>Never you always need it</answer>
+                <answer>When the method isn't complicated</answer>
+                <answer id = "correct">If there are no parameter variables</answer>
+                <answer>Methods whose return type is void</answer>
+            </question>
+            <question>
+                <statement>When do you exclude the @return tag in javadoc commentating?</statement>
+                <answer>Never you always need it</answer>
+                <answer>When the method isn't complicated</answer>
+                <answer>If there are no parameter variables</answer>
+                <answer id = "correct">Methods whose return type is void</answer>
+            </question>
+</questions>
     </chapter>
     <chapter id = "Variables">
         <questions>
             <question>
-                
+                <statement>What do variables do?</statement>
+                    <answer>change in value depending on how often they are used</answer>
+                    <answer id = "correct">store a value for later use</answer>
+                    <answer>change the value of a method</answer>
+                    <answer>Nothing</answer>
+            </question>
+            <question>
+                <statement>What is wrong with this code?
+String dog = 15;</statement>
+                <answer>String should be lowercase;</answer>
+                <answer>It should just be String = 15;</answer>
+                <answer id = "correct">15 is a integer not a string</answer>
+                <answer>Nothing</answer>
+            </question>
+            <question>
+                <statement>What is wrong with this code?
+PrintStream printer = System.out;</statement>
+                <answer>PrintStream is not a variable type</answer>
+                <answer>System.out is not a valid value</answer>
+                <answer>PrintStream is not a variable type and System.out is not a valid value</answer>
+                <answer id = "correct">Nothing</answer>
+            </question>
+            <question>
+                <statement>What checks for type mismatches?</statement>
+                    <answer id = "correct">compiler</answer>
+                    <answer>processor</answer>
+                    <answer>pre-processor</answer>
+                    <answer>assembler</answer>
+            </question>
+            <question>
+                <statement>What is the term for the name of a variable, method, or class?</statement>
+                <answer>name</answer>
+                <answer id = "correct">identifier</answer>
+                <answer>identity</answer>
+                <answer>Variable ID</answer>
+            </question>
+            <question>
+                <statement>What should variable names begin with?</statement>
+                <answer>A number</answer>
+                <answer>An uppercase letter</answer>
+                <answer id = "correct">A lowercase letter</answer>
+                <answer>It doesn't matter, do what you want.</answer>
+            </question>
+            <question>
+                <statement>What should class names begin with?</statement>
+                <answer>A number</answer>
+                <answer id = "correct">An uppercase letter</answer>
+                <answer>A lowercase letter</answer>
+                <answer>It doesn't matter, do what you want.</answer>
+            </question>
+            <question>
+                <statement>What symbol will not cause errors, but should be avoided in variable and class names?</statement>
+                <answer>%</answer>
+                <answer>?</answer>
+                <answer>_</answer>
+                <answer id = "correct">$</answer>
+            </question>
+            <question>
+                <statement>Why are single letter variable names usually frowned upon in coding?</statement>
+                <answer id ="correct">Can make it difficult reading variable names and knowing what they are for</answer>
+                <answer>Only gives you 26 variables</answer>
+                <answer>We want to be different from algebra</answer>
+                <answer>It's not frowned upon</answer>
+            </question>
+            <question>
+                <statement>Which of these is the proper way to make a new object of type counter?</statement>
+                <answer>Counter Bank = 7;</answer>
+                <answer id = "correct">Counter Bank = new Counter();</answer>
+                <answer>Counter Bank = new Counter;</answer>
+                <answer>Counter Bank = Counter();</answer>
+            </question>
+            <question>
+                <statement>Which of these is not part of an instance variable declaration?</statement>
+                <answer>An access specifier</answer>
+                <answer>The type of the instance variable</answer>
+                <answer id = "correct">The class it belongs to</answer>
+                <answer>The name of the variable</answer>
+            </question>
+            <question>
+                <statement>What will this code do when called on an object?
+public void count(){
+value = value + 1;
+}</statement>
+                <answer>Nothing unless, the user passes it a variable called value.</answer>
+                <answer>Nothing</answer>
+                <answer>Create a new variable called value and add 1 to it.</answer>
+                <answer id = "correct">increment the instance variable value</answer>
+            </question>
+            <question>
+                <statement>What does a return statement do?</statement>
+                <answer id = "correct">Terminates method call and returns a result to the method's caller</answer>
+                <answer>Prints out a value</answer>
+                <answer>Returns a variable to it's uninitialized state, and then launches a new method</answer>
+                <answer>Launches a method and returns all objects back to default values</answer>
+            </question>
+            <question>
+                <statement>Where is a local variable declared?</statement>
+                <answer>At the start of an object</answer>
+                <answer id = "correct">In the body of a method</answer>
+                <answer>Within the method header</answer>
+                <answer>At the end of a local variable</answer>
+            </question>
+            <question>
+                <statement>Where is a parameter variable declared?</statement>
+                <answer>At the start of an object</answer>
+                <answer>In the body of a method</answer>
+                <answer id = "correct">Within the method header</answer>
+                <answer>At the end of a local variable</answer>
+            </question>
+            <question>
+                <statement>What is an implicit parameter?</statement>
+                <answer>A parameter enclosed in parenthesis when a method is invoked</answer>
+                <answer id = "correct">The object on which a method is invoked</answer>
+                <answer>A method included in all objects</answer>
+                <answer>A method included in all classes</answer>
+            </question>
+            <question>
+                <statement>What is an explicit parameter?</statement>
+                <answer id = "correct">A parameter enclosed in parenthesis when a method is invoked</answer>
+                <answer>The object on which a method is invoked</answer>
+                <answer>A method included in all objects</answer>
+                <answer>A method included in all classes</answer>
+            </question>
+            <question>
+                <statement>In the following code, what is the explicit parameter?
+public void deposit(double amount){
+balance = balance + amount;
+}                </statement>
+                <answer>balance</answer>
+                <answer>deposit</answer>
+                <answer id = "correct">amount</answer>
+                <answer>There is no explicit parameter</answer>
             </question>
         </questions>
     </chapter>
     <chapter id = "Methods">
         <questions>
             <question>
-
+                    <statement>The access specifier of a method controls what?</statement>
+                    <answer>The return type of the method</answer>
+                    <answer>The maximum memory the method can use</answer>
+                    <answer>The number of times a method can be accessed</answer>
+                    <answer id = "correct">Which other method can call this method</answer>
+            </question>
+            <question>
+                <statement>What is a constructor</statement>
+                <answer id ="correct">A method to initialize the instance variables of an object</answer>
+                <answer>A fancy name for a normal method</answer>
+                <answer>The return type of a method is called the constructor</answer>
+                <answer>A special type of method that returns the value of an objects variables</answer>
+            </question>
+            <question>
+                <statement>What do all constructors of a class share?</statement>
+                <answer>parameter variables</answer>
+                <answer>A body</answer>
+                <answer id = "correct">A name</answer>
+                <answer>Internal methods</answer>
+            </question>
+            <question>
+                <statement>What word is used to invoke a superclasses methods</statement>
+                <answer>MoveUp</answer>
+                <answer>Override</answer>
+                <answer>Invoke</answer>
+                <answer id = "correct">super</answer>
+            </question>
+            <question>
+                <statement>When does a subclass method override a superclass methd?</statement>
+                <answer>If it has the same name</answer>
+                <answer>If it has the same parameters</answer>
+                <answer id = "correct">If it has both the same name and same parameters</answer>
+                <answer>A subclass method never overrides a superclass method</answer>
+            </question>
+            <question>
+                <statement>Why call super.methodName?</statement>
+                <answer>You want to access a child classes variables</answer>
+                <answer>You want to make a variable unchangeable</answer>
+                <answer>You want to run the method "methodName" on variable super</answer>
+                <answer id = "correct">You want to run a superclasses method instead of a subclasses</answer>
+            </question>
+            <question>
+                <statement>When overriding a method, what should you make sure match exactly?</statement>
+                <answer></answer>
+            </question>
+            <question>
+                <statement>In the following method declaration, what keyword is the access specifier?
+public double Balance(int newDeposit){
+                </statement>
+                <answer id = "correct">public</answer>
+                <answer>int</answer>
+                <answer>Balance</answer>
+                <answer>newDeposit</answer>
+            </question>
+            <question>
+                <statement>In the following method declaration, what keyword is the return type?
+public double Balance(int newDeposit){</statement>
+                    <answer>public</answer>
+                    <answer id = "correct">double</answer>
+                    <answer>Balance</answer>
+                    <answer>newDeposit</answer>
+            </question>
+            <question>
+                <statement>In the following method declaration, what keyword is the method name?
+public double Balance(int newDeposit){</statement>
+                <answer>public</answer>
+                <answer>double</answer>
+                <answer id = "correct">Balance</answer>
+                <answer>newDeposit</answer>
+            </question>
+            <question>
+                <statement>In the following method declaration, what keyword is the parameter variable?
+public double Balance(int newDeposit){</statement>
+                <answer>public</answer>
+                <answer>double</answer>
+                <answer>Balance</answer>
+                <answer id = "correct">newDeposit</answer>
+            </question>
+            <question>
+                <statement>What is wrong with the following code?
+double public bankAccount(double newDeposit){</statement>
+                <answer id = "correct">return type stated before access specifier</answer>
+                <answer>access specifier stated before method name</answer>
+                <answer>return type listed before parameter variable</answer>
+                <answer>Nothing</answer>
             </question>
         </questions>
     </chapter>
