@@ -45,7 +45,7 @@ public class LessonSidePanel {
 
     public void initialize() {
         vBox.setSpacing(10);
-        vBox.setPadding(new Insets(200,0,0,15));
+        vBox.setPadding(new Insets(80,0,0,15));
         line.setPreserveRatio(false);
         line.setFitHeight(25);
         line.setFitWidth(5);

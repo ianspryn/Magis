@@ -47,7 +47,7 @@ public class QuizSidePanel {
         this.vBox = new VBox();
         this.currentPage = new HBox();
         vBox.setSpacing(10);
-        vBox.setPadding(new Insets(200,0,0,15));
+        vBox.setPadding(new Insets(80,0,0,15));
         line.setPreserveRatio(false);
         line.setFitHeight(25);
         line.setFitWidth(5);
@@ -104,7 +104,6 @@ public class QuizSidePanel {
 
         //choose whether or not to display the quiz submit button
         if (QuizPage.currentPage + 1 == QuizPage.numPages) {
-            System.out.println("I CALLED IN SIDE PANEL");
             QuizPage.submitButton.setVisible(true);
         } else {
             QuizPage.submitButton.setVisible(false);

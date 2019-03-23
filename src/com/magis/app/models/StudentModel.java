@@ -176,8 +176,8 @@ public class StudentModel {
             chapters.appendChild(chapter);
         }
 
-        //test
-        Element quizzes = document.createElement("test");
+        //quizzes
+        Element quizzes = document.createElement("quizzes");
         student.appendChild(quizzes);
 
         //exams
@@ -258,8 +258,8 @@ public class StudentModel {
             }
             Element studentElement = (Element) student;
             assert studentElement != null;
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("test").item(0);
-            Element newQuiz = document.createElement("test");
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+            Element newQuiz = document.createElement("quiz");
             newQuiz.setAttribute("chapter", Integer.toString(chapterID));
             quizzesElement.appendChild(newQuiz);
             UpdateModel.updateXML(new DOMSource(document), filePath);
@@ -338,10 +338,10 @@ public class StudentModel {
                 }
             }
 
-            //test
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("test").item(0);
-            if (quizzesElement.getElementsByTagName("test") != null) {
-                NodeList quizzesList = quizzesElement.getElementsByTagName("test");
+            //quizzes
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+            if (quizzesElement.getElementsByTagName("quiz") != null) {
+                NodeList quizzesList = quizzesElement.getElementsByTagName("quiz");
                 for (int i = 0; i < quizzesList.getLength(); i++) {
                     Node quizNode = quizzesList.item(i);
                     Quiz quiz = new Quiz(quizNode);
@@ -351,7 +351,7 @@ public class StudentModel {
 
             //exams
             Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
-            if (examsElement.getElementsByTagName("exams") != null) {
+            if (examsElement.getElementsByTagName("exam") != null) {
                 NodeList examsList = examsElement.getElementsByTagName("exam");
                 for (int i = 0; i < examsList.getLength(); i++) {
                     Node examNode = examsList.item(i);
@@ -461,8 +461,8 @@ public class StudentModel {
                 }
                 Element studentElement = (Element) student;
                 assert studentElement != null;
-                Element quizzesElement = (Element) studentElement.getElementsByTagName("test").item(0);
-                NodeList quizzes = quizzesElement.getElementsByTagName("test");
+                Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+                NodeList quizzes = quizzesElement.getElementsByTagName("quiz");
                 Node quiz = null;
                 for (int i = 0; i < quizzes.getLength(); i++) {
                     quiz = quizzes.item(i);
