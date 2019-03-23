@@ -51,12 +51,12 @@ public class StudentResults {
             double [] testRes = new double[3];
             Arrays.fill(testRes, 0.0);
             String title = Main.lessonModel.getChapter(i).getTitle();
-            if (Main.quizzesModel.hasQuiz(title)) {
-                StudentModel.Student.Quiz quiz = Main.studentModel.getStudent(Main.username).getQuiz(i);
+            if (Main.testsModel.hasTest(title)) {
+                StudentModel.Student.Test test = Main.studentModel.getStudent(Main.username).getTest(i);
 
-                testRes[0] = quiz.getAverageScore();
-                testRes[1] = quiz.getBestScore();
-                testRes[2] = quiz.getWorstScore();
+                testRes[0] = test.getAverageScore();
+                testRes[1] = test.getBestScore();
+                testRes[2] = test.getWorstScore();
             }
 
             testsRes.add(testRes);
