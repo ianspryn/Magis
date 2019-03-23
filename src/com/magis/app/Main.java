@@ -5,6 +5,7 @@ import com.magis.app.login.Login;
 import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
+import com.magis.app.models.TestsModel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ public class Main extends Application{
     public static LessonModel lessonModel;
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
+    public static TestsModel testsModel;
     public static String username = "";
     public static double width, height;
 
@@ -39,6 +41,7 @@ public class Main extends Application{
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
         quizzesModel = new QuizzesModel();
+        testsModel = new TestsModel();
 //        Button button = new Button();
 //        button.setOnAction(e -> System.out.println("hi"));
 //        button.setText("woo");

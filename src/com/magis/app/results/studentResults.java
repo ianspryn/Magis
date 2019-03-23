@@ -17,11 +17,9 @@ public class StudentResults {
     }
 
 
-    public ArrayList<double[]> quizResults() {
-
+    public ArrayList<double[]> getQuizResults() {
         // each quizzesRes element has double[](avg, best, worst) scores
         ArrayList<double[]> quizzesRes = new ArrayList<double[]>();
-
         for (int i = 0; i < Main.lessonModel.getChapters().size(); i++) {
             // default quiz result vals
             double [] quizRes = new double[3];
@@ -29,39 +27,40 @@ public class StudentResults {
             String title = Main.lessonModel.getChapter(i).getTitle();
             if (Main.quizzesModel.hasQuiz(title)) {
                 StudentModel.Student.Quiz quiz = Main.studentModel.getStudent(Main.username).getQuiz(i);
-
                 quizRes[0] = quiz.getAverageScore();
                 quizRes[1] = quiz.getBestScore();
                 quizRes[2] = quiz.getWorstScore();
             }
-
             quizzesRes.add(quizRes);
         }
-
         return quizzesRes;
     }
 
-    public ArrayList<double[]> testResults() {
-
+    public ArrayList<double[]> getTestResults() {
         // each testsRes element has double[](avg, best, worst) scores
         ArrayList<double[]> testsRes = new ArrayList<double[]>();
-
         for (int i = 0; i < Main.lessonModel.getChapters().size(); i++) {
             // default test result vals
             double [] testRes = new double[3];
             Arrays.fill(testRes, 0.0);
             String title = Main.lessonModel.getChapter(i).getTitle();
             if (Main.testsModel.hasTest(title)) {
-                StudentModel.Student.Test test = Main.studentModel.getStudent(Main.username).getTest(i);
-
+                StudentModel.Student.Exam test = Main.studentModel.getStudent(Main.username).getExam(i);
                 testRes[0] = test.getAverageScore();
                 testRes[1] = test.getBestScore();
                 testRes[2] = test.getWorstScore();
             }
-
             testsRes.add(testRes);
         }
-
         return testsRes;
+    }
+
+    public ArrayList<int> getChaptersProgress() {
+        ArrayList<int> chaptersProgress = new ArrayList<int>();
+        for (int i = 0; i < Main.lessonModel.getChapters().size(); i++) {
+            int chProg = Main.studentModel.getStudent(Main.username).getChapter(i).getProgress();
+            chaptersProgress.add(chProg);
+        }
+        return chaptersProgress;
     }
 }
