@@ -1,7 +1,17 @@
 <?xml version = "1.0"?>
+<!--
+STRUCTURE:
 <lesson>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/1-primitive-types.png</image>
+		<image></image>
+		<title></title>
+		<description>
+	</chapter>
+</lesson>
+-->
+<lesson>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
 		<title>Comments</title>
 		<description>Become familiar with the three types of Java comments</description>
 		<pages>
@@ -153,7 +163,7 @@ which stands for “double precision floating-point number”. Think of
 a number in double format as any number that can appear in the display panel of a
 calculator, such as 1.3 or –0.333333333.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%201/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Primitive%20Types/2.png</image>
 			</page>
 			<page>
 				<text>
@@ -226,7 +236,7 @@ you want to avoid the float type—it has less than 7 signiﬁcant digits. (Some
 programmers use float to save on memory if they need to store a huge set of numbers
 that do not require much precision.)
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%201/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Primitive%20Types/2.png</image>
 			</page>
 			<page>
 				<text>
@@ -326,7 +336,7 @@ width = 20;
 
 The assignment replaces the original value of the variable (see Figure 1).
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/2.png</image>
 			</page>
 			<page title = "Assignment Errors">
 				<text>
@@ -340,9 +350,9 @@ width = height;
 The compiler will complain about an “uninitialized variable” when you use a
 variable that has never been assigned a value. (See Figure 2.)
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/4.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/5.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/6.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/5.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/6.png</image>
 			</page>
 			<page title = "Good Assignment Practice">
 				<text>
@@ -435,7 +445,7 @@ items--;
 
 subtracts 1 from items.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185391/Magis/Chapter%202/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185391/Magis/Operators/9.png</image>
 			</page>
 			<page title = "Arithmetic Operators">
 				<text>
@@ -488,13 +498,13 @@ In algebra, you use fractions, superscripts for exponents, and radical signs for
 roots to arrange expressions in a compact two-dimensional form. In Java, you have
 to write all expressions in a linear arrangement.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/11.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/11.png</image>
 			</page>
 			<page title = "Arithmetic Operators">
 				<text>
 For example, the subexpression
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Chapter%202/13.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Operators/13.png</image>
 				<text>
 of the quadratic formula becomes
 
@@ -515,7 +525,7 @@ the expression that you want to convert:
 double balance = total + tax;
 int dollars = (int) balance;
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/15.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/15.png</image>
 				<text>
 The cast (int) converts the ﬂoating-point value balance to an integer by discarding
 the fractional part. For example, if balance is 13.75, then dollars is set to 13.
@@ -529,7 +539,7 @@ long rounded = Math.round(balance);
 				</text>
 			</page>
 			<page title = "Table 2">
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/17.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/17.png</image>
 			</page>
 			<page title = "Self Check">
 				<text>
@@ -617,7 +627,7 @@ the starting and ending positions. The ﬁrst string position is labeled 0, the 
 one 1, and so on. For example, Figure 3 shows the position numbers in the greeting
 string.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/21.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/21.png</image>
 				<text>
 The position number of the last character (12 for the string "Hello, World!") is
 always 1 less than the length of the string.
@@ -625,7 +635,7 @@ Let us ﬁgure out how to extract the substring "World". Count characters starti
 at 0, not 1. You ﬁnd that W, the eighth character, has position number 7. The ﬁrst
 character that you don’t want, !, is the character at position 12 (see Figure 4).
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Chapter%202/23.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Operators/23.png</image>
 				<text>
 Therefore, the appropriate substring command is
 
@@ -686,13 +696,13 @@ Sometimes you need to invert a condition with the ! (not) logical operator. For
 example, we may want to carry out a certain action only if two strings are not equal:
 if (!input.equals("S")) . . .
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%202/27.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Operators/27.png</image>
 				<text>
 The ! operator takes a single condition and evaluates to true if that condition is false
 and to false if the condition is true.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Chapter%202/29.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Chapter%202/30.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Operators/29.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1552185392/Magis/Operators/30.png</image>
 				<text>
 You can use a Boolean variable if you know that there are only two possible values.
 Have another look at the tax program in Section 5.3.2. The marital status is either
@@ -772,8 +782,8 @@ Just as the PrintStream class provides methods such as println and print for its
 objects, the String class provides methods that you can apply to String objects. One
 of them is the length method. The length method counts the number of characters in a string.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/2.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/3.png</image>
 				<text>
 You can apply that method to any object of type String.
 
@@ -863,9 +873,9 @@ Here is what happens in detail:
 2. It uses the parameters (in this case, 5, 10, 20, and 30) to initialize the data of the object.
 3. It returns the object.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/6.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/7.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/8.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/6.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/7.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/8.png</image>
 				<text>
 The process of creating a new object is called construction. The four values 5, 10,
 20, and 30 are called the construction parameters.
@@ -924,7 +934,7 @@ changes the top-left corner. Afterward, the rectangle that had its top-left corn
 (5, 10) now has it at (20, 35).
 This method is a mutator because it modifies the implicit parameter object.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/11.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/11.png</image>
 			</page>
 			<page title = "Self Check">
 				<text>
@@ -956,8 +966,8 @@ object. It refers to the object. Two object variables can refer to the same obje
 
 Rectangle box2 = box;
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/14.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/15.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/14.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/15.png</image>
 				<text>
 Now you can access the same Rectangle object both as box and as box2, as shown in Figure 18.
 However, number variables actually store numbers. When you declare
@@ -968,7 +978,7 @@ then the luckyNumber variable holds the number 13, not a reference to the number
 (see Figure 19). The reason is again efficiency. Because numbers require little
 storage, it is more efficient to store them directly in a variable.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/17.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/17.png</image>
 				<text>
 You can see the difference between number variables and object variables when you
 make a copy of a variable. When you copy a number, the original and the copy of
@@ -983,8 +993,8 @@ luckyNumber2 = 12;
 
 Now the variable luckyNumber contains the value 13, and luckyNumber2 contains 12.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/19.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/20.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/19.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/20.png</image>
 				<text>
 Now consider the seemingly analogous code with Rectangle objects (see Figure 21).
 
@@ -1018,7 +1028,7 @@ if (amount &lt;= balance)
 
 Java has six relational operators:
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/23.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/23.png</image>
 				<text>
 As you can see, only two relational operators (&gt; and &lt;) look as you would expect
 from the mathematical notation. Computer keyboards do not have keys for ≥, ≤, or
@@ -1077,7 +1087,7 @@ final double EPSILON = 1E-14;
 if (Math.abs(x - y) &lt;= EPSILON)
 // x is approximately equal to y
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/25.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/25.png</image>
 			</page>
 			<page title = "String Equality">
 				<text>
@@ -1131,10 +1141,10 @@ lexicographic ordering. Now compare "cathode" with "cargo". The first two letter
 In the third character position, t comes after r, so the string "cathode" comes after
 "cargo" in lexicographic ordering. (See Figure 3.)
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/27.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/27.png</image>
 			</page>
 			<page title = "Relational Operator Tbl.">
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/28.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/28.png</image>
 			</page>
 			<page title = "Common Relational Errors">
 				<text>
@@ -1192,7 +1202,7 @@ box1.equals(box3)
 
 is true.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%203/30.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Object%20and%20Object%20Comparison/30.png</image>
 				<text>
 However, you must be careful when using the equals method. It works correctly
 only if the implementors of the class have supplied it. The Rectangle class has an
@@ -1251,7 +1261,7 @@ double y = 3 * (1.0 / 3);
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/1-primitive-types.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/variables.png</image>
 		<title>Variables</title>
 		<description>Explore parameter, local, instance, and class variables</description>
 		<pages>
@@ -1282,7 +1292,7 @@ It is an error to store a value whose type does not match the type of the variab
 For example, the following is an error:
 String greeting = 20; // ERROR: Types don’t match
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/2.png</image>
 				<text>
 You cannot use a String variable to store an integer. The compiler checks type
 mismatches to protect you from errors.
@@ -1315,8 +1325,8 @@ follow so that other programmers will find your programs easy to read:
 If you violate these conventions, the compiler won’t complain, but you will confuse
 other programmers who read your code.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/4.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/5.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/5.png</image>
 				<text>
 Table 3 shows examples of legal and illegal variable names in Java.
 				</text>
@@ -1382,8 +1392,8 @@ counter object contains. In this simple example, that is very straightforward. E
 counter needs to store a variable that keeps track of how many times the counter
 has been advanced.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/8.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/8.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/9.png</image>
 				<text>
 					An object stores its data in instance variables. An instance of a class is an object
 					of the class. Thus, an instance variable is a storage location that is present in each
@@ -1408,7 +1418,7 @@ variable value is set to 0 when a Counter object is constructed.
 In order to gain a better understanding of how methods affect instance variables,
 we will have a quick look at the implementation of the methods of the Counter class.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/11.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/11.png</image>
 				<text>
 The count method advances the counter value by 1. We will cover the syntax of the
 method header in another section. For now, focus on the body of the method inside the
@@ -1535,7 +1545,7 @@ balance = balance + amount;
 actually means
 this.balance = this.balance + amount;
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/14.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/14.png</image>
 			</page>
 			<page title="Instance Variables">
 				<text>
@@ -1646,7 +1656,7 @@ Every BankAccount object has its own balance and accountNumber instance variable
 there is only a single copy of the lastAssignedNumber variable (see Figure 4). That
 variable is stored in a separate location, outside any BankAccount objects.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/17.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/17.png</image>
 				<text>
 A static variable is sometimes called a class variable because there is a single variable for the entire class.
 Every method of a class can access its static variables. Here is the constructor of
@@ -1913,8 +1923,8 @@ explicit parameters at all. An example of the latter is the length method of the
 class (see Figure 7). All the information that the length method requires to do its
 job—namely, the character sequence of the string—is stored in the implicit parameter object.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/20.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/21.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/20.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/21.png</image>
 				<text>
 The length method differs from the println method in another way: it has an
 output. We say that the method returns a value, namely the number of characters in the
@@ -1943,8 +1953,8 @@ river = river.replace("issipp", "our");
 Or you can pass it to another method:
 System.out.println(river.replace("issipp", "our"));
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/23.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%204/24.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/23.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Variables/24.png</image>
 				<text>
 
 As Figure 9 shows, this method call has
@@ -1988,13 +1998,12 @@ SELF CHECK
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/1-primitive-types.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/methods.png</image>
 		<title>Methods</title>
-		<image></image>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
 		<pages>
 			<page >
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%205/0.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Methods/0.png</image>
 				<text>
 Imagine that you are a member of a team that works on banking software. A
 fundamental concept in banking is a bank account. Your task is to understand the
@@ -2156,7 +2165,7 @@ number in parentheses after the method name:
 
 double root = Math.sqrt(100);
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%205/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Methods/2.png</image>
 				<text>
 This call makes it appear as if the sqrt method is applied to an object called Math.
 However, Math is a class, not an object. A method such as Math.sqrt that does not
@@ -2225,7 +2234,7 @@ is not overridden.
 				</text>
 			</page>
 			<page title="Overloaded Methods">
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Chapter%205/5.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Methods/5.png</image>
 				<text>
 Let’s implement the deposit method of the CheckingAccount class. It increments the
 transaction count and deposits the money:

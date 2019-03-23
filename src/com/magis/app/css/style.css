@@ -30,6 +30,11 @@
     src: url('RobotoMono-ThinItalic.ttf');
 }
 
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
 .borderpane-home {
     -fx-background-color: #ffffff;
 
@@ -40,6 +45,10 @@
 }
 
 .borderpane-lesson {
+
+}
+
+.borderpane-test {
 
 }
 
@@ -62,6 +71,8 @@
 
 .button {
     -fx-background-color: #D81B60; /* Pink 600 */
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #ffffff
 }
 
 .button:hover {
@@ -72,6 +83,18 @@
     -fx-background-color: #AD1457; /* Pink 800 */
 }
 
+.start-test-button {
+    -fx-font-size: 28px;
+}
+
+.submit-test-button {
+    -fx-font-size: 16px;
+}
+
+.test-radio-button:disabled {
+    -fx-opacity: 0.8;
+}
+
 .menu-bar {
     -fx-background-color: #AD1457
 }
@@ -79,6 +102,50 @@
 
 .title-bar {
     -fx-background-color: #C2185B;
+}
+
+.login-box {
+-fx-background-color: #ffffff;
+}
+
+.sign-in-field {
+    -fx-control-inner-background: #f9f9f9;
+    -fx-padding: 1em 1em 1em 1em;
+    -fx-background-radius: 25px;
+}
+
+/*
+The greeting ("Hello, Ian!") on the home page
+*/
+.greeting-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #181818;
+    -fx-font-size: 3.0em;
+}
+
+.drop-shadow {
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+}
+
+/* the chevron text for navigating pages */
+.navigation-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #939393;
+    -fx-font-size: 2.0em;
+}
+
+/*text for grade result inside circle*/
+.grade-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-fill: #ffffff;
+    -fx-font-size: 3.5em;
+}
+
+/* Main text below the grade circle */
+.grade-main-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 2.0em;
+    -fx-fill: #515151;
 }
 
 /* set default fill of svg path */
@@ -112,14 +179,15 @@
 }
 
 .chapter-box-scrollpane {
-    -fx-alignment: center;
+   -fx-alignment: center;
 }
 
 .chapter-box-container {
     -fx-alignment: center;
-    -fx-padding: 100px 0 0 0;
+    -fx-padding: 50px 0 50px 0;
     -fx-spacing: 50px;
 }
+
 
 .chapter-box {
     -fx-background-color: #ffffff;
@@ -132,6 +200,11 @@
 
 .chapter-title-text {
     -fx-font-size: 1.5em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.page-title-text {
+    -fx-font-size: 2.5em;
     -fx-font-family: "Roboto Mono Bold";
 }
 

@@ -83,21 +83,32 @@ public class ReadChapterXML {
         }
     }
 
-    private static Node getChapter(int chapterIndex) throws ParserConfigurationException, SAXException, IOException {
+    private static Node getChapter(int chapterIndex) {
         return getChapterList().item(chapterIndex);
     }
 
-    private static NodeList getChapterList() throws IOException, SAXException, ParserConfigurationException {
+    private static NodeList getChapterList() {
         Document doc = getDocument("src/com/magis/app/resources/chapters.xml");
         doc.getDocumentElement().normalize();
         return doc.getElementsByTagName("chapter");
     }
 
-    private static Document getDocument(String filePath) throws ParserConfigurationException, IOException, SAXException {
+    private static Document getDocument(String filePath) {
         File inputFile = new File(filePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        return dBuilder.parse(inputFile);
+        DocumentBuilder dBuilder = null;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document document = null;
+        try {
+            document = dBuilder.parse(inputFile);
+        } catch (SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        return document;
     }
 
 }

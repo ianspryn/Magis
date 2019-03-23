@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<students>
+        <student username="ianspryn">
+                <firstname>Ian</firstname>
+                <lastname>Spryn</lastname>
+                <chapters>
+                        <chapter>0</chapter>
+                        <chapter>0</chapter>
+                        <chapter>0</chapter>
+                        <chapter>0</chapter>
+                        <chapter>0</chapter>
+                        <chapter>0</chapter>
+                </chapters>
+                <quizzes>
+                        <quiz chapter="2">
+                                <score>100.0</score>
+                                <score>71.43</score>
+                        </quiz>
+                </quizzes>
+                <exams/>
+        </student>
+</students>
