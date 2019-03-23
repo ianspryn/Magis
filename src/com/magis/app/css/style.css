@@ -182,9 +182,10 @@ The greeting ("Hello, Ian!") on the home page
    -fx-alignment: center;
 }
 
+/* Home page container for all of the chapters */
 .chapter-box-container {
     -fx-alignment: center;
-    -fx-padding: 50px 0 50px 0;
+    -fx-padding: 50px 0 150px 0;
     -fx-spacing: 50px;
 }
 
