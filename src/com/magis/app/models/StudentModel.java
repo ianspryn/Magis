@@ -361,15 +361,15 @@ public class StudentModel {
             Element chaptersElement = (Element) studentElement.getElementsByTagName("chapters").item(0);
             NodeList chapters = chaptersElement.getElementsByTagName("chapter");
             for (int i = 0; i < chapters.getLength(); i++) {
-                Node chapter  = chapters.item(i);
+                Node chapter = chapters.item(i);
                 Element chapterElement = (Element) chapter;
                 Node progress = chapterElement.getElementsByTagName("progress").item(0);
                 progress.setTextContent(Integer.toString(getChapter(i).getProgress()));
                 NodeList pages = chapterElement.getElementsByTagName("page");
                 for (int j = 0; j < pages.getLength(); j++) {
-                    Node page = pages.item(i);
-                    Element pageElement = (Element) page;
-                    pageElement.setTextContent(getChapter(i).getPageVisisted().get(j).toString());
+
+                    Node page = pages.item(j);
+                    page.setTextContent(Integer.toString(getChapter(i).getPageVisisted().get(j)));
                 }
             }
             //write to XML file

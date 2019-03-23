@@ -33,6 +33,7 @@ public class UpdateModel {
 //         StreamResult result = new StreamResult(System.out);
 
         try {
+            assert transformer != null;
             transformer.transform(source, result);
         } catch (TransformerException e) {
             e.printStackTrace();

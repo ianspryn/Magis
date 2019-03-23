@@ -76,7 +76,6 @@ public class Login {
         StackPane.setMargin(createAccount, new Insets(0,0,20,0));
 
         content.getChildren().add(boxBackground);
-
         Scene scene = new Scene(content, Main.width, Main.height);
         scene.getStylesheets().add("com/magis/app/css/style.css");
         Main.setScene(scene, "Magis");
