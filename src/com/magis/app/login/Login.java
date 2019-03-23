@@ -84,14 +84,12 @@ public class Login {
 
     private static void attemptSignIn(String username) {
         Main.studentModel.initializeStudent(username);
-        //if that student exists
         if (username.length() == 0) {
             Alert.showAlert("Error", "Please enter a username.");
-        } else if (Main.studentModel.getStudent(username) != null) {
+        } else if (Main.studentModel.getStudent(username) != null) { //if that student exists
             Main.username = username;
             HomePage.Page();
-        } else {
-            //Spit out an error and tell the student to try again
+        } else { //Spit out an error and tell the student to try again
             Alert.showAlert("Error", "Username not found. Please try again.");
         }
     }
