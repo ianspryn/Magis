@@ -18,13 +18,14 @@ import javafx.scene.text.Text;
 
 public class LessonPage {
 
-    static int currentPage = 0;
+    static int currentPage;
     static LessonSidePanel panel;
     static LessonPageContent lessonPageContent;
     static boolean hasQuiz = false;
     static int numPages;
 
     public static void Page(int chapterIndex) {
+        currentPage = 0;
         hasQuiz = Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle());
 
         if (hasQuiz) {
@@ -40,7 +41,7 @@ public class LessonPage {
         sideBar.getStyleClass().add("sidebar");
 
         //Home icon
-        HBox homeBox = UIComponents.getHomeBox();
+        HBox homeBox = UIComponents.getHomeBox(false);
 
          lessonPageContent = new LessonPageContent(chapterIndex);
          lessonPageContent.initialize();

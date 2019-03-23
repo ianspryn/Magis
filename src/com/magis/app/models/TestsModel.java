@@ -42,7 +42,7 @@ public class TestsModel {
 
     public TestsModel() {
         this.chapters = new ArrayList<>();
-        this.filePath = "src/com/magis/app/resources/test.xml";
+        this.filePath = "src/com/magis/app/resources/tests.xml";
         File file = new File(filePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;

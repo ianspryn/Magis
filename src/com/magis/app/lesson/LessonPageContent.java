@@ -52,6 +52,9 @@ public class LessonPageContent {
             return;
         }
 
+        //Mark the page as visited
+        Main.studentModel.getStudent(Main.username).getChapter(chapterIndex).visitPage(pageIndex);
+
         masterContent.getChildren().clear();
         titleContent.getChildren().clear();
         pageContent.getChildren().clear();
