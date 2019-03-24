@@ -3,6 +3,7 @@ package com.magis.app.home;
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.lesson.LessonPage;
+import com.magis.app.models.StudentModel;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -24,6 +25,7 @@ public class HomePage {
     private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
 
     public static void Page() {
+        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
         Random rand = new Random();
         /*
         Master
@@ -47,14 +49,57 @@ public class HomePage {
         if (code == 0) {
             String codeGreeting = codeGreetings[rand.nextInt(codeGreetings.length)];
             String[] codeGreetingComponents = codeGreeting.split(":");
-            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + Main.studentModel.getStudent(Main.username).getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
+            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
         } else {
-            greeting = greetingComponents[0] + ", " + Main.studentModel.getStudent(Main.username).getFirstName() + greetingComponents[1];
+            greeting = greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1];
         }
 
         Label greetingText = new Label(greeting);
         greetingText.getStyleClass().add("greeting-text");
         vBox.getChildren().add(greetingText);
+
+
+        //Last Activity
+        if (student.getRecentChapter() > -1) {
+            //master box
+            HBox recentBox = new HBox();
+            recentBox.getStyleClass().add("recent-box");
+            recentBox.setMaxWidth(350);
+            recentBox.setMinHeight(100);
+            recentBox.setAlignment(Pos.CENTER_LEFT);
+
+            recentBox.setOnMouseClicked(e -> {
+                LessonPage.Page(student.getRecentChapter());
+                LessonPage.lessonPageContent.update(student.getRecentPage());
+            });
+            recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+            //Progress, title, and text description
+            VBox lastPlace = new VBox();
+            recentBox.setAlignment(Pos.CENTER_LEFT);
+
+            //Title
+            Label lastPlaceText = new Label();
+            lastPlaceText.getStyleClass().add("chapter-title-text");
+            lastPlaceText.setTextAlignment(TextAlignment.LEFT);
+            lastPlaceText.setWrapText(true);
+            lastPlaceText.setText("Pick up where you left off?");
+
+            //Text description
+            Label lastPlaceSubText = new Label();
+            lastPlaceSubText.setPadding(new Insets(25,0,0,0));
+            lastPlaceSubText.setWrapText(true);
+            lastPlaceSubText.getStyleClass().add("chapter-description-text");
+            lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
+            lastPlaceSubText.setText("Your last activity was with " + Main.lessonModel.getChapter(student.getRecentChapter()).getTitle() + " on page " + student.getRecentPage() + ".");
+
+            lastPlace.getChildren().addAll(lastPlaceText, lastPlaceSubText);
+
+            recentBox.getChildren().addAll(lastPlace);
+
+            vBox.getChildren().add(recentBox);
+        }
 
         int numChapters = Main.lessonModel.getChapters().size();
 
@@ -88,7 +133,7 @@ public class HomePage {
 
             //Progress
             RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(Main.studentModel.getStudent(Main.username).getChapter(i).getProgress());
+            progressIndicator.setProgress(student.getChapter(i).getProgress());
 
             //Title
             Label title = new Label();
@@ -132,8 +177,9 @@ public class HomePage {
         borderPane.setCenter(scrollPane);
 
 
-
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+//        Scene oldScene = Main.window.getScene();
+//        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()));
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");

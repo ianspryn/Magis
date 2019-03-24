@@ -3,15 +3,11 @@ package com.magis.app.test.quiz;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.home.HomePage;
-import com.magis.app.icons.MaterialIcons;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
@@ -43,7 +39,7 @@ public class QuizPage {
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
-        HBox homeBox = UIComponents.getHomeBox(true);
+        HBox homeBox = UIComponents.createHomeBox(true);
         sideBar.setTop(homeBox);
 
         int numQuestions = 7;
@@ -115,7 +111,7 @@ public class QuizPage {
 
         borderPane.setCenter(quizArea);
 
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Quiz");

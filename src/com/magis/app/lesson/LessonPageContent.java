@@ -55,6 +55,9 @@ public class LessonPageContent {
         //Mark the page as visited
         Main.studentModel.getStudent(Main.username).getChapter(chapterIndex).visitPage(pageIndex);
 
+        //Last page visited
+        Main.studentModel.getStudent(Main.username).setRecentPlace(chapterIndex, pageIndex);
+
         masterContent.getChildren().clear();
         titleContent.getChildren().clear();
         pageContent.getChildren().clear();

@@ -91,7 +91,7 @@ public class UIComponents {
      * @param isTestPage if this is a test page, then it will prompt the user if they wish to exit the test before proceeding
      * @return the HBox object that holds the home box
      */
-    public static HBox getHomeBox(boolean isTestPage) {
+    public static HBox createHomeBox(boolean isTestPage) {
         HBox home = new HBox();
         home.setSpacing(20);
         home.setMinWidth(300);
@@ -115,6 +115,7 @@ public class UIComponents {
             });
 
         } else {
+            Main.studentModel.getStudent(Main.username).writePageProgress();
             home.setOnMouseClicked(e -> HomePage.Page());
         }
 
@@ -131,7 +132,7 @@ public class UIComponents {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit Test");
         alert.setContentText("Are you sure you want to exit? All test progress will be lost!");
-        ButtonType cancelButton = new ButtonType("Back", ButtonBar.ButtonData.NO);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.NO);
         ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         alert.getButtonTypes().setAll(cancelButton, okButton);
         alert.showAndWait().ifPresent(type -> {

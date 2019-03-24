@@ -1,6 +1,5 @@
 package com.magis.app.models;
 
-import com.magis.app.Main;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -166,6 +165,14 @@ public class StudentModel {
         lastNameElement.appendChild(document.createTextNode(lastName));
         student.appendChild(lastNameElement);
 
+        //recent activity elements
+        Element recentElement = document.createElement("recent");
+        student.appendChild(recentElement);
+        Element chapterID = document.createElement("chapter");
+        Element pageID = document.createElement("page");
+        recentElement.appendChild(chapterID);
+        recentElement.appendChild(pageID);
+
         //chapters
         Element chapters = document.createElement("chapters");
         student.appendChild(chapters);
@@ -203,10 +210,13 @@ public class StudentModel {
     }
 
     public class Student {
+        private Node student;
         private String username;
         private String firstName;
         private String lastName;
         private String fullName;
+        private int recentChapter;
+        private int recentPage;
         private ArrayList<ChapterModel> chapters;
         private ArrayList<Quiz> quizzes;
         private ArrayList<Exam> exams;
@@ -225,6 +235,16 @@ public class StudentModel {
 
         public String getFullName() {
             return fullName;
+        }
+
+        public int getRecentChapter() { return recentChapter; }
+
+        public int getRecentPage() { return recentPage; }
+
+        public void setRecentPlace(int chapterIndex, int pageIndex) {
+            recentChapter = chapterIndex;
+            recentPage = pageIndex;
+
         }
 
         public ChapterModel getChapter(int chapterIndex) {
@@ -358,6 +378,13 @@ public class StudentModel {
             }
             Element studentElement = (Element) student;
             assert studentElement != null;
+
+            Element recentElement = (Element) studentElement.getElementsByTagName("recent").item(0);
+            Node recentChapter = recentElement.getElementsByTagName("chapter").item(0);
+            Node recentPage = recentElement.getElementsByTagName("page").item(0);
+            recentChapter.setTextContent(Integer.toString(this.recentChapter));
+            recentPage.setTextContent(Integer.toString(this.recentPage));
+
             Element chaptersElement = (Element) studentElement.getElementsByTagName("chapters").item(0);
             NodeList chapters = chaptersElement.getElementsByTagName("chapter");
             for (int i = 0; i < chapters.getLength(); i++) {
@@ -377,7 +404,10 @@ public class StudentModel {
         }
 
         Student(Node student, String username) {
+            this.student = student;
             this.username = username;
+            this.recentChapter = -1;
+            this.recentPage = -1;
             this.chapters = new ArrayList<>();
             this.quizzes = new ArrayList<>();
             this.exams = new ArrayList<>();
@@ -387,6 +417,16 @@ public class StudentModel {
             this.firstName = studentElement.getElementsByTagName("firstname").item(0).getTextContent();
             this.lastName = studentElement.getElementsByTagName("lastname").item(0).getTextContent();
             this.fullName = firstName + " " + lastName;
+
+            Element recentElement = (Element) studentElement.getElementsByTagName("recent").item(0);
+            Node recentChapter = recentElement.getElementsByTagName("chapter").item(0);
+            Node recentPage = recentElement.getElementsByTagName("page").item(0);
+            if (recentChapter.getTextContent().length() > 0) {
+                this.recentChapter = Integer.parseInt(recentChapter.getTextContent());
+            }
+            if (recentPage.getTextContent().length() > 0) {
+                this.recentPage = Integer.parseInt(recentPage.getTextContent());
+            }
 
             //chapters
             Element chaptersElement = (Element) studentElement.getElementsByTagName("chapters").item(0);

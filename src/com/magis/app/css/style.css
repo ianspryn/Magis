@@ -189,6 +189,12 @@ The greeting ("Hello, Ian!") on the home page
     -fx-spacing: 50px;
 }
 
+.recent-box {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+    -fx-padding: 20px;
+    -fx-background-radius: 25px;
+}
 
 .chapter-box {
     -fx-background-color: #ffffff;

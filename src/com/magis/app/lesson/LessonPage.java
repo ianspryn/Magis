@@ -2,25 +2,16 @@ package com.magis.app.lesson;
 
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.home.HomePage;
-import com.magis.app.icons.MaterialIcons;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 public class LessonPage {
 
     static int currentPage;
     static LessonSidePanel panel;
-    static LessonPageContent lessonPageContent;
+    public static LessonPageContent lessonPageContent;
     static boolean hasQuiz = false;
     static int numPages;
 
@@ -41,7 +32,7 @@ public class LessonPage {
         sideBar.getStyleClass().add("sidebar");
 
         //Home icon
-        HBox homeBox = UIComponents.getHomeBox(false);
+        HBox homeBox = UIComponents.createHomeBox(false);
 
          lessonPageContent = new LessonPageContent(chapterIndex);
          lessonPageContent.initialize();
@@ -98,7 +89,7 @@ public class LessonPage {
 
         borderPane.setCenter(lessonArea);
 
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, Main.lessonModel.getChapter(chapterIndex).getTitle());
