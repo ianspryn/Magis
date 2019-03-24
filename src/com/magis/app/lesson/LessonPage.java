@@ -2,29 +2,23 @@ package com.magis.app.lesson;
 
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.home.HomePage;
-import com.magis.app.icons.MaterialIcons;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 public class LessonPage {
 
-    static int currentPage = 0;
-    static LessonSidePanel panel;
+    static int currentPage;
+    static LessonSidePanel lessonSidePanel;
     static LessonPageContent lessonPageContent;
     static boolean hasQuiz = false;
     static int numPages;
 
-    public static void Page(int chapterIndex) {
+    public static void Page(int chapterIndex, boolean continueWhereLeftOff) {
+        //get the recent page before it's overwritten to 0 in case the user chose to jump back where they left off
+        int recentPage = Main.studentModel.getStudent(Main.username).getRecentPage();
+        currentPage = 0;
         hasQuiz = Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle());
 
         if (hasQuiz) {
@@ -36,50 +30,24 @@ public class LessonPage {
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
 
-        AnchorPane sideBar = new AnchorPane();
+        BorderPane sideBar = new BorderPane();
         sideBar.getStyleClass().add("sidebar");
-        sideBar.setPrefWidth(300);
 
         //Home icon
-        Button homeButton = UIComponents.CreateSVGIconButton(MaterialIcons.home, 50);
-
-        //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
-        magisLogo.setPreserveRatio(true);
-        magisLogo.setFitWidth(175);
-
-        HBox home = new HBox();
-//        home.setPickOnBounds(true);
-        home.setSpacing(20);
-//        home.setMinWidth(300);
-        home.setPadding(new Insets(15,0,0,20));
-        home.getChildren().addAll(homeButton, magisLogo);
-
-        //listeners
-        homeButton.setPickOnBounds(true);
-        homeButton.setOnMouseClicked(e -> HomePage.Page());
-        homeButton.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
-        homeButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        magisLogo.setPickOnBounds(true);
-        magisLogo.setOnMouseClicked(e -> HomePage.Page());
-        magisLogo.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
-        magisLogo.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        home.setOnMouseClicked(e -> HomePage.Page());
-        home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
-        home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        sideBar.setTopAnchor(home, 0.0);
+        HBox homeBox = UIComponents.createHomeBox(false);
 
          lessonPageContent = new LessonPageContent(chapterIndex);
          lessonPageContent.initialize();
 
         //Lesson Side Panel
-        panel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
-        panel.initialize();
+        lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
+        lessonSidePanel.initialize();
 
-        sideBar.getChildren().addAll(home, panel.getvBox());
+        sideBar.setTop(homeBox);
+        sideBar.setLeft(lessonSidePanel.getvBox());
+
+//        sideBar.getChildren().addAll(home, lessonSidePanel.getvBox());
+        borderPane.setCenter(lessonPageContent.getPageContent());
         borderPane.setLeft(sideBar);
 
         //Lesson area
@@ -123,13 +91,19 @@ public class LessonPage {
 
         borderPane.setCenter(lessonArea);
 
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+        if (continueWhereLeftOff) {
+            lessonSidePanel.update(recentPage);
+            lessonPageContent.update(recentPage);
+        }
+
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, Main.lessonModel.getChapter(chapterIndex).getTitle());
     }
 
     private static void updatePage(int move) {
+        //currentPage += -1 or currentPage += 1
         currentPage += move;
         if (currentPage == numPages - 1 && hasQuiz) {
 
@@ -137,6 +111,6 @@ public class LessonPage {
         } else {
             lessonPageContent.update(currentPage);
         }
-        panel.update(currentPage);
+        lessonSidePanel.update(currentPage); //extra because we need to always update the position of the current page indicator
     }
 }

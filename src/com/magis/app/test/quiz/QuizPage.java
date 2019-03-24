@@ -3,34 +3,24 @@ package com.magis.app.test.quiz;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.home.HomePage;
-import com.magis.app.icons.MaterialIcons;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 
 public class QuizPage {
 
-    public static boolean notSubmitted = true;
-    static ArrayList<QuizPageContent> quizPages;
-    static ScrollPane quizPageScrollPane;
-    static QuizSidePanel sidePanel;
-    static TestPageContent testPageContent;
-    static AnchorPane sideBar;
     static Button submitButton;
     static int currentPage;
     static int numPages;
 
     public static void Page (int chapterIndex) {
         ArrayList<Integer> usedBankQuestions = new ArrayList<>();;
-        testPageContent = new TestPageContent();
+        TestPageContent testPageContent = new TestPageContent();
         currentPage = 0;
 
 //        Main.window.setOnCloseRequest(e -> );
@@ -45,45 +35,21 @@ public class QuizPage {
         borderPane.getStyleClass().add("borderpane-test");
 
         //create instance of sideBar
-        sideBar = new AnchorPane();
+        BorderPane sideBar = new BorderPane();
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
-        //Home icon
-        Button homeButton = UIComponents.CreateSVGIconButton(MaterialIcons.home, 50);
-
-        //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
-        magisLogo.setPreserveRatio(true);
-        magisLogo.setFitWidth(175);
-
-        HBox home = new HBox();
-        home.setPickOnBounds(true);
-        home.setSpacing(20);
-        home.setMinWidth(300);
-        home.setPadding(new Insets(15,0,0,20));
-        home.getChildren().addAll(homeButton, magisLogo);
-
-        //listeners
-        home.setOnMouseClicked(e -> HomePage.Page());
-        home.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        sideBar.setTopAnchor(home, 0.0);
-
+        HBox homeBox = UIComponents.createHomeBox(true);
+        sideBar.setTop(homeBox);
 
         int numQuestions = 7;
 
         Grader grader = new Grader(numQuestions);
         numPages = (int) Math.ceil((double) numQuestions / 2);
-        //Save each correct answer into the grader for future grading
-//        for (int i = 0; i < numQuestions; i++) {
-//            grader.addCorrectAnswer(i,Main.quizzesModel.getChapter(chapterName).getQuestion(i).getCorrectAnswer());
-//        }
 
         //Since the user as the ability to jump between pages, we need to store the test page in memory to hold the user's answers.
         //That way, if the user decides to go back and change an answer, the answers won't be blank (otherwise even though they answers would be saved, the user wouldn't know that)
-        quizPages = new ArrayList<>();
+        ArrayList<QuizPageContent> quizPages = new ArrayList<>();
         for (int i = 0; i < numPages; i++) {
             QuizPageContent quizPageContent = new QuizPageContent(numQuestions, numPages, chapterIndex, grader, testPageContent, usedBankQuestions);
             quizPageContent.initialize(i);
@@ -92,7 +58,7 @@ public class QuizPage {
 
 
         //Quiz Content
-        quizPageScrollPane = new ScrollPane();
+        ScrollPane quizPageScrollPane = new ScrollPane();
         quizPageScrollPane.setFitToWidth(true);
         quizPageScrollPane.setFitToHeight(true);
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -100,11 +66,10 @@ public class QuizPage {
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
 
         //Quiz Side Panel
-        sidePanel = new QuizSidePanel(quizPages, numQuestions, quizPageScrollPane, testPageContent);
+        QuizSidePanel sidePanel = new QuizSidePanel(quizPages, numQuestions, quizPageScrollPane, testPageContent);
         sidePanel.initialize(true);
 
-
-        sideBar.getChildren().addAll(home, sidePanel.getvBox());
+        sideBar.setLeft(sidePanel.getvBox());
         borderPane.setLeft(sideBar);
 
         //Quiz area
@@ -113,7 +78,6 @@ public class QuizPage {
         quizArea.setStyle("-fx-box-border: transparent");
 
         //Bottom navigation
-//        AnchorPane navigationContent = new AnchorPane();
         BorderPane navigationContent = new BorderPane();
         navigationContent.setPadding(new Insets(10,10,10,10));
 
@@ -121,14 +85,14 @@ public class QuizPage {
         StackPane leftButton = UIComponents.createNavigationButton("<");
         leftButton.setOnMouseClicked(e -> {
             if (currentPage > 0) {
-                updatePage(-1);
+                updatePage(-1, sidePanel, quizPageScrollPane, testPageContent);
             }
         });
         //Right navigation
         StackPane rightButton = UIComponents.createNavigationButton(">");
         rightButton.setOnMouseClicked(e -> {
             if (currentPage < numPages - 1) {
-                updatePage(1);
+                updatePage(1, sidePanel, quizPageScrollPane, testPageContent);
             }
         });
 
@@ -136,31 +100,34 @@ public class QuizPage {
         submitButton = new Button("Submit");
         submitButton.getStyleClass().add("submit-test-button");
         submitButton.setVisible(false);
-        submitButton.setOnAction(e -> confirmSubmit(grader, chapterIndex));
+        submitButton.setOnAction(e -> confirmSubmit(grader, chapterIndex, navigationContent, sideBar, quizPages, quizPageScrollPane, sidePanel, testPageContent));
 
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
         navigationContent.setCenter(submitButton);
-
-
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);
 
         borderPane.setCenter(quizArea);
 
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Quiz");
     }
-
     /**
      * A popup to confirm to submit the quiz
      * @param grader the current Grader Class used to grade this quiz
      * @param chapterIndex used to add the grade score to the correct chapter should the user confirm submission
+     * @param navigationContent the navigation bar that contains the submit button. Pass this parameter in to remove the submit button
+     * @param sideBar the sidebar to be updated once the test is submitted
+     * @param quizPages the class containing the questions that will be greyed out (disabled)
+     * @param quizPageScrollPane the main content box to update with the quiz results
+     * @param sidePanel the side panel to insert the new results tab into
+     * @param testPageContent the class containing the pages that will also receive the new results page
      */
-    private static void confirmSubmit(Grader grader, int chapterIndex) {
+    private static void confirmSubmit(Grader grader, int chapterIndex, BorderPane navigationContent, BorderPane sideBar, ArrayList<QuizPageContent> quizPages, ScrollPane quizPageScrollPane, QuizSidePanel sidePanel, TestPageContent testPageContent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Submit Quiz");
         alert.setContentText("Do you wish to submit your quiz?");
@@ -169,14 +136,10 @@ public class QuizPage {
         alert.getButtonTypes().setAll(cancelButton, okButton);
         alert.showAndWait().ifPresent(type -> {
             if (type.getText().equals("Submit")) {
-                notSubmitted = true;
-                submitButton.setVisible(false);
+                navigationContent.setCenter(null);
                 grader.grade();
                 Main.studentModel.getStudent(Main.username).getQuiz(chapterIndex + 1).addScore(grader.getGrade());
-
-                /*
-                to recycle some code, instead of creating an entirely new QuizPage, simply insert an additional page
-                 */
+                //to recycle some code, instead of creating an entirely new QuizPage, simply insert an additional page
                 //create the new pageContent
                 VBox result = TestResult.createTestResultPage(Main.lessonModel.getChapter(chapterIndex).getTitle(), "quiz", grader.getGrade());
                 //add new page to testPageContent
@@ -186,7 +149,7 @@ public class QuizPage {
                 //reinitialize with the added page
                 sidePanel.initialize(false);
                 //set the new page
-                sideBar.getChildren().set(1, sidePanel.getvBox());
+                sideBar.setLeft(sidePanel.getvBox());
                 //we added a new page, so increment the number of pages
                 numPages++;
                 //disable all the buttons so the user can't change it
@@ -197,14 +160,10 @@ public class QuizPage {
                 for (int i = 0; i < quizPages.size(); i++) {
                     quizPages.get(i).colorize(grader, i);
                 }
-//                for (QuizPageContent quizPage : quizPages) {
-//                    quizPage.colorize(grader);
-//                }
                 //reset currentPage
                 currentPage = 0;
                 //jump to the new page
                 quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
-
             }
         });
     }
@@ -212,18 +171,16 @@ public class QuizPage {
     /**
      * A method used by the navigation buttons to change pages
      * @param move positive or negative 1, depending on the direction of page changing
+     * @param sidePanel the side panel to update the page position to
+     * @param quizPageScrollPane the main content box to update the page content to
+     * @param testPageContent the class that contains the page contents
      */
-    private static void updatePage(int move) {
+    private static void updatePage(int move, QuizSidePanel sidePanel, ScrollPane quizPageScrollPane, TestPageContent testPageContent) {
         //increment or decrement currentPage value
         currentPage += move;
         //update the page with new content
         quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
         //update the side panel to reflect the page change
         sidePanel.update(currentPage);
-        if (currentPage + 1 == numPages && notSubmitted) {
-            submitButton.setVisible(true);
-        } else {
-            submitButton.setVisible(false);
-        }
     }
 }

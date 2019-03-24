@@ -2,10 +2,8 @@ package com.magis.app.home;
 
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
-import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
-import com.magis.app.resources.ReadChapterXML;
-import com.magis.app.resources.ReadStudentXML;
+import com.magis.app.models.StudentModel;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -17,16 +15,21 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Screen;
+import javafx.scene.text.TextFlow;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.Random;
 
 
 public class HomePage {
 
+    private static String[] greetings = {"Hello:!", "Hey there:!", "Welcome:!", "Good day:!", "How goes it:?", "What's happening:?"};
+    private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
+
     public static void Page() {
+        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+        Random rand = new Random();
         /*
         Master
          */
@@ -34,39 +37,99 @@ public class HomePage {
         borderPane.getStyleClass().add("borderpane-home");
 
         /*
-        Top
-         */
-//        HBox hBox = UIComponents.CreateTitleBar();
-//        hBox.setId("toolbar");
-//        borderPane.setTop(hBox);
-
-        /*
         Middle
          */
         VBox vBox = new VBox();
         vBox.getStyleClass().add("chapter-box-container");
-        vBox.setMinWidth(750);
         vBox.setMaxWidth(750);
 
-//        ReadStudentXML readStudentXML = new ReadStudentXML("0");
+        //Greeting
+        String greeting = greetings[rand.nextInt(greetings.length)];
+        String[] greetingComponents = greeting.split(":");
+
+        //add the code greeting 1/3 of the time
+        int code = rand.nextInt(3);
+        if (code == 0) {
+            String codeGreeting = codeGreetings[rand.nextInt(codeGreetings.length)];
+            String[] codeGreetingComponents = codeGreeting.split(":");
+            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
+        } else {
+            greeting = greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1];
+        }
+
+        Label greetingText = new Label(greeting);
+        greetingText.getStyleClass().add("greeting-text");
+        vBox.getChildren().add(greetingText);
+
+
+        //Last Activity
+        if (student.getRecentChapter() > -1) {
+            //master box
+            HBox recentBox = new HBox();
+            recentBox.getStyleClass().add("recent-box");
+            recentBox.setMaxWidth(350);
+            recentBox.setMinHeight(100);
+            recentBox.setAlignment(Pos.CENTER_LEFT);
+
+            recentBox.setOnMouseClicked(e -> LessonPage.Page(student.getRecentChapter(), true));
+            recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+            //Progress, title, and text description
+            VBox lastPlace = new VBox();
+            recentBox.setAlignment(Pos.CENTER_LEFT);
+
+            //Title
+            Label lastPlaceText = new Label();
+            lastPlaceText.getStyleClass().add("chapter-title-text");
+            lastPlaceText.setTextAlignment(TextAlignment.LEFT);
+            lastPlaceText.setWrapText(true);
+            lastPlaceText.setText("Pick up where you left off?");
+
+            //Text description
+            TextFlow lastPlaceSubText = new TextFlow();
+            lastPlaceSubText.setPadding(new Insets(25,0,0,0));
+            lastPlaceSubText.getStyleClass().add("chapter-description-text");
+            lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
+
+            Text text1 = new Text("Your last activity was with ");
+            Text text2, text3, text4, text5;
+            if (Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle() != null) {
+                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
+                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text3 = new Text(" with the page ");
+                text4 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle());
+                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text5 = new Text(".");
+            } else {
+                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
+                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text3 = new Text(" on page ");
+                text4 = new Text(Integer.toString((student.getRecentPage() + 1)));
+                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text5 = new Text(".");
+            }
+            lastPlaceSubText.getChildren().addAll(text1, text2, text3, text4, text5);
+            lastPlace.getChildren().addAll(lastPlaceText, lastPlaceSubText);
+
+            recentBox.getChildren().addAll(lastPlace);
+
+            vBox.getChildren().add(recentBox);
+        }
+
         int numChapters = Main.lessonModel.getChapters().size();
-//        String firstName = readStudentXML.getFirstName();
-//        ArrayList<String> images = ReadChapterXML.getChapterImages();
-//        ArrayList<String> titles = ReadChapterXML.getChapterTitles();
-//        ArrayList<String> descriptions = ReadChapterXML.getChapterDescriptions();
-//        ArrayList<Integer> chapterProgresses = readStudentXML.getAllChaptersProgress();
 
         //for each chapter
         for (int i = 0; i < numChapters; i++) {
             int chapterIndex = i;
             //master box
             HBox chapterBox = new HBox();
+            chapterBox.getStyleClass().add("chapter-box");
 
-            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex));
+            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex, false));
             chapterBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             chapterBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-            chapterBox.getStyleClass().add("chapter-box");
 
             //Left image
             ImageView imageView = new ImageView(Main.lessonModel.getChapter(i).getImage());
@@ -84,11 +147,9 @@ public class HomePage {
             VBox chapterInfo = new VBox();
             chapterBox.setAlignment(Pos.CENTER_LEFT);
 
-            AnchorPane topContent = new AnchorPane();
-
             //Progress
             RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(Main.studentModel.getStudent(Main.username).getChapter(i).getProgress());
+            progressIndicator.setProgress(student.getChapter(i).getProgress());
 
             //Title
             Label title = new Label();
@@ -97,13 +158,14 @@ public class HomePage {
             title.setWrapText(true);
             title.setText(Main.lessonModel.getChapter(i).getTitle());
 
+            AnchorPane topContent = new AnchorPane();
             topContent.getChildren().addAll(progressIndicator, title);
             topContent.setLeftAnchor(progressIndicator, 0.0);
             topContent.setRightAnchor(title, 5.0);
 
             //Text description
             Label description = new Label();
-            description.setMinWidth(400);
+            description.setPrefWidth(550);
             description.setWrapText(true);
             description.getStyleClass().add("chapter-description-text");
             description.setTextAlignment(TextAlignment.LEFT);
@@ -111,8 +173,8 @@ public class HomePage {
 
             chapterInfo.getChildren().addAll(topContent, description);
 
-            
             chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
+
             vBox.getChildren().add(chapterBox);
         }
 
@@ -131,8 +193,9 @@ public class HomePage {
         borderPane.setCenter(scrollPane);
 
 
-
-        Scene scene = new Scene(borderPane, Main.width, Main.height);
+//        Scene oldScene = Main.window.getScene();
+//        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()));
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");

@@ -45,12 +45,12 @@ public class LessonSidePanel {
 
     public void initialize() {
         vBox.setSpacing(10);
-        vBox.setPadding(new Insets(200,0,0,15));
+        vBox.setPadding(new Insets(80,0,0,15));
         line.setPreserveRatio(false);
         line.setFitHeight(25);
         line.setFitWidth(5);
         pageLabels.getLabel(0).setPadding(new Insets( 0, 0, 0, 10));
-        pageLabels.getLabel(0).getStyleClass().add("lesson-side-panel-text");
+        pageLabels.getLabel(0).getStyleClass().add("studentlesson-side-panel-text");
         setLabelText(0);
 
         //listeners
@@ -70,7 +70,7 @@ public class LessonSidePanel {
         for (int i = 1; i < pages.size(); i++) {
             int index = i;
             pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            pageLabels.getLabel(i).getStyleClass().add("lesson-side-panel-text");
+            pageLabels.getLabel(i).getStyleClass().add("studentlesson-side-panel-text");
             setLabelText(i);
 
             //listeners
@@ -88,9 +88,9 @@ public class LessonSidePanel {
 
         //if there exists a test for this chapter
         if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
-            //then add it to the side panel
+            //then add it to the side lessonSidePanel
             pageLabels.getLabel(pages.size()).setPadding(new Insets(0, 0, 0, 15));
-            pageLabels.getLabel(pages.size()).getStyleClass().add("lesson-side-panel-text");
+            pageLabels.getLabel(pages.size()).getStyleClass().add("studentlesson-side-panel-text");
             pageLabels.getLabel(pages.size()).setText("Quiz");
 
             //listeners

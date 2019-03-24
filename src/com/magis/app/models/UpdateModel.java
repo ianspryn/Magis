@@ -20,19 +20,14 @@ import java.io.IOException;
 
 public class UpdateModel {
     public static void updateXML(DOMSource source, String filePath) {
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = null;
         try {
-            transformer = transformerFactory.newTransformer();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        }
-        StreamResult result = new StreamResult(filePath);
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            StreamResult result = new StreamResult(filePath);
 
-        // Output to console for testing
+            // Output to console for testing
 //         StreamResult result = new StreamResult(System.out);
 
-        try {
             transformer.transform(source, result);
         } catch (TransformerException e) {
             e.printStackTrace();
