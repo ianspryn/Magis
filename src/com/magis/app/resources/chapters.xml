@@ -52,7 +52,7 @@ Each comment is placed immediately above the feature it documents. Each /** . . 
 documentation comment contains introductory text followed by tagged documentation.
 				</text>
 			</page>
-			<page title = "Commenting the Public Interface">
+			<page title = "Public Interfaces">
 				<text>
 When you implement classes and methods, you should get into the habit of thoroughly
 commenting their behaviors. In Java there is a very useful standard form for
@@ -400,7 +400,7 @@ SELF CHECK
 2. How do you change the value of the greeting variable to "Hello, Nina!"?
 				</text>
 			</page>
-			<page title = "Common Error: Confusing Variable Declarations and Assignment Statements">
+			<page title = "Variable Declarations">
 				<text>
 Suppose your program declares a variable as follows:
 int width = 20;
@@ -1469,7 +1469,7 @@ zero.
 How can you access these variables in your program?
 				</text>
 			</page>
-			<page title="Local and Parameter Variables">
+			<page title="Local/Parameter Variables">
 				<text>
 In this section, we discuss the behavior of local variables. A local variable
 is a variable that is declared in the body of a method. For example, the giveChange method in
@@ -1847,7 +1847,7 @@ System.out.println(r);
 2. What is the scope of the balance variable of the BankAccount class?
 				</text>
 			</page>
-			<page title="Tips and Errors: Shadowing">
+			<page title="Errors: Shadowing">
 				<text>
 Common Error: Shadowing
 Accidentally using the same name for a local variable and an instance variable
