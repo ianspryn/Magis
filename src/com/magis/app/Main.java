@@ -23,6 +23,8 @@ public class Main extends Application{
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
     public static String username = "";
+    public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
+    public static boolean isLoggedIn = false;
     public static double width, height;
 
     @Override
@@ -34,7 +36,10 @@ public class Main extends Application{
         height = height * 3 / 4;
 
         window = primaryStage;
-        window.setOnCloseRequest(e -> closeProgram(window.getTitle()));
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            closeProgram(window.getTitle());
+        });
 
 
         lessonModel = new LessonModel();
@@ -57,10 +62,12 @@ public class Main extends Application{
 
     public void closeProgram(String title) {
         boolean close = true;
-        if (title.equals("Quiz") || title.equals("Exam")) {
+        if (takingTest) {
             close = UIComponents.confirmClose();
         }
-        Main.studentModel.getStudent(Main.username).writePageProgress();
+        if (isLoggedIn) {
+            Main.studentModel.getStudent(Main.username).writePageProgress();
+        }
 
         if (close) window.close();
     }

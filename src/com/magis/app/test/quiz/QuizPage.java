@@ -164,6 +164,8 @@ public class QuizPage {
                 currentPage = 0;
                 //jump to the new page
                 quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
+                //we're done taking the test
+                Main.takingTest = false;
             }
         });
     }

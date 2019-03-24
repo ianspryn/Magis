@@ -92,20 +92,20 @@ public class HomePage {
             lastPlaceSubText.getStyleClass().add("chapter-description-text");
             lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
 
-            Text text1 = new Text("Your last activity was with ");
+            Text text1 = new Text("Tap to return to your last activity with ");
             Text text2, text3, text4, text5;
             if (Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle() != null) {
                 text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
                 text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text3 = new Text(" with the page ");
+                text3 = new Text(" on the page ");
                 text4 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle());
                 text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
                 text5 = new Text(".");
             } else {
                 text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
                 text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text3 = new Text(" on page ");
-                text4 = new Text(Integer.toString((student.getRecentPage() + 1)));
+                text3 = new Text(" on ");
+                text4 = new Text("page " + Integer.toString((student.getRecentPage() + 1)));
                 text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
                 text5 = new Text(".");
             }

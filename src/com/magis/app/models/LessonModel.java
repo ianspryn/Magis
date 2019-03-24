@@ -4,13 +4,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class LessonModel {
@@ -21,7 +22,8 @@ public class LessonModel {
     public LessonModel() {
         this.chapters = new ArrayList<>();
 
-        File file = new File("src/com/magis/app/resources/chapters.xml");
+        InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/magis/app/resources/chapters.xml");
+//        File file = new File("src/com/magis/app/resources/chapters.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;
         try {
@@ -31,9 +33,7 @@ public class LessonModel {
         }
         try {
             this.document = dBuilder.parse(file);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
         this.document.getDocumentElement().normalize();

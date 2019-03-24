@@ -14,6 +14,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -37,8 +38,28 @@ public class StudentModel {
 
     public StudentModel(LessonModel lessonModel) {
         this.students = new ArrayList<>();
-        this.filePath = "src/com/magis/app/resources/students.xml";
         this.lessonModel = lessonModel;
+
+
+        /*
+        build version
+         */
+        String fileName = "students.xml";
+        File jarFile = null;
+        try {
+            jarFile = new File(StudentModel.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        assert jarFile != null;
+        this.filePath = jarFile.getParent() + File.separator + fileName;
+
+        /*
+       local version
+         */
+//        this.filePath = "src/com/magis/app/resources/students.xml";
+
+        File file = new File(this.filePath);
 
         if (!Files.exists(Paths.get(filePath))) {
             createStudentFile();

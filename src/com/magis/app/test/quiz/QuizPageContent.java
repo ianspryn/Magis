@@ -226,7 +226,7 @@ public class QuizPageContent {
 
                 //highlight the correct answer as green
                 if (button.getText().equals(grader.getCorrectAnswer(index + page * 2))) {
-                    button.setStyle("-fx-text-fill: #57d154;");
+                    button.setStyle("-fx-text-fill: #00cd0a;");
                 }
 
                 //if the user selected the wrong answer, highlight their answer as red

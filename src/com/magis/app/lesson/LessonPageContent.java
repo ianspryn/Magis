@@ -104,9 +104,12 @@ public class LessonPageContent {
     private void showQuizPage() {
         masterContent.getChildren().clear();
         masterContent.setAlignment(Pos.CENTER);
-        Button button = new Button("Click to begin test");
+        Button button = new Button("Click to begin quiz");
         button.getStyleClass().addAll("start-test-button", "drop-shadow");
-        button.setOnAction(e -> QuizPage.Page(chapterIndex));
+        button.setOnAction(e -> {
+            Main.takingTest = true;
+            QuizPage.Page(chapterIndex);
+        });
         masterContent.getChildren().add(button);
     }
 }

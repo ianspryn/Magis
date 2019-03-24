@@ -5,13 +5,12 @@ import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
@@ -97,8 +96,16 @@ public class UIComponents {
         home.setMinWidth(300);
         home.setPadding(new Insets(15,0,0,20));
 
-        //Home icon
+        //Home icon and text
+        VBox homeVBox = new VBox();
+
         Button homeButton = UIComponents.getHomeButton();
+
+        Label text = new Label("Home");
+        text.getStyleClass().add("home-text");
+
+        homeVBox.getChildren().addAll(homeButton, text);
+
 
         //Magis logo
         ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-white-small-v2.png");
@@ -108,18 +115,18 @@ public class UIComponents {
         //listeners
         home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
         home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        if (isTestPage) {
-            home.setOnMouseClicked(e -> {
-                boolean result = UIComponents.confirmClose();
-                if (result) HomePage.Page();
-            });
+        home.setOnMouseClicked(e -> {
+            if (Main.takingTest) {
+                if (UIComponents.confirmClose()) {
+                    Main.takingTest = false;
+                    HomePage.Page();
+                }
+            } else {
+                HomePage.Page();
+            }
+        });
 
-        } else {
-            Main.studentModel.getStudent(Main.username).writePageProgress();
-            home.setOnMouseClicked(e -> HomePage.Page());
-        }
-
-        home.getChildren().addAll(homeButton, magisLogo);
+        home.getChildren().addAll(homeVBox, magisLogo);
         return home;
     }
 

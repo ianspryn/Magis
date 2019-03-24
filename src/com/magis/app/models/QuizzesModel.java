@@ -12,12 +12,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class QuizzesModel {
 
     private Document document;
-    private String filePath;
     private ArrayList<ChapterModel> chapters;
 
     public ChapterModel getChapter(String chapterName) {
@@ -42,8 +42,8 @@ public class QuizzesModel {
 
     public QuizzesModel() {
         this.chapters = new ArrayList<>();
-        this.filePath = "src/com/magis/app/resources/quiz.xml";
-        File file = new File(filePath);
+        InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/magis/app/resources/quiz.xml");
+//        File file = new File("src/com/magis/app/resources/quiz.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;
         try {

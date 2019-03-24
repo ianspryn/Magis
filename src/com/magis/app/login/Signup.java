@@ -104,6 +104,10 @@ public class Signup {
             return;
         }
 
+        //capitalize the first letter of the name
+        firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase();
+        lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1).toLowerCase();
+
         int result = Main.studentModel.addStudent(username, firstName, lastName);
 
         if (result == -1) {
@@ -111,6 +115,7 @@ public class Signup {
         } else {
             Main.studentModel.initializeStudent(username);
             Main.username = username;
+            Main.isLoggedIn = true;
             HomePage.Page();
         }
     }
