@@ -10,12 +10,14 @@ import javafx.scene.layout.*;
 public class LessonPage {
 
     static int currentPage;
-    static LessonSidePanel panel;
-    public static LessonPageContent lessonPageContent;
+    static LessonSidePanel lessonSidePanel;
+    static LessonPageContent lessonPageContent;
     static boolean hasQuiz = false;
     static int numPages;
 
-    public static void Page(int chapterIndex) {
+    public static void Page(int chapterIndex, boolean continueWhereLeftOff) {
+        //get the recent page before it's overwritten to 0 in case the user chose to jump back where they left off
+        int recentPage = Main.studentModel.getStudent(Main.username).getRecentPage();
         currentPage = 0;
         hasQuiz = Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle());
 
@@ -38,13 +40,13 @@ public class LessonPage {
          lessonPageContent.initialize();
 
         //Lesson Side Panel
-        panel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
-        panel.initialize();
+        lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
+        lessonSidePanel.initialize();
 
         sideBar.setTop(homeBox);
-        sideBar.setLeft(panel.getvBox());
+        sideBar.setLeft(lessonSidePanel.getvBox());
 
-//        sideBar.getChildren().addAll(home, panel.getvBox());
+//        sideBar.getChildren().addAll(home, lessonSidePanel.getvBox());
         borderPane.setCenter(lessonPageContent.getPageContent());
         borderPane.setLeft(sideBar);
 
@@ -89,6 +91,11 @@ public class LessonPage {
 
         borderPane.setCenter(lessonArea);
 
+        if (continueWhereLeftOff) {
+            lessonSidePanel.update(recentPage);
+            lessonPageContent.update(recentPage);
+        }
+
         Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
@@ -96,6 +103,7 @@ public class LessonPage {
     }
 
     private static void updatePage(int move) {
+        //currentPage += -1 or currentPage += 1
         currentPage += move;
         if (currentPage == numPages - 1 && hasQuiz) {
 
@@ -103,6 +111,6 @@ public class LessonPage {
         } else {
             lessonPageContent.update(currentPage);
         }
-        panel.update(currentPage);
+        lessonSidePanel.update(currentPage); //extra because we need to always update the position of the current page indicator
     }
 }

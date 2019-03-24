@@ -61,11 +61,11 @@ public class LessonPageContent {
         masterContent.getChildren().clear();
         titleContent.getChildren().clear();
         pageContent.getChildren().clear();
-        Text pageTitle = new Text(Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getTitle());
+        Text pageTitle = new Text(Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getTitle());
         pageTitle.getStyleClass().add("page-title-text");
         titleContent.getChildren().add(pageTitle);
 
-        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getLessonContent();
+        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
         for (int i = 0; i < lessonContents.size(); i++) {
             LessonModel.ChapterModel.PageModel.LessonContent currentLesson = lessonContents.get(i);
             String type = currentLesson.getType();

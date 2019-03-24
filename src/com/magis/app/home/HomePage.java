@@ -15,7 +15,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
+
 import java.util.Random;
 
 
@@ -68,10 +71,7 @@ public class HomePage {
             recentBox.setMinHeight(100);
             recentBox.setAlignment(Pos.CENTER_LEFT);
 
-            recentBox.setOnMouseClicked(e -> {
-                LessonPage.Page(student.getRecentChapter());
-                LessonPage.lessonPageContent.update(student.getRecentPage());
-            });
+            recentBox.setOnMouseClicked(e -> LessonPage.Page(student.getRecentChapter(), true));
             recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -87,13 +87,29 @@ public class HomePage {
             lastPlaceText.setText("Pick up where you left off?");
 
             //Text description
-            Label lastPlaceSubText = new Label();
+            TextFlow lastPlaceSubText = new TextFlow();
             lastPlaceSubText.setPadding(new Insets(25,0,0,0));
-            lastPlaceSubText.setWrapText(true);
             lastPlaceSubText.getStyleClass().add("chapter-description-text");
             lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
-            lastPlaceSubText.setText("Your last activity was with " + Main.lessonModel.getChapter(student.getRecentChapter()).getTitle() + " on page " + student.getRecentPage() + ".");
 
+            Text text1 = new Text("Your last activity was with ");
+            Text text2, text3, text4, text5;
+            if (Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle() != null) {
+                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
+                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text3 = new Text(" with the page ");
+                text4 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle());
+                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text5 = new Text(".");
+            } else {
+                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
+                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text3 = new Text(" on page ");
+                text4 = new Text(Integer.toString((student.getRecentPage() + 1)));
+                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text5 = new Text(".");
+            }
+            lastPlaceSubText.getChildren().addAll(text1, text2, text3, text4, text5);
             lastPlace.getChildren().addAll(lastPlaceText, lastPlaceSubText);
 
             recentBox.getChildren().addAll(lastPlace);
@@ -110,7 +126,7 @@ public class HomePage {
             HBox chapterBox = new HBox();
             chapterBox.getStyleClass().add("chapter-box");
 
-            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex));
+            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex, false));
             chapterBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             chapterBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -149,7 +165,7 @@ public class HomePage {
 
             //Text description
             Label description = new Label();
-            description.setMinWidth(550);
+            description.setPrefWidth(550);
             description.setWrapText(true);
             description.getStyleClass().add("chapter-description-text");
             description.setTextAlignment(TextAlignment.LEFT);

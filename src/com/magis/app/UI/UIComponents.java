@@ -101,7 +101,7 @@ public class UIComponents {
         Button homeButton = UIComponents.getHomeButton();
 
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-white-small-v2.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 

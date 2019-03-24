@@ -98,7 +98,7 @@ public class LessonModel {
             return pages.size();
         }
 
-        public PageModel getPages(int index) {
+        public PageModel getPage(int index) {
             return pages.get(index);
         }
 
