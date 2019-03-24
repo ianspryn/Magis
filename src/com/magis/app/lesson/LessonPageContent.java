@@ -9,22 +9,32 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
 
 public class LessonPageContent {
 
+    private VBox masterContent;
+    private VBox titleContent;
     private VBox pageContent;
     private int chapterIndex;
 
     public LessonPageContent(int chapterIndex) {
+        masterContent = new VBox();
+        masterContent.setAlignment(Pos.TOP_CENTER);
+        titleContent = new VBox();
+        titleContent.setAlignment(Pos.CENTER);
+        titleContent.setPadding(new Insets(30,0,10,20));
         pageContent = new VBox();
+        pageContent.setAlignment(Pos.TOP_LEFT);
+        pageContent.setPadding(new Insets(0,0,0,20));
         this.chapterIndex = chapterIndex;
     }
 
     public VBox getPageContent() {
-        return pageContent;
+        return masterContent;
     }
 
     public void initialize() {
@@ -33,6 +43,7 @@ public class LessonPageContent {
 
     /**
      * Update the page content of the lesson page
+     *
      * @param pageIndex the page to load. If it's -1, then it is the optional test page
      */
     public void update(int pageIndex) {
@@ -41,10 +52,20 @@ public class LessonPageContent {
             return;
         }
 
+        //Mark the page as visited
+        Main.studentModel.getStudent(Main.username).getChapter(chapterIndex).visitPage(pageIndex);
+
+        //Last page visited
+        Main.studentModel.getStudent(Main.username).setRecentPlace(chapterIndex, pageIndex);
+
+        masterContent.getChildren().clear();
+        titleContent.getChildren().clear();
         pageContent.getChildren().clear();
-        pageContent.setAlignment(Pos.TOP_LEFT);
-        
-        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getLessonContent();
+        Text pageTitle = new Text(Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getTitle());
+        pageTitle.getStyleClass().add("page-title-text");
+        titleContent.getChildren().add(pageTitle);
+
+        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
         for (int i = 0; i < lessonContents.size(); i++) {
             LessonModel.ChapterModel.PageModel.LessonContent currentLesson = lessonContents.get(i);
             String type = currentLesson.getType();
@@ -56,7 +77,7 @@ public class LessonPageContent {
                     text.setPrefWidth(700);
                     text.getStyleClass().add("lesson-text");
                     text.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
-                    text.setPadding(new Insets(20,20,20,20));
+                    text.setPadding(new Insets(20, 0, 20, 0));
                     pageContent.getChildren().add(text);
                     break;
                 case "image":
@@ -72,19 +93,20 @@ public class LessonPageContent {
                     textDefault.setPrefWidth(700);
                     textDefault.getStyleClass().add("lesson-text");
                     textDefault.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
-                    textDefault.setPadding(new Insets(20,20,20,20));
+                    textDefault.setPadding(new Insets(20, 20, 20, 20));
                     pageContent.getChildren().add(textDefault);
                     break;
             }
         }
+        masterContent.getChildren().addAll(titleContent, pageContent);
     }
 
     private void showQuizPage() {
-        pageContent.getChildren().clear();
-        pageContent.setAlignment(Pos.CENTER);
+        masterContent.getChildren().clear();
+        masterContent.setAlignment(Pos.CENTER);
         Button button = new Button("Click to begin test");
-        button.getStyleClass().addAll("start-test-button","drop-shadow");
+        button.getStyleClass().addAll("start-test-button", "drop-shadow");
         button.setOnAction(e -> QuizPage.Page(chapterIndex));
-        pageContent.getChildren().add(button);
+        masterContent.getChildren().add(button);
     }
 }

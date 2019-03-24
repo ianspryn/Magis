@@ -1,6 +1,7 @@
 package com.magis.app;
 
-import com.magis.app.home.HomePage;
+import com.magis.app.UI.UIComponents;
+import com.magis.app.login.Login;
 import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
@@ -12,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main extends Application{
 
@@ -20,7 +22,7 @@ public class Main extends Application{
     public static LessonModel lessonModel;
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
-    public static String username = "ianspryn";
+    public static String username = "";
     public static double width, height;
 
     @Override
@@ -32,11 +34,13 @@ public class Main extends Application{
         height = height * 3 / 4;
 
         window = primaryStage;
+        window.setOnCloseRequest(e -> closeProgram(window.getTitle()));
+
+
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
-        int result = studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.initializeStudent("ianspryn");
         quizzesModel = new QuizzesModel();
+        Login.Page();
 //        Button button = new Button();
 //        button.setOnAction(e -> System.out.println("hi"));
 //        button.setText("woo");
@@ -45,10 +49,20 @@ public class Main extends Application{
 //        layout.getChildren().add(button);
 
 //        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Magis");
+//        primaryStage.setTitle("Magis");
 
-        HomePage.Page();
+//        HomePage.Page();
         primaryStage.show();
+    }
+
+    public void closeProgram(String title) {
+        boolean close = true;
+        if (title.equals("Quiz") || title.equals("Exam")) {
+            close = UIComponents.confirmClose();
+        }
+        Main.studentModel.getStudent(Main.username).writePageProgress();
+
+        if (close) window.close();
     }
 
     public static void setScene(Scene newScene) {

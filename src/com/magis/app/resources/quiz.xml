@@ -1,4 +1,21 @@
-<!-- TEST XML FILE -->
+<!--
+STRUCTURE:
+
+<quizzes>
+	<chapter id = "Chapter Name">
+		<questions>
+                        <question>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
+                                <answer></answer>
+                                <answer></answer>
+                                <answer></answer>
+                        </question>
+                </questions>
+	</chapter>
+</lesson>
+
+-->
 <quizzes>
         <chapter id = "Primitive Types">
                 <questions>
