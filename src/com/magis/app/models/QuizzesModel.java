@@ -42,8 +42,8 @@ public class QuizzesModel {
 
     public QuizzesModel() {
         this.chapters = new ArrayList<>();
-        InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/magis/app/resources/quiz.xml");
-//        File file = new File("src/com/magis/app/resources/quiz.xml");
+        InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream("com/magis/app/resources/quizzes.xml");
+//        File file = new File("src/com/magis/app/resources/quizzes.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;
         try {
