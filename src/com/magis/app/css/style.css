@@ -52,9 +52,24 @@
 
 }
 
+.lesson-side-panel-chapter-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Mono Bold";
+    -fx-text-fill: #ffffff;
+    -fx-padding: 0 0 0 15px;
+
+}
+
 .lesson-side-panel-text {
     -fx-font-size: 18px;
     -fx-font-family: "Roboto Mono Light";
+    -fx-text-fill: #ffb5d6;
+
+}
+
+.lesson-side-panel-test-text {
+    -fx-font-size: 18px;
+    -fx-font-family: "Roboto Mono Bold";
     -fx-text-fill: #ffb5d6;
 
 }
@@ -217,5 +232,12 @@ The greeting ("Hello, Ian!") on the home page
 
 .chapter-description-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #939393
+    -fx-text-fill: #939393;
+}
+
+/* the text right below the home icon in the top left corner */
+.home-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-text-fill: #e397b1;
+    -fx-padding: 12px 0 0 0;
 }
