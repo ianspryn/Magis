@@ -44,9 +44,9 @@ public class LessonPage {
         lessonSidePanel.initialize();
 
         sideBar.setTop(homeBox);
-        sideBar.setLeft(lessonSidePanel.getMasterVBox());
+        sideBar.setLeft(lessonSidePanel.getSidePanel());
 
-//        sideBar.getChildren().addAll(home, lessonSidePanel.getMasterVBox());
+//        sideBar.getChildren().addAll(home, lessonSidePanel.getSidePanel());
         borderPane.setCenter(lessonPageContent.getPageContent());
         borderPane.setLeft(sideBar);
 

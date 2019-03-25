@@ -5,6 +5,7 @@ import com.magis.app.models.LessonModel;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,6 +17,7 @@ public class LessonSidePanel {
     private int chapterIndex;
     private LessonPageContent lessonPageContent;
     private ArrayList<LessonModel.ChapterModel.PageModel> pages;
+    private ScrollPane scrollPane;
     private VBox masterVBox;
     private VBox contentPagesVBox;
     private HBox currentPage;
@@ -30,6 +32,7 @@ public class LessonSidePanel {
         this.chapterIndex = chapterIndex;
         this.lessonPageContent = lessonPageContent;
         this.pages = pages;
+        this.scrollPane = new ScrollPane();
         this.masterVBox = new VBox();
         this.contentPagesVBox = new VBox();
         this.currentPage = new HBox();
@@ -43,8 +46,8 @@ public class LessonSidePanel {
         currentPageIndex = 0;
     }
 
-    public VBox getMasterVBox() {
-        return masterVBox;
+    public ScrollPane getSidePanel() {
+        return scrollPane;
     }
 
     public void initialize() {
@@ -90,7 +93,7 @@ public class LessonSidePanel {
         for (int i = 1; i < pages.size(); i++) {
             int index = i;
             pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            pageLabels.getLabel(i).getStyleClass().add("studentlesson-side-panel-text");
+            pageLabels.getLabel(i).getStyleClass().add("sistudentlesson-side-panel-text");
             setLabelText(i);
 
             //listeners
@@ -123,6 +126,11 @@ public class LessonSidePanel {
             pageLabels.getLabel(pages.size()).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
             contentPagesVBox.getChildren().addAll(pageLabels.getLabel(pages.size()));
         }
+
+        scrollPane.setContent(masterVBox);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.getStyleClass().add("sidebar-scrollpane");
     }
 
     /**

@@ -1,7 +1,12 @@
 package com.magis.app.test;
 
+import com.magis.app.Main;
+import com.magis.app.test.quiz.QuizPage;
+import com.magis.app.test.quiz.QuizPageContent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -20,7 +25,7 @@ public class TestResult {
         vBox.setAlignment(Pos.CENTER);
 
         StackPane topGrade = new StackPane();
-        topGrade.setPadding(new Insets(50,0,20,0));
+        topGrade.setPadding(new Insets(50,0,50,0));
 
         Circle circle = new Circle();
         circle.setRadius(85);
@@ -32,8 +37,12 @@ public class TestResult {
 
         topGrade.getChildren().addAll(circle, gradeText);
 
-        Text mainText = new Text("Click through to view your results.");
-        mainText.getStyleClass().add("grade-main-text");
+        Button mainText = new Button("Click to view your results.");
+        mainText.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        mainText.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        mainText.setOnAction(e -> QuizPage.updatePage(1));
+        mainText.getStyleClass().addAll("grade-main-text", "drop-shadow");
+        mainText.setStyle("-fx-background-color: " + calculateColor(grade));
 
         vBox.getChildren().addAll(topGrade, mainText);
 

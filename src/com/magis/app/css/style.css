@@ -80,8 +80,12 @@
     -fx-text-fill: #200310;
 }
 
-.sidebar {
+.sidebar, .sidebar-scrollpane {
     -fx-background-color: #AD1457; /* Pink 800 */
+}
+
+.sidebar-scrollpane {
+    -fx-background:#AD1457; /* Pink 800 */
 }
 
 .button {
@@ -158,9 +162,7 @@ The greeting ("Hello, Ian!") on the home page
 
 /* Main text below the grade circle */
 .grade-main-text {
-    -fx-font-family: "Roboto Mono Regular";
     -fx-font-size: 2.0em;
-    -fx-fill: #515151;
 }
 
 /* set default fill of svg path */

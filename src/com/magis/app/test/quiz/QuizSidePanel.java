@@ -19,6 +19,7 @@ public class QuizSidePanel {
     private int numQuestions;
     private ScrollPane quizPageScrollPane;
     private TestPageContent testPageContent;
+    private ScrollPane scrollPane;
     private VBox vBox;
     private HBox currentPage;
     private int numQuizQuestionPages;
@@ -30,6 +31,7 @@ public class QuizSidePanel {
         this.quizPagesContent = quizPages;
         this.numQuestions = numQuestions;
         this.quizPageScrollPane = quizPageScrollPane;
+        this.scrollPane = new ScrollPane();
         this.vBox = new VBox();
         this.currentPage = new HBox();
         this.pageLabels = new PageLabels(quizPages.size());
@@ -38,8 +40,8 @@ public class QuizSidePanel {
         currentPageIndex = 0;
     }
 
-    public Node getvBox() {
-        return vBox;
+    public Node getSidePanel() {
+        return scrollPane;
     }
 
     public void initialize(boolean firstTime) {
@@ -89,6 +91,10 @@ public class QuizSidePanel {
             vBox.getChildren().add(pageLabels.getLabel(i));
         }
         currentPageIndex = 0;
+        scrollPane.setContent(vBox);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.getStyleClass().add("sidebar-scrollpane");
     }
 
     /**
