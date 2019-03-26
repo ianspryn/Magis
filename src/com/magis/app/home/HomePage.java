@@ -92,7 +92,7 @@ public class HomePage {
             lastPlaceSubText.getStyleClass().add("chapter-description-text");
             lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
 
-            Text text1 = new Text("Tap to return to your last activity with ");
+            Text text1 = new Text("Click here to return to your last activity with ");
             Text text2, text3, text4, text5;
             if (Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle() != null) {
                 text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());

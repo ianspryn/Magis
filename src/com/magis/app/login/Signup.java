@@ -92,7 +92,7 @@ public class Signup {
 
         content.getChildren().add(boxBackground);
 
-        Scene scene = new Scene(content, Main.width, Main.height);
+        Scene scene = new Scene(content, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
         Main.setScene(scene, "Magis");
     }

@@ -37,7 +37,6 @@
 
 .borderpane-home {
     -fx-background-color: #ffffff;
-
 }
 
 .separator-home {
@@ -124,7 +123,7 @@
 }
 
 .login-box {
--fx-background-color: #ffffff;
+    -fx-background-color: #ffffff;
 }
 
 .sign-in-field {
@@ -196,11 +195,12 @@ The greeting ("Hello, Ian!") on the home page
 }
 
 .chapter-box-scrollpane {
-   -fx-alignment: center;
+    -fx-alignment: center;
 }
 
 /* Home page container for all of the chapters */
 .chapter-box-container {
+    /*-fx-background-color: #ededed;*/
     -fx-alignment: center;
     -fx-padding: 50px 0 150px 0;
     -fx-spacing: 50px;

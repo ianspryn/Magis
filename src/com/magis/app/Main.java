@@ -25,7 +25,7 @@ public class Main extends Application{
     public static String username = "";
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false;
-    public static double width, height;
+    public static double width = -1, height = -1;
 
     @Override
     public void start(Stage primaryStage) {
