@@ -39,18 +39,25 @@
     -fx-background-color: #ffffff;
 }
 
+/* a slightly darker background for screens with lower contrast */
+.borderpane-lesson, .borderpane-test, .chapter-box-scrollpane,
+.lesson-page-content, .quiz-page-content, .navigation-content {
+    -fx-background-color: #eee; /* or set both to #ddd */
+    -fx-background: #eee;
+}
+
 .separator-home {
 
 }
-
+/*
 .borderpane-lesson {
-
+    -fx-background-color: #ededed;
 }
 
 .borderpane-test {
-
+    -fx-background-color: #ededed;
 }
-
+*/
 .lesson-side-panel-chapter-text {
     -fx-font-size: 20px;
     -fx-font-family: "Roboto Mono Bold";

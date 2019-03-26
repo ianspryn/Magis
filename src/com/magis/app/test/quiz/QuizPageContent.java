@@ -31,6 +31,7 @@ public class QuizPageContent {
 
     public QuizPageContent(int numQuestions, int numPages, int chapterIndex,  Grader grader, TestPageContent testPageContent, ArrayList<Integer> usedBankQuestions) {
         pageContent = new VBox();
+        pageContent.getStyleClass().add("quiz-page-content");
         this.numQuestions = numQuestions;
         this.chapterIndex = chapterIndex;
         this.grader = grader;

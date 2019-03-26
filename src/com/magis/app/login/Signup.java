@@ -28,7 +28,8 @@ public class Signup {
         Rectangle rectangle = new Rectangle();
         rectangle.setHeight(550);
         rectangle.setWidth(550);
-        rectangle.setFill(Color.valueOf("#eee"));
+        rectangle.setFill(Color.valueOf("#ededed"));
+//        rectangle.setFill(Color.valueOf("#dedede")); //more contrast if needed
 
         ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");

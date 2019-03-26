@@ -38,7 +38,7 @@ public class Main extends Application{
         window = primaryStage;
         window.setOnCloseRequest(e -> {
             e.consume();
-            closeProgram(window.getTitle());
+            closeProgram();
         });
 
 
@@ -60,7 +60,7 @@ public class Main extends Application{
         primaryStage.show();
     }
 
-    public void closeProgram(String title) {
+    public void closeProgram() {
         boolean close = true;
         if (takingTest) {
             close = UIComponents.confirmClose();

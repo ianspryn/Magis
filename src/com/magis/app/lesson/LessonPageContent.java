@@ -23,6 +23,7 @@ public class LessonPageContent {
 
     public LessonPageContent(int chapterIndex) {
         masterContent = new VBox();
+        masterContent.getStyleClass().add("lesson-page-content");
         masterContent.setAlignment(Pos.TOP_CENTER);
         titleContent = new VBox();
         titleContent.setAlignment(Pos.CENTER);

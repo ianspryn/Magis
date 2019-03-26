@@ -65,6 +65,7 @@ public class LessonPage {
 
         //Bottom navigation
         BorderPane navigationContent = new BorderPane();
+        navigationContent.getStyleClass().add("navigation-content");
         navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
