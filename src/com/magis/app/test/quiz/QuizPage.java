@@ -3,12 +3,16 @@ package com.magis.app.test.quiz;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
+import com.magis.app.home.HomePage;
+import com.magis.app.lesson.LessonPage;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -42,7 +46,17 @@ public class QuizPage {
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
-        HBox homeBox = UIComponents.createHomeBox(true);
+        HBox homeBox = UIComponents.createHomeBox();
+        homeBox.setOnMouseClicked(e -> {
+            if (Main.takingTest) {
+                if (UIComponents.confirmClose()) {
+                    Main.takingTest = false;
+                    HomePage.goHome(borderPane);
+                }
+            } else {
+                HomePage.goHome(borderPane);
+            }
+        });
         sideBar.setTop(homeBox);
 
         int numQuestions = 7;

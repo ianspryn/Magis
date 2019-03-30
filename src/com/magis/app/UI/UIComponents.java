@@ -3,8 +3,10 @@ package com.magis.app.UI;
 import com.magis.app.Main;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
+import javafx.animation.*;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -87,10 +90,9 @@ public class UIComponents {
 
     /**
      * build the home box that goes in the top left corner
-     * @param isTestPage if this is a test page, then it will prompt the user if they wish to exit the test before proceeding
      * @return the HBox object that holds the home box
      */
-    public static HBox createHomeBox(boolean isTestPage) {
+    public static HBox createHomeBox() {
         HBox home = new HBox();
         home.setSpacing(20);
         home.setMinWidth(300);
@@ -115,16 +117,7 @@ public class UIComponents {
         //listeners
         home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
         home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        home.setOnMouseClicked(e -> {
-            if (Main.takingTest) {
-                if (UIComponents.confirmClose()) {
-                    Main.takingTest = false;
-                    HomePage.Page();
-                }
-            } else {
-                HomePage.Page();
-            }
-        });
+
 
         home.getChildren().addAll(homeVBox, magisLogo);
         return home;
@@ -146,5 +139,72 @@ public class UIComponents {
             if (type.getText().equals("Yes")) result.set(true);
         });
         return result.get();
+    }
+
+    /**
+     * Fade in the side panel labels
+     * @param node the current label to fade in
+     * @param i the current index of the label. Used to add incremental delay of fade in
+     * @param delay how long before the animation begins
+     * @param duration how long to animate
+     * @param fromX where the node should start in its animation for the x-axis
+     * @param fromY where the node should start in its animation for the y-axis
+     */
+    public static void animate(Node node, int i, double delay, double duration, double fromX, double fromY) {
+        //fade in
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        //"hack" to hide all the chapters
+        fadeTransition.play();
+        fadeTransition.pause();
+
+        //move down
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(0);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(0);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        //wait a certain delay, then animate in
+        SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)i / 30))), parallelTransition);
+        sequentialTransition.play();
+    }
+
+    /**
+     * Animate a node
+     * @param node the node to animate
+     * @param delay how long before the animation begins
+     * @param duration how long to animate
+     * @param fromX where the node should start in its animation for the x-axis
+     * @param fromY where the node should start in its animation for the y-axis
+     */
+    public static void animate(Node node, double delay, double duration, float fromX, float fromY) {
+        //fade in
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        //"hack" to initially hide the component
+        fadeTransition.play();
+        fadeTransition.pause();
+
+        //move down
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(0);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(0);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        //wait a certain delay, then animate in
+        SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay)), parallelTransition);
+        sequentialTransition.play();
     }
 }
