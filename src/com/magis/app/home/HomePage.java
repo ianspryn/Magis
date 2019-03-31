@@ -77,7 +77,7 @@ public class HomePage {
             recentBox.setMinHeight(100);
             recentBox.setAlignment(Pos.CENTER_LEFT);
 
-            recentBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter()));
+            recentBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
             recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -134,7 +134,7 @@ public class HomePage {
             chapterBox.getStyleClass().add("chapter-box");
             UIComponents.animate(chapterBox, i, 0.3, 0.2, 0,0,-10,0);
 
-            chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex));
+            chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex, false));
             chapterBox.setOnMouseEntered(e -> {
                 Main.scene.setCursor(Cursor.HAND);
                 scaleBox(chapterBox,1.02);
@@ -230,7 +230,7 @@ public class HomePage {
      * @param node the node to fade out
      * @param chapterIndex the desired chapter to switch scenes to
      */
-    private static void goToLessonPage(Node node, int chapterIndex) {
+    private static void goToLessonPage(Node node, int chapterIndex, boolean continueWhereLeftOff) {
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
@@ -245,7 +245,7 @@ public class HomePage {
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
         parallelTransition.play();
-        parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
+        parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
     }
 
 

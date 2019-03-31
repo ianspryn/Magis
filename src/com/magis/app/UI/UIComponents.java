@@ -148,7 +148,9 @@ public class UIComponents {
      * @param delay how long before the animation begins
      * @param duration how long to animate
      * @param fromX where the node should start in its animation for the x-axis
+     * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
+     * @param toY where the node should end in its animation for the y-axis
      */
     public static void animate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         //fade in
@@ -181,7 +183,9 @@ public class UIComponents {
      * @param delay how long before the animation begins
      * @param duration how long to animate
      * @param fromX where the node should start in its animation for the x-axis
+     * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
+     * @param toY where the node should end in its animation for the y-axis
      */
     public static void animate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         //fade in
