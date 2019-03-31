@@ -64,8 +64,8 @@ public class LessonSidePanel {
         horizontalLine.setFitHeight(2);
         horizontalLine.setFitWidth(250);
 
-        UIComponents.animate(chapterTitle, 0.15, 0.2,-10,0);
-        UIComponents.animate(horizontalLine, 0.15, 0.2,-10,0);
+        UIComponents.animate(chapterTitle, 0.15, 0.2,-10,0,0,0);
+        UIComponents.animate(horizontalLine, 0.15, 0.2,-10,0,0,0);
 
         masterVBox.getChildren().addAll(chapterTitle, horizontalLine);
 
@@ -94,7 +94,7 @@ public class LessonSidePanel {
         //add verticalLine and first page text to hbox
         currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
 
-        UIComponents.animate(currentPage, 0.15, 0.2, -10,0);
+        UIComponents.animate(currentPage,0.2,0.2,-10,0,0,0);
 
         //add first page to the list of pages
         contentPagesVBox.getChildren().add(currentPage);
@@ -116,7 +116,7 @@ public class LessonSidePanel {
             //add page to the list of pages
             contentPagesVBox.getChildren().add(pageLabels.getLabel(i));
 
-            UIComponents.animate(pageLabels.getLabel(i), i, 0.15, 0.2, -10, 0);
+            UIComponents.animate(pageLabels.getLabel(i), i, 0.15, 0.2, -10,0,0, 0);
         }
         masterVBox.getChildren().add(contentPagesVBox);
         currentPageIndex = 0;
@@ -137,7 +137,7 @@ public class LessonSidePanel {
             pageLabels.getLabel(pages.size()).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
             contentPagesVBox.getChildren().addAll(pageLabels.getLabel(pages.size()));
 
-            UIComponents.animate(pageLabels.getLabel(pages.size()), pages.size(), 0.15, 0.2, -10, 0);
+            UIComponents.animate(pageLabels.getLabel(pages.size()), pages.size(), 0.15, 0.2, -10,0,0, 0);
         }
 
         scrollPane.setContent(masterVBox);

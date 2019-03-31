@@ -144,13 +144,13 @@ public class UIComponents {
     /**
      * Fade in the side panel labels
      * @param node the current label to fade in
-     * @param i the current index of the label. Used to add incremental delay of fade in
+     * @param index the current index of the label. Used to add incremental delay of fade in
      * @param delay how long before the animation begins
      * @param duration how long to animate
      * @param fromX where the node should start in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      */
-    public static void animate(Node node, int i, double delay, double duration, double fromX, double fromY) {
+    public static void animate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
         fadeTransition.setFromValue(0.0);
@@ -162,16 +162,16 @@ public class UIComponents {
         //move down
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
         translateTransition.setFromX(fromX);
-        translateTransition.setToX(0);
+        translateTransition.setToX(toX);
         translateTransition.setFromY(fromY);
-        translateTransition.setToY(0);
+        translateTransition.setToY(toY);
 
         //move down and fade in at the same time
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
         //wait a certain delay, then animate in
-        SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)i / 30))), parallelTransition);
+        SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)index / 30))), parallelTransition);
         sequentialTransition.play();
     }
 
@@ -183,7 +183,7 @@ public class UIComponents {
      * @param fromX where the node should start in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      */
-    public static void animate(Node node, double delay, double duration, float fromX, float fromY) {
+    public static void animate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
         fadeTransition.setFromValue(0.0);
@@ -195,9 +195,9 @@ public class UIComponents {
         //move down
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
         translateTransition.setFromX(fromX);
-        translateTransition.setToX(0);
+        translateTransition.setToX(toX);
         translateTransition.setFromY(fromY);
-        translateTransition.setToY(0);
+        translateTransition.setToY(toY);
 
         //move down and fade in at the same time
         ParallelTransition parallelTransition = new ParallelTransition();

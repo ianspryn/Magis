@@ -64,7 +64,7 @@ public class HomePage {
 
         Label greetingText = new Label(greeting);
         greetingText.getStyleClass().add("greeting-text");
-        UIComponents.animate(greetingText,0.3,0.2,0,-10);
+        UIComponents.animate(greetingText,0.3,0.2,0,0,-10,0);
         vBox.getChildren().add(greetingText);
 
 
@@ -120,7 +120,7 @@ public class HomePage {
             recentBox.getChildren().addAll(lastPlace);
 
             vBox.getChildren().add(recentBox);
-            UIComponents.animate(recentBox,0.3,0.2,0,-10);
+            UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
         }
 
         int numChapters = Main.lessonModel.getChapters().size();
@@ -132,16 +132,16 @@ public class HomePage {
             //master box
             HBox chapterBox = new HBox();
             chapterBox.getStyleClass().add("chapter-box");
-            UIComponents.animate(chapterBox, i, 0.3, 0.2, 0,-10);
+            UIComponents.animate(chapterBox, i, 0.3, 0.2, 0,0,-10,0);
 
             chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex));
             chapterBox.setOnMouseEntered(e -> {
                 Main.scene.setCursor(Cursor.HAND);
-                scaleBox(chapterBox, 1, 1.02);
+                scaleBox(chapterBox,1.02);
             });
             chapterBox.setOnMouseExited(e -> {
                 Main.scene.setCursor(Cursor.DEFAULT);
-                scaleBox(chapterBox,1.02,1);
+                scaleBox(chapterBox,1);
             });
 
 
@@ -215,7 +215,7 @@ public class HomePage {
         Main.setScene(scene, "Home");
     }
 
-    private static void scaleBox(Node node, double beginning, double end) {
+    private static void scaleBox(Node node, double end) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.1), node);
         scaleTransition.setFromX(node.getScaleX());
         scaleTransition.setToX(end);
@@ -231,11 +231,21 @@ public class HomePage {
      * @param chapterIndex the desired chapter to switch scenes to
      */
     private static void goToLessonPage(Node node, int chapterIndex) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.3), node);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
-        fadeTransition.play();
-        fadeTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
+
+        //move up
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        parallelTransition.play();
+        parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
     }
 
 
@@ -243,7 +253,18 @@ public class HomePage {
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
-        fadeTransition.play();
-        fadeTransition.setOnFinished(e -> HomePage.Page());
+
+        //move up
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        parallelTransition.play();
+
+        parallelTransition.setOnFinished(e -> HomePage.Page());
     }
 }

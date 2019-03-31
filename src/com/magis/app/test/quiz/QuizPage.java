@@ -4,15 +4,12 @@ import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
-import com.magis.app.lesson.LessonPage;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
-import javafx.animation.FadeTransition;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -81,9 +78,10 @@ public class QuizPage {
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
+        UIComponents.animate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
 
         //Quiz Side Panel
-        sidePanel = new QuizSidePanel(quizPages, numQuestions, quizPageScrollPane, testPageContent);
+        sidePanel = new QuizSidePanel(chapterIndex, quizPages, numQuestions, quizPageScrollPane, testPageContent);
         sidePanel.initialize(true);
 
         sideBar.setLeft(sidePanel.getSidePanel());
@@ -123,6 +121,7 @@ public class QuizPage {
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
         navigationContent.setCenter(submitButton);
+        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);
