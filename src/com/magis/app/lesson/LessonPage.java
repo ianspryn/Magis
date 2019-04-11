@@ -19,13 +19,15 @@ public class LessonPage {
         //get the recent page before it's overwritten to 0 in case the user chose to jump back where they left off
         int recentPage = Main.studentModel.getStudent(Main.username).getRecentPage();
         currentPage = 0;
-        hasQuiz = Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
+        int hasQuiz = Main.quizzesModel.hasQuiz(chapterTitle) ? 1 : 0;
+        int hasTest = Main.testsModel.hasTest(chapterTitle) ? 1 : 0;
 
-        if (hasQuiz) {
-            numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages() + 1;
-        } else {
-            numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages();
-        }
+//        if (hasQuiz) {
+//            numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages() + 1;
+//        } else {
+//            numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages();
+//        }
 
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
@@ -40,7 +42,7 @@ public class LessonPage {
          lessonPageContent.initialize();
 
         //Lesson Side Panel
-        lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages());
+        lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages(), hasQuiz, hasTest);
         lessonSidePanel.initialize();
 
         sideBar.setTop(homeBox);

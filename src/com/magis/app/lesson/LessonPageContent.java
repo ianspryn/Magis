@@ -39,6 +39,7 @@ public class LessonPageContent {
     }
 
     public void initialize() {
+
         update(0);
     }
 
