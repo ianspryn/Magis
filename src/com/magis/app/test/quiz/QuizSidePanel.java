@@ -2,6 +2,7 @@ package com.magis.app.test.quiz;
 
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
+import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.PageLabels;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -15,42 +16,63 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class QuizSidePanel {
+    private int chapterIndex;
     private ArrayList<QuizPageContent> quizPagesContent;
     private int numQuestions;
     private ScrollPane quizPageScrollPane;
     private TestPageContent testPageContent;
-    private VBox vBox;
+    private ScrollPane scrollPane;
+    private VBox masterVBox;
+    private VBox contentPagesVBox;
     private HBox currentPage;
     private int numQuizQuestionPages;
     private PageLabels pageLabels;
-    private ImageView line;
+    private ImageView verticalLine;
+    private ImageView horizontalLine;
     private int currentPageIndex;
 
-    public QuizSidePanel(ArrayList<QuizPageContent> quizPages, int numQuestions, ScrollPane quizPageScrollPane, TestPageContent testPageContent) {
+    public QuizSidePanel(int chapterIndex, ArrayList<QuizPageContent> quizPages, int numQuestions, ScrollPane quizPageScrollPane, TestPageContent testPageContent) {
+        this.chapterIndex = chapterIndex;
         this.quizPagesContent = quizPages;
         this.numQuestions = numQuestions;
         this.quizPageScrollPane = quizPageScrollPane;
-        this.vBox = new VBox();
-        this.currentPage = new HBox();
+        this.scrollPane = new ScrollPane();
+        this.masterVBox = new VBox();
         this.pageLabels = new PageLabels(quizPages.size());
         this.testPageContent = testPageContent;
-        line = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
+        verticalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
+        horizontalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
         currentPageIndex = 0;
     }
 
-    public Node getvBox() {
-        return vBox;
+    public Node getSidePanel() {
+        return scrollPane;
     }
 
     public void initialize(boolean firstTime) {
 
-        this.vBox = new VBox();
+        this.masterVBox = new VBox();
+
+        Label chapterTitle = new Label(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        chapterTitle.getStyleClass().add("lesson-side-panel-chapter-text");
+        chapterTitle.setMaxWidth(300);
+        chapterTitle.setWrapText(true);
+
+        horizontalLine.setPreserveRatio(false);
+        horizontalLine.setFitHeight(2);
+        horizontalLine.setFitWidth(250);
+
+        masterVBox.getChildren().addAll(chapterTitle, horizontalLine);
+
+        masterVBox.setPadding(new Insets(50,0,0,15));
+        masterVBox.setSpacing(10);
+
+        this.contentPagesVBox = new VBox();
         this.currentPage = new HBox();
-        vBox.setSpacing(10);
-        vBox.setPadding(new Insets(80,0,0,15));
-        line.setPreserveRatio(false);
-        line.setFitHeight(25);
-        line.setFitWidth(5);
+        contentPagesVBox.setSpacing(10);
+        verticalLine.setPreserveRatio(false);
+        verticalLine.setFitHeight(25);
+        verticalLine.setFitWidth(5);
         pageLabels.getLabel(0).setPadding(new Insets( 0, 0, 0, 10));
         if (firstTime) {
             setLabelText(0);
@@ -64,11 +86,11 @@ public class QuizSidePanel {
         pageLabels.getLabel(0).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         pageLabels.getLabel(0).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        //add line and first page text to hbox
-        currentPage.getChildren().addAll(line, pageLabels.getLabel(0));
+        //add verticalLine and first page text to hbox
+        currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
 
         //add first page to the list of pages
-        vBox.getChildren().add(currentPage);
+        contentPagesVBox.getChildren().add(currentPage);
 
         for (int i = 1; i < pageLabels.getNumLabels(); i++) {
             int index = i;
@@ -86,9 +108,18 @@ public class QuizSidePanel {
             pageLabels.getLabel(i).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
             //add page to the list of pages
-            vBox.getChildren().add(pageLabels.getLabel(i));
+            contentPagesVBox.getChildren().add(pageLabels.getLabel(i));
+
+            UIComponents.animate(pageLabels.getLabel(i), i,0.2, 0.2,-10,0,0,0);
         }
+
+        masterVBox.getChildren().add(contentPagesVBox);
+
         currentPageIndex = 0;
+        scrollPane.setContent(masterVBox);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.getStyleClass().add("sidebar-scrollpane");
     }
 
     /**
@@ -113,13 +144,13 @@ public class QuizSidePanel {
         pageLabels.getLabel(index).setPadding(new Insets(0, 0, 0, 10));
 
         //remove nodes (by making new temporary nodes) so the program doesn't bark about duplicate nodes
-        vBox.getChildren().set(currentPageIndex, new Label());
-        vBox.getChildren().set(index, new Label());
+        contentPagesVBox.getChildren().set(currentPageIndex, new Label());
+        contentPagesVBox.getChildren().set(index, new Label());
 
         //move current page and current page indicator to new location
-        vBox.getChildren().set(index, currentPage);
+        contentPagesVBox.getChildren().set(index, currentPage);
         //set previous current page to just a label with no indicator
-        vBox.getChildren().set(currentPageIndex, pageLabels.getLabel(currentPageIndex));
+        contentPagesVBox.getChildren().set(currentPageIndex, pageLabels.getLabel(currentPageIndex));
         //update the current page indicator label with the correct label
         currentPage.getChildren().add(pageLabels.getLabel(index));
 

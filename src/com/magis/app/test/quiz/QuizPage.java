@@ -3,6 +3,7 @@ package com.magis.app.test.quiz;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
+import com.magis.app.home.HomePage;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
@@ -17,10 +18,13 @@ public class QuizPage {
     static Button submitButton;
     static int currentPage;
     static int numPages;
+    static QuizSidePanel sidePanel;
+    static ScrollPane quizPageScrollPane;
+    static TestPageContent testPageContent;
 
     public static void Page (int chapterIndex) {
         ArrayList<Integer> usedBankQuestions = new ArrayList<>();;
-        TestPageContent testPageContent = new TestPageContent();
+        testPageContent = new TestPageContent();
         currentPage = 0;
 
 //        Main.window.setOnCloseRequest(e -> );
@@ -39,7 +43,17 @@ public class QuizPage {
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
-        HBox homeBox = UIComponents.createHomeBox(true);
+        HBox homeBox = UIComponents.createHomeBox();
+        homeBox.setOnMouseClicked(e -> {
+            if (Main.takingTest) {
+                if (UIComponents.confirmClose()) {
+                    Main.takingTest = false;
+                    HomePage.goHome(borderPane);
+                }
+            } else {
+                HomePage.goHome(borderPane);
+            }
+        });
         sideBar.setTop(homeBox);
 
         int numQuestions = 7;
@@ -58,18 +72,19 @@ public class QuizPage {
 
 
         //Quiz Content
-        ScrollPane quizPageScrollPane = new ScrollPane();
+        quizPageScrollPane = new ScrollPane();
         quizPageScrollPane.setFitToWidth(true);
         quizPageScrollPane.setFitToHeight(true);
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
+        UIComponents.animate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
 
         //Quiz Side Panel
-        QuizSidePanel sidePanel = new QuizSidePanel(quizPages, numQuestions, quizPageScrollPane, testPageContent);
+        sidePanel = new QuizSidePanel(chapterIndex, quizPages, numQuestions, quizPageScrollPane, testPageContent);
         sidePanel.initialize(true);
 
-        sideBar.setLeft(sidePanel.getvBox());
+        sideBar.setLeft(sidePanel.getSidePanel());
         borderPane.setLeft(sideBar);
 
         //Quiz area
@@ -79,20 +94,21 @@ public class QuizPage {
 
         //Bottom navigation
         BorderPane navigationContent = new BorderPane();
+        navigationContent.getStyleClass().add("navigation-content");
         navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
         StackPane leftButton = UIComponents.createNavigationButton("<");
         leftButton.setOnMouseClicked(e -> {
             if (currentPage > 0) {
-                updatePage(-1, sidePanel, quizPageScrollPane, testPageContent);
+                updatePage(-1);
             }
         });
         //Right navigation
         StackPane rightButton = UIComponents.createNavigationButton(">");
         rightButton.setOnMouseClicked(e -> {
             if (currentPage < numPages - 1) {
-                updatePage(1, sidePanel, quizPageScrollPane, testPageContent);
+                updatePage(1);
             }
         });
 
@@ -105,6 +121,7 @@ public class QuizPage {
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
         navigationContent.setCenter(submitButton);
+        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);
@@ -149,7 +166,7 @@ public class QuizPage {
                 //reinitialize with the added page
                 sidePanel.initialize(false);
                 //set the new page
-                sideBar.setLeft(sidePanel.getvBox());
+                sideBar.setLeft(sidePanel.getSidePanel());
                 //we added a new page, so increment the number of pages
                 numPages++;
                 //disable all the buttons so the user can't change it
@@ -173,11 +190,8 @@ public class QuizPage {
     /**
      * A method used by the navigation buttons to change pages
      * @param move positive or negative 1, depending on the direction of page changing
-     * @param sidePanel the side panel to update the page position to
-     * @param quizPageScrollPane the main content box to update the page content to
-     * @param testPageContent the class that contains the page contents
      */
-    private static void updatePage(int move, QuizSidePanel sidePanel, ScrollPane quizPageScrollPane, TestPageContent testPageContent) {
+    public static void updatePage(int move) {
         //increment or decrement currentPage value
         currentPage += move;
         //update the page with new content

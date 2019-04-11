@@ -37,21 +37,27 @@
 
 .borderpane-home {
     -fx-background-color: #ffffff;
+}
 
+/* a slightly darker background for screens with lower contrast */
+.borderpane-lesson, .borderpane-test, .chapter-box-scrollpane,
+.lesson-page-content, .quiz-page-content, .navigation-content {
+    -fx-background-color: #eee; /* or set both to #ddd */
+    -fx-background: #eee;
 }
 
 .separator-home {
 
 }
-
+/*
 .borderpane-lesson {
-
+    -fx-background-color: #ededed;
 }
 
 .borderpane-test {
-
+    -fx-background-color: #ededed;
 }
-
+*/
 .lesson-side-panel-chapter-text {
     -fx-font-size: 20px;
     -fx-font-family: "Roboto Mono Bold";
@@ -80,8 +86,12 @@
     -fx-text-fill: #200310;
 }
 
-.sidebar {
+.sidebar, .sidebar-scrollpane {
     -fx-background-color: #AD1457; /* Pink 800 */
+}
+
+.sidebar-scrollpane {
+    -fx-background:#AD1457; /* Pink 800 */
 }
 
 .button {
@@ -120,7 +130,7 @@
 }
 
 .login-box {
--fx-background-color: #ffffff;
+    -fx-background-color: #ffffff;
 }
 
 .sign-in-field {
@@ -158,9 +168,7 @@ The greeting ("Hello, Ian!") on the home page
 
 /* Main text below the grade circle */
 .grade-main-text {
-    -fx-font-family: "Roboto Mono Regular";
     -fx-font-size: 2.0em;
-    -fx-fill: #515151;
 }
 
 /* set default fill of svg path */
@@ -194,11 +202,12 @@ The greeting ("Hello, Ian!") on the home page
 }
 
 .chapter-box-scrollpane {
-   -fx-alignment: center;
+    -fx-alignment: center;
 }
 
 /* Home page container for all of the chapters */
 .chapter-box-container {
+    /*-fx-background-color: #ededed;*/
     -fx-alignment: center;
     -fx-padding: 50px 0 150px 0;
     -fx-spacing: 50px;

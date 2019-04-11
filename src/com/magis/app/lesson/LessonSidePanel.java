@@ -1,13 +1,18 @@
 package com.magis.app.lesson;
 
 import com.magis.app.Main;
+import com.magis.app.UI.UIComponents;
 import com.magis.app.models.LessonModel;
+import javafx.animation.*;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -16,6 +21,7 @@ public class LessonSidePanel {
     private int chapterIndex;
     private LessonPageContent lessonPageContent;
     private ArrayList<LessonModel.ChapterModel.PageModel> pages;
+    private ScrollPane scrollPane;
     private VBox masterVBox;
     private VBox contentPagesVBox;
     private HBox currentPage;
@@ -30,6 +36,7 @@ public class LessonSidePanel {
         this.chapterIndex = chapterIndex;
         this.lessonPageContent = lessonPageContent;
         this.pages = pages;
+        this.scrollPane = new ScrollPane();
         this.masterVBox = new VBox();
         this.contentPagesVBox = new VBox();
         this.currentPage = new HBox();
@@ -43,8 +50,8 @@ public class LessonSidePanel {
         currentPageIndex = 0;
     }
 
-    public VBox getMasterVBox() {
-        return masterVBox;
+    public ScrollPane getSidePanel() {
+        return scrollPane;
     }
 
     public void initialize() {
@@ -56,6 +63,9 @@ public class LessonSidePanel {
         horizontalLine.setPreserveRatio(false);
         horizontalLine.setFitHeight(2);
         horizontalLine.setFitWidth(250);
+
+        UIComponents.animate(chapterTitle, 0.15, 0.2,-10,0,0,0);
+        UIComponents.animate(horizontalLine, 0.15, 0.2,-10,0,0,0);
 
         masterVBox.getChildren().addAll(chapterTitle, horizontalLine);
 
@@ -84,13 +94,15 @@ public class LessonSidePanel {
         //add verticalLine and first page text to hbox
         currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
 
+        UIComponents.animate(currentPage,0.2,0.2,-10,0,0,0);
+
         //add first page to the list of pages
         contentPagesVBox.getChildren().add(currentPage);
 
         for (int i = 1; i < pages.size(); i++) {
             int index = i;
             pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            pageLabels.getLabel(i).getStyleClass().add("studentlesson-side-panel-text");
+            pageLabels.getLabel(i).getStyleClass().add("lesson-side-panel-text");
             setLabelText(i);
 
             //listeners
@@ -103,6 +115,8 @@ public class LessonSidePanel {
 
             //add page to the list of pages
             contentPagesVBox.getChildren().add(pageLabels.getLabel(i));
+
+            UIComponents.animate(pageLabels.getLabel(i), i, 0.15, 0.2, -10,0,0, 0);
         }
         masterVBox.getChildren().add(contentPagesVBox);
         currentPageIndex = 0;
@@ -122,8 +136,16 @@ public class LessonSidePanel {
             pageLabels.getLabel(pages.size()).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             pageLabels.getLabel(pages.size()).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
             contentPagesVBox.getChildren().addAll(pageLabels.getLabel(pages.size()));
+
+            UIComponents.animate(pageLabels.getLabel(pages.size()), pages.size(), 0.15, 0.2, -10,0,0, 0);
         }
+
+        scrollPane.setContent(masterVBox);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.getStyleClass().add("sidebar-scrollpane");
     }
+
 
     /**
      * Updates the position of the side marker that indicates which page the user is currently on

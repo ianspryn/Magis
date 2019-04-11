@@ -30,7 +30,8 @@ public class Login {
         Rectangle rectangle = new Rectangle();
         rectangle.setHeight(450);
         rectangle.setWidth(450);
-        rectangle.setFill(Color.valueOf("#eee"));
+        rectangle.setFill(Color.valueOf("#ededed"));
+//        rectangle.setFill(Color.valueOf("#ddd")); //more contrast if needed
 
         ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
