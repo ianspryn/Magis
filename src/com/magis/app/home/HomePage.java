@@ -2,13 +2,17 @@ package com.magis.app.home;
 
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
+import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
 import com.magis.app.models.StudentModel;
+import com.sun.jndi.dns.DnsUrl;
+import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -18,6 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import java.util.Random;
 
@@ -59,6 +64,7 @@ public class HomePage {
 
         Label greetingText = new Label(greeting);
         greetingText.getStyleClass().add("greeting-text");
+        UIComponents.animate(greetingText,0.3,0.2,0,0,-10,0);
         vBox.getChildren().add(greetingText);
 
 
@@ -71,11 +77,10 @@ public class HomePage {
             recentBox.setMinHeight(100);
             recentBox.setAlignment(Pos.CENTER_LEFT);
 
-            recentBox.setOnMouseClicked(e -> LessonPage.Page(student.getRecentChapter(), true));
+            recentBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
             recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-            //Progress, title, and text description
             VBox lastPlace = new VBox();
             recentBox.setAlignment(Pos.CENTER_LEFT);
 
@@ -115,20 +120,29 @@ public class HomePage {
             recentBox.getChildren().addAll(lastPlace);
 
             vBox.getChildren().add(recentBox);
+            UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
         }
 
         int numChapters = Main.lessonModel.getChapters().size();
 
+        //Progress, title, and text description
         //for each chapter
         for (int i = 0; i < numChapters; i++) {
             int chapterIndex = i;
             //master box
             HBox chapterBox = new HBox();
             chapterBox.getStyleClass().add("chapter-box");
+            UIComponents.animate(chapterBox, i, 0.3, 0.2, 0,0,-10,0);
 
-            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex, false));
-            chapterBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-            chapterBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+            chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex, false));
+            chapterBox.setOnMouseEntered(e -> {
+                Main.scene.setCursor(Cursor.HAND);
+                scaleBox(chapterBox,1.02);
+            });
+            chapterBox.setOnMouseExited(e -> {
+                Main.scene.setCursor(Cursor.DEFAULT);
+                scaleBox(chapterBox,1);
+            });
 
 
             //Left image
@@ -199,5 +213,58 @@ public class HomePage {
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");
+    }
+
+    private static void scaleBox(Node node, double end) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.1), node);
+        scaleTransition.setFromX(node.getScaleX());
+        scaleTransition.setToX(end);
+        scaleTransition.setFromY(node.getScaleY());
+        scaleTransition.setToY(end);
+
+        scaleTransition.play();
+    }
+
+    /**
+     * Animate going to the lesson page by fading out the home page content first
+     * @param node the node to fade out
+     * @param chapterIndex the desired chapter to switch scenes to
+     */
+    private static void goToLessonPage(Node node, int chapterIndex, boolean continueWhereLeftOff) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        //move up
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        parallelTransition.play();
+        parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
+    }
+
+
+    public static void goHome(Node node) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        //move up
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        parallelTransition.play();
+
+        parallelTransition.setOnFinished(e -> HomePage.Page());
     }
 }

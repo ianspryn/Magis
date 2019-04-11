@@ -2,6 +2,7 @@ package com.magis.app.lesson;
 
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
+import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -31,12 +32,23 @@ public class LessonPage {
 
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
+        UIComponents.animate(borderPane,0.2,0.2,-10,0,0,0);
 
         BorderPane sideBar = new BorderPane();
         sideBar.getStyleClass().add("sidebar");
 
         //Home icon
-        HBox homeBox = UIComponents.createHomeBox(false);
+        HBox homeBox = UIComponents.createHomeBox();
+        homeBox.setOnMouseClicked(e -> {
+            if (Main.takingTest) {
+                if (UIComponents.confirmClose()) {
+                    Main.takingTest = false;
+                    HomePage.goHome(borderPane);
+                }
+            } else {
+                HomePage.goHome(borderPane);
+            }
+        });
 
          lessonPageContent = new LessonPageContent(chapterIndex);
          lessonPageContent.initialize();
@@ -49,7 +61,7 @@ public class LessonPage {
         sideBar.setLeft(lessonSidePanel.getSidePanel());
 
 //        sideBar.getChildren().addAll(home, lessonSidePanel.getSidePanel());
-        borderPane.setCenter(lessonPageContent.getPageContent());
+//        borderPane.setCenter(lessonPageContent.getPageContent());
         borderPane.setLeft(sideBar);
 
         //Lesson area
@@ -64,6 +76,7 @@ public class LessonPage {
         lessonPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         lessonPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         lessonPageScrollPane.setContent(lessonPageContent.getPageContent());
+        UIComponents.animate(lessonPageContent.getPageContent(), 0.15,0.2,0,0,-10,0);
 
         //Bottom navigation
         BorderPane navigationContent = new BorderPane();
@@ -88,6 +101,7 @@ public class LessonPage {
 
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
+        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
 
         lessonArea.setCenter(lessonPageScrollPane);
         lessonArea.setBottom(navigationContent);

@@ -3,6 +3,7 @@ package com.magis.app.test.quiz;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
+import com.magis.app.home.HomePage;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
@@ -42,7 +43,17 @@ public class QuizPage {
         sideBar.getStyleClass().add("sidebar");
         sideBar.setPrefWidth(300);
 
-        HBox homeBox = UIComponents.createHomeBox(true);
+        HBox homeBox = UIComponents.createHomeBox();
+        homeBox.setOnMouseClicked(e -> {
+            if (Main.takingTest) {
+                if (UIComponents.confirmClose()) {
+                    Main.takingTest = false;
+                    HomePage.goHome(borderPane);
+                }
+            } else {
+                HomePage.goHome(borderPane);
+            }
+        });
         sideBar.setTop(homeBox);
 
         int numQuestions = 7;
@@ -67,9 +78,10 @@ public class QuizPage {
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
+        UIComponents.animate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
 
         //Quiz Side Panel
-        sidePanel = new QuizSidePanel(quizPages, numQuestions, quizPageScrollPane, testPageContent);
+        sidePanel = new QuizSidePanel(chapterIndex, quizPages, numQuestions, quizPageScrollPane, testPageContent);
         sidePanel.initialize(true);
 
         sideBar.setLeft(sidePanel.getSidePanel());
@@ -109,6 +121,7 @@ public class QuizPage {
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
         navigationContent.setCenter(submitButton);
+        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);

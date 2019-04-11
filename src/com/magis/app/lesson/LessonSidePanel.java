@@ -1,14 +1,18 @@
 package com.magis.app.lesson;
 
 import com.magis.app.Main;
+import com.magis.app.UI.UIComponents;
 import com.magis.app.models.LessonModel;
+import javafx.animation.*;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -60,6 +64,9 @@ public class LessonSidePanel {
         horizontalLine.setFitHeight(2);
         horizontalLine.setFitWidth(250);
 
+        UIComponents.animate(chapterTitle, 0.15, 0.2,-10,0,0,0);
+        UIComponents.animate(horizontalLine, 0.15, 0.2,-10,0,0,0);
+
         masterVBox.getChildren().addAll(chapterTitle, horizontalLine);
 
         masterVBox.setPadding(new Insets(50,0,0,15));
@@ -86,6 +93,8 @@ public class LessonSidePanel {
 
         //add verticalLine and first page text to hbox
         currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
+
+        UIComponents.animate(currentPage,0.2,0.2,-10,0,0,0);
 
         //add first page to the list of pages
         contentPagesVBox.getChildren().add(currentPage);
