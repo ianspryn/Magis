@@ -2390,4 +2390,92 @@ When overriding a method, be sure to check that the parameter types match exactl
 			</page>
 		</pages>
 	</chapter>
+	<chapter>
+		<title>Packages</title>
+		<description>Learn how packages can help you in Java land!</description>
+		<pages>
+			<page>
+				<text>
+A Java program consists of a collection of classes. So far, most of your
+programs have consisted of a small number of classes. As programs get larger,
+however, simply distributing the classes over multiple ﬁles isn’t enough.
+An additional structuring mechanism is needed.
+
+In Java, packages provide this structuring mechanism. A Java package is a
+set of related classes. For example, the Java library consists of several
+hundred packages, some of which are listed in Table 1.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/2.png</image>
+			</page>
+			<page title="Organizing Packages">
+				<text>
+To put one of your classes in a package, you must place a line package packageName;
+as the ﬁrst instruction in the source ﬁle containing the class. A package name
+consists of one or more identiﬁers separated by periods. For example, let’s put
+the Financial class introduced in this chapter into a package named com.horstmann.bigjava.
+The Financial.java ﬁle must start as follows:
+
+package com.horstmann.bigjava;
+public class Financial {   . . . }
+
+In addition to the named packages (such as java.util or com.horstmann.bigjava),
+there is a special package, called the default package, which has no name. If you did
+not include any package statement at the top of your source ﬁle, its classes are placed
+in the default package.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/4.png</image>
+			</page>
+			<page title="Importing Packages">
+				<text>
+If you want to use a class from a package, you can refer to it by its full name
+(package name plus class name). For example, java.util.Scanner refers to the Scanner
+class in the java.util package:
+
+java.util.Scanner in = new java.util.Scanner(System.in);
+
+Naturally, that is somewhat inconvenient. You can instead import a name with an import
+statement: import java.util.Scanner; Then you can refer to the class as Scanner without
+the package preﬁx. You can import all classes of a package with an import statement that
+ends in .*. For example, you can use the statement import java.util.*; to import all
+classes from the java.util package. That statement lets you refer to classes like Scanner
+or Random without a java.util preﬁx. However, you never need to import the classes in the
+java.lang package explicitly. That is the package containing the most basic Java classes,
+such as Math and Object. These classes are always available to you. In effect, an automatic
+import java.lang.*; statement has been placed into every source ﬁle. Finally, you don’t
+need to import other classes in the same package. For example, when you implement the
+class homework1.Tester, you don’t need to import the class homework1.Bank. The compiler
+will ﬁnd the Bank class without an import statement because it is located in the same
+package, homework1.
+
+Placing related classes into a package is clearly a convenient mechanism to organize classes.
+However, there is a more important reason for packages: to avoid name clashes. In a large
+project, it is inevitable that two people will come up with the same name for the same concept.
+This even happens in the standard Java class library (which has now grown to thousands of
+classes). There is a class Timer in the java.util package and another class called Timer in
+the javax.swing package. You can still tell the Java compiler exactly which Timer class you
+need, simply by referring to them as java.util.Timer and javax.swing.Timer.
+
+Of course, for the package-naming convention to work, there must be some way to ensure that
+package names are unique. It wouldn’t be good if the car maker BMW placed all its Java code
+into the package bmw, and some other programmer (perhaps Britney M. Walters) had the same
+bright idea. To avoid this problem, the inventors of Java recommend that you use a package-naming
+scheme that takes advantage of the uniqueness of Internet domain names.
+
+For example, I have a domain name horstmann.com, and there is nobody else on the planet with
+the same domain name. (I was lucky that the domain name horstmann.com had not been taken by
+anyone else when I applied. If your name is Walters, you will sadly ﬁnd that someone else beat
+you to  walters.com.) To get a package name, turn the domain name around to produce a package
+name preﬁx, such as com.horstmann.
+
+If you don’t have your own domain name, you can still create a package name that has a high
+probability of being unique by writing your e-mail address backwards. For example, if Britney
+Walters has an e-mail address walters@cs.sjsu.edu, then she can use a package name
+edu.sjsu.cs.walters for her own classes. Some instructors will want you to place each of your
+assignments into a separate package, such as homework1, homework2, and so on. The reason is
+again to avoid name collision. You can have two classes, homework1.Bank and homework2.Bank,
+with slightly different properties.
+				</text>
+			</page>
+		</pages>
+	</chapter>
 </lesson>
