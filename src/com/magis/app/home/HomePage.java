@@ -5,10 +5,10 @@ import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.SmartContinue;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
-import com.magis.app.models.LessonModel;
+import com.magis.app.lesson.LessonPageContent;
 import com.magis.app.models.StudentModel;
-import com.sun.jndi.dns.DnsUrl;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -21,32 +21,64 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class HomePage {
 
+    private static HomePage homePage = null;
+    private Label greetingText;
+    private BorderPane borderPane;
+    private ArrayList<HBox> chapterBoxes;
+    private HBox recentBox;
+    private VBox masterVbox;
+    private VBox vBox;
+    private StudentModel.Student student;
+
     private static String[] greetings = {"Hello:!", "Hey there:!", "Welcome:!", "Good day:!", "How goes it:?", "What's happening:?"};
     private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
 
-    public static void Page() {
-        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+    public static HomePage getInstance() {
+        if (homePage == null) homePage = new HomePage();
+        return homePage;
+    }
+
+    public void Page() {
+        Main.setScene(borderPane, "Home");
+        animate();
+    }
+
+    private void animate() {
+        UIComponents.animate(vBox, 0.3, 0.2, 0, 0, -10, 0);
+        UIComponents.animate(greetingText, 0.3, 0.2, 0, 0, -10, 0);
+        if (student.getRecentChapter() > -1) {
+            UIComponents.animate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
+        }
+        for (int i = 0; i < chapterBoxes.size(); i++) {
+            UIComponents.animate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
+        }
+    }
+
+    private HomePage() {
+        student = Main.studentModel.getStudent(Main.username);
         Random rand = new Random();
         /*
         Master
          */
-        BorderPane borderPane = new BorderPane();
+        borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-home");
+
+        masterVbox = new VBox();
+        masterVbox.setAlignment(Pos.CENTER);
 
         /*
         Middle
          */
-        VBox vBox = new VBox();
+        vBox = new VBox();
         vBox.getStyleClass().add("chapter-box-container");
         vBox.setMaxWidth(750);
 
@@ -64,16 +96,17 @@ public class HomePage {
             greeting = greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1];
         }
 
-        Label greetingText = new Label(greeting);
+        greetingText = new Label(greeting);
         greetingText.getStyleClass().add("greeting-text");
-        UIComponents.animate(greetingText,0.3,0.2,0,0,-10,0);
-        vBox.getChildren().add(greetingText);
+        greetingText.setPadding(new Insets(50,0,0,0));
+//        UIComponents.animate(greetingText,0.3,0.2,0,0,-10,0);
+        masterVbox.getChildren().add(greetingText);
 
 
         //Last Activity
         if (student.getRecentChapter() > -1) {
             //master box
-            HBox recentBox = new HBox();
+            recentBox = new HBox();
             recentBox.getStyleClass().add("recent-box");
             recentBox.setMaxWidth(350);
             recentBox.setMinHeight(100);
@@ -86,86 +119,35 @@ public class HomePage {
             recentBox.getChildren().add(SmartContinue.generate());
 
             vBox.getChildren().add(recentBox);
-            UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
+//            UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
         }
 
         int numChapters = Main.lessonModel.getChapters().size();
+
+        chapterBoxes = new ArrayList<>();
 
         //Progress, title, and text description
         //for each chapter
         for (int i = 0; i < numChapters; i++) {
             int chapterIndex = i;
-            //master box
             HBox chapterBox = new HBox();
-            chapterBox.getStyleClass().add("chapter-box");
-            UIComponents.animate(chapterBox, i, 0.3, 0.2, 0,0,-10,0);
-
-            chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex, false));
-            chapterBox.setOnMouseEntered(e -> {
-                Main.scene.setCursor(Cursor.HAND);
-                scaleBox(chapterBox,1.02);
-            });
-            chapterBox.setOnMouseExited(e -> {
-                Main.scene.setCursor(Cursor.DEFAULT);
-                scaleBox(chapterBox,1);
-            });
-
-
-            //Left image
-            ImageView imageView = new ImageView(Main.lessonModel.getChapter(i).getImage());
-            imageView.setPreserveRatio(true);
-            imageView.setFitHeight(150);
-
-            //Separator
-            Separator separator = new Separator();
-            separator.getStyleClass().add("separator-home");
-            separator.setOrientation(Orientation.VERTICAL);
-            separator.setMaxHeight(200);
-            separator.setPadding(new Insets(0, 35, 0, 15));
-
-            //Progress, title, and text description
-            VBox chapterInfo = new VBox();
-            chapterBox.setAlignment(Pos.CENTER_LEFT);
-
-            //Progress
-            RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(student.getChapter(i).getProgress());
-
-            //Title
-            Label title = new Label();
-            title.getStyleClass().add("chapter-title-text");
-            title.setTextAlignment(TextAlignment.RIGHT);
-            title.setWrapText(true);
-            title.setText(Main.lessonModel.getChapter(i).getTitle());
-
-            AnchorPane topContent = new AnchorPane();
-            topContent.getChildren().addAll(progressIndicator, title);
-            topContent.setLeftAnchor(progressIndicator, 0.0);
-            topContent.setRightAnchor(title, 5.0);
-
-            //Text description
-            Label description = new Label();
-            description.setPrefWidth(550);
-            description.setWrapText(true);
-            description.getStyleClass().add("chapter-description-text");
-            description.setTextAlignment(TextAlignment.LEFT);
-            description.setText(Main.lessonModel.getChapter(i).getDescription());
-
-            chapterInfo.getChildren().addAll(topContent, description);
-
-            chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
 
             vBox.getChildren().add(chapterBox);
+            chapterBoxes.add(chapterBox);
+
+//            new Thread(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex))).start();
+            Platform.runLater(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
         }
 
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(vBox);
+        masterVbox.getChildren().add(vBox);
+
+        ScrollPane scrollPane = new ScrollPane();;
         scrollPane.getStyleClass().add("chapter-box-scrollpane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setFitToWidth(true);
 
-        StackPane contentHolder = new StackPane(vBox);
+        StackPane contentHolder = new StackPane(masterVbox);
         contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
                 scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
@@ -174,11 +156,66 @@ public class HomePage {
 
 
 //        Scene oldScene = Main.window.getScene();
-//        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()));
-        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
-        scene.getStylesheets().add("com/magis/app/css/style.css");
+//        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()))
+    }
 
-        Main.setScene(scene, "Home");
+    private void buildChapterBox(int chapterIndex, HBox chapterBox) {
+        //master box
+        chapterBox.getStyleClass().add("chapter-box");
+
+        chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex, false));
+        chapterBox.setOnMouseEntered(e -> {
+            Main.scene.setCursor(Cursor.HAND);
+            scaleBox(chapterBox, 1.02);
+        });
+        chapterBox.setOnMouseExited(e -> {
+            Main.scene.setCursor(Cursor.DEFAULT);
+            scaleBox(chapterBox, 1);
+        });
+
+        //Left image
+        ImageView imageView = new ImageView(Main.lessonModel.getChapter(chapterIndex).getImage());
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(150);
+
+        //Separator
+        Separator separator = new Separator();
+        separator.getStyleClass().add("separator-home");
+        separator.setOrientation(Orientation.VERTICAL);
+        separator.setMaxHeight(200);
+        separator.setPadding(new Insets(0, 35, 0, 15));
+
+        //Progress, title, and text description
+        VBox chapterInfo = new VBox();
+        chapterBox.setAlignment(Pos.CENTER_LEFT);
+
+        //Progress
+        RingProgressIndicator progressIndicator = new RingProgressIndicator();
+        progressIndicator.setProgress(student.getChapter(chapterIndex).getProgress());
+
+        //Title
+        Label title = new Label();
+        title.getStyleClass().add("chapter-title-text");
+        title.setTextAlignment(TextAlignment.RIGHT);
+        title.setWrapText(true);
+        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
+
+        AnchorPane topContent = new AnchorPane();
+        topContent.getChildren().addAll(progressIndicator, title);
+        topContent.setLeftAnchor(progressIndicator, 0.0);
+        topContent.setRightAnchor(title, 5.0);
+
+        //Text description
+        Label description = new Label();
+        description.setPrefWidth(550);
+        description.setWrapText(true);
+        description.getStyleClass().add("chapter-description-text");
+        description.setTextAlignment(TextAlignment.LEFT);
+        description.setText(Main.lessonModel.getChapter(chapterIndex).getDescription());
+
+        chapterInfo.getChildren().addAll(topContent, description);
+
+        chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
     }
 
     private static void scaleBox(Node node, double end) {
@@ -193,7 +230,8 @@ public class HomePage {
 
     /**
      * Animate going to the lesson page by fading out the home page content first
-     * @param node the node to fade out
+     *
+     * @param node         the node to fade out
      * @param chapterIndex the desired chapter to switch scenes to
      */
     private static void goToLessonPage(Node node, int chapterIndex, boolean continueWhereLeftOff) {
@@ -206,7 +244,7 @@ public class HomePage {
         translateTransition.setFromY(0);
         translateTransition.setToY(-10);
 
-        //move down and fade in at the same time
+        //move up and fade in at the same time
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
@@ -231,6 +269,6 @@ public class HomePage {
 
         parallelTransition.play();
 
-        parallelTransition.setOnFinished(e -> HomePage.Page());
+        parallelTransition.setOnFinished(e -> getInstance().Page());
     }
 }

@@ -7,10 +7,12 @@ import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -43,23 +45,15 @@ public class Main extends Application{
             closeProgram();
         });
 
+        scene = new Scene(new BorderPane(), width, height);
+        scene.getStylesheets().add("com/magis/app/css/style.css");
+        window.setScene(scene);
 
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
         quizzesModel = new QuizzesModel();
         testsModel = new TestsModel();
         Login.Page();
-//        Button button = new Button();
-//        button.setOnAction(e -> System.out.println("hi"));
-//        button.setText("woo");
-//
-//        StackPane layout = new StackPane();
-//        layout.getChildren().add(button);
-
-//        primaryStage.initStyle(StageStyle.TRANSPARENT);
-//        primaryStage.setTitle("Magis");
-
-//        HomePage.Page();
         primaryStage.show();
     }
 
@@ -71,19 +65,16 @@ public class Main extends Application{
         if (isLoggedIn) {
             Main.studentModel.getStudent(Main.username).writePageProgress();
         }
-
         if (close) window.close();
     }
 
-    public static void setScene(Scene newScene) {
-        scene = newScene;
-        window.setScene(newScene);
+    public static void setScene(Parent root) {
+        scene.setRoot(root);
         window.setTitle("Magis");
     }
 
-    public static void setScene(Scene newScene, String windowTitle) {
-        scene = newScene;
-        window.setScene(newScene);
+    public static void setScene(Parent root, String windowTitle) {
+        scene.setRoot(root);
         window.setTitle(windowTitle);
     }
 

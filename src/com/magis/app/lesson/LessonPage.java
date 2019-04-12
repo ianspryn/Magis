@@ -106,11 +106,7 @@ public class LessonPage {
             lessonSidePanel.update(recentPage);
             lessonPageContent.update(recentPage);
         }
-
-        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
-        scene.getStylesheets().add("com/magis/app/css/style.css");
-
-        Main.setScene(scene, Main.lessonModel.getChapter(chapterIndex).getTitle());
+        Main.setScene(borderPane, Main.lessonModel.getChapter(chapterIndex).getTitle());
     }
 
     private static void updatePage(int move) {

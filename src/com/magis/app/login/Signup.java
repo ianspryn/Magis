@@ -92,10 +92,7 @@ public class Signup {
         StackPane.setMargin(back, new Insets(0,0,20,0));
 
         content.getChildren().add(boxBackground);
-
-        Scene scene = new Scene(content, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
-        scene.getStylesheets().add("com/magis/app/css/style.css");
-        Main.setScene(scene, "Magis");
+        Main.setScene(content, "Magis");
     }
 
     private static void attemptSignUp(String username, String firstName, String lastName) {
@@ -117,7 +114,7 @@ public class Signup {
             Main.studentModel.initializeStudent(username);
             Main.username = username;
             Main.isLoggedIn = true;
-            HomePage.Page();
+            HomePage.getInstance().Page();
         }
     }
 }

@@ -60,7 +60,6 @@ public class PageContent {
         });
         masterContent.getChildren().add(button);
     }
-
 }
 
 

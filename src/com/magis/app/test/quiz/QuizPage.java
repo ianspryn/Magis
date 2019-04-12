@@ -127,11 +127,7 @@ public class QuizPage {
         quizArea.setBottom(navigationContent);
 
         borderPane.setCenter(quizArea);
-
-        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
-        scene.getStylesheets().add("com/magis/app/css/style.css");
-
-        Main.setScene(scene, "Quiz");
+        Main.setScene(borderPane, "Quiz");
     }
     /**
      * A popup to confirm to submit the quiz

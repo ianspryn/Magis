@@ -77,9 +77,8 @@ public class Login {
         StackPane.setMargin(createAccount, new Insets(0,0,20,0));
 
         content.getChildren().add(boxBackground);
-        Scene scene = new Scene(content, Main.width, Main.height);
-        scene.getStylesheets().add("com/magis/app/css/style.css");
-        Main.setScene(scene, "Magis");
+
+        Main.setScene(content, "Magis");
     }
 
     private static void attemptSignIn(String username) {
@@ -89,7 +88,7 @@ public class Login {
         } else if (Main.studentModel.getStudent(username) != null) { //if that student exists
             Main.username = username;
             Main.isLoggedIn = true;
-            HomePage.Page();
+            HomePage.getInstance().Page();
         } else { //Spit out an error and tell the student to try again
             Alert.showAlert("Error", "Username not found. Please try again.");
         }

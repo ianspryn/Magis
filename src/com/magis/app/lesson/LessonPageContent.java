@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 
 public class LessonPageContent {
@@ -39,36 +40,12 @@ public class LessonPageContent {
     public void initialize() {
         LessonModel.ChapterModel chapter = Main.lessonModel.getChapter(chapterIndex);
         int numPages = chapter.getNumPages();
-        for (int pageIndex = 0; pageIndex < numPages; pageIndex++) {
-            PageContent pageContent = new PageContent(chapterIndex);
 
-            ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
-            for (LessonModel.ChapterModel.PageModel.LessonContent lessonPageContent : lessonContents) {
-                String type = lessonPageContent.getType();
-                switch (type) {
-                    case "image":
-                        ImageView image = new ImageView(lessonPageContent.getContent());
-                        image.setPreserveRatio(true);
-                        pageContent.add(image);
-                        break;
-                    default:
-                        System.err.println("Unrecognized XML tag <" + type + ">. Defaulting to text field.");
-                    case "text":
-                        Label textDefault = new Label();
-                        textDefault.setText(lessonPageContent.getContent());
-                        textDefault.setWrapText(true);
-                        textDefault.setPrefWidth(700);
-                        textDefault.getStyleClass().add("lesson-text");
-                        textDefault.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
-                        textDefault.setPadding(new Insets(20, 20, 20, 20));
-                        pageContent.add(textDefault);
-                        break;
-                }
-            }
-            pageContent.buildAsLessonPage(pageIndex);
-            pageContents.add(pageContent);
+        for (int i = 0; i < numPages; i++) {
+            int pageIndex = i;
+            pageContents.add(new PageContent(chapterIndex));
+            new Thread(() -> buildPage(pageIndex)).start();
         }
-
 
         if (hasQuiz > 0) {
             PageContent pageContent = new PageContent(chapterIndex);
@@ -96,9 +73,40 @@ public class LessonPageContent {
         }
         //Last page visited
         Main.studentModel.getStudent(Main.username).setRecentPlace(chapterIndex, pageIndex);
+
         //set the page content
         masterContent = pageContents.get(pageIndex).getMasterContent();
         parentScrollPane.setContent(masterContent);
+    }
 
+    /**
+     * @param pageIndex the index of the lesson page for the current chapter
+     */
+    private void buildPage(int pageIndex) {
+        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
+        PageContent pageContent = pageContents.get(pageIndex);
+        for (LessonModel.ChapterModel.PageModel.LessonContent lessonPageContent : lessonContents) {
+            String type = lessonPageContent.getType();
+            switch (type) {
+                case "image":
+                    ImageView image = new ImageView(lessonPageContent.getContent());
+                    image.setPreserveRatio(true);
+                    pageContent.add(image);
+                    break;
+                default:
+                    System.err.println("Unrecognized XML tag <" + type + ">. Defaulting to text field.");
+                case "text":
+                    Label textDefault = new Label();
+                    textDefault.setText(lessonPageContent.getContent());
+                    textDefault.setWrapText(true);
+                    textDefault.setPrefWidth(700);
+                    textDefault.getStyleClass().add("lesson-text");
+                    textDefault.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
+                    textDefault.setPadding(new Insets(20, 20, 20, 20));
+                    pageContent.add(textDefault);
+                    break;
+            }
+        }
+        pageContent.buildAsLessonPage(pageIndex);
     }
 }
