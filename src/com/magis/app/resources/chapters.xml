@@ -2006,6 +2006,59 @@ SELF CHECK
 		</pages>
 	</chapter>
 	<chapter>
+		<title>Escape Sequences</title>
+		<description>Learn how to properly employ escape sequences.</description>
+		<pages>
+			<page>
+				<text>
+Suppose you want to display a string containing quotation marks, such as
+
+"Hello, "World"!
+
+You can’t use System.out.println("Hello, "World"!");
+
+As soon as the compiler reads "Hello, ", it thinks the string is ﬁnished, and then it gets all
+confused about World followed by two quotation marks. A human would probably realize
+that the second and third quotation marks were supposed to be part of the string, but a compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just
+refuses to go on, and reports an error. Well, how do you then display quotation marks on the
+screen? You precede the quotation marks inside the string with a backslash character. Inside a
+string, the sequence \" denotes a literal quote, not the end of a string. The correct display
+statement is, therefore
+System.out.println("Hello, \"World\"!");
+
+The backslash character is used as an escape character; the character sequence \" is called an
+escape sequence. The backslash does not denote itself; instead, it is used to encode other
+characters that would otherwise be difﬁcult to include in a string.
+Now, what do you do if you actually want to print a backslash (for example, to specify a
+Windows ﬁle name)? You must enter two \\ in a row, like this:
+System.out.println("The secret message is in C:\\Temp\\Secret.txt");
+
+This statement prints
+The secret message is in C:\Temp\Secret.txt
+
+Another escape sequence occasionally used is \n, which denotes a newline or line feed character. Printing a newline character causes the start of a new line on the display. For example,
+the statement
+
+System.out.print("*\n**\n***\n");
+
+prints the characters
+
+*
+**
+***
+
+on three separate lines. Of course, you could have achieved the same effect with three separate calls to println.
+Finally, escape sequences are useful for including international characters in a string. For
+example, suppose you want to print “All the way to San José!”, with an accented letter (é). If
+you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode encoding scheme to denote international characters. For example, the é character has
+Unicode encoding 00E9. You can include that character inside a string by writing \u, followed
+by its Unicode encoding:
+System.out.println("All the way to San Jos\u00E9!");
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/methods.png</image>
 		<title>Methods</title>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
