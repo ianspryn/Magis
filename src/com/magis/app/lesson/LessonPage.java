@@ -24,11 +24,7 @@ public class LessonPage {
         int hasQuiz = Main.quizzesModel.hasQuiz(chapterTitle) ? 1 : 0;
         int hasTest = Main.testsModel.hasTest(chapterTitle) ? 1 : 0;
 
-//        if (hasQuiz) {
-//            numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages() + 1;
-//        } else {
-//            numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages();
-//        }
+        numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages() + hasQuiz + hasTest;
 
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
@@ -50,18 +46,6 @@ public class LessonPage {
             }
         });
 
-         lessonPageContent = new LessonPageContent(chapterIndex);
-         lessonPageContent.initialize();
-
-        //Lesson Side Panel
-        lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages(), hasQuiz, hasTest);
-        lessonSidePanel.initialize();
-
-        sideBar.setTop(homeBox);
-        sideBar.setLeft(lessonSidePanel.getSidePanel());
-
-//        sideBar.getChildren().addAll(home, lessonSidePanel.getSidePanel());
-//        borderPane.setCenter(lessonPageContent.getPageContent());
         borderPane.setLeft(sideBar);
 
         //Lesson area
@@ -75,8 +59,18 @@ public class LessonPage {
         lessonPageScrollPane.setFitToHeight(true);
         lessonPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         lessonPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        lessonPageScrollPane.setContent(lessonPageContent.getPageContent());
+
+        lessonPageContent = new LessonPageContent(lessonPageScrollPane, chapterIndex, hasQuiz, hasTest);
+        lessonPageContent.initialize();
+
         UIComponents.animate(lessonPageContent.getPageContent(), 0.15,0.2,0,0,-10,0);
+
+        //Lesson Side Panel
+        lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages(), hasQuiz, hasTest);
+        lessonSidePanel.initialize();
+
+        sideBar.setTop(homeBox);
+        sideBar.setLeft(lessonSidePanel.getSidePanel());
 
         //Bottom navigation
         BorderPane navigationContent = new BorderPane();
@@ -120,14 +114,9 @@ public class LessonPage {
     }
 
     private static void updatePage(int move) {
-        //currentPage += -1 or currentPage += 1
+        //currentPage += -1;      or      currentPage += 1;
         currentPage += move;
-        if (currentPage == numPages - 1 && hasQuiz) {
-
-            lessonPageContent.update(-1);
-        } else {
-            lessonPageContent.update(currentPage);
-        }
-        lessonSidePanel.update(currentPage); //extra because we need to always update the position of the current page indicator
+        lessonPageContent.update(currentPage);
+        lessonSidePanel.update(currentPage);
     }
 }

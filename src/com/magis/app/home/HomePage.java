@@ -2,8 +2,10 @@ package com.magis.app.home;
 
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
+import com.magis.app.UI.SmartContinue;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
+import com.magis.app.models.LessonModel;
 import com.magis.app.models.StudentModel;
 import com.sun.jndi.dns.DnsUrl;
 import javafx.animation.*;
@@ -81,43 +83,7 @@ public class HomePage {
             recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-            VBox lastPlace = new VBox();
-            recentBox.setAlignment(Pos.CENTER_LEFT);
-
-            //Title
-            Label lastPlaceText = new Label();
-            lastPlaceText.getStyleClass().add("chapter-title-text");
-            lastPlaceText.setTextAlignment(TextAlignment.LEFT);
-            lastPlaceText.setWrapText(true);
-            lastPlaceText.setText("Pick up where you left off?");
-
-            //Text description
-            TextFlow lastPlaceSubText = new TextFlow();
-            lastPlaceSubText.setPadding(new Insets(25,0,0,0));
-            lastPlaceSubText.getStyleClass().add("chapter-description-text");
-            lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
-
-            Text text1 = new Text("Click here to return to your last activity with ");
-            Text text2, text3, text4, text5;
-            if (Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle() != null) {
-                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
-                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text3 = new Text(" on the page ");
-                text4 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle());
-                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text5 = new Text(".");
-            } else {
-                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
-                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text3 = new Text(" on ");
-                text4 = new Text("page " + Integer.toString((student.getRecentPage() + 1)));
-                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text5 = new Text(".");
-            }
-            lastPlaceSubText.getChildren().addAll(text1, text2, text3, text4, text5);
-            lastPlace.getChildren().addAll(lastPlaceText, lastPlaceSubText);
-
-            recentBox.getChildren().addAll(lastPlace);
+            recentBox.getChildren().add(SmartContinue.generate());
 
             vBox.getChildren().add(recentBox);
             UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
