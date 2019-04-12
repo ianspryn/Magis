@@ -23,6 +23,7 @@ public class LessonPageContent {
 
     public LessonPageContent(int chapterIndex) {
         masterContent = new VBox();
+        masterContent.getStyleClass().add("lesson-page-content");
         masterContent.setAlignment(Pos.TOP_CENTER);
         titleContent = new VBox();
         titleContent.setAlignment(Pos.CENTER);
@@ -52,14 +53,20 @@ public class LessonPageContent {
             return;
         }
 
+        //Mark the page as visited
+        Main.studentModel.getStudent(Main.username).getChapter(chapterIndex).visitPage(pageIndex);
+
+        //Last page visited
+        Main.studentModel.getStudent(Main.username).setRecentPlace(chapterIndex, pageIndex);
+
         masterContent.getChildren().clear();
         titleContent.getChildren().clear();
         pageContent.getChildren().clear();
-        Text pageTitle = new Text(Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getTitle());
+        Text pageTitle = new Text(Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getTitle());
         pageTitle.getStyleClass().add("page-title-text");
         titleContent.getChildren().add(pageTitle);
 
-        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPages(pageIndex).getLessonContent();
+        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
         for (int i = 0; i < lessonContents.size(); i++) {
             LessonModel.ChapterModel.PageModel.LessonContent currentLesson = lessonContents.get(i);
             String type = currentLesson.getType();
@@ -98,9 +105,12 @@ public class LessonPageContent {
     private void showQuizPage() {
         masterContent.getChildren().clear();
         masterContent.setAlignment(Pos.CENTER);
-        Button button = new Button("Click to begin test");
+        Button button = new Button("Click to begin quiz");
         button.getStyleClass().addAll("start-test-button", "drop-shadow");
-        button.setOnAction(e -> QuizPage.Page(chapterIndex));
+        button.setOnAction(e -> {
+            Main.takingTest = true;
+            QuizPage.Page(chapterIndex);
+        });
         masterContent.getChildren().add(button);
     }
 }

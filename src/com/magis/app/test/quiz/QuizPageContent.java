@@ -31,6 +31,7 @@ public class QuizPageContent {
 
     public QuizPageContent(int numQuestions, int numPages, int chapterIndex,  Grader grader, TestPageContent testPageContent, ArrayList<Integer> usedBankQuestions) {
         pageContent = new VBox();
+        pageContent.getStyleClass().add("quiz-page-content");
         this.numQuestions = numQuestions;
         this.chapterIndex = chapterIndex;
         this.grader = grader;
@@ -45,6 +46,8 @@ public class QuizPageContent {
     public void initialize(int pageIndex) {
         pageContent.getChildren().clear();
         Random rand = new Random();
+        ArrayList<String> usedGeneratorQuestions = new ArrayList<>();
+        String generatedQuestion = "";
         //max 2 questions per page
         for (int i = 0, questionIndex = pageIndex * 2 + i; i < 2 && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
             ArrayList<String> answers = new ArrayList<>();
@@ -90,7 +93,13 @@ public class QuizPageContent {
                     case "Comments":
                         CommentQuestions cQuestion = new CommentQuestions();
                         cQuestion.generateGeneralCommentQuestion();
-                        statement.setText(cQuestion.getQuestion());
+
+                        do{
+                            generatedQuestion = cQuestion.getQuestion();
+                        }while(usedGeneratorQuestions.contains(generatedQuestion));
+                        usedGeneratorQuestions.add(generatedQuestion);
+
+                        statement.setText(generatedQuestion);
                         questionBox.getChildren().add(statement);
                         correctAnswer = cQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
@@ -100,7 +109,13 @@ public class QuizPageContent {
                     case "Primitive Types":
                         DataTypeQuestions dtQuestion = new DataTypeQuestions();
                         dtQuestion.datatypeMatchingQuestion();
-                        statement.setText(dtQuestion.getQuestion());
+
+                        do{
+                            generatedQuestion = dtQuestion.getQuestion();
+                        }while(usedGeneratorQuestions.contains(generatedQuestion));
+                        usedGeneratorQuestions.add(generatedQuestion);
+
+                        statement.setText(generatedQuestion);
                         questionBox.getChildren().add(statement);
                         correctAnswer = dtQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
@@ -117,7 +132,13 @@ public class QuizPageContent {
                             objcQuestion.generateEqualsQuestion();
                         }
 
-                        statement.setText(objcQuestion.getQuestion());
+
+                        do{
+                            generatedQuestion = objcQuestion.getQuestion();
+                        }while(usedGeneratorQuestions.contains(generatedQuestion));
+                        usedGeneratorQuestions.add(generatedQuestion);
+
+                        statement.setText(generatedQuestion);
                         questionBox.getChildren().add(statement);
                         correctAnswer = objcQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
@@ -138,7 +159,13 @@ public class QuizPageContent {
                             opQuestion.getSubstringQuestion();
                         }
 
-                        statement.setText(opQuestion.getQuestion());
+
+                        do{
+                            generatedQuestion = opQuestion.getQuestion();
+                        }while(usedGeneratorQuestions.contains(generatedQuestion));
+                        usedGeneratorQuestions.add(generatedQuestion);
+
+                        statement.setText(generatedQuestion);
                         questionBox.getChildren().add(statement);
                         correctAnswer = opQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
@@ -155,7 +182,13 @@ public class QuizPageContent {
                             mQuestion.getStringMethodQuestion();
                         }
 
-                        statement.setText(mQuestion.getQuestion());
+
+                        do{
+                            generatedQuestion = mQuestion.getQuestion();
+                        }while(usedGeneratorQuestions.contains(generatedQuestion));
+                        usedGeneratorQuestions.add(generatedQuestion);
+
+                        statement.setText(generatedQuestion);
                         questionBox.getChildren().add(statement);
                         correctAnswer = mQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
@@ -172,7 +205,13 @@ public class QuizPageContent {
                             vQuestion.getVariableNameQuestion();
                         }
 
-                        statement.setText(vQuestion.getQuestion());
+
+                        do{
+                            generatedQuestion = vQuestion.getQuestion();
+                        }while(usedGeneratorQuestions.contains(generatedQuestion));
+                        usedGeneratorQuestions.add(generatedQuestion);
+
+                        statement.setText(generatedQuestion);
                         questionBox.getChildren().add(statement);
                         correctAnswer = vQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
@@ -226,7 +265,7 @@ public class QuizPageContent {
 
                 //highlight the correct answer as green
                 if (button.getText().equals(grader.getCorrectAnswer(index + page * 2))) {
-                    button.setStyle("-fx-text-fill: #57d154;");
+                    button.setStyle("-fx-text-fill: #00cd0a;");
                 }
 
                 //if the user selected the wrong answer, highlight their answer as red

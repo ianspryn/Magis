@@ -28,7 +28,8 @@ public class Signup {
         Rectangle rectangle = new Rectangle();
         rectangle.setHeight(550);
         rectangle.setWidth(550);
-        rectangle.setFill(Color.valueOf("#eee"));
+        rectangle.setFill(Color.valueOf("#ededed"));
+//        rectangle.setFill(Color.valueOf("#dedede")); //more contrast if needed
 
         ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
@@ -92,7 +93,7 @@ public class Signup {
 
         content.getChildren().add(boxBackground);
 
-        Scene scene = new Scene(content, Main.width, Main.height);
+        Scene scene = new Scene(content, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
         Main.setScene(scene, "Magis");
     }
@@ -104,6 +105,10 @@ public class Signup {
             return;
         }
 
+        //capitalize the first letter of the name
+        firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase();
+        lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1).toLowerCase();
+
         int result = Main.studentModel.addStudent(username, firstName, lastName);
 
         if (result == -1) {
@@ -111,6 +116,7 @@ public class Signup {
         } else {
             Main.studentModel.initializeStudent(username);
             Main.username = username;
+            Main.isLoggedIn = true;
             HomePage.Page();
         }
     }

@@ -41,6 +41,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         int result = studentModel.addStudent("ianspryn", "Ian", "Spryn");
+        studentModel.initializeStudent("ianspryn");
         Assert.assertEquals(0, result);
         Files.deleteIfExists(file.toPath());
     }
@@ -51,6 +52,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn", "Ian", "Spryn");
+        studentModel.initializeStudent("ianspryn");
         int result = studentModel.addStudent("ianspryn", "Ian", "Spryn");
 
         Assert.assertEquals(-1, result);
@@ -63,6 +65,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         String firstName = studentModel.getStudent("ianspryn").getFirstName();
 
         Assert.assertEquals("Ian",firstName);
@@ -75,6 +78,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         String lastName = studentModel.getStudent("ianspryn").getLastName();
 
         Assert.assertEquals("Spryn",lastName);
@@ -87,6 +91,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         String fullName = studentModel.getStudent("ianspryn").getFullName();
 
         Assert.assertEquals("Ian Spryn",fullName);
@@ -102,10 +107,11 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.getStudent("ianspryn").getChapter(1).setProgress(50);
+        studentModel.initializeStudent("ianspryn");
+        studentModel.getStudent("ianspryn").getChapter(1).visitPage(0);
         int progress = studentModel.getStudent("ianspryn").getChapter(1).getProgress();
 
-        Assert.assertEquals(50, progress);
+        Assert.assertEquals(12, progress);
         Files.deleteIfExists(file.toPath());
     }
 
@@ -119,6 +125,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(50);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
 
@@ -138,6 +145,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(50);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
 
@@ -154,6 +162,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
 
         Double expectedScore = 92.5;
@@ -169,6 +178,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         Double expectedScore = -1.0;
         Double actualScore = studentModel.getStudent("ianspryn").getQuiz(1).getLastScore();
@@ -183,6 +193,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(42.0);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(85.5);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
@@ -201,6 +212,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(42.0);
 
         Double expectedAverage = 42.0;
@@ -216,6 +228,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         Double expectedAverage = 0.0;
         Double actualAverage = studentModel.getStudent("ianspryn").getQuiz(1).getAverageScore();
@@ -234,6 +247,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(50);
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
 
@@ -253,6 +267,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(50);
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
 
@@ -269,6 +284,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
 
         Double expectedScore = 92.5;
@@ -284,6 +300,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         Double expectedScore = -1.0;
         Double actualScore = studentModel.getStudent("ianspryn").getExam(1).getLastScore();
@@ -298,6 +315,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(42.0);
         studentModel.getStudent("ianspryn").getExam(1).addScore(85.5);
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
@@ -316,6 +334,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(42.0);
 
         Double expectedAverage = 42.0;
@@ -331,6 +350,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         Double expectedAverage = 0.0;
         Double actualAverage = studentModel.getStudent("ianspryn").getExam(1).getAverageScore();
@@ -361,8 +381,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         String firstName =  studentModel2.getStudent("ianspryn").getFirstName();
 
         Assert.assertEquals("Ian",firstName);
@@ -375,8 +397,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         String lastName = studentModel2.getStudent("ianspryn").getLastName();
 
         Assert.assertEquals("Spryn",lastName);
@@ -389,8 +413,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         String fullName = studentModel2.getStudent("ianspryn").getFullName();
 
         Assert.assertEquals("Ian Spryn",fullName);
@@ -406,12 +432,15 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
-        studentModel.getStudent("ianspryn").getChapter(1).setProgress(50);
+        studentModel.initializeStudent("ianspryn");
+        studentModel.getStudent("ianspryn").getChapter(1).visitPage(0);
+        studentModel.getStudent("ianspryn").writePageProgress();
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         int progress = studentModel2.getStudent("ianspryn").getChapter(1).getProgress();
 
-        Assert.assertEquals(50, progress);
+        Assert.assertEquals(12, progress);
         Files.deleteIfExists(file.toPath());
     }
 
@@ -425,6 +454,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(50);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
 
@@ -433,6 +463,7 @@ public class StudentModelTest {
         expectedScores.add(92.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         ArrayList<Double> actualScores = studentModel2.getStudent("ianspryn").getQuiz(1).getScores();
 
         Assert.assertEquals(expectedScores, actualScores);
@@ -445,10 +476,12 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(50);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedScore = 92.5;
         Double actualScore = studentModel2.getStudent("ianspryn").getQuiz(1).getLastScore();
 
@@ -462,9 +495,11 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedScore = 92.5;
         Double actualScore = studentModel2.getStudent("ianspryn").getQuiz(1).getLastScore();
 
@@ -478,8 +513,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedScore = -1.0;
         Double actualScore = studentModel2.getStudent("ianspryn").getQuiz(1).getLastScore();
 
@@ -493,12 +530,14 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(42.0);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(85.5);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(92.5);
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(98.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedAverage = (42.0 + 85.5 + 92.5 + 98.5) / 4.0;
         Double actualAverage = studentModel2.getStudent("ianspryn").getQuiz(1).getAverageScore();
 
@@ -512,9 +551,11 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getQuiz(1).addScore(42.0);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedAverage = 42.0;
         Double actualAverage = studentModel2.getStudent("ianspryn").getQuiz(1).getAverageScore();
 
@@ -528,8 +569,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedAverage = 0.0;
         Double actualAverage = studentModel2.getStudent("ianspryn").getQuiz(1).getAverageScore();
 
@@ -547,6 +590,7 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(50);
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
 
@@ -555,6 +599,7 @@ public class StudentModelTest {
         expectedScores.add(92.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         ArrayList<Double> actualScores = studentModel2.getStudent("ianspryn").getExam(1).getScores();
 
         Assert.assertEquals(expectedScores, actualScores);
@@ -566,11 +611,13 @@ public class StudentModelTest {
         File file = new File("src/com/magis/app/resources/students.xml");
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.initializeStudent("ianspryn");
         studentModel.addStudent("ianspryn","Ian","Spryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(50);
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedScore = 92.5;
         Double actualScore = studentModel2.getStudent("ianspryn").getExam(1).getLastScore();
 
@@ -583,10 +630,12 @@ public class StudentModelTest {
         File file = new File("src/com/magis/app/resources/students.xml");
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.initializeStudent("ianspryn");
         studentModel.addStudent("ianspryn","Ian","Spryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedScore = 92.5;
         Double actualScore = studentModel2.getStudent("ianspryn").getExam(1).getLastScore();
 
@@ -600,8 +649,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedScore = -1.0;
         Double actualScore = studentModel2.getStudent("ianspryn").getExam(1).getLastScore();
 
@@ -615,12 +666,14 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(42.0);
         studentModel.getStudent("ianspryn").getExam(1).addScore(85.5);
         studentModel.getStudent("ianspryn").getExam(1).addScore(92.5);
         studentModel.getStudent("ianspryn").getExam(1).addScore(98.5);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedAverage = (42.0 + 85.5 + 92.5 + 98.5) / 4.0;
         Double actualAverage = studentModel2.getStudent("ianspryn").getExam(1).getAverageScore();
 
@@ -634,9 +687,11 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
         studentModel.getStudent("ianspryn").getExam(1).addScore(42.0);
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedAverage = 42.0;
         Double actualAverage = studentModel2.getStudent("ianspryn").getExam(1).getAverageScore();
 
@@ -650,8 +705,10 @@ public class StudentModelTest {
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
 
         StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.initializeStudent("ianspryn");
         Double expectedAverage = 0.0;
         Double actualAverage = studentModel2.getStudent("ianspryn").getExam(1).getAverageScore();
 

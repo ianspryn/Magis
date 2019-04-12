@@ -1,0 +1,31 @@
+<!--
+STRUCTURE:
+
+<tests>
+	<chapter id = "Chapter Name">
+		<questions>
+                        <question>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
+                                <answer></answer>
+                                <answer></answer>
+                                <answer></answer>
+                        </question>
+                </questions>
+	</chapter>
+</tests>
+
+-->
+<tests>
+        <chapter id = "Primitive Types">
+                <questions>
+                        <question>
+                                <statement>How is 0 different from "0"?</statement>
+                                <answer id = "correct"> "0" is a string, 0 is an int</answer>
+                                <answer>"0" is an int, 0 is a string</answer>
+                                <answer>There is no difference</answer>
+                                <answer>"0" is a double, 0 is a int</answer>
+                        </question>
+                </questions>
+        </chapter>
+</tests>

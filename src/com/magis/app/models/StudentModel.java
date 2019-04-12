@@ -14,6 +14,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -37,8 +38,28 @@ public class StudentModel {
 
     public StudentModel(LessonModel lessonModel) {
         this.students = new ArrayList<>();
-        this.filePath = "src/com/magis/app/resources/students.xml";
         this.lessonModel = lessonModel;
+
+
+        /*
+        build version
+         */
+        String fileName = "students.xml";
+        File jarFile = null;
+        try {
+            jarFile = new File(StudentModel.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        assert jarFile != null;
+        this.filePath = jarFile.getParent() + File.separator + fileName;
+
+        /*
+       local version
+         */
+//        this.filePath = "src/com/magis/app/resources/students.xml";
+
+        File file = new File(this.filePath);
 
         if (!Files.exists(Paths.get(filePath))) {
             createStudentFile();
@@ -165,6 +186,14 @@ public class StudentModel {
         lastNameElement.appendChild(document.createTextNode(lastName));
         student.appendChild(lastNameElement);
 
+        //recent activity elements
+        Element recentElement = document.createElement("recent");
+        student.appendChild(recentElement);
+        Element chapterID = document.createElement("chapter");
+        Element pageID = document.createElement("page");
+        recentElement.appendChild(chapterID);
+        recentElement.appendChild(pageID);
+
         //chapters
         Element chapters = document.createElement("chapters");
         student.appendChild(chapters);
@@ -172,8 +201,18 @@ public class StudentModel {
         //each chapter, initialized to 0
         for (int i = 0; i < lessonModel.getNumChapters(); i++) {
             Element chapter = document.createElement("chapter");
-            chapter.appendChild(document.createTextNode("0"));
             chapters.appendChild(chapter);
+            Element progress = document.createElement("progress");
+            progress.appendChild(document.createTextNode("0"));
+            chapter.appendChild(progress);
+
+            //each page, 0 = not visited, 1 = visited
+            for (int j = 0; j < lessonModel.getChapter(i).getNumPages(); j++) {
+                Element page = document.createElement("page");
+                page.appendChild(document.createTextNode("0"));
+                chapter.appendChild(page);
+            }
+
         }
 
         //quizzes
@@ -192,10 +231,13 @@ public class StudentModel {
     }
 
     public class Student {
+        private Node student;
         private String username;
         private String firstName;
         private String lastName;
         private String fullName;
+        private int recentChapter;
+        private int recentPage;
         private ArrayList<ChapterModel> chapters;
         private ArrayList<Quiz> quizzes;
         private ArrayList<Exam> exams;
@@ -214,6 +256,16 @@ public class StudentModel {
 
         public String getFullName() {
             return fullName;
+        }
+
+        public int getRecentChapter() { return recentChapter; }
+
+        public int getRecentPage() { return recentPage; }
+
+        public void setRecentPlace(int chapterIndex, int pageIndex) {
+            recentChapter = chapterIndex;
+            recentPage = pageIndex;
+
         }
 
         public ChapterModel getChapter(int chapterIndex) {
@@ -315,8 +367,68 @@ public class StudentModel {
             return e;
         }
 
+        /**
+         * Write the progress for each page to the XML file
+         */
+        public void writePageProgress() {
+            //add score to the XML file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            Document document = null;
+            try {
+                assert documentBuilder != null;
+                document = documentBuilder.parse(filePath);
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            assert document != null;
+            Element root = document.getDocumentElement();
+            NodeList students = root.getElementsByTagName("student");
+            Node student = null;
+            for (int i = 0; i < students.getLength(); i++) {
+                student = students.item(i);
+                //find the current student
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                    break;
+                }
+            }
+            Element studentElement = (Element) student;
+            assert studentElement != null;
+
+            Element recentElement = (Element) studentElement.getElementsByTagName("recent").item(0);
+            Node recentChapter = recentElement.getElementsByTagName("chapter").item(0);
+            Node recentPage = recentElement.getElementsByTagName("page").item(0);
+            recentChapter.setTextContent(Integer.toString(this.recentChapter));
+            recentPage.setTextContent(Integer.toString(this.recentPage));
+
+            Element chaptersElement = (Element) studentElement.getElementsByTagName("chapters").item(0);
+            NodeList chapters = chaptersElement.getElementsByTagName("chapter");
+            for (int i = 0; i < chapters.getLength(); i++) {
+                Node chapter = chapters.item(i);
+                Element chapterElement = (Element) chapter;
+                Node progress = chapterElement.getElementsByTagName("progress").item(0);
+                progress.setTextContent(Integer.toString(getChapter(i).getProgress()));
+                NodeList pages = chapterElement.getElementsByTagName("page");
+                for (int j = 0; j < pages.getLength(); j++) {
+
+                    Node page = pages.item(j);
+                    page.setTextContent(Integer.toString(getChapter(i).getPageVisisted().get(j)));
+                }
+            }
+            //write to XML file
+            UpdateModel.updateXML(new DOMSource(document), filePath);
+        }
+
         Student(Node student, String username) {
+            this.student = student;
             this.username = username;
+            this.recentChapter = -1;
+            this.recentPage = -1;
             this.chapters = new ArrayList<>();
             this.quizzes = new ArrayList<>();
             this.exams = new ArrayList<>();
@@ -326,6 +438,16 @@ public class StudentModel {
             this.firstName = studentElement.getElementsByTagName("firstname").item(0).getTextContent();
             this.lastName = studentElement.getElementsByTagName("lastname").item(0).getTextContent();
             this.fullName = firstName + " " + lastName;
+
+            Element recentElement = (Element) studentElement.getElementsByTagName("recent").item(0);
+            Node recentChapter = recentElement.getElementsByTagName("chapter").item(0);
+            Node recentPage = recentElement.getElementsByTagName("page").item(0);
+            if (recentChapter.getTextContent().length() > 0) {
+                this.recentChapter = Integer.parseInt(recentChapter.getTextContent());
+            }
+            if (recentPage.getTextContent().length() > 0) {
+                this.recentPage = Integer.parseInt(recentPage.getTextContent());
+            }
 
             //chapters
             Element chaptersElement = (Element) studentElement.getElementsByTagName("chapters").item(0);
@@ -364,16 +486,43 @@ public class StudentModel {
         public class ChapterModel {
             private Node chapter;
             private int progress;
+            private ArrayList<Integer> pageVisisted;
 
             ChapterModel(Node chapter) {
                 this.chapter = chapter;
-                this.progress = Integer.parseInt(chapter.getTextContent());
+                pageVisisted = new ArrayList<>();
+                Element chapterElement = (Element) chapter;
+                this.progress = Integer.parseInt(chapterElement.getElementsByTagName("progress").item(0).getTextContent());
+                NodeList pages = chapterElement.getElementsByTagName("page");
+                for (int i = 0; i < pages.getLength(); i++) {
+                    Node page = pages.item(i);
+                    pageVisisted.add(Integer.parseInt(page.getTextContent()));
+                }
             }
 
-            public void setProgress(int progress) {
+            public ArrayList<Integer> getPageVisisted() {
+                return pageVisisted;
+            }
+
+            /**
+             * Mark a page as page visited
+             * @param pageIndex the index of the page of the current chapter
+             */
+            public void visitPage(int pageIndex) {
+                //if this is our first time visiting the page, update the value to 1 and update the overall progress
+                if (pageVisisted.get(pageIndex) == 0) {
+                    pageVisisted.set(pageIndex, 1);
+                    updateProgress();
+                }
+            }
+
+            private void updateProgress() {
+                int progress = 0;
+                for (int page : pageVisisted) {
+                    progress += page;
+                }
+                progress = (int) (100.0 * ((double)progress / (double)pageVisisted.size()));
                 this.progress = progress;
-                chapter.setTextContent(Integer.toString(progress));
-                UpdateModel.updateXML(new DOMSource(document), filePath);
             }
 
             public int getProgress() {

@@ -2,19 +2,28 @@ package com.magis.app.home;
 
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
+import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
+import com.magis.app.models.StudentModel;
+import com.sun.jndi.dns.DnsUrl;
+import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
+
 import java.util.Random;
 
 
@@ -24,6 +33,7 @@ public class HomePage {
     private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
 
     public static void Page() {
+        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
         Random rand = new Random();
         /*
         Master
@@ -47,27 +57,92 @@ public class HomePage {
         if (code == 0) {
             String codeGreeting = codeGreetings[rand.nextInt(codeGreetings.length)];
             String[] codeGreetingComponents = codeGreeting.split(":");
-            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + Main.studentModel.getStudent(Main.username).getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
+            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
         } else {
-            greeting = greetingComponents[0] + ", " + Main.studentModel.getStudent(Main.username).getFirstName() + greetingComponents[1];
+            greeting = greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1];
         }
 
         Label greetingText = new Label(greeting);
         greetingText.getStyleClass().add("greeting-text");
+        UIComponents.animate(greetingText,0.3,0.2,0,0,-10,0);
         vBox.getChildren().add(greetingText);
+
+
+        //Last Activity
+        if (student.getRecentChapter() > -1) {
+            //master box
+            HBox recentBox = new HBox();
+            recentBox.getStyleClass().add("recent-box");
+            recentBox.setMaxWidth(350);
+            recentBox.setMinHeight(100);
+            recentBox.setAlignment(Pos.CENTER_LEFT);
+
+            recentBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
+            recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+            VBox lastPlace = new VBox();
+            recentBox.setAlignment(Pos.CENTER_LEFT);
+
+            //Title
+            Label lastPlaceText = new Label();
+            lastPlaceText.getStyleClass().add("chapter-title-text");
+            lastPlaceText.setTextAlignment(TextAlignment.LEFT);
+            lastPlaceText.setWrapText(true);
+            lastPlaceText.setText("Pick up where you left off?");
+
+            //Text description
+            TextFlow lastPlaceSubText = new TextFlow();
+            lastPlaceSubText.setPadding(new Insets(25,0,0,0));
+            lastPlaceSubText.getStyleClass().add("chapter-description-text");
+            lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
+
+            Text text1 = new Text("Click here to return to your last activity with ");
+            Text text2, text3, text4, text5;
+            if (Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle() != null) {
+                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
+                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text3 = new Text(" on the page ");
+                text4 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getPage(student.getRecentPage()).getTitle());
+                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text5 = new Text(".");
+            } else {
+                text2 = new Text(Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
+                text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text3 = new Text(" on ");
+                text4 = new Text("page " + Integer.toString((student.getRecentPage() + 1)));
+                text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                text5 = new Text(".");
+            }
+            lastPlaceSubText.getChildren().addAll(text1, text2, text3, text4, text5);
+            lastPlace.getChildren().addAll(lastPlaceText, lastPlaceSubText);
+
+            recentBox.getChildren().addAll(lastPlace);
+
+            vBox.getChildren().add(recentBox);
+            UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
+        }
 
         int numChapters = Main.lessonModel.getChapters().size();
 
+        //Progress, title, and text description
         //for each chapter
         for (int i = 0; i < numChapters; i++) {
             int chapterIndex = i;
             //master box
             HBox chapterBox = new HBox();
             chapterBox.getStyleClass().add("chapter-box");
+            UIComponents.animate(chapterBox, i, 0.3, 0.2, 0,0,-10,0);
 
-            chapterBox.setOnMouseClicked(e -> LessonPage.Page(chapterIndex));
-            chapterBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-            chapterBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+            chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex, false));
+            chapterBox.setOnMouseEntered(e -> {
+                Main.scene.setCursor(Cursor.HAND);
+                scaleBox(chapterBox,1.02);
+            });
+            chapterBox.setOnMouseExited(e -> {
+                Main.scene.setCursor(Cursor.DEFAULT);
+                scaleBox(chapterBox,1);
+            });
 
 
             //Left image
@@ -88,7 +163,7 @@ public class HomePage {
 
             //Progress
             RingProgressIndicator progressIndicator = new RingProgressIndicator();
-            progressIndicator.setProgress(Main.studentModel.getStudent(Main.username).getChapter(i).getProgress());
+            progressIndicator.setProgress(student.getChapter(i).getProgress());
 
             //Title
             Label title = new Label();
@@ -104,7 +179,7 @@ public class HomePage {
 
             //Text description
             Label description = new Label();
-            description.setMinWidth(550);
+            description.setPrefWidth(550);
             description.setWrapText(true);
             description.getStyleClass().add("chapter-description-text");
             description.setTextAlignment(TextAlignment.LEFT);
@@ -132,10 +207,64 @@ public class HomePage {
         borderPane.setCenter(scrollPane);
 
 
-
-        Scene scene = new Scene(borderPane, Main.window.getWidth(), Main.window.getHeight());
+//        Scene oldScene = Main.window.getScene();
+//        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()));
+        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
         scene.getStylesheets().add("com/magis/app/css/style.css");
 
         Main.setScene(scene, "Home");
+    }
+
+    private static void scaleBox(Node node, double end) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.1), node);
+        scaleTransition.setFromX(node.getScaleX());
+        scaleTransition.setToX(end);
+        scaleTransition.setFromY(node.getScaleY());
+        scaleTransition.setToY(end);
+
+        scaleTransition.play();
+    }
+
+    /**
+     * Animate going to the lesson page by fading out the home page content first
+     * @param node the node to fade out
+     * @param chapterIndex the desired chapter to switch scenes to
+     */
+    private static void goToLessonPage(Node node, int chapterIndex, boolean continueWhereLeftOff) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        //move up
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        parallelTransition.play();
+        parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
+    }
+
+
+    public static void goHome(Node node) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        //move up
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        parallelTransition.play();
+
+        parallelTransition.setOnFinished(e -> HomePage.Page());
     }
 }

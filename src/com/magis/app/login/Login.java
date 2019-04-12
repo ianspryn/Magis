@@ -30,7 +30,8 @@ public class Login {
         Rectangle rectangle = new Rectangle();
         rectangle.setHeight(450);
         rectangle.setWidth(450);
-        rectangle.setFill(Color.valueOf("#eee"));
+        rectangle.setFill(Color.valueOf("#ededed"));
+//        rectangle.setFill(Color.valueOf("#ddd")); //more contrast if needed
 
         ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
@@ -76,7 +77,6 @@ public class Login {
         StackPane.setMargin(createAccount, new Insets(0,0,20,0));
 
         content.getChildren().add(boxBackground);
-
         Scene scene = new Scene(content, Main.width, Main.height);
         scene.getStylesheets().add("com/magis/app/css/style.css");
         Main.setScene(scene, "Magis");
@@ -84,14 +84,13 @@ public class Login {
 
     private static void attemptSignIn(String username) {
         Main.studentModel.initializeStudent(username);
-        //if that student exists
         if (username.length() == 0) {
             Alert.showAlert("Error", "Please enter a username.");
-        } else if (Main.studentModel.getStudent(username) != null) {
+        } else if (Main.studentModel.getStudent(username) != null) { //if that student exists
             Main.username = username;
+            Main.isLoggedIn = true;
             HomePage.Page();
-        } else {
-            //Spit out an error and tell the student to try again
+        } else { //Spit out an error and tell the student to try again
             Alert.showAlert("Error", "Username not found. Please try again.");
         }
     }

@@ -3,16 +3,23 @@ package com.magis.app.UI;
 import com.magis.app.Main;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
+import javafx.animation.*;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UIComponents {
 
@@ -81,26 +88,127 @@ public class UIComponents {
         return button;
     }
 
-    public static HBox getHomeBox() {
+    /**
+     * build the home box that goes in the top left corner
+     * @return the HBox object that holds the home box
+     */
+    public static HBox createHomeBox() {
         HBox home = new HBox();
         home.setSpacing(20);
         home.setMinWidth(300);
         home.setPadding(new Insets(15,0,0,20));
 
-        //Home icon
+        //Home icon and text
+        VBox homeVBox = new VBox();
+
         Button homeButton = UIComponents.getHomeButton();
 
+        Label text = new Label("Home");
+        text.getStyleClass().add("home-text");
+
+        homeVBox.getChildren().addAll(homeButton, text);
+
+
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-small.png");
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-white-small-v2.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 
         //listeners
-        home.setOnMouseClicked(e -> HomePage.Page());
         home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
         home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        home.getChildren().addAll(homeButton, magisLogo);
+
+        home.getChildren().addAll(homeVBox, magisLogo);
         return home;
+    }
+
+    /**
+     * Pop up box confirming the user's action of exiting
+     * @return the user's choice, yes/true = exit, no/false = stay
+     */
+    public static boolean confirmClose() {
+        AtomicBoolean result = new AtomicBoolean(false);
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit Test");
+        alert.setContentText("Are you sure you want to exit? All test progress will be lost!");
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.NO);
+        ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        alert.getButtonTypes().setAll(cancelButton, okButton);
+        alert.showAndWait().ifPresent(type -> {
+            if (type.getText().equals("Yes")) result.set(true);
+        });
+        return result.get();
+    }
+
+    /**
+     * Fade in the side panel labels
+     * @param node the current label to fade in
+     * @param index the current index of the label. Used to add incremental delay of fade in
+     * @param delay how long before the animation begins
+     * @param duration how long to animate
+     * @param fromX where the node should start in its animation for the x-axis
+     * @param toX where the node should end in its animation for the x-axis
+     * @param fromY where the node should start in its animation for the y-axis
+     * @param toY where the node should end in its animation for the y-axis
+     */
+    public static void animate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+        //fade in
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        //"hack" to hide all the chapters
+        fadeTransition.play();
+        fadeTransition.pause();
+
+        //move down
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(toX);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(toY);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        //wait a certain delay, then animate in
+        SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)index / 30))), parallelTransition);
+        sequentialTransition.play();
+    }
+
+    /**
+     * Animate a node
+     * @param node the node to animate
+     * @param delay how long before the animation begins
+     * @param duration how long to animate
+     * @param fromX where the node should start in its animation for the x-axis
+     * @param toX where the node should end in its animation for the x-axis
+     * @param fromY where the node should start in its animation for the y-axis
+     * @param toY where the node should end in its animation for the y-axis
+     */
+    public static void animate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+        //fade in
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        //"hack" to initially hide the component
+        fadeTransition.play();
+        fadeTransition.pause();
+
+        //move down
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(toX);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(toY);
+
+        //move down and fade in at the same time
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
+
+        //wait a certain delay, then animate in
+        SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay)), parallelTransition);
+        sequentialTransition.play();
     }
 }
