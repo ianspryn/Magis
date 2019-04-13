@@ -35,6 +35,7 @@ public class HomePage {
     private BorderPane borderPane;
     private ArrayList<HBox> chapterBoxes;
     private HBox recentBox;
+    private HBox settingsBox;
     private VBox masterVbox;
     private VBox vBox;
     private StudentModel.Student student;
@@ -119,7 +120,6 @@ public class HomePage {
             recentBox.getChildren().add(SmartContinue.generate());
 
             vBox.getChildren().add(recentBox);
-//            UIComponents.animate(recentBox,0.3,0.2,0,0,-10,0);
         }
 
         int numChapters = Main.lessonModel.getChapters().size();
@@ -150,6 +150,75 @@ public class HomePage {
         StackPane contentHolder = new StackPane(masterVbox);
         contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
                 scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
+
+
+        /*
+        Settings box
+         */
+        settingsBox = new HBox();
+        settingsBox.getStyleClass().add("recent-box");
+        settingsBox.setMaxWidth(350);
+        settingsBox.setMinHeight(100);
+        settingsBox.setAlignment(Pos.CENTER_LEFT);
+
+        settingsBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
+        settingsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        settingsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+        settingsBox.setOnMouseEntered(e -> {
+            Main.scene.setCursor(Cursor.HAND);
+            scaleBox(settingsBox, 1.02);
+        });
+        settingsBox.setOnMouseExited(e -> {
+            Main.scene.setCursor(Cursor.DEFAULT);
+            scaleBox(settingsBox, 1);
+        });
+
+        //Left image
+        ImageView imageView = new ImageView(Main.lessonModel.getChapter(chapterIndex).getImage());
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(150);
+
+        //Separator
+        Separator separator = new Separator();
+        separator.getStyleClass().add("separator-home");
+        separator.setOrientation(Orientation.VERTICAL);
+        separator.setMaxHeight(200);
+        separator.setPadding(new Insets(0, 35, 0, 15));
+
+        //Progress, title, and text description
+        VBox chapterInfo = new VBox();
+        chapterBox.setAlignment(Pos.CENTER_LEFT);
+
+        //Progress
+        RingProgressIndicator progressIndicator = new RingProgressIndicator();
+        progressIndicator.setProgress(student.getChapter(chapterIndex).getProgress());
+
+        //Title
+        Label title = new Label();
+        title.getStyleClass().add("chapter-title-text");
+        title.setTextAlignment(TextAlignment.RIGHT);
+        title.setWrapText(true);
+        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
+
+        AnchorPane topContent = new AnchorPane();
+        topContent.getChildren().addAll(progressIndicator, title);
+        topContent.setLeftAnchor(progressIndicator, 0.0);
+        topContent.setRightAnchor(title, 5.0);
+
+        //Text description
+        Label description = new Label();
+        description.setPrefWidth(550);
+        description.setWrapText(true);
+        description.getStyleClass().add("chapter-description-text");
+        description.setTextAlignment(TextAlignment.LEFT);
+        description.setText(Main.lessonModel.getChapter(chapterIndex).getDescription());
+
+        chapterInfo.getChildren().addAll(topContent, description);
+
+        chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
+
+        vBox.getChildren().add(recentBox);
 
         scrollPane.setContent(contentHolder);
         borderPane.setCenter(scrollPane);
