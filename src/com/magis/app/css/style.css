@@ -36,11 +36,11 @@
 }
 
 .borderpane-home {
-    -fx-background-color: #ffffff;
+
 }
 
 /* a slightly darker background for screens with lower contrast */
-.borderpane-lesson, .borderpane-test, .chapter-box-scrollpane,
+.borderpane-lesson, .borderpane-settings, .borderpane-test, .chapter-box-scrollpane,
 .lesson-page-content, .quiz-page-content, .navigation-content {
     -fx-background-color: #eee; /* or set both to #ddd */
     -fx-background: #eee;
@@ -173,6 +173,10 @@ The greeting ("Hello, Ian!") on the home page
 
 /* set default fill of svg path */
 .icon-button .button-icon {
+    -fx-fill: #fff;
+}
+/* things like the edit icon etc */
+.material-icons {
     -fx-fill: #fff;
 }
 

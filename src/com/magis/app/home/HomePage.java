@@ -5,8 +5,8 @@ import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.SmartContinue;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.LessonPage;
-import com.magis.app.lesson.LessonPageContent;
 import com.magis.app.models.StudentModel;
+import com.magis.app.settings.SettingsPage;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -15,7 +15,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -31,8 +30,8 @@ import java.util.Random;
 public class HomePage {
 
     private static HomePage homePage = null;
-    private Label greetingText;
-    private BorderPane borderPane;
+    private static BorderPane borderPane;
+    private  static Label greetingLabel;
     private ArrayList<HBox> chapterBoxes;
     private static ArrayList<RingProgressIndicator> ringProgressIndicators;
     private static HBox recentBox;
@@ -61,6 +60,7 @@ public class HomePage {
         }
         recentBox.getChildren().clear();
         recentBox.getChildren().add(SmartContinue.generate());
+        greetingLabel.setText(generateGreetingText());
     }
 
     public void Page() {
@@ -69,8 +69,8 @@ public class HomePage {
     }
 
     private void animate() {
-        UIComponents.animate(vBox, 0.3, 0.2, 0, 0, -10, 0);
-        UIComponents.animate(greetingText, 0.3, 0.2, 0, 0, -10, 0);
+        UIComponents.animate(borderPane, 0.3, 0.2, 0, 0, -10, 0);
+        UIComponents.animate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
         if (student.getRecentChapter() > -1) {
             UIComponents.animate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
         }
@@ -83,7 +83,6 @@ public class HomePage {
     private HomePage() {
         student = Main.studentModel.getStudent(Main.username);
         ringProgressIndicators = new ArrayList<>();
-        Random rand = new Random();
         /*
         Master
          */
@@ -101,24 +100,10 @@ public class HomePage {
         vBox.setMaxWidth(750);
 
         //Greeting
-        String greeting = greetings[rand.nextInt(greetings.length)];
-        String[] greetingComponents = greeting.split(":");
-
-        //add the code greeting 1/3 of the time
-        int code = rand.nextInt(3);
-        if (code == 0) {
-            String codeGreeting = codeGreetings[rand.nextInt(codeGreetings.length)];
-            String[] codeGreetingComponents = codeGreeting.split(":");
-            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
-        } else {
-            greeting = greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1];
-        }
-
-        greetingText = new Label(greeting);
-        greetingText.getStyleClass().add("greeting-text");
-        greetingText.setPadding(new Insets(50,0,0,0));
-//        UIComponents.animate(greetingText,0.3,0.2,0,0,-10,0);
-        masterVbox.getChildren().add(greetingText);
+        greetingLabel = new Label(generateGreetingText());
+        greetingLabel.getStyleClass().add("greeting-text");
+        greetingLabel.setPadding(new Insets(50,0,0,0));
+        masterVbox.getChildren().add(greetingLabel);
 
 
         //Last Activity
@@ -130,7 +115,7 @@ public class HomePage {
             recentBox.setMinHeight(100);
             recentBox.setAlignment(Pos.CENTER_LEFT);
 
-            recentBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
+            recentBox.setOnMouseClicked(e -> goToLesson(borderPane, student.getRecentChapter(), true));
             recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -165,7 +150,7 @@ public class HomePage {
         settingsBox.setMinHeight(50);
         settingsBox.setAlignment(Pos.CENTER_LEFT);
 
-//        settingsBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
+        settingsBox.setOnMouseClicked(e -> goToSettings(borderPane));
         settingsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         settingsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -214,11 +199,29 @@ public class HomePage {
 //        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()))
     }
 
+    private static String generateGreetingText() {
+        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+        Random rand = new Random();
+        String greeting = greetings[rand.nextInt(greetings.length)];
+        String[] greetingComponents = greeting.split(":");
+
+        //add the code greeting 1/3 of the time
+        int code = rand.nextInt(3);
+        if (code == 0) {
+            String codeGreeting = codeGreetings[rand.nextInt(codeGreetings.length)];
+            String[] codeGreetingComponents = codeGreeting.split(":");
+            greeting = codeGreetingComponents[0] + greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1] + codeGreetingComponents[1];
+        } else {
+            greeting = greetingComponents[0] + ", " + student.getFirstName() + greetingComponents[1];
+        }
+        return greeting;
+    }
+
     private void buildChapterBox(int chapterIndex, HBox chapterBox) {
         //master box
         chapterBox.getStyleClass().add("chapter-box");
 
-        chapterBox.setOnMouseClicked(e -> goToLessonPage(vBox, chapterIndex, false));
+        chapterBox.setOnMouseClicked(e -> goToLesson(borderPane, chapterIndex, false));
         chapterBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
             scaleBox(chapterBox, 1.02);
@@ -285,46 +288,50 @@ public class HomePage {
     }
 
     /**
-     * Animate going to the lesson page by fading out the home page content first
-     *
-     * @param node         the node to fade out
+     * Move up and fade out at the same time the home page before going to the lesson page
+     * @param node the desired node to animate first
      * @param chapterIndex the desired chapter to switch scenes to
      */
-    private static void goToLessonPage(Node node, int chapterIndex, boolean continueWhereLeftOff) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-
-        //move up
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
-        translateTransition.setFromY(0);
-        translateTransition.setToY(-10);
-
-        //move up and fade in at the same time
-        ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
-
+    private static void goToLesson(Node node, int chapterIndex, boolean continueWhereLeftOff) {
+        ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
         parallelTransition.play();
         parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
     }
 
+    /**
+     * Move up and fade out at the same time the home page before going to the lesson page
+     * @param node the desired node to animate first
+     */
+    private static void goToSettings(Node node) {
+        ParallelTransition pt = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+        pt.play();
+        pt.setOnFinished(e -> SettingsPage.Page());
+    }
 
+    /**
+     * Move up and fade out at the same time the current page before going to the home page
+     * @param node the desired node to animate first
+     */
     public static void goHome(Node node) {
+        ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+        parallelTransition.play();
+        parallelTransition.setOnFinished(e -> getInstance().Page());
+    }
+
+
+    private static FadeTransition getFadeTransition(Node node) {
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
 
-        //move up
+        return fadeTransition;
+    }
+
+    private static TranslateTransition getTranslateTransition(Node node) {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
         translateTransition.setFromY(0);
-        translateTransition.setToY(-10);
+        translateTransition.setToY(-10); //move up
 
-        //move down and fade in at the same time
-        ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
-
-        parallelTransition.play();
-
-        parallelTransition.setOnFinished(e -> getInstance().Page());
+        return translateTransition;
     }
 }
