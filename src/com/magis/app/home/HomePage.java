@@ -34,7 +34,8 @@ public class HomePage {
     private Label greetingText;
     private BorderPane borderPane;
     private ArrayList<HBox> chapterBoxes;
-    private HBox recentBox;
+    private static ArrayList<RingProgressIndicator> ringProgressIndicators;
+    private static HBox recentBox;
     private HBox settingsBox;
     private VBox masterVbox;
     private VBox vBox;
@@ -44,8 +45,22 @@ public class HomePage {
     private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
 
     public static HomePage getInstance() {
-        if (homePage == null) homePage = new HomePage();
+        if (homePage == null) {
+            homePage = new HomePage();
+        } else {
+            update();
+        }
         return homePage;
+    }
+
+    private static void update() {
+        int numChapters = Main.lessonModel.getNumChapters();
+        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+        for (int i = 0; i < numChapters; i++) {
+            ringProgressIndicators.get(i).setProgress(student.getChapter(i).getProgress());
+        }
+        recentBox.getChildren().clear();
+        recentBox.getChildren().add(SmartContinue.generate());
     }
 
     public void Page() {
@@ -62,10 +77,12 @@ public class HomePage {
         for (int i = 0; i < chapterBoxes.size(); i++) {
             UIComponents.animate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
         }
+        UIComponents.animate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
     }
 
     private HomePage() {
         student = Main.studentModel.getStudent(Main.username);
+        ringProgressIndicators = new ArrayList<>();
         Random rand = new Random();
         /*
         Master
@@ -139,29 +156,16 @@ public class HomePage {
             Platform.runLater(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
         }
 
-        masterVbox.getChildren().add(vBox);
-
-        ScrollPane scrollPane = new ScrollPane();;
-        scrollPane.getStyleClass().add("chapter-box-scrollpane");
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setFitToWidth(true);
-
-        StackPane contentHolder = new StackPane(masterVbox);
-        contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
-                scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
-
-
-        /*
+         /*
         Settings box
          */
         settingsBox = new HBox();
-        settingsBox.getStyleClass().add("recent-box");
-        settingsBox.setMaxWidth(350);
-        settingsBox.setMinHeight(100);
+        settingsBox.getStyleClass().add("settings-box");
+        settingsBox.setMaxWidth(250);
+        settingsBox.setMinHeight(50);
         settingsBox.setAlignment(Pos.CENTER_LEFT);
 
-        settingsBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
+//        settingsBox.setOnMouseClicked(e -> goToLessonPage(vBox, student.getRecentChapter(), true));
         settingsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         settingsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -175,50 +179,32 @@ public class HomePage {
         });
 
         //Left image
-        ImageView imageView = new ImageView(Main.lessonModel.getChapter(chapterIndex).getImage());
+        ImageView imageView = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/settings-black.png");
         imageView.setPreserveRatio(true);
-        imageView.setFitHeight(150);
-
-        //Separator
-        Separator separator = new Separator();
-        separator.getStyleClass().add("separator-home");
-        separator.setOrientation(Orientation.VERTICAL);
-        separator.setMaxHeight(200);
-        separator.setPadding(new Insets(0, 35, 0, 15));
-
-        //Progress, title, and text description
-        VBox chapterInfo = new VBox();
-        chapterBox.setAlignment(Pos.CENTER_LEFT);
-
-        //Progress
-        RingProgressIndicator progressIndicator = new RingProgressIndicator();
-        progressIndicator.setProgress(student.getChapter(chapterIndex).getProgress());
-
-        //Title
-        Label title = new Label();
-        title.getStyleClass().add("chapter-title-text");
-        title.setTextAlignment(TextAlignment.RIGHT);
-        title.setWrapText(true);
-        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
-
-        AnchorPane topContent = new AnchorPane();
-        topContent.getChildren().addAll(progressIndicator, title);
-        topContent.setLeftAnchor(progressIndicator, 0.0);
-        topContent.setRightAnchor(title, 5.0);
+        imageView.setFitHeight(50);
 
         //Text description
-        Label description = new Label();
-        description.setPrefWidth(550);
+        Label description = new Label("Settings");
+        description.setPrefWidth(350);
         description.setWrapText(true);
-        description.getStyleClass().add("chapter-description-text");
-        description.setTextAlignment(TextAlignment.LEFT);
-        description.setText(Main.lessonModel.getChapter(chapterIndex).getDescription());
+        description.getStyleClass().add("settings-text");
+        description.setTextAlignment(TextAlignment.CENTER);
 
-        chapterInfo.getChildren().addAll(topContent, description);
+        settingsBox.getChildren().addAll(imageView, description);
 
-        chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
+        vBox.getChildren().add(settingsBox);
 
-        vBox.getChildren().add(recentBox);
+        masterVbox.getChildren().add(vBox);
+
+        ScrollPane scrollPane = new ScrollPane();;
+        scrollPane.getStyleClass().add("chapter-box-scrollpane");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setFitToWidth(true);
+
+        StackPane contentHolder = new StackPane(masterVbox);
+        contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
+                scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
         scrollPane.setContent(contentHolder);
         borderPane.setCenter(scrollPane);
@@ -261,6 +247,7 @@ public class HomePage {
         //Progress
         RingProgressIndicator progressIndicator = new RingProgressIndicator();
         progressIndicator.setProgress(student.getChapter(chapterIndex).getProgress());
+        ringProgressIndicators.add(progressIndicator);
 
         //Title
         Label title = new Label();

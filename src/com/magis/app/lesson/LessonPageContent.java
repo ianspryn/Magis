@@ -4,6 +4,8 @@ import com.magis.app.Main;
 import com.magis.app.UI.PageContent;
 import com.magis.app.models.LessonModel;
 import com.magis.app.test.quiz.QuizPage;
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -40,12 +42,25 @@ public class LessonPageContent {
     public void initialize() {
         LessonModel.ChapterModel chapter = Main.lessonModel.getChapter(chapterIndex);
         int numPages = chapter.getNumPages();
+        ArrayList<Thread> threads = new ArrayList<>();
 
         for (int i = 0; i < numPages; i++) {
             int pageIndex = i;
             pageContents.add(new PageContent(chapterIndex));
-            new Thread(() -> buildPage(pageIndex)).start();
+            Thread thread = new Thread(() -> buildPage(pageIndex));
+            thread.start();
+            threads.add(thread);
         }
+
+        //wait for the threads to finish, else we *sometimes* get a "Not on FX application thread" error. Only sometimes. And only on one page. Very weird bug.
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         if (hasQuiz > 0) {
             PageContent pageContent = new PageContent(chapterIndex);
