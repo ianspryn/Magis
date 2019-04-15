@@ -1,5 +1,6 @@
 package com.magis.app.login;
 
+import com.jfoenix.controls.JFXButton;
 import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.home.HomePage;
@@ -67,10 +68,10 @@ public class Signup {
 //        namePane.add(lastName,2,1);
 //        namePane.add(lastNameTextField,1,1);
 
-        Button signUp = new Button("Sign Up");
+        JFXButton signUp = new JFXButton("Sign Up");
         signUp.setOnMouseClicked(e -> attemptSignUp(userNameTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText()));
 
-        Button back = new Button("Back");
+        JFXButton back = new JFXButton("Back");
         back.setOnMouseClicked(e -> Login.Page());
 
 

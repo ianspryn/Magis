@@ -94,18 +94,23 @@
     -fx-background:#AD1457; /* Pink 800 */
 }
 
-.button {
+.jfx-button {
+    -jfx-button-type: RAISED;
     -fx-background-color: #D81B60; /* Pink 600 */
-    -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #ffffff
+    -fx-text-fill: #fff;
+    -fx-padding: 10px;
+    -fx-font-size: 15px;
+    -fx-font-family: "Roboto Mono Bold";
 }
 
-.button:hover {
-    -fx-background-color: #E91E63; /* Pink 500 */
+.jfx-rippler {
+    -jfx-rippler-fill: #F48FB1; /* Pink 200 */
 }
 
-.button:pressed {
-    -fx-background-color: #AD1457; /* Pink 800 */
+.create-account-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #D81B60;
+    -jfx-button-type: FLAT;
 }
 
 .start-test-button {
@@ -133,10 +138,17 @@
     -fx-background-color: #ffffff;
 }
 
+.jfx-text-field, .jfx-password-field {
+    -fx-font-weight: BOLD;
+    -fx-prompt-text-fill: #808080;
+    -fx-alignment: top-left;
+    -jfx-focus-color: #D81B60; /* Pink 600 */
+    -jfx-unfocus-color: #F8BBD0; /* Pink 100 */
+    -fx-max-width: 300;
+}
+
 .sign-in-field {
-    -fx-control-inner-background: #f9f9f9;
-    -fx-padding: 1em 1em 1em 1em;
-    -fx-background-radius: 25px;
+    -fx-max-width: 150;
 }
 
 /*

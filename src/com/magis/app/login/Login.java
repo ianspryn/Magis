@@ -1,5 +1,6 @@
 package com.magis.app.login;
 
+import com.jfoenix.controls.*;
 import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.home.HomePage;
@@ -39,15 +40,11 @@ public class Login {
         /*
         Sign-in area
          */
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(25,25,25,25));
 
-        Label userName = new Label("Username:");
-        TextField userNameTextField = new TextField();
-        userNameTextField.getStyleClass().add("sign-in-field");
+
+        JFXTextField userNameTextField = new JFXTextField();
+        userNameTextField.setPromptText("Username");
+        userNameTextField.getStyleClass().addAll("sign-in-field");
 
 
         userNameTextField.setOnKeyPressed(e -> {
@@ -55,20 +52,20 @@ public class Login {
                 attemptSignIn(userNameTextField.getText());
             }
         });
-        gridPane.add(userName, 0, 1);
-        gridPane.add(userNameTextField,1,1);
-        Button signIn = new Button("Sign In");
+
+        JFXButton signIn = new JFXButton("Sign In");
         signIn.setOnMouseClicked(e -> attemptSignIn(userNameTextField.getText()));
 
-        Button createAccount = new Button("Create Account");
+        JFXButton createAccount = new JFXButton("Create Account");
+        createAccount.getStyleClass().add("create-account-button");
         createAccount.setOnMouseClicked(e -> Signup.Page(userNameTextField.getText()));
 
-        boxBackground.getChildren().addAll(rectangle, magisLogo, gridPane, signIn, createAccount);
+        boxBackground.getChildren().addAll(rectangle, magisLogo, userNameTextField, signIn, createAccount);
         StackPane.setAlignment(magisLogo, Pos.TOP_CENTER);
         StackPane.setMargin(magisLogo, new Insets(50,0,0,0));
 
-        StackPane.setAlignment(gridPane, Pos.CENTER);
-        StackPane.setMargin(gridPane, new Insets(0,57,0,0));
+        StackPane.setAlignment(userNameTextField, Pos.CENTER);
+//        StackPane.setMargin(userNameTextField, new Insets(0,57,0,0));
 
         StackPane.setAlignment(signIn, Pos.CENTER);
         StackPane.setMargin(signIn, new Insets(120,0,0,0));
