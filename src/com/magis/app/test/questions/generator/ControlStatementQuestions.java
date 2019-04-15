@@ -60,6 +60,42 @@ public class ControlStatementQuestions {
         question+="\n\nWhat is the final result of \"num\"?";
     }
 
+    public void whileLoopQuestions(){
+        question = "";
+        answers.clear();
+
+        int startingNum = rand.nextInt(10);
+        int num = startingNum;
+        int controller = rand.nextInt(10)+1;
+
+        question += "num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\t"+num+"--;\n}";
+        question += "\n\nHow many times will this while loop iterate?";
+
+        int j = 0;
+        while(num > controller){
+            num--;
+            j++;
+        }
+
+        if(j==0){
+            correctAnswer = "The loop will not run at all";
+            answers.add(correctAnswer);
+            answers.add(""+(j+1)+" times");
+            answers.add(""+(j+2)+" times");
+            answers.add(""+(j+3)+" times");
+        }
+        else{
+            correctAnswer = ""+j+" times";
+            answers.add(correctAnswer);
+            answers.add(""+(j+1)+" times");
+            answers.add(""+(j+2)+" times");
+            answers.add("The loop will not run at all");
+        }
+
+        Collections.shuffle(answers);
+        answers.add("Unknown");
+    }
+
     public ArrayList<String> getAnswers() { return answers; }
 
     public String getQuestion(){
