@@ -2444,6 +2444,338 @@ When overriding a method, be sure to check that the parameter types match exactl
 		</pages>
 	</chapter>
 	<chapter>
+		<title>Input/Output</title>
+		<description>Learn how to use scanners and become comfortable with input/output protocol</description>
+		<pages>
+			<page title="Introduction to Scanners">
+				<text>
+We begin this chapter by discussing the common task of reading and writing files that contain text. Examples are files
+that are created with a simple text editor, such as Windows Notepad, as well as Java source code and HTML files.
+The simplest mechanism for reading text is to use the Scanner class. You already know how to use a Scanner for reading
+console input. To read input from a disk file, the Scanner class relies on another class, File, which describes disk
+files and directories. (The File class has many methods that we do not discuss in this book; for example, methods that
+delete or rename a file.) First construct a File object with the name of the input file, then use the File to construct
+a Scanner object:
+
+File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);
+
+This Scanner object reads text from the file input.txt. You can use the Scanner methods (such as next, nextLine,
+nextInt, and nextDouble) to read data from the input file. To write output to a file, you construct a PrintWriter
+object with the given file name, for example
+
+PrintWriter out = new PrintWriter("output.txt");
+
+If the output file already exists, it is emptied before the new data are written into it.
+If the file doesn’t exist, an empty file is created. You can also construct a PrintWriter
+object from a File object. This is useful if you use a file chooser.
+
+The PrintWriter class is an enhancement of the PrintStream class that you already know—System.out is a PrintStream
+object. You can use the familiar print, println, and printf methods with any PrintWriter object:
+
+out.print(29.95);
+out.println(new Rectangle(5, 10, 15, 25));
+out.printf("%10.2f", price);
+
+When you are done writing to a file, be sure to close the PrintWriter:
+
+out.close();
+
+If your program exits without closing the PrintWriter, the disk file may not contain all of the output. The following
+program puts these concepts to work. It reads all lines of an input file and sends them to the output file, preceded by
+line numbers. If the input file is
+
+Mary had a little lamb
+Whose fleece was white as snow.
+And everywhere that Mary went,
+The lamb was sure to go!
+
+then the program produces the output file
+/* 1 */ Mary had a little lamb
+/* 2 */ Whose fleece was white as snow.
+/* 3 */ And everywhere that Mary went,
+/* 4 */ The lamb was sure to go!
+
+The line numbers are enclosed in /* */ delimiters so that the program can be used for numbering Java source files.
+There is one additional issue that we need to tackle. When the input or output file doesn’t exist, a
+FileNotFoundException can occur. The compiler insists that we tell it what the program should do when that happens.
+(In this regard, the FileNotFoundException is different from the exceptions that you have already encountered. We
+will discuss this difference in detail later on.) In our sample program, we take the easy way out and acknowledge that
+the main method should simply be terminated if the exception occurs. We label the main method like this:
+
+public static void main(String[] args) throws FileNotFoundException
+
+You will see in the following sections how to deal with exceptions in a more professional way.
+				</text>
+			</page>
+			<page title="Example Program">
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/3.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+SELF CHECK
+
+1. What happens when you supply the same name for the input and output files to
+the LineNumberer program?
+
+2. What happens when you supply the name of a nonexistent input file to the LineNumberer program?
+				</text>
+			</page>
+			<page title="Common Errors">
+				<text>
+Common Error: Backslashes in File Names
+
+When you specify a file name as a string literal, and the name contains backslash characters
+(as in a Windows file name), you must supply each backslash twice:
+
+inFile = new File("c:\\homework\\input.dat");
+
+Recall that a single backslash inside quoted strings is an escape character that is combined
+with another character to form a special meaning, such as \n for a newline character. The \\
+combination denotes a single backslash.
+
+When a user supplies a file name to a program, however, the user should not type the
+backslash twice.
+
+Common Error: Constructing a Scanner with a String
+
+When you construct a PrintWriter with a string, it writes to a file:
+
+PrintWriter out = new PrintWriter("output.txt");
+
+However, this does not work for a Scanner. The statement
+
+Scanner in = new Scanner("input.txt"); // ERROR?
+
+does not open a file. Instead, it simply reads through the string: in.nextLine() returns the
+string "input.txt". This feature can be useful.
+
+You must simply remember to use File objects in the Scanner constructor:
+
+Scanner in = new Scanner(new File("input.txt")); //OK
+				</text>
+			</page>
+			<page title="Reading Text Input">
+				<text>
+In the following sections, you will learn how to process complex text input that you often encounter
+in real life situations. In the preceding example program, we read input a line at a time. Sometimes, it is
+useful to read words rather than lines. For example, consider the loop
+
+while (in.hasNext())
+{
+	String input = in.next();
+	System.out.println(input);
+}
+
+With our sample input, this loop would print a word on every line:
+
+Mary
+had
+a
+little
+lamb
+
+In Java, a word is not the same as in English. It is any sequence of characters that is not white space. White space
+includes spaces, tab characters, and the newline characters that separate lines. For example, the following are
+considered words:
+
+snow.
+1729
+C++
+
+(Note the period after snow—it is considered a part of the word because it is no white space.) Here is precisely
+what happens when the next method is executed. Input characters that are white space are consumed—that is, removed
+from the input. However, they do not become part of the word. The first character that is not white space becomes
+the first character of the word. More characters are added until either another white space character occurs, or the
+end of the input has been reached.
+
+Sometimes, you want to read just the words and discard anything that isn’t a letter. You achieve this task by calling
+the useDelimiter method on your Scanner object as follows:
+
+Scanner in = new Scanner(. . .);
+in.useDelimiter("[^A-Za-z]+");
+
+Here, we set the character pattern that separates words to “any sequence of characters other than letters”. (The
+notation used for describing the character pattern is called a regular expression. See Productivity Hint 11.1 on
+page 477 if you are interested in more details.) With this setting, punctuation and numbers are stripped off from
+the words returned by the next method.
+				</text>
+			</page>
+			<page title="Processing Lines">
+				<text>
+When each line of a file is a data record, it is often best to read entire lines with the nextLine method:
+
+String line = in.nextLine();
+
+The nextLine method consumes the next input line (including the newline character) and returns the line without
+the newline character. You can then take the line apart for further processing. Here is a typical example of processing
+lines in a file. A file with population data from the CIA Fact Book site
+(http://www.cia.gov/library/publications/the-worldfactbook/) contains lines such as the following:
+
+China 1330044605
+India 1147995898
+United States 303824646
+. . .
+
+Because some country names have more than one word, it would be tedious to read this file using the next method.
+For example, after reading United, how would your program know that it still needs to read another word before
+reading the population count? Instead, read each input line into a string. Then use the isDigit and isWhitespace
+methods to find out where the name ends and the number starts. Locate the first digit:
+
+int i = 0;
+while (!Character.isDigit(line.charAt(i))) { i++; }
+
+Then extract the country name and population:
+
+String countryName = line.substring(0, i);
+String population = line.substring(i);
+
+However, the country name contains one or more spaces at the end. Use the trim method to remove them:
+
+countryName = countryName.trim();
+
+The trim method returns the string with all white space at the beginning and end removed.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/9.png</image>
+			</page>
+			<page title="Processing Lines">
+				<text>
+There is another problem. The population is stored in a string, not a number. Use
+the Integer.parseInt method to convert it:
+
+int populationValue = Integer.parseInt(population);
+
+You need to be careful when calling the Integer.parseInt method. Its parameter
+value must be a string containing the digits of an integer or a NumberFormatException
+occurs. The parameter value may not contain any additional characters. Not even
+spaces are allowed! In our situation, we happen to know that there won’t be any
+spaces at the beginning of the string, but there might be some at the end. Therefore,
+we use the trim method:
+
+int populationValue = Integer.parseInt(population.trim());
+
+Here you saw how to break a string into parts by looking at individual characters.
+Another approach is occasionally easier. Construct a new Scanner object to read the
+characters from a string:
+
+Scanner lineScanner = new Scanner(line);
+
+Then you can use lineScanner like any other	Scanner	object, reading words and numbers:
+
+String countryName = lineScanner.next();
+while (!lineScanner.hasNextInt())
+{
+	countryName = countryName + " " + lineScanner.next();
+}
+int populationValue = lineScanner.nextInt();
+				</text>
+			</page>
+			<page title="Reading Numbers">
+				<text>
+You have used the nextInt and nextDouble methods of the Scanner class many times,
+but here we will have a look at their behavior in detail. Suppose you call
+double value = in.nextDouble();
+
+The	nextDouble method recognizes floating-point numbers such as 3.14159, -21, or
+(a billion in scientific notation). However, if there is no number in the input,
+then a NoSuchElementException occurs.
+Consider an input containing the characters
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/12.png</image>
+				<text>
+
+White space is consumed and the word 21st is read. However, this word is not a
+properly formatted number. In this situation, an “input mismatch exception”
+occurs.
+
+To avoid exceptions, use the hasNextDouble method to screen the input. For example,
+if (in.hasNextDouble())
+{
+	double value = in.nextDouble();
+	. . .
+}
+
+Similarly, you should call the hasNextInt method before calling nextInt.
+Note that the nextInt and nextDouble methods do not consume the white space
+that follows a number. This can be a problem if you alternate between calling
+nextInt/nextDouble and nextLine. Suppose a file contains student IDs and names in
+this format:
+
+1729
+Harry Morgan
+1730
+Diana Lin
+. . .
+
+Now suppose you read the file with these instructions:
+while (in.hasNextInt())
+{
+	int studentID = in.nextInt();
+	String name = in.nextLine();
+
+	//Process the student ID and name
+}
+
+Initially, the input contains
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/14.png</image>
+				<text>
+
+After the first call to nextInt, the input contains
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/16.png</image>
+				<text>
+The call to nextLine reads an empty string! The remedy is to add a call to
+nextLine after reading the ID:
+
+int studentID = in.nextInt();
+in.nextLine(); // Consume the newline
+String name = in.nextLine();
+				</text>
+			</page>
+			<page title="Reading Characters">
+				<text>
+Sometimes, you want to read a file one character at a time. You achieve this task by
+calling the useDelimiter method on your Scanner object with an empty string:
+Scanner in = new Scanner(. . .);
+in.useDelimiter("");
+
+Now each call to next returns a string consisting of a single character. Here is how
+you can process the characters:
+
+while (in.hasNext())
+{
+	char ch = in.next().charAt(0);
+	// Process ch
+}
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose the input contains the characters 6,995.0. What is the value of number
+and input after these statements?
+
+int number = in.nextInt();
+String input = in.next();
+
+2. Suppose the input contains the characters 6,995.00 12. What is the value of price
+and quantity after these statements?
+
+double price = in.nextDouble();
+int quantity = in.nextInt();
+
+3. Your input file contains a sequence of numbers, but sometimes a value is not
+available and marked as N/A. How can you read the numbers and skip over the
+markers?
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
 		<title>Packages</title>
 		<description>Learn how packages can help you in Java land!</description>
 		<pages>
