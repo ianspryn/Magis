@@ -2006,6 +2006,7 @@ SELF CHECK
 		</pages>
 	</chapter>
 	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
 		<title>Escape Sequences</title>
 		<description>Learn how to properly employ escape sequences.</description>
 		<pages>
@@ -2444,6 +2445,7 @@ When overriding a method, be sure to check that the parameter types match exactl
 		</pages>
 	</chapter>
 	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
 		<title>Input/Output</title>
 		<description>Learn how to use scanners and become comfortable with input/output protocol</description>
 		<pages>
@@ -2776,6 +2778,313 @@ markers?
 		</pages>
 	</chapter>
 	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<title>Exceptions</title>
+		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
+		<pages>
+			<page title="Throwing Exceptions">
+				<text>
+There are two main aspects to exception handling: reporting and recovery. A major
+challenge of error handling is that the point of reporting is usually far apart from
+the point of recovery. For example, the get method of the ArrayList class may detect
+that a nonexistent element is being accessed, but it does not have enough information
+to decide what to do about this failure. Should the user be asked to try a different
+operation? Should the program be aborted after saving the user’s work? These decisions
+must be made in a different part of the program.
+
+In Java, exception handling provides a flexible mechanism for passing control
+from the point of error reporting to a competent recovery handler. In the remainder
+of this chapter, we will look into the details of this mechanism.
+
+When you detect an error condition, your job is really easy. You just throw an
+appropriate exception object, and you are done. For example, suppose someone
+tries to withdraw too much money from a bank account.
+
+public class BankAccount
+{
+	. . .
+	public void withdraw(double amount)
+	{
+		if (amount > balance)
+		// Now what?
+		. . .
+	}
+}
+
+First look for an appropriate exception class. The Java library provides many classes
+to signal all sorts of exceptional conditions. Figure 1 on the next page shows the
+most useful ones.
+
+Look around for an exception type that might describe your situation. How about the
+IllegalStateException? Is the bank account in an illegal state for the withdraw operation?
+Not really—some withdraw operations could succeed. Is the parameter value illegal?
+Indeed it is. It is just too large. Therefore, let’s throw an IllegalArgumentException.
+(The term argument is an alternative term for a parameter value.)
+
+public class BankAccount
+{
+	public void withdraw(double amount)
+	{
+		if (amount > balance)
+		{
+			throw new IllegalArgumentException("Amount exceeds balance");
+		}
+		balance = balance - amount;
+	}
+	. . .
+}
+
+The statement
+
+throw new IllegalArgumentException("Amount exceeds balance");
+
+constructs an object of type IllegalArgumentException and throws that object.
+
+When you throw an exception, execution does not continue with the next statement but
+with an exception handler. For now, we won’t worry about the handling of the exception.
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/3.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. How should you modify the deposit method to ensure that the balance is never
+negative?
+
+2. Suppose you construct a new bank account object with a zero balance and then
+call withdraw(10). What is the value of balance afterwards?
+				</text>
+			</page>
+			<page title="Checked and Unchecked Exceptions">
+				<text>
+Java exceptions fall into two categories, called checked and unchecked exceptions.
+When you call a method that throws a checked exception, the compiler checks that
+you don’t ignore it. You must tell the compiler what you are going to do about the
+exception if it is ever thrown. For example, all subclasses of IOException are checked
+exceptions. On the other hand, the compiler does not require you to keep track of
+unchecked exceptions. Exceptions such as NumberFormatException, IllegalArgumentException,
+and NullPointerException are unchecked exceptions. More generally, all
+exceptions that belong to subclasses of RuntimeException are unchecked, and all other
+subclasses of the class Exception are checked. (In Figure 1, the checked exceptions
+are shaded in a darker color.) There is a second category of internal errors that are
+reported by throwing objects of type Error. One example is the OutOfMemoryError,
+which is thrown when all available memory has been used up. These are fatal errors
+that happen rarely and are beyond your control. They too are unchecked.
+
+Why have two kinds of exceptions? A checked exception describes a problem
+that is likely to occur at times, no matter how careful you are. The unchecked
+exceptions, on the other hand, are your fault. For example, an unexpected end of
+file can be caused by forces beyond your control, such as a disk error or a broken
+network connection. But you are to blame for a NullPointerException, because your
+code was wrong when it tried to use a null reference.
+The compiler doesn’t check whether you handle a NullPointerException, because
+you should test your references for null before using them rather than install a
+handler for that exception. The compiler does insist that your program be able to
+handle error conditions that you cannot prevent.
+
+Actually, those categories aren’t perfect. For example, the Scanner.nextInt method
+throws an unchecked InputMismatchException if the input does not contain a valid
+integer. A checked exception would have been more appropriate because the programmer
+cannot prevent users from entering incorrect input. (The designers of the
+Scanner class made this choice to make it easy to use for beginning programmers.)
+As you can see from Figure 1, the majority of checked exceptions occur when
+you deal with input and output. That is a fertile ground for external failures beyond
+your control—a file might have been corrupted or removed, a network connection
+might be overloaded, a server might have crashed, and so on. Therefore, you will
+need to deal with checked exceptions principally when programming with files and
+streams.
+
+You have seen how to use the Scanner class to read data from a file, by passing a
+File object to the Scanner constructor:
+
+String filename = . . .;
+File inFile = new File(filename);
+Scanner in = new Scanner(inFile);
+
+However, the Scanner constructor can throw a FileNotFoundException. The
+FileNotFoundException is a checked exception, so you need to tell the compiler what
+you are going to do about it. You have two choices. You can handle the exception,
+using the techniques that you will see in Section 11.5. Or you can simply tell the
+compiler that you are aware of this exception and that you want your method to be
+terminated when it occurs. The method that reads input does not usually know
+what to do about an unexpected error, so that is usually the better option.
+
+To declare that a method should be terminated when a checked exception occurs
+within it, tag the method with a throws clause.
+
+public void read(String filename) throws FileNotFoundException
+{
+File inFile = new File(filename);
+Scanner in = new Scanner(inFile);
+. . .
+}
+
+The throws clause in turn signals the caller of your method that it may encounter a
+FileNotFoundException. Then the caller needs to make the same decision—handle the
+exception, or tell its caller that the exception may be thrown. If your method
+can throw exceptions of different types, you separate the exception class names by commas:
+
+public void read(String filename)
+throws FileNotFoundException, NoSuchElementException
+
+Always keep in mind that exception classes form an inheritance hierarchy. For
+example, FileNotFoundException is a subclass of IOException. Thus, if a method can
+throw both an IOException and a FileNotFoundException, you only tag it as throws
+IOException.
+
+It sounds somehow irresponsible not to handle an exception when you know
+that it happened. Actually, though, it is usually best not to catch an exception if you
+don’t know how to remedy the situation. After all, what can you do in a low-level
+read method? Can you tell the user? How? By sending a message to System.out? You
+don’t know whether this method is called in a graphical program or an embedded
+system (such as a vending machine), where the user may never see System.out. And
+even if your users can see your error message, how do you know that they can
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/6.png</image>
+				<text>
+
+understand English? Your class may be used to build an application for users in
+another country. If you can’t tell the user, can you patch up the data and keep
+going? How? If you set a variable to zero, null, or an empty string, that may just
+cause the program to break later, with much greater mystery.
+Of course, some methods in the program know how to communicate with the
+user or take other remedial action. By allowing the exception to reach those methods,
+you make it possible for the exception to be processed by a competent handler.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose a method calls the Scanner constructor, which can throw a FileNotFoundException, and the nextInt method of the Scanner class, which can cause a
+NoSuchElementException or InputMismatchException. Which exceptions should be
+included in the throws clause?
+
+2. Why is a NullPointerException not a checked exception?
+				</text>
+			</page>
+			<page title="Catching Exceptions">
+				<text>
+Every exception should be handled somewhere in your program. If an exception
+has no handler, an error message is printed, and your program terminates. That may
+be fine for a student program. But you would not want a professionally written
+program to die just because some method detected an unexpected error. Therefore,
+you should install exception handlers for all exceptions that your program might
+throw.
+You install an exception handler with the try/catch statement. Each try block
+contains one or more statements that may cause an exception. Each catch clause
+contains the handler for an exception type. Here is an example:
+
+try
+{
+	String filename = . . .;
+	File inFile = new File(filename);
+	Scanner in = new Scanner(inFile);
+	String input = in.next();
+	int value = Integer.parseInt(input);
+	. . .
+}
+catch (IOException exception)
+{
+	exception.printStackTrace();
+}
+catch (NumberFormatException exception)
+{
+	System.out.println("Input was not a number");
+}
+
+Three exceptions may be thrown in this try block: The Scanner constructor can
+throw a FileNotFoundException, Scanner.next can throw a NoSuchElementException, and
+Integer.parseInt can throw a NumberFormatException.
+If any of these exceptions is actually thrown, then the rest of the instructions in
+the try block are skipped. Here is what happens for the various exception types:
+	• If a FileNotFoundException is thrown, then the catch clause for the IOException is
+	executed. (Recall that FileNotFoundException is a subclass of IOException.)
+	• If a NumberFormatException occurs, then the second catch clause is executed.
+	• A NoSuchElementException is not caught by any of the catch clauses. The
+	exception remains thrown until it is caught by another try block or the main
+	method terminates.
+When the catch (IOException exception) block is executed, then some method in the
+try block has failed with an IOException. The variable exception contains a reference
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/10.png</image>
+				<text>
+to the exception object that was thrown. The catch clause can analyze that object to
+find out more details about the failure. For example, you can get a printout of the
+chain of method calls that lead to the exception, by calling
+exception.printStackTrace()
+
+In these sample catch clauses, we merely inform the user of the source of the problem.
+A better way of dealing with the exception would be to give the user another
+chance to provide a correct input.
+
+It is important to remember that you should place catch clauses only in methods
+in which you can competently handle the particular exception type.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose the file with the given file name exists and has no contents. Trace the
+flow of execution in the try block in this section.
+
+2. Is there a difference between catching checked and unchecked exceptions?
+				</text>
+			</page>
+			<page title="Designing Exception Types">
+				<text>
+Sometimes none of the standard exception types describe your particular error
+condition well enough. In that case, you can design your own exception class. Consider
+a bank account. Let’s report an InsufficientFundsException when an attempt is made
+to withdraw an amount from a bank account that exceeds the current balance.
+
+if (amount > balance)
+{
+	throw new InsufficientFundsException(
+	"withdrawal of " + amount + " exceeds balance of " + balance);
+}
+
+Now you need to provide the InsufficientFundsException class. Should it be a
+checked or an unchecked exception? Is it the fault of some external event, or is it the
+fault of the programmer? We take the position that the programmer could have prevented
+the exceptional condition—after all, it would have been an easy matter to
+check whether amount <= account.getBalance() before calling the withdraw method.
+Therefore, the exception should be an unchecked exception and extend the RuntimeException
+class or one of its subclasses.
+
+It is a good idea to extend an appropriate class in the exception hierarchy. For
+example, we can consider an InsufficientFundsException a special case of an
+IllegalArgumentException. This enables other programmers to catch the exception as an
+IllegalArgumentException if they are not interested in the exact nature of the problem.
+It is customary to provide two constructors for an exception class: a constructor
+with no parameters and a constructor that accepts a message string describing the
+reason for the exception. Here is the declaration of the exception class.
+
+public class InsufficientFundsException extends IllegalArgumentException
+{
+	public InsufficientFundsException() {}
+	public InsufficientFundsException(String message)
+	{
+		super(message);
+	}
+}
+
+When the exception is caught, its message string can be retrieved using the getMessage
+method of the Throwable class.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. What is the purpose of the call super(message) in the second InsufficientFundsException constructor?
+
+2. Suppose you read bank account data from a file. Contrary to your expectation,
+the next input value is not of type double. You decide to implement a BadDataException.
+Which exception class should you extend?
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
 		<title>Packages</title>
 		<description>Learn how packages can help you in Java land!</description>
 		<pages>
