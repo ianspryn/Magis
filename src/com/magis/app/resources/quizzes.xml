@@ -19,21 +19,21 @@ STRUCTURE:
 <quizzes>
         <chapter id = "Primitive Types">
                 <questions>
-                        <question>
+                        <question level = "1">
                                 <statement>How is 0 different from "0"?</statement>
                                 <answer id = "correct"> "0" is a string, 0 is an int</answer>
                                 <answer>"0" is an int, 0 is a string</answer>
                                 <answer>There is no difference</answer>
                                 <answer>"0" is a double, 0 is a int</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Which statement returns the maximum integer value?</statement>
                                 <answer id = "correct">Integer.MAX_VALUE</answer>
                                 <answer>Integer.return.max</answer>
                                 <answer>Max.value.Integer</answer>
                                 <answer>Integer.MAXIMUM</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What will
                                         int n = 1000000;
                                         system.out.println(n*n);
@@ -43,7 +43,7 @@ STRUCTURE:
                                 <answer>An incorrect positive number because of overflow</answer>
                                 <answer>Because the integer value overflows, it will return to 0</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>If
                                         double x = 4.35;
                                         double x = x*100;
@@ -53,34 +53,34 @@ STRUCTURE:
                                 <answer>No, it will be exactly 435.0 because it is a double</answer>
                                 <answer id = "correct">No, because doubles have a slight roundoff error.</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is roundoff error?</statement>
                                 <answer>When a integer tries to calculate a round surface and cannot get decimals</answer>
                                 <answer id = "correct">When a value cannot be converted exactly, so the computer rounds it to the nearest value</answer>
                                 <answer>When an integer cannot represent all decimal values</answer>
                                 <answer>4th answer</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Which input will correctly compute the length of string "Hello"</statement>
                                 <answer>Length("Hello");</answer>
                                 <answer>Length.get("Hello");</answer>
                                 <answer>"Hello".get.Length();</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the length of string "" ?</statement>
                                 <answer id = "correct">0</answer>
                                 <answer>1</answer>
                                 <answer>2</answer>
                                 <answer>3</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>A boolean can be two values, what are they?</statement>
                                 <answer>0 or 1</answer>
                                 <answer id = "correct">true or false</answer>
                                 <answer>-1 or 1</answer>
                                 <answer>a or b</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement> double amount = 0;
                                         bool lessThanThousand = amount > 1000;
                                         system.out.println(lessThanThousand);
@@ -91,7 +91,7 @@ STRUCTURE:
                                 <answer id = "correct">false</answer>
                                 <answer>1</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>
                                         What is the problem with this code?
                                         double x = 100.0;
@@ -101,7 +101,7 @@ STRUCTURE:
                                 <answer>double should be capitalized</answer>
                                 <answer>int should be Integer</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>
                                         What does an object's 'type' tell you in java?
                                 </statement>
@@ -110,56 +110,56 @@ STRUCTURE:
                                 <answer>The position of an objects decimal point</answer>
                                 <answer>Nothing at all</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What does DOUBLE stand for?</statement>
                                 <answer>Double the storage space of integers</answer>
                                 <answer id = "correct">Double precision floating point number</answer>
                                 <answer>Integer with two values attached to it</answer>
                                 <answer>Two types, can be int or String</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Which of the following is NOT a primitive type?</statement>
                                 <answer>int</answer>
                                 <answer>short</answer>
                                 <answer id = "correct">tall</answer>
                                 <answer>byte</answer>
                         </question>
-                        <question>
-                                <statement>What warning will you recieve when integer overflow occurs?</statement>
+                        <question level = "1">
+                                <statement>What warning will you receive when integer overflow occurs?</statement>
                                 <answer>Int_max_value warning</answer>
                                 <answer>Display_overflow error</answer>
                                 <answer>truncation_deletion_error</answer>
                                 <answer id = "correct">There is no warning</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the simplest remedy to overflowing an int?</statement>
                                 <answer>use two ints</answer>
                                 <answer id = "correct">change the int to a long</answer>
                                 <answer>use smaller numbers</answer>
                                 <answer>Just let it overflow and figure out how to use that new value.</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>A string literal is </statement>
                                 <answer id = "correct">enclosed in a double quotation marks</answer>
                                 <answer>enclosed in brackets</answer>
                                 <answer>enclosed in parentheses</answer>
                                 <answer>not a real thing</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Which of the following is a string of length 5?</statement>
                                 <answer>"A dog!"</answer>
                                 <answer>"An dog!"</answer>
                                 <answer>" aaaaa "</answer>
                                 <answer id = "correct">" !!! "</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>To what class do strings belong?</statement>
                                 <answer>Char</answer>
                                 <answer>Writing</answer>
                                 <answer id = "correct">String</answer>
                                 <answer>No class</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>If you wanted to pick a primitive type to count the number of people in a class, which one would work best?
                                 </statement>
                                 <answer>Double</answer>
@@ -167,7 +167,7 @@ STRUCTURE:
                                 <answer>Char</answer>
                                 <answer id = "correct">Integer</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>If you wanted to pick a primitive type to keep track of the balance of a bank account, which one would work best?</statement>
                                 <answer id = "correct">Double</answer>
                                 <answer>String</answer>
@@ -178,7 +178,7 @@ STRUCTURE:
         </chapter>
         <chapter id = "Operators">
                 <questions>
-                        <question>
+                        <question level = "2">
                                 <statement>If you want to change the value of
                                         int width = 10;
                                         to 20 what do you type?</statement>
@@ -187,7 +187,7 @@ STRUCTURE:
                                 <answer>width = 10;</answer>
                                 <answer>int width = new int width(20);</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What is wrong with the following code?
                                         int height;
                                         width = height;</statement>
@@ -196,7 +196,7 @@ STRUCTURE:
                                 <answer>height isn't spelled right</answer>
                                 <answer>Nothing</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What is wrong with this code?
                                         int width = 20;
                                         width = width + 10;</statement>
@@ -205,7 +205,7 @@ STRUCTURE:
                                 <answer>Need more ;</answer>
                                 <answer id ="correct">Nothing</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What will be the value of i after the following code is run?
                                         int i = 2;
                                         i++;
@@ -215,7 +215,7 @@ STRUCTURE:
                                 <answer id= "correct">3</answer>
                                 <answer>1</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What will be the value of i after the following code is run?
                                         int i = 2;
                                         i--;</statement>
@@ -224,7 +224,7 @@ STRUCTURE:
                                 <answer>3</answer>
                                 <answer id = "correct">1</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What will be the value of sum after the following code is run?
                                         int a = 11;
                                         int b = 3;
@@ -235,7 +235,7 @@ STRUCTURE:
                                 <answer id = "correct">3</answer>
                                 <answer>2</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What will be the value of sum after the following code is run?
                                         double a = 11;
                                         int b = 3;
@@ -245,7 +245,7 @@ STRUCTURE:
                                 <answer id = "correct">3</answer>
                                 <answer>2</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What will be the value of sum after the following code is run?
                                         double a = 11;
                                         int b = 3;
@@ -255,21 +255,21 @@ STRUCTURE:
                                 <answer>3</answer>
                                 <answer id = "correct">2</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>How do you compute x^n?</statement>
                                 <answer>Math.sqrt(x);</answer>
                                 <answer>Math.exp(x,n);</answer>
                                 <answer>Math.sqr(x);</answer>
                                 <answer id = "correct">Math.pow(x,n);</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>How do you take the Square root of a number?</statement>
                                 <answer id = "correct">Math.sqrt(x);</answer>
                                 <answer>Math.exp(x,n);</answer>
                                 <answer>Math.sqr(x);</answer>
                                 <answer>Math.pow(x,n);</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Which one correctly converts the value of a double into an int?</statement>
                                 <answer>double balance = 100.5;
                                         int dollars = balance.cast.int;                        </answer>
@@ -284,35 +284,35 @@ STRUCTURE:
         </chapter>
         <chapter id = "Object and Object Comparison">
                 <questions>
-                        <question>
+                        <question level = "1">
                                 <statement>An object is</statement>
                                 <answer id = "correct">a value who you can manipulate by calling one of its methods.</answer>
                                 <answer>a sequence of instructions that can access internal data.</answer>
                                 <answer>another name for primitive types.</answer>
                                 <answer>Not real</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the type of an object called?</statement>
                                 <answer>object group</answer>
                                 <answer id = "correct">class</answer>
                                 <answer>Method</answer>
                                 <answer>object band</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Length and ToUpperCase in the string object are examples of what?</statement>
                                 <answer>object group</answer>
                                 <answer>class</answer>
                                 <answer id = "correct">Method</answer>
                                 <answer>object band</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>If the name of a method is 'overloaded' what does that mean?</statement>
                                 <answer id = "correct">Multiple methods with the same name</answer>
                                 <answer>The method requires too much processing power</answer>
                                 <answer>The name is too long</answer>
                                 <answer>The name cannot be used</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What will
                                         system.out.length();
                                         do?                    </statement>
@@ -321,7 +321,7 @@ STRUCTURE:
                                 <answer>Nothing</answer>
                                 <answer>Be ignored</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement> What will goodmeal be equal to after this code?
 String meal = "lunch";
 String goodMeal = meal.toUpperCase();
@@ -331,7 +331,7 @@ String goodMeal = meal.toUpperCase();
                                 <answer id = "correct">LUNCH</answer>
                                 <answer>This code results in an error</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>How do you create a new Rectangle object with it's top left corner at (3,5) and with
                                         a width of 5 and height of 10?                        </statement>
                                 <answer>Rectangle t = Rectangle.create(3,5,5,10);</answer>
@@ -339,7 +339,7 @@ String goodMeal = meal.toUpperCase();
                                 <answer>Rectangle t = new Rectangle.topLeft(3,5).width(5).height(10);</answer>
                                 <answer id = "correct">Rectangle t = new Rectangle(3,5,5,10)</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>In the code,
                                         Rectangle box = new Rectangle(5, 10, 20, 30);
                                         5, 10,20 and 30 are examples of what?</statement>
@@ -348,7 +348,7 @@ String goodMeal = meal.toUpperCase();
                                 <answer>Methods</answer>
                                 <answer>Objects</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What would the width of this rectangle be?
                                         Rectangle t = new Rectangle();                    </statement>
                                 <answer>Default: 1</answer>
@@ -356,21 +356,21 @@ String goodMeal = meal.toUpperCase();
                                 <answer>The width would be uninitialized</answer>
                                 <answer>5</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is a mutator method?</statement>
                                 <answer>Any method that changes variables</answer>
                                 <answer>A method that modifies the name of the object</answer>
                                 <answer id = "correct">A method that modifies the implicit parameter object</answer>
                                 <answer>Not a real thing</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is a method?</statement>
                                 <answer>a value who you can manipulate by calling one of its methods.</answer>
                                 <answer id = "correct">a sequence of instructions that can access internal data.</answer>
                                 <answer>another name for primitive types.</answer>
                                 <answer>Not real</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the object in the following line of code?
 System.out.println("Words");</statement>
                                 <answer>Words</answer>
@@ -378,21 +378,21 @@ System.out.println("Words");</statement>
                                 <answer id = "correct">System.out</answer>
                                 <answer>println</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What specifies the methods that can be applied to it's objects?</statement>
                                 <answer>object group</answer>
                                 <answer id = "correct">class</answer>
                                 <answer>Method</answer>
                                 <answer>object band</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the process of creating a new object called?</statement>
                                 <answer>setter</answer>
                                 <answer>getter</answer>
                                 <answer id = "correct">Construction</answer>
                                 <answer>mutator</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the term for a method that accesses an object
 and returns some information about it, without changing the object</statement>
                                 <answer>mutator</answer>
@@ -400,28 +400,28 @@ and returns some information about it, without changing the object</statement>
                                 <answer>setter</answer>
                                 <answer id = "correct">accessor</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is stored in a variable whose type is a class?</statement>
                                 <answer>The object</answer>
                                 <answer id = "correct">The object's memory location</answer>
                                 <answer>A random instance variable</answer>
                                 <answer>A string created by the classes toString method</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is stored in a variable whose type is a number?</statement>
                                 <answer id = "correct">The object</answer>
                                 <answer>The object's memory location</answer>
                                 <answer>A random instance variable</answer>
                                 <answer>A string created by the classes toString method</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>When you copy a number variable into a new number variable, the copy is a </statement>
                                 <answer id = "correct">Independent value</answer>
                                 <answer>Reference to the same object</answer>
                                 <answer>Slightly modified version of the original</answer>
                                 <answer>Replacement for the original</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>When you copy a object variable into a new object variable, the copy is a </statement>
                                 <answer>Independent value</answer>
                                 <answer id = "correct">Reference to the same object</answer>
@@ -432,21 +432,21 @@ and returns some information about it, without changing the object</statement>
         </chapter>
         <chapter id = "Comments">
                 <questions>
-                        <question>
+                        <question level = "1">
                                 <statement>Why do we include comments in code?</statement>
                                 <answer>To help the processor read the code</answer>
                                 <answer>To import new java libraries</answer>
                                 <answer>To waste time and space</answer>
                                 <answer id = "correct">To explain in more detail what the code does, and improve readability for humans.</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What should you use to comment a single line?</statement>
                                 <answer id = "correct">//</answer>
                                 <answer>/* */</answer>
                                 <answer>// /*</answer>
                                 <answer>/** */</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Is the following code properly commented
                                         /*This code adds 1 to
                                         the value of the integer dogs */                </statement>
@@ -455,7 +455,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>No, /* and */ should be \* and *\</answer>
                                 <answer id = "correct">Yes</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Is the following code properly commented
                                         \*This code adds 1 to
                                         the value of the integer dogs *\                </statement>
@@ -464,7 +464,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>No, \* and *\ should be /* and */</answer>
                                 <answer id = "correct">Yes</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Is the following code properly commented
                                         \*This code adds 1 to
                                         the value of the integer dogs *\                </statement>
@@ -473,7 +473,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>No, \* and *\ should be /* and */</answer>
                                 <answer id = "correct">Yes</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Is the following code properly commented
                                         \\This code adds 1 to
                                         the value of the integer cats\\                </statement>
@@ -482,21 +482,21 @@ and returns some information about it, without changing the object</statement>
                                 <answer id = "correct">No, \\ should be // and needs to be at the beginning of each line</answer>
                                 <answer>Yes</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>@param and @return are both parts of what comment based utility?</statement>
                                 <answer>Good practice commenting</answer>
                                 <answer>javaComments</answer>
                                 <answer>javaTalk</answer>
                                 <answer id = "correct">javadoc</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What symbols the end of a documentation comment?</statement>
                                 <answer>/*</answer>
                                 <answer id = "correct">*/</answer>
                                 <answer>**/</answer>
                                 <answer>/**</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What symbols the start of a documentation </statement>
                                 <answer>/*</answer>
                                 <answer>*/</answer>
@@ -510,14 +510,14 @@ and returns some information about it, without changing the object</statement>
                                 <answer>**/</answer>
                                 <answer>/**</answer>
                         </question>
-                        <question>
+                        <question level="1">
                                 <statement>When do you exclude the @param tag in javadoc commentating?</statement>
                                 <answer>Never you always need it</answer>
                                 <answer>When the method isn't complicated</answer>
                                 <answer id = "correct">If there are no parameter variables</answer>
                                 <answer>Methods whose return type is void</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>When do you exclude the @return tag in javadoc commentating?</statement>
                                 <answer>Never you always need it</answer>
                                 <answer>When the method isn't complicated</answer>
@@ -528,14 +528,14 @@ and returns some information about it, without changing the object</statement>
         </chapter>
         <chapter id = "Variables">
                 <questions>
-                        <question>
+                        <question level="1">
                                 <statement>What do variables do?</statement>
                                 <answer>change in value depending on how often they are used</answer>
                                 <answer id = "correct">store a value for later use</answer>
                                 <answer>change the value of a method</answer>
                                 <answer>Nothing</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is wrong with this code?
                                         String dog = 15;</statement>
                                 <answer>String should be lowercase;</answer>
@@ -543,7 +543,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer id = "correct">15 is a integer not a string</answer>
                                 <answer>Nothing</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What is wrong with this code?
                                         PrintStream printer = System.out;</statement>
                                 <answer>PrintStream is not a variable type</answer>
@@ -551,63 +551,63 @@ and returns some information about it, without changing the object</statement>
                                 <answer>PrintStream is not a variable type and System.out is not a valid value</answer>
                                 <answer id = "correct">Nothing</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What checks for type mismatches?</statement>
                                 <answer id = "correct">compiler</answer>
                                 <answer>processor</answer>
                                 <answer>pre-processor</answer>
                                 <answer>assembler</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What is the term for the name of a variable, method, or class?</statement>
                                 <answer>name</answer>
                                 <answer id = "correct">identifier</answer>
                                 <answer>identity</answer>
                                 <answer>Variable ID</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What should variable names begin with?</statement>
                                 <answer>A number</answer>
                                 <answer>An uppercase letter</answer>
                                 <answer id = "correct">A lowercase letter</answer>
                                 <answer>It doesn't matter, do what you want.</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What should class names begin with?</statement>
                                 <answer>A number</answer>
                                 <answer id = "correct">An uppercase letter</answer>
                                 <answer>A lowercase letter</answer>
                                 <answer>It doesn't matter, do what you want.</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What symbol will not cause errors, but should be avoided in variable and class names?</statement>
                                 <answer>%</answer>
                                 <answer>?</answer>
                                 <answer>_</answer>
                                 <answer id = "correct">$</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Why are single letter variable names usually frowned upon in coding?</statement>
                                 <answer id ="correct">Can make it difficult reading variable names and knowing what they are for</answer>
                                 <answer>Only gives you 26 variables</answer>
                                 <answer>We want to be different from algebra</answer>
                                 <answer>It's not frowned upon</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>Which of these is the proper way to make a new object of type counter?</statement>
                                 <answer>Counter Bank = 7;</answer>
                                 <answer id = "correct">Counter Bank = new Counter();</answer>
                                 <answer>Counter Bank = new Counter;</answer>
                                 <answer>Counter Bank = Counter();</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Which of these is not part of an instance variable declaration?</statement>
                                 <answer>An access specifier</answer>
                                 <answer>The type of the instance variable</answer>
                                 <answer id = "correct">The class it belongs to</answer>
                                 <answer>The name of the variable</answer>
                         </question>
-                        <question>
+                        <question level = "2">
                                 <statement>What will this code do when called on an object?
                                         public void count(){
                                         value = value + 1;
@@ -617,42 +617,42 @@ and returns some information about it, without changing the object</statement>
                                 <answer>Create a new variable called value and add 1 to it.</answer>
                                 <answer id = "correct">increment the instance variable value</answer>
                         </question>
-                        <question>
+                        <question level ="1">
                                 <statement>What does a return statement do?</statement>
                                 <answer id = "correct">Terminates method call and returns a result to the method's caller</answer>
                                 <answer>Prints out a value</answer>
                                 <answer>Returns a variable to it's uninitialized state, and then launches a new method</answer>
                                 <answer>Launches a method and returns all objects back to default values</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Where is a local variable declared?</statement>
                                 <answer>At the start of an object</answer>
                                 <answer id = "correct">In the body of a method</answer>
                                 <answer>Within the method header</answer>
                                 <answer>At the end of a local variable</answer>
                         </question>
-                        <question>
+                        <question leve = "1">
                                 <statement>Where is a parameter variable declared?</statement>
                                 <answer>At the start of an object</answer>
                                 <answer>In the body of a method</answer>
                                 <answer id = "correct">Within the method header</answer>
                                 <answer>At the end of a local variable</answer>
                         </question>
-                        <question>
+                        <question level= "1">
                                 <statement>What is an implicit parameter?</statement>
                                 <answer>A parameter enclosed in parenthesis when a method is invoked</answer>
                                 <answer id = "correct">The object on which a method is invoked</answer>
                                 <answer>A method included in all objects</answer>
                                 <answer>A method included in all classes</answer>
                         </question>
-                        <question>
+                        <question level ="1">
                                 <statement>What is an explicit parameter?</statement>
                                 <answer id = "correct">A parameter enclosed in parenthesis when a method is invoked</answer>
                                 <answer>The object on which a method is invoked</answer>
                                 <answer>A method included in all objects</answer>
                                 <answer>A method included in all classes</answer>
                         </question>
-                        <question>
+                        <question level= "1">
                                 <statement>In the following code, what is the explicit parameter?
                                         public void deposit(double amount){
                                         balance = balance + amount;
@@ -666,56 +666,56 @@ and returns some information about it, without changing the object</statement>
         </chapter>
         <chapter id = "Methods">
                 <questions>
-                        <question>
+                        <question level= "1">
                                 <statement>The access specifier of a method controls what?</statement>
                                 <answer>The return type of the method</answer>
                                 <answer>The maximum memory the method can use</answer>
                                 <answer>The number of times a method can be accessed</answer>
                                 <answer id = "correct">Which other method can call this method</answer>
                         </question>
-                        <question>
+                        <question level= "1">
                                 <statement>What is a constructor</statement>
                                 <answer id ="correct">A method to initialize the instance variables of an object</answer>
                                 <answer>A fancy name for a normal method</answer>
                                 <answer>The return type of a method is called the constructor</answer>
                                 <answer>A special type of method that returns the value of an objects variables</answer>
                         </question>
-                        <question>
+                        <question level ="1">
                                 <statement>What do all constructors of a class share?</statement>
                                 <answer>parameter variables</answer>
                                 <answer>A body</answer>
                                 <answer id = "correct">A name</answer>
                                 <answer>Internal methods</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>What word is used to invoke a superclasses methods</statement>
                                 <answer>MoveUp</answer>
                                 <answer>Override</answer>
                                 <answer>Invoke</answer>
                                 <answer id = "correct">super</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>When does a subclass method override a superclass methd?</statement>
                                 <answer>If it has the same name</answer>
                                 <answer>If it has the same parameters</answer>
                                 <answer id = "correct">If it has both the same name and same parameters</answer>
                                 <answer>A subclass method never overrides a superclass method</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>Why call super.methodName?</statement>
                                 <answer>You want to access a child classes variables</answer>
                                 <answer>You want to make a variable unchangeable</answer>
                                 <answer>You want to run the method "methodName" on variable super</answer>
                                 <answer id = "correct">You want to run a superclasses method instead of a subclasses</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>When overriding a method, what should you make sure match exactly?</statement>
                                 <answer>Name</answer>
                                 <answer id = "correct">Name and parameters</answer>
                                 <answer>parameters</answer>
                                 <answer>method bod</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>In the following method declaration, what keyword is the access specifier?
                                         public double Balance(int newDeposit){
                                 </statement>
@@ -724,7 +724,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>Balance</answer>
                                 <answer>newDeposit</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>In the following method declaration, what keyword is the return type?
                                         public double Balance(int newDeposit){</statement>
                                 <answer>public</answer>
@@ -732,7 +732,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>Balance</answer>
                                 <answer>newDeposit</answer>
                         </question>
-                        <question>
+                        <question level = "1">
                                 <statement>In the following method declaration, what keyword is the method name?
                                         public double Balance(int newDeposit){</statement>
                                 <answer>public</answer>
@@ -740,7 +740,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer id = "correct">Balance</answer>
                                 <answer>newDeposit</answer>
                         </question>
-                        <question>
+                        <question level = "">
                                 <statement>In the following method declaration, what keyword is the parameter variable?
                                         public double Balance(int newDeposit){</statement>
                                 <answer>public</answer>
