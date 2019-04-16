@@ -2006,6 +2006,60 @@ SELF CHECK
 		</pages>
 	</chapter>
 	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<title>Escape Sequences</title>
+		<description>Learn how to properly employ escape sequences.</description>
+		<pages>
+			<page>
+				<text>
+Suppose you want to display a string containing quotation marks, such as
+
+"Hello, "World"!
+
+You can’t use System.out.println("Hello, "World"!");
+
+As soon as the compiler reads "Hello, ", it thinks the string is ﬁnished, and then it gets all
+confused about World followed by two quotation marks. A human would probably realize
+that the second and third quotation marks were supposed to be part of the string, but a compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just
+refuses to go on, and reports an error. Well, how do you then display quotation marks on the
+screen? You precede the quotation marks inside the string with a backslash character. Inside a
+string, the sequence \" denotes a literal quote, not the end of a string. The correct display
+statement is, therefore
+System.out.println("Hello, \"World\"!");
+
+The backslash character is used as an escape character; the character sequence \" is called an
+escape sequence. The backslash does not denote itself; instead, it is used to encode other
+characters that would otherwise be difﬁcult to include in a string.
+Now, what do you do if you actually want to print a backslash (for example, to specify a
+Windows ﬁle name)? You must enter two \\ in a row, like this:
+System.out.println("The secret message is in C:\\Temp\\Secret.txt");
+
+This statement prints
+The secret message is in C:\Temp\Secret.txt
+
+Another escape sequence occasionally used is \n, which denotes a newline or line feed character. Printing a newline character causes the start of a new line on the display. For example,
+the statement
+
+System.out.print("*\n**\n***\n");
+
+prints the characters
+
+*
+**
+***
+
+on three separate lines. Of course, you could have achieved the same effect with three separate calls to println.
+Finally, escape sequences are useful for including international characters in a string. For
+example, suppose you want to print “All the way to San José!”, with an accented letter (é). If
+you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode encoding scheme to denote international characters. For example, the é character has
+Unicode encoding 00E9. You can include that character inside a string by writing \u, followed
+by its Unicode encoding:
+System.out.println("All the way to San Jos\u00E9!");
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/methods.png</image>
 		<title>Methods</title>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
@@ -2386,6 +2440,734 @@ be double
 The compiler will not complain. It thinks that you want to provide a deposit method just for
 int parameters, while inheriting another deposit method for double parameters.
 When overriding a method, be sure to check that the parameter types match exactly.
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<title>Input/Output</title>
+		<description>Learn how to use scanners and become comfortable with input/output protocol</description>
+		<pages>
+			<page title="Introduction to Scanners">
+				<text>
+We begin this chapter by discussing the common task of reading and writing files that contain text. Examples are files
+that are created with a simple text editor, such as Windows Notepad, as well as Java source code and HTML files.
+The simplest mechanism for reading text is to use the Scanner class. You already know how to use a Scanner for reading
+console input. To read input from a disk file, the Scanner class relies on another class, File, which describes disk
+files and directories. (The File class has many methods that we do not discuss in this book; for example, methods that
+delete or rename a file.) First construct a File object with the name of the input file, then use the File to construct
+a Scanner object:
+
+File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);
+
+This Scanner object reads text from the file input.txt. You can use the Scanner methods (such as next, nextLine,
+nextInt, and nextDouble) to read data from the input file. To write output to a file, you construct a PrintWriter
+object with the given file name, for example
+
+PrintWriter out = new PrintWriter("output.txt");
+
+If the output file already exists, it is emptied before the new data are written into it.
+If the file doesn’t exist, an empty file is created. You can also construct a PrintWriter
+object from a File object. This is useful if you use a file chooser.
+
+The PrintWriter class is an enhancement of the PrintStream class that you already know—System.out is a PrintStream
+object. You can use the familiar print, println, and printf methods with any PrintWriter object:
+
+out.print(29.95);
+out.println(new Rectangle(5, 10, 15, 25));
+out.printf("%10.2f", price);
+
+When you are done writing to a file, be sure to close the PrintWriter:
+
+out.close();
+
+If your program exits without closing the PrintWriter, the disk file may not contain all of the output. The following
+program puts these concepts to work. It reads all lines of an input file and sends them to the output file, preceded by
+line numbers. If the input file is
+
+Mary had a little lamb
+Whose fleece was white as snow.
+And everywhere that Mary went,
+The lamb was sure to go!
+
+then the program produces the output file
+/* 1 */ Mary had a little lamb
+/* 2 */ Whose fleece was white as snow.
+/* 3 */ And everywhere that Mary went,
+/* 4 */ The lamb was sure to go!
+
+The line numbers are enclosed in /* */ delimiters so that the program can be used for numbering Java source files.
+There is one additional issue that we need to tackle. When the input or output file doesn’t exist, a
+FileNotFoundException can occur. The compiler insists that we tell it what the program should do when that happens.
+(In this regard, the FileNotFoundException is different from the exceptions that you have already encountered. We
+will discuss this difference in detail later on.) In our sample program, we take the easy way out and acknowledge that
+the main method should simply be terminated if the exception occurs. We label the main method like this:
+
+public static void main(String[] args) throws FileNotFoundException
+
+You will see in the following sections how to deal with exceptions in a more professional way.
+				</text>
+			</page>
+			<page title="Example Program">
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/3.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+SELF CHECK
+
+1. What happens when you supply the same name for the input and output files to
+the LineNumberer program?
+
+2. What happens when you supply the name of a nonexistent input file to the LineNumberer program?
+				</text>
+			</page>
+			<page title="Common Errors">
+				<text>
+Common Error: Backslashes in File Names
+
+When you specify a file name as a string literal, and the name contains backslash characters
+(as in a Windows file name), you must supply each backslash twice:
+
+inFile = new File("c:\\homework\\input.dat");
+
+Recall that a single backslash inside quoted strings is an escape character that is combined
+with another character to form a special meaning, such as \n for a newline character. The \\
+combination denotes a single backslash.
+
+When a user supplies a file name to a program, however, the user should not type the
+backslash twice.
+
+Common Error: Constructing a Scanner with a String
+
+When you construct a PrintWriter with a string, it writes to a file:
+
+PrintWriter out = new PrintWriter("output.txt");
+
+However, this does not work for a Scanner. The statement
+
+Scanner in = new Scanner("input.txt"); // ERROR?
+
+does not open a file. Instead, it simply reads through the string: in.nextLine() returns the
+string "input.txt". This feature can be useful.
+
+You must simply remember to use File objects in the Scanner constructor:
+
+Scanner in = new Scanner(new File("input.txt")); //OK
+				</text>
+			</page>
+			<page title="Reading Text Input">
+				<text>
+In the following sections, you will learn how to process complex text input that you often encounter
+in real life situations. In the preceding example program, we read input a line at a time. Sometimes, it is
+useful to read words rather than lines. For example, consider the loop
+
+while (in.hasNext())
+{
+	String input = in.next();
+	System.out.println(input);
+}
+
+With our sample input, this loop would print a word on every line:
+
+Mary
+had
+a
+little
+lamb
+
+In Java, a word is not the same as in English. It is any sequence of characters that is not white space. White space
+includes spaces, tab characters, and the newline characters that separate lines. For example, the following are
+considered words:
+
+snow.
+1729
+C++
+
+(Note the period after snow—it is considered a part of the word because it is no white space.) Here is precisely
+what happens when the next method is executed. Input characters that are white space are consumed—that is, removed
+from the input. However, they do not become part of the word. The first character that is not white space becomes
+the first character of the word. More characters are added until either another white space character occurs, or the
+end of the input has been reached.
+
+Sometimes, you want to read just the words and discard anything that isn’t a letter. You achieve this task by calling
+the useDelimiter method on your Scanner object as follows:
+
+Scanner in = new Scanner(. . .);
+in.useDelimiter("[^A-Za-z]+");
+
+Here, we set the character pattern that separates words to “any sequence of characters other than letters”. (The
+notation used for describing the character pattern is called a regular expression. See Productivity Hint 11.1 on
+page 477 if you are interested in more details.) With this setting, punctuation and numbers are stripped off from
+the words returned by the next method.
+				</text>
+			</page>
+			<page title="Processing Lines">
+				<text>
+When each line of a file is a data record, it is often best to read entire lines with the nextLine method:
+
+String line = in.nextLine();
+
+The nextLine method consumes the next input line (including the newline character) and returns the line without
+the newline character. You can then take the line apart for further processing. Here is a typical example of processing
+lines in a file. A file with population data from the CIA Fact Book site
+(http://www.cia.gov/library/publications/the-worldfactbook/) contains lines such as the following:
+
+China 1330044605
+India 1147995898
+United States 303824646
+. . .
+
+Because some country names have more than one word, it would be tedious to read this file using the next method.
+For example, after reading United, how would your program know that it still needs to read another word before
+reading the population count? Instead, read each input line into a string. Then use the isDigit and isWhitespace
+methods to find out where the name ends and the number starts. Locate the first digit:
+
+int i = 0;
+while (!Character.isDigit(line.charAt(i))) { i++; }
+
+Then extract the country name and population:
+
+String countryName = line.substring(0, i);
+String population = line.substring(i);
+
+However, the country name contains one or more spaces at the end. Use the trim method to remove them:
+
+countryName = countryName.trim();
+
+The trim method returns the string with all white space at the beginning and end removed.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/9.png</image>
+			</page>
+			<page title="Processing Lines">
+				<text>
+There is another problem. The population is stored in a string, not a number. Use
+the Integer.parseInt method to convert it:
+
+int populationValue = Integer.parseInt(population);
+
+You need to be careful when calling the Integer.parseInt method. Its parameter
+value must be a string containing the digits of an integer or a NumberFormatException
+occurs. The parameter value may not contain any additional characters. Not even
+spaces are allowed! In our situation, we happen to know that there won’t be any
+spaces at the beginning of the string, but there might be some at the end. Therefore,
+we use the trim method:
+
+int populationValue = Integer.parseInt(population.trim());
+
+Here you saw how to break a string into parts by looking at individual characters.
+Another approach is occasionally easier. Construct a new Scanner object to read the
+characters from a string:
+
+Scanner lineScanner = new Scanner(line);
+
+Then you can use lineScanner like any other	Scanner	object, reading words and numbers:
+
+String countryName = lineScanner.next();
+while (!lineScanner.hasNextInt())
+{
+	countryName = countryName + " " + lineScanner.next();
+}
+int populationValue = lineScanner.nextInt();
+				</text>
+			</page>
+			<page title="Reading Numbers">
+				<text>
+You have used the nextInt and nextDouble methods of the Scanner class many times,
+but here we will have a look at their behavior in detail. Suppose you call
+double value = in.nextDouble();
+
+The	nextDouble method recognizes floating-point numbers such as 3.14159, -21, or
+(a billion in scientific notation). However, if there is no number in the input,
+then a NoSuchElementException occurs.
+Consider an input containing the characters
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/12.png</image>
+				<text>
+
+White space is consumed and the word 21st is read. However, this word is not a
+properly formatted number. In this situation, an “input mismatch exception”
+occurs.
+
+To avoid exceptions, use the hasNextDouble method to screen the input. For example,
+if (in.hasNextDouble())
+{
+	double value = in.nextDouble();
+	. . .
+}
+
+Similarly, you should call the hasNextInt method before calling nextInt.
+Note that the nextInt and nextDouble methods do not consume the white space
+that follows a number. This can be a problem if you alternate between calling
+nextInt/nextDouble and nextLine. Suppose a file contains student IDs and names in
+this format:
+
+1729
+Harry Morgan
+1730
+Diana Lin
+. . .
+
+Now suppose you read the file with these instructions:
+while (in.hasNextInt())
+{
+	int studentID = in.nextInt();
+	String name = in.nextLine();
+
+	//Process the student ID and name
+}
+
+Initially, the input contains
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/14.png</image>
+				<text>
+
+After the first call to nextInt, the input contains
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/16.png</image>
+				<text>
+The call to nextLine reads an empty string! The remedy is to add a call to
+nextLine after reading the ID:
+
+int studentID = in.nextInt();
+in.nextLine(); // Consume the newline
+String name = in.nextLine();
+				</text>
+			</page>
+			<page title="Reading Characters">
+				<text>
+Sometimes, you want to read a file one character at a time. You achieve this task by
+calling the useDelimiter method on your Scanner object with an empty string:
+Scanner in = new Scanner(. . .);
+in.useDelimiter("");
+
+Now each call to next returns a string consisting of a single character. Here is how
+you can process the characters:
+
+while (in.hasNext())
+{
+	char ch = in.next().charAt(0);
+	// Process ch
+}
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose the input contains the characters 6,995.0. What is the value of number
+and input after these statements?
+
+int number = in.nextInt();
+String input = in.next();
+
+2. Suppose the input contains the characters 6,995.00 12. What is the value of price
+and quantity after these statements?
+
+double price = in.nextDouble();
+int quantity = in.nextInt();
+
+3. Your input file contains a sequence of numbers, but sometimes a value is not
+available and marked as N/A. How can you read the numbers and skip over the
+markers?
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<title>Exceptions</title>
+		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
+		<pages>
+			<page title="Throwing Exceptions">
+				<text>
+There are two main aspects to exception handling: reporting and recovery. A major
+challenge of error handling is that the point of reporting is usually far apart from
+the point of recovery. For example, the get method of the ArrayList class may detect
+that a nonexistent element is being accessed, but it does not have enough information
+to decide what to do about this failure. Should the user be asked to try a different
+operation? Should the program be aborted after saving the user’s work? These decisions
+must be made in a different part of the program.
+
+In Java, exception handling provides a flexible mechanism for passing control
+from the point of error reporting to a competent recovery handler. In the remainder
+of this chapter, we will look into the details of this mechanism.
+
+When you detect an error condition, your job is really easy. You just throw an
+appropriate exception object, and you are done. For example, suppose someone
+tries to withdraw too much money from a bank account.
+
+public class BankAccount
+{
+	. . .
+	public void withdraw(double amount)
+	{
+		if (amount > balance)
+		// Now what?
+		. . .
+	}
+}
+
+First look for an appropriate exception class. The Java library provides many classes
+to signal all sorts of exceptional conditions. Figure 1 on the next page shows the
+most useful ones.
+
+Look around for an exception type that might describe your situation. How about the
+IllegalStateException? Is the bank account in an illegal state for the withdraw operation?
+Not really—some withdraw operations could succeed. Is the parameter value illegal?
+Indeed it is. It is just too large. Therefore, let’s throw an IllegalArgumentException.
+(The term argument is an alternative term for a parameter value.)
+
+public class BankAccount
+{
+	public void withdraw(double amount)
+	{
+		if (amount > balance)
+		{
+			throw new IllegalArgumentException("Amount exceeds balance");
+		}
+		balance = balance - amount;
+	}
+	. . .
+}
+
+The statement
+
+throw new IllegalArgumentException("Amount exceeds balance");
+
+constructs an object of type IllegalArgumentException and throws that object.
+
+When you throw an exception, execution does not continue with the next statement but
+with an exception handler. For now, we won’t worry about the handling of the exception.
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/3.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. How should you modify the deposit method to ensure that the balance is never
+negative?
+
+2. Suppose you construct a new bank account object with a zero balance and then
+call withdraw(10). What is the value of balance afterwards?
+				</text>
+			</page>
+			<page title="Checked and Unchecked Exceptions">
+				<text>
+Java exceptions fall into two categories, called checked and unchecked exceptions.
+When you call a method that throws a checked exception, the compiler checks that
+you don’t ignore it. You must tell the compiler what you are going to do about the
+exception if it is ever thrown. For example, all subclasses of IOException are checked
+exceptions. On the other hand, the compiler does not require you to keep track of
+unchecked exceptions. Exceptions such as NumberFormatException, IllegalArgumentException,
+and NullPointerException are unchecked exceptions. More generally, all
+exceptions that belong to subclasses of RuntimeException are unchecked, and all other
+subclasses of the class Exception are checked. (In Figure 1, the checked exceptions
+are shaded in a darker color.) There is a second category of internal errors that are
+reported by throwing objects of type Error. One example is the OutOfMemoryError,
+which is thrown when all available memory has been used up. These are fatal errors
+that happen rarely and are beyond your control. They too are unchecked.
+
+Why have two kinds of exceptions? A checked exception describes a problem
+that is likely to occur at times, no matter how careful you are. The unchecked
+exceptions, on the other hand, are your fault. For example, an unexpected end of
+file can be caused by forces beyond your control, such as a disk error or a broken
+network connection. But you are to blame for a NullPointerException, because your
+code was wrong when it tried to use a null reference.
+The compiler doesn’t check whether you handle a NullPointerException, because
+you should test your references for null before using them rather than install a
+handler for that exception. The compiler does insist that your program be able to
+handle error conditions that you cannot prevent.
+
+Actually, those categories aren’t perfect. For example, the Scanner.nextInt method
+throws an unchecked InputMismatchException if the input does not contain a valid
+integer. A checked exception would have been more appropriate because the programmer
+cannot prevent users from entering incorrect input. (The designers of the
+Scanner class made this choice to make it easy to use for beginning programmers.)
+As you can see from Figure 1, the majority of checked exceptions occur when
+you deal with input and output. That is a fertile ground for external failures beyond
+your control—a file might have been corrupted or removed, a network connection
+might be overloaded, a server might have crashed, and so on. Therefore, you will
+need to deal with checked exceptions principally when programming with files and
+streams.
+
+You have seen how to use the Scanner class to read data from a file, by passing a
+File object to the Scanner constructor:
+
+String filename = . . .;
+File inFile = new File(filename);
+Scanner in = new Scanner(inFile);
+
+However, the Scanner constructor can throw a FileNotFoundException. The
+FileNotFoundException is a checked exception, so you need to tell the compiler what
+you are going to do about it. You have two choices. You can handle the exception,
+using the techniques that you will see in Section 11.5. Or you can simply tell the
+compiler that you are aware of this exception and that you want your method to be
+terminated when it occurs. The method that reads input does not usually know
+what to do about an unexpected error, so that is usually the better option.
+
+To declare that a method should be terminated when a checked exception occurs
+within it, tag the method with a throws clause.
+
+public void read(String filename) throws FileNotFoundException
+{
+File inFile = new File(filename);
+Scanner in = new Scanner(inFile);
+. . .
+}
+
+The throws clause in turn signals the caller of your method that it may encounter a
+FileNotFoundException. Then the caller needs to make the same decision—handle the
+exception, or tell its caller that the exception may be thrown. If your method
+can throw exceptions of different types, you separate the exception class names by commas:
+
+public void read(String filename)
+throws FileNotFoundException, NoSuchElementException
+
+Always keep in mind that exception classes form an inheritance hierarchy. For
+example, FileNotFoundException is a subclass of IOException. Thus, if a method can
+throw both an IOException and a FileNotFoundException, you only tag it as throws
+IOException.
+
+It sounds somehow irresponsible not to handle an exception when you know
+that it happened. Actually, though, it is usually best not to catch an exception if you
+don’t know how to remedy the situation. After all, what can you do in a low-level
+read method? Can you tell the user? How? By sending a message to System.out? You
+don’t know whether this method is called in a graphical program or an embedded
+system (such as a vending machine), where the user may never see System.out. And
+even if your users can see your error message, how do you know that they can
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/6.png</image>
+				<text>
+
+understand English? Your class may be used to build an application for users in
+another country. If you can’t tell the user, can you patch up the data and keep
+going? How? If you set a variable to zero, null, or an empty string, that may just
+cause the program to break later, with much greater mystery.
+Of course, some methods in the program know how to communicate with the
+user or take other remedial action. By allowing the exception to reach those methods,
+you make it possible for the exception to be processed by a competent handler.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose a method calls the Scanner constructor, which can throw a FileNotFoundException, and the nextInt method of the Scanner class, which can cause a
+NoSuchElementException or InputMismatchException. Which exceptions should be
+included in the throws clause?
+
+2. Why is a NullPointerException not a checked exception?
+				</text>
+			</page>
+			<page title="Catching Exceptions">
+				<text>
+Every exception should be handled somewhere in your program. If an exception
+has no handler, an error message is printed, and your program terminates. That may
+be fine for a student program. But you would not want a professionally written
+program to die just because some method detected an unexpected error. Therefore,
+you should install exception handlers for all exceptions that your program might
+throw.
+You install an exception handler with the try/catch statement. Each try block
+contains one or more statements that may cause an exception. Each catch clause
+contains the handler for an exception type. Here is an example:
+
+try
+{
+	String filename = . . .;
+	File inFile = new File(filename);
+	Scanner in = new Scanner(inFile);
+	String input = in.next();
+	int value = Integer.parseInt(input);
+	. . .
+}
+catch (IOException exception)
+{
+	exception.printStackTrace();
+}
+catch (NumberFormatException exception)
+{
+	System.out.println("Input was not a number");
+}
+
+Three exceptions may be thrown in this try block: The Scanner constructor can
+throw a FileNotFoundException, Scanner.next can throw a NoSuchElementException, and
+Integer.parseInt can throw a NumberFormatException.
+If any of these exceptions is actually thrown, then the rest of the instructions in
+the try block are skipped. Here is what happens for the various exception types:
+	• If a FileNotFoundException is thrown, then the catch clause for the IOException is
+	executed. (Recall that FileNotFoundException is a subclass of IOException.)
+	• If a NumberFormatException occurs, then the second catch clause is executed.
+	• A NoSuchElementException is not caught by any of the catch clauses. The
+	exception remains thrown until it is caught by another try block or the main
+	method terminates.
+When the catch (IOException exception) block is executed, then some method in the
+try block has failed with an IOException. The variable exception contains a reference
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/10.png</image>
+				<text>
+to the exception object that was thrown. The catch clause can analyze that object to
+find out more details about the failure. For example, you can get a printout of the
+chain of method calls that lead to the exception, by calling
+exception.printStackTrace()
+
+In these sample catch clauses, we merely inform the user of the source of the problem.
+A better way of dealing with the exception would be to give the user another
+chance to provide a correct input.
+
+It is important to remember that you should place catch clauses only in methods
+in which you can competently handle the particular exception type.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose the file with the given file name exists and has no contents. Trace the
+flow of execution in the try block in this section.
+
+2. Is there a difference between catching checked and unchecked exceptions?
+				</text>
+			</page>
+			<page title="Designing Exception Types">
+				<text>
+Sometimes none of the standard exception types describe your particular error
+condition well enough. In that case, you can design your own exception class. Consider
+a bank account. Let’s report an InsufficientFundsException when an attempt is made
+to withdraw an amount from a bank account that exceeds the current balance.
+
+if (amount > balance)
+{
+	throw new InsufficientFundsException(
+	"withdrawal of " + amount + " exceeds balance of " + balance);
+}
+
+Now you need to provide the InsufficientFundsException class. Should it be a
+checked or an unchecked exception? Is it the fault of some external event, or is it the
+fault of the programmer? We take the position that the programmer could have prevented
+the exceptional condition—after all, it would have been an easy matter to
+check whether amount <= account.getBalance() before calling the withdraw method.
+Therefore, the exception should be an unchecked exception and extend the RuntimeException
+class or one of its subclasses.
+
+It is a good idea to extend an appropriate class in the exception hierarchy. For
+example, we can consider an InsufficientFundsException a special case of an
+IllegalArgumentException. This enables other programmers to catch the exception as an
+IllegalArgumentException if they are not interested in the exact nature of the problem.
+It is customary to provide two constructors for an exception class: a constructor
+with no parameters and a constructor that accepts a message string describing the
+reason for the exception. Here is the declaration of the exception class.
+
+public class InsufficientFundsException extends IllegalArgumentException
+{
+	public InsufficientFundsException() {}
+	public InsufficientFundsException(String message)
+	{
+		super(message);
+	}
+}
+
+When the exception is caught, its message string can be retrieved using the getMessage
+method of the Throwable class.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. What is the purpose of the call super(message) in the second InsufficientFundsException constructor?
+
+2. Suppose you read bank account data from a file. Contrary to your expectation,
+the next input value is not of type double. You decide to implement a BadDataException.
+Which exception class should you extend?
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<title>Packages</title>
+		<description>Learn how packages can help you in Java land!</description>
+		<pages>
+			<page>
+				<text>
+A Java program consists of a collection of classes. So far, most of your
+programs have consisted of a small number of classes. As programs get larger,
+however, simply distributing the classes over multiple ﬁles isn’t enough.
+An additional structuring mechanism is needed.
+
+In Java, packages provide this structuring mechanism. A Java package is a
+set of related classes. For example, the Java library consists of several
+hundred packages, some of which are listed in Table 1.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/2.png</image>
+			</page>
+			<page title="Organizing Packages">
+				<text>
+To put one of your classes in a package, you must place a line package packageName;
+as the ﬁrst instruction in the source ﬁle containing the class. A package name
+consists of one or more identiﬁers separated by periods. For example, let’s put
+the Financial class introduced in this chapter into a package named com.horstmann.bigjava.
+The Financial.java ﬁle must start as follows:
+
+package com.horstmann.bigjava;
+public class Financial {   . . . }
+
+In addition to the named packages (such as java.util or com.horstmann.bigjava),
+there is a special package, called the default package, which has no name. If you did
+not include any package statement at the top of your source ﬁle, its classes are placed
+in the default package.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/4.png</image>
+			</page>
+			<page title="Importing Packages">
+				<text>
+If you want to use a class from a package, you can refer to it by its full name
+(package name plus class name). For example, java.util.Scanner refers to the Scanner
+class in the java.util package:
+
+java.util.Scanner in = new java.util.Scanner(System.in);
+
+Naturally, that is somewhat inconvenient. You can instead import a name with an import
+statement: import java.util.Scanner; Then you can refer to the class as Scanner without
+the package preﬁx. You can import all classes of a package with an import statement that
+ends in .*. For example, you can use the statement import java.util.*; to import all
+classes from the java.util package. That statement lets you refer to classes like Scanner
+or Random without a java.util preﬁx. However, you never need to import the classes in the
+java.lang package explicitly. That is the package containing the most basic Java classes,
+such as Math and Object. These classes are always available to you. In effect, an automatic
+import java.lang.*; statement has been placed into every source ﬁle. Finally, you don’t
+need to import other classes in the same package. For example, when you implement the
+class homework1.Tester, you don’t need to import the class homework1.Bank. The compiler
+will ﬁnd the Bank class without an import statement because it is located in the same
+package, homework1.
+
+Placing related classes into a package is clearly a convenient mechanism to organize classes.
+However, there is a more important reason for packages: to avoid name clashes. In a large
+project, it is inevitable that two people will come up with the same name for the same concept.
+This even happens in the standard Java class library (which has now grown to thousands of
+classes). There is a class Timer in the java.util package and another class called Timer in
+the javax.swing package. You can still tell the Java compiler exactly which Timer class you
+need, simply by referring to them as java.util.Timer and javax.swing.Timer.
+
+Of course, for the package-naming convention to work, there must be some way to ensure that
+package names are unique. It wouldn’t be good if the car maker BMW placed all its Java code
+into the package bmw, and some other programmer (perhaps Britney M. Walters) had the same
+bright idea. To avoid this problem, the inventors of Java recommend that you use a package-naming
+scheme that takes advantage of the uniqueness of Internet domain names.
+
+For example, I have a domain name horstmann.com, and there is nobody else on the planet with
+the same domain name. (I was lucky that the domain name horstmann.com had not been taken by
+anyone else when I applied. If your name is Walters, you will sadly ﬁnd that someone else beat
+you to  walters.com.) To get a package name, turn the domain name around to produce a package
+name preﬁx, such as com.horstmann.
+
+If you don’t have your own domain name, you can still create a package name that has a high
+probability of being unique by writing your e-mail address backwards. For example, if Britney
+Walters has an e-mail address walters@cs.sjsu.edu, then she can use a package name
+edu.sjsu.cs.walters for her own classes. Some instructors will want you to place each of your
+assignments into a separate package, such as homework1, homework2, and so on. The reason is
+again to avoid name collision. You can have two classes, homework1.Bank and homework2.Bank,
+with slightly different properties.
 				</text>
 			</page>
 		</pages>
