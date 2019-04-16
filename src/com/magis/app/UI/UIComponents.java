@@ -146,13 +146,13 @@ public class UIComponents {
      * @param node the current label to fade in
      * @param index the current index of the label. Used to add incremental delay of fade in
      * @param delay how long before the animation begins
-     * @param duration how long to animate
+     * @param duration how long to fadeAndTranslate
      * @param fromX where the node should start in its animation for the x-axis
      * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      * @param toY where the node should end in its animation for the y-axis
      */
-    public static void animate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+    public static void fadeAndTranslate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
         fadeTransition.setFromValue(0.0);
@@ -172,22 +172,22 @@ public class UIComponents {
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
-        //wait a certain delay, then animate in
+        //wait a certain delay, then fadeAndTranslate in
         SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)index / 30))), parallelTransition);
         sequentialTransition.play();
     }
 
     /**
      * Animate a node
-     * @param node the node to animate
+     * @param node the node to fadeAndTranslate
      * @param delay how long before the animation begins
-     * @param duration how long to animate
+     * @param duration how long to fadeAndTranslate
      * @param fromX where the node should start in its animation for the x-axis
      * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      * @param toY where the node should end in its animation for the y-axis
      */
-    public static void animate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+    public static void fadeAndTranslate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
         fadeTransition.setFromValue(0.0);
@@ -207,8 +207,31 @@ public class UIComponents {
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
-        //wait a certain delay, then animate in
+        //wait a certain delay, then fadeAndTranslate in
         SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay)), parallelTransition);
         sequentialTransition.play();
+    }
+
+    public static void translate(Node node, double duration, float fromX, float toX, float fromY, float toY) {
+        if (duration == 0) {
+            System.err.println("Duration is set to 0 seconds. In order to animate, it must be greater than 0");
+        }
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(toX);
+        translateTransition.setFromY(fromY);
+        translateTransition.setToY(toY);
+
+        translateTransition.play();
+    }
+
+    public static void scale(Node node, double duration, double scaleTo) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(duration), node);
+        scaleTransition.setFromX(node.getScaleX());
+        scaleTransition.setToX(scaleTo);
+        scaleTransition.setFromY(node.getScaleY());
+        scaleTransition.setToY(scaleTo);
+
+        scaleTransition.play();
     }
 }

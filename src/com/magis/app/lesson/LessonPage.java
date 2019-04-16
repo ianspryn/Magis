@@ -4,7 +4,6 @@ import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
@@ -28,7 +27,7 @@ public class LessonPage {
 
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
-        UIComponents.animate(borderPane,0.2,0.2,-10,0,0,0);
+        UIComponents.fadeAndTranslate(borderPane,0.2,0.2,-10,0,0,0);
 
         BorderPane sideBar = new BorderPane();
         sideBar.getStyleClass().add("sidebar");
@@ -63,7 +62,7 @@ public class LessonPage {
         lessonPageContent = new LessonPageContent(lessonPageScrollPane, chapterIndex, hasQuiz, hasTest);
         lessonPageContent.initialize();
 
-        UIComponents.animate(lessonPageContent.getPageContent(), 0.15,0.2,0,0,-10,0);
+        UIComponents.fadeAndTranslate(lessonPageContent.getPageContent(), 0.15,0.2,0,0,-10,0);
 
         //Lesson Side Panel
         lessonSidePanel = new LessonSidePanel(chapterIndex, lessonPageContent, Main.lessonModel.getChapter(chapterIndex).getPages(), hasQuiz, hasTest);
@@ -95,7 +94,7 @@ public class LessonPage {
 
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
-        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
+        UIComponents.fadeAndTranslate(navigationContent,0.15,0.3,0,0,0,0);
 
         lessonArea.setCenter(lessonPageScrollPane);
         lessonArea.setBottom(navigationContent);

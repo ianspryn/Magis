@@ -7,7 +7,6 @@ import com.magis.app.home.HomePage;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -78,7 +77,7 @@ public class QuizPage {
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
-        UIComponents.animate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
+        UIComponents.fadeAndTranslate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
 
         //Quiz Side Panel
         sidePanel = new QuizSidePanel(chapterIndex, quizPages, numQuestions, quizPageScrollPane, testPageContent);
@@ -121,7 +120,7 @@ public class QuizPage {
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
         navigationContent.setCenter(submitButton);
-        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
+        UIComponents.fadeAndTranslate(navigationContent,0.15,0.3,0,0,0,0);
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);

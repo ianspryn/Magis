@@ -69,15 +69,15 @@ public class HomePage {
     }
 
     private void animate() {
-        UIComponents.animate(borderPane, 0.3, 0.2, 0, 0, -10, 0);
-        UIComponents.animate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeAndTranslate(borderPane, 0.3, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeAndTranslate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
         if (student.getRecentChapter() > -1) {
-            UIComponents.animate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
+            UIComponents.fadeAndTranslate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
         }
         for (int i = 0; i < chapterBoxes.size(); i++) {
-            UIComponents.animate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
+            UIComponents.fadeAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
         }
-        UIComponents.animate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
+        UIComponents.fadeAndTranslate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
     }
 
     private HomePage() {
@@ -156,11 +156,11 @@ public class HomePage {
 
         settingsBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
-            scaleBox(settingsBox, 1.02);
+            UIComponents.scale(settingsBox, 0.1,1.02);
         });
         settingsBox.setOnMouseExited(e -> {
             Main.scene.setCursor(Cursor.DEFAULT);
-            scaleBox(settingsBox, 1);
+            UIComponents.scale(settingsBox,0.1, 1);
         });
 
         //Left image
@@ -224,11 +224,11 @@ public class HomePage {
         chapterBox.setOnMouseClicked(e -> goToLesson(borderPane, chapterIndex, false));
         chapterBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
-            scaleBox(chapterBox, 1.02);
+            UIComponents.scale(chapterBox, 0.1,1.02);
         });
         chapterBox.setOnMouseExited(e -> {
             Main.scene.setCursor(Cursor.DEFAULT);
-            scaleBox(chapterBox, 1);
+            UIComponents.scale(chapterBox, 0.1,1);
         });
 
         //Left image
@@ -277,19 +277,9 @@ public class HomePage {
         chapterBox.getChildren().addAll(imageView, separator, chapterInfo);
     }
 
-    private static void scaleBox(Node node, double end) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.1), node);
-        scaleTransition.setFromX(node.getScaleX());
-        scaleTransition.setToX(end);
-        scaleTransition.setFromY(node.getScaleY());
-        scaleTransition.setToY(end);
-
-        scaleTransition.play();
-    }
-
     /**
      * Move up and fade out at the same time the home page before going to the lesson page
-     * @param node the desired node to animate first
+     * @param node the desired node to fadeAndTranslate first
      * @param chapterIndex the desired chapter to switch scenes to
      */
     private static void goToLesson(Node node, int chapterIndex, boolean continueWhereLeftOff) {
@@ -300,7 +290,7 @@ public class HomePage {
 
     /**
      * Move up and fade out at the same time the home page before going to the lesson page
-     * @param node the desired node to animate first
+     * @param node the desired node to fadeAndTranslate first
      */
     private static void goToSettings(Node node) {
         ParallelTransition pt = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
@@ -310,7 +300,7 @@ public class HomePage {
 
     /**
      * Move up and fade out at the same time the current page before going to the home page
-     * @param node the desired node to animate first
+     * @param node the desired node to fadeAndTranslate first
      */
     public static void goHome(Node node) {
         ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));

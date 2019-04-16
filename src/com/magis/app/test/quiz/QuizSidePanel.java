@@ -110,7 +110,7 @@ public class QuizSidePanel {
             //add page to the list of pages
             contentPagesVBox.getChildren().add(pageLabels.getLabel(i));
 
-            UIComponents.animate(pageLabels.getLabel(i), i,0.2, 0.2,-10,0,0,0);
+            UIComponents.fadeAndTranslate(pageLabels.getLabel(i), i,0.2, 0.2,-10,0,0,0);
         }
 
         masterVBox.getChildren().add(contentPagesVBox);
