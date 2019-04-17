@@ -5,6 +5,7 @@ import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
+import com.magis.app.models.StudentModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -36,8 +37,7 @@ public class Login {
         rectangle = new Rectangle();
         rectangle.setHeight(450);
         rectangle.setWidth(450);
-//        rectangle.setFill(Color.valueOf("#ededed"));
-        rectangle.setFill(Color.valueOf("#ddd")); //more contrast if needed
+        rectangle.setFill(Color.valueOf("#ddd")); //#ededed
 
         magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
@@ -81,10 +81,11 @@ public class Login {
         gridPane.add(lastNameTextField,0,3);
 
         SignInUp = new JFXButton("Sign In");
+        SignInUp.getStyleClass().addAll("jfx-button-raised", "jfx-button-raised-color");
         SignInUp.setOnMouseClicked(e -> attemptSignIn(userNameTextField.getText()));
 
         bottomButton = new JFXButton("Create Account");
-        bottomButton.getStyleClass().add("create-account-button");
+        bottomButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
         bottomButton.setOnMouseClicked(e -> showSignUp());
 
         boxBackground.getChildren().addAll(rectangle, magisLogo, gridPane, SignInUp, bottomButton);
@@ -106,15 +107,31 @@ public class Login {
 
     private static void attemptSignIn(String username) {
         Main.studentModel.initializeStudent(username);
+        StudentModel.Student student = Main.studentModel.getStudent(username);
         if (username.length() == 0) {
             Alert.showAlert("Error", "Please enter a username.");
-        } else if (Main.studentModel.getStudent(username) != null) { //if that student exists
+        } else if (student != null) { //if that student exists
             Main.username = username;
             Main.isLoggedIn = true;
+            applyColorSettings(student);
             HomePage.getInstance().Page();
         } else { //Spit out an error and tell the student to try again
             Alert.showAlert("Error", "Username not found. Please try again.");
         }
+    }
+
+    private static void applyColorSettings(StudentModel.Student student) {
+        //Remove the default light css
+        Main.scene.getStylesheets().remove("com/magis/app/css/lightmode.css");
+        //apply the student's light or dark css
+        String lightOrDark = student.getDarkMode() ? "com/magis/app/css/darkmode.css" : "com/magis/app/css/lightmode.css";
+        System.out.println(lightOrDark);
+        Main.scene.getStylesheets().add(lightOrDark);
+
+        //Remove the default pink color
+        Main.scene.getStylesheets().remove("com/magis/app/css/pink.css");
+        //apply the student's selected color
+        Main.scene.getStylesheets().add("com/magis/app/css/" + student.getTheme() + ".css");
     }
 
     private static void attemptSignUp(String username, String firstName, String lastName) {

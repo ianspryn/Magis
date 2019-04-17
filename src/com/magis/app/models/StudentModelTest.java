@@ -4,10 +4,23 @@ import org.junit.Assert;
 import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class StudentModelTest {
+    
+    public File getFile() {
+        File jarFile = null;
+        try {
+            jarFile = new File(StudentModel.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        assert jarFile != null;
+        String filePath = jarFile.getParent() + File.separator + "students.xml";
+        return new File(filePath);
+    }
 
     /*
     File
@@ -15,7 +28,7 @@ public class StudentModelTest {
     @Test
     public void canDeleteFile() throws IOException {
         new StudentModel(new LessonModel());
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         boolean result = Files.deleteIfExists(file.toPath());
         Assert.assertTrue(result);
     }
@@ -37,7 +50,7 @@ public class StudentModelTest {
      */
     @Test
     public void addNewStudent() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         int result = studentModel.addStudent("ianspryn", "Ian", "Spryn");
@@ -48,7 +61,7 @@ public class StudentModelTest {
 
     @Test
     public void addDuplicateStudent() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn", "Ian", "Spryn");
@@ -61,7 +74,7 @@ public class StudentModelTest {
 
     @Test
     public void getStudentFirstName() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -74,7 +87,7 @@ public class StudentModelTest {
 
     @Test
     public void getStudentLastName() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -87,7 +100,7 @@ public class StudentModelTest {
 
     @Test
     public void getStudentFullName() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -99,11 +112,76 @@ public class StudentModelTest {
     }
 
     /*
+    Settings
+     */
+    @Test
+    public void getDarkMode() throws IOException {
+        File file = getFile();
+        Files.deleteIfExists(file.toPath());
+        StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        boolean isDarkMode = studentModel.getStudent("ianspryn").getDarkMode();
+
+        Assert.assertFalse(isDarkMode);
+        Files.deleteIfExists(file.toPath());
+    }
+
+    @Test
+    public void setAndGetDarkMode() throws IOException {
+        File file = getFile();
+        Files.deleteIfExists(file.toPath());
+        StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        studentModel.getStudent("ianspryn").setDarkMode(true);
+
+        StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.addStudent("ianspryn","Ian","Spryn");
+        studentModel2.initializeStudent("ianspryn");
+        boolean isDarkMode = studentModel2.getStudent("ianspryn").getDarkMode();
+
+        Assert.assertTrue(isDarkMode);
+        Files.deleteIfExists(file.toPath());
+    }
+
+    @Test
+    public void getTheme() throws IOException {
+        File file = getFile();
+        Files.deleteIfExists(file.toPath());
+        StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        String theme = studentModel.getStudent("ianspryn").getTheme();
+
+        Assert.assertEquals("pink", theme);
+        Files.deleteIfExists(file.toPath());
+    }
+
+    @Test
+    public void setAndGetTheme() throws IOException {
+        File file = getFile();
+        Files.deleteIfExists(file.toPath());
+        StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        studentModel.getStudent("ianspryn").setTheme("purple");
+
+        StudentModel studentModel2 = new StudentModel(new LessonModel());
+        studentModel2.addStudent("ianspryn","Ian","Spryn");
+        studentModel2.initializeStudent("ianspryn");
+        String theme = studentModel2.getStudent("ianspryn").getTheme();
+
+        Assert.assertEquals("purple", theme);
+        Files.deleteIfExists(file.toPath());
+    }
+
+    /*
     Chapter Class
      */
     @Test
     public void getChapterProgress() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -121,7 +199,7 @@ public class StudentModelTest {
 
     @Test
     public void getQuizScores() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -141,7 +219,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastQuizScoreWithScores() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -158,7 +236,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastQuizScoreWithSingleScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -174,7 +252,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastQuizScoreWithNoScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -189,7 +267,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageQuizScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -208,7 +286,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageQuizScoreWithOneScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -224,7 +302,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageQuizScoreWithNoScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -243,7 +321,7 @@ public class StudentModelTest {
 
     @Test
     public void getExamScores() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -263,7 +341,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastExamScoreWithScores() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -280,7 +358,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastExamScoreWithSingleScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -296,7 +374,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastExamScoreWithNoScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -311,7 +389,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageExamScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -330,7 +408,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageExamScoreWithOneScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -346,7 +424,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageExamScoreWithNoScore() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -377,7 +455,7 @@ public class StudentModelTest {
 
     @Test
     public void getStudentFirstNameXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -393,7 +471,7 @@ public class StudentModelTest {
 
     @Test
     public void getStudentLastNameXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -409,7 +487,7 @@ public class StudentModelTest {
 
     @Test
     public void getStudentFullNameXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -424,11 +502,42 @@ public class StudentModelTest {
     }
 
     /*
+    Settings
+     */
+    @Test
+    public void setAndGetDarkModeXML() throws IOException {
+        File file = getFile();
+        Files.deleteIfExists(file.toPath());
+        StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        studentModel.getStudent("ianspryn").setDarkMode(true);
+        boolean isDarkMode = studentModel.getStudent("ianspryn").getDarkMode();
+
+        Assert.assertTrue(isDarkMode);
+        Files.deleteIfExists(file.toPath());
+    }
+
+    @Test
+    public void setAndGetThemeXML() throws IOException {
+        File file = getFile();
+        Files.deleteIfExists(file.toPath());
+        StudentModel studentModel = new StudentModel(new LessonModel());
+        studentModel.addStudent("ianspryn","Ian","Spryn");
+        studentModel.initializeStudent("ianspryn");
+        studentModel.getStudent("ianspryn").setTheme("purple");
+        String theme = studentModel.getStudent("ianspryn").getTheme();
+
+        Assert.assertEquals("purple", theme);
+        Files.deleteIfExists(file.toPath());
+    }
+
+    /*
     Chapter Class
      */
     @Test
     public void getChapterProgressXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -450,7 +559,7 @@ public class StudentModelTest {
 
     @Test
     public void getQuizScoresXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -472,7 +581,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastQuizScoreWithScoresXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -491,7 +600,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastQuizScoreWithSingleScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -509,7 +618,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastQuizScoreWithNoScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -526,7 +635,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageQuizScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -547,7 +656,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageQuizScoreWithOneScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -565,7 +674,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageQuizScoreWithNoScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -586,7 +695,7 @@ public class StudentModelTest {
 
     @Test
     public void getExamScoresXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -608,7 +717,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastExamScoreWithScoresXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.initializeStudent("ianspryn");
@@ -627,7 +736,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastExamScoreWithSingleScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.initializeStudent("ianspryn");
@@ -645,7 +754,7 @@ public class StudentModelTest {
 
     @Test
     public void getLastExamScoreWithNoScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -662,7 +771,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageExamScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -683,7 +792,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageExamScoreWithOneScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");
@@ -701,7 +810,7 @@ public class StudentModelTest {
 
     @Test
     public void getAverageExamScoreWithNoScoreXML() throws IOException {
-        File file = new File("src/com/magis/app/resources/students.xml");
+        File file = getFile();
         Files.deleteIfExists(file.toPath());
         StudentModel studentModel = new StudentModel(new LessonModel());
         studentModel.addStudent("ianspryn","Ian","Spryn");

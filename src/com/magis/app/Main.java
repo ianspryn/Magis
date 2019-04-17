@@ -7,17 +7,12 @@ import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main extends Application{
 
@@ -47,8 +42,9 @@ public class Main extends Application{
         });
 
         scene = new Scene(new BorderPane(), width, height);
-        scene.getStylesheets().add("com/magis/app/css/style.css");
         window.setScene(scene);
+        //default to light, with pink
+        scene.getStylesheets().addAll("com/magis/app/css/style.css", "com/magis/app/css/lightmode.css", "com/magis/app/css/pink.css");
 
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);

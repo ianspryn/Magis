@@ -46,7 +46,7 @@ public class SmartContinue {
                 text2 = new Text(chapter.getTitle());
                 text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
                 text3 = new Text(" on ");
-                text4 = new Text("page " + Integer.toString((student.getRecentPage() + 1)));
+                text4 = new Text("page " + (student.getRecentPage() + 1));
                 text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
                 text5 = new Text(".");
             }
@@ -55,6 +55,9 @@ public class SmartContinue {
             text1 = new Text("Looks like my dumb AI thinks you're ready for a quiz/test. How 'bout it?");
             lastPlaceSubText.getChildren().add(text1);
         }
+        text1.getStyleClass().add("chapter-description-text");
+
+
         box.getChildren().addAll(lastPlaceText, lastPlaceSubText);
         return box;
     }

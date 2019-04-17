@@ -1,0 +1,33 @@
+.lesson-side-panel-text {
+    -fx-text-fill: #C8E6C9; /* green 100 */
+}
+
+.sidebar, .sidebar-scrollpane {
+    -fx-background-color: #2E7D32; /* green 800 */
+    -fx-background: #2E7D32; /* green 800 */
+}
+
+.jfx-button-raised-color {
+    -fx-background-color: #43A047; /* green 600 */
+}
+
+.jfx-button-flat-color {
+    -fx-text-fill: #43A047; /* green 600 */
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: #A5D6A7; /* green 200 */
+}
+
+.menu-bar {
+    -fx-background-color: #2E7D32 /* green 800 */
+}
+
+.title-bar {
+    -fx-background-color: #388E3C; /* green 700 */
+}
+
+.jfx-text-field, .jfx-password-field {
+    -jfx-focus-color: #43A047; /* green 600 */
+    -jfx-unfocus-color: #C8E6C9; /* green 100 */
+}

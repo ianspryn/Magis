@@ -32,10 +32,13 @@ public class UIComponents {
         hBox.getStyleClass().add("title-bar");
 
         Button minimize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.minimize, 12);
+        minimize.getStyleClass().add("material-icons-light");
         minimize.setOnAction(e -> Main.window.setIconified(true));
         Button maximize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.maximize, 12);
+        maximize.getStyleClass().add("material-icons-light");
         maximize.setOnAction(e -> Main.window.setFullScreen(!Main.window.isFullScreen()));
         Button close = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.close, 12);
+        close.getStyleClass().add("material-icons-light");
 
         hBox.getChildren().addAll(minimize, maximize, close);
 
@@ -76,13 +79,14 @@ public class UIComponents {
         button.setPickOnBounds(true);
         button.setGraphic(path);
         button.setAlignment(Pos.CENTER);
-        button.getStyleClass().add("icon-button");
+        button.getStyleClass().addAll("icon-button");
 
         return button;
     }
 
     public static Button getHomeButton() {
         Button button = CreateSVGIconButton(MaterialIcons.home, 50);
+        button.getStyleClass().add("material-icons-light-solid");
         button.setDisable(true);
         button.setStyle("-fx-opacity: 1.0");
         return button;

@@ -186,6 +186,16 @@ public class StudentModel {
         lastNameElement.appendChild(document.createTextNode(lastName));
         student.appendChild(lastNameElement);
 
+        //settings elements
+        Element settingsElement = document.createElement("settings");
+        student.appendChild(settingsElement);
+        Element darkmodeElement = document.createElement("darkmode");
+        darkmodeElement.appendChild(document.createTextNode("FALSE"));
+        settingsElement.appendChild(darkmodeElement);
+        Element themeElement = document.createElement("theme");
+        themeElement.appendChild(document.createTextNode("pink"));
+        settingsElement.appendChild(themeElement);
+
         //recent activity elements
         Element recentElement = document.createElement("recent");
         student.appendChild(recentElement);
@@ -236,6 +246,8 @@ public class StudentModel {
         private String firstName;
         private String lastName;
         private String fullName;
+        private boolean darkMode;
+        private String theme;
         private int recentChapter;
         private int recentPage;
         private ArrayList<ChapterModel> chapters;
@@ -258,6 +270,10 @@ public class StudentModel {
             return fullName;
         }
 
+        public boolean getDarkMode() { return darkMode; }
+
+        public String getTheme() { return theme; }
+
         public int getRecentChapter() { return recentChapter; }
 
         public int getRecentPage() { return recentPage; }
@@ -265,7 +281,67 @@ public class StudentModel {
         public void setRecentPlace(int chapterIndex, int pageIndex) {
             recentChapter = chapterIndex;
             recentPage = pageIndex;
+        }
 
+        public void setDarkMode(boolean value) {
+            darkMode = value;
+            writeSettings();
+        }
+
+        public void setTheme(String color) {
+            switch(color) {
+                case "pink":
+                case "purple":
+                case "cyan":
+                case "green":
+                case "blue-gray":
+                    theme = color;
+                    break;
+                default:
+                    System.err.println("Unrecognized theme color of \"" + color + "\"");
+            }
+            theme = color;
+            writeSettings();;
+        }
+
+        private void writeSettings() {
+            //add score to the XML file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            Document document = null;
+            try {
+                assert documentBuilder != null;
+                document = documentBuilder.parse(filePath);
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            assert document != null;
+            Element root = document.getDocumentElement();
+            NodeList students = root.getElementsByTagName("student");
+            Node student = null;
+            for (int i = 0; i < students.getLength(); i++) {
+                student = students.item(i);
+                //find the current student
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                    break;
+                }
+            }
+            Element studentElement = (Element) student;
+            assert studentElement != null;
+
+            Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
+            Node darkmode = settingsElement.getElementsByTagName("darkmode").item(0);
+            Node theme  = settingsElement.getElementsByTagName("theme").item(0);
+            darkmode.setTextContent(Boolean.toString(this.darkMode));
+            theme.setTextContent(this.theme);
+
+            //write to XML file
+            UpdateModel.updateXML(new DOMSource(document), filePath);
         }
 
         public ChapterModel getChapter(int chapterIndex) {
@@ -438,6 +514,13 @@ public class StudentModel {
             this.firstName = studentElement.getElementsByTagName("firstname").item(0).getTextContent();
             this.lastName = studentElement.getElementsByTagName("lastname").item(0).getTextContent();
             this.fullName = firstName + " " + lastName;
+
+            //apply user-specific settings
+            Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
+            Node darkMode = settingsElement.getElementsByTagName("darkmode").item(0);
+            Node theme = settingsElement.getElementsByTagName("theme").item(0);
+            this.darkMode = Boolean.parseBoolean(darkMode.getTextContent());
+            this.theme = theme.getTextContent();
 
             Element recentElement = (Element) studentElement.getElementsByTagName("recent").item(0);
             Node recentChapter = recentElement.getElementsByTagName("chapter").item(0);

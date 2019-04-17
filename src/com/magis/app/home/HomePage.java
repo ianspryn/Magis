@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
+import javax.sound.midi.Receiver;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,6 +40,7 @@ public class HomePage {
     private VBox masterVbox;
     private VBox vBox;
     private StudentModel.Student student;
+    private ArrayList<Thread> threads;
 
     private static String[] greetings = {"Hello:!", "Hey there:!", "Welcome:!", "Good day:!", "How goes it:?", "What's happening:?"};
     private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
@@ -58,9 +60,12 @@ public class HomePage {
         for (int i = 0; i < numChapters; i++) {
             ringProgressIndicators.get(i).setProgress(student.getChapter(i).getProgress());
         }
-        recentBox.getChildren().clear();
-        recentBox.getChildren().add(SmartContinue.generate());
-        greetingLabel.setText(generateGreetingText());
+        if (student.getRecentPage() != -1) { //make sure we don't add to the recentBox until student visited a page
+            recentBox.setVisible(true);
+            recentBox.getChildren().clear();
+            recentBox.getChildren().add(SmartContinue.generate());
+            greetingLabel.setText(generateGreetingText());
+        }
     }
 
     public void Page() {
@@ -83,6 +88,7 @@ public class HomePage {
     private HomePage() {
         student = Main.studentModel.getStudent(Main.username);
         ringProgressIndicators = new ArrayList<>();
+        threads = new ArrayList<>();
         /*
         Master
          */
@@ -107,21 +113,22 @@ public class HomePage {
 
 
         //Last Activity
+        recentBox = new HBox();
+        recentBox.setVisible(false);
+        vBox.getChildren().add(recentBox);
+        //master box
+        recentBox.getStyleClass().add("recent-box");
+        recentBox.setMaxWidth(350);
+        recentBox.setMinHeight(100);
+        recentBox.setAlignment(Pos.CENTER_LEFT);
+
+        recentBox.setOnMouseClicked(e -> goToLesson(borderPane, student.getRecentChapter(), true));
+        recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
         if (student.getRecentChapter() > -1) {
-            //master box
-            recentBox = new HBox();
-            recentBox.getStyleClass().add("recent-box");
-            recentBox.setMaxWidth(350);
-            recentBox.setMinHeight(100);
-            recentBox.setAlignment(Pos.CENTER_LEFT);
-
-            recentBox.setOnMouseClicked(e -> goToLesson(borderPane, student.getRecentChapter(), true));
-            recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-            recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
             recentBox.getChildren().add(SmartContinue.generate());
-
-            vBox.getChildren().add(recentBox);
+            recentBox.setVisible(true);
         }
 
         int numChapters = Main.lessonModel.getChapters().size();
@@ -137,8 +144,18 @@ public class HomePage {
             vBox.getChildren().add(chapterBox);
             chapterBoxes.add(chapterBox);
 
-//            new Thread(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex))).start();
-            Platform.runLater(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
+            Thread thread = new Thread(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
+            thread.start();
+            threads.add(thread);
+//            Platform.runLater(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
+        }
+        //wait for the threads to finish, else we *sometimes* get a "Not on FX application thread" error. Only sometimes. And only on one page. Very weird bug.
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
          /*
@@ -182,7 +199,7 @@ public class HomePage {
         masterVbox.getChildren().add(vBox);
 
         ScrollPane scrollPane = new ScrollPane();;
-        scrollPane.getStyleClass().add("chapter-box-scrollpane");
+        scrollPane.getStyleClass().add("master-scrollpane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setFitToWidth(true);

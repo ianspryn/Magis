@@ -1,0 +1,60 @@
+/* a slightly darker background for screens with lower contrast */
+.borderpane-lesson, .borderpane-test, .master-scrollpane,
+.lesson-page-content, .quiz-page-content, .navigation-content {
+    -fx-background-color: #111;
+    -fx-background: #111;
+}
+
+.chapter-description-text {
+    -fx-text-fill: #eee;
+    -fx-fill: #eee;
+}
+
+.lesson-text {
+    -fx-text-fill: #fff1f7;
+}
+
+.jfx-text-field, .jfx-password-field {
+    -fx-prompt-text-fill: #181818;
+}
+
+/*
+The greeting ("Hello, Ian!") on the home page
+*/
+.greeting-text {
+    -fx-text-fill: #eee;
+}
+
+/* the chevron text for navigating pages */
+.navigation-text {
+    -fx-text-fill: #eee;
+}
+
+.material-icons-light:pressed .button-icon,
+.material-icons-light:hover .button-icon {
+    -fx-fill: #ccc;
+}
+
+/* things like the edit icon etc */
+.material-icons-dark {
+    -fx-fill: #fff;
+}
+
+.material-icons-dark:pressed .button-icon,
+.material-icons-dark:hover .button-icon {
+    -fx-fill: #ccc;
+}
+
+.chapter-box, .recent-box, .settings-box {
+    -fx-background-color: #272727;
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+}
+
+/*text for grade result inside circle*/
+.grade-text {
+    -fx-fill: #272727;
+}
+
+.settings-page, .settings-page-text {
+    -fx-text-fill: #fff;
+}
