@@ -168,6 +168,40 @@ public class MiscOOPQuestions {
         }
     }
 
+    public void getSuperMethodQuestion(){
+        question = "";
+        answers.clear();
+
+        int maxSpeed1 = rand.nextInt(200);
+        int maxSpeed2 = rand.nextInt(200);
+
+        question = "public class Vehicle {\n\tint maxSpeed = "+maxSpeed1+";\n}\n\n";
+
+        answers.add(""+maxSpeed1);
+        answers.add(""+maxSpeed2);
+
+        int thisOrSuper = rand.nextInt();
+
+        if(thisOrSuper == 0) {
+            question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}";
+
+            correctAnswer = answers.get(1);
+        }
+        else {
+            question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.maxSpeed);\n\t}\n}";
+
+            correctAnswer = answers.get(0);
+        }
+
+        answers.add("Null");
+        answers.add("IllegalArgumentException");
+        answers.add("Unknown");
+
+        question += "\n\nWhat is the result of calling \"display\" in the \"Car\" class?";
+    }
+
     public ArrayList<String> getAnswers() { return answers; }
 
     public String getQuestion(){
