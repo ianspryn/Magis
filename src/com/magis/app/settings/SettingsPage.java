@@ -6,6 +6,7 @@ import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
+import com.magis.app.login.Login;
 import com.magis.app.models.StudentModel;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
@@ -20,15 +21,18 @@ import javafx.scene.shape.Rectangle;
 
 public class SettingsPage {
 
-    private static StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+    private static StudentModel.Student student = Main.studentModel.getStudent();
 
     public static void Page() {
-        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+        StudentModel.Student student = Main.studentModel.getStudent();
 
         /*
         Master
          */
+        StackPane master = new StackPane();
+        master.getStyleClass().add("background");
         ScrollPane scrollPane = new ScrollPane();
+        UIComponents.fadeAndTranslate(scrollPane,0.2,0.2,0,0,-10,0);
         scrollPane.getStyleClass().add("master-scrollpane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -57,7 +61,7 @@ public class SettingsPage {
         HBox backButtonContainer = new HBox();
         backButtonContainer.setAlignment(Pos.CENTER);
         JFXButton backButton = new JFXButton("Back");
-        backButton.setOnMouseClicked(e -> HomePage.getInstance().Page());
+        backButton.setOnMouseClicked(e -> HomePage.goHome(scrollPane));
         backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
 
         backButtonContainer.getChildren().add(backButton);
@@ -96,7 +100,7 @@ public class SettingsPage {
         HBox darkModeTextContainer = new HBox();
         darkModeTextContainer.setPadding(new Insets(20,0,0,0));
 
-        Label darkModeText = new Label("Enable dark mode");
+        Label darkModeText = new Label("Use dark mode");
         darkModeText.getStyleClass().add("settings-page-text");
 
         darkModeTextContainer.getChildren().add(darkModeText);
@@ -146,6 +150,32 @@ public class SettingsPage {
         vBox.getChildren().add(themeAnchorPane);
 
         /*
+        Disable Animations
+         */
+        AnchorPane animationsAnchorPane = new AnchorPane();
+        HBox animationTextContainer = new HBox();
+        animationTextContainer.setPadding(new Insets(20,0,0,0));
+
+        Label animationText = new Label("Use animations");
+        animationText.getStyleClass().add("settings-page-text");
+
+        animationTextContainer.getChildren().add(animationText);
+
+        JFXToggleButton animationToggle = new JFXToggleButton();
+        animationToggle.setSelected(student.useAnimations());
+        animationToggle.setOnAction(e -> {
+            if (!animationToggle.isSelected()) HomePage.getInstance().disableAnimations();
+            student.setAnimations(animationToggle.isSelected());
+            Main.useAnimations = animationToggle.isSelected();
+        });
+
+        animationsAnchorPane.getChildren().addAll(animationTextContainer, animationToggle);
+        animationsAnchorPane.setLeftAnchor(animationText, 0.0);
+        animationsAnchorPane.setRightAnchor(animationToggle,0.0);
+
+        vBox.getChildren().add(animationsAnchorPane);
+
+        /*
         Delete user
          */
         HBox deleteUserContainer = new HBox();
@@ -154,11 +184,21 @@ public class SettingsPage {
 
         JFXButton deleteUser = new JFXButton("Delete Account");
         deleteUser.getStyleClass().add("delete-user-button");
+        deleteUser.setOnMouseClicked(e -> {
+            if (UIComponents.confirmMessage("Delete user", "Do you wish to delete your profile?")) { //confirm user wants to deleteUser
+                if (UIComponents.confirmMessage("Delete user", "Are you sure? This action cannot be undone!")) { //double confirm with user
+                    Main.studentModel.deleteUser(Main.username);
+                    Login.Page();
+                }
+            }
+        });
 
         deleteUserContainer.getChildren().add(deleteUser);
         vBox.getChildren().add(deleteUserContainer);
 
-        Main.setScene(scrollPane, "Settings");
+        master.getChildren().add(scrollPane);
+        StackPane.setAlignment(scrollPane, Pos.CENTER);
+        Main.setScene(master, "Settings");
     }
 
     private static Rectangle colorRectangle(String hexColor, String name) {

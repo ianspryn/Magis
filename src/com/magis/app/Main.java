@@ -12,7 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.awt.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class Main extends Application{
 
@@ -24,7 +32,8 @@ public class Main extends Application{
     public static TestsModel testsModel;
     public static String username = "";
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
-    public static boolean isLoggedIn = false;
+    public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
+    public static boolean useAnimations = true;
     public static double width = -1, height = -1;
 
     @Override
@@ -57,11 +66,11 @@ public class Main extends Application{
     public void closeProgram() {
         boolean close = true;
         if (takingTest) {
-            close = UIComponents.confirmClose();
+            String title = "Exit Test";
+            String content = "Are you sure you want to exit? All test progress will be lost!";
+            close = UIComponents.confirmMessage(title, content);
         }
-        if (isLoggedIn) {
-            Main.studentModel.getStudent(Main.username).writePageProgress();
-        }
+        if (isLoggedIn) Main.studentModel.getStudent().writePageProgress();
         if (close) window.close();
     }
 

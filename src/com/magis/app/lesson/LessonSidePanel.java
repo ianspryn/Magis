@@ -3,6 +3,7 @@ package com.magis.app.lesson;
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.models.LessonModel;
+import com.magis.app.models.StudentModel;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -25,8 +27,9 @@ public class LessonSidePanel {
     private VBox contentPagesVBox;
     private HBox currentPage;
     private PageLabels pageLabels;
-    private ImageView verticalLine;
-    private ImageView horizontalLine;
+    private Rectangle verticalLine;
+    private Rectangle horizontalLine;
+    private StudentModel.Student student;
 
     private int currentPageIndex;
 
@@ -42,9 +45,10 @@ public class LessonSidePanel {
         pageLabels = new PageLabels(pages.size() + hasQuiz + hasTest);
         this.hasQuiz = hasQuiz;
         this.hasTest = hasTest;
-        verticalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
-        horizontalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
+        verticalLine = new Rectangle();
+        horizontalLine = new Rectangle();
         currentPageIndex = 0;
+        student = Main.studentModel.getStudent();
     }
 
     public ScrollPane getSidePanel() {
@@ -57,9 +61,9 @@ public class LessonSidePanel {
         chapterTitle.setMaxWidth(300);
         chapterTitle.setWrapText(true);
 
-        horizontalLine.setPreserveRatio(false);
-        horizontalLine.setFitHeight(2);
-        horizontalLine.setFitWidth(250);
+        horizontalLine.setHeight(2);
+        horizontalLine.setWidth(250);
+        horizontalLine.getStyleClass().add("lesson-rectangle");
 
         UIComponents.fadeAndTranslate(chapterTitle, 0.15, 0.2,-10,0,0,0);
         UIComponents.fadeAndTranslate(horizontalLine, 0.15, 0.2,-10,0,0,0);
@@ -70,21 +74,16 @@ public class LessonSidePanel {
         masterVBox.setSpacing(10);
         contentPagesVBox.setSpacing(10);
 
-        verticalLine.setPreserveRatio(false);
-        verticalLine.setFitHeight(25);
-        verticalLine.setFitWidth(5);
-
-
+        verticalLine.setHeight(25);
+        verticalLine.setWidth(5);
+        verticalLine.getStyleClass().add("lesson-rectangle");
 
         pageLabels.getLabel(0).setPadding(new Insets( 0, 0, 0, 10));
         pageLabels.getLabel(0).getStyleClass().add("studentlesson-side-panel-text");
         getAndSetLabelText(0);
 
         //listeners
-        pageLabels.getLabel(0).setOnMouseClicked(e -> {
-            lessonPageContent.update(0);
-            update(0);
-        });
+        pageLabels.getLabel(0).setOnMouseClicked(e -> LessonPage.updatePage(0));
         pageLabels.getLabel(0).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         pageLabels.getLabel(0).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -127,10 +126,7 @@ public class LessonSidePanel {
         pageLabels.getLabel(index).getStyleClass().add("lesson-side-panel-text");
 
         //listeners
-        pageLabels.getLabel(index).setOnMouseClicked(e -> {
-            lessonPageContent.update(index);
-            update(index);
-        });
+        pageLabels.getLabel(index).setOnMouseClicked(e -> LessonPage.updatePage(index));
         pageLabels.getLabel(index).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         pageLabels.getLabel(index).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 

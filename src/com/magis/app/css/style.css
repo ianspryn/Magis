@@ -35,10 +35,6 @@
     -fx-faint-focus-color: transparent;
 }
 
-.borderpane-home {
-
-}
-
 .separator-home {
 
 }
@@ -218,7 +214,6 @@ The greeting ("Hello, Ian!") on the home page
 /* the text right below the home icon in the top left corner */
 .home-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #e397b1;
     -fx-padding: 12px 0 0 0;
 }
 
@@ -242,6 +237,6 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #fff;
 }
 
-.material-icons-light-solid {
+.material-icons-light-solid .button-icon {
     -fx-fill: #fff;
 }

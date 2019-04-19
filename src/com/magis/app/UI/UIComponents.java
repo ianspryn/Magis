@@ -48,15 +48,12 @@ public class UIComponents {
     public static StackPane createNavigationButton(String chevron) {
         StackPane button = new StackPane();
         Circle leftCircle = new Circle();
-        leftCircle.getStyleClass().add("drop-shadow");
+        leftCircle.getStyleClass().addAll("navigation-button","drop-shadow");
         leftCircle.setRadius((35));
-        leftCircle.setFill(Paint.valueOf("ffffff"));
         Text leftChevron = new Text(chevron);
         leftChevron.getStyleClass().add("navigation-text");
         button.getChildren().addAll(leftCircle, leftChevron);
         button.setAlignment(Pos.CENTER);
-        button.setOnMousePressed(e ->  leftCircle.setFill(Paint.valueOf("ededed")));
-        button.setOnMouseReleased(e ->  leftCircle.setFill(Paint.valueOf("ffffff")));
         button.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         button.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
         StackPane.setMargin(leftChevron, new Insets(0,0,8,0)); //center "<"
@@ -79,7 +76,7 @@ public class UIComponents {
         button.setPickOnBounds(true);
         button.setGraphic(path);
         button.setAlignment(Pos.CENTER);
-        button.getStyleClass().addAll("icon-button");
+        button.getStyleClass().add("icon-button");
 
         return button;
     }
@@ -128,14 +125,14 @@ public class UIComponents {
     }
 
     /**
-     * Pop up box confirming the user's action of exiting
-     * @return the user's choice, yes/true = exit, no/false = stay
+     * Pop up box confirming the user's action
+     * @return the user's choice, yes/true = continue, no/false = stay
      */
-    public static boolean confirmClose() {
+    public static boolean confirmMessage(String title, String content) {
         AtomicBoolean result = new AtomicBoolean(false);
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit Test");
-        alert.setContentText("Are you sure you want to exit? All test progress will be lost!");
+        alert.setTitle(title);
+        alert.setContentText(content);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.NO);
         ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         alert.getButtonTypes().setAll(cancelButton, okButton);
@@ -157,8 +154,10 @@ public class UIComponents {
      * @param toY where the node should end in its animation for the y-axis
      */
     public static void fadeAndTranslate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+        if (!Main.useAnimations) return;
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
+        fadeTransition.setInterpolator(Interpolator.EASE_OUT);
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
         //"hack" to hide all the chapters
@@ -167,6 +166,7 @@ public class UIComponents {
 
         //move down
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setInterpolator(Interpolator.EASE_OUT);
         translateTransition.setFromX(fromX);
         translateTransition.setToX(toX);
         translateTransition.setFromY(fromY);
@@ -192,8 +192,10 @@ public class UIComponents {
      * @param toY where the node should end in its animation for the y-axis
      */
     public static void fadeAndTranslate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+        if (!Main.useAnimations) return;
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
+        fadeTransition.setInterpolator(Interpolator.EASE_OUT);
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
         //"hack" to initially hide the component
@@ -202,6 +204,7 @@ public class UIComponents {
 
         //move down
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setInterpolator(Interpolator.EASE_OUT);
         translateTransition.setFromX(fromX);
         translateTransition.setToX(toX);
         translateTransition.setFromY(fromY);
@@ -217,10 +220,12 @@ public class UIComponents {
     }
 
     public static void translate(Node node, double duration, float fromX, float toX, float fromY, float toY) {
+        if (!Main.useAnimations) return;
         if (duration == 0) {
             System.err.println("Duration is set to 0 seconds. In order to animate, it must be greater than 0");
         }
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setInterpolator(Interpolator.EASE_BOTH);
         translateTransition.setFromX(fromX);
         translateTransition.setToX(toX);
         translateTransition.setFromY(fromY);
@@ -229,12 +234,14 @@ public class UIComponents {
         translateTransition.play();
     }
 
-    public static void scale(Node node, double duration, double scaleTo) {
+    public static void scale(Node node, double duration, double scaleToX, double scaleToY) {
+        if (!Main.useAnimations) return;
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(duration), node);
+        scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
         scaleTransition.setFromX(node.getScaleX());
-        scaleTransition.setToX(scaleTo);
+        scaleTransition.setToX(scaleToX);
         scaleTransition.setFromY(node.getScaleY());
-        scaleTransition.setToY(scaleTo);
+        scaleTransition.setToY(scaleToY);
 
         scaleTransition.play();
     }

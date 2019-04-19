@@ -4,6 +4,7 @@ import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
@@ -12,18 +13,24 @@ public class LessonPage {
     static int currentPage;
     static LessonSidePanel lessonSidePanel;
     static LessonPageContent lessonPageContent;
+    static ScrollPane lessonPageScrollPane;
+    public  static StackPane leftButton;
+    public static StackPane rightButton;
     static boolean hasQuiz = false;
     static int numPages;
 
     public static void Page(int chapterIndex, boolean continueWhereLeftOff) {
         //get the recent page before it's overwritten to 0 in case the user chose to jump back where they left off
-        int recentPage = Main.studentModel.getStudent(Main.username).getRecentPage();
+        int recentPage = Main.studentModel.getStudent().getRecentPage();
         currentPage = 0;
         String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
         int hasQuiz = Main.quizzesModel.hasQuiz(chapterTitle) ? 1 : 0;
         int hasTest = Main.testsModel.hasTest(chapterTitle) ? 1 : 0;
 
         numPages = Main.lessonModel.getChapter(chapterIndex).getNumPages() + hasQuiz + hasTest;
+
+        StackPane master = new StackPane();
+        master.getStyleClass().add("background");
 
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-lesson");
@@ -36,7 +43,9 @@ public class LessonPage {
         HBox homeBox = UIComponents.createHomeBox();
         homeBox.setOnMouseClicked(e -> {
             if (Main.takingTest) {
-                if (UIComponents.confirmClose()) {
+                String title = "Exit Test";
+                String content = "Are you sure you want to exit? All test progress will be lost!";
+                if (UIComponents.confirmMessage(title, content)) {
                     Main.takingTest = false;
                     HomePage.goHome(borderPane);
                 }
@@ -53,7 +62,7 @@ public class LessonPage {
         lessonArea.setStyle("-fx-box-border: transparent");
 
         //Lesson content
-        ScrollPane lessonPageScrollPane = new ScrollPane();
+        lessonPageScrollPane = new ScrollPane();
         lessonPageScrollPane.setFitToWidth(true);
         lessonPageScrollPane.setFitToHeight(true);
         lessonPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -77,18 +86,19 @@ public class LessonPage {
         navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
-        StackPane leftButton = UIComponents.createNavigationButton("<");
+        leftButton = UIComponents.createNavigationButton("<");
+        leftButton.setVisible(false); //default to invisible since we're on the first page
         leftButton.setOnMouseClicked(e -> {
             if (currentPage > 0) {
-                updatePage(-1);
+                updatePage(currentPage - 1);
             }
         });
 
         //Right navigation
-        StackPane rightButton = UIComponents.createNavigationButton(">");
+        rightButton = UIComponents.createNavigationButton(">");
         rightButton.setOnMouseClicked(e -> {
             if (currentPage < numPages - 1) {
-                updatePage(1);
+                updatePage(currentPage + 1);
             }
         });
 
@@ -101,17 +111,27 @@ public class LessonPage {
 
         borderPane.setCenter(lessonArea);
 
-        if (continueWhereLeftOff) {
-            lessonSidePanel.update(recentPage);
-            lessonPageContent.update(recentPage);
-        }
-        Main.setScene(borderPane, Main.lessonModel.getChapter(chapterIndex).getTitle());
+        if (continueWhereLeftOff) updatePage(recentPage);
+
+        master.getChildren().add(borderPane);
+        StackPane.setAlignment(borderPane, Pos.CENTER);
+
+        Main.setScene(master, Main.lessonModel.getChapter(chapterIndex).getTitle());
     }
 
-    private static void updatePage(int move) {
-        //currentPage += -1;      or      currentPage += 1;
-        currentPage += move;
+    /**
+     * Update the page page, including the side panel and the page content
+     * @param page the new page index
+     */
+    public static void updatePage(int page) {
+        currentPage = page;
+        lessonPageScrollPane.setVvalue(0); //reset the scroll bar to the top
         lessonPageContent.update(currentPage);
         lessonSidePanel.update(currentPage);
+        //hide the some of the navigation buttons if we're at the beginning or end of the pages
+        if (currentPage == 0) leftButton.setVisible(false);
+        else leftButton.setVisible(true);
+        if (currentPage == numPages - 1) rightButton.setVisible(false);
+        else rightButton.setVisible(true);
     }
 }

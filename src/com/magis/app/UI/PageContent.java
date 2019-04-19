@@ -1,5 +1,7 @@
 package com.magis.app.UI;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSpinner;
 import com.magis.app.Main;
 import com.magis.app.models.LessonModel;
 import com.magis.app.test.quiz.QuizPage;
@@ -51,8 +53,8 @@ public class PageContent {
 
     public void buildAsTestIntroPage(String testType) {
         masterContent.setAlignment(Pos.CENTER);
-        Button button = new Button("Click to begin " + testType);
-        button.getStyleClass().addAll("start-test-button", "drop-shadow");
+        JFXButton button = new JFXButton("Click to begin " + testType);
+        button.getStyleClass().addAll("start-test-button", "jfx-button-raised", "jfx-button-raised-color");
         button.setOnAction(e -> {
             Main.takingTest = true;
             //todo: Do I need to make a separate TestPage.Page()?

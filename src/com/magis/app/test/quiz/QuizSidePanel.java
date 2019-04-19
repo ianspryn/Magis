@@ -1,5 +1,6 @@
 package com.magis.app.test.quiz;
 
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
@@ -12,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -27,8 +29,8 @@ public class QuizSidePanel {
     private HBox currentPage;
     private int numQuizQuestionPages;
     private PageLabels pageLabels;
-    private ImageView verticalLine;
-    private ImageView horizontalLine;
+    private Rectangle verticalLine;
+    private Rectangle horizontalLine;
     private int currentPageIndex;
 
     public QuizSidePanel(int chapterIndex, ArrayList<QuizPageContent> quizPages, int numQuestions, ScrollPane quizPageScrollPane, TestPageContent testPageContent) {
@@ -40,8 +42,8 @@ public class QuizSidePanel {
         this.masterVBox = new VBox();
         this.pageLabels = new PageLabels(quizPages.size());
         this.testPageContent = testPageContent;
-        verticalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
-        horizontalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
+        verticalLine = new Rectangle();
+        horizontalLine = new Rectangle();
         currentPageIndex = 0;
     }
 
@@ -58,9 +60,9 @@ public class QuizSidePanel {
         chapterTitle.setMaxWidth(300);
         chapterTitle.setWrapText(true);
 
-        horizontalLine.setPreserveRatio(false);
-        horizontalLine.setFitHeight(2);
-        horizontalLine.setFitWidth(250);
+        horizontalLine.setHeight(2);
+        horizontalLine.setWidth(250);
+        horizontalLine.getStyleClass().add("lesson-rectangle");
 
         masterVBox.getChildren().addAll(chapterTitle, horizontalLine);
 
@@ -70,19 +72,14 @@ public class QuizSidePanel {
         this.contentPagesVBox = new VBox();
         this.currentPage = new HBox();
         contentPagesVBox.setSpacing(10);
-        verticalLine.setPreserveRatio(false);
-        verticalLine.setFitHeight(25);
-        verticalLine.setFitWidth(5);
+        verticalLine.setHeight(25);
+        verticalLine.setWidth(5);
+        verticalLine.getStyleClass().add("lesson-rectangle");
         pageLabels.getLabel(0).setPadding(new Insets( 0, 0, 0, 10));
-        if (firstTime) {
-            setLabelText(0);
-        }
+        if (firstTime) setLabelText(0);
 
         //listeners
-        pageLabels.getLabel(0).setOnMouseClicked(e -> {
-            quizPageScrollPane.setContent(testPageContent.getPageContent(0));
-            update(0);
-        });
+        pageLabels.getLabel(0).setOnMouseClicked(e -> QuizPage.updatePage(0));
         pageLabels.getLabel(0).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         pageLabels.getLabel(0).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -95,15 +92,10 @@ public class QuizSidePanel {
         for (int i = 1; i < pageLabels.getNumLabels(); i++) {
             int index = i;
             pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            if (firstTime) {
-                setLabelText(i);
-            }
+            if (firstTime) setLabelText(i);
 
             //listeners
-            pageLabels.getLabel(i).setOnMouseClicked(e -> {
-                quizPageScrollPane.setContent(testPageContent.getPageContent(index));
-                update(index);
-            });
+            pageLabels.getLabel(i).setOnMouseClicked(e -> QuizPage.updatePage(index));
             pageLabels.getLabel(i).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
             pageLabels.getLabel(i).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -117,6 +109,7 @@ public class QuizSidePanel {
 
         currentPageIndex = 0;
         scrollPane.setContent(masterVBox);
+        JFXScrollPane.smoothScrolling(scrollPane);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.getStyleClass().add("sidebar-scrollpane");

@@ -1,33 +1,52 @@
+/* Colors taken from https://material.io/design/color/the-color-system.html#tools-for-picking-colors */
+
+/* the text right below the home icon in the top left corner */
+.home-text {
+    -fx-text-fill: #80DEEA; /* Cyan 200*/
+}
+
+.circleindicator-container  {
+	circleindicator-color: #0097A7; /* Cyan 700 */
+}
+
 .lesson-side-panel-text {
-    -fx-text-fill: #B2EBF2; /* cyan 100 */
+    -fx-text-fill: #B2EBF2; /* Cyan 100 */
 }
 
 .sidebar, .sidebar-scrollpane {
-    -fx-background-color: #00838F; /* cyan 800 */
-    -fx-background: #00838F; /* cyan 800 */
+    -fx-background-color: #00838F; /* Cyan 800 */
+    -fx-background: #00838F; /* Cyan 800 */
+}
+
+.jfx-toggle-button {
+    -jfx-toggle-color: #00ACC1; /* Cyan 600 */
 }
 
 .jfx-button-raised-color {
-    -fx-background-color: #00ACC1; /* cyan 600 */
+    -fx-background-color: #00ACC1; /* Cyan 600 */
 }
 
 .jfx-button-flat-color {
-    -fx-text-fill: #00ACC1; /* cyan 600 */
+    -fx-text-fill: #00ACC1; /* Cyan 600 */
 }
 
 .jfx-rippler {
-    -jfx-rippler-fill: #80DEEA; /* cyan 200 */
+    -jfx-rippler-fill: #80DEEA; /* Cyan 200 */
 }
 
 .menu-bar {
-    -fx-background-color: #00838F /* cyan 800 */
+    -fx-background-color: #00838F /* Cyan 800 */
 }
 
 .title-bar {
-    -fx-background-color: #0097A7; /* cyan 700 */
+    -fx-background-color: #0097A7; /* Cyan 700 */
 }
 
 .jfx-text-field, .jfx-password-field {
-    -jfx-focus-color: #00ACC1; /* cyan 600 */
-    -jfx-unfocus-color: #B2EBF2; /* cyan 100 */
+    -jfx-focus-color: #00ACC1; /* Cyan 600 */
+    -jfx-unfocus-color: #B2EBF2; /* Cyan 100 */
+}
+
+.lesson-rectangle {
+    -fx-fill: #26C6DA; /* Cyan 400 */
 }

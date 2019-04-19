@@ -13,7 +13,7 @@ import javafx.scene.text.TextFlow;
 
 public class SmartContinue {
     public static VBox generate() {
-        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+        StudentModel.Student student = Main.studentModel.getStudent();
         VBox box = new VBox();
 
         //Title
@@ -26,36 +26,44 @@ public class SmartContinue {
         //Text description
         TextFlow lastPlaceSubText = new TextFlow();
         lastPlaceSubText.setPadding(new Insets(25,0,0,0));
-        lastPlaceSubText.getStyleClass().add("chapter-description-text");
         lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
 
-        Text text1, text2, text3, text4, text5;
+        Text text1 = new Text();
+        text1.getStyleClass().add("chapter-description-text");
+        Text text2 = new Text();
+        text2.getStyleClass().add("chapter-description-text");
+        Text text3 = new Text();
+        text3.getStyleClass().add("chapter-description-text");
+        Text text4 = new Text();
+        text4.getStyleClass().add("chapter-description-text");
+        Text text5 = new Text();
+        text5.getStyleClass().add("chapter-description-text");
+
         LessonModel.ChapterModel chapter = Main.lessonModel.getChapter(student.getRecentChapter());
 
 
         if (student.getRecentPage() < chapter.getNumPages()) {
-            text1 = new Text("Click here to return to your last activity with ");
+            text1.setText("Click here to return to your last activity with ");
             if (chapter.getPage(student.getRecentPage()).getTitle() != null) {
-                text2 = new Text(chapter.getTitle());
+                text2.setText(chapter.getTitle());
                 text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text3 = new Text(" on the page ");
-                text4 = new Text(chapter.getPage(student.getRecentPage()).getTitle());
+                text3.setText(" on the page ");
+                text4.setText(chapter.getPage(student.getRecentPage()).getTitle());
                 text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text5 = new Text(".");
+                text5.setText(".");
             } else {
-                text2 = new Text(chapter.getTitle());
+                text2.setText(chapter.getTitle());
                 text2.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text3 = new Text(" on ");
-                text4 = new Text("page " + (student.getRecentPage() + 1));
+                text3.setText(" on ");
+                text4.setText("page " + (student.getRecentPage() + 1));
                 text4.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-                text5 = new Text(".");
+                text5.setText(".");
             }
             lastPlaceSubText.getChildren().addAll(text1, text2, text3, text4, text5);
         } else {
-            text1 = new Text("Looks like my dumb AI thinks you're ready for a quiz/test. How 'bout it?");
+            text1.setText("Looks like my dumb AI thinks you're ready for a quiz/test. How 'bout it?");
             lastPlaceSubText.getChildren().add(text1);
         }
-        text1.getStyleClass().add("chapter-description-text");
 
 
         box.getChildren().addAll(lastPlaceText, lastPlaceSubText);

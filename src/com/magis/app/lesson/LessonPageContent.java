@@ -1,5 +1,6 @@
 package com.magis.app.lesson;
 
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.PageContent;
 import com.magis.app.models.LessonModel;
@@ -11,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
@@ -53,13 +55,13 @@ public class LessonPageContent {
         }
 
         //wait for the threads to finish, else we *sometimes* get a "Not on FX application thread" error. Only sometimes. And only on one page. Very weird bug.
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (Thread thread : threads) {
+//            try {
+//                thread.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
         if (hasQuiz > 0) {
@@ -84,14 +86,15 @@ public class LessonPageContent {
         //Make sure we don't try to mark the quiz/test intro page as a lesson page (we'll get an out of bounds if we do)
         if (pageIndex < Main.lessonModel.getChapter(chapterIndex).getNumPages()) {
             //Mark the page as visited
-            Main.studentModel.getStudent(Main.username).getChapter(chapterIndex).visitPage(pageIndex);
+            Main.studentModel.getStudent().getChapter(chapterIndex).visitPage(pageIndex);
         }
         //Last page visited
-        Main.studentModel.getStudent(Main.username).setRecentPlace(chapterIndex, pageIndex);
+        Main.studentModel.getStudent().setRecentPlace(chapterIndex, pageIndex);
 
         //set the page content
         masterContent = pageContents.get(pageIndex).getMasterContent();
         parentScrollPane.setContent(masterContent);
+        JFXScrollPane.smoothScrolling(parentScrollPane);
     }
 
     /**
@@ -104,7 +107,10 @@ public class LessonPageContent {
             String type = lessonPageContent.getType();
             switch (type) {
                 case "image":
-                    ImageView image = new ImageView(lessonPageContent.getContent());
+                    ImageView image = new ImageView();
+                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent()))); //load images in the background
+                    thread.setDaemon(true);
+                    thread.start();
                     image.setPreserveRatio(true);
                     pageContent.add(image);
                     break;

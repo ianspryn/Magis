@@ -1,29 +1,36 @@
 package com.magis.app.home;
 
+import com.jfoenix.controls.JFXScrollPane;
+import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.skins.JFXSpinnerSkin;
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.SmartContinue;
 import com.magis.app.UI.UIComponents;
+import com.magis.app.icons.MaterialIcons;
 import com.magis.app.lesson.LessonPage;
 import com.magis.app.models.StudentModel;
 import com.magis.app.settings.SettingsPage;
 import javafx.animation.*;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-import javax.sound.midi.Receiver;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -31,7 +38,7 @@ import java.util.Random;
 public class HomePage {
 
     private static HomePage homePage = null;
-    private static BorderPane borderPane;
+    private static ScrollPane scrollPane;
     private  static Label greetingLabel;
     private ArrayList<HBox> chapterBoxes;
     private static ArrayList<RingProgressIndicator> ringProgressIndicators;
@@ -40,26 +47,20 @@ public class HomePage {
     private VBox masterVbox;
     private VBox vBox;
     private StudentModel.Student student;
-    private ArrayList<Thread> threads;
 
     private static String[] greetings = {"Hello:!", "Hey there:!", "Welcome:!", "Good day:!", "How goes it:?", "What's happening:?"};
     private static String[] codeGreetings = {"String message = \":\";", "System.out.println(\":\");"};
 
     public static HomePage getInstance() {
-        if (homePage == null) {
-            homePage = new HomePage();
-        } else {
-            update();
-        }
+        if (homePage == null) homePage = new HomePage();
+        else update();
         return homePage;
     }
 
     private static void update() {
         int numChapters = Main.lessonModel.getNumChapters();
-        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
-        for (int i = 0; i < numChapters; i++) {
-            ringProgressIndicators.get(i).setProgress(student.getChapter(i).getProgress());
-        }
+        StudentModel.Student student = Main.studentModel.getStudent();
+        for (int i = 0; i < numChapters; i++) ringProgressIndicators.get(i).setProgress(student.getChapter(i).getProgress());
         if (student.getRecentPage() != -1) { //make sure we don't add to the recentBox until student visited a page
             recentBox.setVisible(true);
             recentBox.getChildren().clear();
@@ -69,31 +70,37 @@ public class HomePage {
     }
 
     public void Page() {
-        Main.setScene(borderPane, "Home");
+        Main.setScene(scrollPane, "Home");
         animate();
     }
 
+    /**
+     * Since the home page fades out on every page exit, we must fade everything back in if the user turns off animations.
+     * Else, the homepage will remain invisible
+     */
+    public void disableAnimations() {
+        UIComponents.fadeAndTranslate(masterVbox, 0, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeAndTranslate(greetingLabel, 0, 0.2, 0, 0, -10, 0);
+        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(recentBox, 0, 0.2, 0, 0, -10, 0);
+        for (HBox chapterBox : chapterBoxes) UIComponents.fadeAndTranslate(chapterBox, 0, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeAndTranslate(settingsBox, 0,0.2,0,0,-10,0);
+    }
+
     private void animate() {
-        UIComponents.fadeAndTranslate(borderPane, 0.3, 0.2, 0, 0, -10, 0);
+        if (!Main.useAnimations) return;
+        UIComponents.fadeAndTranslate(masterVbox, 0.3, 0.2, 0, 0, -10, 0);
         UIComponents.fadeAndTranslate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
-        if (student.getRecentChapter() > -1) {
-            UIComponents.fadeAndTranslate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
-        }
-        for (int i = 0; i < chapterBoxes.size(); i++) {
-            UIComponents.fadeAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
-        }
+        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
+        for (int i = 0; i < chapterBoxes.size(); i++) UIComponents.fadeAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
         UIComponents.fadeAndTranslate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
     }
 
     private HomePage() {
-        student = Main.studentModel.getStudent(Main.username);
+        student = Main.studentModel.getStudent();
         ringProgressIndicators = new ArrayList<>();
-        threads = new ArrayList<>();
         /*
         Master
          */
-        borderPane = new BorderPane();
-        borderPane.getStyleClass().add("borderpane-home");
 
         masterVbox = new VBox();
         masterVbox.setAlignment(Pos.CENTER);
@@ -122,7 +129,7 @@ public class HomePage {
         recentBox.setMinHeight(100);
         recentBox.setAlignment(Pos.CENTER_LEFT);
 
-        recentBox.setOnMouseClicked(e -> goToLesson(borderPane, student.getRecentChapter(), true));
+        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), true));
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -138,24 +145,12 @@ public class HomePage {
         //Progress, title, and text description
         //for each chapter
         for (int i = 0; i < numChapters; i++) {
-            int chapterIndex = i;
             HBox chapterBox = new HBox();
 
             vBox.getChildren().add(chapterBox);
             chapterBoxes.add(chapterBox);
 
-            Thread thread = new Thread(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
-            thread.start();
-            threads.add(thread);
-//            Platform.runLater(() -> buildChapterBox(chapterIndex, chapterBoxes.get(chapterIndex)));
-        }
-        //wait for the threads to finish, else we *sometimes* get a "Not on FX application thread" error. Only sometimes. And only on one page. Very weird bug.
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            buildChapterBox(i, chapterBoxes.get(i));
         }
 
          /*
@@ -164,26 +159,38 @@ public class HomePage {
         settingsBox = new HBox();
         settingsBox.getStyleClass().add("settings-box");
         settingsBox.setMaxWidth(250);
-        settingsBox.setMinHeight(50);
+        settingsBox.setMinHeight(75);
         settingsBox.setAlignment(Pos.CENTER_LEFT);
 
-        settingsBox.setOnMouseClicked(e -> goToSettings(borderPane));
+        settingsBox.setOnMouseClicked(e -> {
+            goToSettings(masterVbox);
+        });
         settingsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         settingsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
         settingsBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
-            UIComponents.scale(settingsBox, 0.1,1.02);
+            UIComponents.scale(settingsBox, 0.1,1.02,1.02);
         });
         settingsBox.setOnMouseExited(e -> {
             Main.scene.setCursor(Cursor.DEFAULT);
-            UIComponents.scale(settingsBox,0.1, 1);
+            UIComponents.scale(settingsBox,0.1, 1,1);
         });
 
         //Left image
-        ImageView imageView = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/settings-black.png");
-        imageView.setPreserveRatio(true);
-        imageView.setFitHeight(50);
+        HBox settingsIconContainer = new HBox();
+        settingsIconContainer.setPadding(new Insets(7,12,0,20));
+
+        SVGPath settingsIcon = new SVGPath();
+        settingsIcon.getStyleClass().add("settings-icon");
+        settingsIcon.setContent(MaterialIcons.settings);
+        // scale to size 350x350
+        Bounds bounds = settingsIcon.getBoundsInLocal();
+        double scaleFactor = 50 / Math.max(bounds.getWidth(), bounds.getHeight());
+        settingsIcon.setScaleX(scaleFactor);
+        settingsIcon.setScaleY(scaleFactor);
+
+        settingsIconContainer.getChildren().add(settingsIcon);
 
         //Text description
         Label description = new Label("Settings");
@@ -192,13 +199,13 @@ public class HomePage {
         description.getStyleClass().add("settings-text");
         description.setTextAlignment(TextAlignment.CENTER);
 
-        settingsBox.getChildren().addAll(imageView, description);
+        settingsBox.getChildren().addAll(settingsIconContainer, description);
 
         vBox.getChildren().add(settingsBox);
 
         masterVbox.getChildren().add(vBox);
 
-        ScrollPane scrollPane = new ScrollPane();;
+        scrollPane = new ScrollPane();
         scrollPane.getStyleClass().add("master-scrollpane");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -209,15 +216,11 @@ public class HomePage {
                 scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
         scrollPane.setContent(contentHolder);
-        borderPane.setCenter(scrollPane);
-
-
-//        Scene oldScene = Main.window.getScene();
-//        Scene newScene = (oldScene == null ? new Scene(borderPane, Main.width, Main.height) : new Scene(borderPane, oldScene.getWidth(), oldScene.getHeight()))
+        JFXScrollPane.smoothScrolling(scrollPane);
     }
 
     private static String generateGreetingText() {
-        StudentModel.Student student = Main.studentModel.getStudent(Main.username);
+        StudentModel.Student student = Main.studentModel.getStudent();
         Random rand = new Random();
         String greeting = greetings[rand.nextInt(greetings.length)];
         String[] greetingComponents = greeting.split(":");
@@ -238,18 +241,23 @@ public class HomePage {
         //master box
         chapterBox.getStyleClass().add("chapter-box");
 
-        chapterBox.setOnMouseClicked(e -> goToLesson(borderPane, chapterIndex, false));
+        chapterBox.setOnMouseClicked(e -> {
+            goToLesson(masterVbox, chapterIndex, false);
+        });
         chapterBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
-            UIComponents.scale(chapterBox, 0.1,1.02);
+            UIComponents.scale(chapterBox, 0.1,1.02,1.02);
         });
         chapterBox.setOnMouseExited(e -> {
             Main.scene.setCursor(Cursor.DEFAULT);
-            UIComponents.scale(chapterBox, 0.1,1);
+            UIComponents.scale(chapterBox, 0.1,1,1);
         });
 
         //Left image
-        ImageView imageView = new ImageView(Main.lessonModel.getChapter(chapterIndex).getImage());
+        ImageView imageView = new ImageView();
+        Thread thread = new Thread(() -> imageView.setImage(new Image(Main.lessonModel.getChapter(chapterIndex).getImage()))); //load images in the background
+        thread.setDaemon(true);
+        thread.start();
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(150);
 
@@ -300,9 +308,13 @@ public class HomePage {
      * @param chapterIndex the desired chapter to switch scenes to
      */
     private static void goToLesson(Node node, int chapterIndex, boolean continueWhereLeftOff) {
-        ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-        parallelTransition.play();
-        parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
+        if (Main.useAnimations) {
+            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+            parallelTransition.play();
+            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
+        } else {
+            LessonPage.Page(chapterIndex, continueWhereLeftOff);
+        }
     }
 
     /**
@@ -310,9 +322,13 @@ public class HomePage {
      * @param node the desired node to fadeAndTranslate first
      */
     private static void goToSettings(Node node) {
-        ParallelTransition pt = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-        pt.play();
-        pt.setOnFinished(e -> SettingsPage.Page());
+        if (Main.useAnimations) {
+            ParallelTransition pt = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+            pt.play();
+            pt.setOnFinished(e -> SettingsPage.Page());
+        } else {
+            SettingsPage.Page();
+        }
     }
 
     /**
@@ -320,9 +336,13 @@ public class HomePage {
      * @param node the desired node to fadeAndTranslate first
      */
     public static void goHome(Node node) {
-        ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-        parallelTransition.play();
-        parallelTransition.setOnFinished(e -> getInstance().Page());
+        if (Main.useAnimations) {
+            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+            parallelTransition.play();
+            parallelTransition.setOnFinished(e -> getInstance().Page());
+        } else {
+            getInstance().Page();
+        }
     }
 
 
