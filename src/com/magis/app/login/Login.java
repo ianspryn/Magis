@@ -283,10 +283,28 @@ public class Login {
         loginGridPane.add(lastNameTextField,0,3);
         loginGridPane.add(passwordTextField,0,4);
 
+        /*
+        If the password field already has text in it, show the password helper anyway
+        Else the user might be confused as to why they can't click "sign in" when all the fields are already filled
+         */
+        if (passwordTextField.getText().length() > 0) {
+            if (Password.longEnough(passwordTextField.getText())) longEnoughCheck.setSelected(true);
+            else longEnoughCheck.setSelected(false);
+            if (Password.containsUpperCase(passwordTextField.getText())) containsUpperCaseCheck.setSelected(true);
+            else containsUpperCaseCheck.setSelected(false);
+            if (Password.containsLowerCase(passwordTextField.getText())) containsLowerCaseCheck.setSelected(true);
+            else containsLowerCaseCheck.setSelected(false);
+            if (Password.containsDigit(passwordTextField.getText())) containsNumberCheck.setSelected(true);
+            else containsNumberCheck.setSelected(false);
+            validPassword.set(longEnoughCheck.isSelected() && containsUpperCaseCheck.isSelected() && containsLowerCaseCheck.isSelected() && containsNumberCheck.isSelected());
+
+            passwordVerifierGridPane.setVisible(true);
+        }
+
         //If password field is focused, show the password verifier helper
         passwordTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue && signUpVisible) passwordVerifierGridPane.setVisible(true);
-            else passwordVerifierGridPane.setVisible(false);
+//            else passwordVerifierGridPane.setVisible(false);
         });
 
         //try to log in if the user presses enter while focussed on the password box
@@ -316,7 +334,10 @@ public class Login {
         //change the text of the button
         bottomButton.setText("Back");
         //change the functionality of the button
-        bottomButton.setOnMouseClicked(e -> showSignIn());
+        bottomButton.setOnMouseClicked(e -> {
+            passwordVerifierGridPane.setVisible(false);
+            showSignIn();
+        });
     }
 
     /**

@@ -162,9 +162,7 @@ public class HomePage {
         settingsBox.setMinHeight(75);
         settingsBox.setAlignment(Pos.CENTER_LEFT);
 
-        settingsBox.setOnMouseClicked(e -> {
-            goToSettings(masterVbox);
-        });
+        settingsBox.setOnMouseClicked(e -> goToSettings(masterVbox));
         settingsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         settingsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
