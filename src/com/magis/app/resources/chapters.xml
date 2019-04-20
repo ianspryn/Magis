@@ -79,40 +79,40 @@ Withdraws money from the bank account.
 */
 public void withdraw(double amount)
 {
-
-implementation—filled in later
+	implementation—filled in later
 }
-/**
 
+/**
 Gets the current balance of the bank account.
 @return the current balance
 */
 public double getBalance()
 {
-
-implementation—filled in later
+	implementation—filled in later
 }
 
 The comments you have just seen explain individual methods. Supply a brief comment for each
 class, explaining its purpose. The comment syntax for class comments
 is very simple: Just place the documentation comment above the class.
-/**
 
+/**
 A bank account has a balance that can be changed by
 deposits and withdrawals.
 */
 public class BankAccount
 {
-. . .
+	. . .
 }
 
 Your first reaction may well be “Whoa! Am I supposed to write all this stuff?”
 These comments do seem pretty repetitive. But you should take the time to write
 them, even if it feels silly.
+
 It is always a good idea to write the method comment first, before writing the
 code in the method body. This is an excellent test to see that you firmly understand
 what you need to program. If you can’t explain what a class or method does, you
 aren’t ready to implement it.
+
 What about very simple methods? You can easily spend more time pondering
 whether a comment is too trivial to write than it takes to write it. In practical
 programming, very simple methods are rare. It is harmless to have a trivial method
@@ -160,11 +160,15 @@ integers. You can call println on any object of type PrintStream.
 Java has separate types for INTEGERS and FLOATING-POINT numbers. Integers are
 whole numbers; floating-point numbers can have fractional parts. For example, 13
 is an integer and 1.3 is a floating-point number.
-The name “floating-point” describes the representation of the number in the computer as a sequence of the significant digits and an indication of the position of the
-decimal point. For example, the numbers 13000.0, 1.3, 0.00013 all have the same decimal digits: 13. When a floating-point number is multiplied or divided by 10, only
-the position of the decimal point changes; it “floats”. This representation is related to
-the “scientific” notation 1.3 × 10^(–4). (Actually, the computer represents numbers in
-base 2, not base 10, but the principle is the same.)
+
+The name “floating-point” describes the representation of the number in the computer as a
+sequence of the significant digits and an indication of the position of the decimal point.
+For example, the numbers 13000.0, 1.3, 0.00013 all have the same decimal digits: 13. When
+a floating-point number is multiplied or divided by 10, only the position of the decimal
+point changes; it “floats”. This representation is related to the “scientific” notation
+1.3 × 10^(–4). (Actually, the computer represents numbers in base 2, not base 10, but the
+principle is the same.)
+
 If you need to process numbers with a fractional part, you should use the type
 called DOUBLE (The double type denotes ﬂoatingpoint numbers that can have fractional parts.), 
 which stands for “double precision floating-point number”. Think of
@@ -180,6 +184,7 @@ Do not use commas when you write number literals in Java. For example,
 13,000 must be written as 13000. To write numbers in exponential notation in Java,
 use the notation En instead of “ × 10n ”. For example, 1.3 × 10–4 is written as 1.3E-4.
 Table 1 shows how to write integer and floating-point literals in Java.
+
 You may wonder why Java has separate integer and floating-point number types.
 Pocket calculators don’t need a separate integer type; they use floating-point numbers for
 all calculations. However, integers have several advantages over floating
@@ -187,6 +192,7 @@ point numbers. They take less storage space, are processed faster, and don’t c
 rounding errors. You will want to use the int type for quantities that can never have
 fractional parts, such as the length of a string. Use the double type for quantities that
 can have fractional parts, such as a grade point average.
+
 There are several other number types in Java that are not as commonly used. We
 will discuss these types in Chapter 4. For most programs in this book, however, the
 int and double types are all you need for processing numbers.
@@ -211,8 +217,11 @@ by 2, use parentheses:
 Self Check
 
 1. What are the types of the values 0 and "0"?
+
 2. Which number type would you use for storing the area of a circle?
+
 3. Why is the expression 13.println() an error?
+
 4. Write an expression to compute the average of the values x and y.
 				</text>
 			</page>
@@ -220,6 +229,7 @@ Self Check
 				<text>
 In Java, every value is either a reference to an object, or it belongs to one of the eight
 primitive types shown in Table 1.
+
 Six of the primitive types are number types; four of them for integers and two for
 ﬂoating-point numbers.
 
@@ -263,8 +273,8 @@ decimal number system. (See Special Topic 4.2 on page 130 for more information.)
 For this reason, the double type is not appropriate for ﬁnancial calculations. In
 this book, we will continue to use double values for bank balances and other ﬁnancial
 quantities so that we keep our programs as simple as possible. However,
-professional programs need to use the BigDecimal type for this purpose—see Special
-Topic 4.1 on page 130.
+professional programs need to use the BigDecimal type for this purpose.
+
 In Java, it is legal to assign an integer value to a ﬂoating-point variable:
 
 int dollars = 100;
@@ -296,6 +306,7 @@ various countries. Which Java data type should you use?
 In Java, strings are objects that belong to the class String. (You can tell that String is
 a class name because it starts with an uppercase letter. The primitive types int and
 double start with lowercase letters.)
+
 You do not need to call a constructor to create a string object. You can obtain a
 string literal simply by enclosing a sequence of characters in double quotation
 marks. For example, the string literal "Harry" is an object of the String class.
@@ -304,6 +315,7 @@ have seen, you can use the length method to obtain the length of a
 string. For example, "Hello".length() is 5, and the length of "Hello, World!" is 13.
 (The quotation marks are not part of the string and do not contribute to the length,
 but you must count spaces and punctuation marks.)
+
 A string of length zero, containing no characters, is called the empty string and is
 written as "".
 				</text>
@@ -380,6 +392,7 @@ width = height + 10;
 
 This means “compute the value of height + 10 and store that value in the variable
 width”.
+
 In the Java programming language, the = operator denotes an action, to replace the
 value of a variable. This usage differs from the mathematical usage of the = symbol,
 as a statement about equality. For example, in Java, the following statement is
@@ -397,6 +410,7 @@ symbol. Of course, in mathematics, the equation width = width + 10 has no soluti
 				<text>
 SELF CHECK
 1. Is 12 = 12 a valid expression in the Java language?
+
 2. How do you change the value of the greeting variable to "Hello, Nina!"?
 				</text>
 			</page>
@@ -439,7 +453,8 @@ algebraic notation, multiplication and division bind more strongly than addition
 and subtraction. For example, in the expression a + b / 2, the / is carried out ﬁrst,
 even though the + operation occurs farther to the left.
 
-Incrementing a value by 1 is so common when writing programs that there is a special shorthand for it, namely
+Incrementing a value by 1 is so common when writing programs that there is a special
+shorthand for it, namely
 
 items++;
 
@@ -559,11 +574,15 @@ SELF CHECK
   n--;
 
 2. What is the value of 1729 / 100? Of 1729 % 100?
+
 3. Why doesn’t the following statement compute the average of s1, s2, and s3?
 double average = s1 + s2 + s3 / 3; // Error
+
 4. What is the value of Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) in mathematical
 notation?
+
 5. When does the cast (long) x yield a different result from the call Math.round(x)?
+
 6. When does the cast (long) x yield a different result from the call Math.round(x)?
 How do you round the double value x to the nearest int value, assuming that you
 know that it is less than 2 · 10^9?
@@ -639,6 +658,7 @@ string.
 				<text>
 The position number of the last character (12 for the string "Hello, World!") is
 always 1 less than the length of the string.
+
 Let us ﬁgure out how to extract the substring "World". Count characters starting
 at 0, not 1. You ﬁnd that W, the eighth character, has position number 7. The ﬁrst
 character that you don’t want, !, is the character at position 12 (see Figure 4).
@@ -653,12 +673,14 @@ It is curious that you must specify the position of the ﬁrst character that yo
 want and then the ﬁrst character that you don’t want. There is one advantage to this
 setup. You can easily compute the length of the substring: It is pastEnd - start. For
 example, the string "World" has length 12 – 7 = 5.
+
 If you omit the second parameter of the substring method, then all characters
 from the starting position to the end of the string are copied. For example,
 
 String tail = greeting.substring(7); // Copies all characters from position 7 on
 
 sets tail to the string "World!".
+
 If you supply an illegal string position (a negative number, or a value that is
 larger than the length of the string), then your program terminates with an error
 message.
@@ -670,6 +692,7 @@ SELF CHECK
 
 1. Assuming the String variable s holds the value "Agent", what is the effect of the
 assignment s = s + s.length()?
+
 2. Assuming the String variable river holds the value "Mississippi", what is the
 value of river.substring(1, 2)? Of river.substring(2, river.length() - 3)?
 				</text>
@@ -720,6 +743,7 @@ private boolean married;
 
 The advantage is that you can’t accidentally store a third value in the variable.
 Then you can use the Boolean variable in a test:
+
 if (married)
 . . .
 else
@@ -727,6 +751,7 @@ else
 
 Sometimes Boolean variables are called flags because they can have only two states:
 “up” and “down”.
+
 It pays to think carefully about the naming of Boolean variables. In our example,
 it would not be a good idea to give the name maritalStatus to the Boolean variable.
 What does it mean that the marital status is true? With a name like married there is
@@ -766,6 +791,7 @@ internal data of an object. When you call the method, you do not know exactly wh
 those instructions are, or even how the object is organized internally. However, the
 behavior of the method is well-defined, and that is what matters to us when we use
 it.
+
 For example, System.out refers to an object. You manipulate it by calling the
 println method. When the println method is called, some activities occur inside
 the object, and the ultimate effect is that text appears in the console window.
@@ -807,6 +833,7 @@ The length method—unlike the println method—requires no input inside the par
 However, the length method yields an output, namely the character count.
 In the next section, you will see in greater detail how to supply method inputs
 and obtain method outputs.
+
 Let us look at another method of the String class. When you apply the toUpperCase
 method to a String object, the method creates another String object that contains the
 characters of the original string, with lowercase letters converted to uppercase. For
@@ -847,7 +874,9 @@ overloaded because it refers to more than one method.
 SELF CHECK
 
 1. How can you compute the length of the string "Mississippi"?
+
 2. How can you print out the uppercase version of "Hello, World!"?
+
 3. Is it legal to call river.println()? Why or why not?
 				</text>
 			</page>
@@ -870,6 +899,7 @@ It is very important that you understand this distinction. In the computer, a
 Rectangle object is a block of memory that holds four numbers, for example x = 5,
 y = 10, width = 20, height = 30. In the imagination of the programmer who uses a
 Rectangle object, the object describes a geometric figure.
+
 To make a new rectangle, you need to specify the x, y, width, and height values.
 Then invoke the new operator, specifying the name of the class and the parameters
 that are required for constructing a new object. For example, you can make a new
@@ -877,6 +907,7 @@ rectangle with its top-left corner at (5, 10), width 20, and height 30 as follow
 new Rectangle(5, 10, 20, 30)
 
 Here is what happens in detail:
+
 1. The new operator makes a Rectangle object.
 2. It uses the parameters (in this case, 5, 10, 20, and 30) to initialize the data of the object.
 3. It returns the object.
@@ -887,6 +918,7 @@ Here is what happens in detail:
 				<text>
 The process of creating a new object is called construction. The four values 5, 10,
 20, and 30 are called the construction parameters.
+
 The new expression yields an object, and you need to store the object if you want
 to use it later. Usually you assign the output of the new operator to a variable. For
 example,
@@ -908,8 +940,10 @@ origin (0, 0), width 0, and height 0.
 SELF CHECK
 
 1. How do you construct a square with center (100, 100) and side length 20?
+
 2. The getWidth method returns the width of a Rectangle object. What does
 the following statement print?
+
 System.out.println(new Rectangle().getWidth());
 				</text>
 			</page>
@@ -922,6 +956,7 @@ purpose is to modify the internal data of an object is called a mutator method.
 For example, the length method of the String class is an accessor method. It
 returns information about a string, namely its length. But it doesn’t modify the
 string at all when counting the characters.
+
 The Rectangle class has a number of accessor methods. The getX, getY, getWidth, and
 getHeight methods return the x- and y-coordinates of the top-left corner, the width,
 and the height values. For example,
@@ -940,6 +975,7 @@ moves the rectangle by 15 units in the x-direction and 25 units in the y-directi
 (see Figure 12). Moving a rectangle doesn’t change its width or height, but it
 changes the top-left corner. Afterward, the rectangle that had its top-left corner at
 (5, 10) now has it at (20, 35).
+
 This method is a mutator because it modifies the implicit parameter object.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/11.png</image>
@@ -949,6 +985,7 @@ This method is a mutator because it modifies the implicit parameter object.
 SELF CHECK
 
 1. Is the toUpperCase method of the String class an accessor or a mutator?
+
 2. Which call to translate is needed to move the rectangle declared by Rectangle
 box = new Rectangle(5, 10, 20, 30) so that its top-left corner is the origin (0, 0)?
 				</text>
@@ -959,6 +996,7 @@ In Java, a variable whose type is a class does not actually hold an object. It m
 holds the memory location of an object. The object itself is stored elsewhere—see Figure 17.
 There is a reason for this behavior. Objects can be very large. It is more efficient
 to store only the memory location instead of the entire object.
+
 We use the technical term object reference to denote the memory location of an
 object. When a variable contains the memory location of an object, we say that it
 refers to an object. For example, after the statement
@@ -992,6 +1030,7 @@ You can see the difference between number variables and object variables when yo
 make a copy of a variable. When you copy a number, the original and the copy of
 the number are independent values. But when you copy an object reference, both
 the original and the copy are references to the same object.
+
 Consider the following code, which copies a number and then changes the copy
 (see Figure 20):
 
@@ -1012,6 +1051,7 @@ box2.translate(15, 25);
 
 Since box and box2 refer to the same rectangle after step 2 , both variables refer to
 the moved rectangle after the call to the translate method.
+
 You need not worry too much about the difference between objects and object
 references. Much of the time, you will have the correct intuition when you think of
 “the object box” rather than the technically more accurate “the object reference
@@ -1024,6 +1064,7 @@ apparent when you have multiple variables that refer to the same object.
 SELF CHECK
 
 1. What is the effect of the assignment: String greeting2 = greeting?
+
 2. After calling greeting2.toUpperCase(), what are the contents of greeting and
 greeting2?
 				</text>
@@ -1049,6 +1090,7 @@ if (a == 5) . . . // Test whether a equals 5
 
 You will have to remember to use == for equality testing, and to use = for
 assignment.
+
 The relational operators have a lower precedence than the arithmetic operators.
 That means, you can write arithmetic expressions on either side of the relational
 operator without using parentheses. For example, in the expression
@@ -1080,6 +1122,7 @@ sqrt(2) squared minus 2 is not 0 but 4.440892098500626E-16
 Unfortunately, such roundoff errors are unavoidable. It plainly does not make sense
 in most circumstances to compare floating-point numbers exactly. Instead, test
 whether they are close enough.
+
 To test whether a number x is close to zero, you can test whether the absolute
 value | x| (that is, the number with its sign removed) is less than a very small
 threshold number. That threshold value is often called ε (the Greek letter epsilon). It is
@@ -1112,6 +1155,7 @@ has an unrelated meaning. It tests whether the two string variables refer to the
 identical string object. You can have strings with identical contents stored in different
 objects, so this test never makes sense in actual programming; see Common Error
 5.2 on page 180.
+
 In Java, letter case matters. For example, "Harry" and "HARRY" are not the same
 string. To ignore the letter case, use the equalsIgnoreCase method:
 
@@ -1138,6 +1182,7 @@ a normal dictionary. Java is case sensitive and sorts characters by putting numb
 first, then uppercase characters, then lowercase characters. For example, 1 comes
 before B, which comes before a. The space character comes before all other
 characters.
+
 Let us investigate the comparison process closely. When Java compares two
 strings, corresponding letters are compared until one of the strings ends or the first
 difference is encountered. If one of the strings ends, the longer string is considered
@@ -1215,11 +1260,12 @@ is true.
 However, you must be careful when using the equals method. It works correctly
 only if the implementors of the class have supplied it. The Rectangle class has an
 equals method that is suitable for comparing rectangles.
+
 For your own classes, you need to supply an appropriate equals method. You will
 learn how to do that later on. Until that point, you should not use the equals
 method to compare objects of your own classes.
 
-5.2.5 Testing for null
+5.2.5:  Testing for null
 
 An object reference can have the special value null if it refers to no object at all. It is
 common to use the null value to indicate that a value has never been set. For example,
@@ -1230,10 +1276,11 @@ middleInitial = middleName.substring(0, 1);
 
 You use the == operator (and not equals) to test whether an object reference is a null
 reference:
+
 if (middleInitial == null)
-System.out.println(firstName + " " + lastName);
+   System.out.println(firstName + " " + lastName);
 else
-System.out.println(firstName + " " + middleInitial + ". " + lastName);
+   System.out.println(firstName + " " + middleInitial + ". " + lastName);
 
 Note that the null reference is not the same as the empty string "". The empty string
 is a valid string of length 0, whereas a null indicates that a string variable refers to no
@@ -1276,7 +1323,7 @@ double y = 3 * (1.0 / 3);
 			<page>
 				<text>
 You often want to store values so that you can use them at a later time.
-	To remember a value, you need to hold it in a variable. A variable is a storage location in the
+To remember a value, you need to hold it in a variable. A variable is a storage location in the
 computer’s memory that has a type, name, and contents. For example, here we
 declare three variables:
 
@@ -1304,6 +1351,7 @@ String greeting = 20; // ERROR: Types don’t match
 				<text>
 You cannot use a String variable to store an integer. The compiler checks type
 mismatches to protect you from errors.
+
 When deciding on a name for a variable, you should make a choice that describes
 the purpose of the variable. For example, the variable name greeting is a better
 choice than the name g.
@@ -1354,7 +1402,7 @@ void
 2. Declare a variable to hold your name. Use camel case in the variable name.
 				</text>
 			</page>
-			<page title="Tip: Variable Names">
+			<page title="Tips: Variable Names">
 				<text>
 Quality Tip 2.1
 
@@ -1363,6 +1411,7 @@ Quality Tip 2.1
 In algebra, variable names are usually just one letter long, such as p or A,
 maybe with a subscript such as p1. You might be tempted to save yourself a
 lot of typing by using short variable names in your Java programs:
+
 int A = w * h;
 
 Compare this with the following statement:
@@ -1370,6 +1419,7 @@ int area = width * height;
 
 The advantage is obvious. Reading width is much easier than reading w and then figuring out
 that it must mean “width”.
+
 In practical programming, descriptive variable names are particularly important when
 programs are written by more than one person. It may be obvious to you that w stands for
 width, but is it obvious to the person who needs to update your code years later? For that
@@ -1386,6 +1436,7 @@ object. You will then learn a systematic process for implementing classes.
 Our first example is a class that models a tally counter, a mechanical device that is
 used to count people—for example, to find out how many people attend a concert
 or board a bus (see Figure 1).
+
 Whenever the operator pushes a button, the counter value advances by one. We
 model this operation with a count method. A physical counter has a display to show
 the current value. In our simulation, we use a getValue method instead. For example,
@@ -1403,16 +1454,16 @@ has been advanced.
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/8.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/9.png</image>
 				<text>
-					An object stores its data in instance variables. An instance of a class is an object
-					of the class. Thus, an instance variable is a storage location that is present in each
-					object of the class.
-					You specify instance variables in the class declaration:
+An object stores its data in instance variables. An instance of a class is an object
+of the class. Thus, an instance variable is a storage location that is present in each
+object of the class.
+You specify instance variables in the class declaration:
 
-					public class Counter
-					{
-					private int value;
-					. . .
-					}
+public class Counter
+{
+	private int value;
+	. . .
+}
 
 An instance variable declaration consists of the following parts:
 • An access specifier (private)
@@ -1431,9 +1482,10 @@ we will have a quick look at the implementation of the methods of the Counter cl
 The count method advances the counter value by 1. We will cover the syntax of the
 method header in another section. For now, focus on the body of the method inside the
 braces:
+
 public void count()
 {
-value = value + 1;
+	value = value + 1;
 }
 
 Note how the count method accesses the instance variable value. Which instance
@@ -1443,19 +1495,22 @@ concertCounter.count();
 
 This call advances the value variable of the concertCounter object.
 The getValue method returns the current value:
+
 public int getValue()
 {
-return value;
+	return value;
 }
 
 The return statement is a special statement that terminates the method call and
 returns a result to the method’s caller.
+
 Instance variables are generally declared with the access specifier private. That
 specifier means that they can be accessed only by the methods of the same class, not
 by any other method. For example, the value variable can be accessed by the count
 and getValue methods of the Counter class but not a method of another class. Those
 other methods need to use the Counter class methods if they want to manipulate a
 counter’s value.
+
 In the next section, we discuss the reason for making instance variables private.
 				</text>
 			</page>
@@ -1465,6 +1520,7 @@ SELF CHECK
 
 1. Supply the body of a method public void reset() that resets the counter back to
 zero.
+
 2. Suppose you use a class Clock with private instance variables hours and minutes.
 How can you access these variables in your program?
 				</text>
@@ -1474,12 +1530,13 @@ How can you access these variables in your program?
 In this section, we discuss the behavior of local variables. A local variable
 is a variable that is declared in the body of a method. For example, the giveChange method in
 declares a local variable change:
+
 public double giveChange()
 {
-double change = payment - purchase;
-purchase = 0;
-payment = 0;
-return change;
+	double change = payment - purchase;
+	purchase = 0;
+	payment = 0;
+	return change;
 }
 
 Parameter variables are similar to local variables, but they are declared in method
@@ -1496,10 +1553,12 @@ constructed, its instance variables are created. The instance variables stay ali
 no method uses the object any longer. (The Java virtual machine contains an agent
 called a garbage collector that periodically reclaims objects when they are no
 longer used.)
+
 An important difference between instance variables and local variables is initialization.
 You must initialize all local variables. If you don’t initialize a local variable,
 the compiler complains when you try to use it. (Note that parameter variables are
 initialized when the method is called.)
+
 Instance variables are initialized with a default value before a constructor is
 invoked. Instance variables that are numbers are initialized to 0. Object references
 are set to a special value called null. If an object reference is null, then it refers to no
@@ -1512,6 +1571,7 @@ SELF CHECK
 
 1. What do local variables and parameter variables have in common? In which
 essential aspect do they differ?
+
 2. Why was it necessary to introduce the local variable change in the giveChange
 method? That is, why didn’t the method simply end with the statement:
 
@@ -1535,7 +1595,7 @@ Now look again at the code of the deposit method:
 
 public void deposit(double amount)
 {
-balance = balance + amount;
+	balance = balance + amount;
 }
 
 What does balance mean exactly? After all, our program may have multiple
@@ -1543,6 +1603,7 @@ Bank-Account objects, and each of them has its own balance.
 Of course, since we are depositing the money into momsSavings, balance must mean
 momsSavings.balance. In general, when you refer to an instance variable inside a
 method, it means the instance variable of the implicit parameter.
+
 If you need to, you can access the implicit parameter—the object on which the
 method is called—with the reserved word this. For example, in the preceding
 method invocation, this refers to the same object as momsSavings (see Figure 6).
@@ -1564,7 +1625,7 @@ the code clearer. Here is an example:
 
 public BankAccount(double initialBalance)
 {
-this.balance = initialBalance;
+	this.balance = initialBalance;
 }
 
 You may want to try it out and see if you like that style.
@@ -1573,7 +1634,7 @@ local or parameter variables. Consider the constructor
 
 public BankAccount(double balance)
 {
-this.balance = balance;
+	this.balance = balance;
 }
 
 The expression this.balance clearly refers to the balance instance variable. However,
@@ -1590,11 +1651,11 @@ method to apply the monthly account fee:
 
 public class BankAccount
 {
-. . .
-public void monthlyFee()
-{
-withdraw(10); // Withdraw $10 from this account
-}
+	. . .
+	public void monthlyFee()
+	{
+		withdraw(10); // Withdraw $10 from this account
+	}
 }
 
 That means to withdraw from the same bank account object that is carrying out the
@@ -1605,11 +1666,11 @@ the this reference to make the method easier to read:
 
 public class BankAccount
 {
-. . .
-public void monthlyFee()
-{
-this.withdraw(10); // Withdraw $10 from this account
-}
+	. . .
+	public void monthlyFee()
+	{
+		this.withdraw(10); // Withdraw $10 from this account
+	}
 }
 
 You have now seen how to use objects and implement classes, and you have learned
@@ -1624,8 +1685,10 @@ SELF CHECK
 
 1. How many implicit and explicit parameters does the withdraw method of the
 BankAccount class have, and what are their names and types?
+
 2. In the deposit method, what is the meaning of this.amount? Or, if the expression
 has no meaning, why not?
+
 3. How many implicit and explicit parameters does the main method of the
 	BankAccountTester class have, and what are they called?
 
@@ -1639,12 +1702,13 @@ bank account numbers sequentially. That is, we want the bank account constructor
 to construct the first account with number 1001, the next with number 1002, and so
 on. Therefore, we must store the last assigned account number somewhere.
 Of course, it makes no sense to make this value into an instance variable:
+
 public class BankAccount
 {
-private double balance;
-private int accountNumber;
-private int lastAssignedNumber = 1000; // NO—won’t work
-. . .
+	private double balance;
+	private int accountNumber;
+	private int lastAssignedNumber = 1000; // NO—won’t work
+	. . .
 }
 
 In that case each instance of the BankAccount class would have its own value of lastAssignedNumber.
@@ -1652,12 +1716,13 @@ In that case each instance of the BankAccount class would have its own value of 
 Instead, we need to have a single value of lastAssignedNumber that is the same for
 the entire class. Such a variable is called a static variable, because you declare it using
 the static reserved word.
+
 public class BankAccount
 {
-private double balance;
-private int accountNumber;
-private static int lastAssignedNumber = 1000;
-. . .
+	private double balance;
+	private int accountNumber;
+	private static int lastAssignedNumber = 1000;
+	. . .
 }
 
 Every BankAccount object has its own balance and accountNumber instance variables, but
@@ -1670,46 +1735,52 @@ A static variable is sometimes called a class variable because there is a single
 Every method of a class can access its static variables. Here is the constructor of
 the BankAccount class, which increments the last assigned number and then uses it to
 initialize the account number of the object to be constructed:
+
 public class BankAccount
 {
-. . .
-public BankAccount()
-{
-lastAssignedNumber++; // Updates the static variable
-accountNumber = lastAssignedNumber; // Sets the instance variable
-}
+	. . .
+	public BankAccount()
+	{
+		lastAssignedNumber++; // Updates the static variable
+		accountNumber = lastAssignedNumber; // Sets the instance variable
+	}
 }
 
 There are three ways to initialize a static variable:
 
 1. Do nothing. The static variable is then initialized with 0 (for numbers), false
 (for boolean values), or null (for objects).
+
 2. Use an explicit initializer, such as
 public class BankAccount
 {
-private static int lastAssignedNumber = 1000;
-. . .
+	private static int lastAssignedNumber = 1000;
+	. . .
 }
+
 3. Use a static initialization block (see Special Topic 8.4 on page 347).
 
 Like instance variables, static variables should always be declared as private to
 ensure that methods of other classes do not change their values. The exception to
 this rule are static constants, which may be either private or public. For example, the
 BankAccount class may want to declare a public constant value, such as
+
 public class BankAccount
 {
-public static final double OVERDRAFT_FEE = 29.95;
-. . .
+	public static final double OVERDRAFT_FEE = 29.95;
+	. . .
 }
 
 Methods from any class can refer to such a constant as BankAccount.OVERDRAFT_FEE.
 It makes sense to declare constants as static—you wouldn’t want every object of
 the BankAccount class to have its own set of variables with these constant values. It is
 sufficient to have one set of them for the class.
+
 Why are class variables called static? As with static methods, the static reserved
 word itself is just a meaningless holdover from C++. But static variables and static
 methods have much in common: They apply to the entire class, not to specific
 instances of the class.
+
 In general, you want to minimize the use of static methods and variables. If you
 find yourself using lots of static methods that access static variables, then that’s an
 indication that you have not found the right classes to solve your problem in an
@@ -1721,6 +1792,7 @@ object-oriented way.
 SELF CHECK
 
 1. Name two static variables of the System class.
+
 2. Harry tells you that he has found a great way to avoid those pesky objects: Put
 all code into a single class and declare all methods and variables static. Then
 main can call the other static methods, and all of them can access the static
@@ -1741,64 +1813,69 @@ method.
 
 public static void process(double[] values) // values is a parameter variable
 {
-for (int i = 0; i &lt; 10; i++) // i is a local variable declared in a for loop
-{
-if (values[i] == 0)
-{
-double r = Math.random(); // r i s a local variable declared in a block
-values[i] = r;
-} // Scope of r ends here
-} // Scope of i ends here
+	for (int i = 0; i &lt; 10; i++) // i is a local variable declared in a for loop
+	{
+		if (values[i] == 0)
+		{
+			double r = Math.random(); // r i s a local variable declared in a block
+			values[i] = r;
+		} // Scope of r ends here
+	} // Scope of i ends here
 } // Scope of values ends here
 
 In Java, the scope of a local variable can never contain the declaration of another
 local variable with the same name. For example, the following is an error:
+
 public static void main(String[] args)
 {
-double r = Math.random();
-if (r > 0.5)
-{
-Rectangle r = new Rectangle(5, 10, 20, 30);
-// Error—can’t declare another variable called r here
-. . .
-}
+	double r = Math.random();
+	if (r > 0.5)
+	{
+		Rectangle r = new Rectangle(5, 10, 20, 30);
+		// Error—can’t declare another variable called r here
+		. . .
+	}
 }
 
 However, you can have local variables with identical names if their scopes do not
 overlap, such as
+
 if (Math.random() > 0.5)
 {
-Rectangle r = new Rectangle(5, 10, 20, 30);
-. . .
+	Rectangle r = new Rectangle(5, 10, 20, 30);
+	. . .
 } // Scope of r ends here
 else
 {
-int r = 5;
-// OK—it is legal to declare another r here
-. . .
+	int r = 5;
+	// OK—it is legal to declare another r here
+	. . .
 }
 
 These variables are independent from each other, or, in other words, their scopes are
 disjoint. You can have local variables with the same name r in different methods,
 just as you can have different motels with the same name “Bates Motel” in different
 cities.
+
 In contrast, the scope of instance variables and static variables consists of the
 entire class in which they are declared.
 
 Problems arise if you have two identical variable names with overlapping scope.
 This can never occur with local variables, but the scopes of identically named local
 variables and instance variables can overlap. Here is a purposefully bad example.
+
 public class Coin
 {
-private String name;
-private double value; // Instance variable
-. . .
-public double getExchangeValue(double exchangeRate)
-{
-double value; // Local variable with the same name
-. . .
-return value;
-}
+	private String name;
+	private double value; // Instance variable
+	. . .
+
+	public double getExchangeValue(double exchangeRate)
+	{
+		double value; // Local variable with the same name
+		. . .
+		return value;
+	}
 }
 
 Inside the getExchangeValue method, the variable name value could potentially have
@@ -1807,18 +1884,21 @@ specifies that in this situation the local variable wins out. It shadows the ins
 
 This sounds pretty arbitrary, but there is actually a good reason: You can still refer
 to the instance variable as this.value.
+
 value = this.value * exchangeRate;
 
 Of course, it is not a good idea to write code like this. You can easily change the
 name of the local variable to something else, such as result.
+
 However, there is one situation where overlapping scope is acceptable. When
 implementing constructors or setter methods, it can be awkward to come up with
 different names for instance variables and parameters. Here is how you can use the
 same name for both:
+
 public Coin(double value, String name)
 {
-this.value = value;
-this.name = name;
+	this.value = value;
+	this.name = name;
 }
 
 The expression this.value refers to the instance variable, and value is the parameter.
@@ -1829,19 +1909,20 @@ The expression this.value refers to the instance variable, and value is the para
 SELF CHECK
 
 1. Consider the following program that uses two variables named r. Is this legal?
+
 public class RectangleTester
 {
-public static double area(Rectangle rect)
-{
-double r = rect.getWidth() * rect.getHeight();
-return r;
-}
-public static void main(String[] args)
-{
-Rectangle r = new Rectangle(5, 10, 20, 30);
-double a = area(r);
-System.out.println(r);
-}
+	public static double area(Rectangle rect)
+	{
+		double r = rect.getWidth() * rect.getHeight();
+		return r;
+	}
+	public static void main(String[] args)
+	{
+		Rectangle r = new Rectangle(5, 10, 20, 30);
+		double a = area(r);
+		System.out.println(r);
+	}
 }
 
 2. What is the scope of the balance variable of the BankAccount class?
@@ -1850,20 +1931,23 @@ System.out.println(r);
 			<page title="Errors: Shadowing">
 				<text>
 Common Error: Shadowing
+
 Accidentally using the same name for a local variable and an instance variable
 is a surprisingly common error. As you saw in the preceding section, the local variable then shadows the
 instance variable. Even though you may have meant to access the instance variable, the local
 variable is quietly accessed. Look at this example of an incorrect constructor:
+
 public class Coin
 {
-private double value;
-private String name;
-. . .
-public Coin(double aValue, String aName)
-{
-value = aValue;
-String name = aName; // Oops . . .
-}
+	private double value;
+	private String name;
+	. . .
+
+	public Coin(double aValue, String aName)
+	{
+		value = aValue;
+		String name = aName; // Oops . . .
+	}
 }
 
 The programmer declared a local variable name in the constructor. In all likelihood, that was
@@ -1871,10 +1955,13 @@ just a typo—the programmer’s fingers were on autopilot and typed the reserve
 even though the programmer all the time intended to access the instance variable. Unfortunately, the compiler gives no warning in this situation and quietly sets the local variable to
 the value of aName. The instance variable of the object that is being constructed is never
 touched, and remains null.
+
 Some programmers give all instance variable names a special prefix to distinguish them
 from other variables. A common convention is to prefix all instance variable names with the
 prefix my, such as myValue or myName.
+
 Another way of avoiding this problem is to use the this parameter when accessing an
+
 instance variable:
 this.name = aName;
 
@@ -1883,20 +1970,23 @@ Quality Tip: Minimize Variable Scope
 When you make the scope of a variable as small as possible, it becomes less likely that the
 variable is accidentally corrupted. It also becomes easier to modify or eliminate the variable
 as you reorganize your code.
+
 As already mentioned, don’t make an instance variable public. (The Java library has a few
 classes with public instance variables, but their creators later regretted their decision when
 they were unable to make optimizations later.)
 When you have a constant, ask yourself who needs it. Everybody (public static final )?
 Only the class (private static final )? Only a single method (a final local variable)? Choose
 the smallest scope.
-Beware of unnecessary instance variables. For example, consider the Pyramid class in
-Worked Example 4.1. You would not want an instance variable for the volume:
+
+Beware of unnecessary instance variables. For example, you would not want an instance variable
+for the volume:
+
 public class Pyramid
 {
-private double height;
-private double baseLength;
-private double volume; // Not
-. . .
+	private double height;
+	private double baseLength;
+	private double volume; // Not
+	. . .
 }
 
 a good idea to use class scope for this variable
@@ -1904,6 +1994,7 @@ a good idea to use class scope for this variable
 Instead, compute the volume when it is needed in the getVolume method. That way, no other
 method can accidentally modify the volume variable, or forget to modify it when changing the
 height or base length.
+
 Finally, with local variables, declare them only when you need them.
 				</text>
 			</page>
@@ -1912,10 +2003,12 @@ Finally, with local variables, declare them only when you need them.
 Methods are fundamental building blocks of Java programs. A program performs
 useful work by calling methods. In this section, we will examine how to provide
 inputs into a method, and how to obtain the result of the method.
+
 Most methods require inputs that give details about the work that the method
 needs to do. For example, the println method has an input: the string that should be
 printed. Computer scientists use the technical term parameter for method inputs.
 We say that the string greeting is a parameter of the method call
+
 System.out.println(greeting);
 
 Figure 6 illustrates passing of the parameter to the method.
@@ -1937,9 +2030,11 @@ job—namely, the character sequence of the string—is stored in the implicit p
 The length method differs from the println method in another way: it has an
 output. We say that the method returns a value, namely the number of characters in the
 string. You can store the return value in a variable:
+
 int n = greeting.length();
 
 You can also use the return value as a parameter of another method:
+
 System.out.println(greeting.length());
 
 The method call greeting.length() returns a value—the integer 13. The return value
@@ -1947,6 +2042,7 @@ becomes a parameter of the println method. Figure 8 shows the process.
 Not all methods return values. One example is the println method. The println
 method interacts with the operating system, causing characters to appear
 in a window. But it does not return a value to the code that calls it.
+
 Let us analyze a more complex method call. Here, we will call the replace method
 of the String class. The replace method carries out a search-and-replace operation,
 similar to that of a word processor. For example, the call
@@ -1956,9 +2052,11 @@ river.replace("issipp", "our")
 constructs a new string that is obtained by replacing all occurrences of "issipp" in
 "Mississippi" with "our". (In this situation, there was only one replacement.) The
 method returns the String object "Missouri". You can save that string in a variable:
+
 river = river.replace("issipp", "our");
 
 Or you can pass it to another method:
+
 System.out.println(river.replace("issipp", "our"));
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/23.png</image>
@@ -1978,6 +2076,7 @@ public int length()
 That is, there are no explicit parameters, and the return value has the type int. (For
 now, all the methods that we consider will be “public” methods—see Chapter 10
 for more restricted methods.)
+
 The type of the implicit parameter is the class that declares the method—String in
 our case. It is not mentioned in the method declaration—hence the term “implicit”.
 The replace method is declared as
@@ -1990,7 +2089,6 @@ When a method returns no value, the return type is declared with the reserved
 word void. For example, the PrintStream class declares the println method as
 
 public void println(String output)
-
 				</text>
 			</page>
 			<page title="Self Check">
@@ -1998,15 +2096,18 @@ public void println(String output)
 SELF CHECK
 
 1. What are the implicit parameters, explicit parameters, and return values in the method call river.length()?
+
 2. What is the result of the call river.replace("p", "s")?
+
 3. What is the result of the call greeting.replace("World", "Dave").length() ?
+
 4. How is the toUpperCase method declared in the String class?
 				</text>
 			</page>
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Escape Sequences</title>
 		<description>Learn how to properly employ escape sequences.</description>
 		<pages>
@@ -2020,16 +2121,19 @@ You can’t use System.out.println("Hello, "World"!");
 
 As soon as the compiler reads "Hello, ", it thinks the string is ﬁnished, and then it gets all
 confused about World followed by two quotation marks. A human would probably realize
-that the second and third quotation marks were supposed to be part of the string, but a compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just
+that the second and third quotation marks were supposed to be part of the string, but a
+compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just
 refuses to go on, and reports an error. Well, how do you then display quotation marks on the
 screen? You precede the quotation marks inside the string with a backslash character. Inside a
 string, the sequence \" denotes a literal quote, not the end of a string. The correct display
 statement is, therefore
+
 System.out.println("Hello, \"World\"!");
 
 The backslash character is used as an escape character; the character sequence \" is called an
 escape sequence. The backslash does not denote itself; instead, it is used to encode other
 characters that would otherwise be difﬁcult to include in a string.
+
 Now, what do you do if you actually want to print a backslash (for example, to specify a
 Windows ﬁle name)? You must enter two \\ in a row, like this:
 System.out.println("The secret message is in C:\\Temp\\Secret.txt");
@@ -2037,8 +2141,9 @@ System.out.println("The secret message is in C:\\Temp\\Secret.txt");
 This statement prints
 The secret message is in C:\Temp\Secret.txt
 
-Another escape sequence occasionally used is \n, which denotes a newline or line feed character. Printing a newline character causes the start of a new line on the display. For example,
-the statement
+Another escape sequence occasionally used is \n, which denotes a newline or line feed
+character. Printing a newline character causes the start of a new line on the display.
+For example, the statement
 
 System.out.print("*\n**\n***\n");
 
@@ -2048,22 +2153,23 @@ prints the characters
 **
 ***
 
-on three separate lines. Of course, you could have achieved the same effect with three separate calls to println.
+on three separate lines. Of course, you could have achieved the same effect with three
+separate calls to println.
+
 Finally, escape sequences are useful for including international characters in a string. For
 example, suppose you want to print “All the way to San José!”, with an accented letter (é). If
-you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode encoding scheme to denote international characters. For example, the é character has
+you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode
+encoding scheme to denote international characters. For example, the é character has
 Unicode encoding 00E9. You can include that character inside a string by writing \u, followed
 by its Unicode encoding:
+
 System.out.println("All the way to San Jos\u00E9!");
 				</text>
 			</page>
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/methods.png</image>
-=======
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/methods.png</image>
->>>>>>> master
 		<title>Methods</title>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
 		<pages>
@@ -2081,9 +2187,11 @@ important (such as the gift that a customer may receive for opening a bank accou
 Deciding which features are essential is not always an easy task. We will revisit that
 issue in later chapters. For now, we will assume that a competent designer has
 decided that the following are considered the essential operations of a bank account:
-• Deposit money
-• Withdraw money
-• Get the current balance
+
+	• Deposit money
+	• Withdraw money
+	• Get the current balance
+
 In Java, operations are expressed as method calls. To figure out the exact specification
 of the method calls, imagine how a programmer would carry out the bank
 account operations. We’ll assume that the variable harrysChecking contains a reference
@@ -2096,32 +2204,33 @@ double currentBalance = harrysChecking.getBalance();
 The first two methods are mutators. They modify the balance of the bank account
 and don’t return a value. The third method is an accessor. It returns a value that you
 store in a variable or pass to a method.
+
 As you can see from the sample calls, the BankAccount class should declare three
 methods:
-• public void deposit(double amount)
-• public void withdraw(double amount)
-• public double getBalance()
+
+	• public void deposit(double amount)
+	• public void withdraw(double amount)
+	• public double getBalance()
 
 Recall from before that double denotes the double-precision floating-point type,
 and void indicates that a method does not return a value.
 Here we only give the method headers. When you declare a method, you also
 need to provide the method body, consisting of statements that are executed when
 the method is called.
+
 public void deposit(double amount)
 {
-
-implementation—filled in later
+	implementation—filled in later
 }
-
 
 We will supply the method bodies in a later section.
 Every method header contains the following parts:
 
-• An access specifier (usually public)
-• The return type (the type of the value returned, such as void or double)
-• The name of the method (such as deposit)
-• A list of the parameter variables of the method (if any), enclosed in parentheses
-(such as double amount)
+	• An access specifier (usually public)
+	• The return type (the type of the value returned, such as void or double)
+	• The name of the method (such as deposit)
+	• A list of the parameter variables of the method (if any), enclosed in parentheses
+	(such as double amount)
 
 The access specifier controls which other methods can call this method. Most methods
 should be declared as public. That way, all other methods in a program can call
@@ -2131,30 +2240,34 @@ called from other methods of the same class.)
 The return type is the type of the value that the method returns. The deposit
 method does not return a value, whereas the getBalance method returns a value of
 type double.
+
 Each parameter of the method has both a type and a name that describes its purpose.
 For example, the deposit method has a single parameter named amount of type double.
 Next, you need to supply constructors. A constructor initializes the instance
 variables of an object. In Java, a constructor is very similar to a method, with two
 important differences.
-• The name of the constructor is always the same as the name of the class (e.g.,
-BankAccount).
-• Constructors have no return type (not even void).
+
+	• The name of the constructor is always the same as the name of the class (e.g.,
+	  BankAccount).
+	• Constructors have no return type (not even void).
+
 We want to construct bank accounts that initially have a zero balance, as well as
 accounts that have a given initial balance. For this purpose, we specify two constructors.
 
-• public BankAccount()
-• public BankAccount(double initialBalance)
+	• public BankAccount()
+	• public BankAccount(double initialBalance)
 
 They are used as follows:
+
 BankAccount harrysChecking = new BankAccount();
 BankAccount momsSavings = new BankAccount(5000);
 
 Just like a method, a constructor also has a body—a sequence of statements that is
 executed when a new object is constructed.
+
 public BankAccount()
 {
-
-implementation—filled in later
+	implementation—filled in later
 }
 
 Don’t worry about the fact that there are two constructors with the same name—
@@ -2162,38 +2275,38 @@ all constructors of a class have the same name, that is, the name of the class. 
 compiler can tell them apart because they take different parameters.
 When declaring a class, you place all constructor and method declarations inside,
 like this:
+
 public class BankAccount
 {
+	private instance variables—filled in later
+	// Constructors
 
-private instance variables—filled in later
-// Constructors
-public BankAccount()
-{
+	public BankAccount()
+	{
+		implementation—filled in later
+	}
 
-implementation—filled in later
-}
-public BankAccount(double initialBalance)
-{
+	public BankAccount(double initialBalance)
+	{
+		implementation—filled in later
+	}
 
-implementation—filled in later
-}
+	// Methods
 
-// Methods
-public void deposit(double amount)
-{
+	public void deposit(double amount)
+	{
+		implementation—filled in later
+	}
 
-implementation—filled in later
-}
-public void withdraw(double amount)
-{
+	public void withdraw(double amount)
+	{
+		implementation—filled in later
+	}
 
-implementation—filled in later
-}
-public double getBalance()
-{
-
-implementation—filled in later
-}
+	public double getBalance()
+	{
+		implementation—filled in later
+	}
 }
 
 The public constructors and methods of a class form the public interface of the
@@ -2203,6 +2316,7 @@ important operations that commonly occur with bank accounts. For example,
 consider this program segment, authored by a programmer who uses the BankAccount
 class. These statements transfer an amount of money from one bank account to
 another:
+
 // Transfer from one account to another
 double transferAmount = 500;
 momsSavings.withdraw(transferAmount);
@@ -2210,8 +2324,7 @@ harrysChecking.deposit(transferAmount);
 
 And here is a program segment that adds interest to a savings account:
 double interestRate = 5; // 5% interest
-double interestAmount
-= momsSavings.getBalance() * interestRate / 100;
+double interestAmount = momsSavings.getBalance() * interestRate / 100;
 momsSavings.deposit(interestAmount);
 				</text>
 			</page>
@@ -2244,12 +2357,14 @@ harrysChecking.deposit(100); // deposit is an instance method
 Static methods do not operate on objects, but they are still declared inside classes.
 When calling the method, you specify the class to which the sqrt method belongs—
 hence the call is Math.sqrt(100).
+
 How can you tell that Math is a class and not an object? By convention, class
 names start with an uppercase letter (such as Math or BankAccount). Objects and
 methods start with a lowercase letter (such as harrysChecking and println). Therefore,
 harrysChecking.deposit(100) denotes a call of the deposit method on the harrysChecking
 object inside the System class. On the other hand, Math.sqrt(100) denotes a call to the
 sqrt method inside the Math class.
+
 This use of upper- and lowercase letters is merely a convention, not a rule of the
 Java language. It is, however, a convention that the authors of the Java class libraries
 follow consistently. You should do the same in your programs so that you don’t
@@ -2261,6 +2376,7 @@ confuse your fellow programmers.
 SELF CHECK
 
 1. Why can’t you call x.pow(y) to compute x^y?
+
 2. Is the call System.out.println(4) a static method call?
 
 				</text>
@@ -2272,25 +2388,26 @@ parameter types as a superclass method. When such a method is applied to a
 subclass object, the overriding method, and not the original method, is executed.
 We turn to the CheckingAccount class for an example of overriding methods. Recall
 that the BankAccount class has three methods:
+
 public class BankAccount
 {
-. . .
-public void deposit(double amount) { . . . } \\ this method overrides a BankAccount method
-public void withdraw(double amount) { . . . } \\ this method overrides a BankAccount method
-public double getBalance() { . . . }
+	. . .
+	public void deposit(double amount) { . . . } \\ this method overrides a BankAccount method
+	public void withdraw(double amount) { . . . } \\ this method overrides a BankAccount method
+	public double getBalance() { . . . }
 }
 
 The CheckingAccount class declares these methods:
+
 public class CheckingAccount extends BankAccount
 {
-. . .
-public void deposit(double amount) { . . . }
-public void withdraw(double amount) { . . . }
-public void deductFees() { . . . }
+	. . .
+	public void deposit(double amount) { . . . }
+	public void withdraw(double amount) { . . . }
+	public void deductFees() { . . . }
 }
 
-These methods override
-BankAccount methods.
+These methods override BankAccount methods.
 
 The deposit and withdraw methods of the CheckingAccount class override the deposit
 and withdraw methods of the BankAccount class to handle transaction fees. However,
@@ -2303,27 +2420,29 @@ is not overridden.
 				<text>
 Let’s implement the deposit method of the CheckingAccount class. It increments the
 transaction count and deposits the money:
+
 public class CheckingAccount extends BankAccount
 {
-. . .
-public void deposit(double amount)
-{
-transactionCount++;
-// Now add amount to balance
-. . .
-}
+	. . .
+	public void deposit(double amount)
+	{
+		transactionCount++;
+		// Now add amount to balance
+		. . .
+	}
 }
 
 Now we have a problem. We can’t simply add amount to balance:
+
 public class CheckingAccount extends BankAccount
 {
-. . .
-public void deposit(double amount)
-{
-transactionCount++;
-// Now add amount to balance
-balance = balance + amount; // Error
-}
+	. . .
+	public void deposit(double amount)
+	{
+		transactionCount++;
+		// Now add amount to balance
+		balance = balance + amount; // Error
+	}
 }
 
 Although every CheckingAccount object has a balance instance variable, that instance
@@ -2342,19 +2461,21 @@ you don’t specify the parameter but simply write the method name, like this:
 
 public class CheckingAccount extends BankAccount
 {
-public void deposit(double amount)
-{
-transactionCount++;
-// Now add amount to balance
-deposit(amount); // Not complete
-}
-. . .
+	public void deposit(double amount)
+	{
+		transactionCount++;
+		// Now add amount to balance
+		deposit(amount); // Not complete
+	}
+	. . .
 }
 
 But this won’t quite work. The compiler interprets
+
 deposit(amount);
 
 as
+
 this.deposit(amount);
 
 The this parameter is of type CheckingAccount. There is a method called deposit in the
@@ -2363,42 +2484,44 @@ method we are currently writing! The method will call itself over and over, and 
 program will die in an infinite recursion (discussed in Chapter 13).
 Instead, we must be specific that we want to invoke only the superclass’s deposit
 method. There is a special reserved word super for this purpose:
+
 public class CheckingAccount extends BankAccount
 {
-public void deposit(double amount)
-{
-transactionCount++;
-// Now add amount to balance
-super.deposit(amount);
-}
-. . .
+	public void deposit(double amount)
+	{
+		transactionCount++;
+		// Now add amount to balance
+		super.deposit(amount);
+	}
+	. . .
 }
 
 This version of the deposit method is correct. To deposit money into a checking
 account, update the transaction count and call the deposit method of the superclass.
 The remaining methods of the CheckingAccount class also invoke a superclass method.
+
 public class CheckingAccount extends BankAccount
 {
-private static final int FREE_TRANSACTIONS = 3;
-private static final double TRANSACTION_FEE = 2.0;
-private int transactionCount;
-. . .
-public void withdraw(double amount)
-{
-transactionCount++;
-// Now subtract amount from balance
-super.withdraw(amount);
-}
-public void deductFees()
-{
-if (transactionCount > FREE_TRANSACTIONS)
-{
-double fees = TRANSACTION_FEE * (transactionCount - FREE_TRANSACTIONS);
-super.withdraw(fees);
-}
-transactionCount = 0;
-}
-. . .
+	private static final int FREE_TRANSACTIONS = 3;
+	private static final double TRANSACTION_FEE = 2.0;
+	private int transactionCount;
+	. . .
+	public void withdraw(double amount)
+	{
+		transactionCount++;
+		// Now subtract amount from balance
+		super.withdraw(amount);
+	}
+	public void deductFees()
+	{
+		if (transactionCount > FREE_TRANSACTIONS)
+		{
+			double fees = TRANSACTION_FEE * (transactionCount - FREE_TRANSACTIONS);
+			super.withdraw(fees);
+		}
+		transactionCount = 0;
+	}
+	. . .
 }
 				</text>
 			</page>
@@ -2407,7 +2530,9 @@ transactionCount = 0;
 SELF CHECK
 
 1. Categorize the methods of the SavingsAccount class as inherited, new, and overridden.
+
 2. Why does the withdraw method of the CheckingAccount class call super.withdraw?
+
 3. Why does the deductFees method set the transaction count to zero?
 				</text>
 			</page>
@@ -2429,13 +2554,14 @@ the same method parameters.
 
 If you mean to override a method but supply a different parameter type, then you
 accidentally introduce an overloaded method. For example,
+
 public class CheckingAccount extends BankAccount
 {
-. . .
-public void deposit(int amount) // Error: should
-{
-. . .
-}
+	. . .
+	public void deposit(int amount) // Error: should
+	{
+		. . .
+	}
 }
 
 be double
@@ -2448,7 +2574,7 @@ When overriding a method, be sure to check that the parameter types match exactl
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Input/Output</title>
 		<description>Learn how to use scanners and become comfortable with input/output protocol</description>
 		<pages>
@@ -2514,8 +2640,8 @@ You will see in the following sections how to deal with exceptions in a more pro
 				</text>
 			</page>
 			<page title="Example Program">
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/2.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/3.png</image>
 			</page>
 			<page title="Self Check">
 				<text>
@@ -2642,7 +2768,7 @@ countryName = countryName.trim();
 
 The trim method returns the string with all white space at the beginning and end removed.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/9.png</image>
 			</page>
 			<page title="Processing Lines">
 				<text>
@@ -2688,7 +2814,7 @@ then a NoSuchElementException occurs.
 Consider an input containing the characters
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/12.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/12.png</image>
 				<text>
 
 White space is consumed and the word 21st is read. However, this word is not a
@@ -2696,6 +2822,7 @@ properly formatted number. In this situation, an “input mismatch exception”
 occurs.
 
 To avoid exceptions, use the hasNextDouble method to screen the input. For example,
+
 if (in.hasNextDouble())
 {
 	double value = in.nextDouble();
@@ -2715,6 +2842,7 @@ Diana Lin
 . . .
 
 Now suppose you read the file with these instructions:
+
 while (in.hasNextInt())
 {
 	int studentID = in.nextInt();
@@ -2726,13 +2854,13 @@ while (in.hasNextInt())
 Initially, the input contains
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/14.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/14.png</image>
 				<text>
 
 After the first call to nextInt, the input contains
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/16.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/16.png</image>
 				<text>
 The call to nextLine reads an empty string! The remedy is to add a call to
 nextLine after reading the ID:
@@ -2746,6 +2874,7 @@ String name = in.nextLine();
 				<text>
 Sometimes, you want to read a file one character at a time. You achieve this task by
 calling the useDelimiter method on your Scanner object with an empty string:
+
 Scanner in = new Scanner(. . .);
 in.useDelimiter("");
 
@@ -2781,7 +2910,7 @@ markers?
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Exceptions</title>
 		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
 		<pages>
@@ -2847,8 +2976,8 @@ When you throw an exception, execution does not continue with the next statement
 with an exception handler. For now, we won’t worry about the handling of the exception.
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/2.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/3.png</image>
 			</page>
 			<page title="Self Check">
 				<text>
@@ -2918,9 +3047,9 @@ within it, tag the method with a throws clause.
 
 public void read(String filename) throws FileNotFoundException
 {
-File inFile = new File(filename);
-Scanner in = new Scanner(inFile);
-. . .
+	File inFile = new File(filename);
+	Scanner in = new Scanner(inFile);
+	. . .
 }
 
 The throws clause in turn signals the caller of your method that it may encounter a
@@ -2945,7 +3074,7 @@ system (such as a vending machine), where the user may never see System.out. And
 even if your users can see your error message, how do you know that they can
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/6.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/6.png</image>
 				<text>
 
 understand English? Your class may be used to build an application for users in
@@ -2974,6 +3103,7 @@ be fine for a student program. But you would not want a professionally written
 program to die just because some method detected an unexpected error. Therefore,
 you should install exception handlers for all exceptions that your program might
 throw.
+
 You install an exception handler with the try/catch statement. Each try block
 contains one or more statements that may cause an exception. Each catch clause
 contains the handler for an exception type. Here is an example:
@@ -3001,16 +3131,17 @@ throw a FileNotFoundException, Scanner.next can throw a NoSuchElementException, 
 Integer.parseInt can throw a NumberFormatException.
 If any of these exceptions is actually thrown, then the rest of the instructions in
 the try block are skipped. Here is what happens for the various exception types:
+					
 	• If a FileNotFoundException is thrown, then the catch clause for the IOException is
-	executed. (Recall that FileNotFoundException is a subclass of IOException.)
+	  executed. (Recall that FileNotFoundException is a subclass of IOException.)
 	• If a NumberFormatException occurs, then the second catch clause is executed.
 	• A NoSuchElementException is not caught by any of the catch clauses. The
-	exception remains thrown until it is caught by another try block or the main
-	method terminates.
+	  exception remains thrown until it is caught by another try block or the main
+	  method terminates.
 When the catch (IOException exception) block is executed, then some method in the
 try block has failed with an IOException. The variable exception contains a reference
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/10.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/10.png</image>
 				<text>
 to the exception object that was thrown. The catch clause can analyze that object to
 find out more details about the failure. For example, you can get a printout of the
@@ -3087,7 +3218,7 @@ Which exception class should you extend?
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Packages</title>
 		<description>Learn how packages can help you in Java land!</description>
 		<pages>
@@ -3102,7 +3233,7 @@ In Java, packages provide this structuring mechanism. A Java package is a
 set of related classes. For example, the Java library consists of several
 hundred packages, some of which are listed in Table 1.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Packages/2.png</image>
 			</page>
 			<page title="Organizing Packages">
 				<text>
@@ -3120,7 +3251,7 @@ there is a special package, called the default package, which has no name. If yo
 not include any package statement at the top of your source ﬁle, its classes are placed
 in the default package.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Packages/4.png</image>
 			</page>
 			<page title="Importing Packages">
 				<text>
