@@ -12,4 +12,9 @@ public class ExceptionsQuestions extends QuestionGenerator{
     public ExceptionsQuestions(){
         super();
     }
+
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt();
+    }
 }

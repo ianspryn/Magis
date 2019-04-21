@@ -33,6 +33,17 @@ public class ObjectComparisonQuestions extends QuestionGenerator{
         eAnswers = new ArrayList<>(Arrays.asList(equalsAnswers));
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt();
+        if(selection == 0){
+            generateEqualsQuestion();
+        }
+        else{
+            generateComparableQuestion();
+        }
+    }
+
     public void generateComparableQuestion(){
         question = "";
         answers = cAnswers;

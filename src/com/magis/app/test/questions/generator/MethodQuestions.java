@@ -25,6 +25,17 @@ public class MethodQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt();
+        if(selection == 0){
+            getStringMethodQuestion();
+        }
+        else{
+            getMathMethodQuestion();
+        }
+    }
+
     public void getStringMethodQuestion(){
         question="";
         int methodSelector = rand.nextInt(4);

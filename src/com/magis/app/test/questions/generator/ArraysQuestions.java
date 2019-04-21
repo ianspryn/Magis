@@ -14,6 +14,17 @@ public class ArraysQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt();
+        if(selection == 0){
+            getArrayIndexQuestion();
+        }
+        else{
+            getIndexQuestion();
+        }
+    }
+
     public void getArrayIndexQuestion(){
         question = "";
         answers.clear();

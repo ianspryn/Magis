@@ -33,6 +33,11 @@ public class DataTypeQuestions extends QuestionGenerator{
         answers = new ArrayList<>(Arrays.asList(dataTypeMatchingAnswers));
     }
 
+    @Override
+    public void initialize() {
+        datatypeMatchingQuestion();
+    }
+
     public void datatypeMatchingQuestion(){
         question = "";
         question = "<x> = ";

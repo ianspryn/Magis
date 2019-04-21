@@ -29,6 +29,17 @@ public class VariableQuestions extends QuestionGenerator{
         wrongVariables = new ArrayList<>(Arrays.asList(names2));
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt();
+        if(selection == 0){
+            getVariableNameQuestion();
+        }
+        else{
+            getInstanceVariableQuestion();
+        }
+    }
+
     public void getVariableNameQuestion(){
         answers.clear();
         question = "";

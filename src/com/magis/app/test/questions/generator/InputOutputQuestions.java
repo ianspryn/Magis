@@ -21,6 +21,11 @@ public class InputOutputQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        getScannerQuestions();
+    }
+
     public void getScannerQuestions(){
         answers.clear();
         Collections.addAll(answers, scannerAnswers);

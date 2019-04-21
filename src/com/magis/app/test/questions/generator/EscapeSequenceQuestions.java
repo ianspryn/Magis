@@ -17,6 +17,11 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        getEscapeSequenceQuestion();
+    }
+
     public void getEscapeSequenceQuestion(){
         answers.clear();
         question = "";

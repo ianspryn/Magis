@@ -21,6 +21,17 @@ public class MiscOOPQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt();
+        if(selection == 0){
+            isaHasAQuestion();
+        }
+        else{
+            getSuperMethodQuestion();
+        }
+    }
+
     public void isaHasAQuestion(){
         answers.clear();
         answers.add("True");
