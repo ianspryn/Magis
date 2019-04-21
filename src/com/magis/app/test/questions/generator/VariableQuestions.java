@@ -6,10 +6,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class VariableQuestions {
+public class VariableQuestions extends QuestionGenerator{
     Random rand;
-
-    private static String chapterTitle = "Variables";
 
     private String[] names1 = {"calculation", "value", "num1", "product", "quotient", "publicNumber", "interest_on_loan",
             "sum", "difference_of_nums", "totalSum", "num3", "square_root", "x", "y"};
@@ -26,10 +24,9 @@ public class VariableQuestions {
     private String question = "";
 
     public VariableQuestions(){
-        rand = new Random();
+        super();
         correctVariables = new ArrayList<>(Arrays.asList(names1));
         wrongVariables = new ArrayList<>(Arrays.asList(names2));
-        answers = new ArrayList<>();
     }
 
     public void getVariableNameQuestion(){
@@ -81,19 +78,5 @@ public class VariableQuestions {
         shuffler.add("Unknown");
 
         answers = shuffler;
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
-    public static String getChapter(){
-        return chapterTitle;
     }
 }

@@ -10,7 +10,7 @@ class QuestionGeneratorTest {
     void testCommentQuestion(){
         CommentQuestions cq = new CommentQuestions();
         cq.generateGeneralCommentQuestion();
-        String[] answers = cq.getCommentAnswers().toArray(new String[0]);
+        String[] answers = cq.getAnswers().toArray(new String[0]);
         String question = cq.getQuestion();
         String correctAnswer = cq.getCorrectAnswer();
 

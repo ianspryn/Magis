@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class ObjectComparisonQuestions {
+public class ObjectComparisonQuestions extends QuestionGenerator{
 
     Random rand;
 
@@ -28,8 +28,7 @@ public class ObjectComparisonQuestions {
     private String question = "";
 
     public ObjectComparisonQuestions(){
-        rand = new Random();
-        answers = new ArrayList<>();
+        super();
         cAnswers = new ArrayList<>(Arrays.asList(comparableStringAnswers));
         eAnswers = new ArrayList<>(Arrays.asList(equalsAnswers));
     }
@@ -97,19 +96,5 @@ public class ObjectComparisonQuestions {
                 correctAnswer = equalsAnswers[1];
             }
         }
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
-    public static String getChapter(){
-        return chapterTitle;
     }
 }

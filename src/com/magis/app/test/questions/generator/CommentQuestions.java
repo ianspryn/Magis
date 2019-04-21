@@ -4,10 +4,8 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class CommentQuestions {
+public class CommentQuestions extends QuestionGenerator{
     Random rand;
-
-    private static String chapterTitle = "Comments";
 
     private String[] commentQuestions = {
             "This is a comment",
@@ -51,19 +49,5 @@ public class CommentQuestions {
             case 4: correctAnswer = generalCommentAnswers[1];
                 break;
         }
-    }
-
-    public ArrayList<String> getCommentAnswers(){ return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
-    public static String getChapter(){
-        return chapterTitle;
     }
 }

@@ -7,11 +7,9 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class MethodQuestions {
+public class MethodQuestions extends QuestionGenerator{
     Random rand;
     DecimalFormat df = new DecimalFormat("####.##");
-
-    private static String chapterTitle = "Methods";
 
     private String[] dataTypeString = {"Cat","DOG","Mouse","Bug","Tree","LIQUID","Programming","SUM",
             "Four","ONE","Two","Ten","five","zero POINT four", "four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
@@ -24,8 +22,7 @@ public class MethodQuestions {
     private String question = "";
 
     public MethodQuestions(){
-        rand = new Random();
-        answers = new ArrayList<>();
+        super();
     }
 
     public void getStringMethodQuestion(){
@@ -109,19 +106,5 @@ public class MethodQuestions {
         Collections.shuffle(shuffler);
         shuffler.add("Unknown");
         answers = shuffler;
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
-    public static String getChapter(){
-        return chapterTitle;
     }
 }
