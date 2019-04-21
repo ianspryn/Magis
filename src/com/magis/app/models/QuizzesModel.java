@@ -94,11 +94,11 @@ public class QuizzesModel {
             return questions.get(index);
         }
 
-        public int getNumQuestions() {
+        public int getNumAvailableQuestions() {
             return questions.size();
         }
 
-        String getChapterName() {
+        public String getChapterName() {
             return chapterName;
         }
 

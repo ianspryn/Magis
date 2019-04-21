@@ -1,5 +1,7 @@
 package com.magis.app.test.quiz;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.TestPageContent;
 import com.magis.app.UI.UIComponents;
@@ -7,7 +9,7 @@ import com.magis.app.home.HomePage;
 import com.magis.app.test.Grader;
 import com.magis.app.test.TestResult;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -15,26 +17,29 @@ import java.util.ArrayList;
 
 public class QuizPage {
 
-    static Button submitButton;
+    static JFXButton submitButton;
     static int currentPage;
     static int numPages;
     static QuizSidePanel sidePanel;
     static ScrollPane quizPageScrollPane;
     static TestPageContent testPageContent;
+    private static StackPane leftButton;
+    private static StackPane rightButton;
 
     public static void Page (int chapterIndex) {
         ArrayList<Integer> usedBankQuestions = new ArrayList<>();;
         testPageContent = new TestPageContent();
         currentPage = 0;
-
-//        Main.window.setOnCloseRequest(e -> );
-
         //get the title of the current chapter
         String chapterName = Main.lessonModel.getChapter(chapterIndex).getTitle();
         //initialize the quiz
         Main.quizzesModel.initializeQuiz(chapterName);
 
-        //main borderpane
+        /*
+        Master
+         */
+        StackPane master = new StackPane();
+        master.getStyleClass().add("background");
         BorderPane borderPane = new BorderPane();
         borderPane.getStyleClass().add("borderpane-test");
 
@@ -46,7 +51,9 @@ public class QuizPage {
         HBox homeBox = UIComponents.createHomeBox();
         homeBox.setOnMouseClicked(e -> {
             if (Main.takingTest) {
-                if (UIComponents.confirmClose()) {
+                String title = "Exit Test";
+                String content = "Are you sure you want to exit? All test progress will be lost!";
+                if (UIComponents.confirmMessage(title, content)) {
                     Main.takingTest = false;
                     HomePage.goHome(borderPane);
                 }
@@ -78,7 +85,8 @@ public class QuizPage {
         quizPageScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         quizPageScrollPane.setContent(testPageContent.getPageContent(0));
-        UIComponents.animate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
+        JFXScrollPane.smoothScrolling(quizPageScrollPane);
+        UIComponents.fadeAndTranslate(testPageContent.getPageContent(0), 0.15,0.2,0,0,-10,0);
 
         //Quiz Side Panel
         sidePanel = new QuizSidePanel(chapterIndex, quizPages, numQuestions, quizPageScrollPane, testPageContent);
@@ -98,40 +106,35 @@ public class QuizPage {
         navigationContent.setPadding(new Insets(10,10,10,10));
 
         //Left navigation
-        StackPane leftButton = UIComponents.createNavigationButton("<");
+        leftButton = UIComponents.createNavigationButton("<");
+        leftButton.setVisible(false); //default to invisible since we're on the first page
         leftButton.setOnMouseClicked(e -> {
-            if (currentPage > 0) {
-                updatePage(-1);
-            }
+            if (currentPage > 0) updatePage(currentPage - 1);
         });
         //Right navigation
-        StackPane rightButton = UIComponents.createNavigationButton(">");
+        rightButton = UIComponents.createNavigationButton(">");
         rightButton.setOnMouseClicked(e -> {
-            if (currentPage < numPages - 1) {
-                updatePage(1);
-            }
+            if (currentPage < numPages - 1) updatePage(currentPage + 1);
         });
 
         //Quiz submit button
-        submitButton = new Button("Submit");
-        submitButton.getStyleClass().add("submit-test-button");
+        submitButton = new JFXButton("Submit");
+        submitButton.getStyleClass().addAll("submit-test-button", "jfx-button-raised", "jfx-button-raised-color");
         submitButton.setVisible(false);
         submitButton.setOnAction(e -> confirmSubmit(grader, chapterIndex, navigationContent, sideBar, quizPages, quizPageScrollPane, sidePanel, testPageContent));
 
         navigationContent.setLeft(leftButton);
         navigationContent.setRight(rightButton);
         navigationContent.setCenter(submitButton);
-        UIComponents.animate(navigationContent,0.15,0.3,0,0,0,0);
+        UIComponents.fadeAndTranslate(navigationContent,0.15,0.3,0,0,0,0);
 
         quizArea.setCenter(quizPageScrollPane);
         quizArea.setBottom(navigationContent);
 
         borderPane.setCenter(quizArea);
-
-        Scene scene = new Scene(borderPane, Main.window.getScene().getWidth(), Main.window.getScene().getHeight());
-        scene.getStylesheets().add("com/magis/app/css/style.css");
-
-        Main.setScene(scene, "Quiz");
+        master.getChildren().add(borderPane);
+        StackPane.setAlignment(borderPane, Pos.CENTER);
+        Main.setScene(master, "Quiz");
     }
     /**
      * A popup to confirm to submit the quiz
@@ -155,7 +158,7 @@ public class QuizPage {
             if (type.getText().equals("Submit")) {
                 navigationContent.setCenter(null);
                 grader.grade();
-                Main.studentModel.getStudent(Main.username).getQuiz(chapterIndex + 1).addScore(grader.getGrade());
+                Main.studentModel.getStudent().getQuiz(chapterIndex + 1).addScore(grader.getGrade());
                 //to recycle some code, instead of creating an entirely new QuizPage, simply insert an additional page
                 //create the new pageContent
                 VBox result = TestResult.createTestResultPage(Main.lessonModel.getChapter(chapterIndex).getTitle(), "quiz", grader.getGrade());
@@ -188,15 +191,21 @@ public class QuizPage {
     }
 
     /**
-     * A method used by the navigation buttons to change pages
-     * @param move positive or negative 1, depending on the direction of page changing
+     * Update the page page, including the side panel and the page content
+     * @param page the new page index
      */
-    public static void updatePage(int move) {
+    public static void updatePage(int page) {
         //increment or decrement currentPage value
-        currentPage += move;
+        currentPage = page;
         //update the page with new content
         quizPageScrollPane.setContent(testPageContent.getPageContent(currentPage));
+        JFXScrollPane.smoothScrolling(quizPageScrollPane);
         //update the side panel to reflect the page change
         sidePanel.update(currentPage);
+        //hide the some of the navigation buttons if we're at the beginning or end of the pages
+        if (currentPage == 0) leftButton.setVisible(false);
+        else leftButton.setVisible(true);
+        if (currentPage == numPages - 1) rightButton.setVisible(false);
+        else rightButton.setVisible(true);
     }
 }

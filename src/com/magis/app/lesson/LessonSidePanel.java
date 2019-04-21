@@ -3,16 +3,15 @@ package com.magis.app.lesson;
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.models.LessonModel;
-import javafx.animation.*;
+import com.magis.app.models.StudentModel;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -21,33 +20,35 @@ public class LessonSidePanel {
     private int chapterIndex;
     private LessonPageContent lessonPageContent;
     private ArrayList<LessonModel.ChapterModel.PageModel> pages;
+    private int hasQuiz;
+    private int hasTest;
     private ScrollPane scrollPane;
     private VBox masterVBox;
     private VBox contentPagesVBox;
     private HBox currentPage;
     private PageLabels pageLabels;
-    private ImageView verticalLine;
-    private ImageView horizontalLine;
+    private Rectangle verticalLine;
+    private Rectangle horizontalLine;
+    private StudentModel.Student student;
 
     private int currentPageIndex;
 
 
-    public LessonSidePanel(int chapterIndex, LessonPageContent lessonPageContent, ArrayList<LessonModel.ChapterModel.PageModel> pages) {
+    public LessonSidePanel(int chapterIndex, LessonPageContent lessonPageContent, ArrayList<LessonModel.ChapterModel.PageModel> pages, int hasQuiz, int hasTest) {
         this.chapterIndex = chapterIndex;
         this.lessonPageContent = lessonPageContent;
         this.pages = pages;
-        this.scrollPane = new ScrollPane();
-        this.masterVBox = new VBox();
-        this.contentPagesVBox = new VBox();
-        this.currentPage = new HBox();
-        if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
-            this.pageLabels = new PageLabels(pages.size() + 1);
-        } else {
-            this.pageLabels = new PageLabels(pages.size());
-        }
-        verticalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
-        horizontalLine = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/pink400.png");
+        scrollPane = new ScrollPane();
+        masterVBox = new VBox();
+        contentPagesVBox = new VBox();
+        currentPage = new HBox();
+        pageLabels = new PageLabels(pages.size() + hasQuiz + hasTest);
+        this.hasQuiz = hasQuiz;
+        this.hasTest = hasTest;
+        verticalLine = new Rectangle();
+        horizontalLine = new Rectangle();
         currentPageIndex = 0;
+        student = Main.studentModel.getStudent();
     }
 
     public ScrollPane getSidePanel() {
@@ -56,16 +57,16 @@ public class LessonSidePanel {
 
     public void initialize() {
         Label chapterTitle = new Label(Main.lessonModel.getChapter(chapterIndex).getTitle());
-        chapterTitle.getStyleClass().add("lesson-side-panel-chapter-text");
+        chapterTitle.getStyleClass().add("side-panel-title");
         chapterTitle.setMaxWidth(300);
         chapterTitle.setWrapText(true);
 
-        horizontalLine.setPreserveRatio(false);
-        horizontalLine.setFitHeight(2);
-        horizontalLine.setFitWidth(250);
+        horizontalLine.setHeight(2);
+        horizontalLine.setWidth(250);
+        horizontalLine.getStyleClass().add("lesson-rectangle");
 
-        UIComponents.animate(chapterTitle, 0.15, 0.2,-10,0,0,0);
-        UIComponents.animate(horizontalLine, 0.15, 0.2,-10,0,0,0);
+        UIComponents.fadeAndTranslate(chapterTitle, 0.15, 0.2,-10,0,0,0);
+        UIComponents.fadeAndTranslate(horizontalLine, 0.15, 0.2,-10,0,0,0);
 
         masterVBox.getChildren().addAll(chapterTitle, horizontalLine);
 
@@ -73,77 +74,66 @@ public class LessonSidePanel {
         masterVBox.setSpacing(10);
         contentPagesVBox.setSpacing(10);
 
-        verticalLine.setPreserveRatio(false);
-        verticalLine.setFitHeight(25);
-        verticalLine.setFitWidth(5);
-
-
+        verticalLine.setHeight(25);
+        verticalLine.setWidth(5);
+        verticalLine.getStyleClass().add("lesson-rectangle");
 
         pageLabels.getLabel(0).setPadding(new Insets( 0, 0, 0, 10));
         pageLabels.getLabel(0).getStyleClass().add("studentlesson-side-panel-text");
-        setLabelText(0);
+        getAndSetLabelText(0);
 
         //listeners
-        pageLabels.getLabel(0).setOnMouseClicked(e -> {
-            lessonPageContent.update(0);
-            update(0);
-        });
+        pageLabels.getLabel(0).setOnMouseClicked(e -> LessonPage.updatePage(0));
         pageLabels.getLabel(0).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         pageLabels.getLabel(0).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
         //add verticalLine and first page text to hbox
         currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
 
-        UIComponents.animate(currentPage,0.2,0.2,-10,0,0,0);
+        UIComponents.fadeAndTranslate(currentPage,0.2,0.2,-10,0,0,0);
 
         //add first page to the list of pages
         contentPagesVBox.getChildren().add(currentPage);
 
         for (int i = 1; i < pages.size(); i++) {
-            int index = i;
-            pageLabels.getLabel(i).setPadding(new Insets(0, 0, 0, 15));
-            pageLabels.getLabel(i).getStyleClass().add("lesson-side-panel-text");
-            setLabelText(i);
-
-            //listeners
-            pageLabels.getLabel(i).setOnMouseClicked(e -> {
-                lessonPageContent.update(index);
-                update(index);
-            });
-            pageLabels.getLabel(i).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-            pageLabels.getLabel(i).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-            //add page to the list of pages
-            contentPagesVBox.getChildren().add(pageLabels.getLabel(i));
-
-            UIComponents.animate(pageLabels.getLabel(i), i, 0.15, 0.2, -10,0,0, 0);
+            configureLabel(i);
+            getAndSetLabelText(i);
         }
         masterVBox.getChildren().add(contentPagesVBox);
         currentPageIndex = 0;
 
-        //if there exists a test for this chapter
-        if (Main.quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapterIndex).getTitle())) {
+        //if there exists a quiz for this chapter
+        if (hasQuiz > 0) {
             //then add it to the side lessonSidePanel
-            pageLabels.getLabel(pages.size()).setPadding(new Insets(0, 0, 0, 15));
-            pageLabels.getLabel(pages.size()).getStyleClass().add("lesson-side-panel-test-text");
+            configureLabel(pages.size()); //the index where the quiz will be
             pageLabels.getLabel(pages.size()).setText("Quiz");
-
-            //listeners
-            pageLabels.getLabel(pages.size()).setOnMouseClicked(e -> {
-                lessonPageContent.update(-1);
-                update(pages.size());
-            });
-            pageLabels.getLabel(pages.size()).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-            pageLabels.getLabel(pages.size()).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-            contentPagesVBox.getChildren().addAll(pageLabels.getLabel(pages.size()));
-
-            UIComponents.animate(pageLabels.getLabel(pages.size()), pages.size(), 0.15, 0.2, -10,0,0, 0);
+        }
+        //if there exists a test for this chapter
+        if (hasTest > 0) {
+            //then add it to the side lessonSidePanel
+            configureLabel(pages.size() + hasQuiz); //the index where the test will be
+            pageLabels.getLabel(pages.size() + hasQuiz).setText("Test");
         }
 
         scrollPane.setContent(masterVBox);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.getStyleClass().add("sidebar-scrollpane");
+    }
+
+    private void configureLabel(int index) {
+        pageLabels.getLabel(index).setPadding(new Insets(0, 0, 0, 15));
+        pageLabels.getLabel(index).getStyleClass().add("lesson-side-panel-text");
+
+        //listeners
+        pageLabels.getLabel(index).setOnMouseClicked(e -> LessonPage.updatePage(index));
+        pageLabels.getLabel(index).setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        pageLabels.getLabel(index).setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+        //add page to the list of pages
+        contentPagesVBox.getChildren().add(pageLabels.getLabel(index));
+
+        UIComponents.fadeAndTranslate(pageLabels.getLabel(index), index, 0.15, 0.2, -10,0,0, 0);
     }
 
 
@@ -174,7 +164,7 @@ public class LessonSidePanel {
         currentPageIndex = index;
     }
 
-    private void setLabelText(int index) {
+    private void getAndSetLabelText(int index) {
         String title = pages.get(index).getTitle();
         if (title != null) {
             if (title.length() > 23) {

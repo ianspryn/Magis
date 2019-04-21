@@ -35,20 +35,15 @@
     -fx-faint-focus-color: transparent;
 }
 
-.borderpane-home {
-    -fx-background-color: #ffffff;
-}
-
-/* a slightly darker background for screens with lower contrast */
-.borderpane-lesson, .borderpane-test, .chapter-box-scrollpane,
-.lesson-page-content, .quiz-page-content, .navigation-content {
-    -fx-background-color: #eee; /* or set both to #ddd */
-    -fx-background: #eee;
-}
-
 .separator-home {
 
 }
+
+/* remove the thin border around the nodes */
+.borderpane {
+    -fx-box-border: transparent
+}
+
 /*
 .borderpane-lesson {
     -fx-background-color: #ededed;
@@ -58,7 +53,7 @@
     -fx-background-color: #ededed;
 }
 */
-.lesson-side-panel-chapter-text {
+.side-panel-title {
     -fx-font-size: 20px;
     -fx-font-family: "Roboto Mono Bold";
     -fx-text-fill: #ffffff;
@@ -69,43 +64,27 @@
 .lesson-side-panel-text {
     -fx-font-size: 18px;
     -fx-font-family: "Roboto Mono Light";
-    -fx-text-fill: #ffb5d6;
-
-}
-
-.lesson-side-panel-test-text {
-    -fx-font-size: 18px;
-    -fx-font-family: "Roboto Mono Bold";
-    -fx-text-fill: #ffb5d6;
-
 }
 
 .lesson-text {
+     -fx-font-size: 15px;
+     -fx-font-family: "Roboto Mono Regular";
+ }
+
+.jfx-button {
+    -fx-text-fill: #fff;
+    -fx-padding: 10px;
     -fx-font-size: 15px;
-    -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #200310;
+    -fx-font-family: "Roboto Mono Bold";
 }
 
-.sidebar, .sidebar-scrollpane {
-    -fx-background-color: #AD1457; /* Pink 800 */
+.jfx-button-raised {
+    -jfx-button-type: RAISED;
 }
 
-.sidebar-scrollpane {
-    -fx-background:#AD1457; /* Pink 800 */
-}
-
-.button {
-    -fx-background-color: #D81B60; /* Pink 600 */
-    -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #ffffff
-}
-
-.button:hover {
-    -fx-background-color: #E91E63; /* Pink 500 */
-}
-
-.button:pressed {
-    -fx-background-color: #AD1457; /* Pink 800 */
+.jfx-button-flat {
+    -fx-background-color: transparent;
+    -jfx-button-type: FLAT;
 }
 
 .start-test-button {
@@ -120,23 +99,18 @@
     -fx-opacity: 0.8;
 }
 
-.menu-bar {
-    -fx-background-color: #AD1457
-}
-
-
-.title-bar {
-    -fx-background-color: #C2185B;
-}
-
 .login-box {
     -fx-background-color: #ffffff;
 }
 
+.jfx-text-field, .jfx-password-field {
+    -fx-font-weight: BOLD;
+    -fx-alignment: top-left;
+    -fx-max-width: 300;
+}
+
 .sign-in-field {
-    -fx-control-inner-background: #f9f9f9;
-    -fx-padding: 1em 1em 1em 1em;
-    -fx-background-radius: 25px;
+    -fx-max-width: 150;
 }
 
 /*
@@ -144,7 +118,6 @@ The greeting ("Hello, Ian!") on the home page
 */
 .greeting-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #181818;
     -fx-font-size: 3.0em;
 }
 
@@ -155,14 +128,12 @@ The greeting ("Hello, Ian!") on the home page
 /* the chevron text for navigating pages */
 .navigation-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #939393;
     -fx-font-size: 2.0em;
 }
 
 /*text for grade result inside circle*/
 .grade-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-fill: #ffffff;
     -fx-font-size: 3.5em;
 }
 
@@ -172,9 +143,11 @@ The greeting ("Hello, Ian!") on the home page
 }
 
 /* set default fill of svg path */
+/*
 .icon-button .button-icon {
     -fx-fill: #fff;
 }
+*/
 
 /* set default fill of svg path */
 /*
@@ -196,42 +169,43 @@ The greeting ("Hello, Ian!") on the home page
 }
 
 /* modify svg path fill for hovered/pressed button */
+/*
 .icon-button:pressed .button-icon,
 .icon-button:hover .button-icon {
     -fx-fill: #fff;
 }
-
+*/
 .chapter-box-scrollpane {
     -fx-alignment: center;
 }
 
 /* Home page container for all of the chapters */
 .chapter-box-container {
-    /*-fx-background-color: #ededed;*/
     -fx-alignment: center;
     -fx-padding: 50px 0 150px 0;
     -fx-spacing: 50px;
 }
 
-.recent-box {
-    -fx-background-color: #ffffff;
-    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
+.recent-box, .settings-box {
     -fx-padding: 20px;
     -fx-background-radius: 25px;
 }
 
 .chapter-box {
-    -fx-background-color: #ffffff;
-    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
     -fx-padding: 20px;
     -fx-alignment: center;
     -fx-background-radius: 25px;
-
 }
 
 .chapter-title-text {
     -fx-font-size: 1.5em;
     -fx-font-family: "Roboto Mono Bold";
+}
+
+.settings-text {
+    -fx-font-size: 2em;
+    -fx-font-family: "Roboto Mono Bold";
+    -fx-padding: 0 0 0 23px;
 }
 
 .page-title-text {
@@ -241,12 +215,34 @@ The greeting ("Hello, Ian!") on the home page
 
 .chapter-description-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #939393;
 }
 
 /* the text right below the home icon in the top left corner */
 .home-text {
     -fx-font-family: "Roboto Mono Regular";
-    -fx-text-fill: #e397b1;
     -fx-padding: 12px 0 0 0;
+}
+
+.settings-name {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 30px;
+    -fx-padding: 0 20px 0 0;
+}
+
+.settings-page-text {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 18px;
+    -fx-padding: 0 20px 0 0;
+}
+
+.delete-user-button {
+    -fx-background-color: #E53935; /* Red 600 */
+}
+
+.material-icons-light {
+    -fx-fill: #fff;
+}
+
+.material-icons-light-solid .button-icon {
+    -fx-fill: #fff;
 }

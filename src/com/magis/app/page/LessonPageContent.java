@@ -1,82 +1,57 @@
-package com.magis.app.lesson;
+package com.magis.app.page;
 
-import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.PageContentContainer;
 import com.magis.app.models.LessonModel;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+public class LessonPageContent extends PageContent {
 
-public class LessonPageContent {
-
-    private ScrollPane parentScrollPane;
-    private ArrayList<PageContentContainer> pageContents;
-    private VBox masterContent;
+    public ArrayList<PageContentContainer> pageContentContainers;
     private int chapterIndex;
+    private int numPages;
     private int hasQuiz;
     private int hasTest;
 
-    public LessonPageContent(ScrollPane scrollPane, int chapterIndex, int hasQuiz, int hasTest) {
-        parentScrollPane = scrollPane;
-        pageContents = new ArrayList<>();
+    public LessonPageContent(int chapterIndex) {
+        pageContentContainers = new ArrayList<>();
         this.chapterIndex = chapterIndex;
-        this.hasQuiz = hasQuiz;
-        this.hasTest = hasTest;
+        LessonModel.ChapterModel chapterModel = Main.lessonModel.getChapter(chapterIndex);
+        String chapterTitle = chapterModel.getTitle();
+        this.hasQuiz = Main.quizzesModel.hasQuiz(chapterTitle) ? 1 : 0;
+        this.hasTest = Main.testsModel.hasTest(chapterTitle) ? 1 : 0;
+        this.numPages = chapterModel.getNumPages();
+
+        initialize();
     }
 
-    public VBox getPageContent() {
-        return masterContent;
-    }
-
-    public void initialize() {
-        LessonModel.ChapterModel chapter = Main.lessonModel.getChapter(chapterIndex);
-        int numPages = chapter.getNumPages();
-        ArrayList<Thread> threads = new ArrayList<>();
-
+    private void initialize() {
         for (int i = 0; i < numPages; i++) {
             int pageIndex = i;
-            pageContents.add(new PageContentContainer(chapterIndex));
-            Thread thread = new Thread(() -> buildPage(pageIndex));
-            thread.start();
-            threads.add(thread);
+            pageContentContainers.add(new PageContentContainer(chapterIndex));
+            new Thread(() -> buildPage(pageIndex)).start();
         }
-
-        //wait for the threads to finish, else we *sometimes* get a "Not on FX application thread" error. Only sometimes. And only on one page. Very weird bug.
-//        for (Thread thread : threads) {
-//            try {
-//                thread.join();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
 
         if (hasQuiz > 0) {
             PageContentContainer pageContent = new PageContentContainer(chapterIndex);
             pageContent.buildAsTestIntroPage("quiz");
-            pageContents.add(pageContent);
+            pageContentContainers.add(pageContent);
         }
 
         if (hasTest > 0) {
             PageContentContainer pageContent = new PageContentContainer(chapterIndex);
             pageContent.buildAsTestIntroPage("test");
-            pageContents.add(pageContent);
+            pageContentContainers.add(pageContent);
         }
-        update(0);
     }
 
-    /**
-     * Update the page content of the lesson page
-     * @param pageIndex the page to load.
-     */
-    public void update(int pageIndex) {
+    @Override
+    void update(int pageIndex) {
         //Make sure we don't try to mark the quiz/test intro page as a lesson page (we'll get an out of bounds if we do)
         if (pageIndex < Main.lessonModel.getChapter(chapterIndex).getNumPages()) {
             //Mark the page as visited
@@ -84,19 +59,13 @@ public class LessonPageContent {
         }
         //Last page visited
         Main.studentModel.getStudent().setRecentPlace(chapterIndex, pageIndex);
-
-        //set the page content
-        masterContent = pageContents.get(pageIndex).getMasterContent();
-        parentScrollPane.setContent(masterContent);
-        JFXScrollPane.smoothScrolling(parentScrollPane);
+        setScrollPaneContent(pageContentContainers.get(pageIndex).getMasterContent());
     }
 
-    /**
-     * @param pageIndex the index of the lesson page for the current chapter
-     */
-    private void buildPage(int pageIndex) {
+    @Override
+    void buildPage(int pageIndex) {
         ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
-        PageContentContainer pageContent = pageContents.get(pageIndex);
+        PageContentContainer pageContentContainer = pageContentContainers.get(pageIndex);
         for (LessonModel.ChapterModel.PageModel.LessonContent lessonPageContent : lessonContents) {
             String type = lessonPageContent.getType();
             switch (type) {
@@ -106,7 +75,7 @@ public class LessonPageContent {
                     thread.setDaemon(true);
                     thread.start();
                     image.setPreserveRatio(true);
-                    pageContent.add(image);
+                    pageContentContainer.add(image);
                     break;
                 default:
                     System.err.println("Unrecognized XML tag <" + type + ">. Defaulting to text field.");
@@ -118,10 +87,12 @@ public class LessonPageContent {
                     textDefault.getStyleClass().add("lesson-text");
                     textDefault.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
                     textDefault.setPadding(new Insets(20, 20, 20, 20));
-                    pageContent.add(textDefault);
+                    pageContentContainer.add(textDefault);
                     break;
             }
         }
-        pageContent.buildAsLessonPage(pageIndex);
+        pageContentContainer.buildAsLessonPage(pageIndex);
     }
+
+
 }
