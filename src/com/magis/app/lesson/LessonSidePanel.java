@@ -57,7 +57,7 @@ public class LessonSidePanel {
 
     public void initialize() {
         Label chapterTitle = new Label(Main.lessonModel.getChapter(chapterIndex).getTitle());
-        chapterTitle.getStyleClass().add("lesson-side-panel-chapter-text");
+        chapterTitle.getStyleClass().add("side-panel-title");
         chapterTitle.setMaxWidth(300);
         chapterTitle.setWrapText(true);
 

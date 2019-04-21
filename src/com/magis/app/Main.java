@@ -6,6 +6,8 @@ import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
+import com.magis.app.page.LessonSidePanel;
+import com.magis.app.page.PageSidePanel;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

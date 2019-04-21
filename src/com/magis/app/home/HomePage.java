@@ -8,8 +8,11 @@ import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.SmartContinue;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.icons.MaterialIcons;
-import com.magis.app.lesson.LessonPage;
 import com.magis.app.models.StudentModel;
+import com.magis.app.page.LessonPage;
+import com.magis.app.page.LessonSidePanel;
+import com.magis.app.page.Page;
+import com.magis.app.page.PageSidePanel;
 import com.magis.app.settings.SettingsPage;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
@@ -129,7 +132,7 @@ public class HomePage {
         recentBox.setMinHeight(100);
         recentBox.setAlignment(Pos.CENTER_LEFT);
 
-        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), true));
+        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), student.getRecentPage()));
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
@@ -239,9 +242,7 @@ public class HomePage {
         //master box
         chapterBox.getStyleClass().add("chapter-box");
 
-        chapterBox.setOnMouseClicked(e -> {
-            goToLesson(masterVbox, chapterIndex, false);
-        });
+        chapterBox.setOnMouseClicked(e -> goToLesson(masterVbox, chapterIndex));
         chapterBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
             UIComponents.scale(chapterBox, 0.1,1.02,1.02);
@@ -305,13 +306,26 @@ public class HomePage {
      * @param node the desired node to fadeAndTranslate first
      * @param chapterIndex the desired chapter to switch scenes to
      */
-    private static void goToLesson(Node node, int chapterIndex, boolean continueWhereLeftOff) {
+    private static void goToLesson(Node node, int chapterIndex) {
         if (Main.useAnimations) {
             ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
             parallelTransition.play();
-            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, continueWhereLeftOff));
+//            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
+            parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex));
         } else {
-            LessonPage.Page(chapterIndex, continueWhereLeftOff);
+//            LessonPage.Page(chapterIndex, false);
+            new com.magis.app.page.LessonPage(chapterIndex);
+        }
+    }
+
+    private static void goToLesson(Node node, int chapterIndex, int page) {
+        if (Main.useAnimations) {
+            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+            parallelTransition.play();
+//            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
+            parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex, page));
+        } else {
+            new com.magis.app.page.LessonPage(chapterIndex, page);
         }
     }
 

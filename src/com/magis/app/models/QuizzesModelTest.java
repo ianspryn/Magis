@@ -16,9 +16,9 @@ public class QuizzesModelTest {
     }
 
     @Test
-    public void getNumQuestions() {
+    public void getNumAvailableQuestions() {
         QuizzesModel quizzesModel = new QuizzesModel();
-        int size = quizzesModel.getChapters("Primitive Types").getNumQuestions();
+        int size = quizzesModel.getChapters("Primitive Types").getNumAvailableQuestions();
         Assert.assertEquals(1, size);
     }
 

@@ -1,6 +1,6 @@
 /* a slightly darker background for screens with lower contrast */
-.background, .borderpane-lesson, .borderpane-test, .master-scrollpane,
-.lesson-page-content, .quiz-page-content, .navigation-content {
+.background, .borderpane-page, .borderpane-lesson, .borderpane-test, .master-scrollpane,
+.lesson-page-content, .navigation-content {
     -fx-background-color: #ddd; /* or set both to #ddd */
     -fx-background: #ddd;
 }

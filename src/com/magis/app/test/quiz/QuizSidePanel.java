@@ -56,7 +56,7 @@ public class QuizSidePanel {
         this.masterVBox = new VBox();
 
         Label chapterTitle = new Label(Main.lessonModel.getChapter(chapterIndex).getTitle());
-        chapterTitle.getStyleClass().add("lesson-side-panel-chapter-text");
+        chapterTitle.getStyleClass().add("side-panel-title");
         chapterTitle.setMaxWidth(300);
         chapterTitle.setWrapText(true);
 

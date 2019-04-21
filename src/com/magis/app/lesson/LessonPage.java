@@ -120,7 +120,7 @@ public class LessonPage {
     }
 
     /**
-     * Update the page page, including the side panel and the page content
+     * Update the page, including the side panel and the page content
      * @param page the new page index
      */
     public static void updatePage(int page) {

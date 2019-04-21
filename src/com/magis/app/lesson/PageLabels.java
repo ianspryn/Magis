@@ -1,5 +1,8 @@
 package com.magis.app.lesson;
 
+import com.magis.app.Main;
+import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
@@ -7,12 +10,22 @@ import java.util.ArrayList;
 public class PageLabels {
 
     private ArrayList<Label> labels;
+    private int numLabels;
 
     public PageLabels(int numLabels) {
         labels = new ArrayList<>();
+        this.numLabels = numLabels;
+        initialize();
+    }
+
+    public void initialize() {
         for (int i = 0; i < numLabels; i++) {
-            labels.add(new Label());
-            labels.get(i).getStyleClass().add("lesson-side-panel-text");
+            Label label = new Label();
+            label.setPadding(new Insets(0, 0, 0, 15));
+            label.getStyleClass().add("lesson-side-panel-text");
+            label.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            label.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+            labels.add(label);
         }
     }
 

@@ -38,6 +38,12 @@
 .separator-home {
 
 }
+
+/* remove the thin border around the nodes */
+.borderpane {
+    -fx-box-border: transparent
+}
+
 /*
 .borderpane-lesson {
     -fx-background-color: #ededed;
@@ -47,7 +53,7 @@
     -fx-background-color: #ededed;
 }
 */
-.lesson-side-panel-chapter-text {
+.side-panel-title {
     -fx-font-size: 20px;
     -fx-font-family: "Roboto Mono Bold";
     -fx-text-fill: #ffffff;
