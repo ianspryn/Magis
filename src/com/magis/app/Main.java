@@ -34,7 +34,7 @@ public class Main extends Application{
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
     public static TestsModel testsModel;
-    public static HashMap<Integer, String> questionGenerator;
+    public static HashMap<Integer, QuestionGenerator> questionGenerator;
     public static String username;
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
@@ -72,16 +72,16 @@ public class Main extends Application{
 
     private void populateQuestionGenerator() {
         questionGenerator = new HashMap<>();
-//        questionGenerator.put(0, new CommentQuestions());
-//        questionGenerator.put(1, new DataTypeQuestions());
-//        questionGenerator.put(2, new OperatorQuestions());
-//        questionGenerator.put(3, new ObjectComparisonQuestions());
-//        questionGenerator.put(4, new VariableQuestions());
-//        questionGenerator.put(5, new EscapeSequenceQuestions());
-//        questionGenerator.put(6, new MethodQuestions());
-//        questionGenerator.put(7, new InputOutputQuestions());
-//        questionGenerator.put(8, new ExceptionsQuestions());
-//        questionGenerator.put(9, new PackagesQuestion());
+        questionGenerator.put(0, new CommentQuestions());
+        questionGenerator.put(1, new DataTypeQuestions());
+        questionGenerator.put(2, new OperatorQuestions());
+        questionGenerator.put(3, new ObjectComparisonQuestions());
+        questionGenerator.put(4, new VariableQuestions());
+        questionGenerator.put(5, new EscapeSequenceQuestions());
+        questionGenerator.put(6, new MethodQuestions());
+        questionGenerator.put(7, new InputOutputQuestions());
+        questionGenerator.put(8, new ExceptionsQuestions());
+//        questionGenerator.put(9, new PackagesQuestions());
 
     }
 

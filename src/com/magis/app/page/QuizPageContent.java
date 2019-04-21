@@ -4,6 +4,7 @@ import com.magis.app.Main;
 import com.magis.app.UI.PageContentContainer;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.test.Grader;
+import com.magis.app.test.questions.generator.QuestionGenerator;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -15,7 +16,8 @@ import java.util.Random;
 
 public class QuizPageContent extends PageContent {
 
-    public ArrayList<PageContentContainer> pageContentContainers;
+    private QuestionGenerator questionGenerator;
+    private ArrayList<PageContentContainer> pageContentContainers;
     private Grader grader;
     private QuizzesModel.ChapterModel quiz;
     private ArrayList<ToggleGroup> toggleGroups;
@@ -56,6 +58,7 @@ public class QuizPageContent extends PageContent {
     }
 
     private void initialize(int pageIndex) {
+        questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
         Random rand = new Random();
         String generatedQuestion = "";
         //max 2 questions per page
@@ -74,6 +77,8 @@ public class QuizPageContent extends PageContent {
             //if we're not out of bank questions, then randomly choose if the question should be from the bank or generated
             if (numAvailableBankQuestions > usedBankQuestions.size()) {
                 typeOfQuestion = rand.nextInt(2); //0 or 1
+            } else if (questionGenerator == null) { // if we're out of bank questions and there doesn't exist a question generator, return
+                return;
             }
 
             switch(typeOfQuestion) {
@@ -99,7 +104,17 @@ public class QuizPageContent extends PageContent {
                     grader.addCorrectAnswer(questionIndex, correctAnswer);
                     break;
                 case 1:
-                    //TODO FINISH
+                    questionGenerator.initialize();
+                    do { generatedQuestion = questionGenerator.getQuestion(); }
+                    while (usedGeneratorQuestions.contains(generatedQuestion));
+                    usedGeneratorQuestions.add(generatedQuestion);
+
+                    statement.setText(generatedQuestion);
+                    questionBox.getChildren().add(statement);
+                    correctAnswer = questionGenerator.getCorrectAnswer();
+                    //add the correct answer to the grader for future grading
+                    grader.addCorrectAnswer(questionIndex, correctAnswer);
+                    answers = questionGenerator.getAnswers();
                     break;
             }
 
