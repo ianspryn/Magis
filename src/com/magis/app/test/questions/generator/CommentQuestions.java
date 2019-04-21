@@ -25,6 +25,11 @@ public class CommentQuestions extends QuestionGenerator{
         answers = new ArrayList<>(Arrays.asList(generalCommentAnswers));
     }
 
+    @Override
+    public void initialize() {
+        generateGeneralCommentQuestion();
+    }
+
     public void generateGeneralCommentQuestion(){
         question = "";
         int random;

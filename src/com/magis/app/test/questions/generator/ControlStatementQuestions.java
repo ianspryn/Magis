@@ -15,6 +15,23 @@ public class ControlStatementQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt(3);
+        if(selection == 0){
+            getIfElseQuestion();
+        }
+        else if(selection == 1){
+            whileLoopQuestions();
+        }
+        else if(selection == 2){
+            forLoopQuestion();
+        }
+        else{
+            forEachLoopQuestion();
+        }
+    }
+
     public void getIfElseQuestion(){
         question = "";
         answers.clear();

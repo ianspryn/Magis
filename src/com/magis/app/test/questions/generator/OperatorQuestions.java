@@ -26,6 +26,23 @@ public class OperatorQuestions extends QuestionGenerator{
         super();
     }
 
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt(3);
+        if(selection == 0){
+            getSubstringQuestion();
+        }
+        else if(selection == 1){
+            getModularQuestion();
+        }
+        else if(selection == 2){
+            getIntegerDivisionQuestion();
+        }
+        else{
+            getIncrementalQuestion();
+        }
+    }
+
     public void getIntegerDivisionQuestion(){
         question = "";
         int firstInt, secondInt = 100;
