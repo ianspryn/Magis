@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Arrays;
 
-public class InputOutputQuestions {
+public class InputOutputQuestions extends QuestionGenerator{
 
     private ArrayList<String> answers;
     private String correctAnswer;
@@ -18,8 +18,7 @@ public class InputOutputQuestions {
     private char[] letters = {'a','b','c','d','e','f','g','h','i','j','k','l'};
 
     public InputOutputQuestions(){
-        answers = new ArrayList<>();
-        rand = new Random();
+        super();
     }
 
     public void getScannerQuestions(){
@@ -59,15 +58,5 @@ public class InputOutputQuestions {
                 break;
         }
         question += "What is the proper way to scan in this input with a scanner?";
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
     }
 }

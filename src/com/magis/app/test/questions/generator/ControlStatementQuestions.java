@@ -5,15 +5,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
-public class ControlStatementQuestions {
+public class ControlStatementQuestions extends QuestionGenerator{
     private ArrayList<String> answers;
     private String correctAnswer;
     private String question = "";
     Random rand;
 
     public ControlStatementQuestions(){
-        answers = new ArrayList<>();
-        rand = new Random();
+        super();
     }
 
     public void getIfElseQuestion(){
@@ -165,15 +164,5 @@ public class ControlStatementQuestions {
         answers.add(""+(sum-numbers[length/2]));
         Collections.shuffle(answers);
         answers.add("Unknown");
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
     }
 }

@@ -104,7 +104,7 @@ public class QuizPageContent {
                         correctAnswer = cQuestion.getCorrectAnswer();
                         //add the correct answer to the grader for future grading
                         grader.addCorrectAnswer(questionIndex, correctAnswer);
-                        answers = cQuestion.getCommentAnswers();
+                        answers = cQuestion.getAnswers();
                         break;
                     case "Primitive Types":
                         DataTypeQuestions dtQuestion = new DataTypeQuestions();

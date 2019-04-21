@@ -3,7 +3,7 @@ package com.magis.app.test.questions.generator;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MiscOOPQuestions {
+public class MiscOOPQuestions extends QuestionGenerator{
     private ArrayList<String> answers;
     private String correctAnswer;
     private String question = "";
@@ -18,8 +18,7 @@ public class MiscOOPQuestions {
     private String[] subClasses = {carClass, bikeClass, boatClass, planeClass};
 
     public MiscOOPQuestions(){
-        answers = new ArrayList<>();
-        rand = new Random();
+        super();
     }
 
     public void isaHasAQuestion(){
@@ -200,15 +199,5 @@ public class MiscOOPQuestions {
         answers.add("Unknown");
 
         question += "\n\nWhat is the result of calling \"display\" in the \"Car\" class?";
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
     }
 }

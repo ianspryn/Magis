@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class ArraysQuestions {
+public class ArraysQuestions extends QuestionGenerator{
     private ArrayList<String> answers;
     private String correctAnswer;
     private String question = "";
     Random rand;
 
     public ArraysQuestions(){
-        answers = new ArrayList<>();
-        rand = new Random();
+        super();
     }
 
     public void getArrayIndexQuestion(){
@@ -138,15 +137,5 @@ public class ArraysQuestions {
             Collections.shuffle(answers);
             answers.add("Unknown");
         }
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
     }
 }

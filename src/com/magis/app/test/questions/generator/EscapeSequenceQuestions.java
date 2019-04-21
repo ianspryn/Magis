@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class EscapeSequenceQuestions {
+public class EscapeSequenceQuestions extends QuestionGenerator{
     private ArrayList<String> answers;
     private String correctAnswer;
     private String question = "";
@@ -14,8 +14,7 @@ public class EscapeSequenceQuestions {
     "I ran over ^the very big hill", "Can ^I have ^the money ^please?", "I want ^to do well ^on this quiz"};
 
     public EscapeSequenceQuestions(){
-        answers = new ArrayList<>();
-        rand = new Random();
+        super();
     }
 
     public void getEscapeSequenceQuestion(){
@@ -85,15 +84,5 @@ public class EscapeSequenceQuestions {
         }
         Collections.shuffle(answers);
         answers.add("Unknown");
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
     }
 }
