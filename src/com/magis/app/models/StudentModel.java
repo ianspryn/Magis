@@ -672,6 +672,8 @@ public class StudentModel {
             Node quiz;
             private int quizChapterNumber;
             private ArrayList<Double> scores;
+            private double bestScore = -1.0;
+            private double worstScore = 1000.0;
 
             private int getQuizChapterNumber() {
                 return quizChapterNumber;
@@ -708,6 +710,28 @@ public class StudentModel {
             }
 
             /**
+             * This method returns the best score for a given test. If the test has not been taken, it will return -1.0
+             * @return a Double of the best score
+             */
+            public Double getBestScore() {
+                if (scores.size() > 0) {
+                    return bestScore;
+                }
+                return -1.0;
+            }
+
+            /**
+             * This method returns the worst score for a given test. If the test has not been taken, it will return -1.0
+             * @return a Double of the worst score
+             */
+            public Double getWorstScore() {
+                if (scores.size() > 0) {
+                    return worstScore;
+                }
+                return -1.0;
+            }
+
+            /**
              * Add a new score value to the test
              * @param scoreValue student's score on test
              */
@@ -720,6 +744,13 @@ public class StudentModel {
              * @param scoreValue student's score on test
              */
             public void addScore(Double scoreValue) {
+                // update best and worst scores
+                if(scoreValue > bestScore) {
+                    bestScore = scoreValue;
+                }
+                if(scoreValue < worstScore) {
+                    worstScore = scoreValue;
+                }
                 //add score to the XML file
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = null;
@@ -788,6 +819,8 @@ public class StudentModel {
         public class Exam {
             private int examChapterNumber;
             private ArrayList<Double> scores;
+            private double bestScore = -1.0;
+            private double worstScore = 1000.0;
 
             private int getExamChapterNumber() {
                 return examChapterNumber;
@@ -825,6 +858,29 @@ public class StudentModel {
             }
 
             /**
+             * This method returns the best score for a given test. If the test has not been taken, it will return -1.0
+             * @return a Double of the best score
+             */
+            public Double getBestScore() {
+                if (scores.size() > 0) {
+                    return bestScore;
+                }
+                return -1.0;
+            }
+
+            /**
+             * This method returns the worst score for a given test. If the test has not been taken, it will return -1.0
+             * @return a Double of the worst score
+             */
+            public Double getWorstScore() {
+                if (scores.size() > 0) {
+                    return worstScore;
+                }
+                return -1.0;
+            }
+
+
+            /**
              * Add a new score value to the exam
              * @param scoreValue student's score on exam
              */
@@ -837,6 +893,14 @@ public class StudentModel {
              * @param scoreValue student's score on exam
              */
             public void addScore(Double scoreValue) {
+                // update best and worst scores
+                if(scoreValue > bestScore) {
+                    bestScore = scoreValue;
+                }
+                if(scoreValue < worstScore) {
+                    worstScore = scoreValue;
+                }
+
                 //add score to the XML file
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = null;
