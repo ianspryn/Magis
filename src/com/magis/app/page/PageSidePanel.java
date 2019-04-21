@@ -5,9 +5,7 @@ import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.lesson.PageLabels;
 import com.magis.app.models.StudentModel;
-import javafx.geometry.HorizontalDirection;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -23,7 +21,7 @@ public class PageSidePanel {
     private HBox currentPage;
     private Rectangle verticalLine;
     private Rectangle horizontalLine;
-    private HBox horizontalLineContainer;
+    private HBox verticalLineContainer;
     private StudentModel.Student student;
     private PageLabels pageLabels;
     private Label title;
@@ -40,7 +38,7 @@ public class PageSidePanel {
         currentPage = new HBox();
         verticalLine = new Rectangle();
         horizontalLine = new Rectangle();
-        horizontalLineContainer = new HBox();
+        verticalLineContainer = new HBox();
         student = Main.studentModel.getStudent();
         title = new Label();
         this.chapterIndex = chapterIndex;
@@ -67,16 +65,15 @@ public class PageSidePanel {
         horizontalLine.setHeight(2);
         horizontalLine.setWidth(250);
         horizontalLine.getStyleClass().add("lesson-rectangle");
-        horizontalLineContainer.getChildren().add(horizontalLine);
-        horizontalLineContainer.setPadding(new Insets(0,0,0,-5));
-        UIComponents.fadeAndTranslate(horizontalLineContainer, 0.15, 0.2,-10,0,0,0);
+        UIComponents.fadeAndTranslate(verticalLineContainer, 0.15, 0.2,-10,0,0,0);
 
         //current page indicator
         verticalLine.setHeight(25);
         verticalLine.setWidth(5);
         verticalLine.getStyleClass().add("lesson-rectangle");
-
-        currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
+        verticalLineContainer.getChildren().add(verticalLine);
+        verticalLineContainer.setPadding(new Insets(0,0,0,-5));
+        currentPage.getChildren().addAll(verticalLineContainer, pageLabels.getLabel(0));
         UIComponents.fadeAndTranslate(currentPage,0.3,0.2,-10,0,0,0);
 
         //pages

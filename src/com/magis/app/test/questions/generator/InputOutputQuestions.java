@@ -10,7 +10,6 @@ public class InputOutputQuestions extends QuestionGenerator{
     private ArrayList<String> answers;
     private String correctAnswer;
     private String question = "";
-    Random rand;
 
     private String[] scannerAnswers = {"sc.next();", "sc.nextLine();", "sc.nextInt();", "sc.nextDouble();"};
     private String[] words = {"Dog", "Cat", "Rat", "Apple", "The Boy Jumped", "The Dog Played", "Java is Fun"

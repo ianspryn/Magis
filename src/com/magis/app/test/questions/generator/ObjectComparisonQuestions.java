@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class ObjectComparisonQuestions extends QuestionGenerator{
-
-    Random rand;
+public class ObjectComparisonQuestions extends QuestionGenerator {
 
     private static String chapterTitle = "Object and Object Comparison";
 
@@ -35,13 +33,8 @@ public class ObjectComparisonQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt();
-        if(selection == 0){
-            generateEqualsQuestion();
-        }
-        else{
-            generateComparableQuestion();
-        }
+        if (rand.nextInt(2) == 0) generateEqualsQuestion();
+        else generateComparableQuestion();
     }
 
     public void generateComparableQuestion(){

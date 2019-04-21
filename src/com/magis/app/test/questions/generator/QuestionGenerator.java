@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class QuestionGenerator {
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
+    protected ArrayList<String> answers;
+    protected String correctAnswer;
+    protected String question = "";
     Random rand;
 
     public QuestionGenerator(){

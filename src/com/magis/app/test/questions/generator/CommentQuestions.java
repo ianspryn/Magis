@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class CommentQuestions extends QuestionGenerator{
-    Random rand;
 
     private String[] commentQuestions = {
             "This is a comment",
@@ -15,13 +14,8 @@ public class CommentQuestions extends QuestionGenerator{
             "This code will do [x]\nIt will also do [y]"
     };
     private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "Unknown"};
-    private ArrayList<String> answers;
-
-    private String correctAnswer;
-    private String question = "";
-
+    
     public CommentQuestions(){
-        rand = new Random();
         answers = new ArrayList<>(Arrays.asList(generalCommentAnswers));
     }
 

@@ -7,7 +7,6 @@ public class MiscOOPQuestions extends QuestionGenerator{
     private ArrayList<String> answers;
     private String correctAnswer;
     private String question = "";
-    Random rand;
 
     private String mainClass = "Vehicle";
     private String[] classes = {"Car", "Bike", "Boat", "Plane"};
@@ -23,13 +22,8 @@ public class MiscOOPQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt();
-        if(selection == 0){
-            isaHasAQuestion();
-        }
-        else{
-            getSuperMethodQuestion();
-        }
+        if (rand.nextInt(2) == 0) isaHasAQuestion();
+        else getSuperMethodQuestion();
     }
 
     public void isaHasAQuestion(){

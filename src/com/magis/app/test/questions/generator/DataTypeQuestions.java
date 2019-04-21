@@ -7,7 +7,6 @@ import java.text.DecimalFormat;
 
 public class DataTypeQuestions extends QuestionGenerator{
 
-    Random rand;
     DecimalFormat df;
 
     private String[] dataTypeString = {"Cat","Dog","Mouse","Bug","Tree","Liquid","Programming","Sum",

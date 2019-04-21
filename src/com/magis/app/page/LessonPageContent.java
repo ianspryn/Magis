@@ -39,13 +39,13 @@ public class LessonPageContent extends PageContent {
 
         if (hasQuiz > 0) {
             PageContentContainer pageContent = new PageContentContainer(chapterIndex);
-            pageContent.buildAsTestIntroPage("quiz");
+            pageContent.buildAsQuizIntroPage();
             pageContentContainers.add(pageContent);
         }
 
         if (hasTest > 0) {
             PageContentContainer pageContent = new PageContentContainer(chapterIndex);
-            pageContent.buildAsTestIntroPage("test");
+            pageContent.buildAsExamIntroPage();
             pageContentContainers.add(pageContent);
         }
     }

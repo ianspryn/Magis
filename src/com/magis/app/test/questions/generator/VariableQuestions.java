@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class VariableQuestions extends QuestionGenerator{
-    Random rand;
 
     private String[] names1 = {"calculation", "value", "num1", "product", "quotient", "publicNumber", "interest_on_loan",
             "sum", "difference_of_nums", "totalSum", "num3", "square_root", "x", "y"};
@@ -31,13 +30,8 @@ public class VariableQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt();
-        if(selection == 0){
-            getVariableNameQuestion();
-        }
-        else{
-            getInstanceVariableQuestion();
-        }
+        if (rand.nextInt(2) == 0) getVariableNameQuestion();
+        else getInstanceVariableQuestion();
     }
 
     public void getVariableNameQuestion(){

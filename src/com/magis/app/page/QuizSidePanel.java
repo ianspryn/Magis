@@ -7,16 +7,22 @@ public class QuizSidePanel extends PageSidePanel {
 
 
 
-    public QuizSidePanel(int chapterIndex) {
+    public QuizSidePanel(int chapterIndex, int numPages) {
         super(chapterIndex);
+
+        setNumPages(numPages);
+
+        /*
+        Generate the side panel
+         */
+        initialize();
+
         /*
         Set the text and clicking action of each page label
          */
-        String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
-        int numPages = Main.quizzesModel.getChapter(chapterTitle).getNumAvailableQuestions();
-        for (int i = 0; i < numPages; i++) {
+        for (int i = 0; i < getNumPages(); i++) {
             Label label = getPageLabel(i);
-            label.setText("Page " + i + 1);
+            label.setText("Page " + (i + 1));
             int index = i;
             label.setOnMouseClicked(e -> page.updatePage(index));
         }

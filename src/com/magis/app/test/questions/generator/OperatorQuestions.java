@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class OperatorQuestions extends QuestionGenerator{
-    Random rand;
+public class OperatorQuestions extends QuestionGenerator {
     DecimalFormat df = new DecimalFormat("####.##");
 
     private String chapterTitle = "Operators";
@@ -28,18 +27,19 @@ public class OperatorQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt(3);
-        if(selection == 0){
-            getSubstringQuestion();
-        }
-        else if(selection == 1){
-            getModularQuestion();
-        }
-        else if(selection == 2){
-            getIntegerDivisionQuestion();
-        }
-        else{
-            getIncrementalQuestion();
+        int selection = rand.nextInt(4);
+        switch (selection) {
+            case 0:
+                getSubstringQuestion();
+                break;
+            case 1:
+                getModularQuestion();
+                break;
+            case 2:
+                getIntegerDivisionQuestion();
+                break;
+            case 3:getIncrementalQuestion();
+                break;
         }
     }
 
