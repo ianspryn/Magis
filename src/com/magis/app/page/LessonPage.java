@@ -10,8 +10,8 @@ public class LessonPage extends Page {
     public LessonPage(int chapterIndex) {
         super(new LessonSidePanel(chapterIndex), new LessonPageContent(chapterIndex), Main.lessonModel.getChapter(chapterIndex).getTitle());
         getPageSidePanel().setPageContainer(this);
-        this.pageSidePanel = super.getPageSidePanel();
-        this.pageContent = super.getPageContent();
+        pageSidePanel = super.getPageSidePanel();
+        pageContent = super.getPageContent();
         updatePage(0);
     }
 
@@ -28,6 +28,7 @@ public class LessonPage extends Page {
         pageSidePanel.update(pageIndex);
         pageContent.update(pageIndex);
         updateNavigation(pageIndex);
+        pageContent.getScrollPane().setVvalue(0);
     }
 
 }

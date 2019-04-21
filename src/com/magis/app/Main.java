@@ -8,6 +8,7 @@ import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
 import com.magis.app.page.LessonSidePanel;
 import com.magis.app.page.PageSidePanel;
+import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,6 +24,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
 
 public class Main extends Application{
 
@@ -32,11 +34,13 @@ public class Main extends Application{
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
     public static TestsModel testsModel;
-    public static String username = "";
+    public static HashMap<Integer, String> questionGenerator;
+    public static String username;
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
     public static boolean useAnimations = true;
     public static double width = -1, height = -1;
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -61,8 +65,24 @@ public class Main extends Application{
         studentModel = new StudentModel(lessonModel);
         quizzesModel = new QuizzesModel();
         testsModel = new TestsModel();
+        populateQuestionGenerator();
         Login.Page();
         primaryStage.show();
+    }
+
+    private void populateQuestionGenerator() {
+        questionGenerator = new HashMap<>();
+//        questionGenerator.put(0, new CommentQuestions());
+//        questionGenerator.put(1, new DataTypeQuestions());
+//        questionGenerator.put(2, new OperatorQuestions());
+//        questionGenerator.put(3, new ObjectComparisonQuestions());
+//        questionGenerator.put(4, new VariableQuestions());
+//        questionGenerator.put(5, new EscapeSequenceQuestions());
+//        questionGenerator.put(6, new MethodQuestions());
+//        questionGenerator.put(7, new InputOutputQuestions());
+//        questionGenerator.put(8, new ExceptionsQuestions());
+//        questionGenerator.put(9, new PackagesQuestion());
+
     }
 
     public void closeProgram() {

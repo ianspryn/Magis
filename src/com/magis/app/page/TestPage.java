@@ -11,8 +11,8 @@ public class TestPage extends Page {
     public TestPage(int chapterIndex) {
         super(new TestSidePanel(chapterIndex), new com.magis.app.page.TestPageContent(chapterIndex), Main.lessonModel.getChapter(chapterIndex).getTitle());
         getPageSidePanel().setPageContainer(this);
-        this.pageSidePanel = super.getPageSidePanel();
-        this.pageContent = super.getPageContent();
+        pageSidePanel = super.getPageSidePanel();
+        pageContent = super.getPageContent();
         updatePage(0);
     }
 

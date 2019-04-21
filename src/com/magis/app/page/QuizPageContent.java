@@ -26,7 +26,7 @@ public class QuizPageContent extends PageContent {
     private int numAvailableBankQuestions;
     private int numQuestions;
 
-    public QuizPageContent(int chapterIndex, int numQuestions, Grader grader, ArrayList<Integer> usedBankQuestions, ArrayList<String> usedGeneratorQuestions) {
+    public QuizPageContent(int chapterIndex) {
         pageContentContainers = new ArrayList<>();
         this.grader = grader;
 
@@ -34,12 +34,25 @@ public class QuizPageContent extends PageContent {
         quiz = Main.quizzesModel.getChapter(chapterName);
 
         toggleGroups = new ArrayList<>();
-        this.usedBankQuestions = usedBankQuestions;
-        this.usedGeneratorQuestions = usedGeneratorQuestions;
         pageContent = new VBox();
         this.chapterIndex = chapterIndex;
         numAvailableBankQuestions = quiz.getNumAvailableQuestions();
+    }
+
+    void setNumQuestions(int numQuestions) {
         this.numQuestions = numQuestions;
+    }
+
+    void setGrader(Grader grader) {
+        this.grader = grader;
+    }
+
+    void setUsedBankQuestions(ArrayList<Integer> usedBankQuestions) {
+        this.usedBankQuestions = usedBankQuestions;
+    }
+
+    void setUsedGeneratorQuestions(ArrayList<String> usedGeneratorQuestions) {
+        this.usedGeneratorQuestions = usedGeneratorQuestions;
     }
 
     private void initialize(int pageIndex) {

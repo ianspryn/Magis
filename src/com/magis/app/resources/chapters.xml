@@ -3047,7 +3047,7 @@ Now you need to provide the InsufficientFundsException class. Should it be a
 checked or an unchecked exception? Is it the fault of some external event, or is it the
 fault of the programmer? We take the position that the programmer could have prevented
 the exceptional condition—after all, it would have been an easy matter to
-check whether amount <= account.getBalance() before calling the withdraw method.
+check whether amount &lt;= account.getBalance() before calling the withdraw method.
 Therefore, the exception should be an unchecked exception and extend the RuntimeException
 class or one of its subclasses.
 
