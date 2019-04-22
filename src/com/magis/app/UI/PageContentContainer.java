@@ -58,7 +58,6 @@ public class PageContentContainer {
         button.setOnAction(e -> {
             Main.takingTest = true;
             new com.magis.app.page.QuizPage(chapterIndex);
-//            QuizPage.Page(chapterIndex);
         });
         masterContent.getChildren().add(button);
     }
@@ -71,7 +70,6 @@ public class PageContentContainer {
         button.setOnAction(e -> {
             Main.takingTest = true;
             new com.magis.app.page.TestPage(chapterIndex);
-//            QuizPage.Page(chapterIndex);
         });
         masterContent.getChildren().add(button);
     }

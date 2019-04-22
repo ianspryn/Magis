@@ -1,7 +1,7 @@
 package com.magis.app.page;
-
-import com.magis.app.Main;
 import javafx.scene.control.Label;
+
+import static com.magis.app.Configure.*;
 
 public class ExamSidePanel extends PageSidePanel {
     public ExamSidePanel(int chapterIndex, int numQuestions) {
@@ -9,7 +9,7 @@ public class ExamSidePanel extends PageSidePanel {
         /*
         Initialize pageLabels
          */
-        int numPages = (int) Math.ceil((double) numQuestions / 2);
+        int numPages = (int) Math.ceil((double) numQuestions / NUM_QUESTIONS_PER_PAGE);
         pageLabels = new PageLabels(numPages);
 
         /*

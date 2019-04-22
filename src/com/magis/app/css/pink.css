@@ -54,3 +54,7 @@
 .lesson-rectangle {
     -fx-fill: #EC407A; /* Pink 400 */
 }
+
+.code-text {
+    -fx-border-color: #EC407A; /* Pink 400 */
+}

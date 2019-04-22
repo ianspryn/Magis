@@ -54,3 +54,7 @@
 .lesson-rectangle {
     -fx-fill: #26C6DA; /* Cyan 400 */
 }
+
+.code-text {
+    -fx-border-color: #26C6DA; /* Cyan 400 */
+}

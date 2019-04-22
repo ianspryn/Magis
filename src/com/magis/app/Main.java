@@ -14,9 +14,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Main extends Application{
+public class Main extends Application {
 
     public static Stage window;
     public static Scene scene;
@@ -56,32 +57,12 @@ public class Main extends Application{
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
         quizzesModel = new QuizzesModel();
-        configureQuizQuestions();
+        numQuestionsPerQuiz = new HashMap<>();
         testsModel = new TestsModel();
-        configureTestQuestions();
+        numQuestionsPerTest = new HashMap<>();
         populateQuestionGenerator();
         Login.Page();
         primaryStage.show();
-    }
-
-    private void configureQuizQuestions() {
-        numQuestionsPerQuiz = new HashMap<>();
-        for (int i = 0; i < lessonModel.getNumChapters(); i++) {
-            QuizzesModel.ChapterModel quiz = quizzesModel.getChapter(lessonModel.getChapter(i).getTitle());
-            if (quiz != null) {
-                numQuestionsPerQuiz.put(lessonModel.getChapter(i).getTitle(), 3); //default all to 15
-            }
-        }
-    }
-
-    private void configureTestQuestions() {
-        numQuestionsPerTest = new HashMap<>();
-        for (int i = 0; i < lessonModel.getNumChapters(); i++) {
-            TestsModel.ChapterModel test = testsModel.getChapter(lessonModel.getChapter(i).getTitle());
-            if (test != null) {
-                numQuestionsPerTest.put(lessonModel.getChapter(i).getTitle(), 35); //default all to 35
-            }
-        }
     }
 
     private void populateQuestionGenerator() {
@@ -121,5 +102,21 @@ public class Main extends Application{
     }
 
     public static void main(String[] args) { launch(args); }
+
+//    public static void main(String[] args) {
+//        LessonModel lessonModel = new LessonModel();
+//        LessonModel.ChapterModel.PageModel page = lessonModel.getChapter(0).getPage(0);
+//        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> content = page.getLessonContent();
+//        String stuff = content.get(0).getContent();
+//
+////        String delimiter = "^```[\\w\\W\\S]*```$|``[\\w\\W\\S]*``|^~~~H[123]~~~.*$";
+////        String delimiter = "`{3}[\\w\\W\\S]*`{3}|`{2}[\\w\\W\\S]*`{2}|^~~~H[123]~~~.*$";
+//        String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)|(?<=\\[H[123]])|(?=\\[H[123]])";
+//        String[] splitStrings = stuff.split(delimiter);
+//        for (String junk : splitStrings) {
+//            System.out.println(junk);
+//            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        }
+//    }
 
 }
