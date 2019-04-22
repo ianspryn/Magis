@@ -95,7 +95,7 @@
     -fx-font-size: 16px;
 }
 
-.test-radio-button:disabled {
+.exam-radio-button:disabled, .test-checkbox-button:disabled {
     -fx-opacity: 0.8;
 }
 

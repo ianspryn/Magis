@@ -1,4 +1,4 @@
-package com.magis.app.lesson;
+package com.magis.app.page;
 
 import com.magis.app.Main;
 import javafx.geometry.Insets;
@@ -27,6 +27,15 @@ public class PageLabels {
             label.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
             labels.add(label);
         }
+    }
+
+    public void add(int index, String text) {
+        Label label = new Label(text);
+        label.setPadding(new Insets(0, 0, 0, 15));
+        label.getStyleClass().add("lesson-side-panel-text");
+        label.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        label.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        labels.add(index, label);
     }
 
     public int getNumLabels() {

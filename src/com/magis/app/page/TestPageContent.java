@@ -1,20 +1,9 @@
 package com.magis.app.page;
 
-public class TestPageContent extends PageContent {
+import com.magis.app.Main;
 
-    private int chapterIndex;
-
+public class TestPageContent extends ExamPageContent {
     public TestPageContent(int chapterIndex) {
-        this.chapterIndex = chapterIndex;
-    }
-
-    @Override
-    void update(int pageIndex) {
-
-    }
-
-    @Override
-    void buildPage(int index) {
-
+        super(chapterIndex, Main.numQuestionsPerTest.get(Main.lessonModel.getChapter(chapterIndex).getTitle()), Main.testsModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()));
     }
 }

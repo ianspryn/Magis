@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.Random;
 
 public class ControlStatementQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
 
     public ControlStatementQuestions(){
         super();

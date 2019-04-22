@@ -5,25 +5,28 @@ import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public abstract class Page {
 
-    private PageSidePanel pageSidePanel;
-    private PageContent pageContent;
-    private StackPane master;
-    private BorderPane borderPane;
-    private BorderPane sideBar;
-    private BorderPane mainArea;
-    private HBox homeHBox;
-    private BorderPane bottomNavigation;
-    private StackPane leftButton;
-    private StackPane rightButton;
+    protected PageSidePanel pageSidePanel;
+    protected PageContent pageContent;
+    protected StackPane master;
+    protected BorderPane borderPane;
+    protected BorderPane sideBar;
+    protected BorderPane mainArea;
+    protected HBox homeHBox;
+    protected BorderPane bottomNavigation;
+    protected StackPane leftButton;
+    protected StackPane rightButton;
 
-    private String title;
-    private int currentPage;
+    protected String title;
+    protected int currentPage;
+    protected int numPages;
 
     public Page(PageSidePanel pageSidePanel, PageContent pageContent, String title) {
         this.pageSidePanel = pageSidePanel;
@@ -40,7 +43,7 @@ public abstract class Page {
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         master.getStyleClass().add("background");
 
         /*
@@ -84,7 +87,6 @@ public abstract class Page {
 
         //left navigation
         leftButton = UIComponents.createNavigationButton("<");
-        leftButton.setVisible(false);
         leftButton.setOnMouseClicked(e -> {
             if (currentPage > 0) updatePage(currentPage - 1);
         });
@@ -92,7 +94,7 @@ public abstract class Page {
         //right navigation
         rightButton = UIComponents.createNavigationButton(">");
         rightButton.setOnMouseClicked(e -> {
-            if (currentPage < pageSidePanel.getNumPages() - 1) updatePage(currentPage + 1);
+            if (currentPage < numPages - 1) updatePage(currentPage + 1);
         });
 
         bottomNavigation.setLeft(leftButton);
@@ -108,26 +110,10 @@ public abstract class Page {
         Main.setScene(master, title);
     }
 
-    public PageSidePanel getPageSidePanel() {
-        return pageSidePanel;
-    }
-
-    public PageContent getPageContent() {
-        return pageContent;
-    }
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
     public void updateNavigation(int currentPage) {
         if (currentPage == 0) leftButton.setVisible(false);
         else leftButton.setVisible(true);
-        if (currentPage == pageSidePanel.getNumPages() - 1) rightButton.setVisible(false);
+        if (currentPage == numPages - 1) rightButton.setVisible(false);
         else rightButton.setVisible(true);
     }
 

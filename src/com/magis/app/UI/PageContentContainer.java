@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.magis.app.Main;
 import com.magis.app.models.LessonModel;
-import com.magis.app.test.quiz.QuizPage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -51,21 +50,10 @@ public class PageContentContainer {
         masterContent.getChildren().addAll(titleContent, pageContent);
     }
 
-    public void buildAsTestIntroPage(String testType) {
-        masterContent.setAlignment(Pos.CENTER);
-        JFXButton button = new JFXButton("Click to begin " + testType);
-        button.getStyleClass().addAll("start-test-button", "jfx-button-raised", "jfx-button-raised-color");
-        button.setOnAction(e -> {
-            Main.takingTest = true;
-            //todo: Do I need to make a separate TestPage.Page()?
-            QuizPage.Page(chapterIndex);
-        });
-        masterContent.getChildren().add(button);
-    }
-
     public void buildAsQuizIntroPage() {
         masterContent.setAlignment(Pos.CENTER);
         JFXButton button = new JFXButton("Click to begin quiz");
+        button.setDisableVisualFocus(true); //fix the button on page appear to be highlighted (not selected, just highlighted)
         button.getStyleClass().addAll("start-test-button", "jfx-button-raised", "jfx-button-raised-color");
         button.setOnAction(e -> {
             Main.takingTest = true;
@@ -75,9 +63,10 @@ public class PageContentContainer {
         masterContent.getChildren().add(button);
     }
 
-    public void buildAsExamIntroPage() {
+    public void buildAsTestIntroPage() {
         masterContent.setAlignment(Pos.CENTER);
-        JFXButton button = new JFXButton("Click to begin exam");
+        JFXButton button = new JFXButton("Click to begin test");
+        button.setDisableVisualFocus(true); //fix the button on page appear to be highlighted (not selected, just highlighted)
         button.getStyleClass().addAll("start-test-button", "jfx-button-raised", "jfx-button-raised-color");
         button.setOnAction(e -> {
             Main.takingTest = true;

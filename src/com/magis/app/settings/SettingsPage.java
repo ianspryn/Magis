@@ -61,6 +61,7 @@ public class SettingsPage {
         HBox backButtonContainer = new HBox();
         backButtonContainer.setAlignment(Pos.CENTER);
         JFXButton backButton = new JFXButton("Back");
+        backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
         backButton.setOnMouseClicked(e -> HomePage.goHome(scrollPane));
         backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
 

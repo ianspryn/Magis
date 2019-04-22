@@ -45,7 +45,7 @@ public class LessonPageContent extends PageContent {
 
         if (hasTest > 0) {
             PageContentContainer pageContent = new PageContentContainer(chapterIndex);
-            pageContent.buildAsExamIntroPage();
+            pageContent.buildAsTestIntroPage();
             pageContentContainers.add(pageContent);
         }
     }

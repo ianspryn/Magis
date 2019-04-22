@@ -1,7 +1,6 @@
 package com.magis.app.page;
 
 import com.magis.app.Main;
-import com.magis.app.lesson.LessonPage;
 import com.magis.app.models.LessonModel;
 import javafx.scene.control.Label;
 
@@ -22,7 +21,7 @@ public class LessonSidePanel extends PageSidePanel {
         int hasQuiz = Main.quizzesModel.hasQuiz(chapterTitle) ? 1 : 0;
         int hasTest = Main.testsModel.hasTest(chapterTitle) ? 1 : 0;
         int numLessonPages = Main.lessonModel.getChapter(chapterIndex).getNumPages();
-        setNumPages(Main.lessonModel.getChapter(chapterIndex).getNumPages() + hasQuiz + hasTest);
+        pageLabels = new PageLabels(numLessonPages + hasQuiz + hasTest);
 
         /*
         Generate the side panel
@@ -34,7 +33,7 @@ public class LessonSidePanel extends PageSidePanel {
         Set the text and clicking action of each page label
          */
         for (int i = 0; i < numLessonPages; i++) {
-            Label sidePanelLabel = getPageLabel(i);
+            Label sidePanelLabel = pageLabels.getLabel(i);
             getAndSetLabelText(i);
             int index = i;
             sidePanelLabel.setOnMouseClicked(e -> page.updatePage(index));

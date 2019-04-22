@@ -16,10 +16,7 @@ public class OperatorQuestions extends QuestionGenerator {
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
 
-    private ArrayList<String> answers;
     private char[] characters = {'+','-','*','/','%'};
-    private String correctAnswer;
-    private String question = "";
 
     public OperatorQuestions(){
         super();

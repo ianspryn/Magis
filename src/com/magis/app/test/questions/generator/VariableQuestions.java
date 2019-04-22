@@ -17,10 +17,7 @@ public class VariableQuestions extends QuestionGenerator{
     private ArrayList<String> wrongVariables;
 
     private String[] dataTypeMatchingAnswers = {"int", "double", "String", "char", "None"};
-    private ArrayList<String> answers;
     private char[] characters = {'+','-','*','/','%','<','=','>'};
-    private String correctAnswer;
-    private String question = "";
 
     public VariableQuestions(){
         super();

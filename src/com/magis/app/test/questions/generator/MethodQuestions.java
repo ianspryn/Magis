@@ -15,11 +15,6 @@ public class MethodQuestions extends QuestionGenerator{
 
     private String[] dataTypes = {"int", "double", "String", "char"};
 
-
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
-
     public MethodQuestions(){
         super();
     }

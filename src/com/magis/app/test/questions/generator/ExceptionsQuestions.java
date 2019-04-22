@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ExceptionsQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
 
     public ExceptionsQuestions(){
         super();

@@ -3,7 +3,6 @@ package com.magis.app.page;
 import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.lesson.PageLabels;
 import com.magis.app.models.StudentModel;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -15,20 +14,19 @@ import javafx.scene.shape.Rectangle;
 
 public class PageSidePanel {
     protected Page page;
-    private ScrollPane scrollPane;
-    private VBox masterVBox;
-    private VBox contentPagesVBox;
-    private HBox currentPage;
-    private Rectangle verticalLine;
-    private Rectangle horizontalLine;
-    private HBox verticalLineContainer;
-    private StudentModel.Student student;
-    private PageLabels pageLabels;
-    private Label title;
+    protected ScrollPane scrollPane;
+    protected VBox masterVBox;
+    protected VBox contentPagesVBox;
+    protected HBox currentPage;
+    protected Rectangle verticalLine;
+    protected Rectangle horizontalLine;
+    protected HBox verticalLineContainer;
+    protected StudentModel.Student student;
+    protected PageLabels pageLabels;
+    protected Label title;
 
-    private int chapterIndex;
-    private int currentPageIndex;
-    private int numPages;
+    protected int chapterIndex;
+    protected int currentPageIndex;
 
 
     public PageSidePanel(int chapterIndex) {
@@ -43,10 +41,6 @@ public class PageSidePanel {
         title = new Label();
         this.chapterIndex = chapterIndex;
         currentPageIndex = 0;
-    }
-
-    public int getNumPages() {
-        return numPages;
     }
 
     public void initialize() {
@@ -92,19 +86,6 @@ public class PageSidePanel {
         JFXScrollPane.smoothScrolling(scrollPane);
     }
 
-    public int getCurrentPageIndex() {
-        return currentPageIndex;
-    }
-
-    public PageLabels getPageLabels() {
-        return  pageLabels;
-    }
-
-    public void setNumPages(int numPages) {
-        this.numPages = numPages;
-        pageLabels = new PageLabels(numPages);
-    }
-
     public void update(int index) {
         if (index == currentPageIndex) return;
 
@@ -131,7 +112,7 @@ public class PageSidePanel {
         return pageLabels.getLabel(index);
     }
 
-    public void setPageContainer(Page page) {
+    public void setPageClass(Page page) {
         this.page = page;
     }
 }

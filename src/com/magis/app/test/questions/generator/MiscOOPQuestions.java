@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MiscOOPQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
 
     private String mainClass = "Vehicle";
     private String[] classes = {"Car", "Bike", "Boat", "Plane"};

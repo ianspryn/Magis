@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.Random;
 
 public class ArraysQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
 
     public ArraysQuestions(){
         super();

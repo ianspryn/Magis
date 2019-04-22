@@ -6,8 +6,6 @@ import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
-import com.magis.app.page.LessonSidePanel;
-import com.magis.app.page.PageSidePanel;
 import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -15,17 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.awt.*;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.HashMap;
-import java.util.Random;
 
 public class Main extends Application{
 
@@ -36,6 +25,8 @@ public class Main extends Application{
     public static QuizzesModel quizzesModel;
     public static TestsModel testsModel;
     public static HashMap<Integer, QuestionGenerator> questionGenerator;
+    public static HashMap<String, Integer> numQuestionsPerQuiz;
+    public static HashMap<String, Integer> numQuestionsPerTest;
     public static String username;
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
@@ -65,10 +56,32 @@ public class Main extends Application{
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
         quizzesModel = new QuizzesModel();
+        configureQuizQuestions();
         testsModel = new TestsModel();
+        configureTestQuestions();
         populateQuestionGenerator();
         Login.Page();
         primaryStage.show();
+    }
+
+    private void configureQuizQuestions() {
+        numQuestionsPerQuiz = new HashMap<>();
+        for (int i = 0; i < lessonModel.getNumChapters(); i++) {
+            QuizzesModel.ChapterModel quiz = quizzesModel.getChapter(lessonModel.getChapter(i).getTitle());
+            if (quiz != null) {
+                numQuestionsPerQuiz.put(lessonModel.getChapter(i).getTitle(), 3); //default all to 15
+            }
+        }
+    }
+
+    private void configureTestQuestions() {
+        numQuestionsPerTest = new HashMap<>();
+        for (int i = 0; i < lessonModel.getNumChapters(); i++) {
+            TestsModel.ChapterModel test = testsModel.getChapter(lessonModel.getChapter(i).getTitle());
+            if (test != null) {
+                numQuestionsPerTest.put(lessonModel.getChapter(i).getTitle(), 35); //default all to 35
+            }
+        }
     }
 
     private void populateQuestionGenerator() {
@@ -81,7 +94,7 @@ public class Main extends Application{
         questionGenerator.put(5, new EscapeSequenceQuestions());
         questionGenerator.put(6, new MethodQuestions());
         questionGenerator.put(7, new InputOutputQuestions());
-        questionGenerator.put(8, new ExceptionsQuestions());
+//        questionGenerator.put(8, new ExceptionsQuestions());
 //        questionGenerator.put(9, new PackagesQuestions());
 
     }

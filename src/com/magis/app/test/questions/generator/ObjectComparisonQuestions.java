@@ -16,14 +16,10 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     private String[] equalsStrings = {"Programming is fun!", "programming is Fun!",
             "programming is fun!", "PROGRAMMING IS FUN!"};
     private String[] equalsAnswers = {"True", "False", "Unknown"};
-
-    private ArrayList<String> answers;
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
 
     private char[] characters = {'+','-','*','/','%','<','=','>'};
-    private String correctAnswer;
-    private String question = "";
 
     public ObjectComparisonQuestions(){
         super();

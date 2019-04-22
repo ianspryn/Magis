@@ -18,6 +18,10 @@
     -fx-background: #AD1457; /* Pink 800 */
 }
 
+.jfx-radio-button {
+    -jfx-selected-color: #EC407A; /* Pink 400 */
+}
+
 .jfx-toggle-button {
     -jfx-toggle-color: #EC407A; /* Pink 400 */
 }
