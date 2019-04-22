@@ -453,7 +453,7 @@ items--;
 
 subtracts 1 from items.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185391/Magis/Operators/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/9.png</image>
 			</page>
 			<page title = "Arithmetic Operators">
 				<text>
@@ -512,7 +512,7 @@ to write all expressions in a linear arrangement.
 				<text>
 For example, the subexpression
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/13.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/13.png</image>
 				<text>
 of the quadratic formula becomes
 
@@ -643,7 +643,7 @@ Let us ﬁgure out how to extract the substring "World". Count characters starti
 at 0, not 1. You ﬁnd that W, the eighth character, has position number 7. The ﬁrst
 character that you don’t want, !, is the character at position 12 (see Figure 4).
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/23.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/23.png</image>
 				<text>
 Therefore, the appropriate substring command is
 
@@ -709,8 +709,8 @@ if (!input.equals("S")) . . .
 The ! operator takes a single condition and evaluates to true if that condition is false
 and to false if the condition is true.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/29.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/30.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/29.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/30.png</image>
 				<text>
 You can use a Boolean variable if you know that there are only two possible values.
 Have another look at the tax program in Section 5.3.2. The marital status is either
