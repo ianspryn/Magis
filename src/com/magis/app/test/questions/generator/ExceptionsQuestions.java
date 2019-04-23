@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ExceptionsQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
-    Random rand;
 
     public ExceptionsQuestions(){
         super();
@@ -15,6 +11,6 @@ public class ExceptionsQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt();
+        int selection = rand.nextInt(2);
     }
 }

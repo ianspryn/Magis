@@ -1,26 +1,11 @@
 package com.magis.app.page;
 
 import com.magis.app.Main;
-import com.magis.app.UI.TestPageContent;
 
-public class TestPage extends Page {
-
-    private PageSidePanel pageSidePanel;
-    private PageContent pageContent;
-
+public class TestPage extends ExamPage {
     public TestPage(int chapterIndex) {
-        super(new TestSidePanel(chapterIndex), new com.magis.app.page.TestPageContent(chapterIndex), Main.lessonModel.getChapter(chapterIndex).getTitle());
-        getPageSidePanel().setPageContainer(this);
-        this.pageSidePanel = super.getPageSidePanel();
-        this.pageContent = super.getPageContent();
-        updatePage(0);
+        super(chapterIndex, new TestSidePanel(chapterIndex), new com.magis.app.page.TestPageContent(chapterIndex), Main.numQuestionsPerTest, Main.lessonModel.getChapter(chapterIndex).getTitle());
+        pageSidePanel.setPageClass(this);
     }
 
-    @Override
-    void updatePage(int pageIndex) {
-        setCurrentPage(pageIndex);
-        pageSidePanel.update(pageIndex);
-        pageContent.update(pageIndex);
-        updateNavigation(pageIndex);
-    }
 }

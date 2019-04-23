@@ -5,13 +5,9 @@ import java.util.Collections;
 import java.util.Random;
 
 public class EscapeSequenceQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
-    Random rand;
 
     private String[] sentences = {"The dog ^left the house", "Can you smell ^what the Rock is cooking?", "What is ^the sum of these two numbers?",
-    "I ran over ^the very big hill", "Can ^I have ^the money ^please?", "I want ^to do well ^on this quiz"};
+    "I ran over ^the very big hill", "Can ^I have ^the money ^please?", "I want ^to do well ^on this exam"};
 
     public EscapeSequenceQuestions(){
         super();

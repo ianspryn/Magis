@@ -205,9 +205,9 @@ public class StudentModel {
         //recent activity elements
         Element recentElement = document.createElement("recent");
         student.appendChild(recentElement);
-        Element chapterID = document.createElement("chapter");
+        Element chapterIndex = document.createElement("chapter");
         Element pageID = document.createElement("page");
-        recentElement.appendChild(chapterID);
+        recentElement.appendChild(chapterIndex);
         recentElement.appendChild(pageID);
 
         //chapters
@@ -401,12 +401,12 @@ public class StudentModel {
 
         /**
          * This method will return a Quiz if it already exists. If it doesn't exist, this method will create a new Quiz and return that
-         * @param chapterID the chapter's number (not index)
+         * @param chapterIndex the chapter's index
          * @return a Quiz Class
          */
-        public Quiz getQuiz(int chapterID) {
+        public Quiz getQuiz(int chapterIndex) {
             for (Quiz quiz : quizzes) {
-                if (quiz.getQuizChapterNumber() == chapterID) {
+                if (quiz.getQuizChapterNumber() == chapterIndex) {
                     return quiz;
                 }
             }
@@ -439,7 +439,7 @@ public class StudentModel {
             assert studentElement != null;
             Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
             Element newQuiz = document.createElement("quiz");
-            newQuiz.setAttribute("chapter", Integer.toString(chapterID));
+            newQuiz.setAttribute("chapter", Integer.toString(chapterIndex));
             quizzesElement.appendChild(newQuiz);
             UpdateModel.updateXML(new DOMSource(document), filePath);
             Quiz q = new Quiz(newQuiz);
@@ -449,12 +449,12 @@ public class StudentModel {
 
         /**
          * This method will return an Exam if it already exists. If it doesn't exist, this method will create a new Exam and return that
-         * @param chapter the chapter's number (not index)
+         * @param chapterIndex the chapter's index
          * @return an Exam Class
          */
-        public Exam getExam(int chapter) {
+        public Exam getExam(int chapterIndex) {
             for (Exam exam : exams) {
-                if (exam.getExamChapterNumber() == chapter) {
+                if (exam.getExamChapterNumber() == chapterIndex) {
                     return exam;
                 }
             }
@@ -486,7 +486,7 @@ public class StudentModel {
             assert studentElement != null;
             Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
             Element newExam = document.createElement("exam");
-            newExam.setAttribute("chapter", Integer.toString(chapter));
+            newExam.setAttribute("chapter", Integer.toString(chapterIndex));
             examsElement.appendChild(newExam);
             UpdateModel.updateXML(new DOMSource(document), filePath);
             Exam e = new Exam(newExam);

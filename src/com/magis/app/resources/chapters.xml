@@ -17,6 +17,30 @@ STRUCTURE:
 </lesson>
 
 -->
+
+<!--
+FORMATTING:
+
+Format as code:
+	```
+	int myVariable = 2;
+	```
+
+Format as code output:
+	``
+	the answer is 3
+	``
+
+Format as H1 header:
+	~H1~My Title~H1~
+
+Format as H2 header:
+	~H2~My Subtitle~H2~
+
+Format as H3 header:
+	[H3]My Sub-subtitle[H3]
+
+-->
 <lesson>
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
@@ -26,100 +50,65 @@ STRUCTURE:
 			<page>
 				<text>
 This line inside the main method is a comment:
+```
 // Display a greeting in the console window
-
-This comment is purely for the beneﬁt of the human reader, to explain in more detail
-what the next statement does. Any text enclosed between // and the end of the line is
-completely ignored by the compiler. Comments are used to explain the program to other
-programmers or to yourself.
+```
+This comment is purely for the beneﬁt of the human reader, to explain in more detail what the next statement does. Any text enclosed between // and the end of the line is completely ignored by the compiler. Comments are used to explain the program to other programmers or to yourself.
 
 There are three kinds of comments:
-
+```
 /* comment */
 // one-line-comment
 /** documentationComment */
+```
+The one-line comment extends to the end of the line. The other comments can span multiple lines and extend to the */ delimiter.
 
-The one-line comment extends to the end of the line. The other comments can span
-multiple lines and extend to the */ delimiter.
-
-A documentation comment is delimited by /** and */. You can comment
+A documentation comment is delimited by /** and */. You can comment the following:
 
 	• Classes
 	• Methods
 	• Instance variables
 
-Each comment is placed immediately above the feature it documents. Each /** . . . */
-documentation comment contains introductory text followed by tagged documentation.
+Each comment is placed immediately above the feature it documents. Each /** . . . */ documentation comment contains introductory text followed by tagged documentation.
 				</text>
 			</page>
 			<page title = "Public Interfaces">
 				<text>
-When you implement classes and methods, you should get into the habit of thoroughly
-commenting their behaviors. In Java there is a very useful standard form for
-documentation comments. If you use this form in your classes, a program called
-javadoc can automatically generate a neat set of HTML pages that describe them.
-A documentation comment is placed before the class or method declaration that
-is being documented. It starts with a /**, a special comment delimiter used by the
-javadoc utility. Then you describe the method’s purpose. Then, for each method
-parameter, you supply a line that starts with @param, followed by the parameter name
-and a short explanation. Finally, you supply a line that starts with @return, describing
-the return value. You omit the @param tag for methods that have no parameters,
-and you omit the @return tag for methods whose return type is void.
-The javadoc utility copies the first sentence of each comment to a summary table
-in the HTML documentation. Therefore, it is best to write that first sentence with
-some care. It should start with an uppercase letter and end with a period. It does not
-have to be a grammatically complete sentence, but it should be meaningful when it
-is pulled out of the comment and displayed in a summary.
+When you implement classes and methods, you should get into the habit of thoroughly commenting their behaviors. In Java there is a very useful standard form for documentation comments. If you use this form in your classes, a program called javadoc can automatically generate a neat set of HTML pages that describe them. A documentation comment is placed before the class or method declaration that is being documented. It starts with a /**, a special comment delimiter used by the javadoc utility. Then you describe the method’s purpose. Then, for each method parameter, you supply a line that starts with @param, followed by the parameter name and a short explanation. Finally, you supply a line that starts with @return, describing the return value. You omit the @param tag for methods that have no parameters, and you omit the @return tag for methods whose return type is void. The javadoc utility copies the first sentence of each comment to a summary table in the HTML documentation. Therefore, it is best to write that first sentence with some care. It should start with an uppercase letter and end with a period. It does not have to be a grammatically complete sentence, but it should be meaningful when it is pulled out of the comment and displayed in a summary.
 
 Here are two typical examples.
+```
 /**
-
 Withdraws money from the bank account.
 @param amount the amount to withdraw
 */
 public void withdraw(double amount)
 {
-
-implementation—filled in later
+	//implementation filled in later
 }
 /**
-
 Gets the current balance of the bank account.
 @return the current balance
 */
 public double getBalance()
 {
-
-implementation—filled in later
+	//implementationfilled in later
 }
-
-The comments you have just seen explain individual methods. Supply a brief comment for each
-class, explaining its purpose. The comment syntax for class comments
-is very simple: Just place the documentation comment above the class.
+```
+The comments you have just seen explain individual methods. Supply a brief comment for each class, explaining its purpose. The comment syntax for class comments is very simple: Just place the documentation comment above the class.
+```
 /**
-
 A bank account has a balance that can be changed by
 deposits and withdrawals.
 */
 public class BankAccount
 {
-. . .
+	. . .
 }
-
-Your first reaction may well be “Whoa! Am I supposed to write all this stuff?”
-These comments do seem pretty repetitive. But you should take the time to write
-them, even if it feels silly.
-It is always a good idea to write the method comment first, before writing the
-code in the method body. This is an excellent test to see that you firmly understand
-what you need to program. If you can’t explain what a class or method does, you
-aren’t ready to implement it.
-What about very simple methods? You can easily spend more time pondering
-whether a comment is too trivial to write than it takes to write it. In practical
-programming, very simple methods are rare. It is harmless to have a trivial method
-overcommented, whereas a complicated method without any comment can cause
-real grief to future maintenance programmers. According to the standard Java documentation
-style, every class, every method, every parameter, and every return
-value should have a comment.
+```
+Your first reaction may well be “Whoa! Am I supposed to write all this stuff?” These comments do seem pretty repetitive. But you should take the time to write them, even if it feels silly.
+It is always a good idea to write the method comment first, before writing the code in the method body. This is an excellent test to see that you firmly understand what you need to program. If you can’t explain what a class or method does, you aren’t ready to implement it.
+What about very simple methods? You can easily spend more time pondering whether a comment is too trivial to write than it takes to write it. In practical programming, very simple methods are rare. It is harmless to have a trivial method overcommented, whereas a complicated method without any comment can cause real grief to future maintenance programmers. According to the standard Java documentation style, every class, every method, every parameter, and every return value should have a comment.
 				</text>
 			</page>
 			<page title = "Self Check">
@@ -133,12 +122,13 @@ number. Supply a documentation comment for the constructor
 public BankAccount(int accountNumber, double initialBalance)
 
 3. Why is the following documentation comment questionable?
-
+```
 /**
 Each account has an account number.
 @return the account number of this account
 */
 public int getAccountNumber()
+```
 				</text>
 			</page>
 		</pages>
@@ -150,60 +140,24 @@ public int getAccountNumber()
 		<pages>
 			<page>
 				<text>
-A computer program processes values: numbers, strings, and more complex data
-items. In Java, every value has a TYPE. (A type speciﬁes a set of values and 
-the operations that can be carried out with the values.) For example, the number 13 has the type int
-(an abbreviation for “integer”), "Hello, World" has the type String, and the object
-System.out has the type PrintStream. The type tells you what operations you can carry
-out with the values. For example, you can compute the sum or product of any two
-integers. You can call println on any object of type PrintStream.
-Java has separate types for INTEGERS and FLOATING-POINT numbers. Integers are
-whole numbers; floating-point numbers can have fractional parts. For example, 13
-is an integer and 1.3 is a floating-point number.
-The name “floating-point” describes the representation of the number in the computer as a sequence of the significant digits and an indication of the position of the
-decimal point. For example, the numbers 13000.0, 1.3, 0.00013 all have the same decimal digits: 13. When a floating-point number is multiplied or divided by 10, only
-the position of the decimal point changes; it “floats”. This representation is related to
-the “scientific” notation 1.3 × 10^(–4). (Actually, the computer represents numbers in
-base 2, not base 10, but the principle is the same.)
-If you need to process numbers with a fractional part, you should use the type
-called DOUBLE (The double type denotes ﬂoatingpoint numbers that can have fractional parts.), 
-which stands for “double precision floating-point number”. Think of
-a number in double format as any number that can appear in the display panel of a
-calculator, such as 1.3 or –0.333333333.
+A computer program processes values: numbers, strings, and more complex data items. In Java, every value has a TYPE. (A type speciﬁes a set of values and  the operations that can be carried out with the values.) For example, the number 13 has the type int (an abbreviation for “integer”), "Hello, World" has the type String, and the object System.out has the type PrintStream. The type tells you what operations you can carry
+out with the values. For example, you can compute the sum or product of any two integers. You can call println on any object of type PrintStream. Java has separate types for INTEGERS and FLOATING-POINT numbers. Integers are whole numbers; floating-point numbers can have fractional parts. For example, 13 is an integer and 1.3 is a floating-point number.
+The name “floating-point” describes the representation of the number in the computer as a sequence of the significant digits and an indication of the position of the decimal point. For example, the numbers 13000.0, 1.3, 0.00013 all have the same decimal digits: 13. When a floating-point number is multiplied or divided by 10, only the position of the decimal point changes; it “floats”. This representation is related to the “scientific” notation 1.3 × 10^(–4). (Actually, the computer represents numbers in base 2, not base 10, but the principle is the same.)
+If you need to process numbers with a fractional part, you should use the type called DOUBLE (The double type denotes ﬂoatingpoint numbers that can have fractional parts.), which stands for “double precision floating-point number”. Think of a number in double format as any number that can appear in the display panel of a calculator, such as 1.3 or –0.333333333.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Primitive%20Types/2.png</image>
 			</page>
 			<page>
 				<text>
-When a value such as 13 or 1.3 occurs in a Java program, it is called a number literal.
-Do not use commas when you write number literals in Java. For example,
-13,000 must be written as 13000. To write numbers in exponential notation in Java,
-use the notation En instead of “ × 10n ”. For example, 1.3 × 10–4 is written as 1.3E-4.
-Table 1 shows how to write integer and floating-point literals in Java.
-You may wonder why Java has separate integer and floating-point number types.
-Pocket calculators don’t need a separate integer type; they use floating-point numbers for
-all calculations. However, integers have several advantages over floating
-point numbers. They take less storage space, are processed faster, and don’t cause
-rounding errors. You will want to use the int type for quantities that can never have
-fractional parts, such as the length of a string. Use the double type for quantities that
-can have fractional parts, such as a grade point average.
-There are several other number types in Java that are not as commonly used. We
-will discuss these types in Chapter 4. For most programs in this book, however, the
-int and double types are all you need for processing numbers.
-In Java, the number types (int, double, and the less commonly used types) are
-primitive types. Numbers are not objects. The number types have no methods.
-However, you can combine numbers with operators such as + and -, as in 10 + n
-or n - 1. To multiply two numbers, use the * operator. For example, 10 × n is written as 10 * n.
-A combination of variables, literals, operators, and/or methods (which you will
-see in Section 2.4) is called an expression. A typical example of an expression is
-x + y * 2.
+When a value such as 13 or 1.3 occurs in a Java program, it is called a number literal. Do not use commas when you write number literals in Java. For example, 13,000 must be written as 13000. To write numbers in exponential notation in Java, use the notation En instead of “ × 10n ”. For example, 1.3 × 10^–4 is written as 1.3E-4. Table 1 shows how to write integer and floating-point literals in Java. You may wonder why Java has separate integer and floating-point number types.
+Pocket calculators don’t need a separate integer type; they use floating-point numbers for all calculations. However, integers have several advantages over floating point numbers. They take less storage space, are processed faster, and don’t cause rounding errors. You will want to use the int type for quantities that can never have fractional parts, such as the length of a string. Use the double type for quantities that
+can have fractional parts, such as a grade point average. There are several other number types in Java that are not as commonly used. We
+will discuss these types in Chapter 4. For most programs in this book, however, the int and double types are all you need for processing numbers.
+In Java, the number types (int, double, and the less commonly used types) are primitive types. Numbers are not objects. The number types have no methods. However, you can combine numbers with operators such as + and -, as in 10 + n or n - 1. To multiply two numbers, use the * operator. For example, 10 × n is written as 10 * n. A combination of variables, literals, operators, and/or methods (which you will see in Section 2.4) is called an expression. A typical example of an expression is x + y * 2.
 
 Numbers can be combined by arithmetic operators such as +, -, and *.
 
-As in mathematics, the * operator binds more strongly than the + operator. That is,
-x + y * 2 means the sum of x and y * 2. If you want to multiply the sum of x and y
-by 2, use parentheses:
-(x + y) * 2
+As in mathematics, the * operator binds more strongly than the + operator. That is, x + y * 2 means the sum of x and y * 2. If you want to multiply the sum of x and y by 2, use parentheses: (x + y) * 2
 				</text>
 			</page>
 			<page title = "Self Check">
@@ -218,20 +172,14 @@ Self Check
 			</page>
 			<page>
 				<text>
-In Java, every value is either a reference to an object, or it belongs to one of the eight
-primitive types shown in Table 1.
-Six of the primitive types are number types; four of them for integers and two for
-ﬂoating-point numbers.
+In Java, every value is either a reference to an object, or it belongs to one of the eight primitive types shown in Table 1. Six of the primitive types are number types; four of them for integers and two for ﬂoating-point numbers.
 
-The largest number that can be represented in an int is denoted by Integer.MAX_VALUE.
-Its value is about 2.14 billion. Similarly, Integer.MIN_VALUE is the smallest integer,
-about –2.14 billion. Generally, you will use the int type for integer quantities. However,
-occasionally, calculations involving integers can overflow. This happens if the result of
-a computation exceeds the range for the number type. For example:
-
+The largest number that can be represented in an int is denoted by Integer.MAX_VALUE. Its value is about 2.14 billion. Similarly, Integer.MIN_VALUE is the smallest integer, about –2.14 billion. Generally, you will use the int type for integer quantities. However,
+occasionally, calculations involving integers can overflow. This happens if the result of a computation exceeds the range for the number type. For example:
+```
 int n = 1000000;
 System.out.println(n * n); // Prints –727379968, which is clearly wrong
-
+```
 The product n * n is 1012, which is larger than the largest integer (about 2 · 109). The
 result is truncated to ﬁt into an int, yielding a value that is completely wrong.
 
@@ -248,33 +196,22 @@ that do not require much precision.)
 			</page>
 			<page>
 				<text>
-Rounding errors are a more serious issue with ﬂoating-point values. Rounding
-errors can occur when you convert between binary and decimal numbers, or
-between integers and ﬂoating-point numbers. When a value cannot be converted
-exactly, it is rounded to the nearest match. Consider this example:
-
+Rounding errors are a more serious issue with ﬂoating-point values. Rounding errors can occur when you convert between binary and decimal numbers, or between integers and ﬂoating-point numbers. When a value cannot be converted exactly, it is rounded to the nearest match. Consider this example:
+```
 double f = 4.35;
 System.out.println(100 * f); // Prints 434.99999999999994
-
-This problem is caused because computers represent numbers in the binary number
-system. In the binary number system, there is no exact representation of the fraction 1/10,
-just as there is no exact representation of the fraction 1/3 = 0.33333 in the
-decimal number system. (See Special Topic 4.2 on page 130 for more information.)
-For this reason, the double type is not appropriate for ﬁnancial calculations. In
-this book, we will continue to use double values for bank balances and other ﬁnancial
-quantities so that we keep our programs as simple as possible. However,
-professional programs need to use the BigDecimal type for this purpose—see Special
-Topic 4.1 on page 130.
-In Java, it is legal to assign an integer value to a ﬂoating-point variable:
-
+```
+This problem is caused because computers represent numbers in the binary number system. In the binary number system, there is no exact representation of the fraction 1/10, just as there is no exact representation of the fraction 1/3 = 0.33333 in the decimal number system. (See Special Topic 4.2 on page 130 for more information.) For this reason, the double type is not appropriate for ﬁnancial calculations. In this book, we will continue to use double values for bank balances and other ﬁnancial quantities so that we keep our programs as simple as possible. However, professional programs need to use the BigDecimal type for this purpose—see Special Topic 4.1 on page 130. In Java, it is legal to assign an integer value to a ﬂoating-point variable:
+```
 int dollars = 100;
 double balance = dollars; // OK
-
+```
 But the opposite assignment is an error:
 You cannot assign a ﬂoating-point expression to an integer variable.
-
+```
 double balance = 13.75;
 int dollars = balance; // Error
+```
 				</text>
 			</page>
 			<page title = "Self Check">
@@ -293,35 +230,18 @@ various countries. Which Java data type should you use?
 			</page>
 			<page>
 				<text>
-In Java, strings are objects that belong to the class String. (You can tell that String is
-a class name because it starts with an uppercase letter. The primitive types int and
-double start with lowercase letters.)
-You do not need to call a constructor to create a string object. You can obtain a
-string literal simply by enclosing a sequence of characters in double quotation
-marks. For example, the string literal "Harry" is an object of the String class.
-The number of characters in a string is called the length of the string. As you
-have seen, you can use the length method to obtain the length of a
-string. For example, "Hello".length() is 5, and the length of "Hello, World!" is 13.
-(The quotation marks are not part of the string and do not contribute to the length,
-but you must count spaces and punctuation marks.)
-A string of length zero, containing no characters, is called the empty string and is
-written as "".
+In Java, strings are objects that belong to the class String. (You can tell that String is a class name because it starts with an uppercase letter. The primitive types int and double start with lowercase letters.) You do not need to call a constructor to create a string object. You can obtain a string literal simply by enclosing a sequence of characters in double quotation marks. For example, the string literal "Harry" is an object of the String class. The number of characters in a string is called the length of the string. As you have seen, you can use the length method to obtain the length of a string. For example, "Hello".length() is 5, and the length of "Hello, World!" is 13. (The quotation marks are not part of the string and do not contribute to the length, but you must count spaces and punctuation marks.) A string of length zero, containing no characters, is called the empty string and is written as "".
 				</text>
 			</page>
 			<page>
 				<text>
-In Java, an expression such as amount &lt; 1000 has a value, just as the expression
-amount + 1000 has a value. The value of a relational expression is either true or false.
-For example, if amount is 500, then the value of amount &lt; 1000 is true. Try it out: The
-program fragment
-
+In Java, an expression such as amount &lt; 1000 has a value, just as the expression amount + 1000 has a value. The value of a relational expression is either true or false. For example, if amount is 500, then the value of amount &lt; 1000 is true. Try it out: The program fragment
+```
 double amount = 0;
 bool lessThanThousand = amount &lt; 1000;
 System.out.println(lessThanThousand);
-
-prints true. The values true and false are not numbers, nor are they objects of a
-class. They belong to a separate type, called boolean. The Boolean type is named
-after the mathematician George Boole (1815–1864), a pioneer in the study of logic.
+```
+prints true. The values true and false are not numbers, nor are they objects of a class. They belong to a separate type, called boolean. The Boolean type is named after the mathematician George Boole (1815–1864), a pioneer in the study of logic.
 				</text>
 			</page>
 		</pages>
@@ -453,7 +373,7 @@ items--;
 
 subtracts 1 from items.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185391/Magis/Operators/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/9.png</image>
 			</page>
 			<page title = "Arithmetic Operators">
 				<text>
@@ -512,7 +432,7 @@ to write all expressions in a linear arrangement.
 				<text>
 For example, the subexpression
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/13.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/13.png</image>
 				<text>
 of the quadratic formula becomes
 
@@ -643,7 +563,7 @@ Let us ﬁgure out how to extract the substring "World". Count characters starti
 at 0, not 1. You ﬁnd that W, the eighth character, has position number 7. The ﬁrst
 character that you don’t want, !, is the character at position 12 (see Figure 4).
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/23.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/23.png</image>
 				<text>
 Therefore, the appropriate substring command is
 
@@ -709,8 +629,8 @@ if (!input.equals("S")) . . .
 The ! operator takes a single condition and evaluates to true if that condition is false
 and to false if the condition is true.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/29.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/v1552185392/Magis/Operators/30.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/29.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Operators/30.png</image>
 				<text>
 You can use a Boolean variable if you know that there are only two possible values.
 Have another look at the tax program in Section 5.3.2. The marital status is either
@@ -2006,6 +1926,60 @@ SELF CHECK
 		</pages>
 	</chapter>
 	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/escape-sequences.png</image>
+		<title>Escape Sequences</title>
+		<description>Learn how to properly employ escape sequences.</description>
+		<pages>
+			<page>
+				<text>
+Suppose you want to display a string containing quotation marks, such as
+
+"Hello, "World"!
+
+You can’t use System.out.println("Hello, "World"!");
+
+As soon as the compiler reads "Hello, ", it thinks the string is ﬁnished, and then it gets all
+confused about World followed by two quotation marks. A human would probably realize
+that the second and third quotation marks were supposed to be part of the string, but a compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just
+refuses to go on, and reports an error. Well, how do you then display quotation marks on the
+screen? You precede the quotation marks inside the string with a backslash character. Inside a
+string, the sequence \" denotes a literal quote, not the end of a string. The correct display
+statement is, therefore
+System.out.println("Hello, \"World\"!");
+
+The backslash character is used as an escape character; the character sequence \" is called an
+escape sequence. The backslash does not denote itself; instead, it is used to encode other
+characters that would otherwise be difﬁcult to include in a string.
+Now, what do you do if you actually want to print a backslash (for example, to specify a
+Windows ﬁle name)? You must enter two \\ in a row, like this:
+System.out.println("The secret message is in C:\\Temp\\Secret.txt");
+
+This statement prints
+The secret message is in C:\Temp\Secret.txt
+
+Another escape sequence occasionally used is \n, which denotes a newline or line feed character. Printing a newline character causes the start of a new line on the display. For example,
+the statement
+
+System.out.print("*\n**\n***\n");
+
+prints the characters
+
+*
+**
+***
+
+on three separate lines. Of course, you could have achieved the same effect with three separate calls to println.
+Finally, escape sequences are useful for including international characters in a string. For
+example, suppose you want to print “All the way to San José!”, with an accented letter (é). If
+you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode encoding scheme to denote international characters. For example, the é character has
+Unicode encoding 00E9. You can include that character inside a string by writing \u, followed
+by its Unicode encoding:
+System.out.println("All the way to San Jos\u00E9!");
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/methods.png</image>
 		<title>Methods</title>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
@@ -2391,7 +2365,7 @@ When overriding a method, be sure to check that the parameter types match exactl
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Input/Output</title>
 		<description>Learn how to use scanners and become comfortable with input/output protocol</description>
 		<pages>
@@ -2457,8 +2431,8 @@ You will see in the following sections how to deal with exceptions in a more pro
 				</text>
 			</page>
 			<page title="Example Program">
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/2.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/3.png</image>
 			</page>
 			<page title="Self Check">
 				<text>
@@ -2524,9 +2498,8 @@ a
 little
 lamb
 
-In Java, a word is not the same as in English. It is any sequence of characters that is not white space. White space
-includes spaces, tab characters, and the newline characters that separate lines. For example, the following are
-considered words:
+In Java, a word is not the same as in English. It is any sequence of characters that is not white space.
+White space includes spaces, tab characters, and the newline characters that separate lines. For example, the following are considered words:
 
 snow.
 1729
@@ -2585,7 +2558,7 @@ countryName = countryName.trim();
 
 The trim method returns the string with all white space at the beginning and end removed.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/9.png</image>
 			</page>
 			<page title="Processing Lines">
 				<text>
@@ -2631,7 +2604,7 @@ then a NoSuchElementException occurs.
 Consider an input containing the characters
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/12.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/12.png</image>
 				<text>
 
 White space is consumed and the word 21st is read. However, this word is not a
@@ -2669,13 +2642,13 @@ while (in.hasNextInt())
 Initially, the input contains
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/14.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/14.png</image>
 				<text>
 
 After the first call to nextInt, the input contains
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/InputOutput/16.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/16.png</image>
 				<text>
 The call to nextLine reads an empty string! The remedy is to add a call to
 nextLine after reading the ID:
@@ -2724,7 +2697,7 @@ markers?
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Exceptions</title>
 		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
 		<pages>
@@ -2790,8 +2763,8 @@ When you throw an exception, execution does not continue with the next statement
 with an exception handler. For now, we won’t worry about the handling of the exception.
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/2.png</image>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/3.png</image>
 			</page>
 			<page title="Self Check">
 				<text>
@@ -2888,7 +2861,7 @@ system (such as a vending machine), where the user may never see System.out. And
 even if your users can see your error message, how do you know that they can
 
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/6.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/6.png</image>
 				<text>
 
 understand English? Your class may be used to build an application for users in
@@ -2953,7 +2926,7 @@ the try block are skipped. Here is what happens for the various exception types:
 When the catch (IOException exception) block is executed, then some method in the
 try block has failed with an IOException. The variable exception contains a reference
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Exceptions/10.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/10.png</image>
 				<text>
 to the exception object that was thrown. The catch clause can analyze that object to
 find out more details about the failure. For example, you can get a printout of the
@@ -2993,7 +2966,7 @@ Now you need to provide the InsufficientFundsException class. Should it be a
 checked or an unchecked exception? Is it the fault of some external event, or is it the
 fault of the programmer? We take the position that the programmer could have prevented
 the exceptional condition—after all, it would have been an easy matter to
-check whether amount <= account.getBalance() before calling the withdraw method.
+check whether amount &lt;= account.getBalance() before calling the withdraw method.
 Therefore, the exception should be an unchecked exception and extend the RuntimeException
 class or one of its subclasses.
 
@@ -3030,7 +3003,7 @@ Which exception class should you extend?
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Packages</title>
 		<description>Learn how packages can help you in Java land!</description>
 		<pages>
@@ -3045,7 +3018,7 @@ In Java, packages provide this structuring mechanism. A Java package is a
 set of related classes. For example, the Java library consists of several
 hundred packages, some of which are listed in Table 1.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Packages/2.png</image>
 			</page>
 			<page title="Organizing Packages">
 				<text>
@@ -3063,7 +3036,7 @@ there is a special package, called the default package, which has no name. If yo
 not include any package statement at the top of your source ﬁle, its classes are placed
 in the default package.
 				</text>
-				<image>https://res.cloudinary.com/ianspryn/image/upload/Magis/Packages/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Packages/4.png</image>
 			</page>
 			<page title="Importing Packages">
 				<text>

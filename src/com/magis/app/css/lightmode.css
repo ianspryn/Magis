@@ -22,6 +22,15 @@
     -fx-text-fill: #200310;
 }
 
+.code-text {
+     -fx-text-fill: #181818;
+ }
+
+ .code-output-text {
+    -fx-text-fill: #111111;
+    -fx-background-color: #ccc;
+  }
+
 .navigation-button {
     -fx-fill: #fff;
 }
@@ -29,8 +38,6 @@
 .navigation-button:pressed {
     -fx-fill: #ededed;
 }
-
-
 
 .jfx-text-field, .jfx-password-field {
     -fx-prompt-text-fill: #aaa;

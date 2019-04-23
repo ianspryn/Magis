@@ -209,7 +209,7 @@ public class Login {
      * @param password the password
      */
     private static void attemptSignIn(String username, String password) {
-        Main.studentModel.initializeStudent(username);
+        Main.studentModel.initializeStudent(username.toLowerCase());
         StudentModel.Student student = Main.studentModel.getStudent();
         if (username.length() == 0) { //blank username
             Alert.showAlert("Error", "Please enter a username.");

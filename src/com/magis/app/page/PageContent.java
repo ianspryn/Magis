@@ -3,9 +3,6 @@ package com.magis.app.page;
 import com.jfoenix.controls.JFXScrollPane;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
 
 public abstract class PageContent {
     private ScrollPane scrollPane;

@@ -6,10 +6,6 @@ import java.util.Collections;
 import java.util.Random;
 
 public class ControlStatementQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
-    Random rand;
 
     public ControlStatementQuestions(){
         super();
@@ -17,18 +13,20 @@ public class ControlStatementQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt(3);
-        if(selection == 0){
-            getIfElseQuestion();
-        }
-        else if(selection == 1){
-            whileLoopQuestions();
-        }
-        else if(selection == 2){
-            forLoopQuestion();
-        }
-        else{
-            forEachLoopQuestion();
+        int selection = rand.nextInt(4);
+        switch (selection) {
+            case 0:
+                getIfElseQuestion();
+                break;
+            case 1:
+                whileLoopQuestions();
+                break;
+            case 2:
+                forLoopQuestion();
+                break;
+            case 3:
+                forEachLoopQuestion();
+                break;
         }
     }
 

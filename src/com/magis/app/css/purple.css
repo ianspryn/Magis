@@ -18,6 +18,10 @@
     -fx-background: #6A1B9A; /* Purple 800 */
 }
 
+ .jfx-radio-button {
+    -jfx-selected-color: #AB47BC; /* Purple 400 */
+ }
+
 .jfx-toggle-button {
     -jfx-toggle-color: #AB47BC; /* Purple 400 */
 }
@@ -49,4 +53,8 @@
 
 .lesson-rectangle {
     -fx-fill: #AB47BC; /* Purple 400 */
+}
+
+.code-text {
+    -fx-border-color: #AB47BC; /* Purple 400 */
 }

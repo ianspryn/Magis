@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class MethodQuestions extends QuestionGenerator{
-    Random rand;
     DecimalFormat df = new DecimalFormat("####.##");
 
     private String[] dataTypeString = {"Cat","DOG","Mouse","Bug","Tree","LIQUID","Programming","SUM",
@@ -16,24 +15,14 @@ public class MethodQuestions extends QuestionGenerator{
 
     private String[] dataTypes = {"int", "double", "String", "char"};
 
-
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
-
     public MethodQuestions(){
         super();
     }
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt();
-        if(selection == 0){
-            getStringMethodQuestion();
-        }
-        else{
-            getMathMethodQuestion();
-        }
+        if (rand.nextInt(2) == 0) getStringMethodQuestion();
+        else getMathMethodQuestion();
     }
 
     public void getStringMethodQuestion(){

@@ -3,11 +3,8 @@ package com.magis.app.page;
 import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.lesson.PageLabels;
 import com.magis.app.models.StudentModel;
-import javafx.geometry.HorizontalDirection;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -17,20 +14,19 @@ import javafx.scene.shape.Rectangle;
 
 public class PageSidePanel {
     protected Page page;
-    private ScrollPane scrollPane;
-    private VBox masterVBox;
-    private VBox contentPagesVBox;
-    private HBox currentPage;
-    private Rectangle verticalLine;
-    private Rectangle horizontalLine;
-    private HBox horizontalLineContainer;
-    private StudentModel.Student student;
-    private PageLabels pageLabels;
-    private Label title;
+    protected ScrollPane scrollPane;
+    protected VBox masterVBox;
+    protected VBox contentPagesVBox;
+    protected HBox currentPage;
+    protected Rectangle verticalLine;
+    protected Rectangle horizontalLine;
+    protected HBox verticalLineContainer;
+    protected StudentModel.Student student;
+    protected PageLabels pageLabels;
+    protected Label title;
 
-    private int chapterIndex;
-    private int currentPageIndex;
-    private int numPages;
+    protected int chapterIndex;
+    protected int currentPageIndex;
 
 
     public PageSidePanel(int chapterIndex) {
@@ -40,15 +36,11 @@ public class PageSidePanel {
         currentPage = new HBox();
         verticalLine = new Rectangle();
         horizontalLine = new Rectangle();
-        horizontalLineContainer = new HBox();
+        verticalLineContainer = new HBox();
         student = Main.studentModel.getStudent();
         title = new Label();
         this.chapterIndex = chapterIndex;
         currentPageIndex = 0;
-    }
-
-    public int getNumPages() {
-        return numPages;
     }
 
     public void initialize() {
@@ -67,16 +59,15 @@ public class PageSidePanel {
         horizontalLine.setHeight(2);
         horizontalLine.setWidth(250);
         horizontalLine.getStyleClass().add("lesson-rectangle");
-        horizontalLineContainer.getChildren().add(horizontalLine);
-        horizontalLineContainer.setPadding(new Insets(0,0,0,-5));
-        UIComponents.fadeAndTranslate(horizontalLineContainer, 0.15, 0.2,-10,0,0,0);
+        UIComponents.fadeAndTranslate(verticalLineContainer, 0.15, 0.2,-10,0,0,0);
 
         //current page indicator
         verticalLine.setHeight(25);
         verticalLine.setWidth(5);
         verticalLine.getStyleClass().add("lesson-rectangle");
-
-        currentPage.getChildren().addAll(verticalLine, pageLabels.getLabel(0));
+        verticalLineContainer.getChildren().add(verticalLine);
+        verticalLineContainer.setPadding(new Insets(0,0,0,-5));
+        currentPage.getChildren().addAll(verticalLineContainer, pageLabels.getLabel(0));
         UIComponents.fadeAndTranslate(currentPage,0.3,0.2,-10,0,0,0);
 
         //pages
@@ -93,19 +84,6 @@ public class PageSidePanel {
         masterVBox.getChildren().addAll(title, horizontalLine, contentPagesVBox);
         scrollPane.setContent(masterVBox);
         JFXScrollPane.smoothScrolling(scrollPane);
-    }
-
-    public int getCurrentPageIndex() {
-        return currentPageIndex;
-    }
-
-    public PageLabels getPageLabels() {
-        return  pageLabels;
-    }
-
-    public void setNumPages(int numPages) {
-        this.numPages = numPages;
-        pageLabels = new PageLabels(numPages);
     }
 
     public void update(int index) {
@@ -134,7 +112,7 @@ public class PageSidePanel {
         return pageLabels.getLabel(index);
     }
 
-    public void setPageContainer(Page page) {
+    public void setPageClass(Page page) {
         this.page = page;
     }
 }

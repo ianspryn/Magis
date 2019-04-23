@@ -5,10 +5,6 @@ import java.util.Collections;
 import java.util.Random;
 
 public class ArraysQuestions extends QuestionGenerator{
-    private ArrayList<String> answers;
-    private String correctAnswer;
-    private String question = "";
-    Random rand;
 
     public ArraysQuestions(){
         super();
@@ -16,13 +12,8 @@ public class ArraysQuestions extends QuestionGenerator{
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt();
-        if(selection == 0){
-            getArrayIndexQuestion();
-        }
-        else{
-            getIndexQuestion();
-        }
+        if (rand.nextInt(2) == 0) getArrayIndexQuestion();
+        else getIndexQuestion();
     }
 
     public void getArrayIndexQuestion(){

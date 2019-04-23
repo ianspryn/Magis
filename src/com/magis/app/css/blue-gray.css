@@ -18,6 +18,10 @@
     -fx-background: #37474F; /* blue-gray 800 */
 }
 
+ .jfx-radio-button {
+    -jfx-selected-color: #78909C; /* blue-gray 400 */
+ }
+
 .jfx-toggle-button {
     -jfx-toggle-color: #78909C; /* blue-gray 400 */
 }
@@ -49,4 +53,8 @@
 
 .lesson-rectangle {
     -fx-fill: #78909C; /* blue-gray 400 */
+}
+
+.code-text {
+    -fx-border-color: #78909C; /* blue-gray 400 */
 }

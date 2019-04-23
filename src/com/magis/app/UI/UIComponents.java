@@ -130,7 +130,7 @@ public class UIComponents {
      */
     public static boolean confirmMessage(String title, String content) {
         AtomicBoolean result = new AtomicBoolean(false);
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setContentText(content);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.NO);
