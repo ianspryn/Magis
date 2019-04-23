@@ -187,8 +187,8 @@ class QuestionGeneratorTest {
     }
     @Test
     void testConstructer(){
-        ConstructerQuestions objc  = new constructerQuestions();
-        objc.generateContentQuestion();
+        QuestionGenerator objc  = new ConstructerQuestions();
+        ((ConstructerQuestions) objc).generateContentQuestion();
         String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
         String correctAnswer = objc.getCorrectAnswer();
