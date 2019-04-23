@@ -10,6 +10,8 @@ public class CommentQuestions extends QuestionGenerator{
             "This is a comment",
             "This is\nA comment",
             "Author: Student\nClass: COMP 101\nDescription: ---",
+            "Param: Number, number to be summed",
+            "Return: Sum, sum of all the numbers added together",
             "This code will do [x]",
             "This code will do [x]\nIt will also do [y]"
     };
@@ -46,6 +48,10 @@ public class CommentQuestions extends QuestionGenerator{
             case 3: correctAnswer = generalCommentAnswers[0];
                 break;
             case 4: correctAnswer = generalCommentAnswers[1];
+                break;
+            case 5: correctAnswer = generalCommentAnswers[2];
+                break;
+            case 6: correctAnswer = generalCommentAnswers[2];
                 break;
         }
     }
