@@ -1,0 +1,60 @@
+/* Colors taken from https://material.io/design/color/the-color-system.html#tools-for-picking-colors */
+
+/* the text right below the home icon in the top left corner */
+.home-text {
+    -fx-text-fill: #F48FB1; /* Pink 200*/
+}
+
+.circleindicator-container  {
+	circleindicator-color: #C2185B; /* Pink 700 */
+}
+
+.lesson-side-panel-text {
+    -fx-text-fill: #F8BBD0; /* Pink 100 */
+}
+
+.sidebar, .sidebar-scrollpane {
+    -fx-background-color: #AD1457; /* Pink 800 */
+    -fx-background: #AD1457; /* Pink 800 */
+}
+
+.jfx-radio-button {
+    -jfx-selected-color: #EC407A; /* Pink 400 */
+}
+
+.jfx-toggle-button {
+    -jfx-toggle-color: #EC407A; /* Pink 400 */
+}
+
+.jfx-button-raised-color {
+    -fx-background-color: #D81B60; /* Pink 600 */
+}
+
+.jfx-button-flat-color {
+    -fx-text-fill: #D81B60; /* Pink 600 */
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: #F48FB1; /* Pink 200 */
+}
+
+.menu-bar {
+    -fx-background-color: #AD1457 /* Pink 800 */
+}
+
+.title-bar {
+    -fx-background-color: #C2185B; /* Pink 700 */
+}
+
+.jfx-text-field, .jfx-password-field {
+    -jfx-focus-color: #D81B60; /* Pink 600 */
+    -jfx-unfocus-color: #F8BBD0; /* Pink 100 */
+}
+
+.lesson-rectangle {
+    -fx-fill: #EC407A; /* Pink 400 */
+}
+
+.code-text {
+    -fx-border-color: #EC407A; /* Pink 400 */
+}

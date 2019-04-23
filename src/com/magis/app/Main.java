@@ -6,17 +6,18 @@ import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
+import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Main extends Application{
+public class Main extends Application {
 
     public static Stage window;
     public static Scene scene;
@@ -24,10 +25,15 @@ public class Main extends Application{
     public static StudentModel studentModel;
     public static QuizzesModel quizzesModel;
     public static TestsModel testsModel;
-    public static String username = "";
+    public static HashMap<Integer, QuestionGenerator> questionGenerator;
+    public static HashMap<String, Integer> numQuestionsPerQuiz;
+    public static HashMap<String, Integer> numQuestionsPerTest;
+    public static String username;
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
-    public static boolean isLoggedIn = false;
+    public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
+    public static boolean useAnimations = true;
     public static double width = -1, height = -1;
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -43,47 +49,55 @@ public class Main extends Application{
             closeProgram();
         });
 
+        scene = new Scene(new BorderPane(), width, height);
+        window.setScene(scene);
+        //default to light, with pink
+        scene.getStylesheets().addAll("com/magis/app/css/style.css", "com/magis/app/css/lightmode.css", "com/magis/app/css/pink.css");
 
         lessonModel = new LessonModel();
         studentModel = new StudentModel(lessonModel);
         quizzesModel = new QuizzesModel();
+        numQuestionsPerQuiz = new HashMap<>();
         testsModel = new TestsModel();
+        numQuestionsPerTest = new HashMap<>();
+        populateQuestionGenerator();
         Login.Page();
-//        Button button = new Button();
-//        button.setOnAction(e -> System.out.println("hi"));
-//        button.setText("woo");
-//
-//        StackPane layout = new StackPane();
-//        layout.getChildren().add(button);
-
-//        primaryStage.initStyle(StageStyle.TRANSPARENT);
-//        primaryStage.setTitle("Magis");
-
-//        HomePage.Page();
         primaryStage.show();
+    }
+
+    private void populateQuestionGenerator() {
+        questionGenerator = new HashMap<>();
+        questionGenerator.put(0, new CommentQuestions());
+        questionGenerator.put(1, new DataTypeQuestions());
+        questionGenerator.put(2, new OperatorQuestions());
+        questionGenerator.put(3, new ObjectComparisonQuestions());
+        questionGenerator.put(4, new VariableQuestions());
+        questionGenerator.put(5, new EscapeSequenceQuestions());
+        questionGenerator.put(6, new MethodQuestions());
+        questionGenerator.put(7, new InputOutputQuestions());
+//        questionGenerator.put(8, new ExceptionsQuestions());
+//        questionGenerator.put(9, new PackagesQuestions());
+
     }
 
     public void closeProgram() {
         boolean close = true;
         if (takingTest) {
-            close = UIComponents.confirmClose();
+            String title = "Exit Test";
+            String content = "Are you sure you want to exit? All test progress will be lost!";
+            close = UIComponents.confirmMessage(title, content);
         }
-        if (isLoggedIn) {
-            Main.studentModel.getStudent(Main.username).writePageProgress();
-        }
-
+        if (isLoggedIn) Main.studentModel.getStudent().writePageProgress();
         if (close) window.close();
     }
 
-    public static void setScene(Scene newScene) {
-        scene = newScene;
-        window.setScene(newScene);
+    public static void setScene(Parent root) {
+        scene.setRoot(root);
         window.setTitle("Magis");
     }
 
-    public static void setScene(Scene newScene, String windowTitle) {
-        scene = newScene;
-        window.setScene(newScene);
+    public static void setScene(Parent root, String windowTitle) {
+        scene.setRoot(root);
         window.setTitle(windowTitle);
     }
 

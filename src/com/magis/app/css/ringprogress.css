@@ -3,14 +3,15 @@
 	-fx-inner-radius: 20.0;
 }
 .ringindicator-inner-circle {
-	-fx-opacity: 0.55;
+	-fx-opacity: 0.3;
 	-fx-stroke: circleindicator-color;
 	-fx-stroke-width: 3.0px;
 	-fx-fill: -fx-background;
 }
 .ringindicator-filler {
 	-fx-stroke: circleindicator-color;
-	-fx-fill: -fx-background;
+	/* -fx-fill: -fx-background; */
+	-fx-fill: transparent;
 	-fx-stroke-line-cap: butt;
 }
 .ringindicator-outer-circle-secondary {

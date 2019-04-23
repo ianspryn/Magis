@@ -44,7 +44,7 @@ public class LessonModel {
             this.chapters.add(chapterModel);
         }
     }
-    int getNumChapters() {
+    public int getNumChapters() {
         return chapters.size();
     }
 
