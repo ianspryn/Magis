@@ -61,6 +61,7 @@ public class Main extends Application {
         testsModel = new TestsModel();
         numQuestionsPerTest = new HashMap<>();
         populateQuestionGenerator();
+        Configure.values(); //apply any custom settings to the program
         Login.Page();
         primaryStage.show();
     }

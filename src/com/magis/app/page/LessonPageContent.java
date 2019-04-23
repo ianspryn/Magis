@@ -79,18 +79,13 @@ public class LessonPageContent extends PageContent {
                 case "image":
                     ImageView image = new ImageView();
                     image.setPreserveRatio(true);
-                    image.getStyleClass().addAll("lesson-image", "drop-shadow");
-                    HBox imageContainer = new HBox();
-                    imageContainer.getChildren().add(image);
-//                    imageContainer.maxWidthProperty().bind(getScrollPane().widthProperty());
-                    imageContainer.widthProperty().addListener((observable, oldVal, newVal) -> {
-                        image.maxWidth(newVal.doubleValue());
-                    });
-                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent()))); //load images in the background
+                    //scale the image to a max of either 800px or whatever thw width of the scroll pane is (compensating for the scrollbar's thickness itself)
+                    getScrollPane().widthProperty().addListener((observable, oldVal, newVal) -> image.setFitWidth(Math.min(800, newVal.doubleValue() - 50)));
+                    //load images in the background
+                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent())));
                     thread.setDaemon(true);
                     thread.start();
-                    image.setPreserveRatio(true);
-                    pageContentContainer.add(imageContainer);
+                    pageContentContainer.add(image);
                     break;
                 default:
                     System.err.println("Unrecognized XML tag <" + type + ">. Defaulting to text field.");
@@ -112,6 +107,8 @@ public class LessonPageContent extends PageContent {
         for (String subString : splitStrings) {
             Label label = new Label();
             label.setWrapText(true);
+            label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
+            label.setMaxWidth(800);
             pageContentContainer.add(label);
             switch (subString) {
                 case "```": //beginning of code segment
