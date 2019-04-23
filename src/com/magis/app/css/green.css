@@ -1,0 +1,56 @@
+/* Colors taken from https://material.io/design/color/the-color-system.html#tools-for-picking-colors */
+
+/* the text right below the home icon in the top left corner */
+.home-text {
+    -fx-text-fill: #A5D6A7; /* Green 200*/
+}
+
+.circleindicator-container  {
+	circleindicator-color: #388E3C; /* Green 700 */
+}
+
+.lesson-side-panel-text {
+    -fx-text-fill: #C8E6C9; /* Green 100 */
+}
+
+.sidebar, .sidebar-scrollpane {
+    -fx-background-color: #2E7D32; /* Green 800 */
+    -fx-background: #2E7D32; /* Green 800 */
+}
+
+.jfx-radio-button {
+    -jfx-selected-color: #66BB6A; /* Green 400 */
+}
+
+.jfx-toggle-button, .jfx-radio-button .dot {
+    -jfx-toggle-color: #66BB6A; /* Green 400 */
+}
+
+.jfx-button-raised-color {
+    -fx-background-color: #43A047; /* Green 600 */
+}
+
+.jfx-button-flat-color {
+    -fx-text-fill: #43A047; /* Green 600 */
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: #A5D6A7; /* Green 200 */
+}
+
+.menu-bar {
+    -fx-background-color: #2E7D32 /* Green 800 */
+}
+
+.title-bar {
+    -fx-background-color: #388E3C; /* Green 700 */
+}
+
+.jfx-text-field, .jfx-password-field {
+    -jfx-focus-color: #43A047; /* Green 600 */
+    -jfx-unfocus-color: #C8E6C9; /* Green 100 */
+}
+
+.lesson-rectangle {
+    -fx-fill: #66BB6A; /* Green 400 */
+}

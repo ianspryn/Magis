@@ -1,8 +1,6 @@
 package com.magis.app.test;
 
 import com.magis.app.Main;
-import com.magis.app.test.quiz.QuizPage;
-import com.magis.app.test.quiz.QuizPageContent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -17,11 +15,14 @@ import java.util.ArrayList;
 
 public class TestResult {
 
+    private VBox vBox;
+    private Button button;
+
     //F, D, C, B, A, A+ Perfect
     private static String[] colors = {"#f44336", "#f57c00", "#d4e157", "#9ccc65", "#36c246", "#00c853"};
 
-    public static VBox createTestResultPage(String chapterTitle, String testType, Double grade) {
-        VBox vBox = new VBox();
+    public TestResult(String chapterTitle, String testType, Double grade) {
+        vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
 
         StackPane topGrade = new StackPane();
@@ -37,16 +38,21 @@ public class TestResult {
 
         topGrade.getChildren().addAll(circle, gradeText);
 
-        Button mainText = new Button("Click to view your results.");
-        mainText.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        mainText.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        mainText.setOnAction(e -> QuizPage.updatePage(1));
-        mainText.getStyleClass().addAll("grade-main-text", "drop-shadow");
-        mainText.setStyle("-fx-background-color: " + calculateColor(grade));
+        button = new Button("Click to view your results.");
+        button.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        button.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        button.getStyleClass().addAll("grade-main-text", "drop-shadow");
+        button.setStyle("-fx-background-color: " + calculateColor(grade));
 
-        vBox.getChildren().addAll(topGrade, mainText);
+        vBox.getChildren().addAll(topGrade, button);
+    }
 
+    public VBox getvBox() {
         return vBox;
+    }
+
+    public Button getButton() {
+        return button;
     }
 
     /**

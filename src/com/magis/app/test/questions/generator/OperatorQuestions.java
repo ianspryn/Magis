@@ -5,11 +5,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class OperatorQuestions {
-    Random rand;
+public class OperatorQuestions extends QuestionGenerator {
     DecimalFormat df = new DecimalFormat("####.##");
-
-    private static String chatperTitle = "Operators";
 
     private String chapterTitle = "Operators";
 
@@ -19,14 +16,28 @@ public class OperatorQuestions {
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
 
-    private ArrayList<String> answers;
     private char[] characters = {'+','-','*','/','%'};
-    private String correctAnswer;
-    private String question = "";
 
     public OperatorQuestions(){
-        rand = new Random();
-        answers = new ArrayList<>();
+        super();
+    }
+
+    @Override
+    public void initialize() {
+        int selection = rand.nextInt(4);
+        switch (selection) {
+            case 0:
+                getSubstringQuestion();
+                break;
+            case 1:
+                getModularQuestion();
+                break;
+            case 2:
+                getIntegerDivisionQuestion();
+                break;
+            case 3:getIncrementalQuestion();
+                break;
+        }
     }
 
     public void getIntegerDivisionQuestion(){
@@ -186,19 +197,5 @@ public class OperatorQuestions {
         shuffler.add("Unknown");
 
         answers = shuffler;
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
-    public static String getChapter(){
-        return chatperTitle;
     }
 }

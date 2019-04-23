@@ -10,12 +10,13 @@ import javafx.stage.Stage;
 
 public class Alert {
     public static void showAlert(String title, String contentText) {
+
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setMinWidth(250);
-        window.setMinHeight(100);
+        window.setMinWidth(350);
+        window.setMinHeight(125);
 
         Label label = new Label();
         label.setText(contentText);

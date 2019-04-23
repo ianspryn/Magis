@@ -5,12 +5,9 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
-public class DataTypeQuestions {
+public class DataTypeQuestions extends QuestionGenerator{
 
-    Random rand;
     DecimalFormat df;
-
-    private static String chapterTitle = "Primitive Types";
 
     private String[] dataTypeString = {"Cat","Dog","Mouse","Bug","Tree","Liquid","Programming","Sum",
             "Four","One","Two","Ten","Five","Zero Point Four", "Four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
@@ -21,11 +18,7 @@ public class DataTypeQuestions {
 
     private String[] dataTypeMatchingAnswers = {"int", "double", "String", "char", "None"};
 
-    private ArrayList<String> answers;
-
     private char[] characters = {'+','-','*','/','%','<','=','>'};
-    private String correctAnswer;
-    private String question = "";
 
     public DataTypeQuestions(){
         df = new DecimalFormat("###.##");
@@ -33,6 +26,11 @@ public class DataTypeQuestions {
         dataTypeMatchingString = new ArrayList<>(Arrays.asList(dataTypeString));
         dataTypeMatchingChar = new ArrayList<>(Arrays.asList(dataTypeChar));
         answers = new ArrayList<>(Arrays.asList(dataTypeMatchingAnswers));
+    }
+
+    @Override
+    public void initialize() {
+        datatypeMatchingQuestion();
     }
 
     public void datatypeMatchingQuestion(){
@@ -68,19 +66,5 @@ public class DataTypeQuestions {
         }
 
         question = question + "\n\nWhat data type would best be used to initialize this value?";
-    }
-
-    public ArrayList<String> getAnswers() { return answers; }
-
-    public String getQuestion(){
-        return question;
-    }
-
-    public String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
-    public static String getChapter(){
-        return chapterTitle;
     }
 }

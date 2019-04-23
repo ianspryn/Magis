@@ -1,5 +1,6 @@
 package com.magis.app.models;
 
+import com.magis.app.Main;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -24,20 +25,14 @@ public class StudentModel {
     private Document document;
     public File file;
     private String filePath;
-    private ArrayList<Student> students;
+    private Student student;
     private LessonModel lessonModel;
 
-    public Student getStudent(String username) {
-        for (Student student : students) {
-            if (username.equals(student.getUsername())) {
-                return student;
-            }
-        }
-        return null;
+    public Student getStudent() {
+        return student;
     }
 
     public StudentModel(LessonModel lessonModel) {
-        this.students = new ArrayList<>();
         this.lessonModel = lessonModel;
 
 
@@ -92,10 +87,7 @@ public class StudentModel {
                     Node studentNode = students.item(i);
                     Element studentElement = (Element) studentNode;
                     String studentUsername = studentElement.getAttributes().getNamedItem("username").getNodeValue();
-                    Student s = new Student(studentNode, studentUsername);
-                    if (!this.students.contains(s)) {
-                        this.students.add(s);
-                    }
+                    this.student = new Student(studentNode, studentUsername);
                 }
             }
         }
@@ -140,9 +132,11 @@ public class StudentModel {
      * @param username username of the student
      * @param firstName first name of the student
      * @param lastName last name of the student
+     * @param password the hashed password
+     * @param salt the salt associated with the password
      * @return 0 if succeeded, or -1 if student username already exists
      */
-    public int addStudent(String username, String firstName, String lastName) {
+    public int addStudent(String username, String firstName, String lastName, String password, String salt) {
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = null;
@@ -186,12 +180,34 @@ public class StudentModel {
         lastNameElement.appendChild(document.createTextNode(lastName));
         student.appendChild(lastNameElement);
 
+        //password elements
+        Element passwordElement = document.createElement("hash");
+        passwordElement.appendChild(document.createTextNode(password));
+        student.appendChild(passwordElement);
+
+        Element saltElement = document.createElement("salt");
+        saltElement.appendChild(document.createTextNode(salt));
+        student.appendChild(saltElement);
+
+        //settings elements
+        Element settingsElement = document.createElement("settings");
+        student.appendChild(settingsElement);
+        Element darkmodeElement = document.createElement("darkmode");
+        darkmodeElement.appendChild(document.createTextNode("false"));
+        settingsElement.appendChild(darkmodeElement);
+        Element themeElement = document.createElement("theme");
+        themeElement.appendChild(document.createTextNode("pink"));
+        settingsElement.appendChild(themeElement);
+        Element animationsElement = document.createElement("animations");
+        animationsElement.appendChild(document.createTextNode("true"));
+        settingsElement.appendChild(animationsElement);
+
         //recent activity elements
         Element recentElement = document.createElement("recent");
         student.appendChild(recentElement);
-        Element chapterID = document.createElement("chapter");
+        Element chapterIndex = document.createElement("chapter");
         Element pageID = document.createElement("page");
-        recentElement.appendChild(chapterID);
+        recentElement.appendChild(chapterIndex);
         recentElement.appendChild(pageID);
 
         //chapters
@@ -224,10 +240,48 @@ public class StudentModel {
         student.appendChild(exams);
 
         UpdateModel.updateXML(new DOMSource(document), filePath);
-
-        Student s = new Student(student, username);
-        this.students.add(s);
         return 0; //success
+    }
+
+    public void deleteUser(String username) {
+
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document document = null;
+        try {
+            assert documentBuilder != null;
+            document = documentBuilder.parse(filePath);
+        } catch (SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        assert document != null;
+        Element root = document.getDocumentElement();
+        NodeList students = root.getElementsByTagName("student");
+        Node student = null;
+        for (int i = 0; i < students.getLength(); i++) {
+            student = students.item(i);
+            //find the current student
+            if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                break;
+            }
+        }
+        assert student != null;
+        student.getParentNode().removeChild(student);
+        //write to XML file
+        UpdateModel.updateXML(new DOMSource(document), filePath);
+
+        //Delete student from class
+        Main.studentModel = new StudentModel(Main.lessonModel);
+        //remove the student's custom styling
+        Main.scene.getStylesheets().removeAll();
+        //default to light, with pink
+        Main.scene.getStylesheets().addAll("com/magis/app/css/style.css", "com/magis/app/css/lightmode.css", "com/magis/app/css/pink.css");
+        Main.isLoggedIn = false;
     }
 
     public class Student {
@@ -236,27 +290,34 @@ public class StudentModel {
         private String firstName;
         private String lastName;
         private String fullName;
+        private String passwordHash;
+        private String salt;
+        private boolean darkMode;
+        private String theme;
+        private boolean useAnimations;
         private int recentChapter;
         private int recentPage;
         private ArrayList<ChapterModel> chapters;
         private ArrayList<Quiz> quizzes;
         private ArrayList<Exam> exams;
 
-        private String getUsername() {
-            return username;
-        }
+        private String getUsername() { return username; }
 
-        public String getFirstName() {
-            return firstName;
-        }
+        public String getFirstName() { return firstName; }
 
-        public String getLastName() {
-            return lastName;
-        }
+        public String getLastName() { return lastName; }
 
-        public String getFullName() {
-            return fullName;
-        }
+        public String getPasswordHash() { return passwordHash; }
+
+        public String getSalt() { return salt; }
+
+        public String getFullName() { return fullName; }
+
+        public boolean getDarkMode() { return darkMode; }
+
+        public String getTheme() { return theme; }
+
+        public boolean useAnimations() { return useAnimations; }
 
         public int getRecentChapter() { return recentChapter; }
 
@@ -265,7 +326,73 @@ public class StudentModel {
         public void setRecentPlace(int chapterIndex, int pageIndex) {
             recentChapter = chapterIndex;
             recentPage = pageIndex;
+        }
 
+        public void setDarkMode(boolean value) {
+            darkMode = value;
+            writeSettings();
+        }
+
+        public void setTheme(String color) {
+            switch(color) {
+                case "pink":
+                case "purple":
+                case "cyan":
+                case "green":
+                case "blue-gray":
+                    theme = color;
+                    break;
+                default:
+                    System.err.println("Unrecognized theme color of \"" + color + "\"");
+            }
+            theme = color;
+            writeSettings();
+        }
+
+        public void setAnimations(boolean value) {
+            useAnimations = value;
+            writeSettings();
+        }
+
+        private void writeSettings() {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            Document document = null;
+            try {
+                assert documentBuilder != null;
+                document = documentBuilder.parse(filePath);
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            assert document != null;
+            Element root = document.getDocumentElement();
+            NodeList students = root.getElementsByTagName("student");
+            Node student = null;
+            for (int i = 0; i < students.getLength(); i++) {
+                student = students.item(i);
+                //find the current student
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                    break;
+                }
+            }
+            Element studentElement = (Element) student;
+            assert studentElement != null;
+
+            Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
+            Node darkmode = settingsElement.getElementsByTagName("darkmode").item(0);
+            Node theme  = settingsElement.getElementsByTagName("theme").item(0);
+            Node animations = settingsElement.getElementsByTagName("animations").item(0);
+            darkmode.setTextContent(Boolean.toString(this.darkMode));
+            theme.setTextContent(this.theme);
+            animations.setTextContent(Boolean.toString(this.useAnimations));
+
+            //write to XML file
+            UpdateModel.updateXML(new DOMSource(document), filePath);
         }
 
         public ChapterModel getChapter(int chapterIndex) {
@@ -274,12 +401,12 @@ public class StudentModel {
 
         /**
          * This method will return a Quiz if it already exists. If it doesn't exist, this method will create a new Quiz and return that
-         * @param chapterID the chapter's number (not index)
+         * @param chapterIndex the chapter's index
          * @return a Quiz Class
          */
-        public Quiz getQuiz(int chapterID) {
+        public Quiz getQuiz(int chapterIndex) {
             for (Quiz quiz : quizzes) {
-                if (quiz.getQuizChapterNumber() == chapterID) {
+                if (quiz.getQuizChapterNumber() == chapterIndex) {
                     return quiz;
                 }
             }
@@ -312,7 +439,7 @@ public class StudentModel {
             assert studentElement != null;
             Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
             Element newQuiz = document.createElement("quiz");
-            newQuiz.setAttribute("chapter", Integer.toString(chapterID));
+            newQuiz.setAttribute("chapter", Integer.toString(chapterIndex));
             quizzesElement.appendChild(newQuiz);
             UpdateModel.updateXML(new DOMSource(document), filePath);
             Quiz q = new Quiz(newQuiz);
@@ -322,12 +449,12 @@ public class StudentModel {
 
         /**
          * This method will return an Exam if it already exists. If it doesn't exist, this method will create a new Exam and return that
-         * @param chapter the chapter's number (not index)
+         * @param chapterIndex the chapter's index
          * @return an Exam Class
          */
-        public Exam getExam(int chapter) {
+        public Exam getExam(int chapterIndex) {
             for (Exam exam : exams) {
-                if (exam.getExamChapterNumber() == chapter) {
+                if (exam.getExamChapterNumber() == chapterIndex) {
                     return exam;
                 }
             }
@@ -359,7 +486,7 @@ public class StudentModel {
             assert studentElement != null;
             Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
             Element newExam = document.createElement("exam");
-            newExam.setAttribute("chapter", Integer.toString(chapter));
+            newExam.setAttribute("chapter", Integer.toString(chapterIndex));
             examsElement.appendChild(newExam);
             UpdateModel.updateXML(new DOMSource(document), filePath);
             Exam e = new Exam(newExam);
@@ -438,6 +565,17 @@ public class StudentModel {
             this.firstName = studentElement.getElementsByTagName("firstname").item(0).getTextContent();
             this.lastName = studentElement.getElementsByTagName("lastname").item(0).getTextContent();
             this.fullName = firstName + " " + lastName;
+            this.passwordHash = studentElement.getElementsByTagName("hash").item(0).getTextContent();
+            this.salt = studentElement.getElementsByTagName("salt").item(0).getTextContent();
+
+            //apply user-specific settings
+            Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
+            Node darkMode = settingsElement.getElementsByTagName("darkmode").item(0);
+            Node theme = settingsElement.getElementsByTagName("theme").item(0);
+            Node animations = settingsElement.getElementsByTagName("animations").item(0);
+            this.darkMode = Boolean.parseBoolean(darkMode.getTextContent());
+            this.theme = theme.getTextContent();
+            this.useAnimations = Boolean.parseBoolean(animations.getTextContent());
 
             Element recentElement = (Element) studentElement.getElementsByTagName("recent").item(0);
             Node recentChapter = recentElement.getElementsByTagName("chapter").item(0);
