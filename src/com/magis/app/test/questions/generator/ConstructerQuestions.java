@@ -38,10 +38,10 @@ public class ConstructerQuestions extends QuestionGenerator{
         if(selection == 0){
             generateContentQuestion();
         }
-        if else(selection == 1){
+        else if(selection == 1){
             generateConstructerQuestion();
         }
-        else(){
+        else {
             generateSecondContructerQuestions();
         }
     }
