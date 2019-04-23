@@ -111,7 +111,7 @@ public class UIComponents {
 
 
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-white-small-v2.png");
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-white-small.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 

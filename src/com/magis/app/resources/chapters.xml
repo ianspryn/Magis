@@ -2382,7 +2382,7 @@ When overriding a method, be sure to check that the parameter types match exactl
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/input-output.png</image>
 		<title>Input/Output</title>
 		<description>Learn how to use scanners and become comfortable with input/output protocol</description>
 		<pages>
@@ -2714,7 +2714,7 @@ markers?
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/exceptions.png</image>
 		<title>Exceptions</title>
 		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
 		<pages>
@@ -3020,7 +3020,7 @@ Which exception class should you extend?
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/packages.png</image>
 		<title>Packages</title>
 		<description>Learn how packages can help you in Java land!</description>
 		<pages>

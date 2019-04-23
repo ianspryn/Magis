@@ -80,7 +80,10 @@ public class LessonPageContent extends PageContent {
                     ImageView image = new ImageView();
                     image.setPreserveRatio(true);
                     //scale the image to a max of either 800px or whatever thw width of the scroll pane is (compensating for the scrollbar's thickness itself)
-                    getScrollPane().widthProperty().addListener((observable, oldVal, newVal) -> image.setFitWidth(Math.min(800, newVal.doubleValue() - 50)));
+                    image.setFitWidth(Math.min(800, getScrollPane().widthProperty().doubleValue() - 50));
+                    getScrollPane().widthProperty().addListener((observable, oldVal, newVal) -> {
+                        image.setFitWidth(Math.min(800, newVal.doubleValue() - 50));
+                    });
                     //load images in the background
                     Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent())));
                     thread.setDaemon(true);
