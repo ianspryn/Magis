@@ -17,10 +17,10 @@ public class ConstructerQuestions extends QuestionGenerator{
             "public example(Double y){}","public example(char c){}"};
     private String[] secondAnswers = {"int x = 3, int y = 5", "int x = 3",
             "int y = 3","nothing at all"};
-    private String[] secondStrings = {"pubic class child extends parrent{\n     public child{\n           super();\n        int y = 5;\n      }\n}",
-            "pubic class child extends parrent{\n     public child{\n           super();\n}\n}",
-            "pubic class child extends parrent{\n     public child{\n        int y = 5;\n      }\n}",
-            "pubic class child extends parrent{\n     public child{\n      }\n}"};
+    private String[] secondStrings = {"pubic class child extends parent{\n     public child{\n           super();\n        int y = 5;\n      }\n}",
+            "pubic class child extends parent{\n     public child{\n           super();\n}\n}",
+            "pubic class child extends parent{\n     public child{\n        int y = 5;\n      }\n}",
+            "pubic class child extends parent{\n     public child{\n      }\n}"};
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
     private ArrayList<String> sAnswers;
@@ -91,8 +91,8 @@ public class ConstructerQuestions extends QuestionGenerator{
 
 
         question = "For constructor \n"+firstPart+"\n with parrent class\n " +
-                "pubic class parrent{\n     public parrent{\n           int x = 3;\n" +
-                "   }}\nwhat variables will be initialized in the constructor?\n";
+                "pubic class parent{\n     public parent{\n           int x = 3;\n" +
+                "   }\n}\nwhat variables will be initialized in the constructor?\n";
         correctAnswer = secondAnswers[random];
 
 
