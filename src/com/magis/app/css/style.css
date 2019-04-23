@@ -30,6 +30,22 @@
     src: url('RobotoMono-ThinItalic.ttf');
 }
 
+@font-face {
+    src: url('MavenPro-Black.ttf');
+}
+
+@font-face {
+    src: url('MavenPro-Bold.ttf');
+}
+
+@font-face {
+    src: url('MavenPro-Medium.ttf');
+}
+
+@font-face {
+    src: url('MavenPro-Regular.ttf');
+}
+
 .root {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -67,9 +83,43 @@
 }
 
 .lesson-text {
-     -fx-font-size: 15px;
-     -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 15px;
+    -fx-font-family: "Roboto Mono Regular";
  }
+
+ .lesson-header-one-text {
+    -fx-font-size: 22px;
+    -fx-font-family: "Roboto Mono Bold";
+ }
+
+.lesson-header-two-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.lesson-header-three-text {
+    -fx-font-size: 17px;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.lesson-image {
+    -fx-padding: 30px;
+}
+
+ .code-text {
+    -fx-font-size: 15px;
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1;
+    -fx-font-family: "monospace";
+  }
+
+  .code-output-text {
+    -fx-font-size: 15px;
+    -fx-padding: 20px;
+    -fx-font-family: "Maven Pro Regular"; /* TODO: Is this even applying the font?!!! */
+    -fx-border-padding: 50px;
+  }
 
 .jfx-button {
     -fx-text-fill: #fff;
@@ -100,7 +150,7 @@
 }
 
 .login-box {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #fff;
 }
 
 .jfx-text-field, .jfx-password-field {

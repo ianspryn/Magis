@@ -34,6 +34,7 @@ public class LessonPage extends Page {
         pageContent.update(pageIndex);
         updateNavigation(pageIndex);
         pageContent.getScrollPane().setVvalue(0);
+        pageContent.getScrollPane().setHvalue(0);
     }
 
 }
