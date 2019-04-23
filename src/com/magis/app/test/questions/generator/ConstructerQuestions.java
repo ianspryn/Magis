@@ -15,24 +15,31 @@ public class ConstructerQuestions extends QuestionGenerator{
     private String[] equalsStrings = {"int", "String", "Double","char"};
     private String[] equalsAnswers = {"public example(int x){}", "public example(String word){}",
             "public example(Double y){}","public example(char c){}"};
-
+    private String[] secondAnswers = {"public example(int x){}", "public example(String word){}",
+            "public example(Double y){}","public example(char c){}"};
+    private String[] secondStrings = {"int", "String", "Double","char"};
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
+    private ArrayList<String> sAnswers;
 
     public ConstructerQuestions(){
         super();
         cAnswers = new ArrayList<>(Arrays.asList(comparableStringAnswers));
         eAnswers = new ArrayList<>(Arrays.asList(equalsAnswers));
+        sAnswers = new ArrayList<>(Arrays.asList(secondAnswers));
     }
 
     @Override
     public void initialize() {
-        int selection = rand.nextInt(2);
+        int selection = rand.nextInt(3);
         if(selection == 0){
             generateContentQuestion();
         }
-        else{
+        if else(selection == 1){
             generateConstructerQuestion();
+        }
+        else(){
+            generateSecondContructerQuestions();
         }
     }
 
@@ -73,4 +80,20 @@ public class ConstructerQuestions extends QuestionGenerator{
         correctAnswer = equalsAnswers[random];
 
     }
+    public void generateSecondContructerQuestions(){
+        question = "";
+        answers = sAnswers;
+        int random = rand.nextInt(4);
+        String firstPart =  secondStrings[random];
+
+
+        question = "Which is the correct constructor for class example if we want the paramater to be a "+firstPart+"?\n";
+        correctAnswer = secondAnswers[random];
+
+
+    }
+    //2 more
+
+
+    
 }
