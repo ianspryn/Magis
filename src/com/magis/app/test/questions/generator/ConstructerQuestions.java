@@ -6,10 +6,6 @@ import java.util.ArrayList;
 
 public class ConstructerQuestions extends QuestionGenerator{
 
-    Random rand;
-
-    private static String chapterTitle = "Constructors";
-
     private String[] comparableStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
@@ -20,12 +16,8 @@ public class ConstructerQuestions extends QuestionGenerator{
     private String[] equalsAnswers = {"public example(int x){}", "public example(String word){}",
             "public example(Double y){}","public example(char c){}"};
 
-    private ArrayList<String> answers;
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
-
-    private String correctAnswer;
-    private String question = "";
 
     public ConstructerQuestions(){
         super();
