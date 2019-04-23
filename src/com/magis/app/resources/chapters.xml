@@ -26,10 +26,10 @@ Format as code:
 	int myVariable = 2;
 	```
 
-Format as code output:
-	``
+Format as code output or special text:
+	###
 	the answer is 3
-	``
+	###
 
 Format as H1 header:
 	~H1~My Title~H1~
