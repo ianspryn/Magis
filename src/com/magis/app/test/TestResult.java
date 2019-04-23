@@ -21,7 +21,7 @@ public class TestResult {
     //F, D, C, B, A, A+ Perfect
     private static String[] colors = {"#f44336", "#f57c00", "#d4e157", "#9ccc65", "#36c246", "#00c853"};
 
-    public TestResult(String chapterTitle, String testType, Double grade) {
+    public TestResult(Double grade) {
         vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
 
