@@ -2911,6 +2911,150 @@ markers?
 	</chapter>
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<title>Arrays</title>
+		<description>Learn many new things about arrays</description>
+		<pages>
+			<page title="Introduction to Arrays">
+				<text>
+In many programs, you need to manipulate collections of related values. It would
+be impractical to use a sequence of variables such as value1, value2, value3, . . . , and
+so on. The array construct provides a better way of storing a collection of values.
+An array is a sequence of values of the same type. The values that are stored in an
+array are called its “elements”. For example, here is how you construct an array of
+10 floating-point numbers:
+
+new double[10]
+
+The number of elements (here, 10) is called the length of the array.
+The new operator merely constructs the array. You will want to store a reference
+to the array in a variable so that you can access it later.
+The type of an array variable is the element type, followed by []. In this example,
+the type is double[], because the element type is double. Here is the declaration of an
+array variable:
+
+double[] values = new double[10];
+
+That is, values is a reference to an array of floating-point numbers. It is initialized
+with an array of 10 numbers (see Figure 1).
+You can also form arrays of objects, for example
+
+BankAccount[] accounts = new BankAccount[10];
+
+When an array is first created, all elements are initialized with 0 (for an array of
+numbers such as int[] or double[]), false (for a boolean[] array), or null (for an array
+of object references).
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/2.png</image>
+				<text>
+Alternatively, you can initialize an array with other values. List all elements that
+you want to include in the array, enclosed in braces and separated by commas:
+
+int[] primes = { 2, 3, 5, 7, 11 };
+
+The Java compiler counts how many elements you want to place in the array, allocates
+an array of the correct size, and fills it with the elements that you specify.
+Each element in the array is specified by an integer index that is placed inside
+square brackets ([]). For example, the expression
+
+values[4]
+
+denotes the element of the values array with index 4.
+You can store a value at a location with an assignment statement, such as the
+following.
+
+values[2] = 29.95;
+
+Now the position with index 2 of values is filled with 29.95 (see Figure 2).
+To read the element at index 2, simply use the expression values[2] as you would
+any variable of type double:
+
+System.out.println("The element at index 2 is " + values[2]);
+
+If you look closely at Figure 2, you will notice that the index values start at 0. That is,
+
+values[0] is the first element
+values[1] is the second element
+values[2] is the third element
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/4.png</image>
+				<text>
+and so on. This convention can be a source of grief for the newcomer, so you should
+pay close attention to the index values. In particular, the last element in the array has
+an index one less than the array length. For example, values refers to an array with
+length 10. The last element is values[9].
+If you try to access an element that does not exist, then an “array index out of
+bounds” exception occurs. For example, the statement
+
+values[10] = 29.95; // ERROR
+
+is a bounds error.
+
+To avoid bounds errors, you will want to know how many elements are in an
+array. The expression
+
+values.length
+
+is the length of the values array. Note that there are no parentheses following
+length—it is an instance variable of the array object, not a method. However, you
+cannot modify this instance variable. In other words, length is a final public
+instance variable. This is quite an anomaly. Normally, Java programmers use a
+method to inquire about the properties of an object. You just have to remember to
+omit the parentheses in this case.
+
+The following code ensures that you only access the array when the index variable i is within the legal bounds:
+
+if (0 <= i && i < values.length) values[i] = value;
+
+Arrays suffer from a significant limitation: their length is fixed. If you start out with
+an array of 10 elements and later decide that you need to add additional elements,
+then you need to make a new array and copy all elements of the existing array into
+the new array. We will discuss this process in detail later.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/6.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/7.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. What elements does the values array contain after the following statements?
+
+double[] values = new double[10];
+for (int i = 0; i < values.length; i++) values[i] = i * i;
+
+2. What do the following program segments print? Or, if there is an error, describe
+the error and specify whether it is detected at compile-time or at run-time.
+
+	a. double[] a = new double[10];
+	   System.out.println(a[0]);
+	b. double[] b = new double[10];
+	   System.out.println(b[10]);
+	c. double[] c;
+	   System.out.println(c[0]);
+				</text>
+			</page>
+			<page title="Bounds Errors">
+				<text>
+A very common array error is attempting to access a nonexistent position.
+
+double[] data = new double[10];
+data[10] = 29.95; // Error—only
+
+have elements with index values 0 . . . 9
+
+When the program runs, an out-of-bounds index generates an exception and terminates the
+program.
+
+This is a great improvement over languages such as C and C++. With those languages
+there is no error message; instead, the program will quietly (or not so quietly) corrupt the
+memory location that is 10 elements away from the start of the array. Sometimes that corruption
+goes unnoticed, but at other times, the program will act flaky or die a horrible death
+many instructions later. These are serious problems that make C and C++ programs difficult
+to debug. Bounds errors in C and C++ programs are a major cause of security vulnerabilities.
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Exceptions</title>
 		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
 		<pages>
@@ -3131,7 +3275,7 @@ throw a FileNotFoundException, Scanner.next can throw a NoSuchElementException, 
 Integer.parseInt can throw a NumberFormatException.
 If any of these exceptions is actually thrown, then the rest of the instructions in
 the try block are skipped. Here is what happens for the various exception types:
-					
+
 	• If a FileNotFoundException is thrown, then the catch clause for the IOException is
 	  executed. (Recall that FileNotFoundException is a subclass of IOException.)
 	• If a NumberFormatException occurs, then the second catch clause is executed.
