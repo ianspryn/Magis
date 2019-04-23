@@ -83,8 +83,8 @@
 }
 
 .lesson-text {
-     -fx-font-size: 15px;
-     -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 15px;
+    -fx-font-family: "Roboto Mono Regular";
  }
 
  .lesson-header-one-text {
@@ -92,16 +92,19 @@
     -fx-font-family: "Roboto Mono Bold";
  }
 
- .lesson-header-two-text {
-     -fx-font-size: 20px;
-     -fx-font-family: "Roboto Mono Bold";
-  }
+.lesson-header-two-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Roboto Mono Bold";
+}
 
-  .lesson-header-three-text {
-       -fx-font-size: 17px;
-       -fx-font-family: "Roboto Mono Bold";
-    }
+.lesson-header-three-text {
+    -fx-font-size: 17px;
+    -fx-font-family: "Roboto Mono Bold";
+}
 
+.lesson-image {
+    -fx-padding: 30px;
+}
 
  .code-text {
     -fx-font-size: 15px;

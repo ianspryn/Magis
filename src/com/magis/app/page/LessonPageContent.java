@@ -78,24 +78,24 @@ public class LessonPageContent extends PageContent {
             switch (type) {
                 case "image":
                     ImageView image = new ImageView();
+                    image.setPreserveRatio(true);
+                    image.getStyleClass().addAll("lesson-image", "drop-shadow");
+                    HBox imageContainer = new HBox();
+                    imageContainer.getChildren().add(image);
+//                    imageContainer.maxWidthProperty().bind(getScrollPane().widthProperty());
+                    imageContainer.widthProperty().addListener((observable, oldVal, newVal) -> {
+                        image.maxWidth(newVal.doubleValue());
+                    });
                     Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent()))); //load images in the background
                     thread.setDaemon(true);
                     thread.start();
                     image.setPreserveRatio(true);
-                    pageContentContainer.add(image);
+                    pageContentContainer.add(imageContainer);
                     break;
                 default:
                     System.err.println("Unrecognized XML tag <" + type + ">. Defaulting to text field.");
                 case "text":
                     formatText(lessonPageContent.getContent(), pageContentContainer, chapterIndex, pageIndex);
-//                    Label textDefault = new Label();
-//                    textDefault.setText(lessonPageContent.getContent());
-//                    textDefault.setWrapText(true);
-//                    textDefault.setPrefWidth(700);
-//                    textDefault.getStyleClass().add("lesson-text");
-//                    textDefault.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
-//                    textDefault.setPadding(new Insets(20, 20, 20, 20));
-//                    pageContentContainer.add(textDefault);
                     break;
             }
         }
@@ -103,11 +103,6 @@ public class LessonPageContent extends PageContent {
     }
 
     private void formatText(String content, PageContentContainer pageContentContainer, int chapterIndex, int pageIndex) {
-
-//        TextFlow textFlow = new TextFlow();
-//        textFlow.setPadding(new Insets(20,20,20,20));
-//        textFlow.setTextAlignment(TextAlignment.LEFT);
-//        pageContentContainer.add(textFlow);
 
         //Visualisation at: https://regex101.com/r/K5260V/2
         String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)|(?<=\\[H[123]])|(?=\\[H[123]])";
@@ -117,33 +112,32 @@ public class LessonPageContent extends PageContent {
         for (String subString : splitStrings) {
             Label label = new Label();
             label.setWrapText(true);
-            label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
             pageContentContainer.add(label);
             switch (subString) {
                 case "```": //beginning of code segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("```")) stack.pop();
-                    else System.err.println("Non-balanced text formatting of type [```] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + pageIndex + 1);
+                    else System.err.println("Non-balanced text formatting of type [```] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
                     break;
                 case "###": //beginning of code output segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("###")) stack.pop();
-                    else System.err.println("Non-balanced text formatting of type [###] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + pageIndex + 1);
+                    else System.err.println("Non-balanced text formatting of type [###] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
                     break;
                 case "[H1]": //beginning of header 1 segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("[H1]")) stack.pop();
-                    else System.err.println("Non-balanced text formatting of type [H1] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + pageIndex + 1);
+                    else System.err.println("Non-balanced text formatting of type [H1] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
                     break;
                 case "[H2]": //beginning of header 2 segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("[H2]")) stack.pop();
-                    else System.err.println("Non-balanced text formatting of type [H2] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + pageIndex + 1);
+                    else System.err.println("Non-balanced text formatting of type [H2] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
                     break;
                 case "[H3]": //beginning of header 3 segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("[H3]")) stack.pop();
-                    else System.err.println("Non-balanced text formatting of type [H3] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + pageIndex + 1);
+                    else System.err.println("Non-balanced text formatting of type [H3] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
                     break;
                 default: //text only
                     String formatType = stack.isEmpty() ? "" : stack.peek();
@@ -167,7 +161,6 @@ public class LessonPageContent extends PageContent {
                             break;
                         default: //we are not in any kind of formatting segment
                             label.getStyleClass().add("lesson-text");
-                            label.setPrefWidth(700);
                     }
             }
         }
