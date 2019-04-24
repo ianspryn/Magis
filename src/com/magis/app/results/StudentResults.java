@@ -45,7 +45,7 @@ public class StudentResults {
             Arrays.fill(testRes, 0.0);
             String title = Main.lessonModel.getChapter(i).getTitle();
             if (Main.testsModel.hasTest(title)) {
-                StudentModel.Student.Exam test = Main.studentModel.getStudent().getExam(i);
+                StudentModel.Student.Test test = Main.studentModel.getStudent().getTest(i);
                 testRes[0] = test.getAverageScore();
                 testRes[1] = test.getBestScore();
                 testRes[2] = test.getWorstScore();

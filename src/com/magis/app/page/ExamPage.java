@@ -17,7 +17,7 @@ public class ExamPage extends Page {
     protected JFXButton submitButton;
     protected ExamPageContent examPageContent;
 
-    public ExamPage(int chapterIndex, PageSidePanel sidePanel, PageContent pageContent, HashMap<String, Integer> numQuestionsPerExam, String title) {
+    public ExamPage(int chapterIndex, PageSidePanel sidePanel, PageContent pageContent, int numQuestions, String title) {
         super(sidePanel, pageContent, title);
         examPageContent = (ExamPageContent) super.pageContent;
         usedBankQuestions = new ArrayList<>();
@@ -27,21 +27,7 @@ public class ExamPage extends Page {
         submitButton = new JFXButton("Submit");
         submitButton.getStyleClass().addAll("submit-test-button", "jfx-button-raised", "jfx-button-raised-color");
         bottomNavigation.setCenter(submitButton);
-        submitButton.setOnMouseClicked(e -> {
-            if (UIComponents.confirmMessage("Submit Quiz", "Do you wish to submit your exam?")) {
-                examPageContent.grader.grade();
-                Main.studentModel.getStudent().getQuiz(chapterIndex).addScore(examPageContent.grader.getGrade());
-                TestResult testResultPage = new TestResult(Main.lessonModel.getChapter(chapterIndex).getTitle(), "exam", examPageContent.grader.getGrade());
-                testResultPage.getButton().setOnAction(e2 -> updatePage(1));
-                addPage(0, "Results", testResultPage.getvBox());
-                examPageContent.disableInput();
-                examPageContent.colorize();
-                updatePage(0);
-                Main.takingTest = false;
-            }
-        });
 
-        int numQuestions = numQuestionsPerExam.get(title);
         numPages = (int) Math.ceil((double) numQuestions / 2);
         for (int i = 0; i < numPages; i++) {
             examPageContent.buildPage(i);
@@ -76,10 +62,10 @@ public class ExamPage extends Page {
         else leftButton.setVisible(true);
         if (currentPage == numPages - 1) {
             rightButton.setVisible(false);
-            submitButton.setVisible(true);
+            if (Main.takingTest) submitButton.setVisible(true);
         } else {
             rightButton.setVisible(true);
-            submitButton.setVisible(false);
+            if (Main.takingTest) submitButton.setVisible(false);
         }
     }
 

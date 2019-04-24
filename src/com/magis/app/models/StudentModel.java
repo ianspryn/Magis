@@ -235,9 +235,9 @@ public class StudentModel {
         Element quizzes = document.createElement("quizzes");
         student.appendChild(quizzes);
 
-        //exams
-        Element exams = document.createElement("exams");
-        student.appendChild(exams);
+        //tests
+        Element tests = document.createElement("tests");
+        student.appendChild(tests);
 
         UpdateModel.updateXML(new DOMSource(document), filePath);
         return 0; //success
@@ -299,7 +299,7 @@ public class StudentModel {
         private int recentPage;
         private ArrayList<ChapterModel> chapters;
         private ArrayList<Quiz> quizzes;
-        private ArrayList<Exam> exams;
+        private ArrayList<Test> tests;
 
         private String getUsername() { return username; }
 
@@ -448,17 +448,17 @@ public class StudentModel {
         }
 
         /**
-         * This method will return an Exam if it already exists. If it doesn't exist, this method will create a new Exam and return that
+         * This method will return an Test if it already exists. If it doesn't exist, this method will create a new Test and return that
          * @param chapterIndex the chapter's index
-         * @return an Exam Class
+         * @return an Test Class
          */
-        public Exam getExam(int chapterIndex) {
-            for (Exam exam : exams) {
-                if (exam.getExamChapterNumber() == chapterIndex) {
-                    return exam;
+        public Test getTest(int chapterIndex) {
+            for (Test test : tests) {
+                if (test.getTestChapterNumber() == chapterIndex) {
+                    return test;
                 }
             }
-            //create the exam node since it didn't exist
+            //create the test node since it didn't exist
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = null;
             try {
@@ -484,13 +484,13 @@ public class StudentModel {
             }
             Element studentElement = (Element) student;
             assert studentElement != null;
-            Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
-            Element newExam = document.createElement("exam");
-            newExam.setAttribute("chapter", Integer.toString(chapterIndex));
-            examsElement.appendChild(newExam);
+            Element testsElement = (Element) studentElement.getElementsByTagName("tests").item(0);
+            Element newTest = document.createElement("test");
+            newTest.setAttribute("chapter", Integer.toString(chapterIndex));
+            testsElement.appendChild(newTest);
             UpdateModel.updateXML(new DOMSource(document), filePath);
-            Exam e = new Exam(newExam);
-            exams.add(e);
+            Test e = new Test(newTest);
+            tests.add(e);
             return e;
         }
 
@@ -558,7 +558,7 @@ public class StudentModel {
             this.recentPage = -1;
             this.chapters = new ArrayList<>();
             this.quizzes = new ArrayList<>();
-            this.exams = new ArrayList<>();
+            this.tests = new ArrayList<>();
 
             Element studentElement = (Element) student;
             //set the names
@@ -609,14 +609,14 @@ public class StudentModel {
                 }
             }
 
-            //exams
-            Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
-            if (examsElement.getElementsByTagName("exam") != null) {
-                NodeList examsList = examsElement.getElementsByTagName("exam");
-                for (int i = 0; i < examsList.getLength(); i++) {
-                    Node examNode = examsList.item(i);
-                    Exam exam = new Exam(examNode);
-                    exams.add(exam);
+            //tests
+            Element testsElement = (Element) studentElement.getElementsByTagName("tests").item(0);
+            if (testsElement.getElementsByTagName("test") != null) {
+                NodeList testsList = testsElement.getElementsByTagName("test");
+                for (int i = 0; i < testsList.getLength(); i++) {
+                    Node testNode = testsList.item(i);
+                    Test test = new Test(testNode);
+                    tests.add(test);
                 }
             }
         }
@@ -816,14 +816,14 @@ public class StudentModel {
             }
         }
 
-        public class Exam {
-            private int examChapterNumber;
+        public class Test {
+            private int testChapterNumber;
             private ArrayList<Double> scores;
             private double bestScore = -1.0;
             private double worstScore = 1000.0;
 
-            private int getExamChapterNumber() {
-                return examChapterNumber;
+            private int getTestChapterNumber() {
+                return testChapterNumber;
             }
 
             public ArrayList<Double> getScores() {
@@ -831,7 +831,7 @@ public class StudentModel {
             }
 
             /**
-             * This method returns the most recent score for a given exam. If the exam has not been taken, it will return -1.0
+             * This method returns the most recent score for a given test. If the test has not been taken, it will return -1.0
              * @return a Double of the most recent score
              */
             public Double getLastScore() {
@@ -843,7 +843,7 @@ public class StudentModel {
 
 
             /**
-             * This method calculates the average scores for a given exam. If the exam as not been taken, it will return 0.0
+             * This method calculates the average scores for a given test. If the test as not been taken, it will return 0.0
              * @return a Double of the average score
              */
             public Double getAverageScore() {
@@ -881,16 +881,16 @@ public class StudentModel {
 
 
             /**
-             * Add a new score value to the exam
-             * @param scoreValue student's score on exam
+             * Add a new score value to the test
+             * @param scoreValue student's score on test
              */
             public void addScore(int scoreValue) {
                 addScore(new Double(scoreValue));
             }
 
             /**
-             * Add a new score value to the exam
-             * @param scoreValue student's score on exam
+             * Add a new score value to the test
+             * @param scoreValue student's score on test
              */
             public void addScore(Double scoreValue) {
                 // update best and worst scores
@@ -929,33 +929,33 @@ public class StudentModel {
                 }
                 Element studentElement = (Element) student;
                 assert studentElement != null;
-                Element examsElement = (Element) studentElement.getElementsByTagName("exams").item(0);
-                NodeList exams = examsElement.getElementsByTagName("exam");
-                Node exam = null;
-                for (int i = 0; i < exams.getLength(); i++) {
-                    exam = exams.item(i);
-                    //find which exam to add score to
-                    if (Integer.parseInt(exam.getAttributes().getNamedItem("chapter").getNodeValue()) == examChapterNumber) {
+                Element testsElement = (Element) studentElement.getElementsByTagName("tests").item(0);
+                NodeList tests = testsElement.getElementsByTagName("test");
+                Node test = null;
+                for (int i = 0; i < tests.getLength(); i++) {
+                    test = tests.item(i);
+                    //find which test to add score to
+                    if (Integer.parseInt(test.getAttributes().getNamedItem("chapter").getNodeValue()) == testChapterNumber) {
                         break;
                     }
                 }
-                Element examElement = (Element) exam;
+                Element testElement = (Element) test;
                 Element score = document.createElement("score");
                 score.appendChild(document.createTextNode(scoreValue.toString()));
-                assert examElement != null;
-                examElement.appendChild(score);
+                assert testElement != null;
+                testElement.appendChild(score);
                 //write to XML file
                 UpdateModel.updateXML(new DOMSource(document), filePath);
                 //add score to the scores ArrayList
                 scores.add(scoreValue);
             }
 
-            Exam(Node exam) {
-                Element examElement = (Element) exam;
-                this.examChapterNumber = Integer.parseInt(examElement.getAttributes().getNamedItem("chapter").getNodeValue());
+            Test(Node test) {
+                Element testElement = (Element) test;
+                this.testChapterNumber = Integer.parseInt(testElement.getAttributes().getNamedItem("chapter").getNodeValue());
                 this.scores = new ArrayList<>();
-                if (examElement.getElementsByTagName("score") != null) {
-                    NodeList scores = examElement.getElementsByTagName("score");
+                if (testElement.getElementsByTagName("score") != null) {
+                    NodeList scores = testElement.getElementsByTagName("score");
                     for (int i = 0; i < scores.getLength(); i++) {
                         this.scores.add(Double.parseDouble(scores.item(i).getTextContent()));
                     }
