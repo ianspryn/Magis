@@ -614,17 +614,16 @@ if (Character.isDigit(ch) == false) . . .
 An object is a value that you can manipulate by calling one or more of its methods. A method consists of a sequence of instructions that can access the internal data of an object. When you call the method, you do not know exactly what those instructions are, or even how the object is organized internally. However, the behavior of the method is well-defined, and that is what matters to us when we use
 it.
 
-For example, ```System.out``` refers to an object. You manipulate it by calling the ```println``` method. When the ```println``` method is called, some activities occur inside the object, and the ultimate effect is that text appears in the console window. You don’t know how that happens, and that’s OK. What matters is that the method carries out the work that you requested. Figure 4 shows a representation of the
-System.out object. The internal data is symbolized by a sequence of zeroes and ones. Think of each method (symbolized by the gears) as a piece of machinery that carries out its assigned task. You encountered two objects:
+For example, ```System.out``` refers to an object. You manipulate it by calling the ```println``` method. When the ```println``` method is called, some activities occur inside the object, and the ultimate effect is that text appears in the console window. You don’t know how that happens, and that’s OK. What matters is that the method carries out the work that you requested. Figure 4 shows a representation of the ```System.out``` object. The internal data is symbolized by a sequence of zeroes and ones. Think of each method (symbolized by the gears) as a piece of machinery that carries out its assigned task. You encountered two objects:
 ###
 • System.out
 • "Hello, World!"
 ###
-The type of an object is a class. The System.out object belongs to the class PrintStream. The "Hello, World!" object belongs to the class ```String```. A class specifies the methods that you can apply to its objects.
+The type of an object is a class. The System.out object belongs to the class ```PrintStream```. The "Hello, World!" object belongs to the class ```String```. A class specifies the methods that you can apply to its objects.
 
-You can use the println method with any object that belongs to the PrintStream class. System.out is one such object. It is possible to obtain other objects of the PrintStream class. For example, you can construct a PrintStream object to send output to a file. However, we won’t discuss files until later.
+You can use the ```println``` method with any object that belongs to the ```PrintStream``` class. ```System.out``` is one such object. It is possible to obtain other objects of the ```PrintStream``` class. For example, you can construct a ```PrintStream``` object to send output to a file. However, we won’t discuss files until later.
 
-Just as the PrintStream class provides methods such as println and print for its objects, the ```String``` class provides methods that you can apply to ```String``` objects. One of them is the length method. The length method counts the number of characters in a string.
+Just as the ```PrintStream``` class provides methods such as ```println``` and print for its objects, the ```String``` class provides methods that you can apply to ```String``` objects. One of them is the ```length``` method. The ```length``` method counts the number of characters in a string.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/2.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/3.png</image>
