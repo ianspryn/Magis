@@ -110,8 +110,8 @@ public class LessonPageContent extends PageContent {
         for (String subString : splitStrings) {
             Label label = new Label();
             label.setWrapText(true);
-            label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT);
-            label.setMaxWidth(800);
+            label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it contains
+//            label.setMaxWidth(800);
             pageContentContainer.add(label);
             switch (subString) {
                 case "```": //beginning of code segment

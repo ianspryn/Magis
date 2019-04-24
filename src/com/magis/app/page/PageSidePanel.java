@@ -44,6 +44,9 @@ public class PageSidePanel {
     }
 
     public void initialize() {
+        scrollPane.getStyleClass().add("side-panel-scroll-bar");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
         //master VBox
         masterVBox.setPadding(new Insets(50,0,0,15));
         masterVBox.setSpacing(10);
