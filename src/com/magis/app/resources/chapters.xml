@@ -717,11 +717,11 @@ System.out.println(new Rectangle().getWidth());```
 In this section we introduce a useful terminology for the methods of a class. A method that accesses an object and returns some information about it, without changing the object, is called an accessor method. In contrast, a method whose purpose is to modify the internal data of an object is called a mutator method. For example, the length method of the ```String``` class is an accessor method. It
 returns information about a string, namely its length. But it doesn’t modify the string at all when counting the characters.
 
-The Rectangle class has a number of accessor methods. The getX, getY, getWidth, and getHeight methods return the x- and y-coordinates of the top-left corner, the width, and the height values. For example,
+The ```Rectangle``` class has a number of accessor methods. The getX, getY, getWidth, and getHeight methods return the x- and y-coordinates of the top-left corner, the width, and the height values. For example,
 
 double width = box.getWidth();
 
-Now let us consider a mutator method. Programs that manipulate rectangles frequently need to move them around, for example, to display animations. The Rectangle class has a method for that purpose, called translate. (Mathematicians use the term “translation” for a rigid motion of the plane.)
+Now let us consider a mutator method. Programs that manipulate rectangles frequently need to move them around, for example, to display animations. The ```Rectangle``` class has a method for that purpose, called translate. (Mathematicians use the term “translation” for a rigid motion of the plane.)
 
 box.translate(15, 25);
 
@@ -746,7 +746,7 @@ We use the technical term object reference to denote the memory location of an o
 
 Rectangle box = new Rectangle(5, 10, 20, 30);
 
-the variable box refers to the Rectangle object that the new operator constructed. Technically speaking, the new operator returned a reference to the new object, and that reference is stored in the box variable.
+the variable box refers to the ```Rectangle``` object that the new operator constructed. Technically speaking, the new operator returned a reference to the new object, and that reference is stored in the box variable.
 
 It is very important that you remember that the box variable does not contain the object. It refers to the object. Two object variables can refer to the same object:
 
@@ -755,7 +755,7 @@ Rectangle box2 = box;
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/14.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/15.png</image>
 				<text>
-Now you can access the same Rectangle object both as box and as box2, as shown in Figure 18. However, number variables actually store numbers. When you declare
+Now you can access the same ```Rectangle``` object both as box and as box2, as shown in Figure 18. However, number variables actually store numbers. When you declare
 
 int luckyNumber = 13;
 
@@ -776,7 +776,7 @@ Now the variable luckyNumber contains the value 13, and luckyNumber2 contains 12
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/19.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/20.png</image>
 				<text>
-Now consider the seemingly analogous code with Rectangle objects (see Figure 21).
+Now consider the seemingly analogous code with ```Rectangle``` objects (see Figure 21).
 
 Rectangle box = new Rectangle(5, 10, 20, 30);
 Rectangle box2 = box;
@@ -936,7 +936,7 @@ is true.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/30.png</image>
 				<text>
-However, you must be careful when using the equals method. It works correctly only if the implementors of the class have supplied it. The Rectangle class has an equals method that is suitable for comparing rectangles.
+However, you must be careful when using the equals method. It works correctly only if the implementors of the class have supplied it. The ```Rectangle``` class has an equals method that is suitable for comparing rectangles.
 
 For your own classes, you need to supply an appropriate equals method. You will learn how to do that later on. Until that point, you should not use the equals method to compare objects of your own classes.
 
