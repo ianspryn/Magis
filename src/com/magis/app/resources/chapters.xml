@@ -671,9 +671,9 @@ That method is used to print an integer value. We say that the println name is o
 				<text>
 Most Java programs need to work on a variety of objects. In this section, you will see how to construct new objects. This allows you to go beyond ```String``` objects and the System.out object.
 
-To learn about object construction, let us turn to another class: the Rectangle class in the Java class library. Objects of type Rectangle describe rectangular shapes—see Figure 10. These objects are useful for a variety of purposes. You can assemble rectangles into bar charts, and you can program simple games by moving rectangles inside a window.
+To learn about object construction, let us turn to another class: the ```Rectangle``` class in the Java class library. Objects of type ```Rectangle``` describe rectangular shapes—see Figure 10. These objects are useful for a variety of purposes. You can assemble rectangles into bar charts, and you can program simple games by moving rectangles inside a window.
 
-Note that a Rectangle object isn’t a rectangular shape—it’s an object that contains a set of numbers. The numbers describe the rectangle (see Figure 11). Each rectangle is described by the x- and y-coordinates of its top-left corner, its width, and its height. It is very important that you understand this distinction. In the computer, a Rectangle object is a block of memory that holds four numbers, for example x = 5, y = 10, width = 20, height = 30. In the imagination of the programmer who uses a Rectangle object, the object describes a geometric figure.
+Note that a ```Rectangle``` object isn’t a rectangular shape—it’s an object that contains a set of numbers. The numbers describe the rectangle (see Figure 11). Each rectangle is described by the x- and y-coordinates of its top-left corner, its width, and its height. It is very important that you understand this distinction. In the computer, a ```Rectangle``` object is a block of memory that holds four numbers, for example x = 5, y = 10, width = 20, height = 30. In the imagination of the programmer who uses a ```Rectangle``` object, the object describes a geometric figure.
 
 To make a new rectangle, you need to specify the x, y, width, and height values. Then invoke the new operator, specifying the name of the class and the parameters that are required for constructing a new object. For example, you can make a new rectangle with its top-left corner at (5, 10), width 20, and height 30 as follows:
 
@@ -681,7 +681,7 @@ new Rectangle(5, 10, 20, 30)
 
 Here is what happens in detail:
 
-1. The new operator makes a Rectangle object.
+1. The new operator makes a ```Rectangle``` object.
 2. It uses the parameters (in this case, 5, 10, 20, and 30) to initialize the data of the object.
 3. It returns the object.
 				</text>
@@ -695,7 +695,7 @@ The new expression yields an object, and you need to store the object if you wan
 
 Rectangle box = new Rectangle(5, 10, 20, 30);
 
-Some classes let you construct objects in multiple ways. For example, you can also obtain a Rectangle object by supplying no construction parameters at all (but you must still supply the parentheses):
+Some classes let you construct objects in multiple ways. For example, you can also obtain a ```Rectangle``` object by supplying no construction parameters at all (but you must still supply the parentheses):
 
 new Rectangle()
 
