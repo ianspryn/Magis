@@ -717,14 +717,14 @@ System.out.println(new Rectangle().getWidth());```
 In this section we introduce a useful terminology for the methods of a class. A method that accesses an object and returns some information about it, without changing the object, is called an accessor method. In contrast, a method whose purpose is to modify the internal data of an object is called a mutator method. For example, the length method of the ```String``` class is an accessor method. It
 returns information about a string, namely its length. But it doesn’t modify the string at all when counting the characters.
 
-The ```Rectangle``` class has a number of accessor methods. The getX, getY, getWidth, and getHeight methods return the x- and y-coordinates of the top-left corner, the width, and the height values. For example,
-
+The ```Rectangle``` class has a number of accessor methods. The ```getX```, ```getY```, ```getWidth```, and ```getHeight``` methods return the x- and y-coordinates of the top-left corner, the width, and the height values. For example,
+```
 double width = box.getWidth();
-
-Now let us consider a mutator method. Programs that manipulate rectangles frequently need to move them around, for example, to display animations. The ```Rectangle``` class has a method for that purpose, called translate. (Mathematicians use the term “translation” for a rigid motion of the plane.)
-
+```
+Now let us consider a mutator method. Programs that manipulate rectangles frequently need to move them around, for example, to display animations. The ```Rectangle``` class has a method for that purpose, called ```translate```. (Mathematicians use the term “translation” for a rigid motion of the plane.)
+```
 box.translate(15, 25);
-
+```
 This method moves a rectangle by a certain distance in the x- and y-directions. The method call, moves the rectangle by 15 units in the x-direction and 25 units in the y-direction (see Figure 12). Moving a rectangle doesn’t change its width or height, but it changes the top-left corner. Afterward, the rectangle that had its top-left corner at (5, 10) now has it at (20, 35).
 
 This method is a mutator because it modifies the implicit parameter object.
@@ -735,7 +735,7 @@ This method is a mutator because it modifies the implicit parameter object.
 				<text>
 1. Is the toUpperCase method of the ```String``` class an accessor or a mutator?
 
-2. Which call to translate is needed to move the rectangle declared by Rectangle box = new Rectangle(5, 10, 20, 30) so that its top-left corner is the origin (0, 0)?
+2. Which call to ```translate``` is needed to move the rectangle declared by ```Rectangle box = new Rectangle(5, 10, 20, 30)``` so that its top-left corner is the origin (0, 0)?
 				</text>
 			</page>
 			<page title = "Object Memory">
@@ -743,84 +743,82 @@ This method is a mutator because it modifies the implicit parameter object.
 In Java, a variable whose type is a class does not actually hold an object. It merely holds the memory location of an object. The object itself is stored elsewhere—see Figure 17. There is a reason for this behavior. Objects can be very large. It is more efficient to store only the memory location instead of the entire object.
 
 We use the technical term object reference to denote the memory location of an object. When a variable contains the memory location of an object, we say that it refers to an object. For example, after the statement
-
+```
 Rectangle box = new Rectangle(5, 10, 20, 30);
-
+```
 the variable box refers to the ```Rectangle``` object that the new operator constructed. Technically speaking, the new operator returned a reference to the new object, and that reference is stored in the box variable.
 
-It is very important that you remember that the box variable does not contain the object. It refers to the object. Two object variables can refer to the same object:
-
-Rectangle box2 = box;
+It is very important that you remember that the ```box``` variable does not contain the object. It refers to the object. Two object variables can refer to the same object:
+```
+Rectangle box2 = box;```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/14.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/15.png</image>
 				<text>
-Now you can access the same ```Rectangle``` object both as box and as box2, as shown in Figure 18. However, number variables actually store numbers. When you declare
-
+Now you can access the same ```Rectangle``` object both as ```box``` and as ```box2```, as shown in Figure 18. However, number variables actually store numbers. When you declare
+```
 int luckyNumber = 13;
-
-then the luckyNumber variable holds the number 13, not a reference to the number (see Figure 19). The reason is again efficiency. Because numbers require little storage, it is more efficient to store them directly in a variable.
+```
+then the ```luckyNumber``` variable holds the number 13, not a reference to the number (see Figure 19). The reason is again efficiency. Because numbers require little storage, it is more efficient to store them directly in a variable.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/17.png</image>
 				<text>
 You can see the difference between number variables and object variables when you make a copy of a variable. When you copy a number, the original and the copy of the number are independent values. But when you copy an object reference, both the original and the copy are references to the same object.
 
 Consider the following code, which copies a number and then changes the copy (see Figure 20):
-
+```
 int luckyNumber = 13; 
 int luckyNumber2 = luckyNumber;
 luckyNumber2 = 12; 
-
-Now the variable luckyNumber contains the value 13, and luckyNumber2 contains 12.
+```
+Now the variable ```luckyNumber``` contains the value 13, and ```luckyNumber2``` contains 12.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/19.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/20.png</image>
 				<text>
 Now consider the seemingly analogous code with ```Rectangle``` objects (see Figure 21).
-
+```
 Rectangle box = new Rectangle(5, 10, 20, 30);
 Rectangle box2 = box;
 box2.translate(15, 25);
-
-Since box and box2 refer to the same rectangle after step 2 , both variables refer to the moved rectangle after the call to the translate method.
+```
+Since ```box``` and ```box2``` refer to the same rectangle after step 2 , both variables refer to the moved rectangle after the call to the ```translate``` method.
 
 You need not worry too much about the difference between objects and object references. Much of the time, you will have the correct intuition when you think of “the object box” rather than the technically more accurate “the object reference stored in box”. The difference between objects and object references only becomes apparent when you have multiple variables that refer to the same object.
 				</text>
 			</page>
 			<page title = "Self Check">
 				<text>
-SELF CHECK
+1. What is the effect of the assignment: ```String greeting2 = greeting```?
 
-1. What is the effect of the assignment: String greeting2 = greeting?
-
-2. After calling greeting2.toUpperCase(), what are the contents of greeting and greeting2?
+2. After calling ```greeting2.toUpperCase()```, what are the contents of ```greeting``` and ```greeting2```?
 				</text>
 			</page>
 			<page title = "Relational Operators">
 				<text>
 A relational operator tests the relationship between two values. An example is the &lt;= operator that we used in the test
-
+```
 if (amount &lt;= balance)
-
+```
 Java has six relational operators:
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/23.png</image>
 				<text>
-As you can see, only two relational operators (&gt; and &lt;) look as you would expect from the mathematical notation. Computer keyboards do not have keys for ≥, ≤, or ≠, but the &gt;=, &lt;=, and != operators are easy to remember because they look similar. The == operator is initially confusing to most newcomers to Java. In Java, the = symbol already has a meaning, namely assignment. The == operator denotes equality testing:
-
+As you can see, only two relational operators (&gt; and &lt;) look as you would expect from the mathematical notation. Computer keyboards do not have keys for ≥, ≤, or ≠, but the ```&gt;=```, ```&lt;=```, and ```!=``` operators are easy to remember because they look similar. The ```==``` operator is initially confusing to most newcomers to Java. In Java, the ```=``` symbol already has a meaning, namely assignment. The ```==``` operator denotes equality testing:
+```
 a = 5; // Assign 5 to a
 if (a == 5) . . . // Test whether a equals 5
-
-You will have to remember to use == for equality testing, and to use = for assignment.
+```
+You will have to remember to use ```==``` for equality testing, and to use ```=``` for assignment.
 
 The relational operators have a lower precedence than the arithmetic operators. That means, you can write arithmetic expressions on either side of the relational operator without using parentheses. For example, in the expression
-
+```
 amount + fee &lt;= balance
-
-both sides (amount + fee and balance) of the &lt; operator are evaluated, and the results are compared. Appendix B shows a table of the Java operators and their precedence.
+```
+both sides (amount + fee and balance) of the ```&lt;``` operator are evaluated, and the results are compared. Appendix B shows a table of the Java operators and their precedence.
 
 You have to be careful when comparing floating-point numbers, in order to cope with roundoff errors. For example, the following code multiplies the square root of 2 by itself and then subtracts 2.
-
+```
 double r = Math.sqrt(2);
 double d = r * r - 2;
 if (d == 0)
@@ -828,24 +826,20 @@ if (d == 0)
 else
   System.out.println(
   "sqrt(2) squared minus 2 is not 0 but " + d);
-
-Even though the laws of mathematics tell us that fragment prints
-
-( 2 )2 − 2 equals 0, this program
-
-sqrt(2) squared minus 2 is not 0 but 4.440892098500626E-16
+```
+Even though the laws of mathematics tell us that fragment prints ###sqrt(2) squared minus 2 is 0###, this program prints ###sqrt(2) squared minus 2 is not 0 but 4.440892098500626E-16###
 
 Unfortunately, such roundoff errors are unavoidable. It plainly does not make sense in most circumstances to compare floating-point numbers exactly. Instead, test whether they are close enough.
 
 To test whether a number x is close to zero, you can test whether the absolute value | x| (that is, the number with its sign removed) is less than a very small threshold number. That threshold value is often called ε (the Greek letter epsilon). It is common to set ε to 10–14 when testing double numbers. Similarly, you can test whether two numbers are approximately equal by checking whether their difference is close to 0.
-
+###
 |x−y| ≤ε
-
+###
 In Java, we program the test as follows:
-
+```
 final double EPSILON = 1E-14;
 if (Math.abs(x - y) &lt;= EPSILON)
-// x is approximately equal to y
+	// x is approximately equal to y```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/25.png</image>
 			</page>
@@ -853,32 +847,32 @@ if (Math.abs(x - y) &lt;= EPSILON)
 				<text>
 To test whether two strings are equal to each other, you must use the method called
 equals:
-
+```
 if (string1.equals(string2)) . . .
-
-Do not use the == operator to compare strings. The expression
-
+```
+Do not use the ```==``` operator to compare strings. The expression
+```
 if (string1 == string2) // Not useful
-
+```
 has an unrelated meaning. It tests whether the two string variables refer to the identical string object. You can have strings with identical contents stored in different objects, so this test never makes sense in actual programming.
 
-In Java, letter case matters. For example, "Harry" and "HARRY" are not the same string. To ignore the letter case, use the equalsIgnoreCase method:
-
+In Java, letter case matters. For example, "Harry" and "HARRY" are not the same string. To ignore the letter case, use the ```equalsIgnoreCase``` method:
+```
 if (string1.equalsIgnoreCase(string2)) . . .
-
-If two strings are not identical to each other, you still may want to know the relationship between them. The compareTo method compares strings in dictionary order. If
-
+```
+If two strings are not identical to each other, you still may want to know the relationship between them. The ```compareTo``` method compares strings in dictionary order. If
+```
 string1.compareTo(string2) &lt; 0
-
-then the string string1 comes before the string string2 in the dictionary. For example, this is the case if string1 is "Harry", and string2 is "Hello". If
-
+```
+then the string ```string1``` comes before the string ```string2``` in the dictionary. For example, this is the case if ```string1``` is "Harry", and ```string2``` is "Hello". If
+```
 string1.compareTo(string2) &gt; 0
-
-then string1 comes after string2 in dictionary order. Finally, if
-
+```
+then ```string1``` comes after ```string2``` in dictionary order. Finally, if
+```
 string1.compareTo(string2) == 0
-
-then string1 and string2 are equal.
+```
+then ```string1``` and ```string2``` are equal.
 
 Actually, the “dictionary” ordering used by Java is slightly different from that of a normal dictionary. Java is case sensitive and sorts characters by putting numbers first, then uppercase characters, then lowercase characters. For example, 1 comes before B, which comes before a. The space character comes before all other characters.
 
@@ -891,47 +885,47 @@ Let us investigate the comparison process closely. When Java compares two string
 			</page>
 			<page title = "Common Relational Errors">
 				<text>
-Common Error 5.2: Using == to Compare Strings
+Common Error 5.2: Using ```==``` to Compare Strings
 
-It is an extremely common error in Java to write == when equals is intended. This is particularly true for strings. If you write
-
+It is an extremely common error in Java to write ```==``` when ```equals``` is intended. This is particularly true for strings. If you write
+```
 if (nickname == "Rob")
-
+```
 then the test succeeds only if the variable nickname refers to the exact same string object as the string constant "Rob". For efficiency,Java makes only one string object for every string constant. Therefore, the following test will pass:
-
+```
 String nickname = "Rob";
 . . .
 if (nickname == "Rob") //Test is true
-
+```
 However, if the string with the letters R o b has been assembled in some other way, then the test will fail:
-
+```
 String name = "Robert";
 String nickname = name.substring(0, 3);
 . . .
 if (nickname == "Rob") // Test is false
-
-This is a particularly distressing situation: The wrong code will sometimes do the right thing, sometimes the wrong thing. Because string objects are always constructed by the compiler, you never have an interest in whether two string objects are shared. You must remember never to use == to compare strings. Always use equals or compareTo to compare strings.
+```
+This is a particularly distressing situation: The wrong code will sometimes do the right thing, sometimes the wrong thing. Because string objects are always constructed by the compiler, you never have an interest in whether two string objects are shared. You must remember never to use ```==``` to compare strings. Always use ```equals``` or ```compareTo``` to compare strings.
 
 5.2.4 Comparing Objects
 
-If you compare two object references with the == operator, you test whether the references refer to the same object. Here is an example:
-
+If you compare two object references with the ```==``` operator, you test whether the references refer to the same object. Here is an example:
+```
 Rectangle box1 = new Rectangle(5, 10, 20, 30);
 Rectangle box2 = box1;
 Rectangle box3 = new Rectangle(5, 10, 20, 30);
-
+```
 The comparison
-
+```
 box1 == box2
-
+```
 is true. Both object variables refer to the same object. But the comparison
-
+```
 box1 == box3
-
+```
 is false. The two object variables refer to different objects (see Figure 4). It does not matter that the objects have identical contents. You can use the equals method to test whether two rectangles have the same contents, that is, whether they have the same upper-left corner and the same width and height. For example, the test
-
+```
 box1.equals(box3)
-
+```
 is true.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/30.png</image>
@@ -943,43 +937,44 @@ For your own classes, you need to supply an appropriate equals method. You will 
 5.2.5:  Testing for null
 
 An object reference can have the special value null if it refers to no object at all. It is common to use the null value to indicate that a value has never been set. For example,
- 
+``` 
 String middleInitial = null; // Not set
 if ( . . . )
 middleInitial = middleName.substring(0, 1);
-
-You use the == operator (and not equals) to test whether an object reference is a null reference:
-
+```
+You use the ```==``` operator (and not ```equals```) to test whether an object reference is a null reference:
+```
 if (middleInitial == null)
    System.out.println(firstName + " " + lastName);
 else
    System.out.println(firstName + " " + middleInitial + ". " + lastName);
-
-Note that the null reference is not the same as the empty string "". The empty string is a valid string of length 0, whereas a null indicates that a string variable refers to no string at all.
+```
+Note that the null reference is not the same as the empty string ```""```. The empty string is a valid string of length 0, whereas a ```null``` indicates that a string variable refers to no string at all.
 				</text>
 			</page>
 			<page title = "Self Check">
 				<text>
-1. What is the value of s.length() if s is
-	a. the empty string ""?
-	b. the string " " containing a space?
-	c. null?
+1. What is the value of ```s.length()``` if ```s``` is
+	a. the empty string ```""```?
+	b. the string ```" "``` containing a space?
+	c. ```null```?
 
 2. Which of the following comparisons are syntactically incorrect? Which of them
 are syntactically correct, but logically questionable?
+```
 String a = "1";
 String b = "one";
 double x = 1;
 double y = 3 * (1.0 / 3);
-
-	a. a == "1"
-	b. a == null
-	c. a.equals("")
-	d. a == b
-	e. a == x
-	f. x == y
-	g. x - y == null
-	h. x.equals(y)
+```
+	a. ```a == "1"```
+	b. ```a == null```
+	c. ```a.equals("")```
+	d. ```a == b```
+	e. ```a == x```
+	f. ```x == y```
+	g. ```x - y == null```
+	h. ```x.equals(y)```
 				</text>
 			</page>
 		</pages>
@@ -992,46 +987,44 @@ double y = 3 * (1.0 / 3);
 			<page>
 				<text>
 You often want to store values so that you can use them at a later time. To remember a value, you need to hold it in a variable. A variable is a storage location in the computer’s memory that has a type, name, and contents. For example, here we declare three variables:
-
+```
 String greeting = "Hello, World!";
 PrintStream printer = System.out;
 int width = 20;
-
-The first variable is called greeting. It can be used to store ```String``` values, and it is set to the value "Hello, World!". The second variable, printer, stores a PrintStream value, and the third stores an integer. Variables can be used in place of the values that they store:
-
+```
+The first variable is called greeting. It can be used to store ```String``` values, and it is set to the value ###"Hello, World!"###. The second variable, ```printer```, stores a ```PrintStream``` value, and the third stores an integer. Variables can be used in place of the values that they store:
+```
 printer.println(greeting); // Same as System.out.println("Hello, World!")
 printer.println(width); // Same as System.out.println(20)
-
+```
 When you declare your own variables, you need to make two decisions.
 • What type should you use for the variable?
 • What name should you give the variable?
 
-The type depends on the intended use. If you need to store a string, use the ```String``` type for your variable. If you need a number, choose the int or double type. It is an error to store a value whose type does not match the type of the variable.
+The type depends on the intended use. If you need to store a string, use the ```String``` type for your variable. If you need a number, choose the ```int``` or ```double``` type. It is an error to store a value whose type does not match the type of the variable.
 
 For example, the following is an error:
-
-String greeting = 20; // ERROR: Types don’t match
+```
+String greeting = 20; // ERROR: Types don’t match```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/2.png</image>
 				<text>
 You cannot use a ```String``` variable to store an integer. The compiler checks type mismatches to protect you from errors.
 
-When deciding on a name for a variable, you should make a choice that describes the purpose of the variable. For example, the variable name greeting is a better choice than the name g.
+When deciding on a name for a variable, you should make a choice that describes the purpose of the variable. For example, the variable name ```greeting``` is a better choice than the name ```g```.
 
 An identifier is the name of a variable, method, or class. Java imposes the following rules for identifiers:
 
-• Identifiers can be made up of letters, digits, and the underscore (_) and dollar sign
-  ($) characters. They cannot start with a digit, though.
-• You cannot use spaces or symbols such as ? or %.
-• Furthermore, you cannot use reserved words, such as public, as names; these
-  words are reserved exclusively for their special Java meanings. (See Appendix C
-  for all reserved words in Java.)
+• Identifiers can be made up of letters, digits, and the underscore (```_```) and dollar sign
+  (```$```) characters. They cannot start with a digit, though.
+• You cannot use spaces or symbols such as ```?``` or ```%```.
+• Furthermore, you cannot use reserved words, such as ```public```, as names; these words are reserved exclusively for their special Java meanings. 
 
 These are firm rules of the Java language. If you violate one of them, the compiler will report an error. Moreover, there are a couple of conventions that you should follow so that other programmers will find your programs easy to read:
 
-• Variable and method names should start with a lowercase letter. It is OK to use an occasional uppercase letter, such as farewellMessage. This mixture of lowercase  and uppercase letters is sometimes called “camel case” because the uppercase letters stick out like the humps of a camel.
-• Class names should start with an uppercase letter. For example, Greeting would be an appropriate name for a class, but not for a variable.
-• You should not use the $ symbol in names. It is intended for names that are automatically generated by tools.
+• Variable and method names should start with a lowercase letter. It is OK to use an occasional uppercase letter, such as ```farewellMessage```. This mixture of lowercase  and uppercase letters is sometimes called “camel case” because the uppercase letters stick out like the humps of a camel.
+• Class names should start with an uppercase letter. For example, ```Greeting``` would be an appropriate name for a class, but not for a variable.
+• You should not use the ```$``` symbol in names. It is intended for names that are automatically generated by tools.
 
 If you violate these conventions, the compiler won’t complain, but you will confuse other programmers who read your code.
 				</text>
@@ -1044,31 +1037,29 @@ Table 3 shows examples of legal and illegal variable names in Java.
 			<page title = "Self Check">
 				<text>
 1. Which of the following are legal identifiers?
-
+```
 Greeting1
 g
 void
 101dalmatians
 #Hello, World
-
+```
 2. Declare a variable to hold your name. Use camel case in the variable name.
 				</text>
 			</page>
 			<page title="Tips: Variable Names">
 				<text>
-Quality Tip 2.1
-
 --Choose Descriptive Names for Variables--
 
-In algebra, variable names are usually just one letter long, such as p or A, maybe with a subscript such as p1. You might be tempted to save yourself a lot of typing by using short variable names in your Java programs:
-
+In algebra, variable names are usually just one letter long, such as ```p``` or ```A```, maybe with a subscript such as ```p1```. You might be tempted to save yourself a lot of typing by using short variable names in your Java programs:
+```
 int A = w * h;
-
+```
 Compare this with the following statement:
-
+```
 int area = width * height;
-
-The advantage is obvious. Reading width is much easier than reading w and then figuring out that it must mean “width”.
+```
+The advantage is obvious. Reading ```width``` is much easier than reading ```w``` and then figuring out that it must mean “width”.
 
 In practical programming, descriptive variable names are particularly important when programs are written by more than one person. It may be obvious to you that w stands for width, but is it obvious to the person who needs to update your code years later? For that
 matter, will you yourself remember what w means when you look at the code a month from now?
@@ -1080,71 +1071,71 @@ You learned how to use objects from existing classes. In this chapter, you will 
 
 Our first example is a class that models a tally counter, a mechanical device that is used to count people—for example, to find out how many people attend a concert or board a bus (see Figure 1).
 
-Whenever the operator pushes a button, the counter value advances by one. We model this operation with a count method. A physical counter has a display to show the current value. In our simulation, we use a getValue method instead. For example,
-
+Whenever the operator pushes a button, the counter value advances by one. We model this operation with a count method. A physical counter has a display to show the current value. In our simulation, we use a ```getValue``` method instead. For example,
+```
 Counter tally = new Counter();
 tally.count();
 tally.count();
 int result = tally.getValue(); // Sets result to 2
-
-When implementing the Counter class, we need to determine the data that each counter object contains. In this simple example, that is very straightforward. Each counter needs to store a variable that keeps track of how many times the counter has been advanced.
+```
+When implementing the ```Counter``` class, we need to determine the data that each counter object contains. In this simple example, that is very straightforward. Each counter needs to store a variable that keeps track of how many times the counter has been advanced.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/8.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/9.png</image>
 				<text>
 An object stores its data in instance variables. An instance of a class is an object of the class. Thus, an instance variable is a storage location that is present in each object of the class. You specify instance variables in the class declaration:
-
+```
 public class Counter
 {
 	private int value;
 	. . .
 }
-
+```
 An instance variable declaration consists of the following parts:
-• An access specifier (private)
-• The type of the instance variable (such as int)
-• The name of the instance variable (such as value)
+• An access specifier (```private```)
+• The type of the instance variable (such as ```int```)
+• The name of the instance variable (such as ```value```)
 
-Each object of a class has its own set of instance variables. For example, if concertand boardingCounter are two objects of the Counter class, then each object has its own value variable (see Figure 2). As you will see in the future, the instance variable value is set to 0 when a Counter object is constructed. In order to gain a better understanding of how methods affect instance variables, we will have a quick look at the implementation of the methods of the Counter class.
+Each object of a class has its own set of instance variables. For example, if concertand boardingCounter are two objects of the ```Counter``` class, then each object has its own value variable (see Figure 2). As you will see in the future, the instance variable value is set to 0 when a ```Counter``` object is constructed. In order to gain a better understanding of how methods affect instance variables, we will have a quick look at the implementation of the methods of the ```Counter``` class.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/11.png</image>
 				<text>
-The count method advances the counter value by 1. We will cover the syntax of the method header in another section. For now, focus on the body of the method inside the braces:
-
+The ```count``` method advances the counter value by 1. We will cover the syntax of the method header in another section. For now, focus on the body of the method inside the braces:
+```
 public void count()
 {
 	value = value + 1;
 }
-
+```
 Note how the count method accesses the instance variable value. Which instance variable? The one belonging to the object on which the method is invoked. For example, consider the call
-
+```
 concertCounter.count();
-
-This call advances the value variable of the concertCounter object. The getValue method returns the current value:
-
+```
+This call advances the value variable of the ```concertCounter``` object. The ```getValue``` method returns the current value:
+```
 public int getValue()
 {
 	return value;
 }
-
+```
 The return statement is a special statement that terminates the method call and returns a result to the method’s caller.
 
-Instance variables are generally declared with the access specifier private. That specifier means that they can be accessed only by the methods of the same class, not by any other method. For example, the value variable can be accessed by the count and getValue methods of the Counter class but not a method of another class. Those other methods need to use the Counter class methods if they want to manipulate a counter’s value.
+Instance variables are generally declared with the access specifier private. That specifier means that they can be accessed only by the methods of the same class, not by any other method. For example, the ```value``` variable can be accessed by the ```count``` and ```getValue``` methods of the ```Counter``` class but not a method of another class. Those other methods need to use the ```Counter``` class methods if they want to manipulate a counter’s value.
 
 In the next section, we discuss the reason for making instance variables private.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. Supply the body of a method public void reset() that resets the counter back to zero.
+1. Supply the body of a method ```public void reset()``` that resets the counter back to zero.
 
-2. Suppose you use a class Clock with private instance variables hours and minutes. How can you access these variables in your program?
+2. Suppose you use a class ```Clock``` with private instance variables hours and minutes. How can you access these variables in your program?
 				</text>
 			</page>
 			<page title="Local/Parameter Variables">
 				<text>
-In this section, we discuss the behavior of local variables. A local variable is a variable that is declared in the body of a method. For example, the giveChange method in declares a local variable change:
-
+In this section, we discuss the behavior of local variables. A local variable is a variable that is declared in the body of a method. For example, the ```giveChange``` method in declares a local variable change:
+```
 public double giveChange()
 {
 	double change = payment - purchase;
@@ -1152,78 +1143,77 @@ public double giveChange()
 	payment = 0;
 	return change;
 }
-
-Parameter variables are similar to local variables, but they are declared in method headers. For example, the following method declares a parameter variable amount:
-
+```
+Parameter variables are similar to local variables, but they are declared in method headers. For example, the following method declares a parameter variable ```amount```:
+```
 public void enterPayment(double amount)
-
-Local and parameter variables belong to methods. When a method runs, its local and parameter variables come to life. When the method exits, they are removed immediately. For example, if you call register.giveChange(), then a variable change is created. When the method exits, that variable is removed. In contrast, instance variables belong to objects, not methods. When an object is constructed, its instance variables are created. The instance variables stay alive until no method uses the object any longer. (The Java virtual machine contains an agent called a garbage collector that periodically reclaims objects when they are no longer used.)
+```
+Local and parameter variables belong to methods. When a method runs, its local and parameter variables come to life. When the method exits, they are removed immediately. For example, if you call ```register.giveChange()```, then a variable change is created. When the method exits, that variable is removed. In contrast, instance variables belong to objects, not methods. When an object is constructed, its instance variables are created. The instance variables stay alive until no method uses the object any longer. (The Java virtual machine contains an agent called a garbage collector that periodically reclaims objects when they are no longer used.)
 
 An important difference between instance variables and local variables is initialization. You must initialize all local variables. If you don’t initialize a local variable, the compiler complains when you try to use it. (Note that parameter variables are initialized when the method is called.)
 
-Instance variables are initialized with a default value before a constructor is invoked. Instance variables that are numbers are initialized to 0. Object references are set to a special value called null. If an object reference is null, then it refers to no
-object at all. We will discuss the null value in greater detail later.
+Instance variables are initialized with a default value before a constructor is invoked. Instance variables that are numbers are initialized to 0. Object references are set to a special value called ```null```. If an object reference is ```null```, then it refers to no object at all. We will discuss the null value in greater detail later.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
 1. What do local variables and parameter variables have in common? In which essential aspect do they differ?
 
-2. Why was it necessary to introduce the local variable change in the giveChange method? That is, why didn’t the method simply end with the statement:
-
+2. Why was it necessary to introduce the local variable change in the ```giveChange``` method? That is, why didn’t the method simply end with the statement:
+```
 return payment - purchase;
-
+```
 				</text>
 			</page>
 			<page title="Implicit Parameters">
 				<text>
 In a previous section, you learned that a method has an implicit parameter (the object on which the method is invoked) in addition to the explicit parameters, which are enclosed in parentheses. In this section, we will examine implicit parameters in greater detail.
 
-Have a look at a particular invocation of the deposit method:
-
+Have a look at a particular invocation of the ```deposit``` method:
+```
 momsSavings.deposit(500);
-
-Here, the implicit parameter is momsSavings and the explicit parameter is 500. Now look again at the code of the deposit method:
-
+```
+Here, the implicit parameter is ```momsSavings``` and the explicit parameter is ```500```. Now look again at the code of the ```deposit``` method:
+```
 public void deposit(double amount)
 {
 	balance = balance + amount;
 }
+```
+What does ```balance``` mean exactly? After all, our program may have multiple ```Bank-Account``` objects, and each of them has its own ```balance```.
+Of course, since we are depositing the money into ```momsSavings```, ```balance``` must mean ```momsSavings.balance```. In general, when you refer to an instance variable inside a method, it means the instance variable of the implicit parameter.
 
-What does balance mean exactly? After all, our program may have multiple Bank-Account objects, and each of them has its own balance.
-Of course, since we are depositing the money into momsSavings, balance must mean momsSavings.balance. In general, when you refer to an instance variable inside a method, it means the instance variable of the implicit parameter.
-
-If you need to, you can access the implicit parameter—the object on which the method is called—with the reserved word this. For example, in the preceding method invocation, this refers to the same object as momsSavings (see Figure 6). The statement
-
+If you need to, you can access the implicit parameter—the object on which the method is called—with the reserved word this. For example, in the preceding method invocation, this refers to the same object as ```momsSavings``` (see Figure 6). The statement
+```
 balance = balance + amount;
-
+```
 actually means
-
-this.balance = this.balance + amount;
+```
+this.balance = this.balance + amount;```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/14.png</image>
 			</page>
 			<page title="Instance Variables">
 				<text>
 When you refer to an instance variable in a method, the compiler automatically applies it to the this reference. Some programmers actually prefer to manually insert the this reference before every instance variable because they find it makes the code clearer. Here is an example:
-
+```
 public BankAccount(double initialBalance)
 {
 	this.balance = initialBalance;
 }
-
+```
 You may want to try it out and see if you like that style. The this reference can also be used to distinguish between instance variables and local or parameter variables. Consider the constructor
-
+```
 public BankAccount(double balance)
 {
 	this.balance = balance;
 }
-
-The expression this.balance clearly refers to the balance instance variable. However, the expression balance by itself seems ambiguous. It could denote either the parameter variable or the instance variable. In Java, local and parameter variables are considered first when looking up variable names. Therefore,
-
+```
+The expression ```this.balance``` clearly refers to the ```balance``` instance variable. However, the expression ```balance``` by itself seems ambiguous. It could denote either the parameter variable or the instance variable. In Java, local and parameter variables are considered first when looking up variable names. Therefore,
+```
 this.balance = balance;
-
-means: “Set the instance variable balance to the parameter variable balance”. There is another situation in which it is important to understand the implicit parameter. Consider the following modification to the BankAccount class. We add a method to apply the monthly account fee:
+```
+means: “Set the instance variable balance to the parameter variable balance”. There is another situation in which it is important to understand the implicit parameter. Consider the following modification to the ```BankAccount``` class. We add a method to apply the monthly account fee:
 
 public class BankAccount
 {
