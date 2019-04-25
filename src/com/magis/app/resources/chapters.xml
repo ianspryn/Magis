@@ -1214,7 +1214,7 @@ The expression ```this.balance``` clearly refers to the ```balance``` instance v
 this.balance = balance;
 ```
 means: “Set the instance variable balance to the parameter variable balance”. There is another situation in which it is important to understand the implicit parameter. Consider the following modification to the ```BankAccount``` class. We add a method to apply the monthly account fee:
-
+```
 public class BankAccount
 {
 	. . .
@@ -1223,9 +1223,9 @@ public class BankAccount
 		withdraw(10); // Withdraw $10 from this account
 	}
 }
-
-That means to withdraw from the same bank account object that is carrying out the monthlyFee operation. In other words, the implicit parameter of the withdraw method is the (invisible) implicit parameter of the monthlyFee method. If you find it confusing to have an invisible parameter, you can use the this reference to make the method easier to read:
-
+```
+That means to withdraw from the same bank account object that is carrying out the ```monthlyFee``` operation. In other words, the implicit parameter of the ```withdraw``` method is the (invisible) implicit parameter of the ```monthlyFee``` method. If you find it confusing to have an invisible parameter, you can use the this reference to make the method easier to read:
+```
 public class BankAccount
 {
 	. . .
@@ -1234,17 +1234,17 @@ public class BankAccount
 		this.withdraw(10); // Withdraw $10 from this account
 	}
 }
-
-You have now seen how to use objects and implement classes, and you have learned some important technical details about variables and method parameters. The remainder of this chapter continues the optional graphics track. In the next chapter, you will learn more about the most fundamental data types of the Java language.
+```
+You have now seen how to use objects and implement classes, and you have learned some important technical details about variables and method parameters. The remainder of this chapter continues the optional graphics track. In a different section, you will learn more about the most fundamental data types of the Java language.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. How many implicit and explicit parameters does the withdraw method of the BankAccount class have, and what are their names and types?
+1. How many implicit and explicit parameters does the ```withdraw``` method of the ```BankAccount``` class have, and what are their names and types?
 
-2. In the deposit method, what is the meaning of this.amount? Or, if the expression has no meaning, why not?
+2. In the ```deposit``` method, what is the meaning of ```this.amount```? Or, if the expression has no meaning, why not?
 
-3. How many implicit and explicit parameters does the main method of the BankAccountTester class have, and what are they called?
+3. How many implicit and explicit parameters does the main method of the ```BankAccountTester``` class have, and what are they called?
 
 				</text>
 			</page>
@@ -1253,7 +1253,7 @@ You have now seen how to use objects and implement classes, and you have learned
 Sometimes, a value properly belongs to a class, not to any object of the class. You use a static variable for this purpose. Here is a typical example. We want to assign bank account numbers sequentially. That is, we want the bank account constructor to construct the first account with number 1001, the next with number 1002, and so on. Therefore, we must store the last assigned account number somewhere.
 
 Of course, it makes no sense to make this value into an instance variable:
-
+```
 public class BankAccount
 {
 	private double balance;
@@ -1261,11 +1261,11 @@ public class BankAccount
 	private int lastAssignedNumber = 1000; // NO—won’t work
 	. . .
 }
+```
+In that case each instance of the ```BankAccount``` class would have its own value of ```lastAssignedNumber```.
 
-In that case each instance of the BankAccount class would have its own value of lastAssignedNumber.
-
-Instead, we need to have a single value of lastAssignedNumber that is the same for the entire class. Such a variable is called a static variable, because you declare it using the static reserved word.
-
+Instead, we need to have a single value of ```lastAssignedNumber``` that is the same for the entire class. Such a variable is called a static variable, because you declare it using the ```static``` reserved word.
+```
 public class BankAccount
 {
 	private double balance;
@@ -1273,13 +1273,13 @@ public class BankAccount
 	private static int lastAssignedNumber = 1000;
 	. . .
 }
-
-Every BankAccount object has its own balance and accountNumber instance variables, but there is only a single copy of the lastAssignedNumber variable (see Figure 4). That variable is stored in a separate location, outside any BankAccount objects.
+```
+Every ```BankAccount``` object has its own ```balance``` and ```accountNumber``` instance variables, but there is only a single copy of the ```lastAssignedNumber``` variable (see Figure 4). That variable is stored in a separate location, outside any ```BankAccount``` objects.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/17.png</image>
 				<text>
-A static variable is sometimes called a class variable because there is a single variable for the entire class. Every method of a class can access its static variables. Here is the constructor of the BankAccount class, which increments the last assigned number and then uses it to initialize the account number of the object to be constructed:
-
+A static variable is sometimes called a class variable because there is a single variable for the entire class. Every method of a class can access its static variables. Here is the constructor of the ```BankAccount``` class, which increments the last assigned number and then uses it to initialize the account number of the object to be constructed:
+```
 public class BankAccount
 {
 	. . .
@@ -1289,28 +1289,30 @@ public class BankAccount
 		accountNumber = lastAssignedNumber; // Sets the instance variable
 	}
 }
-
+```
 There are three ways to initialize a static variable:
 
-1. Do nothing. The static variable is then initialized with 0 (for numbers), false (for boolean values), or null (for objects).
+1. Do nothing. The static variable is then initialized with ```0``` (for numbers), ```false``` (for boolean values), or ```null``` (for objects).
 
-2. Use an explicit initializer, such as public class BankAccount
+2. Use an explicit initializer, such as 
+```
+public class BankAccount
 {
 	private static int lastAssignedNumber = 1000;
 	. . .
 }
-
+```
 3. Use a static initialization block.
 
-Like instance variables, static variables should always be declared as private to ensure that methods of other classes do not change their values. The exception to this rule are static constants, which may be either private or public. For example, the BankAccount class may want to declare a public constant value, such as
-
+Like instance variables, static variables should always be declared as ```private``` to ensure that methods of other classes do not change their values. The exception to this rule are static constants, which may be either private or public. For example, the BankAccount class may want to declare a public constant value, such as
+```
 public class BankAccount
 {
 	public static final double OVERDRAFT_FEE = 29.95;
 	. . .
 }
-
-Methods from any class can refer to such a constant as BankAccount.OVERDRAFT_FEE. It makes sense to declare constants as static—you wouldn’t want every object of the BankAccount class to have its own set of variables with these constant values. It is sufficient to have one set of them for the class.
+```
+Methods from any class can refer to such a constant as ```BankAccount.OVERDRAFT_FEE```. It makes sense to declare constants as static—you wouldn’t want every object of the ```BankAccount``` class to have its own set of variables with these constant values. It is sufficient to have one set of them for the class.
 
 Why are class variables called static? As with static methods, the static reserved word itself is just a meaningless holdover from C++. But static variables and static methods have much in common: They apply to the entire class, not to specific instances of the class.
 
@@ -1319,7 +1321,7 @@ In general, you want to minimize the use of static methods and variables. If you
 			</page>
 			<page title="Self Check">
 				<text>
-1. Name two static variables of the System class.
+1. Name two static variables of the ```System``` class.
 
 2. Harry tells you that he has found a great way to avoid those pesky objects: Put all code into a single class and declare all methods and variables static. Then main can call the other static methods, and all of them can access the static variables. Will Harry’s plan work? Is it a good idea?
 				</text>
@@ -1329,7 +1331,7 @@ In general, you want to minimize the use of static methods and variables. If you
 The scope of a variable is the part of the program in which the variable can be accessed. It is considered good design to minimize the scope of a variable. This reduces the possibility of accidental modification and name conflicts. In the following sections, you will learn how to determine the scopes of local and instance variables, and how to resolve name conflicts if the scopes overlap.
 
 The scope of a local variable extends from the point of its declaration to the end of the block or for loop that encloses it. The scope of a parameter variable is the entire method.
-
+```
 public static void process(double[] values) // values is a parameter variable
 {
 	for (int i = 0; i &lt; 10; i++) // i is a local variable declared in a for loop
@@ -1341,9 +1343,9 @@ public static void process(double[] values) // values is a parameter variable
 		} // Scope of r ends here
 	} // Scope of i ends here
 } // Scope of values ends here
-
+```
 In Java, the scope of a local variable can never contain the declaration of another local variable with the same name. For example, the following is an error:
-
+```
 public static void main(String[] args)
 {
 	double r = Math.random();
@@ -1354,9 +1356,9 @@ public static void main(String[] args)
 		. . .
 	}
 }
-
+```
 However, you can have local variables with identical names if their scopes do not overlap, such as
-
+```
 if (Math.random() > 0.5)
 {
 	Rectangle r = new Rectangle(5, 10, 20, 30);
@@ -1368,13 +1370,13 @@ else
 	// OK—it is legal to declare another r here
 	. . .
 }
-
-These variables are independent from each other, or, in other words, their scopes are disjoint. You can have local variables with the same name r in different methods, just as you can have different motels with the same name “Bates Motel” in different cities.
+```
+These variables are independent from each other, or, in other words, their scopes are disjoint. You can have local variables with the same name ```r``` in different methods, just as you can have different motels with the same name “Bates Motel” in different cities.
 
 In contrast, the scope of instance variables and static variables consists of the entire class in which they are declared.
 
 Problems arise if you have two identical variable names with overlapping scope. This can never occur with local variables, but the scopes of identically named local variables and instance variables can overlap. Here is a purposefully bad example.
-
+```
 public class Coin
 {
 	private String name;
@@ -1388,30 +1390,30 @@ public class Coin
 		return value;
 	}
 }
+```
+Inside the ```getExchangeValue``` method, the variable name value could potentially have two meanings: the local variable or the instance variable. The Java language specifies that in this situation the local variable wins out. It shadows the instance variable.
 
-Inside the getExchangeValue method, the variable name value could potentially have two meanings: the local variable or the instance variable. The Java language specifies that in this situation the local variable wins out. It shadows the instance variable.
-
-This sounds pretty arbitrary, but there is actually a good reason: You can still refer to the instance variable as this.value.
-
+This sounds pretty arbitrary, but there is actually a good reason: You can still refer to the instance variable as ```this.value```.
+```
 value = this.value * exchangeRate;
-
+```
 Of course, it is not a good idea to write code like this. You can easily change the name of the local variable to something else, such as result.
 
 However, there is one situation where overlapping scope is acceptable. When implementing constructors or setter methods, it can be awkward to come up with different names for instance variables and parameters. Here is how you can use the same name for both:
-
+```
 public Coin(double value, String name)
 {
 	this.value = value;
 	this.name = name;
 }
-
+```
 The expression this.value refers to the instance variable, and value is the parameter.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. Consider the following program that uses two variables named r. Is this legal?
-
+1. Consider the following program that uses two variables named ```r```. Is this legal?
+```
 public class RectangleTester
 {
 	public static double area(Rectangle rect)
@@ -1426,8 +1428,8 @@ public class RectangleTester
 		System.out.println(r);
 	}
 }
-
-2. What is the scope of the balance variable of the BankAccount class?
+```
+2. What is the scope of the ```balance``` variable of the ```BankAccount``` class?
 				</text>
 			</page>
 			<page title="Errors: Shadowing">
@@ -1435,7 +1437,7 @@ public class RectangleTester
 Common Error: Shadowing
 
 Accidentally using the same name for a local variable and an instance variable is a surprisingly common error. As you saw in the preceding section, the local variable then shadows the instance variable. Even though you may have meant to access the instance variable, the local variable is quietly accessed. Look at this example of an incorrect constructor:
-
+```
 public class Coin
 {
 	private double value;
@@ -1448,35 +1450,34 @@ public class Coin
 		String name = aName; // Oops . . .
 	}
 }
+```
+The programmer declared a local variable name in the constructor. In all likelihood, that was just a typo—the programmer’s fingers were on autopilot and typed the reserved word ```String```, even though the programmer all the time intended to access the instance variable. Unfortunately, the compiler gives no warning in this situation and quietly sets the local variable to the value of ```aName```. The instance variable of the object that is being constructed is never touched, and remains ```null```.
 
-The programmer declared a local variable name in the constructor. In all likelihood, that was just a typo—the programmer’s fingers were on autopilot and typed the reserved word ```String```, even though the programmer all the time intended to access the instance variable. Unfortunately, the compiler gives no warning in this situation and quietly sets the local variable to the value of aName. The instance variable of the object that is being constructed is never touched, and remains null.
+Some programmers give all instance variable names a special prefix to distinguish them from other variables. A common convention is to prefix all instance variable names with the prefix ```my```, such as ```myValue``` or ```myName```.
 
-Some programmers give all instance variable names a special prefix to distinguish them from other variables. A common convention is to prefix all instance variable names with the prefix my, such as myValue or myName.
-
-Another way of avoiding this problem is to use the this parameter when accessing an
-
-instance variable:
+Another way of avoiding this problem is to use the this parameter when accessing an instance variable:
+```
 this.name = aName;
-
+```
 Quality Tip: Minimize Variable Scope
 
 When you make the scope of a variable as small as possible, it becomes less likely that the variable is accidentally corrupted. It also becomes easier to modify or eliminate the variable as you reorganize your code.
 
-As already mentioned, don’t make an instance variable public. (The Java library has a few classes with public instance variables, but their creators later regretted their decision when they were unable to make optimizations later.) When you have a constant, ask yourself who needs it. Everybody (public static final )? Only the class (private static final )? Only a single method (a final local variable)? Choose the smallest scope.
+As already mentioned, don’t make an instance variable public. (The Java library has a few classes with public instance variables, but their creators later regretted their decision when they were unable to make optimizations later.) When you have a constant, ask yourself who needs it. Everybody (```public static final```)? Only the class (```private static final```)? Only a single method (a ```final local variable```)? Choose the smallest scope.
 
-Beware of unnecessary instance variables. For example, you would not want an instance variable for the volume:
-
+Beware of unnecessary instance variables. For example, you would not want an instance variable for the ```volume```:
+```
 public class Pyramid
 {
 	private double height;
 	private double baseLength;
 	private double volume; // Not
 	. . .
-}
+}```
 
 a good idea to use class scope for this variable
 
-Instead, compute the volume when it is needed in the getVolume method. That way, no other method can accidentally modify the volume variable, or forget to modify it when changing the height or base length.
+Instead, compute the volume when it is needed in the ```getVolume``` method. That way, no other method can accidentally modify the ```volume``` variable, or forget to modify it when changing the height or base length.
 
 Finally, with local variables, declare them only when you need them.
 				</text>
@@ -1485,41 +1486,40 @@ Finally, with local variables, declare them only when you need them.
 				<text>
 Methods are fundamental building blocks of Java programs. A program performs useful work by calling methods. In this section, we will examine how to provide inputs into a method, and how to obtain the result of the method.
 
-Most methods require inputs that give details about the work that the method needs to do. For example, the println method has an input: the string that should be printed. Computer scientists use the technical term parameter for method inputs. We say that the string greeting is a parameter of the method call
-
+Most methods require inputs that give details about the work that the method needs to do. For example, the ```println``` method has an input: the string that should be printed. Computer scientists use the technical term parameter for method inputs. We say that the string ```greeting``` is a parameter of the method call
+```
 System.out.println(greeting);
-
-Figure 6 illustrates passing of the parameter to the method. Technically speaking, the greeting parameter is an explicit parameter of the
-println method. The object on which you invoke the method is also considered a parameter of the method call; it is called the implicit parameter. For example, System.out is the implicit parameter of the method call
-
+```
+Figure 6 illustrates passing of the parameter to the method. Technically speaking, the ```greeting``` parameter is an explicit parameter of the ```println``` method. The object on which you invoke the method is also considered a parameter of the method call; it is called the implicit parameter. For example, ```System.out``` is the implicit parameter of the method call
+```
 System.out.println(greeting);
-
+```
 Some methods require multiple explicit parameters, others don’t require any explicit parameters at all. An example of the latter is the length method of the ```String``` class (see Figure 7). All the information that the length method requires to do its job—namely, the character sequence of the string—is stored in the implicit parameter object.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/20.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/21.png</image>
 				<text>
 The length method differs from the println method in another way: it has an output. We say that the method returns a value, namely the number of characters in the string. You can store the return value in a variable:
-
+```
 int n = greeting.length();
-
+```
 You can also use the return value as a parameter of another method:
-
+```
 System.out.println(greeting.length());
+```
+The method call ```greeting.length()``` returns a value—the integer 13. The return value becomes a parameter of the ```println``` method. Figure 8 shows the process. Not all methods return values. One example is the ```println``` method. The ```println``` method interacts with the operating system, causing characters to appear in a window. But it does not return a value to the code that calls it.
 
-The method call greeting.length() returns a value—the integer 13. The return value becomes a parameter of the println method. Figure 8 shows the process. Not all methods return values. One example is the println method. The println method interacts with the operating system, causing characters to appear in a window. But it does not return a value to the code that calls it.
-
-Let us analyze a more complex method call. Here, we will call the replace method of the ```String``` class. The replace method carries out a search-and-replace operation, similar to that of a word processor. For example, the call
-
+Let us analyze a more complex method call. Here, we will call the replace method of the ```String``` class. The ```replace``` method carries out a search-and-replace operation, similar to that of a word processor. For example, the call
+```
 river.replace("issipp", "our")
-
+```
 constructs a new string that is obtained by replacing all occurrences of "issipp" in "Mississippi" with "our". (In this situation, there was only one replacement.) The method returns the ```String``` object "Missouri". You can save that string in a variable:
-
+```
 river = river.replace("issipp", "our");
-
+```
 Or you can pass it to another method:
-
-System.out.println(river.replace("issipp", "our"));
+```
+System.out.println(river.replace("issipp", "our"));```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/23.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Variables/24.png</image>
@@ -1530,16 +1530,16 @@ As Figure 9 shows, this method call has
 • two explicit parameters: the strings "issipp" and "our"
 • a return value: the string "Missouri"
 When a method is declared in a class, the declaration specifies the types of the explicit parameters and the return value. For example, the ```String``` class declares the length method as
-
+```
 public int length()
+```
+That is, there are no explicit parameters, and the return value has the type ```int```. (For now, all the methods that we consider will be “public” methods.
 
-That is, there are no explicit parameters, and the return value has the type int. (For now, all the methods that we consider will be “public” methods.
-
-The type of the implicit parameter is the class that declares the method—```String``` in our case. It is not mentioned in the method declaration—hence the term “implicit”. The replace method is declared as
-
+The type of the implicit parameter is the class that declares the method—```String``` in our case. It is not mentioned in the method declaration—hence the term “implicit”. The ```replace``` method is declared as
+```
 public String replace(String target, String replacement)
-
-To call the replace method, you supply two explicit parameters, target and replacement, which both have type ```String```. The returned value is another string. When a method returns no value, the return type is declared with the reserved word void. For example, the PrintStream class declares the println method as
+```
+To call the ```replace``` method, you supply two explicit parameters, ```target``` and ```replacement```, which both have type ```String```. The returned value is another string. When a method returns no value, the return type is declared with the reserved word void. For example, the PrintStream class declares the println method as
 
 public void println(String output)
 				</text>
