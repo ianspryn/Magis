@@ -1539,20 +1539,20 @@ The type of the implicit parameter is the class that declares the method—```St
 ```
 public String replace(String target, String replacement)
 ```
-To call the ```replace``` method, you supply two explicit parameters, ```target``` and ```replacement```, which both have type ```String```. The returned value is another string. When a method returns no value, the return type is declared with the reserved word void. For example, the PrintStream class declares the println method as
-
-public void println(String output)
+To call the ```replace``` method, you supply two explicit parameters, ```target``` and ```replacement```, which both have type ```String```. The returned value is another string. When a method returns no value, the return type is declared with the reserved word ```void```. For example, the ```PrintStream``` class declares the ```println``` method as
+```
+public void println(String output)```
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. What are the implicit parameters, explicit parameters, and return values in the method call river.length()?
+1. What are the implicit parameters, explicit parameters, and return values in the method call ```river.length()```?
 
-2. What is the result of the call river.replace("p", "s")?
+2. What is the result of the call ```river.replace("p", "s")```?
 
-3. What is the result of the call greeting.replace("World", "Dave").length() ?
+3. What is the result of the call ```greeting.replace("World", "Dave").length()```?
 
-4. How is the toUpperCase method declared in the ```String``` class?
+4. How is the ```toUpperCase``` method declared in the ```String``` class?
 				</text>
 			</page>
 		</pages>
@@ -1565,40 +1565,40 @@ public void println(String output)
 			<page>
 				<text>
 Suppose you want to display a string containing quotation marks, such as
-
+###
 "Hello, "World"!
+###
+You can’t use ```System.out.println("Hello, "World"!");```
 
-You can’t use System.out.println("Hello, "World"!");
-
-As soon as the compiler reads "Hello, ", it thinks the string is ﬁnished, and then it gets all confused about World followed by two quotation marks. A human would probably realize that the second and third quotation marks were supposed to be part of the string, but a
-compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just refuses to go on, and reports an error. Well, how do you then display quotation marks on the screen? You precede the quotation marks inside the string with a backslash character. Inside a string, the sequence \" denotes a literal quote, not the end of a string. The correct display statement is, therefore
-
+As soon as the compiler reads ```"Hello, "```, it thinks the string is ﬁnished, and then it gets all confused about ```World``` followed by two quotation marks. A human would probably realize that the second and third quotation marks were supposed to be part of the string, but a compiler has a one-track mind. If a simple analysis of the input doesn’t make sense to it, it just refuses to go on, and reports an error. Well, how do you then display quotation marks on the screen? You precede the quotation marks inside the string with a backslash character. Inside a string, the sequence ```\"``` denotes a literal quote, not the end of a string. The correct display statement is, therefore
+```
 System.out.println("Hello, \"World\"!");
+```
+The backslash character is used as an escape character; the character sequence ```\"``` is called an escape sequence. The backslash does not denote itself; instead, it is used to encode other characters that would otherwise be difﬁcult to include in a string.
 
-The backslash character is used as an escape character; the character sequence \" is called an escape sequence. The backslash does not denote itself; instead, it is used to encode other characters that would otherwise be difﬁcult to include in a string.
-
-Now, what do you do if you actually want to print a backslash (for example, to specify a Windows ﬁle name)? You must enter two \\ in a row, like this: 
-
+Now, what do you do if you actually want to print a backslash (for example, to specify a Windows ﬁle name)? You must enter two ```\\``` in a row, like this: 
+```
 System.out.println("The secret message is in C:\\Temp\\Secret.txt");
-
+```
 This statement prints
+###
 The secret message is in C:\Temp\Secret.txt
-
-Another escape sequence occasionally used is \n, which denotes a newline or line feed character. Printing a newline character causes the start of a new line on the display. For example, the statement
-
+###
+Another escape sequence occasionally used is ```\n```, which denotes a newline or line feed character. Printing a newline character causes the start of a new line on the display. For example, the statement
+```
 System.out.print("*\n**\n***\n");
-
+```
 prints the characters
-
+###
 *
 **
 ***
+###
+on three separate lines. Of course, you could have achieved the same effect with three separate calls to ```println```.
 
-on three separate lines. Of course, you could have achieved the same effect with three separate calls to println.
-
-Finally, escape sequences are useful for including international characters in a string. For example, suppose you want to print “All the way to San José!”, with an accented letter (é). If you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode encoding scheme to denote international characters. For example, the é character has Unicode encoding 00E9. You can include that character inside a string by writing \u, followed by its Unicode encoding:
-
-System.out.println("All the way to San Jos\u00E9!");
+Finally, escape sequences are useful for including international characters in a string. For example, suppose you want to print ###“All the way to San José!”###, with an accented letter (é). If you use a U.S. keyboard, you may not have a key to generate that letter. Java uses the Unicode encoding scheme to denote international characters. For example, the é character has Unicode encoding 00E9. You can include that character inside a string by writing ```\u```, followed by its Unicode encoding:
+```
+System.out.println("All the way to San Jos\u00E9!");```
 				</text>
 			</page>
 		</pages>
@@ -1611,7 +1611,7 @@ System.out.println("All the way to San Jos\u00E9!");
 			<page >
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Methods/0.png</image>
 				<text>
-Imagine that you are a member of a team that works on banking software. A fundamental concept in banking is a bank account. Your task is to understand the design of a BankAccount class so that you can implement it, which in turn allows other programmers on the team to use it.
+Imagine that you are a member of a team that works on banking software. A fundamental concept in banking is a bank account. Your task is to understand the design of a ```BankAccount``` class so that you can implement it, which in turn allows other programmers on the team to use it.
 
 You need to know exactly what features of a bank account need to be implemented. Some features are essential (such as deposits), whereas others are not important (such as the gift that a customer may receive for opening a bank account). Deciding which features are essential is not always an easy task. We will revisit that issue in later chapters. For now, we will assume that a competent designer has
 decided that the following are considered the essential operations of a bank account:
@@ -1620,63 +1620,63 @@ decided that the following are considered the essential operations of a bank acc
 	• Withdraw money
 	• Get the current balance
 
-In Java, operations are expressed as method calls. To figure out the exact specification of the method calls, imagine how a programmer would carry out the bank account operations. We’ll assume that the variable harrysChecking contains a reference to an object of type BankAccount. We want to support method calls such as the following:
-
+In Java, operations are expressed as method calls. To figure out the exact specification of the method calls, imagine how a programmer would carry out the bank account operations. We’ll assume that the variable harrysChecking contains a reference to an object of type ```BankAccount```. We want to support method calls such as the following:
+```
 harrysChecking.deposit(2240.59);
 harrysChecking.withdraw(500);
 double currentBalance = harrysChecking.getBalance();
-
+```
 The first two methods are mutators. They modify the balance of the bank account and don’t return a value. The third method is an accessor. It returns a value that you store in a variable or pass to a method.
 
-As you can see from the sample calls, the BankAccount class should declare three methods:
-
+As you can see from the sample calls, the ```BankAccount``` class should declare three methods:
+```
 	• public void deposit(double amount)
 	• public void withdraw(double amount)
 	• public double getBalance()
-
-Recall from before that double denotes the double-precision floating-point type, and void indicates that a method does not return a value. Here we only give the method headers. When you declare a method, you also need to provide the method body, consisting of statements that are executed when the method is called.
-
+```
+Recall from before that ```double``` denotes the double-precision floating-point type, and ```void``` indicates that a method does not return a value. Here we only give the method headers. When you declare a method, you also need to provide the method body, consisting of statements that are executed when the method is called.
+```
 public void deposit(double amount)
 {
 	implementation—filled in later
 }
-
+```
 We will supply the method bodies in a later section. Every method header contains the following parts:
 
-	• An access specifier (usually public)
-	• The return type (the type of the value returned, such as void or double)
-	• The name of the method (such as deposit)
+	• An access specifier (usually ```public```)
+	• The return type (the type of the value returned, such as ```void``` or ```double```)
+	• The name of the method (such as ```deposit```)
 	• A list of the parameter variables of the method (if any), enclosed in parentheses
-	(such as double amount)
+	(such as ```(double amount)```)
 
-The access specifier controls which other methods can call this method. Most methods should be declared as public. That way, all other methods in a program can call them. (Occasionally, it can be useful to have private methods. They can only be called from other methods of the same class.)
+The access specifier controls which other methods can call this method. Most methods should be declared as ```public```. That way, all other methods in a program can call them. (Occasionally, it can be useful to have private methods. They can only be called from other methods of the same class.)
 
-The return type is the type of the value that the method returns. The deposit method does not return a value, whereas the getBalance method returns a value of type double.
+The return type is the type of the value that the method returns. The ```deposit``` method does not return a value, whereas the ```getBalance``` method returns a value of type ```double```.
 
-Each parameter of the method has both a type and a name that describes its purpose. For example, the deposit method has a single parameter named amount of type double. Next, you need to supply constructors. A constructor initializes the instance variables of an object. In Java, a constructor is very similar to a method, with two important differences.
+Each parameter of the method has both a type and a name that describes its purpose. For example, the ```deposit``` method has a single parameter named amount of type ```double```. Next, you need to supply constructors. A constructor initializes the instance variables of an object. In Java, a constructor is very similar to a method, with two important differences.
 
-	• The name of the constructor is always the same as the name of the class (e.g., BankAccount).
-	• Constructors have no return type (not even void).
+	• The name of the constructor is always the same as the name of the class (e.g., ```BankAccount```).
+	• Constructors have no return type (not even ```void```).
 
 We want to construct bank accounts that initially have a zero balance, as well as accounts that have a given initial balance. For this purpose, we specify two constructors.
-
+```
 	• public BankAccount()
 	• public BankAccount(double initialBalance)
-
+```
 They are used as follows:
-
+```
 BankAccount harrysChecking = new BankAccount();
 BankAccount momsSavings = new BankAccount(5000);
-
+```
 Just like a method, a constructor also has a body—a sequence of statements that is executed when a new object is constructed.
-
+```
 public BankAccount()
 {
 	implementation—filled in later
 }
-
+```
 Don’t worry about the fact that there are two constructors with the same name—all constructors of a class have the same name, that is, the name of the class. The compiler can tell them apart because they take different parameters. When declaring a class, you place all constructor and method declarations inside, like this:
-
+```
 public class BankAccount
 {
 	private instance variables—filled in later
@@ -1709,78 +1709,57 @@ public class BankAccount
 		implementation—filled in later
 	}
 }
-
-The public constructors and methods of a class form the public interface of the class. These are the operations that any programmer can use to create and manipulate BankAccount objects. Our BankAccount class is simple, but it allows programmers to carry out all of the
-important operations that commonly occur with bank accounts. For example, consider this program segment, authored by a programmer who uses the BankAccount class. These statements transfer an amount of money from one bank account to another:
-
+```
+The public constructors and methods of a class form the public interface of the class. These are the operations that any programmer can use to create and manipulate ```BankAccount``` objects. Our ```BankAccount``` class is simple, but it allows programmers to carry out all of the important operations that commonly occur with bank accounts. For example, consider this program segment, authored by a programmer who uses the ```BankAccount``` class. These statements transfer an amount of money from one bank account to another:
+```
 // Transfer from one account to another
 double transferAmount = 500;
 momsSavings.withdraw(transferAmount);
 harrysChecking.deposit(transferAmount);
-
+```
 And here is a program segment that adds interest to a savings account:
+```
 double interestRate = 5; // 5% interest
 double interestAmount = momsSavings.getBalance() * interestRate / 100;
-momsSavings.deposit(interestAmount);
+momsSavings.deposit(interestAmount);```
 				</text>
 			</page>
 			<page title="Static Methods">
 				<text>
-Java contains a Math class, which contains a collection of helpful methods for carrying out mathematical computations. These methods
-have a special form: they are static methods that do not operate on an object. That is, you don’t call
-
+Java contains a ```Math``` class, which contains a collection of helpful methods for carrying out mathematical computations. These methods have a special form: they are static methods that do not operate on an object. That is, you don’t call
+```
 double root = 100.sqrt(); // Error
-
+```
 In Java, numbers are not objects, so you can never invoke a method on a number. Instead, you pass a number as an explicit parameter to a method, enclosing the number in parentheses after the method name:
-
-double root = Math.sqrt(100);
+```
+double root = Math.sqrt(100);```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Methods/2.png</image>
 				<text>
-This call makes it appear as if the sqrt method is applied to an object called Math.
-However, Math is a class, not an object. A method such as Math.sqrt that does not
-operate on any object is called a static method. (The term “static” is a historical
-holdover from the C and C++ programming languages. It has nothing to do with
-the usual meaning of the word.) In contrast, a method that is invoked on an object is
-class, is called an instance method:
-
+This call makes it appear as if the ```sqrt```` method is applied to an object called ```Math```. However, ```Math``` is a class, not an object. A method such as ```Math.sqrt``` that does not operate on any object is called a static method. (The term “static” is a historical holdover from the C and C++ programming languages. It has nothing to do with the usual meaning of the word.) In contrast, a method that is invoked on an object is class, is called an instance method:
+```
 harrysChecking.deposit(100); // deposit is an instance method
+```
+Static methods do not operate on objects, but they are still declared inside classes. When calling the method, you specify the class to which the ```sqrt``` method belongs—hence the call is ```Math.sqrt(100)```.
 
-Static methods do not operate on objects, but they are still declared inside classes.
-When calling the method, you specify the class to which the sqrt method belongs—
-hence the call is Math.sqrt(100).
+How can you tell that Math is a class and not an object? By convention, class names start with an uppercase letter (such as ```Math``` or ```BankAccount```). Objects and methods start with a lowercase letter (such as ```harrysChecking``` and ```println```). Therefore,
+```harrysChecking.deposit(100)``` denotes a call of the ```deposit``` method on the ```harrysChecking``` object inside the ```System``` class. On the other hand, ```Math.sqrt(100)``` denotes a call to the ```sqrt``` method inside the ```Math``` class.
 
-How can you tell that Math is a class and not an object? By convention, class
-names start with an uppercase letter (such as Math or BankAccount). Objects and
-methods start with a lowercase letter (such as harrysChecking and println). Therefore,
-harrysChecking.deposit(100) denotes a call of the deposit method on the harrysChecking
-object inside the System class. On the other hand, Math.sqrt(100) denotes a call to the
-sqrt method inside the Math class.
-
-This use of upper- and lowercase letters is merely a convention, not a rule of the
-Java language. It is, however, a convention that the authors of the Java class libraries
-follow consistently. You should do the same in your programs so that you don’t
-confuse your fellow programmers.
+This use of upper- and lowercase letters is merely a convention, not a rule of the Java language. It is, however, a convention that the authors of the Java class libraries follow consistently. You should do the same in your programs so that you don’t confuse your fellow programmers.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-SELF CHECK
+1. Why can’t you call ```x.pow(y)``` to compute x^y?
 
-1. Why can’t you call x.pow(y) to compute x^y?
-
-2. Is the call System.out.println(4) a static method call?
+2. Is the call ```System.out.println(4)``` a static method call?
 
 				</text>
 			</page>
 			<page title="Overriding Methods">
 				<text>
-A subclass method overrides a superclass method if it has the same name and
-parameter types as a superclass method. When such a method is applied to a
-subclass object, the overriding method, and not the original method, is executed.
-We turn to the CheckingAccount class for an example of overriding methods. Recall
-that the BankAccount class has three methods:
-
+A subclass method overrides a superclass method if it has the same name and parameter types as a superclass method. When such a method is applied to a subclass object, the overriding method, and not the original method, is executed. We turn to the ```CheckingAccount``` class for an example of overriding methods. Recall that the ```BankAccount``` class has three methods:
+```
 public class BankAccount
 {
 	. . .
@@ -1788,9 +1767,9 @@ public class BankAccount
 	public void withdraw(double amount) { . . . } \\ this method overrides a BankAccount method
 	public double getBalance() { . . . }
 }
-
-The CheckingAccount class declares these methods:
-
+```
+The ```CheckingAccount``` class declares these methods:
+```
 public class CheckingAccount extends BankAccount
 {
 	. . .
@@ -1798,21 +1777,17 @@ public class CheckingAccount extends BankAccount
 	public void withdraw(double amount) { . . . }
 	public void deductFees() { . . . }
 }
+```
+These methods override ```BankAccount``` methods.
 
-These methods override BankAccount methods.
-
-The deposit and withdraw methods of the CheckingAccount class override the deposit
-and withdraw methods of the BankAccount class to handle transaction fees. However,
-the deductFees method does not override another method, and the getBalance method
-is not overridden.
+The ```deposit``` and ```withdraw``` methods of the ```CheckingAccount``` class override the ```deposit``` and ```withdraw``` methods of the ```BankAccount``` class to handle transaction fees. However, the ```deductFees``` method does not override another method, and the ```getBalance``` method is not overridden.
 				</text>
 			</page>
 			<page title="Overloaded Methods">
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Methods/5.png</image>
 				<text>
-Let’s implement the deposit method of the CheckingAccount class. It increments the
-transaction count and deposits the money:
-
+Let’s implement the ```deposit``` method of the ```CheckingAccount``` class. It increments the transaction count and deposits the money:
+```
 public class CheckingAccount extends BankAccount
 {
 	. . .
@@ -1823,9 +1798,9 @@ public class CheckingAccount extends BankAccount
 		. . .
 	}
 }
-
-Now we have a problem. We can’t simply add amount to balance:
-
+```
+Now we have a problem. We can’t simply add ```amount``` to ```balance```:
+```
 public class CheckingAccount extends BankAccount
 {
 	. . .
@@ -1836,21 +1811,12 @@ public class CheckingAccount extends BankAccount
 		balance = balance + amount; // Error
 	}
 }
+```
+Although every ```CheckingAccount``` object has a ```balance``` instance variable, that instance variable is private to the superclass ```BankAccount```. Subclass methods have no more access rights to the private data of the superclass than any other methods. If you
+want to modify a private superclass instance variable, you must use a public method of the superclass.
 
-Although every CheckingAccount object has a balance instance variable, that instance
-variable is private to the superclass BankAccount. Subclass methods have no more
-access rights to the private data of the superclass than any other methods. If you
-want to modify a private superclass instance variable, you must use a public method
-of the superclass.
-
-How can we add the deposit amount to the balance, using the public interface of
-the BankAccount class? There is a perfectly good method for that purpose—namely,
-the deposit method of the BankAccount class. So we must invoke the deposit method
-on some object. On which object? The checking account into which the money is
-deposited—that is, the implicit parameter of the deposit method of the
-CheckingAccount class. To invoke another method on the implicit parameter,
-you don’t specify the parameter but simply write the method name, like this:
-
+How can we add the deposit amount to the balance, using the public interface of the ```BankAccount``` class? There is a perfectly good method for that purpose—namely, the ```deposit``` method of the ```BankAccount``` class. So we must invoke the ```deposit``` method on some object. On which object? The checking account into which the money is deposited—that is, the implicit parameter of the ```deposit``` method of the ```CheckingAccount``` class. To invoke another method on the implicit parameter, you don’t specify the parameter but simply write the method name, like this:
+```
 public class CheckingAccount extends BankAccount
 {
 	public void deposit(double amount)
@@ -1861,22 +1827,17 @@ public class CheckingAccount extends BankAccount
 	}
 	. . .
 }
-
+```
 But this won’t quite work. The compiler interprets
-
+```
 deposit(amount);
-
+```
 as
-
+```
 this.deposit(amount);
-
-The this parameter is of type CheckingAccount. There is a method called deposit in the
-CheckingAccount class. Therefore, that method will be called—but that is just the
-method we are currently writing! The method will call itself over and over, and the
-program will die in an infinite recursion (discussed in Chapter 13).
-Instead, we must be specific that we want to invoke only the superclass’s deposit
-method. There is a special reserved word super for this purpose:
-
+```
+The this parameter is of type ```CheckingAccount```. There is a method called ```deposit``` in the ```CheckingAccount``` class. Therefore, that method will be called—but that is just the method we are currently writing! The method will call itself over and over, and the program will die in an infinite recursion. Instead, we must be specific that we want to invoke only the superclass’s ```deposit``` method. There is a special reserved word ```super``` for this purpose:
+```
 public class CheckingAccount extends BankAccount
 {
 	public void deposit(double amount)
@@ -1887,11 +1848,9 @@ public class CheckingAccount extends BankAccount
 	}
 	. . .
 }
-
-This version of the deposit method is correct. To deposit money into a checking
-account, update the transaction count and call the deposit method of the superclass.
-The remaining methods of the CheckingAccount class also invoke a superclass method.
-
+```
+This version of the ```deposit``` method is correct. To deposit money into a checking account, update the transaction count and call the ```deposit``` method of the superclass. The remaining methods of the ```CheckingAccount``` class also invoke a superclass method.
+```
 public class CheckingAccount extends BankAccount
 {
 	private static final int FREE_TRANSACTIONS = 3;
@@ -1914,53 +1873,42 @@ public class CheckingAccount extends BankAccount
 		transactionCount = 0;
 	}
 	. . .
-}
+}```
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-SELF CHECK
+1. Categorize the methods of the ```SavingsAccount``` class as inherited, new, and overridden.
 
-1. Categorize the methods of the SavingsAccount class as inherited, new, and overridden.
+2. Why does the withdraw method of the ```CheckingAccount``` class call ```super.withdraw```?
 
-2. Why does the withdraw method of the CheckingAccount class call super.withdraw?
-
-3. Why does the deductFees method set the transaction count to zero?
+3. Why does the ```deductFees``` method set the transaction count to zero?
 				</text>
 			</page>
 			<page title="Accidental Overloading">
 				<text>
-Recall from before that two methods can have the same name, provided they have different
-method parameters. For example, the PrintStream class has methods called println with headers
-
+Recall from before that two methods can have the same name, provided they have different method parameters. For example, the ```PrintStream``` class has methods called ```println``` with headers
+```
 void println(int x)
-
+```
 and
-
+```
 void println(String x)
+```
+These are different methods, each with its own implementation. The Java compiler considers them to be completely unrelated. We say that the ```println``` name is overloaded. This is different from overriding, where a subclass method provides an implementation of a method with the same method parameters.
 
-These are different methods, each with its own implementation. The Java compiler considers
-them to be completely unrelated. We say that the println name is overloaded. This is different
-from overriding, where a subclass method provides an implementation of a method with
-the same method parameters.
-
-If you mean to override a method but supply a different parameter type, then you
-accidentally introduce an overloaded method. For example,
-
+If you mean to override a method but supply a different parameter type, then you accidentally introduce an overloaded method. For example,
+```
 public class CheckingAccount extends BankAccount
 {
 	. . .
-	public void deposit(int amount) // Error: should
+	public void deposit(int amount) // Error: should be double
 	{
 		. . .
 	}
 }
-
-be double
-
-The compiler will not complain. It thinks that you want to provide a deposit method just for
-int parameters, while inheriting another deposit method for double parameters.
-When overriding a method, be sure to check that the parameter types match exactly.
+```
+The compiler will not complain. It thinks that you want to provide a ```deposit``` method just for ```int``` parameters, while inheriting another ```deposit``` method for ```double``` parameters. When overriding a method, be sure to check that the parameter types match exactly.
 				</text>
 			</page>
 		</pages>
@@ -1972,62 +1920,45 @@ When overriding a method, be sure to check that the parameter types match exactl
 		<pages>
 			<page title="Introduction to Scanners">
 				<text>
-We begin this chapter by discussing the common task of reading and writing files that contain text. Examples are files
-that are created with a simple text editor, such as Windows Notepad, as well as Java source code and HTML files.
-The simplest mechanism for reading text is to use the Scanner class. You already know how to use a Scanner for reading
-console input. To read input from a disk file, the Scanner class relies on another class, File, which describes disk
-files and directories. (The File class has many methods that we do not discuss in this book; for example, methods that
-delete or rename a file.) First construct a File object with the name of the input file, then use the File to construct
-a Scanner object:
-
+We begin this chapter by discussing the common task of reading and writing files that contain text. Examples are files that are created with a simple text editor, such as Windows Notepad, as well as Java source code and HTML files. The simplest mechanism for reading text is to use the ```Scanner``` class. You already know how to use a ```Scanner``` for reading console input. To read input from a disk file, the ```Scanner``` class relies on another class, ```File```, which describes disk files and directories. (The ```File``` class has many methods that we do not discuss in this book; for example, methods that delete or rename a file.) First construct a ```File``` object with the name of the input file, then use the File to construct a ```Scanner``` object:
+```
 File inFile = new File("input.txt");
 Scanner in = new Scanner(inFile);
-
-This Scanner object reads text from the file input.txt. You can use the Scanner methods (such as next, nextLine,
-nextInt, and nextDouble) to read data from the input file. To write output to a file, you construct a PrintWriter
-object with the given file name, for example
-
+```
+This ```Scanner``` object reads text from the file ```input.txt```. You can use the ```Scanner``` methods (such as ```next```, ```nextLine```, ```nextInt```, and ```nextDouble```) to read data from the input file. To write output to a file, you construct a ```PrintWriter``` object with the given file name, for example
+```
 PrintWriter out = new PrintWriter("output.txt");
+```
+If the output file already exists, it is emptied before the new data are written into it. If the file doesn’t exist, an empty file is created. You can also construct a ```PrintWriter``` object from a ```File``` object. This is useful if you use a file chooser.
 
-If the output file already exists, it is emptied before the new data are written into it.
-If the file doesn’t exist, an empty file is created. You can also construct a PrintWriter
-object from a File object. This is useful if you use a file chooser.
-
-The PrintWriter class is an enhancement of the PrintStream class that you already know—System.out is a PrintStream
-object. You can use the familiar print, println, and printf methods with any PrintWriter object:
-
+The ```PrintWriter``` class is an enhancement of the ```PrintStream``` class that you already know—```System.out``` is a ```PrintStream``` object. You can use the familiar ```print```, ```println```, and ```printf``` methods with any ```PrintWriter``` object:
+```
 out.print(29.95);
 out.println(new Rectangle(5, 10, 15, 25));
 out.printf("%10.2f", price);
-
-When you are done writing to a file, be sure to close the PrintWriter:
-
+```
+When you are done writing to a file, be sure to close the ```PrintWriter```:
+```
 out.close();
-
-If your program exits without closing the PrintWriter, the disk file may not contain all of the output. The following
-program puts these concepts to work. It reads all lines of an input file and sends them to the output file, preceded by
-line numbers. If the input file is
-
+```
+If your program exits without closing the ```PrintWriter```, the disk file may not contain all of the output. The following program puts these concepts to work. It reads all lines of an input file and sends them to the output file, preceded by line numbers. If the input file is
+```
 Mary had a little lamb
 Whose fleece was white as snow.
 And everywhere that Mary went,
 The lamb was sure to go!
-
+```
 then the program produces the output file
+```
 /* 1 */ Mary had a little lamb
 /* 2 */ Whose fleece was white as snow.
 /* 3 */ And everywhere that Mary went,
 /* 4 */ The lamb was sure to go!
-
-The line numbers are enclosed in /* */ delimiters so that the program can be used for numbering Java source files.
-There is one additional issue that we need to tackle. When the input or output file doesn’t exist, a
-FileNotFoundException can occur. The compiler insists that we tell it what the program should do when that happens.
-(In this regard, the FileNotFoundException is different from the exceptions that you have already encountered. We
-will discuss this difference in detail later on.) In our sample program, we take the easy way out and acknowledge that
-the main method should simply be terminated if the exception occurs. We label the main method like this:
-
+```
+The line numbers are enclosed in ```/* */``` delimiters so that the program can be used for numbering Java source files. There is one additional issue that we need to tackle. When the input or output file doesn’t exist, a ```FileNotFoundException``` can occur. The compiler insists that we tell it what the program should do when that happens. (In this regard, the ````FileNotFoundException``` is different from the exceptions that you have already encountered. We will discuss this difference in detail later on.) In our sample program, we take the easy way out and acknowledge that the main method should simply be terminated if the exception occurs. We label the main method like this:
+```
 public static void main(String[] args) throws FileNotFoundException
-
+```
 You will see in the following sections how to deal with exceptions in a more professional way.
 				</text>
 			</page>
@@ -2037,70 +1968,55 @@ You will see in the following sections how to deal with exceptions in a more pro
 			</page>
 			<page title="Self Check">
 				<text>
-SELF CHECK
+1. What happens when you supply the same name for the input and output files to the ```LineNumberer``` program?
 
-1. What happens when you supply the same name for the input and output files to
-the LineNumberer program?
-
-2. What happens when you supply the name of a nonexistent input file to the LineNumberer program?
+2. What happens when you supply the name of a nonexistent input file to the ```LineNumberer``` program?
 				</text>
 			</page>
 			<page title="Common Errors">
 				<text>
 Common Error: Backslashes in File Names
 
-When you specify a file name as a string literal, and the name contains backslash characters
-(as in a Windows file name), you must supply each backslash twice:
-
+When you specify a file name as a string literal, and the name contains backslash characters (as in a Windows file name), you must supply each backslash twice:
+```
 inFile = new File("c:\\homework\\input.dat");
-
-Recall that a single backslash inside quoted strings is an escape character that is combined
-with another character to form a special meaning, such as \n for a newline character. The \\
-combination denotes a single backslash.
-
-When a user supplies a file name to a program, however, the user should not type the
-backslash twice.
+```
+Recall that a single backslash inside quoted strings is an escape character that is combined with another character to form a special meaning, such as ```\n``` for a newline character. The ```\\``` combination denotes a single backslash. When a user supplies a file name to a program, however, the user should not type the backslash twice.
 
 Common Error: Constructing a Scanner with a String
 
-When you construct a PrintWriter with a string, it writes to a file:
-
+When you construct a ```PrintWriter``` with a string, it writes to a file:
+```
 PrintWriter out = new PrintWriter("output.txt");
-
-However, this does not work for a Scanner. The statement
-
+```
+However, this does not work for a ```Scanner```. The statement
+```
 Scanner in = new Scanner("input.txt"); // ERROR?
-
-does not open a file. Instead, it simply reads through the string: in.nextLine() returns the
-string "input.txt". This feature can be useful.
-
-You must simply remember to use File objects in the Scanner constructor:
-
-Scanner in = new Scanner(new File("input.txt")); //OK
+```
+does not open a file. Instead, it simply reads through the string: ```in.nextLine()``` returns the string ```"input.txt"```. This feature can be useful. You must simply remember to use ```File``` objects in the ```Scanner``` constructor:
+```
+Scanner in = new Scanner(new File("input.txt")); //OK```
 				</text>
 			</page>
 			<page title="Reading Text Input">
 				<text>
-In the following sections, you will learn how to process complex text input that you often encounter
-in real life situations. In the preceding example program, we read input a line at a time. Sometimes, it is
-useful to read words rather than lines. For example, consider the loop
-
+In the following sections, you will learn how to process complex text input that you often encounter in real life situations. In the preceding example program, we read input a line at a time. Sometimes, it is useful to read words rather than lines. For example, consider the loop
+```
 while (in.hasNext())
 {
 	String input = in.next();
 	System.out.println(input);
 }
-
+```
 With our sample input, this loop would print a word on every line:
-
+###
 Mary
 had
 a
 little
 lamb
-
-In Java, a word is not the same as in English. It is any sequence of characters that is not white space.
-White space includes spaces, tab characters, and the newline characters that separate lines. For example, the following are considered words:
+###
+In Java, a word is not the same as in English. It is any sequence of characters that is not white space. White space includes spaces, tab characters, and the newline characters that separate lines. For example, the following are considered words:
 
 snow.
 1729
