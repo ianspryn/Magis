@@ -140,7 +140,7 @@ public class ArraysQuestions extends QuestionGenerator{
         int[] singleArray = new int[num];
         int[][] doubleArray = new int[numRows][numColumns];
 
-        int doubleOrSingle = rand.nextInt();
+        int doubleOrSingle = rand.nextInt(2);
         int sum = 0;
 
         if(doubleOrSingle == 0){
@@ -157,28 +157,29 @@ public class ArraysQuestions extends QuestionGenerator{
             }
             correctAnswer = ""+sum;
             answers.add(correctAnswer);
-            answers.add(""+(sum-singleArray[0]));
 
             if(singleArray.length == 1){
                 answers.add("The for loops don't execute");
                 answers.add("1");
+                answers.add("2");
             }
             else{
-                answers.add(""+(sum-singleArray[singleArray.length-1]));
+                answers.add(""+(sum+sum+1));
                 answers.add("0");
+                answers.add(""+(sum*2));
             }
             Collections.shuffle(answers);
-            answers.add("Unknown");
+            answers.add("None of the Above");
         }
         else{
             question = "int[][] numList = new numList["+numRows+"]["+numColumns+"];\nint sum = 0;\n\n";
-            question += "for(int i = 0; i < numList.length; i++){\n\tfor(int j = 0; j < numList[i].length; j++){\n\t\tnumList[i][j] = i;\n\t}\n}\n";
+            question += "for(int i = 0; i < numList.length; i++){\n\tfor(int j = 0; j < numList[i].length; j++){\n\t\tnumList[i][j] = (i+j)+1;\n\t}\n}\n";
             question += "for(int i = 0; i < numList.length; i++){\n\tfor(int j = 0; j < numList[i].length; j++){\n\t\tsum += numList[i][j];\n\t}\n}\n\n";
             question += "What is the value of \"sum\"?";
 
             for(int i = 0; i<doubleArray.length; i++){
                 for(int j = 0; j<doubleArray[i].length; j++) {
-                    doubleArray[i][j] = (i+j);
+                    doubleArray[i][j] = (i+j)+1;
                 }
             }
             for(int i = 0; i<doubleArray.length; i++){
@@ -188,18 +189,18 @@ public class ArraysQuestions extends QuestionGenerator{
             }
             correctAnswer = ""+sum;
             answers.add(correctAnswer);
-            answers.add(""+(sum-doubleArray[0][0]));
+            answers.add(""+(sum-1));
 
             if(doubleArray.length == 1 && doubleArray[0].length == 1){
                 answers.add("The for loops don't execute");
                 answers.add("1");
             }
             else{
-                answers.add(""+(sum + 10));
+                answers.add(""+(sum * 2));
                 answers.add("0");
             }
             Collections.shuffle(answers);
-            answers.add("Unknown");
+            answers.add("None of the Above");
         }
     }
 }
