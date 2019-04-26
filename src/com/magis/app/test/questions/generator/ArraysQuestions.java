@@ -189,14 +189,15 @@ public class ArraysQuestions extends QuestionGenerator{
             }
             correctAnswer = ""+sum;
             answers.add(correctAnswer);
-            answers.add(""+(sum-1));
 
             if(doubleArray.length == 1 && doubleArray[0].length == 1){
                 answers.add("The for loops don't execute");
-                answers.add("1");
+                answers.add("2");
+                answers.add("3");
             }
             else{
                 answers.add(""+(sum * 2));
+                answers.add(""+(sum-1));
                 answers.add("0");
             }
             Collections.shuffle(answers);
