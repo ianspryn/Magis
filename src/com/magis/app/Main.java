@@ -61,6 +61,7 @@ public class Main extends Application {
         testsModel = new TestsModel();
         numQuestionsPerTest = new HashMap<>();
         populateQuestionGenerator();
+        Configure.values(); //apply any custom settings to the program
         Login.Page();
         primaryStage.show();
     }
@@ -102,21 +103,5 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) { launch(args); }
-
-//    public static void main(String[] args) {
-//        LessonModel lessonModel = new LessonModel();
-//        LessonModel.ChapterModel.PageModel page = lessonModel.getChapter(0).getPage(0);
-//        ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> content = page.getLessonContent();
-//        String stuff = content.get(0).getContent();
-//
-////        String delimiter = "^```[\\w\\W\\S]*```$|``[\\w\\W\\S]*``|^~~~H[123]~~~.*$";
-////        String delimiter = "`{3}[\\w\\W\\S]*`{3}|`{2}[\\w\\W\\S]*`{2}|^~~~H[123]~~~.*$";
-//        String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)|(?<=\\[H[123]])|(?=\\[H[123]])";
-//        String[] splitStrings = stuff.split(delimiter);
-//        for (String junk : splitStrings) {
-//            System.out.println(junk);
-//            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//        }
-//    }
 
 }
