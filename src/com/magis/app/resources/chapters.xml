@@ -2046,113 +2046,91 @@ Here, we set the character pattern that separates words to “any sequence of ch
 			<page title="Processing Lines">
 				<text>
 When each line of a file is a data record, it is often best to read entire lines with the nextLine method:
-
+```
 String line = in.nextLine();
-
-The nextLine method consumes the next input line (including the newline character) and returns the line without
-the newline character. You can then take the line apart for further processing. Here is a typical example of processing
-lines in a file. A file with population data from the CIA Fact Book site
-(http://www.cia.gov/library/publications/the-worldfactbook/) contains lines such as the following:
-
+```
+The nextLine method consumes the next input line (including the newline character) and returns the line without the newline character. You can then take the line apart for further processing. Here is a typical example of processing lines in a file. A file with population data from the CIA Fact Book site (http://www.cia.gov/library/publications/the-worldfactbook/) contains lines such as the following:
+###
 China 1330044605
 India 1147995898
 United States 303824646
 . . .
-
-Because some country names have more than one word, it would be tedious to read this file using the next method.
-For example, after reading United, how would your program know that it still needs to read another word before
-reading the population count? Instead, read each input line into a string. Then use the isDigit and isWhitespace
-methods to find out where the name ends and the number starts. Locate the first digit:
-
+###
+Because some country names have more than one word, it would be tedious to read this file using the next method. For example, after reading United, how would your program know that it still needs to read another word before reading the population count? Instead, read each input line into a string. Then use the isDigit and isWhitespace methods to find out where the name ends and the number starts. Locate the first digit:
+```
 int i = 0;
 while (!Character.isDigit(line.charAt(i))) { i++; }
-
+```
 Then extract the country name and population:
-
+```
 String countryName = line.substring(0, i);
 String population = line.substring(i);
-
+```
 However, the country name contains one or more spaces at the end. Use the trim method to remove them:
-
+```
 countryName = countryName.trim();
-
+```
 The trim method returns the string with all white space at the beginning and end removed.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/9.png</image>
 			</page>
 			<page title="Processing Lines">
 				<text>
-There is another problem. The population is stored in a string, not a number. Use
-the Integer.parseInt method to convert it:
-
+There is another problem. The population is stored in a string, not a number. Use the Integer.parseInt method to convert it:
+```
 int populationValue = Integer.parseInt(population);
-
-You need to be careful when calling the Integer.parseInt method. Its parameter
-value must be a string containing the digits of an integer or a NumberFormatException
-occurs. The parameter value may not contain any additional characters. Not even
-spaces are allowed! In our situation, we happen to know that there won’t be any
-spaces at the beginning of the string, but there might be some at the end. Therefore,
-we use the trim method:
-
+```
+You need to be careful when calling the Integer.parseInt method. Its parameter value must be a string containing the digits of an integer or a NumberFormatException occurs. The parameter value may not contain any additional characters. Not even spaces are allowed! In our situation, we happen to know that there won’t be any spaces at the beginning of the string, but there might be some at the end. Therefore, we use the trim method:
+```
 int populationValue = Integer.parseInt(population.trim());
-
-Here you saw how to break a string into parts by looking at individual characters.
-Another approach is occasionally easier. Construct a new Scanner object to read the
-characters from a string:
-
+```
+Here you saw how to break a string into parts by looking at individual characters. Another approach is occasionally easier. Construct a new Scanner object to read the characters from a string:
+```
 Scanner lineScanner = new Scanner(line);
-
+```
 Then you can use lineScanner like any other	Scanner	object, reading words and numbers:
-
+```
 String countryName = lineScanner.next();
 while (!lineScanner.hasNextInt())
 {
 	countryName = countryName + " " + lineScanner.next();
 }
 int populationValue = lineScanner.nextInt();
+```
 				</text>
 			</page>
 			<page title="Reading Numbers">
 				<text>
-You have used the nextInt and nextDouble methods of the Scanner class many times,
-but here we will have a look at their behavior in detail. Suppose you call
+You have used the nextInt and nextDouble methods of the Scanner class many times, but here we will have a look at their behavior in detail. Suppose you call
+```
 double value = in.nextDouble();
-
-The	nextDouble method recognizes floating-point numbers such as 3.14159, -21, or
-(a billion in scientific notation). However, if there is no number in the input,
-then a NoSuchElementException occurs.
-Consider an input containing the characters
+```
+The	nextDouble method recognizes floating-point numbers such as 3.14159, -21, or (a billion in scientific notation). However, if there is no number in the input, then a NoSuchElementException occurs. Consider an input containing the characters
 
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/12.png</image>
 				<text>
 
-White space is consumed and the word 21st is read. However, this word is not a
-properly formatted number. In this situation, an “input mismatch exception”
-occurs.
+White space is consumed and the word 21st is read. However, this word is not a properly formatted number. In this situation, an “input mismatch exception” occurs.
 
 To avoid exceptions, use the hasNextDouble method to screen the input. For example,
-
+```
 if (in.hasNextDouble())
 {
 	double value = in.nextDouble();
 	. . .
 }
-
-Similarly, you should call the hasNextInt method before calling nextInt.
-Note that the nextInt and nextDouble methods do not consume the white space
-that follows a number. This can be a problem if you alternate between calling
-nextInt/nextDouble and nextLine. Suppose a file contains student IDs and names in
-this format:
-
+```
+Similarly, you should call the hasNextInt method before calling nextInt. Note that the nextInt and nextDouble methods do not consume the white space that follows a number. This can be a problem if you alternate between calling nextInt/nextDouble and nextLine. Suppose a file contains student IDs and names in this format:
+###
 1729
 Harry Morgan
 1730
 Diana Lin
 . . .
-
+###
 Now suppose you read the file with these instructions:
-
+```
 while (in.hasNextInt())
 {
 	int studentID = in.nextInt();
@@ -2160,7 +2138,7 @@ while (in.hasNextInt())
 
 	//Process the student ID and name
 }
-
+```
 Initially, the input contains
 
 				</text>
@@ -2172,49 +2150,44 @@ After the first call to nextInt, the input contains
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/InputOutput/16.png</image>
 				<text>
-The call to nextLine reads an empty string! The remedy is to add a call to
-nextLine after reading the ID:
-
+The call to nextLine reads an empty string! The remedy is to add a call to nextLine after reading the ID:
+```
 int studentID = in.nextInt();
 in.nextLine(); // Consume the newline
 String name = in.nextLine();
+```
 				</text>
 			</page>
 			<page title="Reading Characters">
 				<text>
-Sometimes, you want to read a file one character at a time. You achieve this task by
-calling the useDelimiter method on your Scanner object with an empty string:
-
+Sometimes, you want to read a file one character at a time. You achieve this task by calling the useDelimiter method on your Scanner object with an empty string:
+```
 Scanner in = new Scanner(. . .);
 in.useDelimiter("");
-
-Now each call to next returns a string consisting of a single character. Here is how
-you can process the characters:
-
+```
+Now each call to next returns a string consisting of a single character. Here is how you can process the characters:
+```
 while (in.hasNext())
 {
 	char ch = in.next().charAt(0);
 	// Process ch
 }
+```
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. Suppose the input contains the characters 6,995.0. What is the value of number
-and input after these statements?
-
+1. Suppose the input contains the characters 6,995.0. What is the value of number and input after these statements?
+```
 int number = in.nextInt();
 String input = in.next();
-
-2. Suppose the input contains the characters 6,995.00 12. What is the value of price
-and quantity after these statements?
-
+```
+2. Suppose the input contains the characters 6,995.00 12. What is the value of price and quantity after these statements?
+```
 double price = in.nextDouble();
 int quantity = in.nextInt();
-
-3. Your input file contains a sequence of numbers, but sometimes a value is not
-available and marked as N/A. How can you read the numbers and skip over the
-markers?
+```
+3. Your input file contains a sequence of numbers, but sometimes a value is not available and marked as N/A. How can you read the numbers and skip over the markers?
 				</text>
 			</page>
 		</pages>
@@ -2226,60 +2199,41 @@ markers?
 		<pages>
 			<page title="Introduction to Arrays">
 				<text>
-In many programs, you need to manipulate collections of related values. It would
-be impractical to use a sequence of variables such as value1, value2, value3, . . . , and
-so on. The array construct provides a better way of storing a collection of values.
-An array is a sequence of values of the same type. The values that are stored in an
-array are called its “elements”. For example, here is how you construct an array of
-10 floating-point numbers:
-
+In many programs, you need to manipulate collections of related values. It would be impractical to use a sequence of variables such as value1, value2, value3, . . . , and so on. The array construct provides a better way of storing a collection of values. An array is a sequence of values of the same type. The values that are stored in an array are called its “elements”. For example, here is how you construct an array of 10 floating-point numbers:
+```
 new double[10]
-
-The number of elements (here, 10) is called the length of the array.
-The new operator merely constructs the array. You will want to store a reference
-to the array in a variable so that you can access it later.
-The type of an array variable is the element type, followed by []. In this example,
-the type is double[], because the element type is double. Here is the declaration of an
+```
+The number of elements (here, 10) is called the length of the array. The new operator merely constructs the array. You will want to store a reference to the array in a variable so that you can access it later. The type of an array variable is the element type, followed by []. In this example, the type is double[], because the element type is double. Here is the declaration of an
 array variable:
-
+```
 double[] values = new double[10];
-
-That is, values is a reference to an array of floating-point numbers. It is initialized
-with an array of 10 numbers (see Figure 1).
+```
+That is, values is a reference to an array of floating-point numbers. It is initialized with an array of 10 numbers (see Figure 1).
 You can also form arrays of objects, for example
-
+```
 BankAccount[] accounts = new BankAccount[10];
-
-When an array is first created, all elements are initialized with 0 (for an array of
-numbers such as int[] or double[]), false (for a boolean[] array), or null (for an array
-of object references).
+```
+When an array is first created, all elements are initialized with 0 (for an array of numbers such as int[] or double[]), false (for a boolean[] array), or null (for an array of object references).
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/2.png</image>
 				<text>
-Alternatively, you can initialize an array with other values. List all elements that
-you want to include in the array, enclosed in braces and separated by commas:
-
+Alternatively, you can initialize an array with other values. List all elements that you want to include in the array, enclosed in braces and separated by commas:
+```
 int[] primes = { 2, 3, 5, 7, 11 };
-
-The Java compiler counts how many elements you want to place in the array, allocates
-an array of the correct size, and fills it with the elements that you specify.
-Each element in the array is specified by an integer index that is placed inside
-square brackets ([]). For example, the expression
-
+```
+The Java compiler counts how many elements you want to place in the array, allocates an array of the correct size, and fills it with the elements that you specify. Each element in the array is specified by an integer index that is placed inside square brackets ([]). For example, the expression
+```
 values[4]
-
-denotes the element of the values array with index 4.
-You can store a value at a location with an assignment statement, such as the
+```
+denotes the element of the values array with index 4. You can store a value at a location with an assignment statement, such as the
 following.
-
+```
 values[2] = 29.95;
-
-Now the position with index 2 of values is filled with 29.95 (see Figure 2).
-To read the element at index 2, simply use the expression values[2] as you would
-any variable of type double:
-
+```
+Now the position with index 2 of values is filled with 29.95 (see Figure 2). To read the element at index 2, simply use the expression values[2] as you would any variable of type double:
+```
 System.out.println("The element at index 2 is " + values[2]);
-
+```
 If you look closely at Figure 2, you will notice that the index values start at 0. That is,
 
 values[0] is the first element
@@ -2288,37 +2242,26 @@ values[2] is the third element
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/4.png</image>
 				<text>
-and so on. This convention can be a source of grief for the newcomer, so you should
-pay close attention to the index values. In particular, the last element in the array has
-an index one less than the array length. For example, values refers to an array with
-length 10. The last element is values[9].
-If you try to access an element that does not exist, then an “array index out of
+and so on. This convention can be a source of grief for the newcomer, so you should pay close attention to the index values. In particular, the last element in the array has an index one less than the array length. For example, values refers to an array with
+length 10. The last element is values[9]. If you try to access an element that does not exist, then an “array index out of
 bounds” exception occurs. For example, the statement
-
+```
 values[10] = 29.95; // ERROR
-
+```
 is a bounds error.
 
-To avoid bounds errors, you will want to know how many elements are in an
-array. The expression
-
+To avoid bounds errors, you will want to know how many elements are in an array. The expression
+```
 values.length
-
-is the length of the values array. Note that there are no parentheses following
-length—it is an instance variable of the array object, not a method. However, you
-cannot modify this instance variable. In other words, length is a final public
-instance variable. This is quite an anomaly. Normally, Java programmers use a
-method to inquire about the properties of an object. You just have to remember to
+```
+is the length of the values array. Note that there are no parentheses following length—it is an instance variable of the array object, not a method. However, you cannot modify this instance variable. In other words, length is a final public instance variable. This is quite an anomaly. Normally, Java programmers use a method to inquire about the properties of an object. You just have to remember to
 omit the parentheses in this case.
 
 The following code ensures that you only access the array when the index variable i is within the legal bounds:
-
+```
 if (0 &lt;= i &amp;&amp; i &lt; values.length) values[i] = value;
-
-Arrays suffer from a significant limitation: their length is fixed. If you start out with
-an array of 10 elements and later decide that you need to add additional elements,
-then you need to make a new array and copy all elements of the existing array into
-the new array. We will discuss this process in detail later.
+```
+Arrays suffer from a significant limitation: their length is fixed. If you start out with an array of 10 elements and later decide that you need to add additional elements, then you need to make a new array and copy all elements of the existing array into the new array. We will discuss this process in detail later.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/6.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/7.png</image>
@@ -2326,39 +2269,34 @@ the new array. We will discuss this process in detail later.
 			<page title="Self Check">
 				<text>
 1. What elements does the values array contain after the following statements?
-
+```
 double[] values = new double[10];
 for (int i = 0; i &lt; values.length; i++) values[i] = i * i;
-
-2. What do the following program segments print? Or, if there is an error, describe
-the error and specify whether it is detected at compile-time or at run-time.
-
+```
+2. What do the following program segments print? Or, if there is an error, describe the error and specify whether it is detected at compile-time or at run-time.
+```
 	a. double[] a = new double[10];
 	   System.out.println(a[0]);
 	b. double[] b = new double[10];
 	   System.out.println(b[10]);
 	c. double[] c;
 	   System.out.println(c[0]);
+```
 				</text>
 			</page>
 			<page title="Bounds Errors">
 				<text>
 A very common array error is attempting to access a nonexistent position.
-
+```
 double[] data = new double[10];
 data[10] = 29.95; // Error—only
-
+```
 have elements with index values 0 . . . 9
 
-When the program runs, an out-of-bounds index generates an exception and terminates the
-program.
+When the program runs, an out-of-bounds index generates an exception and terminates the program.
 
-This is a great improvement over languages such as C and C++. With those languages
-there is no error message; instead, the program will quietly (or not so quietly) corrupt the
-memory location that is 10 elements away from the start of the array. Sometimes that corruption
-goes unnoticed, but at other times, the program will act flaky or die a horrible death
-many instructions later. These are serious problems that make C and C++ programs difficult
-to debug. Bounds errors in C and C++ programs are a major cause of security vulnerabilities.
+This is a great improvement over languages such as C and C++. With those languages there is no error message; instead, the program will quietly (or not so quietly) corrupt the memory location that is 10 elements away from the start of the array. Sometimes that corruption
+goes unnoticed, but at other times, the program will act flaky or die a horrible death many instructions later. These are serious problems that make C and C++ programs difficult to debug. Bounds errors in C and C++ programs are a major cause of security vulnerabilities.
 				</text>
 			</page>
 		</pages>
@@ -2370,22 +2308,12 @@ to debug. Bounds errors in C and C++ programs are a major cause of security vuln
 		<pages>
 			<page title="Throwing Exceptions">
 				<text>
-There are two main aspects to exception handling: reporting and recovery. A major
-challenge of error handling is that the point of reporting is usually far apart from
-the point of recovery. For example, the get method of the ArrayList class may detect
-that a nonexistent element is being accessed, but it does not have enough information
-to decide what to do about this failure. Should the user be asked to try a different
-operation? Should the program be aborted after saving the user’s work? These decisions
-must be made in a different part of the program.
+There are two main aspects to exception handling: reporting and recovery. A major challenge of error handling is that the point of reporting is usually far apart from the point of recovery. For example, the get method of the ArrayList class may detect that a nonexistent element is being accessed, but it does not have enough information to decide what to do about this failure. Should the user be asked to try a different operation? Should the program be aborted after saving the user’s work? These decisions must be made in a different part of the program.
 
-In Java, exception handling provides a flexible mechanism for passing control
-from the point of error reporting to a competent recovery handler. In the remainder
-of this chapter, we will look into the details of this mechanism.
+In Java, exception handling provides a flexible mechanism for passing control from the point of error reporting to a competent recovery handler. In the remainder of this chapter, we will look into the details of this mechanism.
 
-When you detect an error condition, your job is really easy. You just throw an
-appropriate exception object, and you are done. For example, suppose someone
-tries to withdraw too much money from a bank account.
-
+When you detect an error condition, your job is really easy. You just throw an appropriate exception object, and you are done. For example, suppose someone tries to withdraw too much money from a bank account.
+```
 public class BankAccount
 {
 	. . .
@@ -2396,17 +2324,11 @@ public class BankAccount
 		. . .
 	}
 }
+```
+First look for an appropriate exception class. The Java library provides many classes to signal all sorts of exceptional conditions. Figure 1 on the next page shows the most useful ones.
 
-First look for an appropriate exception class. The Java library provides many classes
-to signal all sorts of exceptional conditions. Figure 1 on the next page shows the
-most useful ones.
-
-Look around for an exception type that might describe your situation. How about the
-IllegalStateException? Is the bank account in an illegal state for the withdraw operation?
-Not really—some withdraw operations could succeed. Is the parameter value illegal?
-Indeed it is. It is just too large. Therefore, let’s throw an IllegalArgumentException.
-(The term argument is an alternative term for a parameter value.)
-
+Look around for an exception type that might describe your situation. How about the IllegalStateException? Is the bank account in an illegal state for the withdraw operation? Not really—some withdraw operations could succeed. Is the parameter value illegal? Indeed it is. It is just too large. Therefore, let’s throw an IllegalArgumentException. (The term argument is an alternative term for a parameter value.)
+```
 public class BankAccount
 {
 	public void withdraw(double amount)
@@ -2419,15 +2341,14 @@ public class BankAccount
 	}
 	. . .
 }
-
+```
 The statement
-
+```
 throw new IllegalArgumentException("Amount exceeds balance");
-
+```
 constructs an object of type IllegalArgumentException and throws that object.
 
-When you throw an exception, execution does not continue with the next statement but
-with an exception handler. For now, we won’t worry about the handling of the exception.
+When you throw an exception, execution does not continue with the next statement but with an exception handler. For now, we won’t worry about the handling of the exception.
 
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/2.png</image>
@@ -2435,133 +2356,71 @@ with an exception handler. For now, we won’t worry about the handling of the e
 			</page>
 			<page title="Self Check">
 				<text>
-1. How should you modify the deposit method to ensure that the balance is never
-negative?
+1. How should you modify the deposit method to ensure that the balance is never negative?
 
-2. Suppose you construct a new bank account object with a zero balance and then
-call withdraw(10). What is the value of balance afterwards?
+2. Suppose you construct a new bank account object with a zero balance and then call withdraw(10). What is the value of balance afterwards?
 				</text>
 			</page>
 			<page title="Checked and Unchecked Exceptions">
 				<text>
-Java exceptions fall into two categories, called checked and unchecked exceptions.
-When you call a method that throws a checked exception, the compiler checks that
-you don’t ignore it. You must tell the compiler what you are going to do about the
-exception if it is ever thrown. For example, all subclasses of IOException are checked
-exceptions. On the other hand, the compiler does not require you to keep track of
-unchecked exceptions. Exceptions such as NumberFormatException, IllegalArgumentException,
-and NullPointerException are unchecked exceptions. More generally, all
-exceptions that belong to subclasses of RuntimeException are unchecked, and all other
-subclasses of the class Exception are checked. (In Figure 1, the checked exceptions
-are shaded in a darker color.) There is a second category of internal errors that are
-reported by throwing objects of type Error. One example is the OutOfMemoryError,
-which is thrown when all available memory has been used up. These are fatal errors
-that happen rarely and are beyond your control. They too are unchecked.
+Java exceptions fall into two categories, called checked and unchecked exceptions. When you call a method that throws a checked exception, the compiler checks that you don’t ignore it. You must tell the compiler what you are going to do about the exception if it is ever thrown. For example, all subclasses of IOException are checked exceptions. On the other hand, the compiler does not require you to keep track of unchecked exceptions. Exceptions such as NumberFormatException, IllegalArgumentException, and NullPointerException are unchecked exceptions. More generally, all exceptions that belong to subclasses of RuntimeException are unchecked, and all other subclasses of the class Exception are checked. (In Figure 1, the checked exceptions are shaded in a darker color.) There is a second category of internal errors that are reported by throwing objects of type Error. One example is the OutOfMemoryError, which is thrown when all available memory has been used up. These are fatal errors that happen rarely and are beyond your control. They too are unchecked.
 
-Why have two kinds of exceptions? A checked exception describes a problem
-that is likely to occur at times, no matter how careful you are. The unchecked
-exceptions, on the other hand, are your fault. For example, an unexpected end of
-file can be caused by forces beyond your control, such as a disk error or a broken
-network connection. But you are to blame for a NullPointerException, because your
-code was wrong when it tried to use a null reference.
-The compiler doesn’t check whether you handle a NullPointerException, because
-you should test your references for null before using them rather than install a
-handler for that exception. The compiler does insist that your program be able to
-handle error conditions that you cannot prevent.
+Why have two kinds of exceptions? A checked exception describes a problem that is likely to occur at times, no matter how careful you are. The unchecked exceptions, on the other hand, are your fault. For example, an unexpected end of file can be caused by forces beyond your control, such as a disk error or a broken network connection. But you are to blame for a NullPointerException, because your code was wrong when it tried to use a null reference. The compiler doesn’t check whether you handle a NullPointerException, because you should test your references for null before using them rather than install a handler for that exception. The compiler does insist that your program be able to handle error conditions that you cannot prevent.
 
-Actually, those categories aren’t perfect. For example, the Scanner.nextInt method
-throws an unchecked InputMismatchException if the input does not contain a valid
-integer. A checked exception would have been more appropriate because the programmer
-cannot prevent users from entering incorrect input. (The designers of the
-Scanner class made this choice to make it easy to use for beginning programmers.)
-As you can see from Figure 1, the majority of checked exceptions occur when
-you deal with input and output. That is a fertile ground for external failures beyond
-your control—a file might have been corrupted or removed, a network connection
-might be overloaded, a server might have crashed, and so on. Therefore, you will
-need to deal with checked exceptions principally when programming with files and
+Actually, those categories aren’t perfect. For example, the Scanner.nextInt method throws an unchecked InputMismatchException if the input does not contain a valid integer. A checked exception would have been more appropriate because the programmer cannot prevent users from entering incorrect input. (The designers of the Scanner class made this choice to make it easy to use for beginning programmers.)
+As you can see from Figure 1, the majority of checked exceptions occur when you deal with input and output. That is a fertile ground for external failures beyond your control—a file might have been corrupted or removed, a network connection might be overloaded, a server might have crashed, and so on. Therefore, you will need to deal with checked exceptions principally when programming with files and
 streams.
 
-You have seen how to use the Scanner class to read data from a file, by passing a
-File object to the Scanner constructor:
-
+You have seen how to use the Scanner class to read data from a file, by passing a File object to the Scanner constructor:
+```
 String filename = . . .;
 File inFile = new File(filename);
 Scanner in = new Scanner(inFile);
+```
+However, the Scanner constructor can throw a FileNotFoundException. The FileNotFoundException is a checked exception, so you need to tell the compiler what you are going to do about it. You have two choices. You can handle the exception, using the techniques that you will see in Section 11.5. Or you can simply tell the compiler that you are aware of this exception and that you want your method to be
+terminated when it occurs. The method that reads input does not usually know what to do about an unexpected error, so that is usually the better option.
 
-However, the Scanner constructor can throw a FileNotFoundException. The
-FileNotFoundException is a checked exception, so you need to tell the compiler what
-you are going to do about it. You have two choices. You can handle the exception,
-using the techniques that you will see in Section 11.5. Or you can simply tell the
-compiler that you are aware of this exception and that you want your method to be
-terminated when it occurs. The method that reads input does not usually know
-what to do about an unexpected error, so that is usually the better option.
-
-To declare that a method should be terminated when a checked exception occurs
-within it, tag the method with a throws clause.
-
+To declare that a method should be terminated when a checked exception occurs within it, tag the method with a throws clause.
+```
 public void read(String filename) throws FileNotFoundException
 {
 	File inFile = new File(filename);
 	Scanner in = new Scanner(inFile);
 	. . .
 }
-
-The throws clause in turn signals the caller of your method that it may encounter a
-FileNotFoundException. Then the caller needs to make the same decision—handle the
-exception, or tell its caller that the exception may be thrown. If your method
-can throw exceptions of different types, you separate the exception class names by commas:
-
+```
+The throws clause in turn signals the caller of your method that it may encounter a FileNotFoundException. Then the caller needs to make the same decision—handle the exception, or tell its caller that the exception may be thrown. If your method can throw exceptions of different types, you separate the exception class names by commas:
+```
 public void read(String filename)
 throws FileNotFoundException, NoSuchElementException
-
-Always keep in mind that exception classes form an inheritance hierarchy. For
-example, FileNotFoundException is a subclass of IOException. Thus, if a method can
-throw both an IOException and a FileNotFoundException, you only tag it as throws
+```
+Always keep in mind that exception classes form an inheritance hierarchy. For example, FileNotFoundException is a subclass of IOException. Thus, if a method can throw both an IOException and a FileNotFoundException, you only tag it as throws
 IOException.
 
-It sounds somehow irresponsible not to handle an exception when you know
-that it happened. Actually, though, it is usually best not to catch an exception if you
-don’t know how to remedy the situation. After all, what can you do in a low-level
-read method? Can you tell the user? How? By sending a message to System.out? You
-don’t know whether this method is called in a graphical program or an embedded
-system (such as a vending machine), where the user may never see System.out. And
-even if your users can see your error message, how do you know that they can
+It sounds somehow irresponsible not to handle an exception when you know that it happened. Actually, though, it is usually best not to catch an exception if you don’t know how to remedy the situation. After all, what can you do in a low-level read method? Can you tell the user? How? By sending a message to System.out? You don’t know whether this method is called in a graphical program or an embedded
+system (such as a vending machine), where the user may never see System.out. And even if your users can see your error message, how do you know that they can
 
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/6.png</image>
 				<text>
 
-understand English? Your class may be used to build an application for users in
-another country. If you can’t tell the user, can you patch up the data and keep
-going? How? If you set a variable to zero, null, or an empty string, that may just
-cause the program to break later, with much greater mystery.
-Of course, some methods in the program know how to communicate with the
-user or take other remedial action. By allowing the exception to reach those methods,
-you make it possible for the exception to be processed by a competent handler.
+understand English? Your class may be used to build an application for users in another country. If you can’t tell the user, can you patch up the data and keep going? How? If you set a variable to zero, null, or an empty string, that may just cause the program to break later, with much greater mystery. Of course, some methods in the program know how to communicate with the user or take other remedial action. By allowing the exception to reach those methods, you make it possible for the exception to be processed by a competent handler.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. Suppose a method calls the Scanner constructor, which can throw a FileNotFoundException, and the nextInt method of the Scanner class, which can cause a
-NoSuchElementException or InputMismatchException. Which exceptions should be
-included in the throws clause?
+1. Suppose a method calls the Scanner constructor, which can throw a FileNotFoundException, and the nextInt method of the Scanner class, which can cause a NoSuchElementException or InputMismatchException. Which exceptions should be included in the throws clause?
 
 2. Why is a NullPointerException not a checked exception?
 				</text>
 			</page>
 			<page title="Catching Exceptions">
 				<text>
-Every exception should be handled somewhere in your program. If an exception
-has no handler, an error message is printed, and your program terminates. That may
-be fine for a student program. But you would not want a professionally written
-program to die just because some method detected an unexpected error. Therefore,
-you should install exception handlers for all exceptions that your program might
+Every exception should be handled somewhere in your program. If an exception has no handler, an error message is printed, and your program terminates. That may be fine for a student program. But you would not want a professionally written program to die just because some method detected an unexpected error. Therefore, you should install exception handlers for all exceptions that your program might
 throw.
 
-You install an exception handler with the try/catch statement. Each try block
-contains one or more statements that may cause an exception. Each catch clause
-contains the handler for an exception type. Here is an example:
-
+You install an exception handler with the try/catch statement. Each try block contains one or more statements that may cause an exception. Each catch clause contains the handler for an exception type. Here is an example:
+```
 try
 {
 	String filename = . . .;
@@ -2579,74 +2438,49 @@ catch (NumberFormatException exception)
 {
 	System.out.println("Input was not a number");
 }
+```
+Three exceptions may be thrown in this try block: The Scanner constructor can throw a FileNotFoundException, Scanner.next can throw a NoSuchElementException, and Integer.parseInt can throw a NumberFormatException. If any of these exceptions is actually thrown, then the rest of the instructions in the try block are skipped. Here is what happens for the various exception types:
 
-Three exceptions may be thrown in this try block: The Scanner constructor can
-throw a FileNotFoundException, Scanner.next can throw a NoSuchElementException, and
-Integer.parseInt can throw a NumberFormatException.
-If any of these exceptions is actually thrown, then the rest of the instructions in
-the try block are skipped. Here is what happens for the various exception types:
+	• If a FileNotFoundException is thrown, then the catch clause for the IOException is executed. (Recall that FileNotFoundException is a subclass of IOException.)
+	• If a NumberFormatException occurs, then the second catch clause is executed. 
+	• A NoSuchElementException is not caught by any of the catch clauses. The exception remains thrown until it is caught by another try block or the main method terminates.
 
-	• If a FileNotFoundException is thrown, then the catch clause for the IOException is
-	  executed. (Recall that FileNotFoundException is a subclass of IOException.)
-	• If a NumberFormatException occurs, then the second catch clause is executed.
-	• A NoSuchElementException is not caught by any of the catch clauses. The
-	  exception remains thrown until it is caught by another try block or the main
-	  method terminates.
-When the catch (IOException exception) block is executed, then some method in the
-try block has failed with an IOException. The variable exception contains a reference
+When the catch (IOException exception) block is executed, then some method in the try block has failed with an IOException. The variable exception contains a reference
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Exceptions/10.png</image>
 				<text>
-to the exception object that was thrown. The catch clause can analyze that object to
-find out more details about the failure. For example, you can get a printout of the
-chain of method calls that lead to the exception, by calling
+to the exception object that was thrown. The catch clause can analyze that object to find out more details about the failure. For example, you can get a printout of the chain of method calls that lead to the exception, by calling
+```
 exception.printStackTrace()
+```
+In these sample catch clauses, we merely inform the user of the source of the problem. A better way of dealing with the exception would be to give the user another chance to provide a correct input.
 
-In these sample catch clauses, we merely inform the user of the source of the problem.
-A better way of dealing with the exception would be to give the user another
-chance to provide a correct input.
-
-It is important to remember that you should place catch clauses only in methods
-in which you can competently handle the particular exception type.
+It is important to remember that you should place catch clauses only in methods in which you can competently handle the particular exception type.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
-1. Suppose the file with the given file name exists and has no contents. Trace the
-flow of execution in the try block in this section.
+1. Suppose the file with the given file name exists and has no contents. Trace the flow of execution in the try block in this section.
 
 2. Is there a difference between catching checked and unchecked exceptions?
 				</text>
 			</page>
 			<page title="Designing Exception Types">
 				<text>
-Sometimes none of the standard exception types describe your particular error
-condition well enough. In that case, you can design your own exception class. Consider
-a bank account. Let’s report an InsufficientFundsException when an attempt is made
-to withdraw an amount from a bank account that exceeds the current balance.
-
+Sometimes none of the standard exception types describe your particular error condition well enough. In that case, you can design your own exception class. Consider a bank account. Let’s report an InsufficientFundsException when an attempt is made to withdraw an amount from a bank account that exceeds the current balance.
+```
 if (amount > balance)
 {
 	throw new InsufficientFundsException(
 	"withdrawal of " + amount + " exceeds balance of " + balance);
 }
+```
+Now you need to provide the InsufficientFundsException class. Should it be a checked or an unchecked exception? Is it the fault of some external event, or is it the fault of the programmer? We take the position that the programmer could have prevented the exceptional condition—after all, it would have been an easy matter to check whether amount &lt;= account.getBalance() before calling the withdraw method.
 
-Now you need to provide the InsufficientFundsException class. Should it be a
-checked or an unchecked exception? Is it the fault of some external event, or is it the
-fault of the programmer? We take the position that the programmer could have prevented
-the exceptional condition—after all, it would have been an easy matter to
-check whether amount &lt;= account.getBalance() before calling the withdraw method.
-Therefore, the exception should be an unchecked exception and extend the RuntimeException
-class or one of its subclasses.
+Therefore, the exception should be an unchecked exception and extend the RuntimeException class or one of its subclasses.
 
-It is a good idea to extend an appropriate class in the exception hierarchy. For
-example, we can consider an InsufficientFundsException a special case of an
-IllegalArgumentException. This enables other programmers to catch the exception as an
-IllegalArgumentException if they are not interested in the exact nature of the problem.
-It is customary to provide two constructors for an exception class: a constructor
-with no parameters and a constructor that accepts a message string describing the
-reason for the exception. Here is the declaration of the exception class.
-
+It is a good idea to extend an appropriate class in the exception hierarchy. For example, we can consider an InsufficientFundsException a special case of an IllegalArgumentException. This enables other programmers to catch the exception as an IllegalArgumentException if they are not interested in the exact nature of the problem. It is customary to provide two constructors for an exception class: a constructor with no parameters and a constructor that accepts a message string describing the reason for the exception. Here is the declaration of the exception class.
+```
 public class InsufficientFundsException extends IllegalArgumentException
 {
 	public InsufficientFundsException() {}
@@ -2655,18 +2489,15 @@ public class InsufficientFundsException extends IllegalArgumentException
 		super(message);
 	}
 }
-
-When the exception is caught, its message string can be retrieved using the getMessage
-method of the Throwable class.
+```
+When the exception is caught, its message string can be retrieved using the getMessage method of the Throwable class.
 				</text>
 			</page>
 			<page title="Self Check">
 				<text>
 1. What is the purpose of the call super(message) in the second InsufficientFundsException constructor?
 
-2. Suppose you read bank account data from a file. Contrary to your expectation,
-the next input value is not of type double. You decide to implement a BadDataException.
-Which exception class should you extend?
+2. Suppose you read bank account data from a file. Contrary to your expectation, the next input value is not of type double. You decide to implement a BadDataException. Which exception class should you extend?
 				</text>
 			</page>
 		</pages>
@@ -2678,84 +2509,41 @@ Which exception class should you extend?
 		<pages>
 			<page>
 				<text>
-A Java program consists of a collection of classes. So far, most of your
-programs have consisted of a small number of classes. As programs get larger,
-however, simply distributing the classes over multiple ﬁles isn’t enough.
-An additional structuring mechanism is needed.
+A Java program consists of a collection of classes. So far, most of your programs have consisted of a small number of classes. As programs get larger, however, simply distributing the classes over multiple ﬁles isn’t enough. An additional structuring mechanism is needed.
 
-In Java, packages provide this structuring mechanism. A Java package is a
-set of related classes. For example, the Java library consists of several
-hundred packages, some of which are listed in Table 1.
+In Java, packages provide this structuring mechanism. A Java package is a set of related classes. For example, the Java library consists of several hundred packages, some of which are listed in Table 1.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Packages/2.png</image>
 			</page>
 			<page title="Organizing Packages">
 				<text>
-To put one of your classes in a package, you must place a line package packageName;
-as the ﬁrst instruction in the source ﬁle containing the class. A package name
-consists of one or more identiﬁers separated by periods. For example, let’s put
-the Financial class introduced in this chapter into a package named com.horstmann.bigjava.
-The Financial.java ﬁle must start as follows:
-
+To put one of your classes in a package, you must place a line package packageName; as the ﬁrst instruction in the source ﬁle containing the class. A package name consists of one or more identiﬁers separated by periods. For example, let’s put the Financial class introduced in this chapter into a package named com.horstmann.bigjava. The Financial.java ﬁle must start as follows:
+```
 package com.horstmann.bigjava;
 public class Financial {   . . . }
-
-In addition to the named packages (such as java.util or com.horstmann.bigjava),
-there is a special package, called the default package, which has no name. If you did
-not include any package statement at the top of your source ﬁle, its classes are placed
+```
+In addition to the named packages (such as java.util or com.horstmann.bigjava), there is a special package, called the default package, which has no name. If you did not include any package statement at the top of your source ﬁle, its classes are placed
 in the default package.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Packages/4.png</image>
 			</page>
 			<page title="Importing Packages">
 				<text>
-If you want to use a class from a package, you can refer to it by its full name
-(package name plus class name). For example, java.util.Scanner refers to the Scanner
-class in the java.util package:
-
+If you want to use a class from a package, you can refer to it by its full name (package name plus class name). For example, java.util.Scanner refers to the Scanner class in the java.util package:
+```
 java.util.Scanner in = new java.util.Scanner(System.in);
-
-Naturally, that is somewhat inconvenient. You can instead import a name with an import
-statement: import java.util.Scanner; Then you can refer to the class as Scanner without
-the package preﬁx. You can import all classes of a package with an import statement that
-ends in .*. For example, you can use the statement import java.util.*; to import all
-classes from the java.util package. That statement lets you refer to classes like Scanner
-or Random without a java.util preﬁx. However, you never need to import the classes in the
-java.lang package explicitly. That is the package containing the most basic Java classes,
-such as Math and Object. These classes are always available to you. In effect, an automatic
-import java.lang.*; statement has been placed into every source ﬁle. Finally, you don’t
-need to import other classes in the same package. For example, when you implement the
-class homework1.Tester, you don’t need to import the class homework1.Bank. The compiler
-will ﬁnd the Bank class without an import statement because it is located in the same
+```
+Naturally, that is somewhat inconvenient. You can instead import a name with an import statement: import java.util.Scanner; Then you can refer to the class as Scanner without the package preﬁx. You can import all classes of a package with an import statement that ends in .*. For example, you can use the statement import java.util.*; to import all classes from the java.util package. That statement lets you refer to classes like Scanner or Random without a java.util preﬁx. However, you never need to import the classes in the java.lang package explicitly. That is the package containing the most basic Java classes, such as Math and Object. These classes are always available to you. In effect, an automatic import java.lang.*; statement has been placed into every source ﬁle. Finally, you don’t need to import other classes in the same package. For example, when you implement the class homework1.Tester, you don’t need to import the class homework1.Bank. The compiler will ﬁnd the Bank class without an import statement because it is located in the same
 package, homework1.
 
-Placing related classes into a package is clearly a convenient mechanism to organize classes.
-However, there is a more important reason for packages: to avoid name clashes. In a large
-project, it is inevitable that two people will come up with the same name for the same concept.
-This even happens in the standard Java class library (which has now grown to thousands of
-classes). There is a class Timer in the java.util package and another class called Timer in
-the javax.swing package. You can still tell the Java compiler exactly which Timer class you
-need, simply by referring to them as java.util.Timer and javax.swing.Timer.
+Placing related classes into a package is clearly a convenient mechanism to organize classes. However, there is a more important reason for packages: to avoid name clashes. In a large project, it is inevitable that two people will come up with the same name for the same concept. This even happens in the standard Java class library (which has now grown to thousands of classes). There is a class Timer in the java.util package and another class called Timer in the javax.swing package. You can still tell the Java compiler exactly which Timer class you need, simply by referring to them as java.util.Timer and javax.swing.Timer.
 
-Of course, for the package-naming convention to work, there must be some way to ensure that
-package names are unique. It wouldn’t be good if the car maker BMW placed all its Java code
-into the package bmw, and some other programmer (perhaps Britney M. Walters) had the same
-bright idea. To avoid this problem, the inventors of Java recommend that you use a package-naming
-scheme that takes advantage of the uniqueness of Internet domain names.
+Of course, for the package-naming convention to work, there must be some way to ensure that package names are unique. It wouldn’t be good if the car maker BMW placed all its Java code into the package bmw, and some other programmer (perhaps Britney M. Walters) had the same bright idea. To avoid this problem, the inventors of Java recommend that you use a package-naming scheme that takes advantage of the uniqueness of Internet domain names.
 
-For example, I have a domain name horstmann.com, and there is nobody else on the planet with
-the same domain name. (I was lucky that the domain name horstmann.com had not been taken by
-anyone else when I applied. If your name is Walters, you will sadly ﬁnd that someone else beat
-you to  walters.com.) To get a package name, turn the domain name around to produce a package
-name preﬁx, such as com.horstmann.
+For example, I have a domain name horstmann.com, and there is nobody else on the planet with the same domain name. (I was lucky that the domain name horstmann.com had not been taken by anyone else when I applied. If your name is Walters, you will sadly ﬁnd that someone else beat you to  walters.com.) To get a package name, turn the domain name around to produce a package name preﬁx, such as com.horstmann.
 
-If you don’t have your own domain name, you can still create a package name that has a high
-probability of being unique by writing your e-mail address backwards. For example, if Britney
-Walters has an e-mail address walters@cs.sjsu.edu, then she can use a package name
-edu.sjsu.cs.walters for her own classes. Some instructors will want you to place each of your
-assignments into a separate package, such as homework1, homework2, and so on. The reason is
-again to avoid name collision. You can have two classes, homework1.Bank and homework2.Bank,
-with slightly different properties.
+If you don’t have your own domain name, you can still create a package name that has a high probability of being unique by writing your e-mail address backwards. For example, if Britney Walters has an e-mail address walters@cs.sjsu.edu, then she can use a package name
+edu.sjsu.cs.walters for her own classes. Some instructors will want you to place each of your assignments into a separate package, such as homework1, homework2, and so on. The reason is again to avoid name collision. You can have two classes, homework1.Bank and Homework2.Bank, with slightly different properties.
 				</text>
 			</page>
 		</pages>
