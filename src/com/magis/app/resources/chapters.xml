@@ -2022,27 +2022,19 @@ snow.
 1729
 C++
 
-(Note the period after snow—it is considered a part of the word because it is no white space.) Here is precisely
-what happens when the next method is executed. Input characters that are white space are consumed—that is, removed
-from the input. However, they do not become part of the word. The first character that is not white space becomes
-the first character of the word. More characters are added until either another white space character occurs, or the
-end of the input has been reached.
+(Note the period after snow—it is considered a part of the word because it is no white space.) Here is precisely what happens when the next method is executed. Input characters that are white space are consumed—that is, removed from the input. However, they do not become part of the word. The first character that is not white space becomes the first character of the word. More characters are added until either another white space character occurs, or the end of the input has been reached.
 
-Sometimes, you want to read just the words and discard anything that isn’t a letter. You achieve this task by calling
-the useDelimiter method on your Scanner object as follows:
-
+Sometimes, you want to read just the words and discard anything that isn’t a letter. You achieve this task by calling the ```useDelimiter``` method on your ```Scanner``` object as follows:
+```
 Scanner in = new Scanner(. . .);
 in.useDelimiter("[^A-Za-z]+");
-
-Here, we set the character pattern that separates words to “any sequence of characters other than letters”. (The
-notation used for describing the character pattern is called a regular expression. See Productivity Hint 11.1 on
-page 477 if you are interested in more details.) With this setting, punctuation and numbers are stripped off from
-the words returned by the next method.
+```
+Here, we set the character pattern that separates words to “any sequence of characters other than letters”. (The notation used for describing the character pattern is called a regular expression.
 				</text>
 			</page>
 			<page title="Processing Lines">
 				<text>
-When each line of a file is a data record, it is often best to read entire lines with the nextLine method:
+When each line of a file is a data record, it is often best to read entire lines with the ```nextLine``` method:
 
 String line = in.nextLine();
 
