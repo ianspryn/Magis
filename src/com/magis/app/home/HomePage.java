@@ -45,6 +45,8 @@ public class HomePage {
     private  static Label greetingLabel;
     private ArrayList<HBox> chapterBoxes;
     private static ArrayList<RingProgressIndicator> ringProgressIndicators;
+    private static HBox topBox;
+    private static VBox statsBox;
     private static HBox recentBox;
     private HBox settingsBox;
     private VBox masterVbox;
@@ -64,8 +66,8 @@ public class HomePage {
         int numChapters = Main.lessonModel.getNumChapters();
         StudentModel.Student student = Main.studentModel.getStudent();
         for (int i = 0; i < numChapters; i++) ringProgressIndicators.get(i).setProgress(student.getChapter(i).getProgress());
-        if (student.getRecentPage() != -1) { //make sure we don't add to the recentBox until student visited a page
-            recentBox.setVisible(true);
+        if (student.getRecentChapter() != -1) { //make sure we don't add to the recentBox until student visited a page
+            if (!topBox.getChildren().contains(recentBox)) topBox.getChildren().add(0, recentBox); //add the recent box once
             recentBox.getChildren().clear();
             recentBox.getChildren().add(SmartContinue.generate());
             greetingLabel.setText(generateGreetingText());
@@ -78,13 +80,14 @@ public class HomePage {
     }
 
     /**
-     * Since the home page fades out on every page exit, we must fade everything back in if the user turns off animations.
+     * Since the home page fades out on every page exit (and the fact that it's an instance, not static and therefore and not regenerated),
+     * we must fade everything back in if the user turns off animations.
      * Else, the homepage will remain invisible
      */
     public void disableAnimations() {
         UIComponents.fadeAndTranslate(masterVbox, 0, 0.2, 0, 0, -10, 0);
         UIComponents.fadeAndTranslate(greetingLabel, 0, 0.2, 0, 0, -10, 0);
-        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(recentBox, 0, 0.2, 0, 0, -10, 0);
+        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(topBox, 0, 0.2, 0, 0, -10, 0);
         for (HBox chapterBox : chapterBoxes) UIComponents.fadeAndTranslate(chapterBox, 0, 0.2, 0, 0, -10, 0);
         UIComponents.fadeAndTranslate(settingsBox, 0,0.2,0,0,-10,0);
     }
@@ -93,7 +96,7 @@ public class HomePage {
         if (!Main.useAnimations) return;
         UIComponents.fadeAndTranslate(masterVbox, 0.3, 0.2, 0, 0, -10, 0);
         UIComponents.fadeAndTranslate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
-        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
+        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(topBox, 0.3, 0.2, 0, 0, -10, 0);
         for (int i = 0; i < chapterBoxes.size(); i++) UIComponents.fadeAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
         UIComponents.fadeAndTranslate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
     }
@@ -122,12 +125,33 @@ public class HomePage {
         masterVbox.getChildren().add(greetingLabel);
 
 
+
+        //Activity and Statistics Page
+        statsBox = new VBox();
+        statsBox.getStyleClass().add("recent-stats-box");
+        statsBox.setMaxWidth(350);
+        statsBox.setPrefWidth(350);
+        statsBox.setMinHeight(100);
+        statsBox.setAlignment(Pos.TOP_LEFT);
+
+        Label statsTitle = new Label("Statistics");
+        statsTitle.getStyleClass().add("chapter-title-text");
+        statsTitle.setTextAlignment(TextAlignment.LEFT);
+        statsTitle.setWrapText(true);
+
+        Label statsText = new Label("Click here to view statistics, insights, feedback, history, and more.");
+        statsText.getStyleClass().add("chapter-description-text");
+        statsText.setPadding(new Insets(25,0,0,0));
+
+        statsBox.getChildren().addAll(statsTitle, statsText);
+
+        statsBox.setOnMouseClicked(e -> goToStats(masterVbox));
+        statsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        statsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
         //Last Activity
         recentBox = new HBox();
-        recentBox.setVisible(false);
-        vBox.getChildren().add(recentBox);
-        //master box
-        recentBox.getStyleClass().add("recent-box");
+        recentBox.getStyleClass().add("recent-stats-box");
         recentBox.setMaxWidth(350);
         recentBox.setMinHeight(100);
         recentBox.setAlignment(Pos.CENTER_LEFT);
@@ -136,10 +160,18 @@ public class HomePage {
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        if (student.getRecentChapter() > -1) {
-            recentBox.getChildren().add(SmartContinue.generate());
-            recentBox.setVisible(true);
-        }
+        if (student.getRecentChapter() > -1) recentBox.getChildren().add(SmartContinue.generate());
+
+        /*
+        Last Activity and statistics box
+         */
+        topBox = new HBox();
+        topBox.setAlignment(Pos.CENTER);
+        topBox.setSpacing(50);
+        if (Main.studentModel.getStudent().getRecentChapter() > -1) topBox.getChildren().add(recentBox);
+        topBox.getChildren().add(statsBox);
+        vBox.getChildren().add(topBox);
+
 
         int numChapters = Main.lessonModel.getChapters().size();
 
@@ -302,6 +334,20 @@ public class HomePage {
     }
 
     /**
+     * Move up and fade out at the same time the home page before going to the statistics page
+     * @param node the desired node to fadeAndTranslate first
+     */
+    private void goToStats(Node node) {
+        if (Main.useAnimations) {
+            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+            parallelTransition.play();
+            parallelTransition.setOnFinished(e -> StatsPage.Page());
+        } else {
+            StatsPage.Page();
+        }
+    }
+
+    /**
      * Move up and fade out at the same time the home page before going to the lesson page
      * @param node the desired node to fadeAndTranslate first
      * @param chapterIndex the desired chapter to switch scenes to
@@ -310,10 +356,8 @@ public class HomePage {
         if (Main.useAnimations) {
             ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
             parallelTransition.play();
-//            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
             parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex));
         } else {
-//            LessonPage.Page(chapterIndex, false);
             new com.magis.app.page.LessonPage(chapterIndex);
         }
     }
@@ -322,7 +366,6 @@ public class HomePage {
         if (Main.useAnimations) {
             ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
             parallelTransition.play();
-//            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
             parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex, page));
         } else {
             new com.magis.app.page.LessonPage(chapterIndex, page);
