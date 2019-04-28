@@ -69,4 +69,7 @@ public class ExamPage extends Page {
         }
     }
 
+    public ExamPageContent getExamPageContent() {
+        return examPageContent;
+    }
 }

@@ -44,13 +44,13 @@ public class QuizzesModelTest {
     }
 
     @Test
-    public void getIncorrectAnswers() {
+    public void getAnswers() {
         QuizzesModel quizzesModel = new QuizzesModel();
         ArrayList<String> expectedAnswers = new ArrayList<>();
         expectedAnswers.add("asdf1");
         expectedAnswers.add("asdf2");
         expectedAnswers.add("asdf3");
-        ArrayList<String> actualAnswers = quizzesModel.getChapters("Primitive Types").getQuestion(0).getIncorrectAnswers();
+        ArrayList<String> actualAnswers = quizzesModel.getChapters("Primitive Types").getQuestion(0).getAnswers();
         Assert.assertEquals(expectedAnswers,actualAnswers);
     }
     */

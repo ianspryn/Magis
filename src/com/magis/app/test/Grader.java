@@ -44,10 +44,6 @@ public class Grader {
     public void addCorrectAnswer(int key, ArrayList<String> answer) {
         correctAnswers.put(key, answer);
     }
-
-    public ArrayList<String> getCorrectAnswer(int key) {
-        return correctAnswers.get(key);
-    }
     
     public void grade() {
         for (Map.Entry<Integer, ArrayList<String>> student : studentAnswers.entrySet()) {
