@@ -6,6 +6,7 @@ import com.magis.app.UI.IntelligentTutor;
 import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.models.StudentModel;
+import com.magis.app.page.HistoryExamPage;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,8 +27,10 @@ import javafx.scene.text.TextFlow;
 public class StatsPage {
 
     private static StudentModel.Student student;
-    private static ScrollPane scrollPane;
+
     private static StackPane master;
+    private static ScrollPane scrollPane;
+    private static VBox mastervBox;
 
     /**
      * The Main page for the stats page
@@ -35,57 +38,13 @@ public class StatsPage {
     public static void Page() {
         student = Main.studentModel.getStudent();
 
-        /*
-        Master
-         */
-        master = new StackPane();
-        master.getStyleClass().add("background");
-        scrollPane = new ScrollPane();
-        UIComponents.fadeAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
-        scrollPane.getStyleClass().add("master-scrollpane");
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setFitToWidth(true);
+        UIComponents.GenericPage page = new UIComponents.GenericPage();
+        master = page.getMaster();
+        scrollPane = page.getScrollPane();
+        mastervBox = page.getMastervBox();
+        page.getBackButton().setOnMouseClicked(e -> HomePage.goHome(scrollPane));
+        page.getPageTitle().setText("Statistics");
 
-
-
-        /*
-        Middle
-         */
-        VBox mastervBox = new VBox();
-        mastervBox.setAlignment(Pos.TOP_CENTER);
-        mastervBox.setPadding(new Insets(25, 25, 25, 25));
-        mastervBox.setMaxWidth(1500);
-        //Center the content in the scrollpane
-        StackPane contentHolder = new StackPane(mastervBox);
-        contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
-                scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
-
-        scrollPane.setContent(contentHolder);
-
-        /*
-        Back button and Page title
-         */
-        AnchorPane top = new AnchorPane();
-        top.setPadding(new Insets(0, 0, 50, 0));
-
-        //back button
-        JFXButton backButton = new JFXButton("Back");
-        backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
-        backButton.setOnMouseClicked(e -> HomePage.goHome(scrollPane));
-        backButton.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        backButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
-
-        //page title
-        Label pageTitle = new Label("Statistics");
-        pageTitle.getStyleClass().add("section-title");
-
-        top.getChildren().addAll(backButton, pageTitle);
-        AnchorPane.setLeftAnchor(backButton, 0.0);
-        AnchorPane.setRightAnchor(pageTitle, 0.0);
-
-        mastervBox.getChildren().add(top);
 
         /*
         Overall Progress
@@ -252,7 +211,8 @@ public class StatsPage {
                 HBox quiz = new HBox();
                 quiz.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
                 quiz.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-//                quiz.setOnMouseClicked(e -> goToChapterInsights(scrollPane, chapterIndex));
+                int index = counter;
+                quiz.setOnMouseClicked(e -> goToHistoryExam(scrollPane, chapterIndex, index, "quiz"));
                 quiz.setOnMouseEntered(e -> {
                     Main.scene.setCursor(Cursor.HAND);
                     UIComponents.scale(quiz, 0.1, 1.02, 1.02);
@@ -263,7 +223,7 @@ public class StatsPage {
                 });
 
                 quiz.setSpacing(50);
-                quiz.getStyleClass().addAll("chapter-box", "stats-chapter-box");
+                quiz.getStyleClass().addAll("inner-chapter-box", "stats-box");
 
                 VBox score = new VBox();
                 score.setAlignment(Pos.CENTER);
@@ -316,7 +276,8 @@ public class StatsPage {
             int counter = 0;
             for (StudentModel.Student.Attempt attempt : student.getTest(chapterIndex).getAttempts()) {
                 HBox test = new HBox();
-//                test.setOnMouseClicked(e -> goToChapterInsights(scrollPane, chapterIndex));
+                int index = counter;
+                test.setOnMouseClicked(e -> goToHistoryExam(scrollPane, chapterIndex, index, "test"));
                 test.setOnMouseEntered(e -> {
                     Main.scene.setCursor(Cursor.HAND);
                     UIComponents.scale(test, 0.1, 1.02, 1.02);
@@ -326,7 +287,7 @@ public class StatsPage {
                     UIComponents.scale(test, 0.1, 1, 1);
                 });
                 test.setSpacing(50);
-                test.getStyleClass().addAll("chapter-box", "stats-chapter-box");
+                test.getStyleClass().addAll("chapter-box", "stats-box");
 
                 VBox score = new VBox();
                 score.setAlignment(Pos.CENTER);
@@ -397,7 +358,7 @@ public class StatsPage {
         VBox chapterBox = new VBox();
         chapterBox.setAlignment(Pos.CENTER);
         chapterBox.setPrefWidth(maxWidth);
-        chapterBox.getStyleClass().addAll("chapter-box", "stats-chapter-box");
+        chapterBox.getStyleClass().addAll("chapter-box", "stats-box");
 //        chapterBox.setAlignment(Pos.CENTER);
         chapterBox.setOnMouseClicked(e -> goToChapterInsights(scrollPane, chapterIndex));
         chapterBox.setOnMouseEntered(e -> {
@@ -520,7 +481,24 @@ public class StatsPage {
     /**
      * Move up and fade out at the same time the main page before going to the desired chapter's insights page
      *
-     * @param node         the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeAndTranslate first
+     * @chapterIndex the chapter index
+     * @index the index of the exam attempt
+     * @type the type of exam (test or quiz)
+     * @param chapterIndex the desired chapter to switch scenes to
+     */
+    private static void goToHistoryExam(Node node, int chapterIndex, int index, String type) {
+        if (Main.useAnimations) {
+            UIComponents.transitionPage(node).setOnFinished(e -> new HistoryExamPage(chapterIndex, index, type));
+        } else {
+            new HistoryExamPage(chapterIndex, index, type);
+        }
+    }
+
+    /**
+     * Move up and fade out at the same time the main page before going to the desired chapter's insights page
+     *
+     * @param node the desired node to fadeAndTranslate first
      * @param chapterIndex the desired chapter to switch scenes to
      */
     private static void goToChapterInsights(Node node, int chapterIndex) {

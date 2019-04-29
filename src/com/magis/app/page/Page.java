@@ -5,11 +5,10 @@ import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public abstract class Page {
 
@@ -84,6 +83,17 @@ public abstract class Page {
          */
         bottomNavigation.getStyleClass().add("navigation-content");
         bottomNavigation.setPadding(new Insets(10,10,10,10));
+
+        //keyboard navigation
+        Main.scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.LEFT) {
+                if (currentPage > 0) updatePage(currentPage - 1);
+            }
+
+            if (e.getCode() == KeyCode.RIGHT) {
+                if (currentPage < numPages - 1) updatePage(currentPage + 1);
+            }
+        });
 
         //left navigation
         leftButton = UIComponents.createNavigationButton("<");

@@ -842,6 +842,10 @@ public class StudentModel {
                 return attempts;
             }
 
+            public Attempt getAttempt(int index) {
+                return attempts.get(index);
+            }
+
             Quiz(Node quiz) {
                 this.quiz = quiz;
 
@@ -1012,6 +1016,10 @@ public class StudentModel {
 
             public ArrayList<Attempt> getAttempts() {
                 return attempts;
+            }
+
+            public Attempt getAttempt(int index) {
+                return attempts.get(index);
             }
 
             Test (Node test) {

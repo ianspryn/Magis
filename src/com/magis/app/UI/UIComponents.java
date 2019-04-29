@@ -1,15 +1,18 @@
 package com.magis.app.UI;
 
+import com.jfoenix.controls.JFXButton;
 import com.magis.app.Main;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import javafx.animation.*;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -22,6 +25,88 @@ import javafx.util.Duration;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UIComponents {
+
+    public static class GenericPage {
+
+        private StackPane master;
+        private ScrollPane scrollPane;
+        private VBox mastervBox;
+        private JFXButton backButton;
+        private Label pageTitle;
+
+        public GenericPage() {
+            /*
+            Master
+             */
+            master = new StackPane();
+            master.getStyleClass().add("background");
+            scrollPane = new ScrollPane();
+            UIComponents.fadeAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
+            scrollPane.getStyleClass().add("master-scrollpane");
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setFitToWidth(true);
+
+
+
+            /*
+            Middle
+             */
+            mastervBox = new VBox();
+            mastervBox.setAlignment(Pos.TOP_CENTER);
+            mastervBox.setPadding(new Insets(25, 25, 25, 25));
+            mastervBox.setMaxWidth(1500);
+            //Center the content in the scrollpane
+            StackPane contentHolder = new StackPane(mastervBox);
+            contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
+                    scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
+
+            scrollPane.setContent(contentHolder);
+
+            /*
+            Back button and Page title
+             */
+            AnchorPane top = new AnchorPane();
+            top.setPadding(new Insets(0, 0, 50, 0));
+
+            //back button
+            backButton = new JFXButton("Back");
+            backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
+            backButton.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            backButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+            backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
+
+            //page title
+            pageTitle = new Label("Statistics");
+            pageTitle.getStyleClass().add("section-title");
+
+            top.getChildren().addAll(backButton, pageTitle);
+            AnchorPane.setLeftAnchor(backButton, 0.0);
+            AnchorPane.setRightAnchor(pageTitle, 0.0);
+
+            mastervBox.getChildren().add(top);
+        }
+
+        public StackPane getMaster() {
+            return master;
+        }
+
+        public ScrollPane getScrollPane() {
+            return scrollPane;
+        }
+
+        public VBox getMastervBox() {
+            return mastervBox;
+        }
+
+        public JFXButton getBackButton() {
+            return backButton;
+        }
+
+        public Label getPageTitle() {
+            return pageTitle;
+        }
+    }
 
     public static HBox CreateTitleBar() {
         HBox hBox = new HBox();

@@ -74,6 +74,10 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #ccc;
 }
 
+.inner-chapter-box {
+    -fx-background-color: #404040;
+}
+
 .chapter-box, .recent-stats-box, .settings-box {
     -fx-background-color: #272727;
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);

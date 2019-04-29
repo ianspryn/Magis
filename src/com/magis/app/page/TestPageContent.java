@@ -7,4 +7,14 @@ public class TestPageContent extends ExamPageContent {
         super(chapterIndex, Main.numQuestionsPerTest.get(Main.lessonModel.getChapter(chapterIndex).getTitle()), Main.testsModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()));
         examSaver.setType("test");
     }
+
+    @Override
+    void update(int pageIndex) {
+
+    }
+
+    @Override
+    void buildPage(int index) {
+
+    }
 }
