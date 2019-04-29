@@ -5,7 +5,7 @@
     -fx-background: #111;
 }
 
-.chapter-description-text {
+.box-description {
     -fx-text-fill: #eee;
     -fx-fill: #eee;
 }
@@ -14,12 +14,12 @@
     -fx-fill: #fff;
 }
 
-.page-title-text {
+.page-box-title {
     -fx-fill: #eee;
 }
 
-.lesson-text {
-    -fx-text-fill: #fff1f7;
+.lesson-text-color {
+    -fx-text-fill: #fff;
 }
 
 .code-text {
@@ -52,6 +52,10 @@ The greeting ("Hello, Ian!") on the home page
 
 /* the chevron text for navigating pages */
 .navigation-text {
+    -fx-fill: #eee;
+}
+
+.text-no-color {
     -fx-fill: #eee;
 }
 

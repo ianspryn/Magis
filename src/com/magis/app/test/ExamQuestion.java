@@ -19,15 +19,19 @@ public class ExamQuestion {
         this.question = question;
     }
 
-    public void setAnswers(ArrayList<String> answers) {
+    public void addAnswers(ArrayList<String> answers) {
         this.answers.addAll(answers);
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void addAnswer(String answer) {
+        this.answers.add(answer);
+    }
+
+    public void addCorrectAnswer(String correctAnswer) {
         correctAnswers.add(correctAnswer);
     }
 
-    public void setCorrectAnswers(ArrayList<String> correctAnswers) {
+    public void addCorrectAnswers(ArrayList<String> correctAnswers) {
         this.correctAnswers.addAll(correctAnswers);
     }
 

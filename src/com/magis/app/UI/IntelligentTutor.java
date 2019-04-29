@@ -11,14 +11,14 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-public class SmartContinue {
-    public static VBox generate() {
+public class IntelligentTutor {
+    public static VBox generateRecentActivity() {
         StudentModel.Student student = Main.studentModel.getStudent();
         VBox box = new VBox();
 
         //Title
         Label lastPlaceText = new Label();
-        lastPlaceText.getStyleClass().add("chapter-title-text");
+        lastPlaceText.getStyleClass().add("box-title");
         lastPlaceText.setTextAlignment(TextAlignment.LEFT);
         lastPlaceText.setWrapText(true);
         lastPlaceText.setText("Pick up where you left off?");
@@ -29,15 +29,15 @@ public class SmartContinue {
         lastPlaceSubText.setTextAlignment(TextAlignment.LEFT);
 
         Text text1 = new Text();
-        text1.getStyleClass().add("chapter-description-text");
+        text1.getStyleClass().add("box-description");
         Text text2 = new Text();
-        text2.getStyleClass().add("chapter-description-text");
+        text2.getStyleClass().add("box-description");
         Text text3 = new Text();
-        text3.getStyleClass().add("chapter-description-text");
+        text3.getStyleClass().add("box-description");
         Text text4 = new Text();
-        text4.getStyleClass().add("chapter-description-text");
+        text4.getStyleClass().add("box-description");
         Text text5 = new Text();
-        text5.getStyleClass().add("chapter-description-text");
+        text5.getStyleClass().add("box-description");
 
         LessonModel.ChapterModel chapter = Main.lessonModel.getChapter(student.getRecentChapter());
 
@@ -68,5 +68,11 @@ public class SmartContinue {
 
         box.getChildren().addAll(lastPlaceText, lastPlaceSubText);
         return box;
+    }
+
+    public static VBox generateInsights() {
+        VBox insights = new VBox();
+
+        return insights;
     }
 }

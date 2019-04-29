@@ -57,10 +57,6 @@ public class Grader {
                 }
             }
             numCorrectAnswers += (double) counter / (double) correctAnswer.size();
-            //if the student's answer matches the correct answer
-//            if (student.getValue().equals(correctAnswers.get(student.getKey()))) {
-//                numCorrectAnswers++;
-//            }
         }
         grade = 100.0 * numCorrectAnswers / (double) numQuestions;
         grade = Double.parseDouble(new DecimalFormat("#.##").format(grade));

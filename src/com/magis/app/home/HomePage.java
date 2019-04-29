@@ -1,18 +1,13 @@
 package com.magis.app.home;
 
 import com.jfoenix.controls.JFXScrollPane;
-import com.jfoenix.controls.JFXSpinner;
-import com.jfoenix.skins.JFXSpinnerSkin;
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
-import com.magis.app.UI.SmartContinue;
+import com.magis.app.UI.IntelligentTutor;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.icons.MaterialIcons;
 import com.magis.app.models.StudentModel;
 import com.magis.app.page.LessonPage;
-import com.magis.app.page.LessonSidePanel;
-import com.magis.app.page.Page;
-import com.magis.app.page.PageSidePanel;
 import com.magis.app.settings.SettingsPage;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
@@ -20,9 +15,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.CacheHint;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +29,8 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import static com.magis.app.UI.UIComponents.*;
 
 
 public class HomePage {
@@ -69,7 +64,7 @@ public class HomePage {
         if (student.getRecentChapter() != -1) { //make sure we don't add to the recentBox until student visited a page
             if (!topBox.getChildren().contains(recentBox)) topBox.getChildren().add(0, recentBox); //add the recent box once
             recentBox.getChildren().clear();
-            recentBox.getChildren().add(SmartContinue.generate());
+            recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
             greetingLabel.setText(generateGreetingText());
         }
     }
@@ -124,7 +119,21 @@ public class HomePage {
         greetingLabel.setPadding(new Insets(50,0,0,0));
         masterVbox.getChildren().add(greetingLabel);
 
+        /*
+        Last Activity and statistics box
+         */
 
+        //Last Activity
+        recentBox = new HBox();
+        recentBox.getStyleClass().add("recent-stats-box");
+        recentBox.setMaxWidth(350);
+        recentBox.setMinHeight(100);
+
+        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), student.getRecentPage()));
+        recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+        if (student.getRecentChapter() > -1) recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
 
         //Activity and Statistics Page
         statsBox = new VBox();
@@ -135,13 +144,14 @@ public class HomePage {
         statsBox.setAlignment(Pos.TOP_LEFT);
 
         Label statsTitle = new Label("Statistics");
-        statsTitle.getStyleClass().add("chapter-title-text");
-        statsTitle.setTextAlignment(TextAlignment.LEFT);
+        statsTitle.getStyleClass().add("box-title");
         statsTitle.setWrapText(true);
 
         Label statsText = new Label("Click here to view statistics, insights, feedback, history, and more.");
-        statsText.getStyleClass().add("chapter-description-text");
+        statsText.getStyleClass().add("box-description");
         statsText.setPadding(new Insets(25,0,0,0));
+        statsText.setWrapText(true);
+        statsText.setTextAlignment(TextAlignment.LEFT);
 
         statsBox.getChildren().addAll(statsTitle, statsText);
 
@@ -149,22 +159,7 @@ public class HomePage {
         statsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         statsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        //Last Activity
-        recentBox = new HBox();
-        recentBox.getStyleClass().add("recent-stats-box");
-        recentBox.setMaxWidth(350);
-        recentBox.setMinHeight(100);
-        recentBox.setAlignment(Pos.CENTER_LEFT);
-
-        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), student.getRecentPage()));
-        recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
-        if (student.getRecentChapter() > -1) recentBox.getChildren().add(SmartContinue.generate());
-
-        /*
-        Last Activity and statistics box
-         */
+        //Main box for last activity and statistics page
         topBox = new HBox();
         topBox.setAlignment(Pos.CENTER);
         topBox.setSpacing(50);
@@ -272,7 +267,7 @@ public class HomePage {
 
     private void buildChapterBox(int chapterIndex, HBox chapterBox) {
         //master box
-        chapterBox.getStyleClass().add("chapter-box");
+        chapterBox.getStyleClass().addAll("chapter-box", "home-chapter-box");
 
         chapterBox.setOnMouseClicked(e -> goToLesson(masterVbox, chapterIndex));
         chapterBox.setOnMouseEntered(e -> {
@@ -310,10 +305,10 @@ public class HomePage {
 
         //Title
         Label title = new Label();
-        title.getStyleClass().add("chapter-title-text");
+        title.getStyleClass().add("box-title");
         title.setTextAlignment(TextAlignment.RIGHT);
         title.setWrapText(true);
-        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle() + " - " + (chapterIndex + 1));
 
         AnchorPane topContent = new AnchorPane();
         topContent.getChildren().addAll(progressIndicator, title);
@@ -324,7 +319,7 @@ public class HomePage {
         Label description = new Label();
         description.setPrefWidth(550);
         description.setWrapText(true);
-        description.getStyleClass().add("chapter-description-text");
+        description.getStyleClass().add("box-description");
         description.setTextAlignment(TextAlignment.LEFT);
         description.setText(Main.lessonModel.getChapter(chapterIndex).getDescription());
 
@@ -339,9 +334,7 @@ public class HomePage {
      */
     private void goToStats(Node node) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-            parallelTransition.setOnFinished(e -> StatsPage.Page());
+            transitionPage(node).setOnFinished(e -> StatsPage.Page());
         } else {
             StatsPage.Page();
         }
@@ -354,19 +347,21 @@ public class HomePage {
      */
     private static void goToLesson(Node node, int chapterIndex) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-            parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex));
+            transitionPage(node).setOnFinished(e -> new LessonPage(chapterIndex));
         } else {
-            new com.magis.app.page.LessonPage(chapterIndex);
+            new LessonPage(chapterIndex);
         }
     }
 
+    /**
+     * Move up and fade out at the same time the home page before going to the lesson page
+     * @param node the desired node to fadeAndTranslate first
+     * @param chapterIndex the desired chapter to switch scenes to
+     * @param page the page within the chapter to navigate to
+     */
     private static void goToLesson(Node node, int chapterIndex, int page) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-            parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex, page));
+            transitionPage(node).setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex, page));
         } else {
             new com.magis.app.page.LessonPage(chapterIndex, page);
         }
@@ -378,9 +373,7 @@ public class HomePage {
      */
     private static void goToSettings(Node node) {
         if (Main.useAnimations) {
-            ParallelTransition pt = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            pt.play();
-            pt.setOnFinished(e -> SettingsPage.Page());
+            transitionPage(node).setOnFinished(e -> SettingsPage.Page());
         } else {
             SettingsPage.Page();
         }
@@ -392,28 +385,9 @@ public class HomePage {
      */
     public static void goHome(Node node) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-            parallelTransition.setOnFinished(e -> getInstance().Page());
+            transitionPage(node).setOnFinished(e -> getInstance().Page());
         } else {
             getInstance().Page();
         }
-    }
-
-
-    private static FadeTransition getFadeTransition(Node node) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-
-        return fadeTransition;
-    }
-
-    private static TranslateTransition getTranslateTransition(Node node) {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
-        translateTransition.setFromY(0);
-        translateTransition.setToY(-10); //move up
-
-        return translateTransition;
     }
 }

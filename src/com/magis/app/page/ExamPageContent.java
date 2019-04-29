@@ -101,12 +101,12 @@ public class ExamPageContent extends PageContent {
                     //get all of the correct answers (there may be 1 or more correct answers)
                     correctAnswers.addAll(exam.getQuestion(question).getCorrectAnswers());
                     //save the correct answers
-                    examQuestion.setCorrectAnswers(correctAnswers);
+                    examQuestion.addCorrectAnswers(correctAnswers);
                     ///add the incorrect answers and the correct answer to the ArrayList of possible answers
                     answers.addAll(exam.getQuestion(question).getIncorrectAnswers());
                     answers.addAll(correctAnswers);
                     //save all of the answers
-                    examQuestion.setAnswers(answers);
+                    examQuestion.addAnswers(answers);
                     //shuffle the order
                     Collections.shuffle(answers);
                     //add the correct answer to the grader for future grading
@@ -126,13 +126,13 @@ public class ExamPageContent extends PageContent {
                     //get the correct answer
                     correctAnswers.add(questionGenerator.getCorrectAnswer());
                     //save the correct answer
-                    examQuestion.setCorrectAnswers(correctAnswers);
+                    examQuestion.addCorrectAnswers(correctAnswers);
                     //add the correct answer to the grader for future grading
                     grader.addCorrectAnswer(questionIndex, correctAnswers);
                     //get the incorrect answers
                     answers = questionGenerator.getAnswers();
                     //save the incorrect answers
-                    examQuestion.setAnswers(answers);
+                    examQuestion.addAnswers(answers);
                     break;
             }
 
@@ -156,9 +156,12 @@ public class ExamPageContent extends PageContent {
                 //every time the student clicks a radio button, update the grader and exam saver with the new answer the student selected
                 int index = questionIndex;
                 toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-                    examQuestion.addStudentAnswer(newVal.getUserData().toString());
-                    if (oldVal != null) examQuestion.removeStudentAnswer(oldVal.getUserData().toString());
                     grader.addStudentAnswer(index, newVal.getUserData().toString());
+                    examQuestion.addStudentAnswer(newVal.getUserData().toString());
+                    if (oldVal != null) {
+                        grader.removeStudentAnswer(index, oldVal.getUserData().toString());
+                        examQuestion.removeStudentAnswer(oldVal.getUserData().toString());
+                    }
                 });
             } else {
                 ArrayList<JFXCheckBox> checkBoxes = new ArrayList<>();

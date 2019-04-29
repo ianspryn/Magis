@@ -6,7 +6,6 @@ import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
-import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -15,8 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class Main extends Application {
