@@ -1049,12 +1049,24 @@ public class StudentModel {
             private String timestamp;
             private ArrayList<ExamQuestion> examQuestions;
 
+            public void setTimestamp(String timestamp) {
+                this.timestamp = timestamp;
+            }
+
+            public void addExamQuestion(ExamQuestion examQuestion) {
+                examQuestions.add(examQuestion);
+            }
+
             public String getTimestamp() {
                 return timestamp;
             }
 
             public ArrayList<ExamQuestion> getExamQuestions() {
                 return examQuestions;
+            }
+
+            Attempt () {
+                examQuestions = new ArrayList<>();
             }
 
             Attempt (Node attempt) {
@@ -1136,10 +1148,19 @@ public class StudentModel {
             assert quizElement != null;
             quizElement.appendChild(attemptElement);
             Element timestamp = document.createElement("timestamp");
-            timestamp.appendChild(document.createTextNode(DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()))); //Sun, April 28 2019 at 11:57 PM
+            String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
+            timestamp.appendChild(document.createTextNode(timestampString));
             attemptElement.appendChild(timestamp);
 
+            Attempt attempt = new Attempt();
+            attempt.setTimestamp(timestampString);
+            //add the attempt to the Quiz class
+            getQuiz(examSaver.getChapterIndex()).getAttempts().add(attempt);
+
             for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
+                //add to the attempt class
+                attempt.addExamQuestion(examQuestion);
+
                 //question element
                 Element question = document.createElement("question");
                 attemptElement.appendChild(question);
@@ -1206,8 +1227,19 @@ public class StudentModel {
             Element attemptElement = document.createElement("attempt");
             assert test != null;
             test.appendChild(attemptElement);
+            Element timestamp = document.createElement("timestamp");
+            String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
+            timestamp.appendChild(document.createTextNode(timestampString));
+            attemptElement.appendChild(timestamp);
+
+            Attempt attempt = new Attempt();
+            attempt.setTimestamp(timestampString);
+            //add the attempt to the Quiz class
+            getTest(examSaver.getChapterIndex()).getAttempts().add(attempt);
 
             for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
+                //add to the attempt class
+                attempt.addExamQuestion(examQuestion);
                 //question element
                 Element question = document.createElement("question");
                 attemptElement.appendChild(question);
