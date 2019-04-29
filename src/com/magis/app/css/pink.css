@@ -58,3 +58,58 @@
 .code-text {
     -fx-border-color: #EC407A; /* Pink 400 */
 }
+
+/*******************************************************************************
+ *                                                                             *
+ * Scroll Bar			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.side-panel-scroll-bar .scroll-bar:vertical > .track-background, .side-panel-scroll-bar .scroll-bar:horizontal > .track-background {
+    -fx-background-color: #AD1457; /* Pink 800 */
+    -fx-background-insets: 0.0;
+}
+
+.side-panel-scroll-bar .scroll-bar:vertical > .thumb, .side-panel-scroll-bar .scroll-bar:horizontal > .thumb {
+    -fx-background-color: #880E4F; /* Pink 900 */
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 1.0;
+}
+
+/* Up- and Down-Button Padding */
+.side-panel-scroll-bar .scroll-bar:vertical > .increment-button, .side-panel-scroll-bar .scroll-bar:vertical > .decrement-button {
+    -fx-padding: 5 2 5 2;
+}
+
+/* Left- and Right-Button Padding */
+.side-panel-scroll-bar .scroll-bar:horizontal > .increment-button, .side-panel-scroll-bar .scroll-bar:horizontal > .decrement-button {
+    -fx-padding: 2 5 2 5;
+}
+
+.side-panel-scroll-bar .scroll-bar > .increment-button, .side-panel-scroll-bar .scroll-bar > .decrement-button, .side-panel-scroll-bar .scroll-bar:hover > .increment-button, .side-panel-scroll-bar .scroll-bar:hover > .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.side-panel-scroll-bar .scroll-bar > .increment-button > .increment-arrow, .side-panel-scroll-bar .scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: #880E4F; /* Pink 900 */
+}
+
+/* Up Arrow */
+.side-panel-scroll-bar .scroll-bar:vertical > .increment-button > .increment-arrow {
+    -fx-shape: "M298 426h428l-214 214z";
+}
+
+/* Down Arrow */
+.side-panel-scroll-bar .scroll-bar:vertical > .decrement-button > .decrement-arrow {
+    -fx-shape: "M298 598l214-214 214 214h-428z";
+}
+
+/* Right Arrow */
+.side-panel-scroll-bar .scroll-bar:horizontal > .increment-button > .increment-arrow {
+    -fx-shape: "M0 428l0 -428l214 214l-214 214z";
+}
+
+/* Left Arrow */
+.side-panel-scroll-bar .scroll-bar:horizontal > .decrement-button > .decrement-arrow {
+    -fx-shape: "M214 0l0 428l-214 -214l214 -214z";
+}

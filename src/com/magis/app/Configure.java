@@ -5,6 +5,7 @@ public class Configure {
     /******************************************************************************
 
      Modify these variables before compiling the program to apply custom values
+
      ******************************************************************************/
 
     /*
