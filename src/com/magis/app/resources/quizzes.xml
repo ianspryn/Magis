@@ -931,4 +931,76 @@ System.out.println("Normal\" Output \\");</statement>
                         </question>
                 </questions>
         </chapter>
+        <chapter id = "Input/Output">
+                <questions>
+                        <question>
+                                <level>1</level>
+                                <statement>To read input from a disk file, the Scanner class relies on what class?</statement>
+                                <answer>Input</answer>
+                                <answer id = "correct">File</answer>
+                                <answer>Disk File</answer>
+                                <answer>ScannerDisk</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which of the following correctly creates a Scanner that reads from text.txt</statement>
+                                <answer id = "correct">File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);</answer>
+                                <answer>Scanner in = new Scanner(File("input.txt"));</answer>
+                                <answer>Scanner in = new Scanner(inFile);
+File inFile = new File("input.txt");</answer>
+                                <answer>Scanner in = new Scanner(inFile);
+File inFile = new File("input.txt")</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>To write output to a file, which object should you create?</statement>
+                                <answer>Output</answer>
+                                <answer id = "correct">PrintWriter</answer>
+                                <answer>Scanner</answer>
+                                <answer>File</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>When using a PrintWriter on an already existing file, what will the print file do with information already stored?</statement>
+                                <answer>Leave it, and add new information to the end</answer>
+                                <answer>Leave it, and add new information to the beginning</answer>
+                                <answer id = "correct">Empty the file before the new data is written into it</answer>
+                                <answer>PrintWriter cannot work with existing files</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>When you are done writing to a file, what should you do with the PrintStream?</statement>
+                                <answer>Delete it</answer>
+                                <answer>Nothing just let java take care of it</answer>
+                                <answer id = "correct">Close it</answer>
+                                <answer>Reassign it a new file</answer>
+                        </question>
+                                                <question>
+                                <level>1</level>
+                                <statement>What will occur if the input/output file cannot be found?</statement>
+                                <answer>Throw a noFileException</answer>
+                                <answer id = "correct">Throw a FileNotFoundException</answer>
+                                <answer>Program will run normally but won't output anything</answer>
+                                <answer>The file will be created.</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which of the lines of code below is the correct way to specify a file name as a String literal</statement>
+                                <answer id = "correct">inFile = new File("c:\\homework\\input.dat");</answer>
+                                <answer>inFile = new File("c:\homework\input.dat");</answer>
+                                <answer> String s = ("c:\homework\input.dat")
+inFile = new File(s);</answer>
+                                <answer>There is no correct way to do this</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement></statement>
+                                <answer></answer>
+                                <answer></answer>
+                                <answer id = "correct"></answer>
+                                <answer></answer>
+                        </question>
+                </questions>
+        </chapter>        
 </quizzes>
