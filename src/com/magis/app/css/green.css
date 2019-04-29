@@ -5,6 +5,11 @@
     -fx-text-fill: #A5D6A7; /* Green 200*/
 }
 
+.text-color {
+    -fx-text-fill: #43A047; /* Green 600 */
+    -fx-fill: #43A047; /* Green 600 */
+}
+
 .circleindicator-container  {
 	circleindicator-color: #388E3C; /* Green 700 */
 }
@@ -51,7 +56,7 @@
     -jfx-unfocus-color: #C8E6C9; /* Green 100 */
 }
 
-.lesson-rectangle {
+.rectangle-color {
     -fx-fill: #66BB6A; /* Green 400 */
 }
 

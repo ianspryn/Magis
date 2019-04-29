@@ -1,6 +1,8 @@
 package com.magis.app.models;
 
 import com.magis.app.Main;
+import com.magis.app.test.ExamQuestion;
+import com.magis.app.test.ExamSaver;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -18,6 +20,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class StudentModel {
@@ -395,8 +399,40 @@ public class StudentModel {
             UpdateModel.updateXML(new DOMSource(document), filePath);
         }
 
+        public ArrayList<ChapterModel> getChapters() { return chapters; }
+
         public ChapterModel getChapter(int chapterIndex) {
             return chapters.get(chapterIndex);
+        }
+
+        /**
+         * Checks to see if a quiz node is associated with a chapter.
+         * The only way for the quiz node to exist is if getQuiz() was called and the node automatically created
+         * @param chapterIndex
+         * @return true if the quiz node exists (meaning the quiz exist) and false otherwise
+         */
+        public boolean hasTakenQuiz(int chapterIndex) {
+            for (Quiz quiz : quizzes) {
+                if (quiz.getQuizChapterNumber() == chapterIndex) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /**
+         * Checks to see if a test node is associated with a chapter.
+         * The only way for the test node to exist is if getTest() was called and the node automatically created
+         * @param chapterIndex
+         * @return true if the test node exists (meaning the test exist) and false otherwise
+         */
+        public boolean hasTakenTest(int chapterIndex) {
+            for (Test test : tests) {
+                if (test.getTestChapterNumber() == chapterIndex) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /**
@@ -672,6 +708,7 @@ public class StudentModel {
             Node quiz;
             private int quizChapterNumber;
             private ArrayList<Double> scores;
+            private ArrayList<Attempt> attempts;
             private double bestScore = -1.0;
             private double worstScore = 1000.0;
 
@@ -800,6 +837,11 @@ public class StudentModel {
                 scores.add(scoreValue);
             }
 
+
+            public ArrayList<Attempt> getAttempts() {
+                return attempts;
+            }
+
             Quiz(Node quiz) {
                 this.quiz = quiz;
 
@@ -813,12 +855,30 @@ public class StudentModel {
                         this.scores.add(Double.parseDouble(scores.item(i).getTextContent()));
                     }
                 }
+
+                this.attempts = new ArrayList<>();
+                if (quizElement.getElementsByTagName("attempt") != null) {
+                    NodeList attempts = quizElement.getElementsByTagName("attempt");
+                    for (int i = 0; i < attempts.getLength(); i++) {
+                        Attempt attempt = new Attempt(attempts.item(i));
+                        this.attempts.add(attempt);
+                    }
+                }
+                for (double scoreValue : scores) {
+                    if(scoreValue > bestScore) {
+                        bestScore = scoreValue;
+                    }
+                    if(scoreValue < worstScore) {
+                        worstScore = scoreValue;
+                    }
+                }
             }
         }
 
         public class Test {
             private int testChapterNumber;
             private ArrayList<Double> scores;
+            private ArrayList<Attempt> attempts;
             private double bestScore = -1.0;
             private double worstScore = 1000.0;
 
@@ -950,7 +1010,11 @@ public class StudentModel {
                 scores.add(scoreValue);
             }
 
-            Test(Node test) {
+            public ArrayList<Attempt> getAttempts() {
+                return attempts;
+            }
+
+            Test (Node test) {
                 Element testElement = (Element) test;
                 this.testChapterNumber = Integer.parseInt(testElement.getAttributes().getNamedItem("chapter").getNodeValue());
                 this.scores = new ArrayList<>();
@@ -960,7 +1024,256 @@ public class StudentModel {
                         this.scores.add(Double.parseDouble(scores.item(i).getTextContent()));
                     }
                 }
+
+                this.attempts = new ArrayList<>();
+                if (testElement.getElementsByTagName("attempt") != null) {
+                    NodeList attempts = testElement.getElementsByTagName("attempt");
+                    for (int i = 0; i < attempts.getLength(); i++) {
+                        Attempt attempt = new Attempt(attempts.item(i));
+                        this.attempts.add(attempt);
+                    }
+                }
+
+                for (double scoreValue : scores) {
+                    if(scoreValue > bestScore) {
+                        bestScore = scoreValue;
+                    }
+                    if(scoreValue < worstScore) {
+                        worstScore = scoreValue;
+                    }
+                }
             }
         }
+
+        public class Attempt {
+            private String timestamp;
+            private ArrayList<ExamQuestion> examQuestions;
+
+            public void setTimestamp(String timestamp) {
+                this.timestamp = timestamp;
+            }
+
+            public void addExamQuestion(ExamQuestion examQuestion) {
+                examQuestions.add(examQuestion);
+            }
+
+            public String getTimestamp() {
+                return timestamp;
+            }
+
+            public ArrayList<ExamQuestion> getExamQuestions() {
+                return examQuestions;
+            }
+
+            Attempt () {
+                examQuestions = new ArrayList<>();
+            }
+
+            Attempt (Node attempt) {
+                examQuestions = new ArrayList<>();
+
+                Element attemptElement = (Element) attempt;
+
+                Node timestamp = attemptElement.getElementsByTagName("timestamp").item(0);
+                this.timestamp = timestamp.getTextContent();
+
+                NodeList questions = attemptElement.getElementsByTagName("question");
+                for (int i = 0; i < questions.getLength(); i++) {
+                    ExamQuestion examQuestion = new ExamQuestion();
+                    Element question = (Element) questions.item(i);
+
+                    Node statement = question.getElementsByTagName("statement").item(0);
+                    examQuestion.setQuestion(statement.getTextContent());
+
+                    NodeList answers = question.getElementsByTagName("answer");
+                    for (int j = 0; j < answers.getLength(); j++) {
+                        Element answer = (Element) answers.item(i);
+                        if (hasAttribute(answer, "id")) {
+                            if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
+                                examQuestion.addCorrectAnswer(answer.getTextContent());
+                            }
+                        }
+                        if (hasAttribute(answer, "selected")) {
+                            if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
+                                examQuestion.addStudentAnswer(answer.getTextContent());
+                            }
+                        }
+                        examQuestion.addAnswer(answer.getTextContent());
+                        examQuestions.add(examQuestion);
+                    }
+                }
+            }
+        }
+
+        public void saveQuiz(ExamSaver examSaver) {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            Document document = null;
+            try {
+                assert documentBuilder != null;
+                document = documentBuilder.parse(filePath);
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            assert document != null;
+            Element root = document.getDocumentElement();
+            NodeList students = root.getElementsByTagName("student");
+            Node student = null;
+            for (int i = 0; i < students.getLength(); i++) {
+                student = students.item(i);
+                //find the current student
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                    break;
+                }
+            }
+            assert student != null;
+            Element studentElement = (Element) student;
+            Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
+            NodeList quizzes = quizzesElement.getElementsByTagName("quiz");
+            Node quiz = null;
+            for (int i = 0; i < quizzes.getLength(); i++) {
+                quiz = quizzes.item(i);
+                //find which test to add score to
+                if (Integer.parseInt(quiz.getAttributes().getNamedItem("chapter").getNodeValue()) == examSaver.getChapterIndex()) {
+                    break;
+                }
+            }
+            Element quizElement = (Element) quiz;
+            Element attemptElement = document.createElement("attempt");
+            assert quizElement != null;
+            quizElement.appendChild(attemptElement);
+            Element timestamp = document.createElement("timestamp");
+            String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
+            timestamp.appendChild(document.createTextNode(timestampString));
+            attemptElement.appendChild(timestamp);
+
+            Attempt attempt = new Attempt();
+            attempt.setTimestamp(timestampString);
+            //add the attempt to the Quiz class
+            getQuiz(examSaver.getChapterIndex()).getAttempts().add(attempt);
+
+            for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
+                //add to the attempt class
+                attempt.addExamQuestion(examQuestion);
+
+                //question element
+                Element question = document.createElement("question");
+                attemptElement.appendChild(question);
+                //each part of the question
+                Element statement = document.createElement("statement");
+                statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
+                question.appendChild(statement);
+
+                for (String answer : examQuestion.getAnswers()) {
+                    Element answerElement = document.createElement("answer");
+                    answerElement.appendChild(document.createTextNode(answer));
+                    //if this is a correct answer
+                    if (examQuestion.getCorrectAnswers().contains(answer)) {
+                        answerElement.setAttribute("id", "correct");
+                    }
+                    //if this is an answer the student selected
+                    if (examQuestion.getStudentAnswers().contains(answer)) {
+                        answerElement.setAttribute("selected", "true");
+                    }
+                    question.appendChild(answerElement);
+                }
+            }
+            UpdateModel.updateXML(new DOMSource(document), filePath);
+        }
+
+        public void saveTest(ExamSaver examSaver) {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            Document document = null;
+            try {
+                assert documentBuilder != null;
+                document = documentBuilder.parse(filePath);
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            assert document != null;
+            Element root = document.getDocumentElement();
+            NodeList students = root.getElementsByTagName("student");
+            Node student = null;
+            for (int i = 0; i < students.getLength(); i++) {
+                student = students.item(i);
+                //find the current student
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                    break;
+                }
+            }
+            assert student != null;
+            Element studentElement = (Element) student;
+            Element testsElement = (Element) studentElement.getElementsByTagName("tests").item(0);
+            NodeList tests = testsElement.getElementsByTagName("test");
+            Node test = null;
+            for (int i = 0; i < tests.getLength(); i++) {
+                test = tests.item(i);
+                //find which test to add score to
+                if (Integer.parseInt(test.getAttributes().getNamedItem("chapter").getNodeValue()) == examSaver.getChapterIndex()) {
+                    break;
+                }
+            }
+            Element attemptElement = document.createElement("attempt");
+            assert test != null;
+            test.appendChild(attemptElement);
+            Element timestamp = document.createElement("timestamp");
+            String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
+            timestamp.appendChild(document.createTextNode(timestampString));
+            attemptElement.appendChild(timestamp);
+
+            Attempt attempt = new Attempt();
+            attempt.setTimestamp(timestampString);
+            //add the attempt to the Quiz class
+            getTest(examSaver.getChapterIndex()).getAttempts().add(attempt);
+
+            for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
+                //add to the attempt class
+                attempt.addExamQuestion(examQuestion);
+                //question element
+                Element question = document.createElement("question");
+                attemptElement.appendChild(question);
+                //each part of the question
+                Element statement = document.createElement("statement");
+                statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
+                question.appendChild(statement);
+
+                for (String answer : examQuestion.getAnswers()) {
+                    Element answerElement = document.createElement("answer");
+                    answerElement.appendChild(document.createTextNode(answer));
+                    //if this is a correct answer
+                    if (examQuestion.getCorrectAnswers().contains(answer)) {
+                        answerElement.setAttribute("id", "correct");
+                    }
+                    //if this is an answer the student selected
+                    if (examQuestion.getStudentAnswers().contains(answer)) {
+                        answerElement.setAttribute("selected", "true");
+                    }
+                    question.appendChild(answerElement);
+                }
+            }
+            UpdateModel.updateXML(new DOMSource(document), filePath);
+        }
+    }
+
+    private boolean hasAttribute(Element element, String value) {
+        NamedNodeMap attributes = element.getAttributes();
+        for (int i = 0; i < attributes.getLength(); i++) {
+            Node node = attributes.item(i);
+            if (value.equals(node.getNodeValue())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
