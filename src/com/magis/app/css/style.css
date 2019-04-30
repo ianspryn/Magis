@@ -246,6 +246,10 @@ The greeting ("Hello, Ian!") on the home page
     -fx-background-radius: 25px;
 }
 
+.inner-chapter-box {
+    -fx-background-radius: 25px;
+}
+
 .home-chapter-box {
     -fx-padding: 20px;
 }

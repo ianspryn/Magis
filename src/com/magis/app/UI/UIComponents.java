@@ -2,7 +2,6 @@ package com.magis.app.UI;
 
 import com.jfoenix.controls.JFXButton;
 import com.magis.app.Main;
-import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
@@ -16,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
@@ -41,7 +39,7 @@ public class UIComponents {
             master = new StackPane();
             master.getStyleClass().add("background");
             scrollPane = new ScrollPane();
-            UIComponents.fadeAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
+            UIComponents.fadeOnAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
             scrollPane.getStyleClass().add("master-scrollpane");
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -53,7 +51,6 @@ public class UIComponents {
             Middle
              */
             mastervBox = new VBox();
-            mastervBox.setAlignment(Pos.TOP_CENTER);
             mastervBox.setPadding(new Insets(25, 25, 25, 25));
             mastervBox.setMaxWidth(1500);
             //Center the content in the scrollpane
@@ -77,7 +74,7 @@ public class UIComponents {
             backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
 
             //page title
-            pageTitle = new Label("Statistics");
+            pageTitle = new Label("Generic Title");
             pageTitle.getStyleClass().add("section-title");
 
             top.getChildren().addAll(backButton, pageTitle);
@@ -85,6 +82,9 @@ public class UIComponents {
             AnchorPane.setRightAnchor(pageTitle, 0.0);
 
             mastervBox.getChildren().add(top);
+
+            master.getChildren().add(scrollPane);
+            StackPane.setAlignment(scrollPane, Pos.CENTER);
         }
 
         public StackPane getMaster() {
@@ -232,13 +232,13 @@ public class UIComponents {
      * @param node the current label to fade in
      * @param index the current index of the label. Used to add incremental delay of fade in
      * @param delay how long before the animation begins
-     * @param duration how long to fadeAndTranslate
+     * @param duration how long to fadeOnAndTranslate
      * @param fromX where the node should start in its animation for the x-axis
      * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      * @param toY where the node should end in its animation for the y-axis
      */
-    public static void fadeAndTranslate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+    public static void fadeOnAndTranslate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         if (!Main.useAnimations) return;
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
@@ -261,22 +261,22 @@ public class UIComponents {
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
-        //wait a certain delay, then fadeAndTranslate in
+        //wait a certain delay, then fadeOnAndTranslate in
         SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)index / 30))), parallelTransition);
         sequentialTransition.play();
     }
 
     /**
      * Animate a node
-     * @param node the node to fadeAndTranslate
+     * @param node the node to fadeOnAndTranslate
      * @param delay how long before the animation begins
-     * @param duration how long to fadeAndTranslate
+     * @param duration how long to fadeOnAndTranslate
      * @param fromX where the node should start in its animation for the x-axis
      * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      * @param toY where the node should end in its animation for the y-axis
      */
-    public static void fadeAndTranslate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+    public static void fadeOnAndTranslate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         if (!Main.useAnimations) return;
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
@@ -299,7 +299,7 @@ public class UIComponents {
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
-        //wait a certain delay, then fadeAndTranslate in
+        //wait a certain delay, then fadeOnAndTranslate in
         SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay)), parallelTransition);
         sequentialTransition.play();
     }

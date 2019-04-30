@@ -3,6 +3,8 @@ package com.magis.app.models;
 import com.magis.app.Main;
 import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.ExamSaver;
+import javafx.beans.property.BooleanProperty;
+import javafx.scene.layout.BorderPane;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -1094,21 +1096,21 @@ public class StudentModel {
                     examQuestion.setQuestion(statement.getTextContent());
 
                     NodeList answers = question.getElementsByTagName("answer");
-                    for (int j = 0; j < answers.getLength(); j++) {
-                        Element answer = (Element) answers.item(i);
-                        if (hasAttribute(answer, "id")) {
+                    for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                        Element answer = (Element) answers.item(answerIndex);
+                        if (answer.getAttributes().getNamedItem("id") != null) {
                             if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
                                 examQuestion.addCorrectAnswer(answer.getTextContent());
                             }
                         }
-                        if (hasAttribute(answer, "selected")) {
+                        if (answer.getAttributes().getNamedItem("selected") != null) {
                             if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
                                 examQuestion.addStudentAnswer(answer.getTextContent());
                             }
                         }
                         examQuestion.addAnswer(answer.getTextContent());
-                        examQuestions.add(examQuestion);
                     }
+                    examQuestions.add(examQuestion);
                 }
             }
         }
@@ -1272,16 +1274,5 @@ public class StudentModel {
             }
             UpdateModel.updateXML(new DOMSource(document), filePath);
         }
-    }
-
-    private boolean hasAttribute(Element element, String value) {
-        NamedNodeMap attributes = element.getAttributes();
-        for (int i = 0; i < attributes.getLength(); i++) {
-            Node node = attributes.item(i);
-            if (value.equals(node.getNodeValue())) {
-                return true;
-            }
-        }
-        return false;
     }
 }

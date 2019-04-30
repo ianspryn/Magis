@@ -41,6 +41,7 @@ public class StatsPage {
         UIComponents.GenericPage page = new UIComponents.GenericPage();
         master = page.getMaster();
         scrollPane = page.getScrollPane();
+        page.getMastervBox().setAlignment(Pos.TOP_CENTER);
         mastervBox = page.getMastervBox();
         page.getBackButton().setOnMouseClicked(e -> HomePage.goHome(scrollPane));
         page.getPageTitle().setText("Statistics");
@@ -90,15 +91,13 @@ public class StatsPage {
             row.setSpacing(25);
             for (int j = i, counter = 0; counter < 3 && j < numChapters; j++, counter++) {
                 VBox chapterBox = buildChapterBox(j);
-                UIComponents.fadeAndTranslate(chapterBox, j + 0.2, 0, 0, 0, -10, 0);
+                UIComponents.fadeOnAndTranslate(chapterBox, j + 0.2, 0, 0, 0, -10, 0);
                 row.getChildren().add(chapterBox);
             }
             chapterBoxes.getChildren().add(row);
         }
         mastervBox.getChildren().addAll(chaptersLabel, chapterBoxes);
 
-        master.getChildren().add(scrollPane);
-        StackPane.setAlignment(scrollPane, Pos.CENTER);
         Main.setScene(master, "Statistics");
     }
 
@@ -268,7 +267,7 @@ public class StatsPage {
             testBox.setAlignment(Pos.CENTER);
             testBox.setSpacing(25);
 
-            Label testLabel = new Label("Your Quiz Results. Tap to view your previous answers");
+            Label testLabel = new Label("Your Test Results. Tap to view your previous answers");
             testLabel.setWrapText(true);
             testLabel.getStyleClass().add("box-title");
             testBox.getChildren().add(testLabel);
@@ -300,6 +299,7 @@ public class StatsPage {
                 score.getChildren().addAll(rpi, scoreLabel);
 
                 Label timestamp = new Label("Taken on " + attempt.getTimestamp());
+                timestamp.setWrapText(true);
                 timestamp.getStyleClass().addAll("text-no-color", "box-description");
 
                 test.getChildren().addAll(score, timestamp);
@@ -323,7 +323,8 @@ public class StatsPage {
         }
 
         mastervBox.getChildren().add(insightsVBox);
-        UIComponents.fadeAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeOnAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
+        Main.setScene(master);
     }
 
     private static HBox createDivider() {
@@ -481,7 +482,7 @@ public class StatsPage {
     /**
      * Move up and fade out at the same time the main page before going to the desired chapter's insights page
      *
-     * @param node the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeOnAndTranslate first
      * @chapterIndex the chapter index
      * @index the index of the exam attempt
      * @type the type of exam (test or quiz)
@@ -498,10 +499,10 @@ public class StatsPage {
     /**
      * Move up and fade out at the same time the main page before going to the desired chapter's insights page
      *
-     * @param node the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeOnAndTranslate first
      * @param chapterIndex the desired chapter to switch scenes to
      */
-    private static void goToChapterInsights(Node node, int chapterIndex) {
+    public static void goToChapterInsights(Node node, int chapterIndex) {
         if (Main.useAnimations) {
             UIComponents.transitionPage(node).setOnFinished(e -> ChapterPage(chapterIndex));
         } else {
@@ -512,7 +513,7 @@ public class StatsPage {
     /**
      * Move up and fade out at the same time the chapter insight page before going to the main page
      *
-     * @param node the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeOnAndTranslate first
      */
     private static void goToStats(Node node) {
         if (Main.useAnimations) {

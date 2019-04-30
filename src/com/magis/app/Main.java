@@ -30,7 +30,7 @@ public class Main extends Application {
     public static String username;
     public static boolean takingTest = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
-    public static boolean useAnimations = true;
+    public static boolean useAnimations = true; //used because we animate the login page, and we need a default state (because the variable is before the student gets initialized)
     public static double width = -1, height = -1;
 
 

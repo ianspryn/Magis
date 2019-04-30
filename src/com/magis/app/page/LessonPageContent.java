@@ -111,7 +111,6 @@ public class LessonPageContent extends PageContent {
             Label label = new Label();
             label.setWrapText(true);
             label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it contains
-//            label.setMaxWidth(800);
             pageContentContainer.add(label);
             switch (subString) {
                 case "```": //beginning of code segment
@@ -160,6 +159,7 @@ public class LessonPageContent extends PageContent {
                             label.getStyleClass().addAll("lesson-header-three-text", "lesson-text-color");
                             break;
                         default: //we are not in any kind of formatting segment
+                            label.setPrefWidth(800);
                             label.getStyleClass().addAll("lesson-text", "lesson-text-color");
                     }
             }

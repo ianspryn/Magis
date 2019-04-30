@@ -49,7 +49,7 @@ public abstract class Page {
         master borderPane
          */
         borderPane.getStyleClass().add("borderpane-page");
-        UIComponents.fadeAndTranslate(borderPane,0.2,0.2,-10,0,0,0);
+        UIComponents.fadeOnAndTranslate(borderPane,0.2,0.2,-10,0,0,0);
 
         /*
         sidebar
@@ -76,7 +76,7 @@ public abstract class Page {
         main area
          */
         mainArea.setCenter(pageContent.getScrollPane());
-        UIComponents.fadeAndTranslate(pageContent.getScrollPane(),0.15,0.2,0,0,-10,0);
+        UIComponents.fadeOnAndTranslate(pageContent.getScrollPane(),0.15,0.2,0,0,-10,0);
 
         /*
         navigation
@@ -84,16 +84,28 @@ public abstract class Page {
         bottomNavigation.getStyleClass().add("navigation-content");
         bottomNavigation.setPadding(new Insets(10,10,10,10));
 
-        //keyboard navigation
-        Main.scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.LEFT) {
-                if (currentPage > 0) updatePage(currentPage - 1);
-            }
 
-            if (e.getCode() == KeyCode.RIGHT) {
-                if (currentPage < numPages - 1) updatePage(currentPage + 1);
-            }
-        });
+        //keyboard navigation
+        /*
+        Currently disabled because there is no known way to capture key presses when the scene isn't focused
+        Which, the scene immediately becomes out of focus the moment the user clicks anything
+         */
+//        Main.scene.setOnKeyPressed(e -> {
+//            if (e.getCode() == KeyCode.LEFT) {
+//                System.out.println(currentPage);
+//                System.out.println(currentPage > 0);
+//                System.out.println();
+//                if (currentPage > 0) updatePage(currentPage - 1);
+//            }
+//
+//            if (e.getCode() == KeyCode.RIGHT) {
+//                System.out.println(currentPage);
+//                System.out.println(numPages);
+//                System.out.println(currentPage < numPages - 1);
+//                System.out.println();
+//                if (currentPage < numPages - 1) updatePage(currentPage + 1);
+//            }
+//        });
 
         //left navigation
         leftButton = UIComponents.createNavigationButton("<");
@@ -109,7 +121,7 @@ public abstract class Page {
 
         bottomNavigation.setLeft(leftButton);
         bottomNavigation.setRight(rightButton);
-        UIComponents.fadeAndTranslate(bottomNavigation,0.15,0.3,0,0,0,0);
+        UIComponents.fadeOnAndTranslate(bottomNavigation,0.15,0.3,0,0,0,0);
 
         mainArea.setCenter(pageContent.getScrollPane());
         mainArea.setBottom(bottomNavigation);
