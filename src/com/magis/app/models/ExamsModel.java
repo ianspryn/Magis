@@ -133,6 +133,7 @@ public abstract class ExamsModel {
                 this.correctAnswers = new ArrayList<>();
                 Element questionElement = (Element) question;
                 this.level = questionElement.getElementsByTagName("level").item(0) != null ? Integer.parseInt(questionElement.getElementsByTagName("level").item(0).getTextContent()) : 1;
+                System.out.println(this.level);
                 this.statement = questionElement.getElementsByTagName("statement").item(0).getTextContent();
                 NodeList answers = questionElement.getElementsByTagName("answer");
                 for (int i = 0; i < answers.getLength(); i++) {

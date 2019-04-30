@@ -40,25 +40,15 @@ public class QuizPageContent extends ExamPageContent {
                 examQuestion.setQuestion(exam.getQuestion(question).getStatement());
                 //add the statement for the question to the questionBox
                 questionBox.getChildren().add(statement);
-
-                //save the label
+                //get and save the level
                 examQuestion.setLevel(exam.getQuestion(question).getLevel());
-
-                //get all of the correct answers (there may be 1 or more correct answers)
-//                            correctAnswers.addAll(exam.getQuestion(question).getCorrectAnswers());
-                //save the correct answers
+                //get and save the correct answers
                 examQuestion.addCorrectAnswers(exam.getQuestion(question).getCorrectAnswers());
-                ///add the incorrect answers and the correct answer to the ArrayList of possible answers
-//                            answers.addAll(exam.getQuestion(question).getIncorrectAnswers());
-//                            answers.addAll(correctAnswers);
-                //save all of the answers
+                //get and save all of the answers
                 examQuestion.addAnswers(exam.getQuestion(question).getIncorrectAnswers());
                 examQuestion.addAnswers(exam.getQuestion(question).getCorrectAnswers());
                 //shuffle the order
-//                          Collections.shuffle(answers);
                 Collections.shuffle(examQuestion.getAnswers());
-                //add the correct answer to the grader for future grading
-//                            grader.addCorrectAnswer(questionIndex, correctAnswers);
                 break;
             case 1:
                 questionGenerator.initialize();
@@ -71,15 +61,11 @@ public class QuizPageContent extends ExamPageContent {
                 examQuestion.setQuestion(generatedQuestion);
                 //add the statement to the questionBox
                 questionBox.getChildren().add(statement);
-                //get the correct answer
-//                            correctAnswers.add(questionGenerator.getCorrectAnswer());
-                //save the correct answer
+                //save the level
+//                examQuestion.setLevel(generatedQuestion.getLevel()); //TODO: Enable this upon code completion
+                //get and save the correct answer
                 examQuestion.addCorrectAnswer(questionGenerator.getCorrectAnswer());
-                //add the correct answer to the grader for future grading
-//                            grader.addCorrectAnswer(questionIndex, correctAnswers);
-                //get all of the answers (correct and incorrect)
-//                            answers = questionGenerator.getAnswers();
-                //save all of the answers (correct and incorrect)
+                //get and save all of the answers (correct and incorrect)
                 examQuestion.addAnswers(questionGenerator.getAnswers());
                 break;
         }

@@ -73,7 +73,8 @@ public abstract class ExamPageContent extends PageContent {
         //keep under the max number of questions per test, and also keep under the max number of questions per page
         for (int i = 0, questionIndex = pageIndex * NUM_QUESTIONS_PER_PAGE + i; i < NUM_QUESTIONS_PER_PAGE && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
             this.questionIndex = questionIndex;
-            examQuestion = new ExamQuestion(); //used to save the question (for viewing this exam at a later date after submitting it)
+            ExamQuestion examQuestion = new ExamQuestion(); //used to save the question (for viewing this exam at a later date after submitting it)
+            this.examQuestion = examQuestion;
 //            answers = new ArrayList<>();
 //            correctAnswers = new ArrayList<>();
             questionBox = new VBox();
@@ -136,7 +137,7 @@ public abstract class ExamPageContent extends PageContent {
             }
             pageContent.getChildren().add(questionBox);
             examSaver.add(examQuestion);
-            grader.addQuestion(questionIndex, examQuestion);
+            grader.addQuestion(examQuestion);
         }
         pageContents.add(pageContent);
     }

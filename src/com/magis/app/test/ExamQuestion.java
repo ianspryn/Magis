@@ -11,6 +11,7 @@ public class ExamQuestion {
     private ArrayList<String> studentAnswers;
 
     public ExamQuestion() {
+        level = 1;
         answers = new ArrayList<>();
         correctAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
