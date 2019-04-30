@@ -117,6 +117,7 @@ public class ExamPageContent extends PageContent {
                     statement.setText(generatedQuestion);
                     questionBox.getChildren().add(statement);
 <<<<<<< HEAD
+<<<<<<< HEAD
                     //get the correct answer
                     correctAnswers.add(questionGenerator.get(generatorUsed).getCorrectAnswer());
                     //save the correct answer
@@ -127,6 +128,12 @@ public class ExamPageContent extends PageContent {
                     answers = questionGenerator.get(generatorUsed).getAnswers();
                     //save the incorrect answers
                     examQuestion.addAnswers(answers);
+=======
+                    correctAnswers.add(questionGenerator.getCorrectAnswer());
+                    //add the correct answer to the grader for future grading
+                    grader.addCorrectAnswer(questionIndex, correctAnswers);
+                    answers = questionGenerator.getAnswers();
+>>>>>>> parent of 1b7d89d... Merge branch 'UI' into QuestionGeneratorVol2
 =======
                     correctAnswers.add(questionGenerator.getCorrectAnswer());
                     //add the correct answer to the grader for future grading
