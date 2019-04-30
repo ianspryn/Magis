@@ -1,22 +1,19 @@
 package com.magis.app.test;
 
-import javax.swing.plaf.nimbus.AbstractRegionPainter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Grader {
 
     private ArrayList<ExamQuestion> questions;
-    private double studentScore; //double because you might only get 0.5 points on a question with multiple correct answers
-    private int numQuestions;
+    private double studentPoints; //double because you might only get 0.5 points on a question with multiple correct answers
+    private double totalPoints;
     private double grade;
 
-    public Grader(int numQuestions) {
+    public Grader() {
         questions = new ArrayList<>();
-        studentScore = 0;
-        this.numQuestions = numQuestions;
+        studentPoints = 0;
+        totalPoints = 0;
     }
 
     public int getNumCorrectAnswers(int key) {
@@ -31,10 +28,10 @@ public class Grader {
                     counter++;
                 }
             }
-            studentScore += ((double) counter / (double) question.getNumCorrectAnswers()) * (double) question.getLevel();
-            System.out.println("LEVEL: " + question.getLevel());
+            studentPoints += ((double) counter / (double) question.getNumCorrectAnswers()) * (double) question.getLevel();
+            totalPoints += question.getLevel();
         }
-        grade = 100.0 * studentScore / (double) numQuestions;
+        grade = 100.0 * studentPoints / totalPoints;
         grade = Double.parseDouble(new DecimalFormat("#.##").format(grade));
     }
     

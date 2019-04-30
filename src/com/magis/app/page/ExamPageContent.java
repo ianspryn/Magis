@@ -36,7 +36,7 @@ public abstract class ExamPageContent extends PageContent {
     protected ExamSaver examSaver;
 
     protected Random rand;
-    protected Label statement;
+    protected String statement;
     protected ExamQuestion examQuestion;
     protected VBox questionBox;
     protected ArrayList<String> correctAnswers;
@@ -50,7 +50,7 @@ public abstract class ExamPageContent extends PageContent {
         this.exam = exam;
         numAvailableBankQuestions = exam.getNumAvailableQuestions();
         questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
-        grader = new Grader(numQuestions);
+        grader = new Grader();
         toggleGroups = new HashMap<>();
         checkboxGroups = new HashMap<>();
         usedBankQuestions = new ArrayList<>();
@@ -70,25 +70,71 @@ public abstract class ExamPageContent extends PageContent {
         rand = new Random();
         VBox pageContent = new VBox();
 
-        //keep under the max number of questions per test, and also keep under the max number of questions per page
+        //keep under the max number of questions per exam, and also keep under the max number of questions per page
         for (int i = 0, questionIndex = pageIndex * NUM_QUESTIONS_PER_PAGE + i; i < NUM_QUESTIONS_PER_PAGE && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
             this.questionIndex = questionIndex;
-            ExamQuestion examQuestion = new ExamQuestion(); //used to save the question (for viewing this exam at a later date after submitting it)
+            /*
+            We keep a local copy of examQuestion because if we don't, the toggle buttons and checkboxes
+            will always refer to the last ExamQuestion created when updating their state (student selects an answer, etc)
+            But, we also need a protected ExamQuestion class for QuizPageContent or TestPageContent to refer to.
+             */
+            ExamQuestion examQuestion = new ExamQuestion();
             this.examQuestion = examQuestion;
 //            answers = new ArrayList<>();
 //            correctAnswers = new ArrayList<>();
             questionBox = new VBox();
             questionBox.setSpacing(15);
             questionBox.setPadding(new Insets(40,0,20,20));
-            statement = new Label();
-            statement.setWrapText(true);
-            statement.setPrefWidth(700);
 
+
+            //abstract, because we don't know if this is a quiz page or a test page
             buildQuestions();
+            //parse and add the statement for the question to the questionBox
+            String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)";
+            String[] splitStrings = statement.split(delimiter);
+            Stack<String> stack = new Stack<>();
+            for (String subString : splitStrings) {
+                Label label = new Label();
+                label.setWrapText(true);
+                label.setPrefWidth(700);
+                label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
+                switch (subString) {
+                    case "```": //beginning of code segment
+                        if (stack.isEmpty()) stack.push(subString);
+                        else if (stack.peek().equals("```")) stack.pop();
+                        else
+                            System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
+                        break;
+                    case "###": //beginning of code output segment
+                        if (stack.isEmpty()) stack.push(subString);
+                        else if (stack.peek().equals("###")) stack.pop();
+                        else
+                            System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
+                        break;
+                    default: //text only
+                        String formatType = stack.isEmpty() ? "" : stack.peek();
+                        if (subString.charAt(0) == '\n')
+                            subString = subString.substring(1); //get rid of the first new line if it exists because of the way we split the strings
+                        label.setText(subString);
+                        switch (formatType) {
+                            case "```": //we're in code segment
+                                label.getStyleClass().add("code-text");
+                                break;
+                            case "###": //we're in a code output segment
+                                label.getStyleClass().addAll("code-output-text", "drop-shadow");
+                                break;
+                            default: //we are not in any kind of formatting segment
+                                label.setPrefWidth(700);
+                                label.getStyleClass().addAll("lesson-text", "lesson-text-color");
+                        }
+                }
+                questionBox.getChildren().add(label);
+            }
 
              /*
             Add each possible answer to a radio button or checkbox
              */
+             //if there's only one correct answer, then use toggle buttons
             if (examQuestion.getNumCorrectAnswers() == 1) {
                 ToggleGroup toggleGroup = new ToggleGroup();
                 toggleGroups.put(questionIndex, toggleGroup);
@@ -104,14 +150,10 @@ public abstract class ExamPageContent extends PageContent {
                 }
                 //every time the student clicks a radio button, update the grader and exam saver with the new answer the student selected
                 toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-//                    grader.addStudentAnswer(index, newVal.getUserData().toString());
                     examQuestion.addStudentAnswer(newVal.getUserData().toString());
-                    if (oldVal != null) {
-//                        grader.removeStudentAnswer(index, oldVal.getUserData().toString());
-                        examQuestion.removeStudentAnswer(oldVal.getUserData().toString());
-                    }
+                    if (oldVal != null) examQuestion.removeStudentAnswer(oldVal.getUserData().toString());
                 });
-            } else {
+            } else { //if there's more than one correct answer, then use check boxes
                 ArrayList<JFXCheckBox> checkBoxes = new ArrayList<>();
                 checkboxGroups.put(questionIndex, checkBoxes);
                 for (String answer : examQuestion.getAnswers()) {
@@ -123,15 +165,10 @@ public abstract class ExamPageContent extends PageContent {
                     checkboxButton.setText(answer);
                     questionBox.getChildren().add(checkboxButton);
                     checkBoxes.add(checkboxButton);
-                    //every time the student clicks a radio button, update the grader with the new answer the student selected
+                    //every time the student clicks a radio button, update the examQuestion with the new answer the student selected
                     checkboxButton.selectedProperty().addListener((observable, oldVal, newVal) -> {
-                        if (newVal) {
-                            examQuestion.addStudentAnswer(checkboxButton.getUserData().toString());
-//                            grader.addStudentAnswer(index, checkboxButton.getUserData().toString());
-                        } else {
-                            examQuestion.removeStudentAnswer(checkboxButton.getUserData().toString());
-//                            grader.removeStudentAnswer(index, checkboxButton.getUserData().toString());
-                        }
+                        if (newVal) examQuestion.addStudentAnswer(checkboxButton.getUserData().toString());
+                        else examQuestion.removeStudentAnswer(checkboxButton.getUserData().toString());
                     });
                 }
             }

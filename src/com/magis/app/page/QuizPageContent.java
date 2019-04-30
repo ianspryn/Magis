@@ -12,10 +12,11 @@ public class QuizPageContent extends ExamPageContent {
         examSaver.setType("quiz");
     }
 
-
     @Override
     protected void buildQuestions() {
         //decide if the question is pulled from a bank (0) or generated (1)
+
+
         int typeOfQuestion;
         if (numAvailableBankQuestions > usedBankQuestions.size() && questionGenerator != null) { //if we have available bank questions and there exists a question generator
             typeOfQuestion = rand.nextInt(2); //0 or 1
@@ -35,11 +36,15 @@ public class QuizPageContent extends ExamPageContent {
                 while (usedBankQuestions.contains(question));
                 usedBankQuestions.add(question); //add the question to the used bank of questions
                 //set the question statement
-                statement.setText(exam.getQuestion(question).getStatement());
+                if (exam.getQuestion(question).getNumCorrectAnswers() == 1) {
+                    statement = exam.getQuestion(question).getStatement();
+                } else { //if there is more than one correct answer, hint this to the student
+                    String statement = exam.getQuestion(question).getStatement();
+                    statement += "\n\nNote: There may be more than one correct answer.";
+                    this.statement = statement;
+                }
                 //save the question
                 examQuestion.setQuestion(exam.getQuestion(question).getStatement());
-                //add the statement for the question to the questionBox
-                questionBox.getChildren().add(statement);
                 //get and save the level
                 examQuestion.setLevel(exam.getQuestion(question).getLevel());
                 //get and save the correct answers
@@ -56,13 +61,11 @@ public class QuizPageContent extends ExamPageContent {
                 while (usedGeneratorQuestions.contains(generatedQuestion));
                 usedGeneratorQuestions.add(generatedQuestion);
                 //set the question statement
-                statement.setText(generatedQuestion);
+                statement = generatedQuestion;
                 //save the question
                 examQuestion.setQuestion(generatedQuestion);
-                //add the statement to the questionBox
-                questionBox.getChildren().add(statement);
                 //save the level
-//                examQuestion.setLevel(generatedQuestion.getLevel()); //TODO: Enable this upon code completion
+                examQuestion.setLevel(generatedQuestion.getLevel());
                 //get and save the correct answer
                 examQuestion.addCorrectAnswer(questionGenerator.getCorrectAnswer());
                 //get and save all of the answers (correct and incorrect)

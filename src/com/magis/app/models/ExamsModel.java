@@ -112,9 +112,9 @@ public abstract class ExamsModel {
                 return incorrectAnswers.size() + correctAnswers.size();
             }
 
-            public int getNumIncorrectAnswers() {
-                return incorrectAnswers.size();
-            }
+            public int getNumIncorrectAnswers() { return incorrectAnswers.size(); }
+
+            public int getNumCorrectAnswers() { return correctAnswers.size(); }
 
             public ArrayList<String> getCorrectAnswers() {
                 return correctAnswers;
