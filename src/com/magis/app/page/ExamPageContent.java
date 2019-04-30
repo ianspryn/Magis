@@ -4,12 +4,11 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.magis.app.Main;
 import com.magis.app.models.ExamsModel;
-import com.magis.app.test.ExamQuestion;
-import com.magis.app.test.ExamSaver;
 import com.magis.app.test.Grader;
 import com.magis.app.test.questions.generator.QuestionGenerator;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
@@ -30,7 +29,6 @@ public class ExamPageContent extends PageContent {
     protected ArrayList<Integer> usedBankQuestions;
     protected ArrayList<String> usedGeneratorQuestions;
     protected ArrayList<VBox> pageContents;
-    protected ExamSaver examSaver;
 
     public ExamPageContent(int chapterIndex, int numQuestions, ExamsModel.ChapterModel exam, String typeOfExam) {
         this.chapterIndex = chapterIndex;
@@ -49,7 +47,6 @@ public class ExamPageContent extends PageContent {
         usedBankQuestions = new ArrayList<>();
         usedGeneratorQuestions = new ArrayList<>();
         pageContents = new ArrayList<>();
-        examSaver = new ExamSaver(chapterIndex);
     }
 
     @Override
@@ -67,7 +64,6 @@ public class ExamPageContent extends PageContent {
 
         //keep under the max number of questions per test, and also keep under the max number of questions per page
         for (int i = 0, questionIndex = pageIndex * maxQuestionsPerPage + i; i < maxQuestionsPerPage && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
-            ExamQuestion examQuestion = new ExamQuestion(); //used to save the question (for viewing this exam at a later date after submitting it)
             ArrayList<String> answers = new ArrayList<>();
             ArrayList<String> correctAnswers = new ArrayList<>();
             VBox questionBox = new VBox();
@@ -98,20 +94,14 @@ public class ExamPageContent extends PageContent {
                     usedBankQuestions.add(question); //add the question to the used bank of questions
                     //set the question statement
                     statement.setText(exam.getQuestion(question).getStatement());
-                    //save the question
-                    examQuestion.setQuestion(exam.getQuestion(question).getStatement());
                     //add the statement for the question to the questionBox
                     questionBox.getChildren().add(statement);
 
                     //get all of the correct answers (there may be 1 or more correct answers)
                     correctAnswers.addAll(exam.getQuestion(question).getCorrectAnswers());
-                    //save the correct answers
-                    examQuestion.addCorrectAnswers(correctAnswers);
                     ///add the incorrect answers and the correct answer to the ArrayList of possible answers
                     answers.addAll(exam.getQuestion(question).getIncorrectAnswers());
                     answers.addAll(correctAnswers);
-                    //save all of the answers
-                    examQuestion.addAnswers(answers);
                     //shuffle the order
                     Collections.shuffle(answers);
                     //add the correct answer to the grader for future grading
@@ -123,12 +113,10 @@ public class ExamPageContent extends PageContent {
                     do generatedQuestion = questionGenerator.get(generatorUsed).getQuestion();
                     while (usedGeneratorQuestions.contains(generatedQuestion));
                     usedGeneratorQuestions.add(generatedQuestion);
-                    //set the question statement
+
                     statement.setText(generatedQuestion);
-                    //save the question
-                    examQuestion.setQuestion(generatedQuestion);
-                    //add the statement to the questionBox
                     questionBox.getChildren().add(statement);
+<<<<<<< HEAD
                     //get the correct answer
                     correctAnswers.add(questionGenerator.get(generatorUsed).getCorrectAnswer());
                     //save the correct answer
@@ -139,6 +127,12 @@ public class ExamPageContent extends PageContent {
                     answers = questionGenerator.get(generatorUsed).getAnswers();
                     //save the incorrect answers
                     examQuestion.addAnswers(answers);
+=======
+                    correctAnswers.add(questionGenerator.getCorrectAnswer());
+                    //add the correct answer to the grader for future grading
+                    grader.addCorrectAnswer(questionIndex, correctAnswers);
+                    answers = questionGenerator.getAnswers();
+>>>>>>> parent of 1b7d89d... Merge branch 'UI' into QuestionGeneratorVol2
                     break;
             }
 
@@ -159,16 +153,9 @@ public class ExamPageContent extends PageContent {
                     radioButton.setToggleGroup(toggleGroup);
                     questionBox.getChildren().add(radioButton);
                 }
-                //every time the student clicks a radio button, update the grader and exam saver with the new answer the student selected
+                //every time the student clicks a radio button, update the grader with the new answer the student selected
                 int index = questionIndex;
-                toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-                    grader.addStudentAnswer(index, newVal.getUserData().toString());
-                    examQuestion.addStudentAnswer(newVal.getUserData().toString());
-                    if (oldVal != null) {
-                        grader.removeStudentAnswer(index, oldVal.getUserData().toString());
-                        examQuestion.removeStudentAnswer(oldVal.getUserData().toString());
-                    }
-                });
+                toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> grader.addStudentAnswer(index, newVal.getUserData().toString()));
             } else {
                 ArrayList<JFXCheckBox> checkBoxes = new ArrayList<>();
                 checkboxGroups.put(questionIndex, checkBoxes);
@@ -184,18 +171,12 @@ public class ExamPageContent extends PageContent {
                     //every time the student clicks a radio button, update the grader with the new answer the student selected
                     int index = questionIndex;
                     checkboxButton.selectedProperty().addListener((observable, oldVal, newVal) -> {
-                        if (newVal) {
-                            examQuestion.addStudentAnswer(checkboxButton.getUserData().toString());
-                            grader.addStudentAnswer(index, checkboxButton.getUserData().toString());
-                        } else {
-                            examQuestion.removeStudentAnswer(checkboxButton.getUserData().toString());
-                            grader.removeStudentAnswer(index, checkboxButton.getUserData().toString());
-                        }
+                        if (newVal) grader.addStudentAnswer(index, checkboxButton.getUserData().toString());
+                        else grader.removeStudentAnswer(index, checkboxButton.getUserData().toString());
                     });
                 }
             }
             pageContent.getChildren().add(questionBox);
-            examSaver.add(examQuestion);
         }
         pageContents.add(pageContent);
     }
@@ -252,7 +233,4 @@ public class ExamPageContent extends PageContent {
         }
     }
 
-    public ExamSaver getExamSaver() {
-        return examSaver;
-    }
 }

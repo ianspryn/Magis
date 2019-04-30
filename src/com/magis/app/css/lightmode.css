@@ -5,7 +5,7 @@
     -fx-background: #ddd;
 }
 
-.box-description {
+.chapter-description-text {
     -fx-text-fill: #939393;
     -fx-fill: #939393;
 }
@@ -14,11 +14,11 @@
     -fx-fill: #181818;
 }
 
-.page-box-title {
+.page-title-text {
     -fx-fill: #181818;
 }
 
-.lesson-text-color {
+.lesson-text {
     -fx-text-fill: #200310;
 }
 
@@ -55,10 +55,6 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #181818;
 }
 
-.text-no-color {
-    -fx-fill: #181818;
-}
-
 /*text for grade result inside circle*/
 .grade-text {
     -fx-fill: #ffffff;
@@ -79,7 +75,7 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #575757;
 }
 
-.chapter-box, .recent-stats-box, .settings-box {
+.chapter-box, .recent-box, .settings-box {
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }

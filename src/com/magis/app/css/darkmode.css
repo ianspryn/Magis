@@ -5,7 +5,7 @@
     -fx-background: #111;
 }
 
-.box-description {
+.chapter-description-text {
     -fx-text-fill: #eee;
     -fx-fill: #eee;
 }
@@ -14,12 +14,12 @@
     -fx-fill: #fff;
 }
 
-.page-box-title {
+.page-title-text {
     -fx-fill: #eee;
 }
 
-.lesson-text-color {
-    -fx-text-fill: #fff;
+.lesson-text {
+    -fx-text-fill: #fff1f7;
 }
 
 .code-text {
@@ -55,10 +55,6 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #eee;
 }
 
-.text-no-color {
-    -fx-fill: #eee;
-}
-
 .material-icons-light:pressed .button-icon,
 .material-icons-light:hover .button-icon {
     -fx-fill: #ccc;
@@ -74,7 +70,7 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #ccc;
 }
 
-.chapter-box, .recent-stats-box, .settings-box {
+.chapter-box, .recent-box, .settings-box {
     -fx-background-color: #272727;
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }

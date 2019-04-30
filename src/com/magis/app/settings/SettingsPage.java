@@ -21,10 +21,10 @@ import javafx.scene.shape.Rectangle;
 
 public class SettingsPage {
 
-    private static StudentModel.Student student;
+    private static StudentModel.Student student = Main.studentModel.getStudent();
 
     public static void Page() {
-        student = Main.studentModel.getStudent();
+        StudentModel.Student student = Main.studentModel.getStudent();
 
         /*
         Master
@@ -63,8 +63,6 @@ public class SettingsPage {
         JFXButton backButton = new JFXButton("Back");
         backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
         backButton.setOnMouseClicked(e -> HomePage.goHome(scrollPane));
-        backButton.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        backButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
         backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
 
         backButtonContainer.getChildren().add(backButton);

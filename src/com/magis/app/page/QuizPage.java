@@ -8,6 +8,7 @@ import com.magis.app.test.TestResult;
 import static com.magis.app.Configure.*;
 
 public class QuizPage extends ExamPage {
+
     public QuizPage(int chapterIndex) {
         super(chapterIndex, new QuizSidePanel(chapterIndex), new QuizPageContent(chapterIndex), Main.numQuestionsPerQuiz.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_QUIZ_QUESTIONS), Main.lessonModel.getChapter(chapterIndex).getTitle());
         pageSidePanel.setPageClass(this);
@@ -21,10 +22,9 @@ public class QuizPage extends ExamPage {
                 addPage(0, "Results", testResultPage.getvBox());
                 examPageContent.disableInput();
                 examPageContent.colorize();
-                getExamPageContent().getExamSaver().save();
+                updatePage(0);
                 Main.takingTest = false;
                 submitButton.setVisible(false);
-                updatePage(0);
             }
         });
     }

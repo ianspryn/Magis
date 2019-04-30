@@ -151,16 +151,16 @@ public class LessonPageContent extends PageContent {
                             label.getStyleClass().addAll("code-output-text", "drop-shadow");
                             break;
                         case "[H1]": //we're in a header 1 segment
-                            label.getStyleClass().addAll("lesson-header-one-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-header-one-text");
                             break;
                         case "[H2]": //we're in a header 2 segment
-                            label.getStyleClass().addAll("lesson-header-two-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-header-two-text");
                             break;
                         case "[H3]": //we're in a header 3 segment
-                            label.getStyleClass().addAll("lesson-header-three-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-header-three-text");
                             break;
                         default: //we are not in any kind of formatting segment
-                            label.getStyleClass().addAll("lesson-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-text");
                     }
             }
         }

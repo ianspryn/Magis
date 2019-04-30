@@ -61,13 +61,13 @@ public class PageSidePanel {
         //divider
         horizontalLine.setHeight(2);
         horizontalLine.setWidth(250);
-        horizontalLine.getStyleClass().add("rectangle-color");
+        horizontalLine.getStyleClass().add("lesson-rectangle");
         UIComponents.fadeAndTranslate(verticalLineContainer, 0.15, 0.2,-10,0,0,0);
 
         //current page indicator
         verticalLine.setHeight(25);
         verticalLine.setWidth(5);
-        verticalLine.getStyleClass().add("rectangle-color");
+        verticalLine.getStyleClass().add("lesson-rectangle");
         verticalLineContainer.getChildren().add(verticalLine);
         verticalLineContainer.setPadding(new Insets(0,0,0,-5));
         currentPage.getChildren().addAll(verticalLineContainer, pageLabels.getLabel(0));

@@ -21,7 +21,6 @@ public class TestPage extends ExamPage {
                 addPage(0, "Results", testResultPage.getvBox());
                 examPageContent.disableInput();
                 examPageContent.colorize();
-                getExamPageContent().getExamSaver().save();
                 Main.takingTest = false;
                 submitButton.setVisible(false);
                 updatePage(0);
