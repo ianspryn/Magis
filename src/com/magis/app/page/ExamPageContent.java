@@ -23,7 +23,7 @@ public class ExamPageContent extends PageContent {
     protected int chapterIndex;
     protected int numAvailableBankQuestions;
     protected int numQuestions;
-    protected QuestionGenerator questionGenerator;
+    protected ArrayList<QuestionGenerator> questionGenerator;
     protected Grader grader;
     protected HashMap<Integer, ToggleGroup> toggleGroups;
     protected HashMap<Integer, ArrayList<JFXCheckBox>> checkboxGroups;
@@ -32,12 +32,17 @@ public class ExamPageContent extends PageContent {
     protected ArrayList<VBox> pageContents;
     protected ExamSaver examSaver;
 
-    public ExamPageContent(int chapterIndex, int numQuestions, ExamsModel.ChapterModel exam) {
+    public ExamPageContent(int chapterIndex, int numQuestions, ExamsModel.ChapterModel exam, String typeOfExam) {
         this.chapterIndex = chapterIndex;
         this.numQuestions = numQuestions;
         this.exam = exam;
+        questionGenerator = new ArrayList<>();
         numAvailableBankQuestions = exam.getNumAvailableQuestions();
-        questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
+
+        if(typeOfExam.equals("QUIZ")) {
+            questionGenerator.add(Main.questionGenerator.getOrDefault(chapterIndex, null));
+        }
+
         grader = new Grader(numQuestions);
         toggleGroups = new HashMap<>();
         checkboxGroups = new HashMap<>();
@@ -113,8 +118,9 @@ public class ExamPageContent extends PageContent {
                     grader.addCorrectAnswer(questionIndex, correctAnswers);
                     break;
                 case 1:
-                    questionGenerator.initialize();
-                    do generatedQuestion = questionGenerator.getQuestion();
+                    int generatorUsed = rand.nextInt(questionGenerator.size());
+                    questionGenerator.get(generatorUsed).initialize();
+                    do generatedQuestion = questionGenerator.get(generatorUsed).getQuestion();
                     while (usedGeneratorQuestions.contains(generatedQuestion));
                     usedGeneratorQuestions.add(generatedQuestion);
                     //set the question statement
@@ -124,13 +130,13 @@ public class ExamPageContent extends PageContent {
                     //add the statement to the questionBox
                     questionBox.getChildren().add(statement);
                     //get the correct answer
-                    correctAnswers.add(questionGenerator.getCorrectAnswer());
+                    correctAnswers.add(questionGenerator.get(generatorUsed).getCorrectAnswer());
                     //save the correct answer
                     examQuestion.addCorrectAnswers(correctAnswers);
                     //add the correct answer to the grader for future grading
                     grader.addCorrectAnswer(questionIndex, correctAnswers);
                     //get the incorrect answers
-                    answers = questionGenerator.getAnswers();
+                    answers = questionGenerator.get(generatorUsed).getAnswers();
                     //save the incorrect answers
                     examQuestion.addAnswers(answers);
                     break;
