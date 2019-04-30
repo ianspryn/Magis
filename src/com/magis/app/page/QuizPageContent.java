@@ -6,15 +6,6 @@ import static com.magis.app.Configure.*;
 
 public class QuizPageContent extends ExamPageContent {
     public QuizPageContent(int chapterIndex) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        super(chapterIndex, Main.numQuestionsPerQuiz.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_QUIZ_QUESTIONS), Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()), "QUIZ");
-        examSaver.setType("quiz");
-=======
         super(chapterIndex, Main.numQuestionsPerQuiz.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_QUIZ_QUESTIONS), Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()));
->>>>>>> parent of 1b7d89d... Merge branch 'UI' into QuestionGeneratorVol2
-=======
-        super(chapterIndex, Main.numQuestionsPerQuiz.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_QUIZ_QUESTIONS), Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()));
->>>>>>> parent of 1b7d89d... Merge branch 'UI' into QuestionGeneratorVol2
     }
 }
