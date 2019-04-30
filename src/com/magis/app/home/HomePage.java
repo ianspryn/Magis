@@ -14,7 +14,6 @@ import com.magis.app.page.LessonSidePanel;
 import com.magis.app.page.Page;
 import com.magis.app.page.PageSidePanel;
 import com.magis.app.settings.SettingsPage;
-import javafx.animation.*;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -32,7 +31,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.TextAlignment;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -82,20 +80,20 @@ public class HomePage {
      * Else, the homepage will remain invisible
      */
     public void disableAnimations() {
-        UIComponents.fadeAndTranslate(masterVbox, 0, 0.2, 0, 0, -10, 0);
-        UIComponents.fadeAndTranslate(greetingLabel, 0, 0.2, 0, 0, -10, 0);
-        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(recentBox, 0, 0.2, 0, 0, -10, 0);
-        for (HBox chapterBox : chapterBoxes) UIComponents.fadeAndTranslate(chapterBox, 0, 0.2, 0, 0, -10, 0);
-        UIComponents.fadeAndTranslate(settingsBox, 0,0.2,0,0,-10,0);
+        UIComponents.fadeOnAndTranslate(masterVbox, 0, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeOnAndTranslate(greetingLabel, 0, 0.2, 0, 0, -10, 0);
+        if (student.getRecentChapter() > -1) UIComponents.fadeOnAndTranslate(topBox, 0, 0.2, 0, 0, -10, 0);
+        for (HBox chapterBox : chapterBoxes) UIComponents.fadeOnAndTranslate(chapterBox, 0, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeOnAndTranslate(settingsBox, 0,0.2,0,0,-10,0);
     }
 
     private void animate() {
         if (!Main.useAnimations) return;
-        UIComponents.fadeAndTranslate(masterVbox, 0.3, 0.2, 0, 0, -10, 0);
-        UIComponents.fadeAndTranslate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
-        if (student.getRecentChapter() > -1) UIComponents.fadeAndTranslate(recentBox, 0.3, 0.2, 0, 0, -10, 0);
-        for (int i = 0; i < chapterBoxes.size(); i++) UIComponents.fadeAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
-        UIComponents.fadeAndTranslate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
+        UIComponents.fadeOnAndTranslate(masterVbox, 0.3, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeOnAndTranslate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
+        if (student.getRecentChapter() > -1) UIComponents.fadeOnAndTranslate(topBox, 0.3, 0.2, 0, 0, -10, 0);
+        for (int i = 0; i < chapterBoxes.size(); i++) UIComponents.fadeOnAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
+        UIComponents.fadeOnAndTranslate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
     }
 
     private HomePage() {
@@ -302,8 +300,20 @@ public class HomePage {
     }
 
     /**
+     * Move up and fade out at the same time the home page before going to the statistics page
+     * @param node the desired node to fadeOnAndTranslate first
+     */
+    private void goToStats(Node node) {
+        if (Main.useAnimations) {
+            transitionPage(node).setOnFinished(e -> StatsPage.Page());
+        } else {
+            StatsPage.Page();
+        }
+    }
+
+    /**
      * Move up and fade out at the same time the home page before going to the lesson page
-     * @param node the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeOnAndTranslate first
      * @param chapterIndex the desired chapter to switch scenes to
      */
     private static void goToLesson(Node node, int chapterIndex) {
@@ -318,6 +328,12 @@ public class HomePage {
         }
     }
 
+    /**
+     * Move up and fade out at the same time the home page before going to the lesson page
+     * @param node the desired node to fadeOnAndTranslate first
+     * @param chapterIndex the desired chapter to switch scenes to
+     * @param page the page within the chapter to navigate to
+     */
     private static void goToLesson(Node node, int chapterIndex, int page) {
         if (Main.useAnimations) {
             ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
@@ -331,7 +347,7 @@ public class HomePage {
 
     /**
      * Move up and fade out at the same time the home page before going to the lesson page
-     * @param node the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeOnAndTranslate first
      */
     private static void goToSettings(Node node) {
         if (Main.useAnimations) {
@@ -345,7 +361,7 @@ public class HomePage {
 
     /**
      * Move up and fade out at the same time the current page before going to the home page
-     * @param node the desired node to fadeAndTranslate first
+     * @param node the desired node to fadeOnAndTranslate first
      */
     public static void goHome(Node node) {
         if (Main.useAnimations) {

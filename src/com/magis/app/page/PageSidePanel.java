@@ -56,13 +56,13 @@ public class PageSidePanel {
         title.getStyleClass().add("side-panel-title");
         title.setMaxWidth(300);
         title.setWrapText(true);
-        UIComponents.fadeAndTranslate(title, 0.15, 0.2,-10,0,0,0);
+        UIComponents.fadeOnAndTranslate(title, 0.15, 0.2,-10,0,0,0);
 
         //divider
         horizontalLine.setHeight(2);
         horizontalLine.setWidth(250);
-        horizontalLine.getStyleClass().add("lesson-rectangle");
-        UIComponents.fadeAndTranslate(verticalLineContainer, 0.15, 0.2,-10,0,0,0);
+        horizontalLine.getStyleClass().add("rectangle-color");
+        UIComponents.fadeOnAndTranslate(verticalLineContainer, 0.15, 0.2,-10,0,0,0);
 
         //current page indicator
         verticalLine.setHeight(25);
@@ -71,7 +71,7 @@ public class PageSidePanel {
         verticalLineContainer.getChildren().add(verticalLine);
         verticalLineContainer.setPadding(new Insets(0,0,0,-5));
         currentPage.getChildren().addAll(verticalLineContainer, pageLabels.getLabel(0));
-        UIComponents.fadeAndTranslate(currentPage,0.3,0.2,-10,0,0,0);
+        UIComponents.fadeOnAndTranslate(currentPage,0.3,0.2,-10,0,0,0);
 
         //pages
         contentPagesVBox.setSpacing(10);
@@ -80,7 +80,7 @@ public class PageSidePanel {
         contentPagesVBox.getChildren().add(currentPage);
         for (int i = 1; i < pageLabels.getNumLabels(); i++) {
             contentPagesVBox.getChildren().add(pageLabels.getLabel(i));
-            UIComponents.fadeAndTranslate(pageLabels.getLabel(i), i, 0.3, 0.2, -10,0,0, 0);
+            UIComponents.fadeOnAndTranslate(pageLabels.getLabel(i), i, 0.3, 0.2, -10,0,0, 0);
         }
 
         //add everything to the master VBox

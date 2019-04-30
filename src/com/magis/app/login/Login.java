@@ -218,6 +218,7 @@ public class Login {
               Alert.showAlert("Error", "Please enter a password");
             } else if (passwordMatches(student, password)) { //success
                 Main.username = username;
+                Main.useAnimations = student.useAnimations();
                 Main.isLoggedIn = true;
                 applyColorSettings(student);
                 HomePage.getInstance().Page();

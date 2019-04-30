@@ -242,12 +242,29 @@ The greeting ("Hello, Ian!") on the home page
 }
 
 .chapter-box {
+    -fx-background-radius: 25px;
+}
+
+.inner-chapter-box {
+    -fx-background-radius: 25px;
+}
+
+.home-chapter-box {
     -fx-padding: 20px;
     -fx-alignment: center;
     -fx-background-radius: 25px;
 }
 
-.chapter-title-text {
+.stats-box {
+    -fx-padding: 15px;
+}
+
+.section-title {
+    -fx-font-size: 2em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.box-title {
     -fx-font-size: 1.5em;
     -fx-font-family: "Roboto Mono Bold";
 }
