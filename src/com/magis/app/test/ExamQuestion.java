@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ExamQuestion {
 
+    private int level;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
@@ -13,6 +14,14 @@ public class ExamQuestion {
         answers = new ArrayList<>();
         correctAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public void setQuestion(String question) {
@@ -35,9 +44,7 @@ public class ExamQuestion {
         this.correctAnswers.addAll(correctAnswers);
     }
 
-    public void addStudentAnswer(String studentAnswer) {
-        studentAnswers.add(studentAnswer);
-    }
+    public void addStudentAnswer(String studentAnswer) { studentAnswers.add(studentAnswer); }
 
     public void removeStudentAnswer(String oldAnswer) {
         studentAnswers.remove(oldAnswer);
@@ -58,4 +65,8 @@ public class ExamQuestion {
     public ArrayList<String> getStudentAnswers() {
         return studentAnswers;
     }
+
+    public Integer getNumCorrectAnswers() { return correctAnswers.size(); }
+
+    public Integer getNumStudentAnswers() { return studentAnswers.size(); }
 }

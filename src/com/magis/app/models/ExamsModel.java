@@ -58,18 +58,6 @@ public abstract class ExamsModel {
         }
     }
 
-//    public void initializeQuiz(String chapterName) {
-//        NodeList chapters = document.getElementsByTagName("chapter");
-//        ChapterModel chapterModel = null;
-//        for (int i = 0; i < chapters.getLength(); i++) {
-//            Node chapterNode = chapters.item(i);
-//            if (chapterName.equals(chapterNode.getAttributes().getNamedItem("id").getNodeValue())) {
-//                chapterModel = new ChapterModel(chapterNode);
-//            }
-//        }
-//        this.chapters.add(chapterModel);
-//    }
-
     public class ChapterModel {
         private String chapterName;
         private ArrayList<QuestionsModel> questions;
@@ -112,6 +100,7 @@ public abstract class ExamsModel {
         public class QuestionsModel {
 
             private String statement;
+            private int level;
             private ArrayList<String> correctAnswers;
             private ArrayList<String> incorrectAnswers;
 
@@ -135,10 +124,15 @@ public abstract class ExamsModel {
                 return incorrectAnswers;
             }
 
+            public int getLevel() {
+                return level;
+            }
+
             QuestionsModel(Node question) {
                 this.incorrectAnswers = new ArrayList<>();
                 this.correctAnswers = new ArrayList<>();
                 Element questionElement = (Element) question;
+                this.level = questionElement.getElementsByTagName("level").item(0) != null ? Integer.parseInt(questionElement.getElementsByTagName("level").item(0).getTextContent()) : 1;
                 this.statement = questionElement.getElementsByTagName("statement").item(0).getTextContent();
                 NodeList answers = questionElement.getElementsByTagName("answer");
                 for (int i = 0; i < answers.getLength(); i++) {

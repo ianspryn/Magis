@@ -848,7 +848,7 @@ public class StudentModel {
                 return attempts.get(index);
             }
 
-            Quiz(Node quiz) {
+            Quiz (Node quiz) {
                 this.quiz = quiz;
 
                 Element quizElement = (Element) quiz;
