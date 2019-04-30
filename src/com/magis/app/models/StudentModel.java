@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class StudentModel {
@@ -399,8 +401,40 @@ public class StudentModel {
             UpdateModel.updateXML(new DOMSource(document), filePath);
         }
 
+        public ArrayList<ChapterModel> getChapters() { return chapters; }
+
         public ChapterModel getChapter(int chapterIndex) {
             return chapters.get(chapterIndex);
+        }
+
+        /**
+         * Checks to see if a quiz node is associated with a chapter.
+         * The only way for the quiz node to exist is if getQuiz() was called and the node automatically created
+         * @param chapterIndex
+         * @return true if the quiz node exists (meaning the quiz exist) and false otherwise
+         */
+        public boolean hasTakenQuiz(int chapterIndex) {
+            for (Quiz quiz : quizzes) {
+                if (quiz.getQuizChapterNumber() == chapterIndex) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /**
+         * Checks to see if a test node is associated with a chapter.
+         * The only way for the test node to exist is if getTest() was called and the node automatically created
+         * @param chapterIndex
+         * @return true if the test node exists (meaning the test exist) and false otherwise
+         */
+        public boolean hasTakenTest(int chapterIndex) {
+            for (Test test : tests) {
+                if (test.getTestChapterNumber() == chapterIndex) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /**
@@ -676,6 +710,7 @@ public class StudentModel {
             Node quiz;
             private int quizChapterNumber;
             private ArrayList<Double> scores;
+            private ArrayList<Attempt> attempts;
             private double bestScore = -1.0;
             private double worstScore = 1000.0;
 
@@ -826,12 +861,30 @@ public class StudentModel {
                         this.scores.add(Double.parseDouble(scores.item(i).getTextContent()));
                     }
                 }
+
+                this.attempts = new ArrayList<>();
+                if (quizElement.getElementsByTagName("attempt") != null) {
+                    NodeList attempts = quizElement.getElementsByTagName("attempt");
+                    for (int i = 0; i < attempts.getLength(); i++) {
+                        Attempt attempt = new Attempt(attempts.item(i));
+                        this.attempts.add(attempt);
+                    }
+                }
+                for (double scoreValue : scores) {
+                    if(scoreValue > bestScore) {
+                        bestScore = scoreValue;
+                    }
+                    if(scoreValue < worstScore) {
+                        worstScore = scoreValue;
+                    }
+                }
             }
         }
 
         public class Test {
             private int testChapterNumber;
             private ArrayList<Double> scores;
+            private ArrayList<Attempt> attempts;
             private double bestScore = -1.0;
             private double worstScore = 1000.0;
 

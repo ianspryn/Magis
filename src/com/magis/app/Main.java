@@ -14,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main extends Application {

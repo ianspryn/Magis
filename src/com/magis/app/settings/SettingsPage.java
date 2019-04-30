@@ -19,10 +19,10 @@ import javafx.scene.shape.Rectangle;
 
 public class SettingsPage {
 
-    private static StudentModel.Student student = Main.studentModel.getStudent();
+    private static StudentModel.Student student;
 
     public static void Page() {
-        StudentModel.Student student = Main.studentModel.getStudent();
+        student = Main.studentModel.getStudent();
 
         UIComponents.GenericPage page = new UIComponents.GenericPage();
 

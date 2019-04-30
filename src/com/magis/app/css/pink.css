@@ -5,6 +5,11 @@
     -fx-text-fill: #F48FB1; /* Pink 200*/
 }
 
+.text-color {
+    -fx-text-fill: #D81B60; /* Pink 600 */
+    -fx-fill: #D81B60; /* Pink 600 */
+}
+
 .circleindicator-container  {
 	circleindicator-color: #C2185B; /* Pink 700 */
 }
@@ -51,7 +56,7 @@
     -jfx-unfocus-color: #F8BBD0; /* Pink 100 */
 }
 
-.lesson-rectangle {
+.rectangle-color {
     -fx-fill: #EC407A; /* Pink 400 */
 }
 

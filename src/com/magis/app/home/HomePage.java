@@ -1,27 +1,20 @@
 package com.magis.app.home;
 
 import com.jfoenix.controls.JFXScrollPane;
-import com.jfoenix.controls.JFXSpinner;
-import com.jfoenix.skins.JFXSpinnerSkin;
 import com.magis.app.Main;
 import com.magis.app.UI.RingProgressIndicator;
-import com.magis.app.UI.SmartContinue;
+import com.magis.app.UI.IntelligentTutor;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.icons.MaterialIcons;
 import com.magis.app.models.StudentModel;
 import com.magis.app.page.LessonPage;
-import com.magis.app.page.LessonSidePanel;
-import com.magis.app.page.Page;
-import com.magis.app.page.PageSidePanel;
 import com.magis.app.settings.SettingsPage;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.CacheHint;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +28,8 @@ import javafx.scene.text.TextAlignment;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.magis.app.UI.UIComponents.*;
+
 
 public class HomePage {
 
@@ -43,6 +38,8 @@ public class HomePage {
     private  static Label greetingLabel;
     private ArrayList<HBox> chapterBoxes;
     private static ArrayList<RingProgressIndicator> ringProgressIndicators;
+    private static HBox topBox;
+    private static VBox statsBox;
     private static HBox recentBox;
     private HBox settingsBox;
     private VBox masterVbox;
@@ -62,10 +59,10 @@ public class HomePage {
         int numChapters = Main.lessonModel.getNumChapters();
         StudentModel.Student student = Main.studentModel.getStudent();
         for (int i = 0; i < numChapters; i++) ringProgressIndicators.get(i).setProgress(student.getChapter(i).getProgress());
-        if (student.getRecentPage() != -1) { //make sure we don't add to the recentBox until student visited a page
-            recentBox.setVisible(true);
+        if (student.getRecentChapter() != -1) { //make sure we don't add to the recentBox until student visited a page
+            if (!topBox.getChildren().contains(recentBox)) topBox.getChildren().add(0, recentBox); //add the recent box once
             recentBox.getChildren().clear();
-            recentBox.getChildren().add(SmartContinue.generate());
+            recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
             greetingLabel.setText(generateGreetingText());
         }
     }
@@ -76,7 +73,8 @@ public class HomePage {
     }
 
     /**
-     * Since the home page fades out on every page exit, we must fade everything back in if the user turns off animations.
+     * Since the home page fades out on every page exit (and the fact that it's an instance, not static and therefore and not regenerated),
+     * we must fade everything back in if the user turns off animations.
      * Else, the homepage will remain invisible
      */
     public void disableAnimations() {
@@ -119,25 +117,54 @@ public class HomePage {
         greetingLabel.setPadding(new Insets(50,0,0,0));
         masterVbox.getChildren().add(greetingLabel);
 
+        /*
+        Last Activity and statistics box
+         */
 
         //Last Activity
         recentBox = new HBox();
-        recentBox.setVisible(false);
-        vBox.getChildren().add(recentBox);
-        //master box
-        recentBox.getStyleClass().add("recent-box");
+        recentBox.getStyleClass().add("recent-stats-box");
         recentBox.setMaxWidth(350);
         recentBox.setMinHeight(100);
-        recentBox.setAlignment(Pos.CENTER_LEFT);
 
         recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), student.getRecentPage()));
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        if (student.getRecentChapter() > -1) {
-            recentBox.getChildren().add(SmartContinue.generate());
-            recentBox.setVisible(true);
-        }
+        if (student.getRecentChapter() > -1) recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
+
+        //Activity and Statistics Page
+        statsBox = new VBox();
+        statsBox.getStyleClass().add("recent-stats-box");
+        statsBox.setMaxWidth(350);
+        statsBox.setPrefWidth(350);
+        statsBox.setMinHeight(100);
+        statsBox.setAlignment(Pos.TOP_LEFT);
+
+        Label statsTitle = new Label("Statistics");
+        statsTitle.getStyleClass().add("box-title");
+        statsTitle.setWrapText(true);
+
+        Label statsText = new Label("Click here to view statistics, insights, feedback, history, and more.");
+        statsText.getStyleClass().add("box-description");
+        statsText.setPadding(new Insets(25,0,0,0));
+        statsText.setWrapText(true);
+        statsText.setTextAlignment(TextAlignment.LEFT);
+
+        statsBox.getChildren().addAll(statsTitle, statsText);
+
+        statsBox.setOnMouseClicked(e -> goToStats(masterVbox));
+        statsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+        statsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+
+        //Main box for last activity and statistics page
+        topBox = new HBox();
+        topBox.setAlignment(Pos.CENTER);
+        topBox.setSpacing(50);
+        if (Main.studentModel.getStudent().getRecentChapter() > -1) topBox.getChildren().add(recentBox);
+        topBox.getChildren().add(statsBox);
+        vBox.getChildren().add(topBox);
+
 
         int numChapters = Main.lessonModel.getChapters().size();
 
@@ -238,7 +265,7 @@ public class HomePage {
 
     private void buildChapterBox(int chapterIndex, HBox chapterBox) {
         //master box
-        chapterBox.getStyleClass().add("chapter-box");
+        chapterBox.getStyleClass().addAll("chapter-box", "home-chapter-box");
 
         chapterBox.setOnMouseClicked(e -> goToLesson(masterVbox, chapterIndex));
         chapterBox.setOnMouseEntered(e -> {
@@ -276,10 +303,10 @@ public class HomePage {
 
         //Title
         Label title = new Label();
-        title.getStyleClass().add("chapter-title-text");
+        title.getStyleClass().add("box-title");
         title.setTextAlignment(TextAlignment.RIGHT);
         title.setWrapText(true);
-        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle() + " - " + (chapterIndex + 1));
 
         AnchorPane topContent = new AnchorPane();
         topContent.getChildren().addAll(progressIndicator, title);
@@ -290,7 +317,7 @@ public class HomePage {
         Label description = new Label();
         description.setPrefWidth(550);
         description.setWrapText(true);
-        description.getStyleClass().add("chapter-description-text");
+        description.getStyleClass().add("box-description");
         description.setTextAlignment(TextAlignment.LEFT);
         description.setText(Main.lessonModel.getChapter(chapterIndex).getDescription());
 
@@ -318,13 +345,9 @@ public class HomePage {
      */
     private static void goToLesson(Node node, int chapterIndex) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-//            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
-            parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex));
+            transitionPage(node).setOnFinished(e -> new LessonPage(chapterIndex));
         } else {
-//            LessonPage.Page(chapterIndex, false);
-            new com.magis.app.page.LessonPage(chapterIndex);
+            new LessonPage(chapterIndex);
         }
     }
 
@@ -336,10 +359,7 @@ public class HomePage {
      */
     private static void goToLesson(Node node, int chapterIndex, int page) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-//            parallelTransition.setOnFinished(e -> LessonPage.Page(chapterIndex, false));
-            parallelTransition.setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex, page));
+            transitionPage(node).setOnFinished(e -> new com.magis.app.page.LessonPage(chapterIndex, page));
         } else {
             new com.magis.app.page.LessonPage(chapterIndex, page);
         }
@@ -351,9 +371,7 @@ public class HomePage {
      */
     private static void goToSettings(Node node) {
         if (Main.useAnimations) {
-            ParallelTransition pt = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            pt.play();
-            pt.setOnFinished(e -> SettingsPage.Page());
+            transitionPage(node).setOnFinished(e -> SettingsPage.Page());
         } else {
             SettingsPage.Page();
         }
@@ -365,28 +383,9 @@ public class HomePage {
      */
     public static void goHome(Node node) {
         if (Main.useAnimations) {
-            ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
-            parallelTransition.play();
-            parallelTransition.setOnFinished(e -> getInstance().Page());
+            transitionPage(node).setOnFinished(e -> getInstance().Page());
         } else {
             getInstance().Page();
         }
-    }
-
-
-    private static FadeTransition getFadeTransition(Node node) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-
-        return fadeTransition;
-    }
-
-    private static TranslateTransition getTranslateTransition(Node node) {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
-        translateTransition.setFromY(0);
-        translateTransition.setToY(-10); //move up
-
-        return translateTransition;
     }
 }

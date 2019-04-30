@@ -44,7 +44,7 @@ public class PageContentContainer {
 
     public void buildAsLessonPage(int pageIndex) {
         Text pageTitle = new Text(Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getTitle());
-        pageTitle.getStyleClass().add("page-title-text");
+        pageTitle.getStyleClass().add("page-box-title");
         titleContent.getChildren().add(pageTitle);
 
         masterContent.getChildren().addAll(titleContent, pageContent);

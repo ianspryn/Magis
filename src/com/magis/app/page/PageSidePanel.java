@@ -67,7 +67,7 @@ public class PageSidePanel {
         //current page indicator
         verticalLine.setHeight(25);
         verticalLine.setWidth(5);
-        verticalLine.getStyleClass().add("lesson-rectangle");
+        verticalLine.getStyleClass().add("rectangle-color");
         verticalLineContainer.getChildren().add(verticalLine);
         verticalLineContainer.setPadding(new Insets(0,0,0,-5));
         currentPage.getChildren().addAll(verticalLineContainer, pageLabels.getLabel(0));

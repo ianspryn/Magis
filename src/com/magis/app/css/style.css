@@ -236,9 +236,10 @@ The greeting ("Hello, Ian!") on the home page
     -fx-spacing: 50px;
 }
 
-.recent-box, .settings-box {
+.recent-stats-box, .settings-box {
     -fx-padding: 20px;
     -fx-background-radius: 25px;
+    -fx-alignment: center;
 }
 
 .chapter-box {
@@ -251,8 +252,6 @@ The greeting ("Hello, Ian!") on the home page
 
 .home-chapter-box {
     -fx-padding: 20px;
-    -fx-alignment: center;
-    -fx-background-radius: 25px;
 }
 
 .stats-box {
@@ -269,18 +268,29 @@ The greeting ("Hello, Ian!") on the home page
     -fx-font-family: "Roboto Mono Bold";
 }
 
+.stats-box-title {
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.insight-text {
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Roboto Mono Regular";
+}
+
 .settings-text {
     -fx-font-size: 2em;
     -fx-font-family: "Roboto Mono Bold";
     -fx-padding: 0 0 0 23px;
 }
 
-.page-title-text {
+.page-box-title {
     -fx-font-size: 2.5em;
     -fx-font-family: "Roboto Mono Bold";
 }
 
-.chapter-description-text {
+.box-description {
+    -fx-font-size: 1.2em;
     -fx-font-family: "Roboto Mono Regular";
 }
 

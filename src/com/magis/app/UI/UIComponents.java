@@ -330,4 +330,26 @@ public class UIComponents {
 
         scaleTransition.play();
     }
+
+    public static ParallelTransition transitionPage(Node node) {
+        ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+        parallelTransition.play();
+        return parallelTransition;
+    }
+
+    public static FadeTransition getFadeTransition(Node node) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        return fadeTransition;
+    }
+
+    public static TranslateTransition getTranslateTransition(Node node) {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10); //move up
+
+        return translateTransition;
+    }
 }
