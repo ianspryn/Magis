@@ -8,68 +8,37 @@ import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import com.magis.app.login.Login;
 import com.magis.app.models.StudentModel;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class SettingsPage {
 
-    private static StudentModel.Student student = Main.studentModel.getStudent();
+    private static StudentModel.Student student;
 
     public static void Page() {
-        StudentModel.Student student = Main.studentModel.getStudent();
+        student = Main.studentModel.getStudent();
 
-        /*
-        Master
-         */
-        StackPane master = new StackPane();
-        master.getStyleClass().add("background");
-        ScrollPane scrollPane = new ScrollPane();
-        UIComponents.fadeAndTranslate(scrollPane,0.2,0.2,0,0,-10,0);
-        scrollPane.getStyleClass().add("master-scrollpane");
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setFitToWidth(true);
+        UIComponents.GenericPage page = new UIComponents.GenericPage();
+
+        page.getMastervBox().setAlignment(Pos.TOP_CENTER);
+
+        page.getPageTitle().setText("Settings");
+        page.getBackButton().setOnMouseClicked(e -> HomePage.goHome(page.getScrollPane()));
 
 
-        /*
-        Middle
-         */
         VBox vBox = new VBox();
-        vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.setAlignment(Pos.CENTER);
         vBox.setMaxWidth(500);
         vBox.setPadding(new Insets(25,25,25,25));
         vBox.setSpacing(25);
 
-        //Center the content in the scrollpane
-        StackPane contentHolder = new StackPane(vBox);
-        contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
-                scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
-
-        scrollPane.setContent(contentHolder);
-
-        /*
-        Back button
-         */
-        HBox backButtonContainer = new HBox();
-        backButtonContainer.setAlignment(Pos.CENTER);
-        JFXButton backButton = new JFXButton("Back");
-        backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
-        backButton.setOnMouseClicked(e -> HomePage.goHome(scrollPane));
-        backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
-
-        backButtonContainer.getChildren().add(backButton);
-        backButtonContainer.setPadding(new Insets(0,0,50,0));
-
-        vBox.getChildren().add(backButtonContainer);
-
+        page.getMastervBox().getChildren().add(vBox);
         /*
         Profile
          */
@@ -89,8 +58,8 @@ public class SettingsPage {
         changePassword.getStyleClass().addAll("jfx-button-raised", "jfx-button-raised-color");
 
         profileAnchorPane.getChildren().addAll(nameSettings, changePassword);
-        profileAnchorPane.setLeftAnchor(nameSettings,0.0);
-        profileAnchorPane.setRightAnchor(changePassword,0.0);
+        AnchorPane.setLeftAnchor(nameSettings,0.0);
+        AnchorPane.setRightAnchor(changePassword,0.0);
 
         vBox.getChildren().add(profileAnchorPane);
 
@@ -121,8 +90,8 @@ public class SettingsPage {
         });
 
         darkModeAnchorPane.getChildren().addAll(darkModeTextContainer, darkModeToggle);
-        darkModeAnchorPane.setLeftAnchor(darkModeText, 0.0);
-        darkModeAnchorPane.setRightAnchor(darkModeToggle,0.0);
+        AnchorPane.setLeftAnchor(darkModeText, 0.0);
+        AnchorPane.setRightAnchor(darkModeToggle,0.0);
 
         vBox.getChildren().add(darkModeAnchorPane);
 
@@ -145,8 +114,8 @@ public class SettingsPage {
         themeBox.getChildren().addAll(pinkTheme, purpleTheme, cyanTheme, greenTheme, grayTheme);
 
         themeAnchorPane.getChildren().addAll(themeText, themeBox);
-        themeAnchorPane.setLeftAnchor(themeText, 0.0);
-        themeAnchorPane.setRightAnchor(themeBox, 0.0);
+        AnchorPane.setLeftAnchor(themeText, 0.0);
+        AnchorPane.setRightAnchor(themeBox, 0.0);
 
         vBox.getChildren().add(themeAnchorPane);
 
@@ -171,8 +140,8 @@ public class SettingsPage {
         });
 
         animationsAnchorPane.getChildren().addAll(animationTextContainer, animationToggle);
-        animationsAnchorPane.setLeftAnchor(animationText, 0.0);
-        animationsAnchorPane.setRightAnchor(animationToggle,0.0);
+        AnchorPane.setLeftAnchor(animationText, 0.0);
+        AnchorPane.setRightAnchor(animationToggle,0.0);
 
         vBox.getChildren().add(animationsAnchorPane);
 
@@ -197,9 +166,7 @@ public class SettingsPage {
         deleteUserContainer.getChildren().add(deleteUser);
         vBox.getChildren().add(deleteUserContainer);
 
-        master.getChildren().add(scrollPane);
-        StackPane.setAlignment(scrollPane, Pos.CENTER);
-        Main.setScene(master, "Settings");
+        Main.setScene(page.getMaster(), "Settings");
     }
 
     private static Rectangle colorRectangle(String hexColor, String name) {

@@ -218,6 +218,7 @@ public class Login {
               Alert.showAlert("Error", "Please enter a password");
             } else if (passwordMatches(student, password)) { //success
                 Main.username = username;
+                Main.useAnimations = student.useAnimations();
                 Main.isLoggedIn = true;
                 applyColorSettings(student);
                 HomePage.getInstance().Page();
@@ -255,7 +256,7 @@ public class Login {
         firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1).toLowerCase();
         lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1).toLowerCase();
 
-        String salt = Password.generateSalt(); //generate salt for password
+        String salt = Password.generateSalt(); //generateRecentActivity salt for password
         String passwordHash = Password.hash(password, salt); //hash the password
         int result = Main.studentModel.addStudent(username, firstName, lastName, passwordHash, salt); //try to add the new student
 
