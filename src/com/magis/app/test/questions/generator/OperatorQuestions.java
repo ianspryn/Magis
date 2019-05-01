@@ -146,7 +146,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
     public void getModularQuestion(){
         question = "";
-        int divisor = rand.nextInt(26);
+        int divisor = rand.nextInt(26)+1;
         int divider = rand.nextInt(divisor)+1;
         ArrayList<String> shuffler = new ArrayList<>();
 
