@@ -6,13 +6,24 @@ import java.util.ArrayList;
 
 public class ClassesQuestions extends QuestionGenerator{
 
-    private String[] comparableStrings = {"Private class Example", "Public class Example", "is it visble?\n","is it not visble?\n"};
+    private String[] comparableStrings = {"Private class Example;", "Public class Example;", "it is visble.\n","it is not visble.\n"};
 
     private String[] comparableStringAnswers = {"True", "False"};
 
-    private String[] equalsStrings = {"int", "String", "Double","char"};
-    private String[] equalsAnswers = {"public example(int x){}", "public example(String word){}",
-            "public example(Double y){}","public example(char c){}"};
+    private String[] equalsStrings = {"Getter", "Setter","public String getName() {\n" +
+            "    return name;\n" +
+            "  }","public void setName(String newName) {\n" +
+            "    this.name = newName;\n" +
+            "  }","public String getName(String newName) {\n" +
+            "    this.name = newName;\n" +
+            "  }","public void setName() {\n" +
+            "    return name;\n" +
+            "  }"};
+    private String[] equalsAnswers = {"It provides a level of protection to a variabel by returning the contents of"+
+            " the variable through a function, rather then pulling the contents of the variable from the variable directly.",
+            "It provides a level of protection to a variabel by changing the contents of the variable"+
+            "through a function, rather then changing the contents of the variable directly.",
+            "Yes", "No"};
     private String[] secondAnswers = {"int x = 3, int y = 5", "int x = 3",
             "int y = 3","nothing at all"};
     private String[] secondStrings = {"pubic class child extends parent{\n     public child{\n           super();\n        int y = 5;\n      }\n}",
@@ -51,45 +62,65 @@ public class ClassesQuestions extends QuestionGenerator{
         String firstPart =  secondStrings[random];
         int random2 = rand.nextInt(2);
         String secondPart =  secondStrings[random2+2];
-
-        question = "Is "+firstPart+" "+secondpart+"\n";
-        if(random == && random1 ==) {
-            correctAnswer = comparableStringAnswers[];
+        question = "If we have a class: "+firstPart+" "+secondpart;
+        if(random == 0 && random1 == 0) {
+            correctAnswer = comparableStringAnswers[1];
         }
-        else if(random == && random1 ==){
-            correctAnswer = comparableStringAnswers[];
+        else if(random == 1 && random1 == 0){
+            correctAnswer = comparableStringAnswers[0];
         }
-        else if(random == && random1 ==){
-            correctAnswer = comparableStringAnswers[];
+        else if(random ==0 && random1 ==1){
+            correctAnswer = comparableStringAnswers[0];
         }
         else {
-            correctAnswer = comparableStringAnswers[];
+            correctAnswer = comparableStringAnswers[1];
         }
 
     }
 
     public void generateContentQuestion(){
-        question = "";
-        answers = eAnswers;
 
-        int random = rand.nextInt(4);
-        String firstPart =  equalsStrings[random];
-
-
-        question = "Which is the correct constructor for class example if we want the paramater to be a "+firstPart+"?\n";
-        correctAnswer = equalsAnswers[random];
+        if(rand.nextInt(2) == 0) {
+            question = "";
+            answers.add(eAnswers.get(0));
+            answers.add(cAnswers.get(1));
+            int random = rand.nextInt(2);
+            String firstPart = equalsStrings[random];
+            question = "What does a " + firstPart + " do?\n";
+            correctAnswer = equalsAnswers[random];
+        }
+        else{
+            question = "";
+            answers.add(eAnswers.get(2));
+            answers.add(cAnswers.get(3));
+            int random = rand.nextInt(4);
+            random +=2;
+            String firstPart = equalsStrings[random];
+            question = "Is this correct? " + firstPart + "\n";
+            if(random == 2){
+                correctAnswer = equalsAnswers[2];
+            }
+            else if(random == 3){
+                correctAnswer = equalsAnswers[2];
+            }
+            else if(random == 4){
+                correctAnswer = equalsAnswers[3];
+            }
+            else{
+                correctAnswer = equalsAnswers[3];
+            }
+        }
 
     }
     public void generateSecondContructerQuestions(){
         question = "";
         answers = sAnswers;
-        int random = rand.nextInt(2);
+        int random = rand.nextInt(4);
         String firstPart =  secondStrings[random];
+        random = rand.nextInt(4);
+        String secondPart =  secondStrings[random];
 
-
-        question = "For constructor \n"+firstPart+"\n with parent class\n " +
-                "pubic class parent{\n     public parent{\n           int x = 3;\n" +
-                "   }\n}\nwhat variables will be initialized in the constructor?\n";
+        question = "If class Example1 " + firstPart + " "+secondPart+"?\n";
         correctAnswer = secondAnswers[random];
 
 
