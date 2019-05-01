@@ -11,12 +11,7 @@ public class TestPageContent extends ExamPageContent {
     }
 
     @Override
-    void update(int pageIndex) {
-
-    }
-
-    @Override
-    void buildPage(int index) {
+    protected void buildQuestions() {
 
     }
 }
