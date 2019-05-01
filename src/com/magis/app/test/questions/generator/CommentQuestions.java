@@ -15,7 +15,7 @@ public class CommentQuestions extends QuestionGenerator{
             "This code will do [x]",
             "This code will do [x]\nIt will also do [y]"
     };
-    private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "Unknown"};
+    private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "None of the Above"};
 
     public CommentQuestions(){
         answers = new ArrayList<>(Arrays.asList(generalCommentAnswers));

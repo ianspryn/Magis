@@ -12,12 +12,12 @@ public class QuestionGenerator {
             "This code will do [x]",
             "This code will do [x]\nIt will also do [y]"
     };
-    private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "Unknown"};
+    private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "None of the Above"};
 
     private String[] comparableStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
-    private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "Unknown"};
+    private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "None of the Above"};
 
     private char[] characters = {'+','-','*','/','%','<','=','>'};
     private String correctAnswer;

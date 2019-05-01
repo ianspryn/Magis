@@ -11,11 +11,11 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     private String[] comparableStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
-    private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "Unknown"};
+    private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "None of the Above"};
 
     private String[] equalsStrings = {"Programming is fun!", "programming is Fun!",
             "programming is fun!", "PROGRAMMING IS FUN!"};
-    private String[] equalsAnswers = {"True", "False", "Unknown"};
+    private String[] equalsAnswers = {"True", "False", "None of the Above"};
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
 

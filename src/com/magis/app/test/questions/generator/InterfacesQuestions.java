@@ -33,7 +33,7 @@ public class InterfacesQuestions extends QuestionGenerator {
         answers.clear();
         answers.add("Yes");
         answers.add("No");
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         correctAnswer = answers.get(1);
 
@@ -84,7 +84,7 @@ public class InterfacesQuestions extends QuestionGenerator {
         answers.add(""+b);
         answers.add(""+c);
         answers.add(""+d);
-        answers.add("Unknown");
+        answers.add("None of the Above");
         correctAnswer = ""+rightNum;
     }
 }

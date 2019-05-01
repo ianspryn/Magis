@@ -36,7 +36,7 @@ public class VariableQuestions extends QuestionGenerator{
         question = "";
         answers.add("True");
         answers.add("False");
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         int rightWrong = rand.nextInt(2);
         int selector;
@@ -77,7 +77,7 @@ public class VariableQuestions extends QuestionGenerator{
         shuffler.add("int value = "+word+";\n"+word+" = value;");
         correctAnswer = shuffler.get(0);
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
 
         answers = shuffler;
     }
