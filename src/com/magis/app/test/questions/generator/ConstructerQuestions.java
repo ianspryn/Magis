@@ -52,7 +52,7 @@ public class ConstructerQuestions extends QuestionGenerator{
         ArrayList<String> four = new ArrayList();
         for (int i = 0; i < 4; i++) {
             String answer = "";
-            do { answer = comparableStrings[random]; }
+            do { answer = comparableStrings[rand.nextInt(comparableStrings.length)]; }
             while (four.contains(answer));
             four.add(answer);
         }

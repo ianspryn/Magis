@@ -65,7 +65,7 @@ public class QuizPageContent extends ExamPageContent {
                 //save the question
                 examQuestion.setQuestion(generatedQuestion);
                 //save the level
-                examQuestion.setLevel(generatedQuestion.getLevel());
+                examQuestion.setLevel(questionGenerator.getLevel());
                 //get and save the correct answer
                 examQuestion.addCorrectAnswer(questionGenerator.getCorrectAnswer());
                 //get and save all of the answers (correct and incorrect)
