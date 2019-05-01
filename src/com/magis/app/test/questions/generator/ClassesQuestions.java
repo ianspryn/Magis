@@ -33,7 +33,7 @@ public class ClassesQuestions extends QuestionGenerator{
     private ArrayList<String> eAnswers;
     private ArrayList<String> sAnswers;
 
-    public ConstructerQuestions(){
+    public ClassesQuestions(){
         super();
         cAnswers = new ArrayList<>(Arrays.asList(comparableStringAnswers));
         eAnswers = new ArrayList<>(Arrays.asList(equalsAnswers));
@@ -61,14 +61,14 @@ public class ClassesQuestions extends QuestionGenerator{
         String firstPart =  secondStrings[random];
         int random2 = rand.nextInt(2);
         String secondPart =  secondStrings[random2+2];
-        question = "If we have a class: "+firstPart+" "+secondpart;
-        if(random == 0 && random1 == 0) {
+        question = "If we have a class: "+firstPart+" "+secondPart;
+        if(random == 0 && random2 == 0) {
             correctAnswer = comparableStringAnswers[1];
         }
-        else if(random == 1 && random1 == 0){
+        else if(random == 1 && random2 == 0){
             correctAnswer = comparableStringAnswers[0];
         }
-        else if(random ==0 && random1 ==1){
+        else if(random ==0 && random2 ==1){
             correctAnswer = comparableStringAnswers[0];
         }
         else {
