@@ -27,7 +27,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
         answers.clear();
         answers.add("True");
         answers.add("False");
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         question = "public class "+mainClass+" {...}\n";
 
@@ -198,7 +198,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
 
         answers.add("Null");
         answers.add("IllegalArgumentException");
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         question += "\n\nWhat is the result of calling \"display\" in the \"Car\" class?";
     }

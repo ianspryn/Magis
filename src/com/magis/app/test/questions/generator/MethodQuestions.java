@@ -72,7 +72,7 @@ public class MethodQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 
@@ -104,7 +104,7 @@ public class MethodQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 }

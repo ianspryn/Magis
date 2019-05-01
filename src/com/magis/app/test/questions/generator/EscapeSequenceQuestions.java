@@ -75,6 +75,6 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
         }
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 }

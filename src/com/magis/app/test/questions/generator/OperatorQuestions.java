@@ -137,7 +137,7 @@ public class OperatorQuestions extends QuestionGenerator {
         }
         shuffler.add(""+(number-14));
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
 
         answers = shuffler;
 
@@ -157,7 +157,7 @@ public class OperatorQuestions extends QuestionGenerator {
         shuffler.add((""+(divisor*divider)));
         shuffler.add((""+(divisor+1)));
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 
@@ -194,7 +194,7 @@ public class OperatorQuestions extends QuestionGenerator {
         shuffler.add(reverseMessage);
         shuffler.add("A random String of size "+(endPoint-startPoint));
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
 
         answers = shuffler;
     }
