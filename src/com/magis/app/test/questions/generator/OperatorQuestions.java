@@ -120,7 +120,7 @@ public class OperatorQuestions extends QuestionGenerator {
                 shuffler.add(correctAnswer);
                 break;
             case 5:
-                extraNumber = rand.nextInt(11);
+                extraNumber = rand.nextInt(11)+1;
                 question += "\nvalue /= " + extraNumber+";";
                 number /= extraNumber;
                 correctAnswer = ""+(number);
