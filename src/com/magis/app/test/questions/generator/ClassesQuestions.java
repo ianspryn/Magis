@@ -24,12 +24,11 @@ public class ClassesQuestions extends QuestionGenerator{
             "It provides a level of protection to a variabel by changing the contents of the variable"+
             "through a function, rather then changing the contents of the variable directly.",
             "Yes", "No"};
-    private String[] secondAnswers = {"int x = 3, int y = 5", "int x = 3",
-            "int y = 3","nothing at all"};
-    private String[] secondStrings = {"pubic class child extends parent{\n     public child{\n           super();\n        int y = 5;\n      }\n}",
-            "pubic class child extends parent{\n     public child{\n           super();\n}\n}",
-            "pubic class child extends parent{\n     public child{\n        int y = 5;\n      }\n}",
-            "pubic class child extends parent{\n     public child{\n      }\n}"};
+    private String[] secondAnswers = {"Example1 is a super class and Example2 is a sub class",
+            "Example1 is a sub class and Example2 is a super class",
+            "Example1 is a super class and Example2 is a super class",
+            "Example1 is a sub class and Example2 is a sub class"};
+    private String[] secondStrings = {"extended by", "extends"};
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
     private ArrayList<String> sAnswers;
@@ -115,12 +114,11 @@ public class ClassesQuestions extends QuestionGenerator{
     public void generateSecondContructerQuestions(){
         question = "";
         answers = sAnswers;
-        int random = rand.nextInt(4);
+        int random = rand.nextInt(2);
         String firstPart =  secondStrings[random];
-        random = rand.nextInt(4);
-        String secondPart =  secondStrings[random];
+        
 
-        question = "If class Example1 " + firstPart + " "+secondPart+"?\n";
+        question = "If class Example1 " + firstPart + " class Example2, what type of classes are Example1 and Example2?\n";
         correctAnswer = secondAnswers[random];
 
 
