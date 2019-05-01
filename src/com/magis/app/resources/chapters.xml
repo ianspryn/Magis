@@ -2299,6 +2299,589 @@ This is a great improvement over languages such as C and C++. With those languag
 goes unnoticed, but at other times, the program will act flaky or die a horrible death many instructions later. These are serious problems that make C and C++ programs difficult to debug. Bounds errors in C and C++ programs are a major cause of security vulnerabilities.
 				</text>
 			</page>
+			<page title="Uninitialized and Unﬁlled Arrays">
+				<text>
+A common error is to allocate an array reference, but not an actual array.
+```
+double[] values;
+values[0] = 29.95; // Error—values not initialized
+```
+Array variables work exactly like object variables—they are only references to the actual
+array. To construct the actual array, you must use the new operator:
+double[] values = new double[10];
+
+Another common error is to allocate an array of objects and expect it to be filled with objects.
+```
+BankAccount[] accounts = new BankAccount[10]; // Contains ten null references
+```
+This array contains null references, not default bank accounts. You need to remember to fill
+the array, for example:
+```
+for (int i = 0; i &lt; 10; i++)
+{
+accounts[i] = new BankAccount();
+}
+```
+				</text>
+			</page>
+			<page title="Quality Tips">
+				<text>
+~H1~Use Arrays for Sequences of Related Values~H1~
+
+Arrays are intended for storing sequences of values with the same meaning. For example, an
+array of test scores makes perfect sense:
+```
+int[] scores = new int[NUMBER_OF_SCORES];
+```
+But it is a bad design to use an array
+```
+double[] personalData = new double[3];
+```
+that holds a person’s age, bank balance, and shoe size as personalData[0], personalData[1], and
+personalData[2] . It would be tedious for the programmer to remember which of these data
+items is stored in which array location. In this situation, it is far better to use three variables
+```
+int age;
+double bankBalance;
+double shoeSize;
+```
+~H1~Make Parallel Arrays into Arrays of Objects~H1~
+
+Programmers who are familiar with arrays, but unfamiliar with object-oriented programming, sometimes distribute information across separate arrays. Here is a typical example. A
+program needs to manage bank data, consisting of account numbers and balances. Don’t
+store the account numbers and balances in separate arrays.
+```
+// Don’t do this
+int[] accountNumbers;
+double[] balances;
+```
+Arrays such as these are called parallel arrays (see Figure 3). The ith slice (accountNumbers[i]
+and balances[i]) contains data that need to be processed together.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/12.png</image>
+				<text>
+If you find yourself using two arrays that have the same length, ask yourself whether you
+couldn’t replace them with a single array of a class type. Look at a slice and find the concept
+that it represents. Then make the concept into a class. In our example each slice contains an
+account number and a balance, describing a bank account. Therefore, it is an easy matter to
+use a single array of objects
+```
+BankAccount[] accounts;
+```
+(See Figure 4.)
+Why is this beneficial? Think ahead. Maybe your program will change and you will need
+to store the owner of the bank account as well. It is a simple matter to update the BankAccount
+class. It may well be quite complicated to add a new array and make sure that all methods
+that accessed the original two arrays now also correctly access the third one.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/14.png</image>
+			</page>
+			<page title="Special Topic">
+				<text>
+~H1~Methods with a Variable Number of Parameters~H1~
+Starting with Java version 5.0, it is possible to declare methods that receive a variable number
+of parameters. For example, we can modify the add method of the DataSet class of Chapter 6
+so that one can add any number of values:
+```
+data.add(1, 3, 7);
+data.add(4);
+data.add(); // OK but not useful
+```
+The modified add method must be declared as
+```
+public void add(double... values)
+```
+The ... symbol indicates that the method can receive any number of double values. The xs
+parameter is actually a double[] array that contains all values that were passed to the method.
+The method implementation traverses the parameter array and processes the values:
+```
+public class DataSet
+{
+	. . .
+	public void add(double... values)
+	{
+		for (int i = 0; i &lt; values.length; i++) // values is a double[]
+		{
+			double x = values[i];
+			sum = sum + x;
+			if (count == 0 || maximum &lt; x) maximum = x;
+			count++;
+		}
+	}
+}
+```
+				</text>
+			</page>
+			<page title="Array Lists">
+				<text>
+The array construct is rather primitive. In this section, we introduce the ArrayList
+class. It lets you collect objects, just like an array does, but array lists offer two significant benefits:
+• Array lists can grow and shrink as needed.
+• The ArrayList class supplies methods for many common tasks, such as inserting
+and removing elements.
+You declare an array list of strings as follows:
+```
+ArrayList&lt;String&gt; names = new ArrayList&lt;String&gt;();
+```
+The type ArrayList&lt;String&gt; denotes an array list of strings. The angle brackets
+around the String type tell you that String is a type parameter. You can replace
+String with any other class and get a different array list type. For that reason,
+ArrayList is called a generic class. You will learn more about generic classes in
+Chapter 17. For now, simply use an ArrayList&lt;T&gt; whenever you want to collect
+objects of type T. However, keep in mind that you cannot use primitive types as
+type parameters—there is no ArrayList&lt;int&gt; or ArrayList&lt;double&gt;. You will see in another section how to overcome that limitation.
+When you construct an ArrayList object, it has size 0. You use the add method to
+add an object to the end of the array list. The size increases after each call to add (see
+Figure 5). The size method yields the current size of the array list.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/17.png</image>
+				<text>
+names.add("Emily"); // Now names has size 1 and element "Emily"
+names.add("Bob"); // Now names has size 2 and elements "Emily", "Bob"
+names.add("Cindy"); // names has size 3 and elements "Emily", "Bob", and "Cindy"
+
+To obtain the value of an array list element, use the get method, not the [ ] operator.
+As with arrays, index values start at 0. For example, names.get(2) retrieves the element with index 2, the third element in the array list:
+```
+String name = names.get(2);
+```
+As with arrays, it is an error to access a nonexistent element. A very common
+bounds error is to use the following:
+```
+int i = names.size();
+name = names.get(i); // Error
+```
+The last valid index is names.size() - 1.
+To set an array list element to a new value, use the set method.
+```
+names.set(2, “Carolyn”);
+```
+This call sets position 2 of the names array list to "Carolyn", overwriting whatever
+value was there before.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/19.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/20.png</image>
+				<text>
+The set method can only overwrite existing values. It is different from the add
+method, which adds a new object to the end of the array list.
+You can also insert an object in the middle of an array list. The call names.add(1,
+“Ann”) moves all elements with index 1 or larger by one position and adds the string
+“Ann” at index 1 (see Figure 6). After each call to the add method, the size of the array
+list increases by 1.
+
+Conversely, the remove method removes the element at a given index, moves all
+elements after the removed element to the next lower index, and reduces the size of
+the array list by 1. Part 3 of Figure 6 illustrates the call names.remove(1).
+The following program demonstrates how to use ArrayList class for collecting
+BankAccount objects. The BankAccount class has been enhanced from the version in
+Chapter 3. Each bank account has an account number. Note that you import the
+generic class java.util.ArrayList, without the type parameter.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/22.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/23.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. How do you construct an array of 10 strings? An array list of strings?
+
+2. What is the content of names after the following statements?
+```
+ArrayList&lt;String&gt; names = new ArrayList&lt;String&gt;();
+names.add("A");
+names.add(0, "B");
+names.add("C");
+names.remove(1);
+```
+				</text>
+			</page>
+			<page title="Wrappers and Auto-boxing">
+				<text>
+Because numbers are not objects in Java, you cannot directly insert them into array
+lists. For example, you cannot form an ArrayList&lt;double&gt;. To store sequences of
+numbers in an array list, you must turn them into objects by using wrapper classes.
+There are wrapper classes for all eight primitive types:
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/26.png</image>
+				<text>
+Note that the wrapper class names start with uppercase letters, and that two of them
+differ from the names of the corresponding primitive type: Integer and Character.
+Each wrapper class object contains a value of the corresponding primitive type.
+For example, an object of the class Double contains a value of type double (see
+Figure 7).
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/28.png</image>
+				<text>
+Wrapper objects can be used anywhere that objects are required instead of primitive type values. For example, you can collect a sequence of floating-point numbers
+in an ArrayList&lt;Double&gt;.
+
+Conversion between primitive types and the corresponding wrapper classes is
+automatic. This process is called auto-boxing (even though auto-wrapping would
+have been more consistent).
+For example, if you assign a number to a Double object, the number is automatically “put into a box”, namely a wrapper object.
+```
+Double d = 29.95; // Auto-boxing; same as Double d = new Double(29.95);
+```
+Conversely, wrapper objects are automatically “unboxed” to primitive types.
+```
+double x = d; // Auto-unboxing; same as double x = d.doubleValue();
+```
+Auto-boxing even works inside arithmetic expressions. For example, the statement
+```
+d = d + 1;
+```
+is perfectly legal. It means:
+• Auto-unbox d into a double
+• Add 1
+• Auto-box the result into a new Double
+• Store a reference to the newly created wrapper object in d
+In order to collect numbers in an array list, simply remember to use the wrapper
+type as the type parameter, and then rely on auto-boxing.
+```
+ArrayList&lt;Double&gt; values = new ArrayList&lt;Double&gt;();
+values.add(29.95);
+double x = values.get(0);
+```
+Keep in mind that storing wrapped numbers is quite inefficient. The use of wrappers is acceptable if you only collect a few numbers, but you should use arrays for
+long sequences of numbers or characters.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. What is the difference between the types double and Double?
+
+2. Suppose values is an ArrayList&lt;Double&gt; of size &gt; 0. How do you increment the
+element with index 0?
+				</text>
+			</page>
+			<page title="The Enhanced for Loop">
+				<text>
+Java version 5.0 introduces a very convenient shortcut for a common loop type.
+Often, you need to iterate through a sequence of elements—such as the elements of
+an array or array list. The enhanced for loop makes this process particularly easy to
+program.
+
+Suppose you want to total up all elements in an array values. Here is how you use
+the enhanced for loop to carry out that task.
+```
+double[] values = . . .;
+double sum = 0;
+for (double element : values)
+{
+sum = sum + element;
+}
+```
+The loop body is executed for each element in the array values. At the beginning of
+each loop iteration, the next element is assigned to the variable element. Then the
+loop body is executed. You should read this loop as “for each element in values”.
+You may wonder why Java doesn’t let you write “for each (element in values)”.
+Unquestionably, this would have been neater, and the Java language designers seriously considered this. However, the “for each” construct was added to Java several
+years after its initial release. Had new reserved words each and in been added to the
+language, then older programs that happened to use those identifiers as variable or
+method names (such as System.in) would no longer have compiled correctly.
+You don’t have to use the “for each” construct to loop through all elements in an
+array. You can implement the same loop with a straightforward for loop and an
+explicit index variable:
+```
+double[] values = . . .;
+double sum = 0;
+for (int i = 0; i &lt; values.length; i++)
+{
+double element = values[i];
+sum = sum + element;
+}
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/32.png</image>
+				<text>
+Note an important difference between the “for each” loop and the ordinary for
+loop. In the “for each” loop, the loop variable e is assigned elements: values[0],
+values[1], and so on. In the ordinary for loop, the loop variable i is assigned index
+values: 0, 1, and so on.
+
+You can also use the enhanced for loop to visit all elements of an array list. For
+example, the following loop computes the total of the balances of all accounts:
+```
+ArrayList&lt;BankAccount&gt; accounts = . . . ;
+double sum = 0;
+for (BankAccount account : accounts)
+{
+	sum = sum + account.getBalance();
+}
+```
+This loop is equivalent to the following ordinary for loop:
+```
+double sum = 0;
+for (int i = 0; i &lt; accounts.size(); i++)
+{
+	BankAccount account = accounts.get(i);
+	sum = sum + account.getBalance();
+}
+```
+Keep in mind that the “for each” loop has a very specific purpose: getting the elements of a collection, from the beginning to the end. It is not suitable for all array
+algorithms. In particular, the “for each” loop does not allow you to modify the contents of an array. The following loop does not fill an array with zeroes:
+```
+for (double element : values)
+{
+	element = 0; // ERROR—this assignment does not modify array elements
+}
+```
+When the loop is executed, the variable element is first set to values[0]. Then element
+is set to 0, then to values[1], then to 0, and so on. The values array is not modified.
+The remedy is simple: Use an ordinary for loop
+```
+for (int i = 0; i &lt; values.length; i++)
+{
+	values[i] = 0; // OK
+}
+```
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Write a “for each” loop that prints all elements in the array values.
+
+2. What does this “for each” loop do?
+```
+int counter = 0;
+for (BankAccount a : accounts)
+{
+	if (a.getBalance() == 0) { counter++; }
+}
+```
+				</text>
+			</page>
+			<page title="Partially Filled Arrays">
+				<text>
+Suppose you write a program that reads a sequence of numbers into an array. How
+many numbers will the user enter? You can’t very well ask the user to count the
+items before entering them—that is just the kind of work that the user expects the
+
+computer to do. Unfortunately, you now run into a problem. You need to set the
+size of the array before you know how many elements you need. Once the array
+size is set, it cannot be changed.
+To solve this problem, make an array that is guaranteed to be larger than the largest possible number of entries, and partially fill it. For example, you can decide that
+the user will never provide more than 100 input values. Then allocate an array of
+size 100:
+```
+final int VALUES_LENGTH = 100;
+double[] values = new double[VALUES_LENGTH];
+```
+Then keep a companion variable that tells how many elements in the array are actually used. It is an excellent idea always to name this companion variable by adding
+the suffix Size to the name of the array.
+```
+int valuesSize = 0;
+```
+Now values.length is the capacity of the array values, and valuesSize is the current
+size of the array (see Figure 8). Keep adding elements into the array, incrementing
+the valuesSize variable each time.
+```
+values[valuesSize] = x;
+valuesSize++;
+```
+This way, valuesSize always contains the correct element count.
+The following code segment shows how to read numbers into a partially filled
+array.
+```
+int valuesSize = 0;
+Scanner in = new Scanner(System.in);
+while (in.hasNextDouble())
+{
+	if (valuesSize &lt; values.length)
+	{
+		values[valuesSize] = in.nextDouble();
+		valuesSize++;
+	}
+}
+```
+At the end of this loop, valuesSize contains the actual number of elements in the
+array. Note that you have to stop accepting inputs if the valuesSize companion variable reaches the array length. Section 7.6 shows how you can overcome that limitation by growing the array.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/36.png</image>
+				<text>
+To process the gathered array elements, you again use the companion variable,
+not the array length. This loop prints the partially filled array:
+```
+for (int i = 0; i &lt; valuesSize; i++)
+{
+	System.out.println(values[i]);
+}
+```
+Array lists use this technique behind the scenes. An array list contains an array of
+objects. When the array runs out of space, the array list allocates a larger array and
+copies the elements. However, all of this happens inside the array list methods, so
+you never need to think about it.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Write a loop to print the elements of the partially filled array values in reverse
+order, starting with the last element.
+
+2. How do you remove the last element of the partially filled array values?
+
+3. Why would a programmer use a partially filled array of numbers instead of an
+array list?
+				</text>
+			</page>
+			<page title="Common Array Algorithms">
+				<text>
+In the following sections, we discuss some of the most common algorithms for
+working with arrays and array lists.
+In the examples, we show a mixture of arrays and array lists so that you become
+familiar with the syntax for both constructs.
+
+~H1~Filling~H1~
+
+This loop fills an array with zeroes:
+```
+for (int i = 0; i &lt; values.length; i++)
+{
+	values[i] = 0;
+}
+```
+Here, we fill an array list with squares (0, 1, 4, 9, 16, …). Note that the element with
+index 0 contains 02, the element with index 1 contains 12, and so on.
+```
+for (int i = 0; i &lt; values.size(); i++)
+{
+	values.set(i, i * i);
+}
+```
+~H1~Computing Sum and Average Values~H1~
+
+To compute the sum of all elements, simply keep a running total.
+```
+double total = 0;
+for (double element : values)
+{
+	total = total + element;
+}
+```
+To obtain the average, divide by the number of elements:
+```
+double average = total / values.size(); // For an array list
+```
+Be sure to check that the size is not zero.
+
+~H1~ Counting Matches~H1~
+
+Suppose you want to find how many accounts of a certain type you have. Then you
+must go through the entire collection and increment a counter each time you find a
+match. Here we count the number of accounts whose balance is at least as much as a
+given threshold:
+```
+public class Bank
+{
+	private ArrayList&lt;BankAccount&gt; accounts;
+	public int count(double atLeast)
+	{
+		int matches = 0;
+		for (BankAccount account : accounts)
+		{
+			if (account.getBalance() >= atLeast) matches++; // Found a match
+		}
+		return matches;
+	}
+	. . .
+}
+```
+~H1~Finding the Maximum or Minimum~H1~
+
+Suppose you want to find the account with the largest balance in the bank. Keep a
+candidate for the maximum. If you find an element with a larger value, then replace
+the candidate with that value. When you have reached the end of the sequence, you
+have found the maximum.
+There is just one problem. When you visit the starting element, you don’t yet
+have a candidate for the maximum. One way to overcome that is to set the candidate to the starting element and make the first comparison with the next element.
+```
+BankAccount largestYet = accounts.get(0);
+for (int i = 1; i &lt; accounts.size(); i++)
+{
+	BankAccount a = accounts.get(i);
+	if (a.getBalance() > largestYet.getBalance())
+	largestYet = a;
+}
+return largestYet;
+```
+Here we use an explicit for loop because the loop no longer visits all elements—it
+skips the starting element.
+Of course, this approach works only if there is at least one element. It doesn’t
+make a lot of sense to ask for the largest element of an empty collection. We can
+return null in that case:
+```
+if (accounts.size() == 0) return null;
+BankAccount largestYet = accounts.get(0);
+. . .
+```
+To compute the minimum of a data set, keep a candidate for the minimum and
+replace it whenever you encounter a smaller value. At the end of the sequence, you
+have found the minimum.
+
+~H1~Searching for a Value~H1~
+
+Suppose you want to know whether there is a bank account with a particular
+account number in your bank. Simply inspect each element until you find a match
+or reach the end of the sequence. Note that the loop might fail to find an answer,
+namely if none of the accounts match. This search process is called a linear search.
+```
+public class Bank
+{
+	. . .
+	public BankAccount find(int accountNumber)
+	{
+		for (BankAccount account : accounts)
+		{
+			if (account.getAccountNumber() == accountNumber) // Found a match
+				return account;
+		}
+		return null; // No match in the entire array list
+	}
+	. . .
+}
+```
+Note that the method returns null if no match is found.
+
+~H1~ Locating the Position of an Element~H1~
+
+You often need to locate the position of an element so that you can replace or
+remove it. Use a variation of the linear search algorithm, but remember the position
+instead of the matching element. Here we locate the position of the first element
+that is larger than 100.
+```
+int pos = 0;
+boolean found = false;
+while (pos &lt; values.size() && !found)
+{
+	if (values.get(pos) > 100)
+	{
+		found = true;
+	}
+	else
+	{
+		pos++;
+	}
+}
+if (found) { System.out.println("Position: " + pos); }
+else { System.out.println("Not found"); }
+```
+~H1~ Removing an Element~H1~
+
+Removing an element from an array list is very easy—simply use the remove method.
+With an array, you have to work harder.
+Suppose you want to remove the element with index pos from the array values.
+First off, you need to keep a companion variable for tracking the number of elements in the array, as explained in Section 7.5.
+If the elements in the array are not in any particular order, simply overwrite the
+element to be removed with the last element of the array, then decrement the variable tracking the size of the array. (See Figure 9.)
+```
+values[pos] = values[valuesSize - 1];
+valuesSize--;
+```
+The situation is more complex if the order of the elements matters. Then you must
+move all elements following the element to be removed to a lower index, and then
+decrement the variable holding the size of the array. (See Figure 10.)
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/40.png</image>
+			</page>
 		</pages>
 	</chapter>
 	<chapter>
