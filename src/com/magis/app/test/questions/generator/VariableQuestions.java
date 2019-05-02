@@ -39,7 +39,6 @@ public class VariableQuestions extends QuestionGenerator{
 
     public void getVariableNameQuestion(){
         answers.clear();
-        question = "";
         answers.add("True");
         answers.add("False");
         answers.add("None of the Above");
@@ -68,7 +67,6 @@ public class VariableQuestions extends QuestionGenerator{
     }
 
     public void getInstanceVariableQuestion(){
-        question = "";
         ArrayList<String> shuffler = new ArrayList<>();
 
         int selector = rand.nextInt(names1.length);

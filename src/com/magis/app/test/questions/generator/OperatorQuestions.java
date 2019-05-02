@@ -46,13 +46,12 @@ public class OperatorQuestions extends QuestionGenerator {
     }
 
     public void getIntegerDivisionQuestion(){
-        question = "";
         int firstInt, secondInt = 100;
         double firstDouble;
 
         ArrayList<String> shuffler = new ArrayList<>();
 
-        question+="int value1 = "+secondInt+";\n";
+        question = "int value1 = "+secondInt+";\n";
 
         int firstData = rand.nextInt(2);
         if(firstData>0){
@@ -82,13 +81,12 @@ public class OperatorQuestions extends QuestionGenerator {
     }
 
     public void getIncrementalQuestion(){
-        question = "";
         int number;
         int extraNumber;
         number = rand.nextInt(11);
         ArrayList<String> shuffler = new ArrayList<>();
 
-        question += "int value = " + number;
+        question = "int value = " + number;
 
         int incrementSelector = rand.nextInt(incrementalEquations.length);
 
@@ -150,12 +148,11 @@ public class OperatorQuestions extends QuestionGenerator {
     }
 
     public void getModularQuestion(){
-        question = "";
         int divisor = rand.nextInt(26)+1;
         int divider = rand.nextInt(divisor)+1;
         ArrayList<String> shuffler = new ArrayList<>();
 
-        question += ""+divisor+" % "+divider+"\n\nWhat is the result of this operation?";
+        question = ""+divisor+" % "+divider+"\n\nWhat is the result of this operation?";
         correctAnswer = ""+(divisor%divider);
         shuffler.add(correctAnswer);
         shuffler.add((""+(divisor+divider)));
@@ -167,7 +164,6 @@ public class OperatorQuestions extends QuestionGenerator {
     }
 
     public void getSubstringQuestion(){
-        question = "";
         int addString = rand.nextInt(manipulativeStrings.length);
         String message = manipulativeStrings[addString];
         ArrayList<String> shuffler = new ArrayList();
@@ -175,7 +171,7 @@ public class OperatorQuestions extends QuestionGenerator {
         int endPoint = rand.nextInt(message.length()-1)+1;
         int startPoint = rand.nextInt(endPoint);
 
-        question += "String message = \""+message+"\".substring("+startPoint+", "+endPoint+");" +
+        question = "String message = \""+message+"\".substring("+startPoint+", "+endPoint+");" +
                 "\n\nWhat does message equal after this method?";
 
         correctAnswer = "\""+message.substring(startPoint, endPoint)+"\"";

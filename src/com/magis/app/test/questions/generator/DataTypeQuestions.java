@@ -39,7 +39,6 @@ public class DataTypeQuestions extends QuestionGenerator{
     }
 
     public void datatypeMatchingQuestion(){
-        question = "";
         question = "<x> = ";
 
         int dataTypeSelector = rand.nextInt(4);

@@ -177,7 +177,6 @@ public class MiscOOPQuestions extends QuestionGenerator{
     }
 
     public void getSuperMethodQuestion(){
-        question = "";
         answers.clear();
 
         int maxSpeed1 = rand.nextInt(200);
