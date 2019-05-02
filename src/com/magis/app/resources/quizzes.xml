@@ -62,8 +62,8 @@ STRUCTURE:
                                 <statement>What is roundoff error?</statement>
                                 <answer>When a integer tries to calculate a round surface and cannot get decimals</answer>
                                 <answer id = "correct">When a value cannot be converted exactly, so the computer rounds it to the nearest value</answer>
-                                <answer>When an integer cannot represent all decimal values</answer>
-                                <answer>4th answer</answer>
+                                <answer>When a variable is too large to fit into an integer but the user tries anyway</answer>
+                                <answer>When memory is full so the computer deletes previous variables</answer>
                         </question>
                         <question>
                                 <level>2</level>
@@ -515,8 +515,8 @@ and returns some information about it, without changing the object</statement>
                                         the value of the integer dogs *\                </statement>
                                 <answer>No, \* and *\ locations should be switched</answer>
                                 <answer>No, \* and *\ only span over 1 line not multiples</answer>
-                                <answer>No, \* and *\ should be /* and */</answer>
-                                <answer id = "correct">Yes</answer>
+                                <answer id = "correct">No, \* and *\ should be /* and */</answer>
+                                <answer>Yes</answer>
                         </question>
                         <question>
                                 <level>2</level>
