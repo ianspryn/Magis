@@ -1,9 +1,6 @@
 package com.magis.app.test.questions.generator;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
-import java.util.Arrays;
 
 public class InputOutputQuestions extends QuestionGenerator{
 

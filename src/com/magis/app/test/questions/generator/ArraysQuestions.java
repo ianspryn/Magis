@@ -20,28 +20,59 @@ public class ArraysQuestions extends QuestionGenerator{
         question = "";
         answers.clear();
 
-        int num = rand.nextInt(5)+1;
-        int numRows = rand.nextInt(5)+1;
-        int numColumns = rand.nextInt(5)+1;
+        int num = rand.nextInt(5)+3;
+        int numRows = rand.nextInt(5)+3;
+        int numColumns = rand.nextInt(5)+3;
 
         int[] singleArray = new int[num];
         int[][] doubleArray = new int[numRows][numColumns];
 
-        int doubleOrSingle = rand.nextInt();
+        int doubleOrSingle = rand.nextInt(2);
 
         if(doubleOrSingle == 0){
             int index = rand.nextInt(singleArray.length);
             question = "Suppose we have a 1D array \"numList\" with the following elements inside it: \n";
-            for(int i=0; i<singleArray.length; i++){
-                singleArray[i] = rand.nextInt(10);
+            singleArray[0] = rand.nextInt(10);
+            question+= ""+singleArray[0];
+            for(int i=1; i<singleArray.length; i++){
+                boolean uniqueIndex = false;
+                while(uniqueIndex == false){
+                    singleArray[i] = rand.nextInt(10);
+                    uniqueIndex = true;
+                    for(int j = 0; j<singleArray.length; j++){
+                        if(singleArray[i] == singleArray[j] && j!=i){
+                            uniqueIndex = false;
+                        }
+                    }
+                }
+
                 question += ", "+singleArray[i];
             }
             question += "\n\nWhat is the value at \"numList["+index+"]\"?";
             correctAnswer = ""+singleArray[index];
             answers.add(correctAnswer);
             answers.add("Null");
-            answers.add(""+singleArray.length);
-            answers.add(""+index);
+
+            boolean unique = false;
+            String uniquePosition = "";
+            while(unique == false){
+                unique = true;
+                uniquePosition = ""+singleArray[rand.nextInt(singleArray.length)];
+                if(uniquePosition.equals(correctAnswer)){
+                    unique = false;
+                }
+            }
+            answers.add(uniquePosition);
+
+            unique = false;
+            while(unique == false){
+                unique = true;
+                uniquePosition = ""+singleArray[rand.nextInt(singleArray.length)];
+                if(uniquePosition.equals(correctAnswer) || uniquePosition.equals(answers.get(2))){
+                    unique = false;
+                }
+            }
+            answers.add(uniquePosition);
         }
         else{
             int indexRow = rand.nextInt(doubleArray.length);
@@ -49,21 +80,52 @@ public class ArraysQuestions extends QuestionGenerator{
             question = "Suppose we have a 2D array \"numList\" with the following elements inside it: \n";
 
             for(int i=0; i<doubleArray.length; i++){
-                for(int j=0; j<doubleArray[i].length; j++){
-                    doubleArray[i][j] = rand.nextInt(10);
+                question+=""+doubleArray[i][0];
+                for(int j=1; j<doubleArray[i].length; j++){
+                    boolean uniqueIndex = false;
+                    while(uniqueIndex == false){
+                        doubleArray[i][j] = rand.nextInt(10);
+                        uniqueIndex = true;
+                        for(int k = 0; k<doubleArray[0].length; k++){
+                            if(doubleArray[i][k] == doubleArray[i][j] && k!=j){
+                                uniqueIndex = false;
+                            }
+                        }
+                    }
+
                     question += ", "+doubleArray[i][j];
                 }
+                question+="\n";
             }
             question += "\n\nWhat is the value at \"numList["+indexRow+"]["+indexColumn+"]\"?";
             correctAnswer = ""+doubleArray[indexRow][indexColumn];
             answers.add(correctAnswer);
             answers.add("Null");
-            answers.add(""+doubleArray.length);
-            answers.add(""+(indexRow+indexColumn));
+
+            boolean unique = false;
+            String uniquePosition = "";
+            while(unique == false){
+                unique = true;
+                uniquePosition = ""+doubleArray[rand.nextInt(doubleArray.length)][rand.nextInt(doubleArray[0].length)];
+                if(uniquePosition.equals(correctAnswer)){
+                    unique = false;
+                }
+            }
+            answers.add(uniquePosition);
+
+            unique = false;
+            while(unique == false){
+                unique = true;
+                uniquePosition = ""+doubleArray[rand.nextInt(doubleArray.length)][rand.nextInt(doubleArray[0].length)];
+                if(uniquePosition.equals(correctAnswer) || uniquePosition.equals(answers.get(2))){
+                    unique = false;
+                }
+            }
+            answers.add(uniquePosition);
         }
 
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
     }
 
@@ -78,7 +140,7 @@ public class ArraysQuestions extends QuestionGenerator{
         int[] singleArray = new int[num];
         int[][] doubleArray = new int[numRows][numColumns];
 
-        int doubleOrSingle = rand.nextInt();
+        int doubleOrSingle = rand.nextInt(2);
         int sum = 0;
 
         if(doubleOrSingle == 0){
@@ -95,28 +157,29 @@ public class ArraysQuestions extends QuestionGenerator{
             }
             correctAnswer = ""+sum;
             answers.add(correctAnswer);
-            answers.add(""+(sum-singleArray[0]));
 
             if(singleArray.length == 1){
                 answers.add("The for loops don't execute");
                 answers.add("1");
+                answers.add("2");
             }
             else{
-                answers.add(""+(sum-singleArray[singleArray.length-1]));
+                answers.add(""+(sum+sum+1));
                 answers.add("0");
+                answers.add(""+(sum*2));
             }
             Collections.shuffle(answers);
-            answers.add("Unknown");
+            answers.add("None of the Above");
         }
         else{
             question = "int[][] numList = new numList["+numRows+"]["+numColumns+"];\nint sum = 0;\n\n";
-            question += "for(int i = 0; i < numList.length; i++){\n\tfor(int j = 0; j < numList[i].length; j++){\n\t\tnumList[i][j] = i;\n\t}\n}\n";
+            question += "for(int i = 0; i < numList.length; i++){\n\tfor(int j = 0; j < numList[i].length; j++){\n\t\tnumList[i][j] = (i+j)+1;\n\t}\n}\n";
             question += "for(int i = 0; i < numList.length; i++){\n\tfor(int j = 0; j < numList[i].length; j++){\n\t\tsum += numList[i][j];\n\t}\n}\n\n";
             question += "What is the value of \"sum\"?";
 
             for(int i = 0; i<doubleArray.length; i++){
                 for(int j = 0; j<doubleArray[i].length; j++) {
-                    doubleArray[i][j] = (i+j);
+                    doubleArray[i][j] = (i+j)+1;
                 }
             }
             for(int i = 0; i<doubleArray.length; i++){
@@ -126,18 +189,19 @@ public class ArraysQuestions extends QuestionGenerator{
             }
             correctAnswer = ""+sum;
             answers.add(correctAnswer);
-            answers.add(""+(sum-doubleArray[0][0]));
 
             if(doubleArray.length == 1 && doubleArray[0].length == 1){
                 answers.add("The for loops don't execute");
-                answers.add("1");
+                answers.add("2");
+                answers.add("3");
             }
             else{
-                answers.add(""+(sum + 10));
+                answers.add(""+(sum * 2));
+                answers.add(""+(sum-1));
                 answers.add("0");
             }
             Collections.shuffle(answers);
-            answers.add("Unknown");
+            answers.add("None of the Above");
         }
     }
 }
