@@ -68,10 +68,11 @@ Will x be exactly 435?
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>Which input will correctly compute the length of string "Hello"</statement>
+                                <statement>Which input will correctly compute the length of string "Hello"?</statement>
                                 <answer>Length("Hello");</answer>
                                 <answer>Length.get("Hello");</answer>
                                 <answer>"Hello".get.Length();</answer>
+                                <answer id = "correct">"hello".length();</answer>
                         </question>
                         <question>
                                 <level>1</level>
@@ -168,6 +169,7 @@ What does an object's 'type' tell you in java?
                                 <answer>"A dog!"</answer>
                                 <answer>"An dog!"</answer>
                                 <answer>" aaaaa "</answer>
+                                <answer>"!!!"</answer>
                                 <answer id = "correct">" !!! "</answer>
                         </question>
                         <question>

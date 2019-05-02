@@ -108,7 +108,9 @@ public abstract class ExamPageContent extends PageContent {
             Add each possible answer to a radio button or checkbox
              */
             //if there's only one correct answer, then use toggle buttons
-            if (examQuestion.getNumCorrectAnswers() == 1) {
+            if (examQuestion.getNumCorrectAnswers() < 1) {
+                System.err.println("Error. No correct answer was marked for the question of \"" + examQuestion.getQuestion() + "\" for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\"");
+            } else if (examQuestion.getNumCorrectAnswers() == 1) {
                 ToggleGroup toggleGroup = new ToggleGroup();
                 toggleGroups.put(questionIndex, toggleGroup);
                 for (String answer : examQuestion.getAnswers()) {

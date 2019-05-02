@@ -51,6 +51,6 @@ public class CommentQuestions extends QuestionGenerator{
     }
 
     public int getNumUnique(){
-        return 7;
+        return commentQuestions.length;
     }
 }

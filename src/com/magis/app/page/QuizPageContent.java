@@ -1,5 +1,4 @@
 package com.magis.app.page;
-import com.magis.app.Configure;
 import com.magis.app.Main;
 
 import java.util.Collections;
@@ -19,15 +18,15 @@ public class QuizPageContent extends ExamPageContent {
         //if we have available bank questions and there exists a question generator (and still have unique questions to generate)
         if (usedBankQuestions.size() < numAvailableBankQuestions && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = rand.nextInt(2); //0 or 1
-        } else if (numAvailableBankQuestions > usedBankQuestions.size() && questionGenerator == null) { //if we don't have a question generator but do have bank questions
+        //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
+        } else if (numAvailableBankQuestions > usedBankQuestions.size() && (questionGenerator == null || numGeneratedQuestions >= questionGenerator.getNumUnique())) {
             typeOfQuestion = 0;
-        //if we do have a question generator (and still have unique questions to generate) but don't have bank questions
+        //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
         } else if (numAvailableBankQuestions <= usedBankQuestions.size() && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = 1;
-        } else { //if we don't have either
+        } else { //if we don't have either, we're out of unique questions
             return false;
         }
-        System.out.println("oof " + typeOfQuestion);
         switch(typeOfQuestion) {
             case 0:
                 //grab a random question from the question bank that hasn't been used before
@@ -37,6 +36,7 @@ public class QuizPageContent extends ExamPageContent {
                 usedBankQuestions.add(question); //add the question to the used bank of questions
                 //set the question statement
                 int level = exam.getQuestion(question).getLevel();
+                //Determine if it should be "point" or "points". i.e. "1 point" vs. "2 points"
                 points = level == 1 ? level + " point" : level + " points";
                 if (exam.getQuestion(question).getNumCorrectAnswers() == 1) {
                     statement = exam.getQuestion(question).getStatement();
@@ -60,13 +60,12 @@ public class QuizPageContent extends ExamPageContent {
                 Collections.shuffle(examQuestion.getAnswers());
                 break;
             case 1:
-                questionGenerator.initialize();
-                do generatedQuestion = questionGenerator.getQuestion();
-                while (usedGeneratorQuestions.contains(generatedQuestion) && numGeneratedQuestions < questionGenerator.getNumUnique()); //only let while loop run for at most 1.5 seconds
-//                while (usedGeneratorQuestions.contains(generatedQuestion)); //only let while loop run for at most 1.5 seconds
-
-                if (usedGeneratorQuestions.contains(generatedQuestion)) return false; //out of generated questions
-
+                numGeneratedQuestions++;
+                do {
+                    questionGenerator.initialize();
+                    generatedQuestion = questionGenerator.getQuestion();
+                }
+                while (usedGeneratorQuestions.contains(generatedQuestion));
                 usedGeneratorQuestions.add(generatedQuestion);
                 //set the question statement
                 int questionLevel = questionGenerator.getLevel();
