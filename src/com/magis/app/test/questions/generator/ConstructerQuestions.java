@@ -46,18 +46,32 @@ public class ConstructerQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return equalsAnswers.length + secondAnswers.length + comparableStringAnswers.length;
+    }
+
     public void generateConstructerQuestion(){
         question = "";
         answers = cAnswers;
         ArrayList<String> four = new ArrayList();
-        int random = rand.nextInt(comparableStrings.length);
-        four.add(comparableStrings[random]);
+        for (int i = 0; i < 4; i++) {
+            String answer = "";
+            do { answer = comparableStrings[rand.nextInt(comparableStrings.length)]; }
+            while (four.contains(answer));
+            four.add(answer);
+        }
+        /*
+        int random;
         random = rand.nextInt(comparableStrings.length);
         four.add(comparableStrings[random]);
         random = rand.nextInt(comparableStrings.length);
         four.add(comparableStrings[random]);
         random = rand.nextInt(comparableStrings.length);
         four.add(comparableStrings[random]);
+        random = rand.nextInt(comparableStrings.length);
+        four.add(comparableStrings[random]);
+        */
 
         int fourAnswer = rand.nextInt(comparableStringAnswers.length);
 
@@ -90,7 +104,7 @@ public class ConstructerQuestions extends QuestionGenerator{
         String firstPart =  secondStrings[random];
 
 
-        question = "For constructor \n"+firstPart+"\n with parrent class\n " +
+        question = "For constructor \n"+firstPart+"\n with parent class\n " +
                 "pubic class parent{\n     public parent{\n           int x = 3;\n" +
                 "   }\n}\nwhat variables will be initialized in the constructor?\n";
         correctAnswer = secondAnswers[random];

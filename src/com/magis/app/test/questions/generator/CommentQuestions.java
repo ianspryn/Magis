@@ -15,7 +15,7 @@ public class CommentQuestions extends QuestionGenerator{
             "This code will do [x]",
             "This code will do [x]\nIt will also do [y]"
     };
-    private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "Unknown"};
+    private String[] generalCommentAnswers = {"Single-Line Comment", "Multi-Line Comment", "Java-Doc Comment", "None of the Above"};
 
     public CommentQuestions(){
         answers = new ArrayList<>(Arrays.asList(generalCommentAnswers));
@@ -47,12 +47,16 @@ public class CommentQuestions extends QuestionGenerator{
                 break;
             case 3: correctAnswer = generalCommentAnswers[0];
                 break;
-            case 4: correctAnswer = generalCommentAnswers[1];
+            case 4: correctAnswer = generalCommentAnswers[2];
                 break;
-            case 5: correctAnswer = generalCommentAnswers[2];
+            case 5: correctAnswer = generalCommentAnswers[0];
                 break;
-            case 6: correctAnswer = generalCommentAnswers[2];
+            case 6: correctAnswer = generalCommentAnswers[1];
                 break;
         }
+    }
+
+    public int getNumUnique(){
+        return 7;
     }
 }

@@ -30,6 +30,11 @@ public class ControlStatementQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return 60 + 20 + 6 + 5;
+    }
+
     public void getIfElseQuestion(){
         question = "";
         answers.clear();
@@ -70,7 +75,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
             answers.add(correctAnswer);
         }
 
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         question+="\n\nWhat is the final result of \"num\"?";
     }
@@ -108,7 +113,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 
     public void forLoopQuestion(){
@@ -145,7 +150,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
         answers.add(""+falseProduct3);
 
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 
     public void forEachLoopQuestion(){
@@ -178,6 +183,6 @@ public class ControlStatementQuestions extends QuestionGenerator{
         answers.add(""+(sum-numbers[0]));
         answers.add(""+(sum-numbers[length/2]));
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 }

@@ -11,11 +11,11 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     private String[] comparableStrings = {"Dog", "Cat", "Apple", "Pineapple", "Squid", "Bean",
             "Squirrel", "Chicken", "Zoo", "Dark", "Cute", "Ape", "Burger", "Pittsburgh", "Pennsylvania",
             "Valentine", "Programming", "Computer"};
-    private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "Unknown"};
+    private String[] comparableStringAnswers = {"Positive", "Negative", "Zero", "None of the Above"};
 
     private String[] equalsStrings = {"Programming is fun!", "programming is Fun!",
             "programming is fun!", "PROGRAMMING IS FUN!"};
-    private String[] equalsAnswers = {"True", "False", "Unknown"};
+    private String[] equalsAnswers = {"True", "False", "None of the Above"};
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
 
@@ -31,6 +31,13 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     public void initialize() {
         if (rand.nextInt(2) == 0) generateEqualsQuestion();
         else generateComparableQuestion();
+    }
+
+    @Override
+    public int getNumUnique() {
+        int answers = ((comparableStrings.length*comparableStrings.length)*comparableStringAnswers.length);
+        answers += ((Math.pow(equalsStrings.length, 2))*equalsAnswers.length);
+        return answers;
     }
 
     public void generateComparableQuestion(){

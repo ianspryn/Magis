@@ -25,6 +25,11 @@ public class MethodQuestions extends QuestionGenerator{
         else getMathMethodQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return Integer.MAX_VALUE;
+    }
+
     public void getStringMethodQuestion(){
         question="";
         int methodSelector = rand.nextInt(4);
@@ -72,7 +77,7 @@ public class MethodQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 
@@ -104,7 +109,7 @@ public class MethodQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 }

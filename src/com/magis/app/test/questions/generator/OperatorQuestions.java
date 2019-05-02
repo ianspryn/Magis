@@ -40,6 +40,11 @@ public class OperatorQuestions extends QuestionGenerator {
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return Integer.MAX_VALUE;
+    }
+
     public void getIntegerDivisionQuestion(){
         question = "";
         int firstInt, secondInt = 100;
@@ -120,7 +125,7 @@ public class OperatorQuestions extends QuestionGenerator {
                 shuffler.add(correctAnswer);
                 break;
             case 5:
-                extraNumber = rand.nextInt(11);
+                extraNumber = rand.nextInt(11)+1;
                 question += "\nvalue /= " + extraNumber+";";
                 number /= extraNumber;
                 correctAnswer = ""+(number);
@@ -137,7 +142,7 @@ public class OperatorQuestions extends QuestionGenerator {
         }
         shuffler.add(""+(number-14));
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
 
         answers = shuffler;
 
@@ -146,7 +151,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
     public void getModularQuestion(){
         question = "";
-        int divisor = rand.nextInt(26);
+        int divisor = rand.nextInt(26)+1;
         int divider = rand.nextInt(divisor)+1;
         ArrayList<String> shuffler = new ArrayList<>();
 
@@ -157,7 +162,7 @@ public class OperatorQuestions extends QuestionGenerator {
         shuffler.add((""+(divisor*divider)));
         shuffler.add((""+(divisor+1)));
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 
@@ -194,7 +199,7 @@ public class OperatorQuestions extends QuestionGenerator {
         shuffler.add(reverseMessage);
         shuffler.add("A random String of size "+(endPoint-startPoint));
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
 
         answers = shuffler;
     }

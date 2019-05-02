@@ -18,6 +18,11 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         getEscapeSequenceQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return sentences.length*5;
+    }
+
     public void getEscapeSequenceQuestion(){
         answers.clear();
         question = "";
@@ -75,6 +80,6 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
         }
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 }
