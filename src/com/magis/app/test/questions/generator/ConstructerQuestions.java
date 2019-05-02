@@ -52,7 +52,6 @@ public class ConstructerQuestions extends QuestionGenerator{
     }
 
     public void generateConstructerQuestion(){
-        question = "";
         answers = cAnswers;
         ArrayList<String> four = new ArrayList();
         for (int i = 0; i < 4; i++) {
@@ -86,7 +85,6 @@ public class ConstructerQuestions extends QuestionGenerator{
     }
 
     public void generateContentQuestion(){
-        question = "";
         answers = eAnswers;
 
         int random = rand.nextInt(4);
@@ -98,7 +96,6 @@ public class ConstructerQuestions extends QuestionGenerator{
 
     }
     public void generateSecondContructerQuestions(){
-        question = "";
         answers = sAnswers;
         int random = rand.nextInt(4);
         String firstPart =  secondStrings[random];

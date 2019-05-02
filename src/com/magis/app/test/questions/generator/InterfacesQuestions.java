@@ -35,7 +35,6 @@ public class InterfacesQuestions extends QuestionGenerator {
     }
 
     public void getInterfaceMethodQuestion(){
-        question = "";
         answers.clear();
         answers.add("Yes");
         answers.add("No");
@@ -64,7 +63,6 @@ public class InterfacesQuestions extends QuestionGenerator {
     }
 
     public void interfaceVariableQuestion(){
-        question = "";
         answers.clear();
 
         int a = rand.nextInt(10)+1;

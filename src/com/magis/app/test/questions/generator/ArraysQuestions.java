@@ -22,7 +22,6 @@ public class ArraysQuestions extends QuestionGenerator{
     }
 
     public void getArrayIndexQuestion(){
-        question = "";
         answers.clear();
 
         int num = rand.nextInt(5)+3;
@@ -135,7 +134,6 @@ public class ArraysQuestions extends QuestionGenerator{
     }
 
     public void getIndexQuestion(){
-        question = "";
         answers.clear();
 
         int num = rand.nextInt(5)+1;

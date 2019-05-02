@@ -60,7 +60,6 @@ public class ClassesQuestions extends QuestionGenerator{
     }
 
     public void generateConstructerQuestion(){
-        question = "";
         answers = cAnswers;
         int random = rand.nextInt(2);
         String firstPart =  secondStrings[random];
@@ -85,7 +84,6 @@ public class ClassesQuestions extends QuestionGenerator{
     public void generateContentQuestion(){
 
         if(rand.nextInt(2) == 0) {
-            question = "";
             answers.add(eAnswers.get(0));
             answers.add(cAnswers.get(1));
             int random = rand.nextInt(2);
@@ -94,7 +92,6 @@ public class ClassesQuestions extends QuestionGenerator{
             correctAnswer = equalsAnswers[random];
         }
         else{
-            question = "";
             answers.add(eAnswers.get(2));
             answers.add(cAnswers.get(3));
             int random = rand.nextInt(4);
@@ -117,7 +114,6 @@ public class ClassesQuestions extends QuestionGenerator{
 
     }
     public void generateSecondContructerQuestions(){
-        question = "";
         answers = sAnswers;
         int random = rand.nextInt(2);
         String firstPart =  secondStrings[random];

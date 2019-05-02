@@ -41,7 +41,6 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     }
 
     public void generateComparableQuestion(){
-        question = "";
         answers = cAnswers;
 
         int random = rand.nextInt(comparableStrings.length);
@@ -64,7 +63,6 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     }
 
     public void generateEqualsQuestion(){
-        question = "";
         answers = eAnswers;
 
         int random = rand.nextInt(equalsStrings.length);
