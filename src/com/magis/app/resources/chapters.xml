@@ -615,45 +615,45 @@ if (Character.isDigit(ch) == false) . . .
 An object is a value that you can manipulate by calling one or more of its methods. A method consists of a sequence of instructions that can access the internal data of an object. When you call the method, you do not know exactly what those instructions are, or even how the object is organized internally. However, the behavior of the method is well-defined, and that is what matters to us when we use
 it.
 
-For example, ```System.out``` refers to an object. You manipulate it by calling the ```println``` method. When the ```println``` method is called, some activities occur inside the object, and the ultimate effect is that text appears in the console window. You don’t know how that happens, and that’s OK. What matters is that the method carries out the work that you requested. Figure 4 shows a representation of the ```System.out``` object. The internal data is symbolized by a sequence of zeroes and ones. Think of each method (symbolized by the gears) as a piece of machinery that carries out its assigned task. You encountered two objects:
+For example, System.out refers to an object. You manipulate it by calling the println method. When the println method is called, some activities occur inside the object, and the ultimate effect is that text appears in the console window. You don’t know how that happens, and that’s OK. What matters is that the method carries out the work that you requested. Figure 4 shows a representation of the System.out object. The internal data is symbolized by a sequence of zeroes and ones. Think of each method (symbolized by the gears) as a piece of machinery that carries out its assigned task. You encountered two objects:
 ###
 • System.out
 • "Hello, World!"
 ###
-The type of an object is a class. The System.out object belongs to the class ```PrintStream```. The "Hello, World!" object belongs to the class ```String```. A class specifies the methods that you can apply to its objects.
+The type of an object is a class. The System.out object belongs to the class PrintStream. The "Hello, World!" object belongs to the class String. A class specifies the methods that you can apply to its objects.
 
-You can use the ```println``` method with any object that belongs to the ```PrintStream``` class. ```System.out``` is one such object. It is possible to obtain other objects of the ```PrintStream``` class. For example, you can construct a ```PrintStream``` object to send output to a file. However, we won’t discuss files until later.
+You can use the println method with any object that belongs to the PrintStream class. System.out is one such object. It is possible to obtain other objects of the PrintStream class. For example, you can construct a PrintStream object to send output to a file. However, we won’t discuss files until later.
 
-Just as the ```PrintStream``` class provides methods such as ```println``` and print for its objects, the ```String``` class provides methods that you can apply to ```String``` objects. One of them is the ```length``` method. The ```length``` method counts the number of characters in a string.
+Just as the PrintStream class provides methods such as println and print for its objects, the String class provides methods that you can apply to String objects. One of them is the length method. The length method counts the number of characters in a string.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/2.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Object%20and%20Object%20Comparison/3.png</image>
 				<text>
-You can apply that method to any object of type ```String```.
+You can apply that method to any object of type String.
 
 For example, the sequence of statements
 ```
 String greeting = "Hello, World!";
 int n = greeting.length();
 ```
-sets ```n``` to the number of characters in the ```String``` object "Hello, World!". After the instructions in the length method are executed, ```n``` is set to 13. (The quotation marks are not part of the string, and the length method does not count them.) The length method—unlike the ```println``` method—requires no input inside the parentheses. However, the ```length``` method yields an output, namely the character ```count```.
+sets n to the number of characters in the String object "Hello, World!". After the instructions in the length method are executed, n is set to 13. (The quotation marks are not part of the string, and the length method does not count them.) The length method—unlike the println method—requires no input inside the parentheses. However, the length method yields an output, namely the character count.
 
 In the next section, you will see in greater detail how to supply method inputs and obtain method outputs.
 
-Let us look at another method of the ```String``` class. When you apply the ```toUpperCase``` method to a ```String``` object, the method creates another ```String``` object that contains the characters of the original string, with lowercase letters converted to uppercase. For example, the sequence of statements
+Let us look at another method of the String class. When you apply the toUpperCase method to a String object, the method creates another String object that contains the characters of the original string, with lowercase letters converted to uppercase. For example, the sequence of statements
 ```
 String river = "Mississippi";
 String bigRiver = river.toUpperCase();
 ```
-sets ```bigRiver``` to the ```String``` object "MISSISSIPPI".
+sets bigRiver to the String object "MISSISSIPPI".
 
 When you apply a method to an object, you must make sure that the method is declared in the appropriate class. For example, it is an error to call
 ```
 System.out.length(); // This method call is an error
 ```
-The ```PrintStream``` class (to which ```System.out``` belongs) has no length method. Let us summarize. In Java, every object belongs to a class. The class declares the methods for the objects. For example, the ```String``` class declares the ```length``` and ```toUpperCase``` methods (as well as other methods—you will learn about most of them in another chapter). The methods form the public interface of the class, telling you what you can do with the objects of the class. A class also declares a private implementation, describing the data inside its objects and the instructions for its methods. Those details are hidden from the programmers who use objects and call methods. Figure 5 shows two objects of the ```String``` class. Each object stores its own data (drawn as boxes that contain characters). Both objects support the same set of methods—the interface that is specified by the ```String``` class.
+The PrintStream class (to which System.out belongs) has no length method. Let us summarize. In Java, every object belongs to a class. The class declares the methods for the objects. For example, the String class declares the length and toUpperCase methods (as well as other methods—you will learn about most of them in another chapter). The methods form the public interface of the class, telling you what you can do with the objects of the class. A class also declares a private implementation, describing the data inside its objects and the instructions for its methods. Those details are hidden from the programmers who use objects and call methods. Figure 5 shows two objects of the String class. Each object stores its own data (drawn as boxes that contain characters). Both objects support the same set of methods—the interface that is specified by the String class.
 
-Occasionally, a class declares two methods with the same name and different parameter types. For example, the ```PrintStream``` class declares a second method, also called ```println```, as
+Occasionally, a class declares two methods with the same name and different parameter types. For example, the PrintStream class declares a second method, also called println, as
 ```
 public void println(int output)
 ```
@@ -662,25 +662,25 @@ That method is used to print an integer value. We say that the println name is o
 			</page>
 			<page title = "Self Check">
 				<text>
-1. How can you compute the length of the ```string``` "Mississippi"?
+1. How can you compute the length of the string "Mississippi"?
 
 2. How can you print out the uppercase version of "Hello, World!"?
 
-3. Is it legal to call ```river.println()```? Why or why not?
+3. Is it legal to call river.println()? Why or why not?
 				</text>
 			</page>
 			<page title = "Constructing Objects">
 				<text>
-Most Java programs need to work on a variety of objects. In this section, you will see how to construct new objects. This allows you to go beyond ```String``` objects and the ```System.out``` object.
+Most Java programs need to work on a variety of objects. In this section, you will see how to construct new objects. This allows you to go beyond String objects and the System.out object.
 
-To learn about object construction, let us turn to another class: the ```Rectangle``` class in the Java class library. Objects of type ```Rectangle``` describe rectangular shapes—see Figure 10. These objects are useful for a variety of purposes. You can assemble rectangles into bar charts, and you can program simple games by moving rectangles inside a window.
+To learn about object construction, let us turn to another class: the Rectangle class in the Java class library. Objects of type Rectangle describe rectangular shapes—see Figure 10. These objects are useful for a variety of purposes. You can assemble rectangles into bar charts, and you can program simple games by moving rectangles inside a window.
 
 Note that a Rectangle object isn’t a rectangular shape—it’s an object that contains a set of numbers. The numbers describe the rectangle (see Figure 11). Each rectangle is described by the x- and y-coordinates of its top-left corner, its width, and its height. It is very important that you understand this distinction. In the computer, a Rectangle object is a block of memory that holds four numbers, for example x = 5, y = 10, width = 20, height = 30. In the imagination of the programmer who uses a Rectangle object, the object describes a geometric figure.
 
 To make a new rectangle, you need to specify the x, y, width, and height values. Then invoke the new operator, specifying the name of the class and the parameters that are required for constructing a new object. For example, you can make a new rectangle with its top-left corner at (5, 10), width 20, and height 30 as follows:
 ```
 new Rectangle(5, 10, 20, 30)
-````
+```
 Here is what happens in detail:
 
 1. The new operator makes a Rectangle object.
@@ -827,10 +827,12 @@ double d = r * r - 2;
 if (d == 0)
   System.out.println("sqrt(2) squared minus 2 is 0");
 else
-  System.out.println(
-  "sqrt(2) squared minus 2 is not 0 but " + d);
+  System.out.println("sqrt(2) squared minus 2 is not 0 but " + d);
 ```
-Even though the laws of mathematics tell us that fragment prints ###sqrt(2) squared minus 2 is 0###, this program prints ###sqrt(2) squared minus 2 is not 0 but 4.440892098500626E-16###
+Even though the laws of mathematics tell us that fragment prints
+###sqrt(2) squared minus 2 is 0###
+this program actually prints
+###sqrt(2) squared minus 2 is not 0 but 4.440892098500626E-16###
 
 Unfortunately, such roundoff errors are unavoidable. It plainly does not make sense in most circumstances to compare floating-point numbers exactly. Instead, test whether they are close enough.
 
