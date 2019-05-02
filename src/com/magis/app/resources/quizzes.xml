@@ -49,8 +49,7 @@ print out, and why?
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>If
-```double x = 4.35;
+                                <statement>```double x = 4.35;
 double x = x*100;```
 Will x be exactly 435?
                                 </statement>

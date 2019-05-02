@@ -27,23 +27,29 @@ public class Grader {
     public void grade() {
         int pointsLabelIndex = 0;
         for (ExamQuestion question : questions) {
-            int counter = 0;
+            double pointsPerAnswer = (double) question.getLevel() / question.getNumCorrectAnswers();
+            double total = 0;
             for (String studentAnswer : question.getStudentAnswers()) {
                 if (question.getCorrectAnswers().contains(studentAnswer)) {
-                    counter++;
+                    total += pointsPerAnswer;
+                }
+                if (question.getIncorrectAnswers().contains(studentAnswer)) {
+                    total -= pointsPerAnswer;
                 }
             }
 
+            total = Double.parseDouble(new DecimalFormat("#.##").format(total)); //don't let 0.3333333333333333 be a thing. Make it 0.33.
+            total = Math.max(0, total); //don't let the score be negative
+
             //update the points label to say " x/y points"
-            double total = ((double) counter / (double) question.getNumCorrectAnswers()) * (double) question.getLevel();
             String temp;
             if (total % 1 == 0) { //avoid showing 2.0/2 (make it 2/2 instead)
                 temp = (int) total + "/" + pointLabels.get(pointsLabelIndex).getText();
-            } else { //example: 1.5/2
+            } else { //but do show things like: 1.5/2
                 temp = total + "/" + pointLabels.get(pointsLabelIndex).getText();
             }
             pointLabels.get(pointsLabelIndex).setText(temp);
-            question.setPointsStatement(temp); //update examQuestion so the change is reflected when viewing history
+            question.setPointsStatement(temp); //update examQuestion so the grading change is reflected when viewing history
 
             studentPoints += total;
             totalPoints += question.getLevel();

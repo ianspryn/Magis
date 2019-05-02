@@ -221,26 +221,25 @@ public abstract class ExamPageContent extends PageContent {
                 toggleGroups.get(i).getToggles().stream().map((toggle) -> (ToggleButton) toggle).forEach((button) -> {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, button.getText())) {
-                        button.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");
+                        button.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a; -jfx-unselected-color: #00cd0a;");
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red
                     if (!grader.isCorrect(questionIndex, button.getText()) && button.isSelected()) {
-                        button.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336;");
+                        button.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336; -jfx-unselected-color: #f44336;");
                     }
                 });
-            } else { //then it's checkboxes with 1 or more correct answers
+            } else { //then it's checkboxes with more than 1 correct answer
                 ArrayList<JFXCheckBox> checkBoxes = checkboxGroups.get(i);
                 for (JFXCheckBox checkBox : checkBoxes) {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, checkBox.getText())) {
-                        checkBox.setCheckedColor(Color.valueOf("#00C853")); //Green A700
-                        checkBox.setUnCheckedColor(Color.valueOf("#00C853")); //Green A700
+                        checkBox.setStyle("-fx-text-fill: #00cd0a; -jfx-checked-color: #00cd0a; -jfx-unchecked-color: #00cd0a;"); //Green A700
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red
                     if (!grader.isCorrect(questionIndex, checkBox.getText()) && checkBox.isSelected()) {
-                        checkBox.setCheckedColor(Color.valueOf("#FF1744")); //Red A400
+                        checkBox.setStyle("-fx-text-fill: #f44336; -jfx-checked-color: #f44336; -jfx-unchecked-color: #f44336;"); //Red A400
                     }
                 }
 
