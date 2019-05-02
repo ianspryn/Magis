@@ -11,7 +11,7 @@ public class TestPageContent extends ExamPageContent {
     }
 
     @Override
-    protected boolean buildQuestions() {
+    protected boolean buildQuestion() {
         return true;
     }
 }

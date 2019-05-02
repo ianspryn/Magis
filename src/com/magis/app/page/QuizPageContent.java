@@ -13,19 +13,21 @@ public class QuizPageContent extends ExamPageContent {
     }
 
     @Override
-    protected boolean buildQuestions() {
+    protected boolean buildQuestion() {
         //decide if the question is pulled from a bank (0) or generated (1)
         int typeOfQuestion;
-        if (numAvailableBankQuestions > usedBankQuestions.size() && questionGenerator != null) { //if we have available bank questions and there exists a question generator
+        //if we have available bank questions and there exists a question generator (and still have unique questions to generate)
+        if (usedBankQuestions.size() < numAvailableBankQuestions && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = rand.nextInt(2); //0 or 1
         } else if (numAvailableBankQuestions > usedBankQuestions.size() && questionGenerator == null) { //if we don't have a question generator but do have bank questions
             typeOfQuestion = 0;
-        } else if (numAvailableBankQuestions <= usedBankQuestions.size() && questionGenerator != null) { //if we do have a question generator but don't have bank questions
+        //if we do have a question generator (and still have unique questions to generate) but don't have bank questions
+        } else if (numAvailableBankQuestions <= usedBankQuestions.size() && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = 1;
         } else { //if we don't have either
             return false;
         }
-
+        System.out.println("oof " + typeOfQuestion);
         switch(typeOfQuestion) {
             case 0:
                 //grab a random question from the question bank that hasn't been used before
@@ -58,8 +60,8 @@ public class QuizPageContent extends ExamPageContent {
             case 1:
                 questionGenerator.initialize();
                 do generatedQuestion = questionGenerator.getQuestion();
-//                while (usedGeneratorQuestions.contains(generatedQuestion) && questionGenerator.getNumUnique()); //only let while loop run for at most 1.5 seconds
-                while (usedGeneratorQuestions.contains(generatedQuestion)); //only let while loop run for at most 1.5 seconds
+                while (usedGeneratorQuestions.contains(generatedQuestion) && numGeneratedQuestions < questionGenerator.getNumUnique()); //only let while loop run for at most 1.5 seconds
+//                while (usedGeneratorQuestions.contains(generatedQuestion)); //only let while loop run for at most 1.5 seconds
 
                 if (usedGeneratorQuestions.contains(generatedQuestion)) return false; //out of generated questions
 

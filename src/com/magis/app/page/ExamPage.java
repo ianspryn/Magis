@@ -34,8 +34,10 @@ public class ExamPage extends Page {
 
         numPages = (int) Math.ceil((double) numQuestions / NUM_QUESTIONS_PER_PAGE);
         for (int i = 0; i < numPages; i++) {
-            if (!examPageContent.buildPage(i)) {
-                numPages = i + 1;
+            //build the page
+            if (!examPageContent.buildPage(i)) { //if we failed fully the page because we ran out of questions
+                //recalculate the number of pages
+                numPages = (int) Math.ceil((double) examPageContent.numQuestions / NUM_QUESTIONS_PER_PAGE);
                 break;
             }
         }

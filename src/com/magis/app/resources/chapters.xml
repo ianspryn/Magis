@@ -32,10 +32,10 @@ Format as code output or special text:
 	###
 
 Format as H1 header:
-	~H1~My Title~H1~
+	[H1]My Title[H1]
 
 Format as H2 header:
-	~H2~My Subtitle~H2~
+	[H2]My Subtitle[H2]
 
 Format as H3 header:
 	[H3]My Sub-subtitle[H3]
@@ -523,7 +523,8 @@ String tail = greeting.substring(7); // Copies all characters from position 7 on
 ```
 sets tail to the string "World!".
 
-If you supply an illegal string position (a negative number, or a value that is larger than the length of the string), then your program terminates with an error message.
+If you supply an illegal string position (a negative number, or a value that is larger than the length of the string), then your program terminates with an error mess2853
+age.
 				</text>
 			</page>
 			<page title = "Self Check">
@@ -2326,7 +2327,7 @@ accounts[i] = new BankAccount();
 			</page>
 			<page title="Quality Tips">
 				<text>
-~H1~Use Arrays for Sequences of Related Values~H1~
+[H1]Use Arrays for Sequences of Related Values[H1]
 
 Arrays are intended for storing sequences of values with the same meaning. For example, an
 array of test scores makes perfect sense:
@@ -2345,7 +2346,7 @@ int age;
 double bankBalance;
 double shoeSize;
 ```
-~H1~Make Parallel Arrays into Arrays of Objects~H1~
+[H1]Make Parallel Arrays into Arrays of Objects[H1]
 
 Programmers who are familiar with arrays, but unfamiliar with object-oriented programming, sometimes distribute information across separate arrays. Here is a typical example. A
 program needs to manage bank data, consisting of account numbers and balances. Don’t
@@ -2378,7 +2379,7 @@ that accessed the original two arrays now also correctly access the third one.
 			</page>
 			<page title="Special Topic">
 				<text>
-~H1~Methods with a Variable Number of Parameters~H1~
+[H1]Methods with a Variable Number of Parameters[H1]
 Starting with Java version 5.0, it is possible to declare methods that receive a variable number
 of parameters. For example, we can modify the add method of the DataSet class of Chapter 6
 so that one can add any number of values:
@@ -2730,7 +2731,7 @@ working with arrays and array lists.
 In the examples, we show a mixture of arrays and array lists so that you become
 familiar with the syntax for both constructs.
 
-~H1~Filling~H1~
+[H1]Filling[H1]
 
 This loop fills an array with zeroes:
 ```
@@ -2747,7 +2748,7 @@ for (int i = 0; i &lt; values.size(); i++)
 	values.set(i, i * i);
 }
 ```
-~H1~Computing Sum and Average Values~H1~
+[H1]Computing Sum and Average Values[H1]
 
 To compute the sum of all elements, simply keep a running total.
 ```
@@ -2763,7 +2764,7 @@ double average = total / values.size(); // For an array list
 ```
 Be sure to check that the size is not zero.
 
-~H1~ Counting Matches~H1~
+[H1] Counting Matches[H1]
 
 Suppose you want to find how many accounts of a certain type you have. Then you
 must go through the entire collection and increment a counter each time you find a
@@ -2785,7 +2786,7 @@ public class Bank
 	. . .
 }
 ```
-~H1~Finding the Maximum or Minimum~H1~
+[H1]Finding the Maximum or Minimum[H1]
 
 Suppose you want to find the account with the largest balance in the bank. Keep a
 candidate for the maximum. If you find an element with a larger value, then replace
@@ -2817,7 +2818,7 @@ To compute the minimum of a data set, keep a candidate for the minimum and
 replace it whenever you encounter a smaller value. At the end of the sequence, you
 have found the minimum.
 
-~H1~Searching for a Value~H1~
+[H1]Searching for a Value[H1]
 
 Suppose you want to know whether there is a bank account with a particular
 account number in your bank. Simply inspect each element until you find a match
@@ -2841,7 +2842,7 @@ public class Bank
 ```
 Note that the method returns null if no match is found.
 
-~H1~ Locating the Position of an Element~H1~
+[H1] Locating the Position of an Element[H1]
 
 You often need to locate the position of an element so that you can replace or
 remove it. Use a variation of the linear search algorithm, but remember the position
@@ -2850,7 +2851,7 @@ that is larger than 100.
 ```
 int pos = 0;
 boolean found = false;
-while (pos &lt; values.size() && !found)
+while (pos &lt; values.size() &amp;&amp; !found)
 {
 	if (values.get(pos) > 100)
 	{
@@ -2864,7 +2865,7 @@ while (pos &lt; values.size() && !found)
 if (found) { System.out.println("Position: " + pos); }
 else { System.out.println("Not found"); }
 ```
-~H1~ Removing an Element~H1~
+[H1] Removing an Element[H1]
 
 Removing an element from an array list is very easy—simply use the remove method.
 With an array, you have to work harder.

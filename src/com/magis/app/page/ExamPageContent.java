@@ -2,7 +2,6 @@ package com.magis.app.page;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
-import com.magis.app.Configure;
 import com.magis.app.Main;
 import com.magis.app.models.ExamsModel;
 import com.magis.app.test.ExamQuestion;
@@ -44,6 +43,7 @@ public abstract class ExamPageContent extends PageContent {
     protected ArrayList<String> answers;
     protected int questionIndex;
     protected String generatedQuestion;
+    protected int numGeneratedQuestions;
 
     public ExamPageContent(int chapterIndex, int numQuestions, ExamsModel.ChapterModel exam) {
         this.chapterIndex = chapterIndex;
@@ -58,6 +58,7 @@ public abstract class ExamPageContent extends PageContent {
         usedGeneratorQuestions = new ArrayList<>();
         pageContents = new ArrayList<>();
         examSaver = new ExamSaver(chapterIndex);
+        numGeneratedQuestions = 0;
     }
 
     @Override
@@ -70,10 +71,11 @@ public abstract class ExamPageContent extends PageContent {
 
         rand = new Random();
         VBox pageContent = new VBox();
+        pageContents.add(pageContent);
 
         //keep under the max number of questions per exam, and also keep under the max number of questions per page
         for (int i = 0, questionIndex = pageIndex * NUM_QUESTIONS_PER_PAGE + i; i < NUM_QUESTIONS_PER_PAGE && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
-            this.questionIndex = questionIndex; //because we need to access this variable in other classes (namely the buildQuestions() method)
+            this.questionIndex = questionIndex; //because we need to access this variable in other classes (namely the buildQuestion() method)
             /*
             We keep a local copy of examQuestion because if we don't, the toggle buttons and checkboxes
             will always refer to the last ExamQuestion created when updating their state (when student selects an answer, etc)
@@ -81,15 +83,16 @@ public abstract class ExamPageContent extends PageContent {
              */
             ExamQuestion examQuestion = new ExamQuestion();
             this.examQuestion = examQuestion;
-//            answers = new ArrayList<>();
-//            correctAnswers = new ArrayList<>();
             questionBox = new VBox();
             questionBox.setSpacing(15);
             questionBox.setPadding(new Insets(40, 0, 20, 20));
 
 
-            //abstract, because we don't know if this is a quiz page or a test page
-            if (!buildQuestions()) return false; //if we run out of questions to use, stop
+            //if we run out of questions to use, stop
+            if (!buildQuestion()) {
+                numQuestions = questionIndex;
+                return false;
+            }
 
             //add the number of points to the question
             Label pointsLabel = new Label(points);
@@ -146,7 +149,6 @@ public abstract class ExamPageContent extends PageContent {
             examSaver.add(examQuestion);
             grader.addQuestion(examQuestion);
         }
-        pageContents.add(pageContent);
         return true; //success
     }
 
@@ -192,7 +194,7 @@ public abstract class ExamPageContent extends PageContent {
         }
     }
 
-    protected abstract boolean buildQuestions();
+    protected abstract boolean buildQuestion();
 
     /**
      * Disable input of all radio buttons and checkboxes used for the exam so that the student cannot modify the exam after submitting it
