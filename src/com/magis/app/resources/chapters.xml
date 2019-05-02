@@ -2194,6 +2194,16 @@ int quantity = in.nextInt();
 	</chapter>
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<title>Control Statements</title>
+		<description>Learn how to make decisions for various blocks of code.</description>
+		<pages>
+			<page title="">
+
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Arrays</title>
 		<description>Learn many new things about arrays</description>
 		<pages>
