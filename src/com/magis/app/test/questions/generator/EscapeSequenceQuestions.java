@@ -18,6 +18,11 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         getEscapeSequenceQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return sentences.length*5;
+    }
+
     public void getEscapeSequenceQuestion(){
         answers.clear();
         question = "";

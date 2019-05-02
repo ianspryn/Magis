@@ -30,6 +30,11 @@ public class ControlStatementQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return 60 + 20 + 6 + 5;
+    }
+
     public void getIfElseQuestion(){
         question = "";
         answers.clear();

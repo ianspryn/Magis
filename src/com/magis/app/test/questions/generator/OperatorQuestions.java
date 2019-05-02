@@ -40,6 +40,11 @@ public class OperatorQuestions extends QuestionGenerator {
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return Integer.MAX_VALUE;
+    }
+
     public void getIntegerDivisionQuestion(){
         question = "";
         int firstInt, secondInt = 100;

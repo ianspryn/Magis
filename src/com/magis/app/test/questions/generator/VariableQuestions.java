@@ -31,6 +31,12 @@ public class VariableQuestions extends QuestionGenerator{
         else getInstanceVariableQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        int answer = names1.length + names2.length;
+        return answer;
+    }
+
     public void getVariableNameQuestion(){
         answers.clear();
         question = "";

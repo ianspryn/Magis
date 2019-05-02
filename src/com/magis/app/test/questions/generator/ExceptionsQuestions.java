@@ -10,4 +10,9 @@ public class ExceptionsQuestions extends QuestionGenerator{
     public void initialize() {
         int selection = rand.nextInt(2);
     }
+
+    @Override
+    public int getNumUnique() {
+        return 0;
+    }
 }

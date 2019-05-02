@@ -30,4 +30,6 @@ public abstract class QuestionGenerator {
     public int getLevel() {
         return level;
     }
+
+    public abstract int getNumUnique();
 }

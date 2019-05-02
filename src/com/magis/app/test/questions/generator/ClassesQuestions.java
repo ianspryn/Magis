@@ -54,6 +54,11 @@ public class ClassesQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return comparableStrings.length + equalsAnswers.length + secondAnswers.length;
+    }
+
     public void generateConstructerQuestion(){
         question = "";
         answers = cAnswers;

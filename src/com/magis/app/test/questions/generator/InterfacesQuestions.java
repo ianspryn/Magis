@@ -28,6 +28,12 @@ public class InterfacesQuestions extends QuestionGenerator {
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        int answer = 40 + 7;
+        return answer;
+    }
+
     public void getInterfaceMethodQuestion(){
         question = "";
         answers.clear();

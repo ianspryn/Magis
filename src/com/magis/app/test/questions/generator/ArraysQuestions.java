@@ -16,6 +16,11 @@ public class ArraysQuestions extends QuestionGenerator{
         else getIndexQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return 5 + (5*5)*(5 + (5*5));
+    }
+
     public void getArrayIndexQuestion(){
         question = "";
         answers.clear();

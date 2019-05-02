@@ -25,6 +25,11 @@ public class MethodQuestions extends QuestionGenerator{
         else getMathMethodQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return Integer.MAX_VALUE;
+    }
+
     public void getStringMethodQuestion(){
         question="";
         int methodSelector = rand.nextInt(4);

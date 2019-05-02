@@ -33,6 +33,13 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
         else generateComparableQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        int answers = ((comparableStrings.length*comparableStrings.length)*comparableStringAnswers.length);
+        answers += ((Math.pow(equalsStrings.length, 2))*equalsAnswers.length);
+        return answers;
+    }
+
     public void generateComparableQuestion(){
         question = "";
         answers = cAnswers;
