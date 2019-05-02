@@ -82,6 +82,11 @@
     -fx-font-family: "Roboto Mono Light";
 }
 
+.lesson-text-small {
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto Mono Regular";
+ }
+
 .lesson-text {
     -fx-font-size: 15px;
     -fx-font-family: "Roboto Mono Regular";

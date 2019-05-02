@@ -13,10 +13,8 @@ public class QuizPageContent extends ExamPageContent {
     }
 
     @Override
-    protected void buildQuestions() {
+    protected boolean buildQuestions() {
         //decide if the question is pulled from a bank (0) or generated (1)
-
-
         int typeOfQuestion;
         if (numAvailableBankQuestions > usedBankQuestions.size() && questionGenerator != null) { //if we have available bank questions and there exists a question generator
             typeOfQuestion = rand.nextInt(2); //0 or 1
@@ -25,7 +23,7 @@ public class QuizPageContent extends ExamPageContent {
         } else if (numAvailableBankQuestions <= usedBankQuestions.size() && questionGenerator != null) { //if we do have a question generator but don't have bank questions
             typeOfQuestion = 1;
         } else { //if we don't have either
-            return;
+            return false;
         }
 
         switch(typeOfQuestion) {
@@ -36,6 +34,8 @@ public class QuizPageContent extends ExamPageContent {
                 while (usedBankQuestions.contains(question));
                 usedBankQuestions.add(question); //add the question to the used bank of questions
                 //set the question statement
+                int level = exam.getQuestion(question).getLevel();
+                points = level == 1 ? level + " point" : level + " points";
                 if (exam.getQuestion(question).getNumCorrectAnswers() == 1) {
                     statement = exam.getQuestion(question).getStatement();
                 } else { //if there is more than one correct answer, hint this to the student
@@ -58,19 +58,26 @@ public class QuizPageContent extends ExamPageContent {
             case 1:
                 questionGenerator.initialize();
                 do generatedQuestion = questionGenerator.getQuestion();
-                while (usedGeneratorQuestions.contains(generatedQuestion));
+//                while (usedGeneratorQuestions.contains(generatedQuestion) && questionGenerator.getNumUnique()); //only let while loop run for at most 1.5 seconds
+                while (usedGeneratorQuestions.contains(generatedQuestion)); //only let while loop run for at most 1.5 seconds
+
+                if (usedGeneratorQuestions.contains(generatedQuestion)) return false; //out of generated questions
+
                 usedGeneratorQuestions.add(generatedQuestion);
                 //set the question statement
+                int questionLevel = questionGenerator.getLevel();
+                points = questionLevel == 1 ? questionLevel + " point" : questionLevel + " points";
                 statement = generatedQuestion;
                 //save the question
                 examQuestion.setQuestion(generatedQuestion);
                 //save the level
-                examQuestion.setLevel(generatedQuestion.getLevel());
+                examQuestion.setLevel(questionGenerator.getLevel());
                 //get and save the correct answer
                 examQuestion.addCorrectAnswer(questionGenerator.getCorrectAnswer());
                 //get and save all of the answers (correct and incorrect)
                 examQuestion.addAnswers(questionGenerator.getAnswers());
                 break;
         }
+        return true;
     }
 }

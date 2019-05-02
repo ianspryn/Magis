@@ -36,6 +36,7 @@ public abstract class ExamPageContent extends PageContent {
     protected ExamSaver examSaver;
 
     protected Random rand;
+    protected String points;
     protected String statement;
     protected ExamQuestion examQuestion;
     protected VBox questionBox;
@@ -65,17 +66,17 @@ public abstract class ExamPageContent extends PageContent {
     }
 
     @Override
-    void buildPage(int pageIndex) {
+    boolean buildPage(int pageIndex) {
 
         rand = new Random();
         VBox pageContent = new VBox();
 
         //keep under the max number of questions per exam, and also keep under the max number of questions per page
         for (int i = 0, questionIndex = pageIndex * NUM_QUESTIONS_PER_PAGE + i; i < NUM_QUESTIONS_PER_PAGE && questionIndex < numQuestions; ++i, questionIndex = pageIndex * 2 + i) {
-            this.questionIndex = questionIndex;
+            this.questionIndex = questionIndex; //because we need to access this variable in other classes (namely the buildQuestions() method)
             /*
             We keep a local copy of examQuestion because if we don't, the toggle buttons and checkboxes
-            will always refer to the last ExamQuestion created when updating their state (student selects an answer, etc)
+            will always refer to the last ExamQuestion created when updating their state (when student selects an answer, etc)
             But, we also need a protected ExamQuestion class for QuizPageContent or TestPageContent to refer to.
              */
             ExamQuestion examQuestion = new ExamQuestion();
@@ -84,57 +85,26 @@ public abstract class ExamPageContent extends PageContent {
 //            correctAnswers = new ArrayList<>();
             questionBox = new VBox();
             questionBox.setSpacing(15);
-            questionBox.setPadding(new Insets(40,0,20,20));
+            questionBox.setPadding(new Insets(40, 0, 20, 20));
 
 
             //abstract, because we don't know if this is a quiz page or a test page
-            buildQuestions();
+            if (!buildQuestions()) return false; //if we run out of questions to use, stop
+
+            //add the number of points to the question
+            Label pointsLabel = new Label(points);
+            pointsLabel.setPadding(new Insets(0, 0, -10, 0));
+            pointsLabel.getStyleClass().addAll("lesson-text-small", "text-color");
+            grader.addPointLabel(pointsLabel);
+            questionBox.getChildren().add(pointsLabel);
+
             //parse and add the statement for the question to the questionBox
-            String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)";
-            String[] splitStrings = statement.split(delimiter);
-            Stack<String> stack = new Stack<>();
-            for (String subString : splitStrings) {
-                Label label = new Label();
-                label.setWrapText(true);
-                label.setPrefWidth(700);
-                label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
-                switch (subString) {
-                    case "```": //beginning of code segment
-                        if (stack.isEmpty()) stack.push(subString);
-                        else if (stack.peek().equals("```")) stack.pop();
-                        else
-                            System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
-                        break;
-                    case "###": //beginning of code output segment
-                        if (stack.isEmpty()) stack.push(subString);
-                        else if (stack.peek().equals("###")) stack.pop();
-                        else
-                            System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
-                        break;
-                    default: //text only
-                        String formatType = stack.isEmpty() ? "" : stack.peek();
-                        if (subString.charAt(0) == '\n')
-                            subString = subString.substring(1); //get rid of the first new line if it exists because of the way we split the strings
-                        label.setText(subString);
-                        switch (formatType) {
-                            case "```": //we're in code segment
-                                label.getStyleClass().add("code-text");
-                                break;
-                            case "###": //we're in a code output segment
-                                label.getStyleClass().addAll("code-output-text", "drop-shadow");
-                                break;
-                            default: //we are not in any kind of formatting segment
-                                label.setPrefWidth(700);
-                                label.getStyleClass().addAll("lesson-text", "lesson-text-color");
-                        }
-                }
-                questionBox.getChildren().add(label);
-            }
+            buildStatement(questionBox);
 
              /*
             Add each possible answer to a radio button or checkbox
              */
-             //if there's only one correct answer, then use toggle buttons
+            //if there's only one correct answer, then use toggle buttons
             if (examQuestion.getNumCorrectAnswers() == 1) {
                 ToggleGroup toggleGroup = new ToggleGroup();
                 toggleGroups.put(questionIndex, toggleGroup);
@@ -177,9 +147,52 @@ public abstract class ExamPageContent extends PageContent {
             grader.addQuestion(examQuestion);
         }
         pageContents.add(pageContent);
+        return true; //success
     }
 
-    protected abstract void buildQuestions();
+    public void buildStatement(VBox questionBox) {
+        String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)";
+        String[] splitStrings = statement.split(delimiter);
+        Stack<String> stack = new Stack<>();
+        for (String subString : splitStrings) {
+            Label label = new Label();
+            label.setWrapText(true);
+            label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
+            switch (subString) {
+                case "```": //beginning of code segment
+                    if (stack.isEmpty()) stack.push(subString);
+                    else if (stack.peek().equals("```")) stack.pop();
+                    else
+                        System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
+                    break;
+                case "###": //beginning of code output segment
+                    if (stack.isEmpty()) stack.push(subString);
+                    else if (stack.peek().equals("###")) stack.pop();
+                    else
+                        System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
+                    break;
+                default: //text only
+                    String formatType = stack.isEmpty() ? "" : stack.peek();
+                    if (subString.charAt(0) == '\n')
+                        subString = subString.substring(1); //get rid of the first new line if it exists because of the way we split the strings
+                    label.setText(subString);
+                    switch (formatType) {
+                        case "```": //we're in code segment
+                            label.getStyleClass().add("code-text");
+                            break;
+                        case "###": //we're in a code output segment
+                            label.getStyleClass().addAll("code-output-text", "drop-shadow");
+                            break;
+                        default: //we are not in any kind of formatting segment
+                            label.setPrefWidth(700);
+                            label.getStyleClass().addAll("lesson-text", "lesson-text-color");
+                    }
+            }
+            questionBox.getChildren().add(label);
+        }
+    }
+
+    protected abstract boolean buildQuestions();
 
     /**
      * Disable input of all radio buttons and checkboxes used for the exam so that the student cannot modify the exam after submitting it
@@ -203,7 +216,7 @@ public abstract class ExamPageContent extends PageContent {
         for (int i = 0; i < numQuestions; i++) {
             int questionIndex = i;
             if (grader.getNumCorrectAnswers(i) == 1) { //then it's radio buttons with only 1 correct answer
-                toggleGroups.get(i).getToggles().stream().map((toggle) -> (ToggleButton)toggle).forEach((button) -> {
+                toggleGroups.get(i).getToggles().stream().map((toggle) -> (ToggleButton) toggle).forEach((button) -> {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, button.getText())) {
                         button.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");

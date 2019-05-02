@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ExamQuestion {
 
     private int level;
+    private String pointsStatement;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
@@ -23,6 +24,14 @@ public class ExamQuestion {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getPointsStatement() {
+        return pointsStatement;
+    }
+
+    public void setPointsStatement(String pointsStatement) {
+        this.pointsStatement = pointsStatement;
     }
 
     public void setQuestion(String question) {

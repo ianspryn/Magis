@@ -70,7 +70,7 @@ public class LessonPageContent extends PageContent {
     }
 
     @Override
-    void buildPage(int pageIndex) {
+    boolean buildPage(int pageIndex) {
         ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
         PageContentContainer pageContentContainer = pageContentContainers.get(pageIndex);
         for (LessonModel.ChapterModel.PageModel.LessonContent lessonPageContent : lessonContents) {
@@ -98,6 +98,7 @@ public class LessonPageContent extends PageContent {
             }
         }
         pageContentContainer.buildAsLessonPage(pageIndex);
+        return true; //sucess
     }
 
     private void formatText(String content, PageContentContainer pageContentContainer, int chapterIndex, int pageIndex) {

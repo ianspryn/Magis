@@ -51,6 +51,12 @@ public class HistoryExamPage {
         questionBox.setSpacing(15);
         questionBox.setPadding(new Insets(20,0,20,20));
 
+        int level = examQuestion.getLevel();
+        Label pointsLabel = new Label(examQuestion.getPointsStatement());
+        pointsLabel.setPadding(new Insets(0,0,-10,0));
+        pointsLabel.getStyleClass().addAll("lesson-text-small", "text-color");
+        questionBox.getChildren().add(pointsLabel);
+
         Label statement = new Label(examQuestion.getQuestion());
         statement.setWrapText(true);
         statement.setPrefWidth(700);

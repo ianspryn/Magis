@@ -10,15 +10,19 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.magis.app.Configure.NUM_QUESTIONS_PER_PAGE;
+
 public class ExamPage extends Page {
 
     protected ArrayList<Integer> usedBankQuestions;
     protected ArrayList<String> usedGeneratorQuestions;
     protected JFXButton submitButton;
     protected ExamPageContent examPageContent;
+    protected ExamSidePanel examSidePanel;
 
     public ExamPage(int chapterIndex, PageSidePanel sidePanel, PageContent pageContent, int numQuestions, String title) {
         super(sidePanel, pageContent, title);
+        examSidePanel = (ExamSidePanel) super.pageSidePanel;
         examPageContent = (ExamPageContent) super.pageContent;
         usedBankQuestions = new ArrayList<>();
         usedGeneratorQuestions = new ArrayList<>();
@@ -28,10 +32,14 @@ public class ExamPage extends Page {
         submitButton.getStyleClass().addAll("submit-test-button", "jfx-button-raised", "jfx-button-raised-color");
         bottomNavigation.setCenter(submitButton);
 
-        numPages = (int) Math.ceil((double) numQuestions / 2);
+        numPages = (int) Math.ceil((double) numQuestions / NUM_QUESTIONS_PER_PAGE);
         for (int i = 0; i < numPages; i++) {
-            examPageContent.buildPage(i);
+            if (!examPageContent.buildPage(i)) {
+                numPages = i + 1;
+                break;
+            }
         }
+        examSidePanel.buildSidePanel(numPages);
         updatePage(0);
     }
 

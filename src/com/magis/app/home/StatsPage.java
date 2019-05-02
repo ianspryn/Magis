@@ -1,6 +1,7 @@
 package com.magis.app.home;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.IntelligentTutor;
 import com.magis.app.UI.RingProgressIndicator;
@@ -41,6 +42,7 @@ public class StatsPage {
         UIComponents.GenericPage page = new UIComponents.GenericPage();
         master = page.getMaster();
         scrollPane = page.getScrollPane();
+        scrollPane.setVvalue(0); //reset to top every time
         page.getMastervBox().setAlignment(Pos.TOP_CENTER);
         mastervBox = page.getMastervBox();
         page.getBackButton().setOnMouseClicked(e -> HomePage.goHome(scrollPane));
@@ -118,6 +120,8 @@ public class StatsPage {
                 scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
         scrollPane.setContent(contentHolder);
+        JFXScrollPane.smoothScrolling(scrollPane);
+        scrollPane.setVvalue(0); //reset to top every time
 
         /*
         Back button and Page title

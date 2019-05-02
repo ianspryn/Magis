@@ -11,7 +11,7 @@ public class Configure {
     /*
     The default number of questions each quiz will have
      */
-    public static final int DEFAULT_NUM_QUIZ_QUESTIONS = 3;
+    public static final int DEFAULT_NUM_QUIZ_QUESTIONS = 5;
     /*
     The default number of question each test will have
      */
