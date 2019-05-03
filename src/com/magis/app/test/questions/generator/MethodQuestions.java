@@ -65,7 +65,8 @@ public class MethodQuestions extends QuestionGenerator{
                 stringSelector = rand.nextInt(dataTypeString.length);
                 String word2 = dataTypeString[stringSelector];
                 int endPoint = rand.nextInt(word.length());
-                int startPoint = rand.nextInt(endPoint);
+                int startPoint = 0;
+                if(endPoint != 0) startPoint = rand.nextInt(endPoint);
                 question = "\""+word+"\".replace(\'"+word.substring(startPoint, endPoint)+"\', \""+word2+"\");\n\nWhat is the value returned by this method?";
                 correctAnswer = word.replace(word.substring(startPoint,endPoint),word2);
                 shuffler.add(correctAnswer);

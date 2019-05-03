@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class Main extends Application {
@@ -106,5 +107,5 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) { launch(args); }
-
+    
 }

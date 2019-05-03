@@ -4,12 +4,17 @@ import javafx.scene.control.Label;
 import static com.magis.app.Configure.*;
 
 public class ExamSidePanel extends PageSidePanel {
+
+
     public ExamSidePanel(int chapterIndex, int numQuestions) {
         super(chapterIndex);
+    }
+
+    protected void buildSidePanel(int numPages) {
         /*
         Initialize pageLabels
          */
-        int numPages = (int) Math.ceil((double) numQuestions / NUM_QUESTIONS_PER_PAGE);
+//        numPages = (int) Math.ceil((double) numQuestions / NUM_QUESTIONS_PER_PAGE);
         pageLabels = new PageLabels(numPages);
 
         /*

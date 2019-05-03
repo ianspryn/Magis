@@ -1,19 +1,23 @@
 package com.magis.app.test;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 
 public class ExamQuestion {
 
     private int level;
+    private String pointsStatement;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
+    private ArrayList<String> incorrectAnswers;
     private ArrayList<String> studentAnswers;
 
     public ExamQuestion() {
         level = 1;
         answers = new ArrayList<>();
         correctAnswers = new ArrayList<>();
+        incorrectAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
     }
 
@@ -23,6 +27,14 @@ public class ExamQuestion {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getPointsStatement() {
+        return pointsStatement;
+    }
+
+    public void setPointsStatement(String pointsStatement) {
+        this.pointsStatement = pointsStatement;
     }
 
     public void setQuestion(String question) {
@@ -44,6 +56,10 @@ public class ExamQuestion {
     public void addCorrectAnswers(ArrayList<String> correctAnswers) {
         this.correctAnswers.addAll(correctAnswers);
     }
+
+    public void addIncorrectAnswers(ArrayList<String> incorrectAnswers) { this.incorrectAnswers.addAll(incorrectAnswers); }
+
+    public ArrayList<String> getIncorrectAnswers() { return incorrectAnswers; }
 
     public void addStudentAnswer(String studentAnswer) { studentAnswers.add(studentAnswer); }
 

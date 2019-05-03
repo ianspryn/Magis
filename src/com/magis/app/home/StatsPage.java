@@ -1,6 +1,7 @@
 package com.magis.app.home;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.UI.IntelligentTutor;
 import com.magis.app.UI.RingProgressIndicator;
@@ -41,6 +42,7 @@ public class StatsPage {
         UIComponents.GenericPage page = new UIComponents.GenericPage();
         master = page.getMaster();
         scrollPane = page.getScrollPane();
+        scrollPane.setVvalue(0); //reset to top every time
         page.getMastervBox().setAlignment(Pos.TOP_CENTER);
         mastervBox = page.getMastervBox();
         page.getBackButton().setOnMouseClicked(e -> HomePage.goHome(scrollPane));
@@ -118,6 +120,8 @@ public class StatsPage {
                 scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
         scrollPane.setContent(contentHolder);
+        JFXScrollPane.smoothScrolling(scrollPane);
+        scrollPane.setVvalue(0); //reset to top every time
 
         /*
         Back button and Page title
@@ -445,7 +449,7 @@ public class StatsPage {
     }
 
 
-    private static int calculateOverallProgress() {
+    public static int calculateOverallProgress() {
         int progress = 0;
         int numChapters = Main.lessonModel.getNumChapters();
         for (int i = 0; i < numChapters; i++) {
@@ -458,11 +462,11 @@ public class StatsPage {
         String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
         double chapterProgress = 0;
         double scale = 1; //scale to take into account if a quiz/test has been taken
-        chapterProgress += student.getChapter(chapterIndex).getProgress();
+        chapterProgress += Main.studentModel.getStudent().getChapter(chapterIndex).getProgress();
         //if there exists a quiz for this chapter
         if (Main.quizzesModel.hasQuiz(chapterTitle)) {
             //if the student has taken the quiz, then add it to the progress
-            if (student.hasTakenQuiz(chapterIndex)) {
+            if (Main.studentModel.getStudent().hasTakenQuiz(chapterIndex)) {
                 chapterProgress += 10; //quiz counts as 10% of the chapter's progress
             }
             scale += 0.1; //scale back by 1.1 because the quiz counts as 10%
@@ -470,7 +474,7 @@ public class StatsPage {
         //if there exists a test for this chapter
         if (Main.testsModel.hasTest(chapterTitle)) {
             //if the student has taken the test, then add it to the progress
-            if (student.hasTakenTest(chapterIndex)) {
+            if (Main.studentModel.getStudent().hasTakenTest(chapterIndex)) {
                 chapterProgress += 20; //test counts as 10% of the chapter's progress
             }
             scale += 0.2; //scale back by 1.2 because the test counts as 20%

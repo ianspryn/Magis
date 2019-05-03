@@ -62,7 +62,7 @@ public class OperatorQuestions extends QuestionGenerator {
             shuffler.add(""+(df.format(secondInt/(double)firstInt)));
         }
         else{
-            firstDouble = rand.nextDouble()*100;
+            firstDouble = (rand.nextDouble()+1)*100;
             question += "double value2 = " + df.format(firstDouble)+";\n";
             correctAnswer = ""+(df.format(secondInt/firstDouble));
             shuffler.add(correctAnswer);

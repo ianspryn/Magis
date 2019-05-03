@@ -26,5 +26,5 @@ public abstract class PageContent {
 
     abstract void update(int pageIndex);
 
-    abstract void buildPage(int index);
+    abstract boolean buildPage(int index);
 }

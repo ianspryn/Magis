@@ -1,6 +1,7 @@
 package com.magis.app.UI;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.icons.MaterialIcons;
 import javafx.animation.*;
@@ -59,6 +60,7 @@ public class UIComponents {
                     scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
             scrollPane.setContent(contentHolder);
+            JFXScrollPane.smoothScrolling(scrollPane);
 
             /*
             Back button and Page title
