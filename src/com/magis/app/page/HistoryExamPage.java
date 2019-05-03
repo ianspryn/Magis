@@ -72,7 +72,7 @@ public class HistoryExamPage {
 
                 //if this is a correct answer, mark it as green
                 if (examQuestion.getCorrectAnswers().contains(answer)) {
-                    radioButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");
+                    radioButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a; -jfx-unselected-color: #00cd0a;");
                     radioButton.setUnderline(true);
                 }
 
@@ -83,7 +83,7 @@ public class HistoryExamPage {
 
                 //if this is an incorrect answer that the student selected, mark it as red
                 if (examQuestion.getStudentAnswers().contains(answer) && !examQuestion.getCorrectAnswers().contains(answer)) {
-                    radioButton.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336;");
+                    radioButton.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336; -jfx-unselected-color: #f44336;");
                 }
 
                 questionBox.getChildren().addAll(radioButton);
