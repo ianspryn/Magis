@@ -8,7 +8,6 @@ import com.magis.app.models.StudentModel;
 import com.magis.app.test.ExamQuestion;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
@@ -51,11 +50,10 @@ public class HistoryExamPage {
         questionBox.setSpacing(15);
         questionBox.setPadding(new Insets(20,0,20,20));
 
-        int level = examQuestion.getLevel();
-        Label pointsLabel = new Label(examQuestion.getPointsStatement());
-        pointsLabel.setPadding(new Insets(0,0,-10,0));
-        pointsLabel.getStyleClass().addAll("lesson-text-small", "text-color");
-        questionBox.getChildren().add(pointsLabel);
+        Label pointsAndQuestionIndex = new Label(examQuestion.getPointsAndQuestionIndex());
+        pointsAndQuestionIndex.setPadding(new Insets(0,0,-10,0));
+        pointsAndQuestionIndex.getStyleClass().addAll("lesson-text-small", "text-color");
+        questionBox.getChildren().add(pointsAndQuestionIndex);
 
         Label statement = new Label(examQuestion.getQuestion());
         statement.setWrapText(true);
@@ -75,6 +73,7 @@ public class HistoryExamPage {
                 //if this is a correct answer, mark it as green
                 if (examQuestion.getCorrectAnswers().contains(answer)) {
                     radioButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");
+                    radioButton.setUnderline(true);
                 }
 
                 //if this was a selected answer, select the button
@@ -100,6 +99,7 @@ public class HistoryExamPage {
                 //if this is a correct answer, mark it as green
                 if (examQuestion.getCorrectAnswers().contains(answer)) {
                     checkBoxButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");
+                    checkBoxButton.setUnderline(true);
                 }
 
                 //if this was a selected answer, select the button

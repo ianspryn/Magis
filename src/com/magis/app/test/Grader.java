@@ -49,7 +49,7 @@ public class Grader {
                 temp = total + "/" + pointLabels.get(pointsLabelIndex).getText();
             }
             pointLabels.get(pointsLabelIndex).setText(temp);
-            question.setPointsStatement(temp); //update examQuestion so the grading change is reflected when viewing history
+            question.setPointsAndQuestionIndex(temp); //update examQuestion so the grading change is reflected when viewing history
 
             studentPoints += total;
             totalPoints += question.getLevel();

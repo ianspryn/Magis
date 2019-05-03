@@ -1,12 +1,11 @@
 package com.magis.app.test;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 
 public class ExamQuestion {
 
     private int level;
-    private String pointsStatement;
+    private String pointsAndQuestionIndex;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
@@ -29,12 +28,12 @@ public class ExamQuestion {
         this.level = level;
     }
 
-    public String getPointsStatement() {
-        return pointsStatement;
+    public String getPointsAndQuestionIndex() {
+        return pointsAndQuestionIndex;
     }
 
-    public void setPointsStatement(String pointsStatement) {
-        this.pointsStatement = pointsStatement;
+    public void setPointsAndQuestionIndex(String pointsAndQuestionIndex) {
+        this.pointsAndQuestionIndex = pointsAndQuestionIndex;
     }
 
     public void setQuestion(String question) {

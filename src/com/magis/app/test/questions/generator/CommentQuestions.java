@@ -30,7 +30,7 @@ public class CommentQuestions extends QuestionGenerator{
         int random = rand.nextInt(commentQuestions.length);
         question = commentQuestions[random];
 
-        question += question+"\n\nWhat would you use to comment the sentence above?";
+        question += "\n\nWhat would you use to comment the sentence above?";
 
         switch(random){
             case 0: correctAnswer = generalCommentAnswers[0];
