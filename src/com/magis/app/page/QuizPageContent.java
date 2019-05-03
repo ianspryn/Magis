@@ -27,6 +27,7 @@ public class QuizPageContent extends ExamPageContent {
         } else { //if we don't have either, we're out of unique questions
             return false;
         }
+
         switch(typeOfQuestion) {
             case 0:
                 //grab a random question from the question bank that hasn't been used before
@@ -37,9 +38,10 @@ public class QuizPageContent extends ExamPageContent {
                 //set the question statement
                 int level = exam.getQuestion(question).getLevel();
                 //Determine if it should be "point" or "points". i.e. "1 point" vs. "2 points"
-                points = level == 1 ? level + " point" : level + " points";
+                pointsAndIndex = level == 1 ? level + " point" : level + " points";
+                pointsAndIndex += "\nQuestion " + (questionIndex + 1);
                 if (exam.getQuestion(question).getNumCorrectAnswers() == 1) {
-                    statement = exam.getQuestion(question).getStatement();
+                    statement += exam.getQuestion(question).getStatement();
                 } else { //if there is more than one correct answer, hint this to the student
                     String statement = exam.getQuestion(question).getStatement();
                     statement += "\n\nNote: There may be more than one correct answer.";
@@ -69,7 +71,8 @@ public class QuizPageContent extends ExamPageContent {
                 usedGeneratorQuestions.add(generatedQuestion);
                 //set the question statement
                 int questionLevel = questionGenerator.getLevel();
-                points = questionLevel == 1 ? questionLevel + " point" : questionLevel + " points";
+                pointsAndIndex = questionLevel == 1 ? questionLevel + " point" : questionLevel + " points";
+                pointsAndIndex += "\nQuestion " + (questionIndex + 1);
                 statement = generatedQuestion;
                 //save the question
                 examQuestion.setQuestion(generatedQuestion);

@@ -35,7 +35,7 @@ public abstract class ExamPageContent extends PageContent {
     protected ExamSaver examSaver;
 
     protected Random rand;
-    protected String points;
+    protected String pointsAndIndex;
     protected String statement;
     protected ExamQuestion examQuestion;
     protected VBox questionBox;
@@ -95,11 +95,11 @@ public abstract class ExamPageContent extends PageContent {
             }
 
             //add the number of points to the question
-            Label pointsLabel = new Label(points);
-            pointsLabel.setPadding(new Insets(0, 0, -10, 0));
-            pointsLabel.getStyleClass().addAll("lesson-text-small", "text-color");
-            grader.addPointLabel(pointsLabel);
-            questionBox.getChildren().add(pointsLabel);
+            Label pointsAndIndexLabel = new Label(pointsAndIndex);
+            pointsAndIndexLabel.setPadding(new Insets(0, 0, -10, 0));
+            pointsAndIndexLabel.getStyleClass().addAll("lesson-text-small", "text-color");
+            grader.addPointLabel(pointsAndIndexLabel);
+            questionBox.getChildren().add(pointsAndIndexLabel);
 
             //parse and add the statement for the question to the questionBox
             buildStatement(questionBox);
@@ -236,12 +236,14 @@ public abstract class ExamPageContent extends PageContent {
                 for (JFXCheckBox checkBox : checkBoxes) {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, checkBox.getText())) {
-                        checkBox.setStyle("-fx-text-fill: #00cd0a; -jfx-checked-color: #00cd0a; -jfx-unchecked-color: #00cd0a;"); //Green A700
+//                        checkBox.setStyle("-fx-text-fill: #00cd0a; -jfx-checked-color: #00cd0a; -jfx-unchecked-color: #00cd0a;"); //Green A700
+                        checkBox.setStyle("-fx-text-fill: #00cd0a;");
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red
                     if (!grader.isCorrect(questionIndex, checkBox.getText()) && checkBox.isSelected()) {
-                        checkBox.setStyle("-fx-text-fill: #f44336; -jfx-checked-color: #f44336; -jfx-unchecked-color: #f44336;"); //Red A400
+//                        checkBox.setStyle("-fx-text-fill: #f44336; -jfx-checked-color: #f44336; -jfx-unchecked-color: #f44336;"); //Red A400
+                        checkBox.setStyle("-fx-text-fill: #f44336;");
                     }
                 }
 

@@ -37,10 +37,9 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>What will
-```int n = 1000000;
+                                <statement>```int n = 1000000;
 system.out.println(n*n);```
-print out, and why?
+What will this code print out, and why?
                                 </statement>
                                 <answer>1000000000000 because that's what n*n is</answer>
                                 <answer id = "correct">A negative number because of overflow</answer>
@@ -174,7 +173,7 @@ What does an object's 'type' tell you in java?
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>To what class do strings belong?</statement>
+                                <statement>Which of the following classes do string belong to?</statement>
                                 <answer>Char</answer>
                                 <answer>Writing</answer>
                                 <answer id = "correct">String</answer>
@@ -355,17 +354,17 @@ int dollars = balance.int;
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>What will
-```system.out.length();```
-do?                    </statement>
-                                <answer>measure the length of the output.</answer>
+                                <statement>```system.out.length();```
+What will this code do?</statement>
+                                <answer>Measure the length of the output.</answer>
                                 <answer id = "correct">Cause an error</answer>
+                                <answer>Output the length 'out' class</answer>
                                 <answer>Nothing</answer>
                                 <answer>Be ignored</answer>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement> What will goodmeal be equal to after this code?
+                                <statement> What will 'goodMeal' be equal to after this code?
 ```String meal = "lunch";
 String goodMeal = meal.toUpperCase();```</statement>
                                 <answer>Lunch</answer>
@@ -376,7 +375,7 @@ String goodMeal = meal.toUpperCase();```</statement>
                         <question>
                                 <level>2</level>
                                 <statement>How do you create a new Rectangle object with it's top left corner at (3,5) and with
-a width of 5 and height of 10?                        </statement>
+a width of 5 and height of 10?</statement>
                                 <answer>Rectangle t = Rectangle.create(3,5,5,10);</answer>
                                 <answer>Rectangle t = Create.Object.Rectangle(3,5,5,10);</answer>
                                 <answer>Rectangle t = new Rectangle.topLeft(3,5).width(5).height(10);</answer>
@@ -386,8 +385,7 @@ a width of 5 and height of 10?                        </statement>
                                 <level>1</level>
                                 <statement>In the code,
 ```Rectangle box = new Rectangle(5, 10, 20, 30);```
-5, 10,20 and 30 are examples of what?
-                                </statement>
+5, 10,20 and 30 are examples of what?</statement>
                                 <answer id = "correct">construction parameters</answer>
                                 <answer>constructors</answer>
                                 <answer>Methods</answer>

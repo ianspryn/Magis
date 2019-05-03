@@ -71,7 +71,7 @@ public abstract class Page {
         sideBar.setTop(homeHBox);
         sideBar.setLeft(pageSidePanel.getScrollPane());
         borderPane.setLeft(sideBar);
-        borderPane.getLeft().prefWidth(400);
+        borderPane.getLeft().prefWidth(300);
 
         /*
         main area
