@@ -56,6 +56,16 @@ public class LessonModel {
         return chapters.get(index);
     }
 
+    public Integer getChapterIndex(String chapterTitle) {
+        for (int i = 0; i < chapters.size(); i++) {
+            ChapterModel chapter = chapters.get(i);
+            if (chapter.getTitle().equals(chapterTitle)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     public class ChapterModel {
         private String image;
         private String title;
