@@ -852,16 +852,4 @@ the value of the integer cats\\```</statement>
                         </question>
                 </questions>
         </chapter>
-        <chapter id = "Escape Sequences">
-            <questions>
-                <question>
-                    <level>1</level>
-                    <statement>Test</statement>
-                    <answer id = "correct">a</answer>
-                    <answer>b</answer>
-                    <answer>c</answer>
-                    <answer>d</answer>
-                </question>
-            </questions>
-        </chapter>
 </quizzes>
