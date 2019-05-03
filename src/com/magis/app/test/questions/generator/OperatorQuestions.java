@@ -88,7 +88,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
         question = "int value = " + number;
 
-        int incrementSelector = rand.nextInt(incrementalEquations.length);
+        int incrementSelector = rand.nextInt(incrementalEquations.length+1);
 
         switch(incrementSelector){
             case 0:
@@ -129,6 +129,11 @@ public class OperatorQuestions extends QuestionGenerator {
                 correctAnswer = ""+(number);
                 shuffler.add(correctAnswer);
                 break;
+            case 6:
+                extraNumber = rand.nextInt(11)+1;
+                question += "\nvalue ** "+extraNumber+";";
+                correctAnswer = "None of the Above";
+                shuffler.add(""+extraNumber);
         }
 
         shuffler.add(""+(number+25));

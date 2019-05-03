@@ -14,7 +14,8 @@ public class InterfacesQuestions extends QuestionGenerator {
 
     public InterfacesQuestions(){
         super();
-        methodList = (ArrayList<String>) Arrays.asList(methods);
+        methodList = new ArrayList<>();
+        Collections.addAll(methodList, methods);
     }
 
     @Override

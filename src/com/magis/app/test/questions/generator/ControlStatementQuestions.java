@@ -74,8 +74,6 @@ public class ControlStatementQuestions extends QuestionGenerator{
             answers.add(correctAnswer);
         }
 
-        answers.add("None of the Above");
-
         question+="\n\nWhat is the final result of \"num\"?";
     }
 
@@ -111,7 +109,6 @@ public class ControlStatementQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(answers);
-        answers.add("None of the Above");
     }
 
     public void forLoopQuestion(){
@@ -140,8 +137,16 @@ public class ControlStatementQuestions extends QuestionGenerator{
             falseProduct3 *= i;
         }
 
-        correctAnswer = ""+product;
-        answers.add(correctAnswer);
+        int noneOfTheAbove = rand.nextInt(10);
+        if(noneOfTheAbove == 0){
+            correctAnswer = "None of the Above";
+            product++;
+            answers.add(""+product);
+        }
+        else {
+            correctAnswer = "" + product;
+            answers.add(correctAnswer);
+        }
         answers.add(""+falseProduct1);
         answers.add(""+falseProduct2);
         answers.add(""+falseProduct3);
@@ -173,8 +178,16 @@ public class ControlStatementQuestions extends QuestionGenerator{
             sum += num;
         }
 
-        correctAnswer += ""+sum;
-        answers.add(correctAnswer);
+        int noneOfTheAbove = rand.nextInt(10);
+        if(noneOfTheAbove == 0){
+            correctAnswer = "None of the Above";
+            sum+=numbers.length;
+            answers.add(""+sum);
+        }
+        else {
+            correctAnswer += "" + sum;
+            answers.add(correctAnswer);
+        }
         answers.add(""+(sum-numbers[length-1]));
         answers.add(""+(sum-numbers[0]));
         answers.add(""+(sum-numbers[length/2]));
