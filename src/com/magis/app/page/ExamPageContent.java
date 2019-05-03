@@ -224,6 +224,7 @@ public abstract class ExamPageContent extends PageContent {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, button.getText())) {
                         button.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a; -jfx-unselected-color: #00cd0a;");
+                        button.setUnderline(true);
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red
@@ -238,6 +239,7 @@ public abstract class ExamPageContent extends PageContent {
                     if (grader.isCorrect(questionIndex, checkBox.getText())) {
 //                        checkBox.setStyle("-fx-text-fill: #00cd0a; -jfx-checked-color: #00cd0a; -jfx-unchecked-color: #00cd0a;"); //Green A700
                         checkBox.setStyle("-fx-text-fill: #00cd0a;");
+                        checkBox.setUnderline(true);
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red

@@ -41,7 +41,7 @@ public class QuizPageContent extends ExamPageContent {
                 pointsAndIndex = level == 1 ? level + " point" : level + " points";
                 pointsAndIndex += "\nQuestion " + (questionIndex + 1);
                 if (exam.getQuestion(question).getNumCorrectAnswers() == 1) {
-                    statement += exam.getQuestion(question).getStatement();
+                    statement = exam.getQuestion(question).getStatement();
                 } else { //if there is more than one correct answer, hint this to the student
                     String statement = exam.getQuestion(question).getStatement();
                     statement += "\n\nNote: There may be more than one correct answer.";
@@ -69,10 +69,12 @@ public class QuizPageContent extends ExamPageContent {
                 }
                 while (usedGeneratorQuestions.contains(generatedQuestion));
                 usedGeneratorQuestions.add(generatedQuestion);
-                //set the question statement
+                //set the points and question index
                 int questionLevel = questionGenerator.getLevel();
                 pointsAndIndex = questionLevel == 1 ? questionLevel + " point" : questionLevel + " points";
                 pointsAndIndex += "\nQuestion " + (questionIndex + 1);
+                //save the points and question index
+                examQuestion.setPointsAndQuestionIndex(pointsAndIndex);
                 statement = generatedQuestion;
                 //save the question
                 examQuestion.setQuestion(generatedQuestion);
