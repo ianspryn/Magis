@@ -304,17 +304,13 @@ double sum = a%b;```</statement>
                                 <level>2</level>
                                 <statement>Which one correctly converts the value of a double into an int?</statement>
                                 <answer>double balance = 100.5;
-int dollars = balance.cast.int;
-                                </answer>
+int dollars = balance.cast.int;</answer>
                                 <answer id = "correct">double balance = 100.5;
-int dollars = (int) balance;
-                                </answer>
+int dollars = (int) balance;</answer>
                                 <answer>double balance = 100.5;
-int dollars = int(balance);
-                                </answer>
+int dollars = int(balance);</answer>
                                 <answer>double balance = 100.5;
-int dollars = balance.int;
-                                </answer>
+int dollars = balance.int;</answer>
                         </question>
                 </questions>
         </chapter>

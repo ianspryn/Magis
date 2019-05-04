@@ -41,7 +41,8 @@
 }
 
 .jfx-text-field, .jfx-password-field {
-    -fx-prompt-text-fill: #181818;
+    -fx-prompt-text-fill: #fff;
+    -fx-text-fill: #fff;
 }
 
 /*

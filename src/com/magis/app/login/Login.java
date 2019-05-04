@@ -88,7 +88,9 @@ public class Login {
         Sign-in area
          */
         userNameTextField = createJFXTextField("Username");
+        userNameTextField.getStyleClass().add("jfx-sign-in-field");
         passwordTextField = createJFXPasswordField("Password");
+        passwordTextField.getStyleClass().add("jfx-sign-in-field");
 
         passwordTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) attemptSignIn(userNameTextField.getText(), passwordTextField.getText());
@@ -98,7 +100,9 @@ public class Login {
         Sign-up area
          */
         firstNameTextField = createJFXTextField("First name");
+        firstNameTextField.getStyleClass().add("jfx-sign-in-field");
         lastNameTextField = createJFXTextField("Last name");
+        lastNameTextField.getStyleClass().add("jfx-sign-in-field");
 
         loginGridPane.add(userNameTextField, 0, 1);
         loginGridPane.add(passwordTextField,0,2);

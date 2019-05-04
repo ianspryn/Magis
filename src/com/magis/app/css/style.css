@@ -159,9 +159,17 @@
 }
 
 .jfx-text-field, .jfx-password-field {
-    -fx-font-weight: BOLD;
     -fx-alignment: top-left;
     -fx-max-width: 300;
+}
+
+.jfx-sign-in-field {
+    -fx-font-weight: BOLD;
+}
+
+.jfx-edit-name-field {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 30px;
 }
 
 .sign-in-field {

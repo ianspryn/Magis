@@ -57,7 +57,7 @@
 
 .jfx-text-field, .jfx-password-field {
     -jfx-focus-color: #43A047; /* Green 600 */
-    -jfx-unfocus-color: #C8E6C9; /* Green 100 */
+    -jfx-unfocus-color: #B0BEC5; /* Green 200 */
 }
 
 .rectangle-color {

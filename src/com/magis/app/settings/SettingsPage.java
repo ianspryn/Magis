@@ -1,8 +1,10 @@
 package com.magis.app.settings;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import com.magis.app.Main;
+import com.magis.app.UI.Alert;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
@@ -16,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.Calendar;
 
 public class SettingsPage {
 
@@ -44,16 +48,71 @@ public class SettingsPage {
          */
         AnchorPane profileAnchorPane = new AnchorPane();
 
+        /*
+        Name settings
+         */
         HBox nameSettings = new HBox();
-        Label name = new Label(student.getFullName());
-        name.getStyleClass().add("settings-name");
+        nameSettings.setAlignment(Pos.CENTER);
+
+        //declare
+        Label fullName = new Label(student.getFullName());
         Button editName = UIComponents.CreateSVGIconButton(MaterialIcons.edit, 20);
+        JFXTextField firstName = new JFXTextField(student.getFirstName());
+        firstName.getStyleClass().add("jfx-edit-name-field");
+        JFXTextField lastName = new JFXTextField(student.getLastName());
+        lastName.getStyleClass().add("jfx-edit-name-field");
+        JFXButton submitButton = new JFXButton("Submit");
+        JFXButton cancelButton = new JFXButton("Cancel");
+        VBox editNameBox = new VBox();
+        HBox topName = new HBox();
+        HBox nameButtons = new HBox();
+        editNameBox.setAlignment(Pos.CENTER);
+        editNameBox.setSpacing(25);
+        editNameBox.getChildren().addAll(topName, nameButtons);
+        topName.getChildren().addAll(firstName, lastName);
+        topName.setAlignment(Pos.CENTER);
+        topName.setSpacing(25);
+        nameButtons.getChildren().addAll(submitButton, cancelButton);
+        nameButtons.setAlignment(Pos.CENTER);
+        nameButtons.setSpacing(25);
+
+        //first show full name and edit button
+        nameSettings.getChildren().addAll(fullName, editName);
+
+        fullName.getStyleClass().add("settings-name");
+
+        //edit button
         editName.getStyleClass().add("material-icons-dark");
-        editName.setPadding(new Insets(12,0,0,0));
-//        editName.setOnMouseClicked(e -> goToLesson(borderPane, student.getRecentChapter(), true));
+        editName.setOnMouseClicked(e -> {
+            nameSettings.getChildren().clear();
+            nameSettings.getChildren().addAll(editNameBox);
+        });
         editName.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         editName.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        nameSettings.getChildren().addAll(name, editName);
+
+        //submit button
+        submitButton.getStyleClass().addAll("jfx-button-raised", "jfx-button-raised-color");
+        submitButton.setOnMouseClicked(e -> {
+            if (firstName.getText().length() == 0 || lastName.getText().length() == 0) {
+                Alert.showAlert("Error", "Name cannot be empty!");
+            } else {
+                student.setFirstName(firstName.getText());
+                student.setLastName(lastName.getText());
+                nameSettings.getChildren().clear();
+                nameSettings.getChildren().addAll(fullName, editName);
+                fullName.setText(student.getFullName());
+
+            }
+        });
+
+        //cancel button
+        cancelButton.getStyleClass().addAll("jfx-button-raised", "jfx-button-raised-color");
+        cancelButton.setOnMouseClicked(e -> {
+            nameSettings.getChildren().clear();
+            nameSettings.getChildren().addAll(fullName, editName);
+        });
+
+
         JFXButton changePassword = new JFXButton("Change Password");
         changePassword.getStyleClass().addAll("jfx-button-raised", "jfx-button-raised-color");
 
@@ -61,7 +120,7 @@ public class SettingsPage {
         AnchorPane.setLeftAnchor(nameSettings,0.0);
         AnchorPane.setRightAnchor(changePassword,0.0);
 
-        vBox.getChildren().add(profileAnchorPane);
+        vBox.getChildren().addAll(nameSettings, changePassword);
 
         /*
         Dark mode

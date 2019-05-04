@@ -309,11 +309,19 @@ public class StudentModel {
 
         public String getFirstName() { return firstName; }
 
-        public void setFirstName(String firstName) { this.firstName = firstName; }
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+            fullName = firstName + " " + lastName;
+            writeSettings();
+        }
 
         public String getLastName() { return lastName; }
 
-        public void setLastName(String lastName) { this.lastName = lastName; }
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+            fullName = firstName + " " + lastName;
+            writeSettings();
+        }
 
         public String getPasswordHash() { return passwordHash; }
 
@@ -368,7 +376,7 @@ public class StudentModel {
             writeSettings();
         }
 
-        public void writeSettings() {
+        private void writeSettings() {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = null;
             try {
