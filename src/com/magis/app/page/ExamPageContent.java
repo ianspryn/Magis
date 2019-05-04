@@ -100,6 +100,7 @@ public abstract class ExamPageContent extends PageContent {
             //add the number of points to the question
             Label pointsAndIndexLabel = new Label(pointsAndIndex);
             pointsAndIndexLabel.setPadding(new Insets(0, 0, -10, 0));
+            pointsAndIndexLabel.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
             pointsAndIndexLabel.getStyleClass().addAll("lesson-text-small", "text-color");
             grader.addPointLabel(pointsAndIndexLabel);
             questionBox.getChildren().add(pointsAndIndexLabel);
