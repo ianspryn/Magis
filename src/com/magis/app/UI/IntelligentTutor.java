@@ -116,6 +116,7 @@ public class IntelligentTutor {
          */
         //if they are completely done with this chapter
         if (progress == 100 && hasTakenQuiz && hasTakenTest) {
+            System.out.println("Progress == 100 and hasTakenQuiz and hasTakenTest");
             recentActivityTitle.setText("Onward!");
             text = new Text();
             texts.add(text);
@@ -241,7 +242,8 @@ public class IntelligentTutor {
                 }
             }
             chapterTitleText.setText("Chapter " + (student.getRecentChapter() + 1) + " - " + chapter.getTitle());
-        } else if (onQuizPage || (progress == 100 && !hasTakenQuiz)) {
+        } else if ((onQuizPage && !hasTakenQuiz) || (progress == 100 && !hasTakenQuiz)) {
+            System.out.println("onQuizPage || (progress == 100 && !hasTakenQuiz)");
             if (!checkForIncompleteProgress("quiz")) {
                 newPage = chapter.getNumPages();
                 recentActivityTitle.setText("Ready to take your quiz?");
@@ -261,7 +263,8 @@ public class IntelligentTutor {
                 text.setText(" chapter! If you're ready to take your quiz, click here.");
                 text.getStyleClass().add("box-description");
             }
-        } else if (onTestPage || (progress == 100 || !hasTakenTest)) {
+        } else if ((onTestPage && !hasTakenTest) || (progress == 100 && !hasTakenTest)) {
+            System.out.println("onTestPage || (progress == 100 && !hasTakenTest)");
             //make sure the student has read everything first
             if (!checkForIncompleteProgress("test")) {
                 //make sure the student has taken the quiz (if there is one)
@@ -286,6 +289,7 @@ public class IntelligentTutor {
                 }
             }
         } else if (onLessonPage) {
+            System.out.println("onLessonPage");
             recentActivityTitle.setText("Pick up where you left off?");
             if (progress > 80) {
                 text = new Text();
@@ -315,7 +319,7 @@ public class IntelligentTutor {
             if (hasPageTitle) {
                 text.setText("Page " + (newPage + 1) + ": " + chapter.getPage(newPage).getTitle());
             } else {
-                text.setText("Page " + (student.getRecentPage() + 1));
+                text.setText("Page " + (newPage + 1));
             }
         }
 
@@ -328,7 +332,8 @@ public class IntelligentTutor {
 
     private static boolean checkForIncompleteQuiz() {
         //if the student hasn't taken a quiz
-        if (hasTakenQuiz) {
+        if (!hasTakenQuiz) {
+            recentActivityTitle.setText("Before you take your test...");
             text = new Text();
             texts.add(text);
             text.setText("\nYou also haven't taken your quiz yet.");

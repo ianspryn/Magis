@@ -2,6 +2,7 @@ package com.magis.app.page;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.models.ExamsModel;
 import com.magis.app.test.ExamQuestion;
@@ -49,7 +50,7 @@ public abstract class ExamPageContent extends PageContent {
         this.chapterIndex = chapterIndex;
         this.numQuestions = numQuestions;
         this.exam = exam;
-        numAvailableBankQuestions = exam.getNumAvailableQuestions();
+        numAvailableBankQuestions = exam != null ? exam.getNumAvailableQuestions() : 0;
         questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
         grader = new Grader();
         toggleGroups = new HashMap<>();
@@ -64,6 +65,8 @@ public abstract class ExamPageContent extends PageContent {
     @Override
     void update(int pageIndex) {
         setScrollPaneContent(pageContents.get(pageIndex));
+        JFXScrollPane.smoothScrolling(getScrollPane());
+        getScrollPane().setVvalue(0);
     }
 
     @Override
@@ -224,6 +227,7 @@ public abstract class ExamPageContent extends PageContent {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, button.getText())) {
                         button.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a; -jfx-unselected-color: #00cd0a;");
+                        button.setUnderline(true);
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red
@@ -238,6 +242,7 @@ public abstract class ExamPageContent extends PageContent {
                     if (grader.isCorrect(questionIndex, checkBox.getText())) {
 //                        checkBox.setStyle("-fx-text-fill: #00cd0a; -jfx-checked-color: #00cd0a; -jfx-unchecked-color: #00cd0a;"); //Green A700
                         checkBox.setStyle("-fx-text-fill: #00cd0a;");
+                        checkBox.setUnderline(true);
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red

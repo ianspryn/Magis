@@ -76,8 +76,12 @@ public class Main extends Application {
         questionGenerator.put(5, new EscapeSequenceQuestions());
         questionGenerator.put(6, new MethodQuestions());
         questionGenerator.put(7, new InputOutputQuestions());
+        questionGenerator.put(8, new ArraysQuestions());
+        questionGenerator.put(9, new ControlStatementQuestions());
+        questionGenerator.put(10, new InterfacesQuestions());
+        questionGenerator.put(11, new MiscOOPQuestions());
 //        questionGenerator.put(8, new ExceptionsQuestions());
-//        questionGenerator.put(9, new PackagesQuestions());
+//        questionGenerator.put(9, new PackagesQuestions());*/
 
     }
 
