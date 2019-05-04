@@ -18,8 +18,9 @@
     -fx-fill: #181818;
 }
 
-.lesson-text-no-color {
-    -fx-text-fill: #200310;
+.text-no-color {
+    -fx-text-fill: #181818;
+    -fx-fill: #181818;
 }
 
 .code-text {
@@ -52,10 +53,6 @@ The greeting ("Hello, Ian!") on the home page
 
 /* the chevron text for navigating pages */
 .navigation-text {
-    -fx-fill: #181818;
-}
-
-.text-no-color {
     -fx-fill: #181818;
 }
 
