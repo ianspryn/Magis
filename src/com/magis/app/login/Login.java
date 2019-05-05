@@ -66,6 +66,7 @@ public class Login {
         passwordVerifierGridPane.setHgap(10);
         passwordVerifierGridPane.setVgap(25);
 
+
         longEnoughCheck = passwordAssistantCheckBox();
         Label longEnoughLabel = passwordAssistantLabel("Greater than 8 characters", longEnoughCheck);
         containsUpperCaseCheck = passwordAssistantCheckBox();
@@ -160,7 +161,7 @@ public class Login {
      */
     private static JFXCheckBox passwordAssistantCheckBox() {
         JFXCheckBox checkBox = new JFXCheckBox();
-        checkBox.setUnCheckedColor(Color.valueOf("#FF1744")); //Red  A400
+        checkBox.setUnCheckedColor(Color.valueOf("#FF1744")); //Red A400
         checkBox.setCheckedColor(Color.valueOf("#00C853")); //Green A700
         checkBox.setDisable(true);
         return checkBox;

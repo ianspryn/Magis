@@ -451,7 +451,7 @@ public class StudentModel {
         public boolean hasTakenTest(int chapterIndex) {
             for (Test test : tests) {
                 if (test.getExamChapterNumber() == chapterIndex) {
-                    return true;
+                    return test.hasScore();
                 }
             }
             return false;
@@ -971,6 +971,9 @@ public class StudentModel {
                     Node statement = question.getElementsByTagName("statement").item(0);
                     examQuestion.setQuestion(statement.getTextContent());
 
+                    Node pointsAndQuestionIndex = document.getElementsByTagName("PointsAndQuestionIndex").item(0);
+                    examQuestion.setPointsAndQuestionIndex(pointsAndQuestionIndex.getTextContent());
+
                     NodeList answers = question.getElementsByTagName("answer");
                     for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
                         Element answer = (Element) answers.item(answerIndex);
@@ -992,87 +995,28 @@ public class StudentModel {
         }
 
         public void saveQuiz(ExamSaver examSaver) {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = null;
-            try {
-                documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            }
-            Document document = null;
-            try {
-                assert documentBuilder != null;
-                document = documentBuilder.parse(filePath);
-            } catch (SAXException | IOException e) {
-                e.printStackTrace();
-            }
-            assert document != null;
-            Element root = document.getDocumentElement();
-            NodeList students = root.getElementsByTagName("student");
-            Node student = null;
-            for (int i = 0; i < students.getLength(); i++) {
-                student = students.item(i);
-                //find the current student
-                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
-                    break;
-                }
-            }
-            assert student != null;
-            Element studentElement = (Element) student;
-            Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
-            NodeList quizzes = quizzesElement.getElementsByTagName("quiz");
-            Node quiz = null;
-            for (int i = 0; i < quizzes.getLength(); i++) {
-                quiz = quizzes.item(i);
-                //find which test to add score to
-                if (Integer.parseInt(quiz.getAttributes().getNamedItem("chapter").getNodeValue()) == examSaver.getChapterIndex()) {
-                    break;
-                }
-            }
-            Element quizElement = (Element) quiz;
-            Element attemptElement = document.createElement("attempt");
-            assert quizElement != null;
-            quizElement.appendChild(attemptElement);
-            Element timestamp = document.createElement("timestamp");
-            String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
-            timestamp.appendChild(document.createTextNode(timestampString));
-            attemptElement.appendChild(timestamp);
-
-            Attempt attempt = new Attempt();
-            attempt.setTimestamp(timestampString);
-            //add the attempt to the Quiz class
+            Attempt attempt = saveExam(examSaver, "quiz");
+            //add the attempt to the Test class
             getQuiz(examSaver.getChapterIndex()).getAttempts().add(attempt);
-
-            for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
-                //add to the attempt class
-                attempt.addExamQuestion(examQuestion);
-
-                //question element
-                Element question = document.createElement("question");
-                attemptElement.appendChild(question);
-                //each part of the question
-                Element statement = document.createElement("statement");
-                statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
-                question.appendChild(statement);
-
-                for (String answer : examQuestion.getAnswers()) {
-                    Element answerElement = document.createElement("answer");
-                    answerElement.appendChild(document.createTextNode(answer));
-                    //if this is a correct answer
-                    if (examQuestion.getCorrectAnswers().contains(answer)) {
-                        answerElement.setAttribute("id", "correct");
-                    }
-                    //if this is an answer the student selected
-                    if (examQuestion.getStudentAnswers().contains(answer)) {
-                        answerElement.setAttribute("selected", "true");
-                    }
-                    question.appendChild(answerElement);
-                }
-            }
-            UpdateModel.updateXML(new DOMSource(document), filePath);
         }
 
         public void saveTest(ExamSaver examSaver) {
+            Attempt attempt = saveExam(examSaver, "test");
+            //add the attempt to the Quiz class
+            getTest(examSaver.getChapterIndex()).getAttempts().add(attempt);
+        }
+
+        Attempt saveExam(ExamSaver examSaver, String examType) {
+            String examTypePlural = "";
+            switch (examType) {
+                case "quiz":
+                    examTypePlural = "quizzes";
+                        break;
+                case "test":
+                    examTypePlural = "tests";
+                    break;
+
+            }
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = null;
             try {
@@ -1100,19 +1044,20 @@ public class StudentModel {
             }
             assert student != null;
             Element studentElement = (Element) student;
-            Element testsElement = (Element) studentElement.getElementsByTagName("tests").item(0);
-            NodeList tests = testsElement.getElementsByTagName("test");
-            Node test = null;
-            for (int i = 0; i < tests.getLength(); i++) {
-                test = tests.item(i);
-                //find which test to add score to
-                if (Integer.parseInt(test.getAttributes().getNamedItem("chapter").getNodeValue()) == examSaver.getChapterIndex()) {
+            Element examsElement = (Element) studentElement.getElementsByTagName(examTypePlural).item(0);
+            NodeList exams = examsElement.getElementsByTagName(examType);
+            Node exam = null;
+            for (int i = 0; i < exams.getLength(); i++) {
+                exam = exams.item(i);
+                //find which exam to add score to
+                if (Integer.parseInt(exam.getAttributes().getNamedItem("chapter").getNodeValue()) == examSaver.getChapterIndex()) {
                     break;
                 }
             }
+            Element examElement = (Element) exam;
             Element attemptElement = document.createElement("attempt");
-            assert test != null;
-            test.appendChild(attemptElement);
+            assert examElement != null;
+            examElement.appendChild(attemptElement);
             Element timestamp = document.createElement("timestamp");
             String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
             timestamp.appendChild(document.createTextNode(timestampString));
@@ -1120,8 +1065,6 @@ public class StudentModel {
 
             Attempt attempt = new Attempt();
             attempt.setTimestamp(timestampString);
-            //add the attempt to the Quiz class
-            getTest(examSaver.getChapterIndex()).getAttempts().add(attempt);
 
             for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
                 //add to the attempt class
@@ -1129,6 +1072,10 @@ public class StudentModel {
                 //question element
                 Element question = document.createElement("question");
                 attemptElement.appendChild(question);
+                //pointsAndQuestionIndex
+                Element pointsAndQuestionIndex = document.createElement("PointsAndQuestionIndex");
+                pointsAndQuestionIndex.appendChild(document.createTextNode(examQuestion.getPointsAndQuestionIndex()));
+                question.appendChild(pointsAndQuestionIndex);
                 //each part of the question
                 Element statement = document.createElement("statement");
                 statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
@@ -1149,6 +1096,7 @@ public class StudentModel {
                 }
             }
             UpdateModel.updateXML(new DOMSource(document), filePath);
+            return attempt; //because we don't know if this is a quiz or a test
         }
     }
 }

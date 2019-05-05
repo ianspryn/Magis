@@ -150,7 +150,7 @@
     -fx-font-size: 16px;
 }
 
-.exam-radio-button:disabled, .test-checkbox-button:disabled {
+.exam-radio-button:disabled, .exam-checkbox-button:disabled {
     -fx-opacity: 0.8;
 }
 

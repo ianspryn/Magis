@@ -23,7 +23,7 @@
     -fx-background: #00838F; /* Cyan 800 */
 }
 
-.jfx-check-box {
+.jfx-custom-check-box {
     -jfx-checked-color: #00ACC1; /* Cyan 600 */
 }
 

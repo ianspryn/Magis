@@ -23,7 +23,7 @@
     -fx-background: #2E7D32; /* Green 800 */
 }
 
-.jfx-check-box {
+.jfx-custom-check-box {
     -jfx-checked-color: #66BB6A; /* Green 400 */
 }
 

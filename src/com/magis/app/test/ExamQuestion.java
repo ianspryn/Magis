@@ -58,8 +58,6 @@ public class ExamQuestion {
 
     public void addIncorrectAnswers(ArrayList<String> incorrectAnswers) { this.incorrectAnswers.addAll(incorrectAnswers); }
 
-    public ArrayList<String> getIncorrectAnswers() { return incorrectAnswers; }
-
     public void addStudentAnswer(String studentAnswer) { studentAnswers.add(studentAnswer); }
 
     public void removeStudentAnswer(String oldAnswer) {
@@ -77,6 +75,8 @@ public class ExamQuestion {
     public ArrayList<String> getCorrectAnswers() {
         return correctAnswers;
     }
+
+    public ArrayList<String> getIncorrectAnswers() { return incorrectAnswers; }
 
     public ArrayList<String> getStudentAnswers() {
         return studentAnswers;

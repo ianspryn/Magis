@@ -23,7 +23,7 @@
     -fx-background: #6A1B9A; /* Purple 800 */
 }
 
-.jfx-check-box {
+.jfx-custom-check-box {
     -jfx-checked-color: #AB47BC; /* Purple 400 */
 }
 

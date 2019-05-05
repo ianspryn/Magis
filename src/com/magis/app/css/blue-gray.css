@@ -23,7 +23,7 @@
     -fx-background: #37474F; /* blue-gray 800 */
 }
 
-.jfx-check-box {
+.jfx-custom-check-box {
     -jfx-checked-color: #78909C; /* blue-gray 400 */
 }
 

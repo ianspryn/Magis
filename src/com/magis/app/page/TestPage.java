@@ -1,9 +1,8 @@
 package com.magis.app.page;
 
-import com.magis.app.Configure;
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
-import com.magis.app.test.TestResult;
+import com.magis.app.test.ExamResultPage;
 
 import static com.magis.app.Configure.*;
 
@@ -16,9 +15,9 @@ public class TestPage extends ExamPage {
             if (UIComponents.confirmMessage("Submit test", "Do you wish to submit your test?")) {
                 examPageContent.grader.grade();
                 Main.studentModel.getStudent().getTest(chapterIndex).addScore(examPageContent.grader.getGrade());
-                TestResult testResultPage = new TestResult(examPageContent.grader.getGrade());
-                testResultPage.getButton().setOnAction(e2 -> updatePage(1));
-                addPage(0, "Results", testResultPage.getvBox());
+                ExamResultPage examResultPage = new ExamResultPage(examPageContent.grader.getGrade());
+                examResultPage.getButton().setOnAction(e2 -> updatePage(1));
+                addPage(0, "Results", examResultPage.getvBox());
                 examPageContent.disableInput();
                 examPageContent.colorize();
                 getExamPageContent().getExamSaver().save();

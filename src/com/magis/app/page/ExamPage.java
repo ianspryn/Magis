@@ -2,13 +2,10 @@ package com.magis.app.page;
 
 import com.jfoenix.controls.JFXButton;
 import com.magis.app.Main;
-import com.magis.app.UI.UIComponents;
-import com.magis.app.test.TestResult;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.magis.app.Configure.NUM_QUESTIONS_PER_PAGE;
 
