@@ -79,7 +79,7 @@ public class InterfacesQuestions extends QuestionGenerator {
         int rightNum = numbers[rand.nextInt(numbers.length)];
 
         question = "public interface in1 {\n\tpublic static final int a = "+a;
-        question += ";\n\tpublic static final int b = "+b+";\n\n\tpublic void display();}";
+        question += ";\n\tpublic static final int b = "+b+";\n\n\tpublic void display();\n\t}";
         question += "\n\n public class questionClass(){\n\tpublic void display(){\n\t\tint c = "+c+";\n\t\tint d = "+d+";\n\t\t"+
                 "System.out.println("+rightNum+");\n\t}";
         question += "\npublic static void main(String[] args){\n\t\tquestionClass q = new questionClass();\n\t\tq.display();\n\t}\n}";

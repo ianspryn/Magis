@@ -149,7 +149,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
         answers = shuffler;
 
-        question+="\n\nWhat is the value of \"value\" after this incremental equation?";
+        question+="\n\nWhat is the value of \"value\" after this line of code executes?";
     }
 
     public void getModularQuestion(){

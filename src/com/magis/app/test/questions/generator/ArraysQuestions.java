@@ -96,11 +96,15 @@ public class ArraysQuestions extends QuestionGenerator{
                             }
                         }
                     }
+                    while(doubleArray[indexRow][indexColumn] == doubleArray[indexColumn][indexRow]){
+                        doubleArray[indexColumn][indexRow] = rand.nextInt(10);
+                    }
 
                     question += ", "+doubleArray[i][j];
                 }
                 question+="\n";
             }
+
             question += "\n\nWhat is the value at \"numList["+indexRow+"]["+indexColumn+"]\"?";
             correctAnswer = ""+doubleArray[indexRow][indexColumn];
             answers.add(correctAnswer);
@@ -116,16 +120,7 @@ public class ArraysQuestions extends QuestionGenerator{
                 }
             }
             answers.add(uniquePosition);
-
-            unique = false;
-            while(unique == false){
-                unique = true;
-                uniquePosition = ""+doubleArray[rand.nextInt(doubleArray.length)][rand.nextInt(doubleArray[0].length)];
-                if(uniquePosition.equals(correctAnswer) || uniquePosition.equals(answers.get(2))){
-                    unique = false;
-                }
-            }
-            answers.add(uniquePosition);
+            answers.add(""+doubleArray[indexColumn][indexRow]);
         }
 
         Collections.shuffle(answers);

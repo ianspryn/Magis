@@ -27,11 +27,11 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         answers.clear();
 
         int sentencePicker = rand.nextInt(sentences.length);
-        question = sentences[sentencePicker];
+        question = "String s = \""+sentences[sentencePicker]+"\";";
 
-        int sequenePicker = rand.nextInt(5);
+        int sequencePicker = rand.nextInt(5);
 
-        switch(sequenePicker){
+        switch(sequencePicker){
             case 0:
                 correctAnswer = question;
                 correctAnswer = correctAnswer.replace('^', '\n');
@@ -43,7 +43,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
             case 1:
                 correctAnswer = question;
-                correctAnswer = correctAnswer.replace('^', '\t');
+                correctAnswer = correctAnswer.replace("^","          ");
                 answers.add(correctAnswer);
                 answers.add(question.replace('^','\n'));
                 answers.add(question.replace('^','\\'));
@@ -54,7 +54,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 correctAnswer = question;
                 correctAnswer = correctAnswer.replace('^', '\\');
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
+                answers.add(question.replace("^","          "));
                 answers.add(question.replace('^','\n'));
                 answers.add(question.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \"\\\\\" do to the string?";
@@ -63,7 +63,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 correctAnswer = question;
                 correctAnswer = correctAnswer.replace('^', '\"');
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
+                answers.add(question.replace("^","          "));
                 answers.add(question.replace('^','\n'));
                 answers.add(question.replace('^','\''));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \" \\\" \" do to the string?";
@@ -72,7 +72,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 correctAnswer = question;
                 correctAnswer = correctAnswer.replace('^', '\'');
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
+                answers.add(question.replace("^","          "));
                 answers.add(question.replace('^','\n'));
                 answers.add(question.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \" \\\' \" do to the string?";
