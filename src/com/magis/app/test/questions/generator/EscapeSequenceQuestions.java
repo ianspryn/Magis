@@ -18,9 +18,13 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         getEscapeSequenceQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return sentences.length*5;
+    }
+
     public void getEscapeSequenceQuestion(){
         answers.clear();
-        question = "";
 
         int sentencePicker = rand.nextInt(sentences.length);
         question = sentences[sentencePicker];
@@ -75,6 +79,6 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
         }
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 }

@@ -14,7 +14,8 @@ public class InterfacesQuestions extends QuestionGenerator {
 
     public InterfacesQuestions(){
         super();
-        methodList = (ArrayList<String>) Arrays.asList(methods);
+        methodList = new ArrayList<>();
+        Collections.addAll(methodList, methods);
     }
 
     @Override
@@ -28,12 +29,17 @@ public class InterfacesQuestions extends QuestionGenerator {
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        int answer = 40 + 7;
+        return answer;
+    }
+
     public void getInterfaceMethodQuestion(){
-        question = "";
         answers.clear();
         answers.add("Yes");
         answers.add("No");
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         correctAnswer = answers.get(1);
 
@@ -58,7 +64,6 @@ public class InterfacesQuestions extends QuestionGenerator {
     }
 
     public void interfaceVariableQuestion(){
-        question = "";
         answers.clear();
 
         int a = rand.nextInt(10)+1;
@@ -84,7 +89,7 @@ public class InterfacesQuestions extends QuestionGenerator {
         answers.add(""+b);
         answers.add(""+c);
         answers.add(""+d);
-        answers.add("Unknown");
+        answers.add("None of the Above");
         correctAnswer = ""+rightNum;
     }
 }

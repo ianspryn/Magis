@@ -18,8 +18,9 @@
     -fx-fill: #eee;
 }
 
-.lesson-text-color {
+.text-no-color {
     -fx-text-fill: #fff;
+    -fx-fill: #fff;
 }
 
 .code-text {
@@ -40,7 +41,8 @@
 }
 
 .jfx-text-field, .jfx-password-field {
-    -fx-prompt-text-fill: #181818;
+    -fx-prompt-text-fill: #fff;
+    -fx-text-fill: #fff;
 }
 
 /*
@@ -52,10 +54,6 @@ The greeting ("Hello, Ian!") on the home page
 
 /* the chevron text for navigating pages */
 .navigation-text {
-    -fx-fill: #eee;
-}
-
-.text-no-color {
     -fx-fill: #eee;
 }
 

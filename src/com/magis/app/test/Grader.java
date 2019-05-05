@@ -1,64 +1,61 @@
 package com.magis.app.test;
 
-import java.lang.reflect.Array;
+import javafx.scene.control.Label;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Grader {
 
-    private HashMap<Integer, ArrayList<String>> studentAnswers;
-    private HashMap<Integer, ArrayList<String>> correctAnswers;
-    private double numCorrectAnswers; //double because you might only get 0.5 points on a question with multiple correct answers
-    private int numQuestions;
+    private ArrayList<ExamQuestion> questions;
+    private ArrayList<Label> pointLabels;
+    private double studentPoints; //double because you might only get 0.5 points on a question with multiple correct answers
+    private double totalPoints;
     private double grade;
 
-    public Grader(int numQuestions) {
-        studentAnswers = new HashMap<>();
-        correctAnswers = new HashMap<>();
-        numCorrectAnswers = 0;
-        this.numQuestions = numQuestions;
+    public Grader() {
+        questions = new ArrayList<>();
+        pointLabels = new ArrayList<>();
+        studentPoints = 0;
+        totalPoints = 0;
     }
 
-    public Integer getNumCorrectAnswer(int key) {
-        return correctAnswers.get(key).size();
+    public int getNumCorrectAnswers(int key) {
+        return questions.get(key).getCorrectAnswers().size();
     }
 
-    public void addStudentAnswer(int key, String answer) {
-        if (!studentAnswers.containsKey(key)) {
-            ArrayList<String> temp = new ArrayList<>();
-            temp.add(answer);
-            studentAnswers.put(key, temp);
-        } else {
-            studentAnswers.get(key).add(answer);
-//            studentAnswers.put(key, temp);
-        }
-    }
-
-    public void removeStudentAnswer(int key, String answer) {
-        studentAnswers.get(key).remove(answer);
-    }
-
-    public void addCorrectAnswer(int key, ArrayList<String> answer) {
-        correctAnswers.put(key, answer);
-    }
-    
     public void grade() {
-        for (Map.Entry<Integer, ArrayList<String>> student : studentAnswers.entrySet()) {
-
-            ArrayList<String> correctAnswer = correctAnswers.get(student.getKey());
-            ArrayList<String> studentAnswer = student.getValue();
-            int counter = 0;
-            for (String string : correctAnswer) {
-                if (studentAnswer.contains(string)) {
-                    counter++;
+        int pointsLabelIndex = 0;
+        for (ExamQuestion question : questions) {
+            double pointsPerAnswer = (double) question.getLevel() / question.getNumCorrectAnswers();
+            double total = 0;
+            for (String studentAnswer : question.getStudentAnswers()) {
+                if (question.getCorrectAnswers().contains(studentAnswer)) {
+                    total += pointsPerAnswer;
+                }
+                if (question.getIncorrectAnswers().contains(studentAnswer)) {
+                    total -= pointsPerAnswer;
                 }
             }
-            numCorrectAnswers += (double) counter / (double) correctAnswer.size();
+
+            total = Double.parseDouble(new DecimalFormat("#.##").format(total)); //don't let 0.3333333333333333 be a thing. Make it 0.33.
+            total = Math.max(0, total); //don't let the score be negative
+
+            //update the points label to say " x/y points"
+            String temp;
+            if (total % 1 == 0) { //avoid showing 2.0/2 (make it 2/2 instead)
+                temp = (int) total + "/" + question.getPointsAndQuestionIndex();
+            } else { //but do show things like: 1.5/2
+                temp = total + "/" + question.getPointsAndQuestionIndex();
+            }
+            pointLabels.get(pointsLabelIndex).setText(temp);
+            question.setPointsAndQuestionIndex(temp); //update examQuestion so the grading change is reflected when viewing history
+
+            studentPoints += total;
+            totalPoints += question.getLevel();
+            pointsLabelIndex++;
         }
-        grade = 100.0 * numCorrectAnswers / (double) numQuestions;
+        grade = 100.0 * studentPoints / totalPoints;
         grade = Double.parseDouble(new DecimalFormat("#.##").format(grade));
     }
     
@@ -66,7 +63,15 @@ public class Grader {
         return grade;
     }
 
-    public boolean contains(int index, String text) {
-        return correctAnswers.get(index).contains(text);
+    public boolean isCorrect(int key, String text) {
+        return questions.get(key).getCorrectAnswers().contains(text);
+    }
+
+    public void addQuestion(ExamQuestion examQuestion) {
+        questions.add(examQuestion);
+    }
+
+    public void addPointLabel(Label label) {
+        pointLabels.add(label);
     }
 }

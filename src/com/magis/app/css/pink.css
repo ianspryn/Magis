@@ -23,6 +23,10 @@
     -fx-background: #AD1457; /* Pink 800 */
 }
 
+.jfx-custom-check-box {
+    -jfx-checked-color: #EC407A; /* Pink 400 */
+}
+
 .jfx-radio-button {
     -jfx-selected-color: #EC407A; /* Pink 400 */
 }
@@ -53,7 +57,7 @@
 
 .jfx-text-field, .jfx-password-field {
     -jfx-focus-color: #D81B60; /* Pink 600 */
-    -jfx-unfocus-color: #F8BBD0; /* Pink 100 */
+    -jfx-unfocus-color: #F48FB1; /* Pink 200 */
 }
 
 .rectangle-color {

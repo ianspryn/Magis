@@ -23,6 +23,10 @@
     -fx-background: #6A1B9A; /* Purple 800 */
 }
 
+.jfx-custom-check-box {
+    -jfx-checked-color: #AB47BC; /* Purple 400 */
+}
+
  .jfx-radio-button {
     -jfx-selected-color: #AB47BC; /* Purple 400 */
  }
@@ -53,7 +57,7 @@
 
 .jfx-text-field, .jfx-password-field {
     -jfx-focus-color: #8E24AA; /* Purple 600 */
-    -jfx-unfocus-color: #E1BEE7; /* Purple 100 */
+    -jfx-unfocus-color: #CE93D8; /* Purple 200 */
 }
 
 .rectangle-color {

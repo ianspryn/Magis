@@ -1,11 +1,13 @@
 package com.magis.app;
 
+
 import com.magis.app.UI.UIComponents;
 import com.magis.app.login.Login;
 import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
+import com.magis.app.test.diff_match_patch;
 import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -13,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+
 import java.awt.*;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Main extends Application {
 
@@ -75,8 +79,12 @@ public class Main extends Application {
         questionGenerator.put(5, new EscapeSequenceQuestions());
         questionGenerator.put(6, new MethodQuestions());
         questionGenerator.put(7, new InputOutputQuestions());
+        questionGenerator.put(8, new ArraysQuestions());
+        questionGenerator.put(9, new ControlStatementQuestions());
+        questionGenerator.put(10, new InterfacesQuestions());
+        questionGenerator.put(11, new MiscOOPQuestions());
 //        questionGenerator.put(8, new ExceptionsQuestions());
-//        questionGenerator.put(9, new PackagesQuestions());
+//        questionGenerator.put(9, new PackagesQuestions());*/
 
     }
 
@@ -102,5 +110,14 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) { launch(args); }
+
+//    public static void main(String[] args) {
+//        diff_match_patch dmp = new diff_match_patch();
+//        LinkedList<diff_match_patch.Diff> diff = dmp.diff_main("Hello World.", "Goodbye World.");
+//        // Result: [(-1, "Hell"), (1, "G"), (0, "o"), (1, "odbye"), (0, " World.")]
+//        dmp.diff_cleanupSemantic(diff);
+//        // Result: [(-1, "Hello"), (1, "Goodbye"), (0, " World.")]
+//        System.out.println(diff);
+//    }
 
 }

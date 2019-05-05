@@ -5,6 +5,7 @@ STRUCTURE:
 	<chapter id = "Chapter Name">
 		<questions>
                         <question>
+                                <level>{1, 2, 3, ... n}</level>
                                 <statement></statement>
                                 <answer id = "correct"></answer>
                                 <answer></answer>
@@ -37,10 +38,10 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>What will
-                                        int n = 1000000;
-                                        system.out.println(n*n);
-                                        print out, and why?</statement>
+                                <statement>```int n = 1000000;
+system.out.println(n*n);```
+What will this code print out, and why?
+                                </statement>
                                 <answer>1000000000000 because that's what n*n is</answer>
                                 <answer id = "correct">A negative number because of overflow</answer>
                                 <answer>An incorrect positive number because of overflow</answer>
@@ -48,10 +49,10 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>If
-                                        double x = 4.35;
-                                        double x = x*100;
-                                        Will x be exactly 435?                                </statement>
+                                <statement>```double x = 4.35;
+double x = x*100;```
+Will x be exactly 435?
+                                </statement>
                                 <answer>Yes it will</answer>
                                 <answer>No, because you can't multiply a double by an int</answer>
                                 <answer>No, it will be exactly 435.0 because it is a double</answer>
@@ -67,10 +68,11 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>Which input will correctly compute the length of string "Hello"</statement>
+                                <statement>Which input will correctly compute the length of string "Hello"?</statement>
                                 <answer>Length("Hello");</answer>
                                 <answer>Length.get("Hello");</answer>
                                 <answer>"Hello".get.Length();</answer>
+                                <answer id = "correct">"hello".length();</answer>
                         </question>
                         <question>
                                 <level>1</level>
@@ -90,10 +92,10 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement> double amount = 0;
-                                        bool lessThanThousand = amount > 1000;
-                                        system.out.println(lessThanThousand);
-                                        What will be printed from this code?
+                                <statement>```double amount = 0;
+bool lessThanThousand = amount > 1000;
+system.out.println(lessThanThousand);```
+What will be printed from this code?
                                 </statement>
                                 <answer>0</answer>
                                 <answer>true</answer>
@@ -102,10 +104,9 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>
-                                        What is the problem with this code?
-                                        double x = 100.0;
-                                        int y = x;</statement>
+                                <statement>What is the problem with this code?
+```double x = 100.0;
+int y = x;```</statement>
                                 <answer id = "correct">Cannot cast a double to an int</answer>
                                 <answer>y is uninitialized</answer>
                                 <answer>double should be capitalized</answer>
@@ -114,7 +115,7 @@ STRUCTURE:
                         <question>
                                 <level>1</level>
                                 <statement>
-                                        What does an object's 'type' tell you in java?
+What does an object's 'type' tell you in java?
                                 </statement>
                                 <answer id = "correct">The set of values that can be contained, and the operations that can be performed</answer>
                                 <answer>The exact value of an object</answer>
@@ -123,7 +124,7 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>What does DOUBLE stand for?</statement>
+                                <statement>Which of the following is the best definition of DOUBLE?</statement>
                                 <answer>Double the storage space of integers</answer>
                                 <answer id = "correct">Double precision floating point number</answer>
                                 <answer>Integer with two values attached to it</answer>
@@ -135,6 +136,7 @@ STRUCTURE:
                                 <answer>int</answer>
                                 <answer>short</answer>
                                 <answer id = "correct">tall</answer>
+                                <answer id = "correct">String</answer>
                                 <answer>byte</answer>
                         </question>
                         <question>
@@ -167,11 +169,12 @@ STRUCTURE:
                                 <answer>"A dog!"</answer>
                                 <answer>"An dog!"</answer>
                                 <answer>" aaaaa "</answer>
+                                <answer>"!!!"</answer>
                                 <answer id = "correct">" !!! "</answer>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>To what class do strings belong?</statement>
+                                <statement>Which of the following classes do string belong to?</statement>
                                 <answer>Char</answer>
                                 <answer>Writing</answer>
                                 <answer id = "correct">String</answer>
@@ -201,8 +204,9 @@ STRUCTURE:
                         <question>
                                 <level>2</level>
                                 <statement>If you want to change the value of
-                                        int width = 10;
-                                        to 20 what do you type?</statement>
+```int width = 10;```
+to 20 what do you type?
+                                </statement>
                                 <answer>int width = 20;</answer>
                                 <answer id = "correct">width = 20</answer>
                                 <answer>width = 10;</answer>
@@ -211,8 +215,8 @@ STRUCTURE:
                         <question>
                                 <level>2</level>
                                 <statement>What is wrong with the following code?
-                                        int height;
-                                        width = height;</statement>
+```int height;
+width = height;```</statement>
                                 <answer>int should be Int</answer>
                                 <answer id = "correct">Height is uninitialized</answer>
                                 <answer>height isn't spelled right</answer>
@@ -221,8 +225,8 @@ STRUCTURE:
                         <question>
                                 <level>2</level>
                                 <statement>What is wrong with this code?
-                                        int width = 20;
-                                        width = width + 10;</statement>
+```int width = 20;
+width = width + 10;```</statement>
                                 <answer>A variable cannot be on both sides of the equals mark</answer>
                                 <answer>There should be a double equals mark if you are using width twice</answer>
                                 <answer>Need more ;</answer>
@@ -231,9 +235,8 @@ STRUCTURE:
                         <question>
                                 <level>1</level>
                                 <statement>What will be the value of i after the following code is run?
-                                        int i = 2;
-                                        i++;
-                                </statement>
+```int i = 2;
+i++;```</statement>
                                 <answer>2</answer>
                                 <answer>4</answer>
                                 <answer id= "correct">3</answer>
@@ -242,8 +245,8 @@ STRUCTURE:
                         <question>
                                 <level>1</level>
                                 <statement>What will be the value of i after the following code is run?
-                                        int i = 2;
-                                        i--;</statement>
+```int i = 2;
+i--;```</statement>
                                 <answer>2</answer>
                                 <answer>4</answer>
                                 <answer>3</answer>
@@ -252,10 +255,9 @@ STRUCTURE:
                         <question>
                                 <level>2</level>
                                 <statement>What will be the value of sum after the following code is run?
-                                        int a = 11;
-                                        int b = 3;
-                                        double sum = a/b;
-                                </statement>
+```int a = 11;
+int b = 3;
+double sum = a/b;```</statement>
                                 <answer>approximately 3.6667</answer>
                                 <answer>4</answer>
                                 <answer id = "correct">3</answer>
@@ -264,20 +266,20 @@ STRUCTURE:
                         <question>
                                 <level>2</level>
                                 <statement>What will be the value of sum after the following code is run?
-                                        double a = 11;
-                                        int b = 3;
-                                        double sum = a/b;</statement>
-                                <answer>Approximately 3.6667</answer>
+```double a = 11;
+int b = 3;
+double sum = a/b;```</statement>
+                                <answer id = "correct">Approximately 3.6667</answer>
                                 <answer>4</answer>
-                                <answer id = "correct">3</answer>
+                                <answer>3</answer>
                                 <answer>2</answer>
                         </question>
                         <question>
                                 <level>2</level>
                                 <statement>What will be the value of sum after the following code is run?
-                                        double a = 11;
-                                        int b = 3;
-                                        double sum = a%b;                    </statement>
+```double a = 11;
+int b = 3;
+double sum = a%b;```</statement>
                                 <answer>Approximately 3.6667</answer>
                                 <answer>4</answer>
                                 <answer>3</answer>
@@ -303,13 +305,13 @@ STRUCTURE:
                                 <level>2</level>
                                 <statement>Which one correctly converts the value of a double into an int?</statement>
                                 <answer>double balance = 100.5;
-                                        int dollars = balance.cast.int;                        </answer>
+int dollars = balance.cast.int;</answer>
                                 <answer id = "correct">double balance = 100.5;
-                                        int dollars = (int) balance;</answer>
+int dollars = (int) balance;</answer>
                                 <answer>double balance = 100.5;
-                                        int dollars = int(balance);                        </answer>
+int dollars = int(balance);</answer>
                                 <answer>double balance = 100.5;
-                                        int dollars = balance.int;          </answer>
+int dollars = balance.int;</answer>
                         </question>
                 </questions>
         </chapter>
@@ -349,20 +351,19 @@ STRUCTURE:
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>What will
-                                        system.out.length();
-                                        do?                    </statement>
-                                <answer>measure the length of the output.</answer>
+                                <statement>```system.out.length();```
+What will this code do?</statement>
+                                <answer>Measure the length of the output.</answer>
                                 <answer id = "correct">Cause an error</answer>
+                                <answer>Output the length 'out' class</answer>
                                 <answer>Nothing</answer>
                                 <answer>Be ignored</answer>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement> What will goodmeal be equal to after this code?
-String meal = "lunch";
-String goodMeal = meal.toUpperCase();
-                                </statement>
+                                <statement> What will 'goodMeal' be equal to after this code?
+```String meal = "lunch";
+String goodMeal = meal.toUpperCase();```</statement>
                                 <answer>Lunch</answer>
                                 <answer>LuNcH</answer>
                                 <answer id = "correct">LUNCH</answer>
@@ -371,7 +372,7 @@ String goodMeal = meal.toUpperCase();
                         <question>
                                 <level>2</level>
                                 <statement>How do you create a new Rectangle object with it's top left corner at (3,5) and with
-                                        a width of 5 and height of 10?                        </statement>
+a width of 5 and height of 10?</statement>
                                 <answer>Rectangle t = Rectangle.create(3,5,5,10);</answer>
                                 <answer>Rectangle t = Create.Object.Rectangle(3,5,5,10);</answer>
                                 <answer>Rectangle t = new Rectangle.topLeft(3,5).width(5).height(10);</answer>
@@ -380,8 +381,8 @@ String goodMeal = meal.toUpperCase();
                         <question>
                                 <level>1</level>
                                 <statement>In the code,
-                                        Rectangle box = new Rectangle(5, 10, 20, 30);
-                                        5, 10,20 and 30 are examples of what?</statement>
+```Rectangle box = new Rectangle(5, 10, 20, 30);```
+5, 10,20 and 30 are examples of what?</statement>
                                 <answer id = "correct">construction parameters</answer>
                                 <answer>constructors</answer>
                                 <answer>Methods</answer>
@@ -390,7 +391,7 @@ String goodMeal = meal.toUpperCase();
                         <question>
                                 <level>1</level>
                                 <statement>What would the width of this rectangle be?
-                                        Rectangle t = new Rectangle();                    </statement>
+```Rectangle t = new Rectangle();```</statement>
                                 <answer>Default: 1</answer>
                                 <answer id = "correct">0</answer>
                                 <answer>The width would be uninitialized</answer>
@@ -415,7 +416,7 @@ String goodMeal = meal.toUpperCase();
                         <question>
                                 <level>1</level>
                                 <statement>What is the object in the following line of code?
-System.out.println("Words");</statement>
+```System.out.println("Words");```</statement>
                                 <answer>Words</answer>
                                 <answer>System</answer>
                                 <answer id = "correct">System.out</answer>
@@ -500,9 +501,9 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>Is the following code properly commented
-                                        /*This code adds 1 to
-                                        the value of the integer dogs */                </statement>
+                                <statement>Is the following code properly commented?
+```/*This code adds 1 to
+the value of the integer dogs */```</statement>
                                 <answer>No, /* and */ locations should be switched</answer>
                                 <answer>No, /* and */ only span over 1 line not multiples</answer>
                                 <answer>No, /* and */ should be \* and *\</answer>
@@ -510,9 +511,9 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>Is the following code properly commented
-                                        \*This code adds 1 to
-                                        the value of the integer dogs *\                </statement>
+                                <statement>Is the following code properly commented?
+```\*This code adds 1 to
+the value of the integer dogs *\```</statement>
                                 <answer>No, \* and *\ locations should be switched</answer>
                                 <answer>No, \* and *\ only span over 1 line not multiples</answer>
                                 <answer id = "correct">No, \* and *\ should be /* and */</answer>
@@ -520,9 +521,9 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>Is the following code properly commented
-                                        \*This code adds 1 to
-                                        the value of the integer dogs *\                </statement>
+                                <statement>Is the following code properly commented?
+```/*This code adds 1 to
+the value of the integer dogs */```</statement>
                                 <answer>No, \* and *\ locations should be switched</answer>
                                 <answer>No, \* and *\ only span over 1 line not multiples</answer>
                                 <answer>No, \* and *\ should be /* and */</answer>
@@ -530,9 +531,9 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>Is the following code properly commented
-                                        \\This code adds 1 to
-                                        the value of the integer cats\\                </statement>
+                                <statement>Is the following code properly commented?
+```\\This code adds 1 to
+the value of the integer cats\\```</statement>
                                 <answer>No, \\ works for only one line, and must be at the beginning of the line</answer>
                                 <answer>No, \\ should be //</answer>
                                 <answer id = "correct">No, \\ should be // and needs to be at the beginning of each line</answer>
@@ -544,7 +545,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>Good practice commenting</answer>
                                 <answer>javaComments</answer>
                                 <answer>javaTalk</answer>
-                                <answer id = "correct">javadoc</answer>
+                                <answer id = "correct">JavaDoc</answer>
                         </question>
                         <question>
                                 <level>1</level>
@@ -570,7 +571,7 @@ and returns some information about it, without changing the object</statement>
                                 <answer>/**</answer>
                         </question>
                         <question level="1">
-                                <statement>When do you exclude the @param tag in javadoc commentating?</statement>
+                                <statement>When do you exclude the @param tag in JavaDoc commentating?</statement>
                                 <answer>Never you always need it</answer>
                                 <answer>When the method isn't complicated</answer>
                                 <answer id = "correct">If there are no parameter variables</answer>
@@ -578,7 +579,7 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>When do you exclude the @return tag in javadoc commentating?</statement>
+                                <statement>When do you exclude the @return tag in JavaDoc commentating?</statement>
                                 <answer>Never you always need it</answer>
                                 <answer>When the method isn't complicated</answer>
                                 <answer>If there are no parameter variables</answer>
@@ -598,7 +599,7 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>1</level>
                                 <statement>What is wrong with this code?
-                                        String dog = 15;</statement>
+```String dog = 15;```</statement>
                                 <answer>String should be lowercase;</answer>
                                 <answer>It should just be String = 15;</answer>
                                 <answer id = "correct">15 is a integer not a string</answer>
@@ -607,7 +608,7 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>2</level>
                                 <statement>What is wrong with this code?
-                                        PrintStream printer = System.out;</statement>
+```PrintStream printer = System.out;```</statement>
                                 <answer>PrintStream is not a variable type</answer>
                                 <answer>System.out is not a valid value</answer>
                                 <answer>PrintStream is not a variable type and System.out is not a valid value</answer>
@@ -680,9 +681,9 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>2</level>
                                 <statement>What will this code do when called on an object?
-                                        public void count(){
-                                        value = value + 1;
-                                        }</statement>
+```public void count() {
+        value = value + 1;
+}```</statement>
                                 <answer>Nothing unless, the user passes it a variable called value.</answer>
                                 <answer>Nothing</answer>
                                 <answer>Create a new variable called value and add 1 to it.</answer>
@@ -726,9 +727,9 @@ and returns some information about it, without changing the object</statement>
                         </question>
                         <question level= "1">
                                 <statement>In the following code, what is the explicit parameter?
-                                        public void deposit(double amount){
-                                        balance = balance + amount;
-                                        }                </statement>
+```public void deposit(double amount) {
+        balance = balance + amount;
+}```</statement>
                                 <answer>balance</answer>
                                 <answer>deposit</answer>
                                 <answer id = "correct">amount</answer>
@@ -794,8 +795,9 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>1</level>
                                 <statement>In the following method declaration, what keyword is the access specifier?
-                                        public double Balance(int newDeposit){
-                                </statement>
+```public double Balance(int newDeposit) {
+        ...
+}```</statement>
                                 <answer id = "correct">public</answer>
                                 <answer>int</answer>
                                 <answer>Balance</answer>
@@ -804,7 +806,9 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>1</level>
                                 <statement>In the following method declaration, what keyword is the return type?
-                                        public double Balance(int newDeposit){</statement>
+```public double Balance(int newDeposit) {
+        ...
+}```</statement>
                                 <answer>public</answer>
                                 <answer id = "correct">double</answer>
                                 <answer>Balance</answer>
@@ -813,7 +817,9 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>1</level>
                                 <statement>In the following method declaration, what keyword is the method name?
-                                        public double Balance(int newDeposit){</statement>
+```public double Balance(int newDeposit) {
+        ...
+}```</statement>
                                 <answer>public</answer>
                                 <answer>double</answer>
                                 <answer id = "correct">Balance</answer>
@@ -822,7 +828,9 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>1</level>
                                 <statement>In the following method declaration, what keyword is the parameter variable?
-                                        public double Balance(int newDeposit){</statement>
+```public double Balance(int newDeposit) {
+        ...
+}```</statement>
                                 <answer>public</answer>
                                 <answer>double</answer>
                                 <answer>Balance</answer>
@@ -831,7 +839,9 @@ and returns some information about it, without changing the object</statement>
                         <question>
                                 <level>1</level>
                                 <statement>What is wrong with the following code?
-                                        double public bankAccount(double newDeposit){</statement>
+```double public bankAccount(double newDeposit) {
+        ...
+}```</statement>
                                 <answer id = "correct">return type stated before access specifier</answer>
                                 <answer>access specifier stated before method name</answer>
                                 <answer>return type listed before parameter variable</answer>
@@ -839,6 +849,7 @@ and returns some information about it, without changing the object</statement>
                         </question>
                 </questions>
         </chapter>
+<<<<<<< HEAD
                <chapter id = "Escape Sequences">
                 <questions>
                         <question>
@@ -933,4 +944,74 @@ System.out.println("Normal\" Output \\");</statement>
         </chapter>
         <chapter id = "Input/Output">
         </chapter>
+=======
+        <chapter id = "Arrays">
+                <questions>
+                        <question>
+                                <level>1</level>
+                                <statement>True or false: arrays can dynamically grow and shrink in size.</statement>
+                                <answer>True</answer>
+                                <answer id = "correct">False</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>True or false: ArrayLists can dynamically grow and shrink in size.</statement>
+                                <answer id = "correct">True</answer>
+                                <answer>False</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which delimeter do we use to indicate a datatype of array?</statement>
+                                <answer id = "correct">[] - brackets</answer>
+                                <answer>{} - braces</answer>
+                                <answer>() - parentheses</answer>
+                                <answer>&lt;&gt; - angle brackets</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <statement>```int[] values = new int[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <shuffle>false</shuffle>
+                                <answer id = "correct">0</answer>
+                                <answer>1</answer>
+                                <answer>null</answer>
+                                <answer>An error will be occur</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <statement>```boolean[] values = new boolean[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <answer id = "correct">true</answer>
+                                <shuffle>false</shuffle>
+                                <answer>false</answer>
+                                <answer>null</answer>
+                                <answer>An error will be occur</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <shuffle>false</shuffle>
+                                <statement>```MyClass[] values = new MyClass[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <answer id = "correct">null</answer>
+                                <answer>An empty string</answer>
+                                <answer>The name of the class</answer>
+                                <answer>An error will be occur</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <shuffle>false</shuffle>
+                                <statement>```int[] values;
+values[1] = 23;```
+Will this code run?</statement>
+                                <answer>Yes</answer>
+                                <answer>Yes, but values[1] will remain null</answer>
+                                <answer>No, you need to set values[0] first</answer>
+                                <answer id = "correct">No, 'values' must be initialized</answer>
+                        </question>
+                </questions>
+        </chapter>
+>>>>>>> master
 </quizzes>
