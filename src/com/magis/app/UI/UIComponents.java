@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -174,6 +175,14 @@ public class UIComponents {
         button.setDisable(true);
         button.setStyle("-fx-opacity: 1.0");
         return button;
+    }
+
+    public static Rectangle createRectangle(double width, double height) {
+        Rectangle rectangle = new Rectangle();
+        rectangle.setWidth(width);
+        rectangle.setHeight(height);
+        rectangle.getStyleClass().add("rectangle-color");
+        return rectangle;
     }
 
     /**

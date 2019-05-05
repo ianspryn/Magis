@@ -1,15 +1,10 @@
 package com.magis.app.UI;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSpinner;
 import com.magis.app.Main;
-import com.magis.app.models.LessonModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -59,7 +54,7 @@ public class PageContentContainer {
         button.setDisableVisualFocus(true); //fix the button on page appear to be highlighted (not selected, just highlighted)
         button.getStyleClass().addAll("start-test-button", "jfx-button-raised", "jfx-button-raised-color");
         button.setOnAction(e -> {
-            Main.takingTest = true;
+            Main.takingExam = true;
             new com.magis.app.page.QuizPage(chapterIndex);
         });
         masterContent.setAlignment(Pos.CENTER);
@@ -84,7 +79,7 @@ public class PageContentContainer {
         button.setDisableVisualFocus(true); //fix the button on page appear to be highlighted (not selected, just highlighted)
         button.getStyleClass().addAll("start-test-button", "jfx-button-raised", "jfx-button-raised-color");
         button.setOnAction(e -> {
-            Main.takingTest = true;
+            Main.takingExam = true;
             new com.magis.app.page.TestPage(chapterIndex);
         });
         masterContent.getChildren().add(button);

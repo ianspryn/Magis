@@ -5,7 +5,6 @@ import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -57,11 +56,11 @@ public abstract class Page {
         sideBar.getStyleClass().add("sidebar");
         homeHBox = UIComponents.createHomeBox();
         homeHBox.setOnMouseClicked(e -> {
-            if (Main.takingTest) {
+            if (Main.takingExam) {
                 String title = "Exit Test";
                 String content = "Are you sure you want to exit? All test progress will be lost!";
                 if (UIComponents.confirmMessage(title, content)) {
-                    Main.takingTest = false;
+                    Main.takingExam = false;
                     HomePage.goHome(borderPane);
                 }
             } else {

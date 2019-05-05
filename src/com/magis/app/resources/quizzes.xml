@@ -887,9 +887,9 @@ What will the code output?</statement>
                                 <statement>```boolean[] values = new boolean[5];
 System.out.println(values[3]);```
 What will the code output?</statement>
-                                <answer id = "correct">true</answer>
                                 <shuffle>false</shuffle>
-                                <answer>false</answer>
+                                <answer>true</answer>
+                                <answer id = "correct">false</answer>
                                 <answer>null</answer>
                                 <answer>An error will be occur</answer>
                         </question>
@@ -898,7 +898,8 @@ What will the code output?</statement>
                                 <shuffle>false</shuffle>
                                 <statement>```MyClass[] values = new MyClass[5];
 System.out.println(values[3]);```
-What will the code output?</statement>
+What will the code output?
+Assume MyClass has been implemented.</statement>
                                 <answer id = "correct">null</answer>
                                 <answer>An empty string</answer>
                                 <answer>The name of the class</answer>
@@ -909,7 +910,7 @@ What will the code output?</statement>
                                 <shuffle>false</shuffle>
                                 <statement>```int[] values;
 values[1] = 23;```
-Will this code run?</statement>
+Will this code run normally?</statement>
                                 <answer>Yes</answer>
                                 <answer>Yes, but values[1] will remain null</answer>
                                 <answer>No, you need to set values[0] first</answer>
