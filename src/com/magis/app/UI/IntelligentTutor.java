@@ -137,7 +137,10 @@ public class IntelligentTutor {
 
             //only suggest the user to continue learning if we're not 100% done with everything
             if (StatsPage.calculateOverallProgress() < 100) {
-                //Find the next chapter to suggest the user to pick up with
+                /*
+                Find the next chapter to suggest the user to pick up with
+                Find the first page of the earliest chapter that has not been read
+                 */
                 ArrayList<StudentModel.Student.ChapterModel> chapters = student.getChapters();
                 for (int chapter = 0; chapter < chapters.size(); chapter++) {
                     StudentModel.Student.ChapterModel chapterModel = chapters.get(chapter);

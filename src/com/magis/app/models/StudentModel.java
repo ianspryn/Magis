@@ -971,7 +971,7 @@ public class StudentModel {
                     Node statement = question.getElementsByTagName("statement").item(0);
                     examQuestion.setQuestion(statement.getTextContent());
 
-                    Node pointsAndQuestionIndex = document.getElementsByTagName("PointsAndQuestionIndex").item(0);
+                    Node pointsAndQuestionIndex = question.getElementsByTagName("PointsAndQuestionIndex").item(0);
                     examQuestion.setPointsAndQuestionIndex(pointsAndQuestionIndex.getTextContent());
 
                     NodeList answers = question.getElementsByTagName("answer");
