@@ -5,7 +5,9 @@ import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
+import com.magis.app.internet.InternetConnector;
 import com.magis.app.models.StudentModel;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -40,6 +42,9 @@ public class Login {
     private static JFXCheckBox containsNumberCheck;
 
     public static void Page() {
+        //check for internet connection in background, and it if fails, output a message to the user
+        new Thread(() -> Platform.runLater(InternetConnector::checkInternet)).start();
+
         VBox content = new VBox();
         content.setAlignment(Pos.CENTER);
 
