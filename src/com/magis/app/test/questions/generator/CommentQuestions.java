@@ -27,16 +27,10 @@ public class CommentQuestions extends QuestionGenerator{
     }
 
     public void generateGeneralCommentQuestion(){
-        question = "";
-        int random;
+        int random = rand.nextInt(commentQuestions.length);
+        question = commentQuestions[random];
 
-        do {
-            random = rand.nextInt(5);
-            question = commentQuestions[random];
-            commentQuestions[random] = "";
-        }while(question.equals(""));
-
-        question = question+"\n\nWhat would you use to comment the sentence above?";
+        question += "\n\nWhat would you use to comment the sentence above?";
 
         switch(random){
             case 0: correctAnswer = generalCommentAnswers[0];
@@ -45,14 +39,18 @@ public class CommentQuestions extends QuestionGenerator{
                 break;
             case 2: correctAnswer = generalCommentAnswers[2];
                 break;
-            case 3: correctAnswer = generalCommentAnswers[0];
+            case 3: correctAnswer = generalCommentAnswers[2];
                 break;
-            case 4: correctAnswer = generalCommentAnswers[1];
+            case 4: correctAnswer = generalCommentAnswers[2];
                 break;
-            case 5: correctAnswer = generalCommentAnswers[2];
+            case 5: correctAnswer = generalCommentAnswers[0];
                 break;
-            case 6: correctAnswer = generalCommentAnswers[2];
+            case 6: correctAnswer = generalCommentAnswers[1];
                 break;
         }
+    }
+
+    public int getNumUnique(){
+        return commentQuestions.length;
     }
 }

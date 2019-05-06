@@ -23,6 +23,10 @@
     -fx-background: #37474F; /* blue-gray 800 */
 }
 
+.jfx-check-box {
+    -jfx-checked-color: #78909C; /* blue-gray 400 */
+}
+
  .jfx-radio-button {
     -jfx-selected-color: #78909C; /* blue-gray 400 */
  }

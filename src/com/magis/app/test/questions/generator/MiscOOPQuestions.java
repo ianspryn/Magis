@@ -23,6 +23,13 @@ public class MiscOOPQuestions extends QuestionGenerator{
         else getSuperMethodQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        int answer = 4 + 4 + 4 + 4 + (4*4);
+        answer += 400;
+        return answer;
+    }
+
     public void isaHasAQuestion(){
         answers.clear();
         answers.add("True");
@@ -170,7 +177,6 @@ public class MiscOOPQuestions extends QuestionGenerator{
     }
 
     public void getSuperMethodQuestion(){
-        question = "";
         answers.clear();
 
         int maxSpeed1 = rand.nextInt(200);

@@ -46,13 +46,17 @@ public class ConstructerQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return equalsAnswers.length + secondAnswers.length + comparableStringAnswers.length;
+    }
+
     public void generateConstructerQuestion(){
-        question = "";
         answers = cAnswers;
         ArrayList<String> four = new ArrayList();
         for (int i = 0; i < 4; i++) {
             String answer = "";
-            do { answer = comparableStrings[random]; }
+            do { answer = comparableStrings[rand.nextInt(comparableStrings.length)]; }
             while (four.contains(answer));
             four.add(answer);
         }
@@ -81,7 +85,6 @@ public class ConstructerQuestions extends QuestionGenerator{
     }
 
     public void generateContentQuestion(){
-        question = "";
         answers = eAnswers;
 
         int random = rand.nextInt(4);
@@ -93,7 +96,6 @@ public class ConstructerQuestions extends QuestionGenerator{
 
     }
     public void generateSecondContructerQuestions(){
-        question = "";
         answers = sAnswers;
         int random = rand.nextInt(4);
         String firstPart =  secondStrings[random];

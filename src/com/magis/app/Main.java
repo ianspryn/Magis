@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class Main extends Application {
@@ -75,8 +76,12 @@ public class Main extends Application {
         questionGenerator.put(5, new EscapeSequenceQuestions());
         questionGenerator.put(6, new MethodQuestions());
         questionGenerator.put(7, new InputOutputQuestions());
+        questionGenerator.put(8, new ArraysQuestions());
+        questionGenerator.put(9, new ControlStatementQuestions());
+        questionGenerator.put(10, new InterfacesQuestions());
+        questionGenerator.put(11, new MiscOOPQuestions());
 //        questionGenerator.put(8, new ExceptionsQuestions());
-//        questionGenerator.put(9, new PackagesQuestions());
+//        questionGenerator.put(9, new PackagesQuestions());*/
 
     }
 
@@ -102,5 +107,5 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) { launch(args); }
-
+    
 }

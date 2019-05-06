@@ -23,6 +23,10 @@
     -fx-background: #6A1B9A; /* Purple 800 */
 }
 
+.jfx-check-box {
+    -jfx-checked-color: #AB47BC; /* Purple 400 */
+}
+
  .jfx-radio-button {
     -jfx-selected-color: #AB47BC; /* Purple 400 */
  }

@@ -54,21 +54,25 @@ public class ClassesQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return comparableStrings.length + equalsAnswers.length + secondAnswers.length;
+    }
+
     public void generateConstructerQuestion(){
-        question = "";
         answers = cAnswers;
         int random = rand.nextInt(2);
         String firstPart =  secondStrings[random];
         int random2 = rand.nextInt(2);
         String secondPart =  secondStrings[random2+2];
-        question = "If we have a class: "+firstPart+" "+secondpart;
-        if(random == 0 && random1 == 0) {
+        question = "If we have a class: "+firstPart+" "+secondPart;
+        if(random == 0 && random2 == 0) {
             correctAnswer = comparableStringAnswers[1];
         }
-        else if(random == 1 && random1 == 0){
+        else if(random == 1 && random2 == 0){
             correctAnswer = comparableStringAnswers[0];
         }
-        else if(random ==0 && random1 ==1){
+        else if(random ==0 && random2 ==1){
             correctAnswer = comparableStringAnswers[0];
         }
         else {
@@ -80,7 +84,6 @@ public class ClassesQuestions extends QuestionGenerator{
     public void generateContentQuestion(){
 
         if(rand.nextInt(2) == 0) {
-            question = "";
             answers.add(eAnswers.get(0));
             answers.add(cAnswers.get(1));
             int random = rand.nextInt(2);
@@ -89,7 +92,6 @@ public class ClassesQuestions extends QuestionGenerator{
             correctAnswer = equalsAnswers[random];
         }
         else{
-            question = "";
             answers.add(eAnswers.get(2));
             answers.add(cAnswers.get(3));
             int random = rand.nextInt(4);
@@ -112,7 +114,6 @@ public class ClassesQuestions extends QuestionGenerator{
 
     }
     public void generateSecondContructerQuestions(){
-        question = "";
         answers = sAnswers;
         int random = rand.nextInt(2);
         String firstPart =  secondStrings[random];

@@ -63,8 +63,8 @@ public class HomePage {
             if (!topBox.getChildren().contains(recentBox)) topBox.getChildren().add(0, recentBox); //add the recent box once
             recentBox.getChildren().clear();
             recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
-            greetingLabel.setText(generateGreetingText());
         }
+        greetingLabel.setText(generateGreetingText());
     }
 
     public void Page() {
@@ -127,11 +127,13 @@ public class HomePage {
         recentBox.setMaxWidth(350);
         recentBox.setMinHeight(100);
 
-        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, student.getRecentChapter(), student.getRecentPage()));
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
-        if (student.getRecentChapter() > -1) recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
+        if (student.getRecentChapter() > -1) {
+            recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
+            recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
+        }
 
         //Activity and Statistics Page
         statsBox = new VBox();

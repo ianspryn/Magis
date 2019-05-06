@@ -27,5 +27,9 @@ public abstract class QuestionGenerator {
         return correctAnswer;
     }
 
-    public int getLevel() { return level; }
+    public int getLevel() {
+        return level;
+    }
+
+    public abstract int getNumUnique();
 }

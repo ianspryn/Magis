@@ -33,8 +33,12 @@ public class DataTypeQuestions extends QuestionGenerator{
         datatypeMatchingQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return Integer.MAX_VALUE;
+    }
+
     public void datatypeMatchingQuestion(){
-        question = "";
         question = "<x> = ";
 
         int dataTypeSelector = rand.nextInt(4);

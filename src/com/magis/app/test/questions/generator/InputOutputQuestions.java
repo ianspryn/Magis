@@ -18,6 +18,11 @@ public class InputOutputQuestions extends QuestionGenerator{
         getScannerQuestions();
     }
 
+    @Override
+    public int getNumUnique() {
+        return words.length + letters.length;
+    }
+
     public void getScannerQuestions(){
         answers.clear();
         Collections.addAll(answers, scannerAnswers);

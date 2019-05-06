@@ -4,15 +4,36 @@ import java.util.ArrayList;
 
 public class ExamQuestion {
 
+    private int level;
+    private String pointsAndQuestionIndex;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
+    private ArrayList<String> incorrectAnswers;
     private ArrayList<String> studentAnswers;
 
     public ExamQuestion() {
+        level = 1;
         answers = new ArrayList<>();
         correctAnswers = new ArrayList<>();
+        incorrectAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public String getPointsAndQuestionIndex() {
+        return pointsAndQuestionIndex;
+    }
+
+    public void setPointsAndQuestionIndex(String pointsAndQuestionIndex) {
+        this.pointsAndQuestionIndex = pointsAndQuestionIndex;
     }
 
     public void setQuestion(String question) {
@@ -35,9 +56,11 @@ public class ExamQuestion {
         this.correctAnswers.addAll(correctAnswers);
     }
 
-    public void addStudentAnswer(String studentAnswer) {
-        studentAnswers.add(studentAnswer);
-    }
+    public void addIncorrectAnswers(ArrayList<String> incorrectAnswers) { this.incorrectAnswers.addAll(incorrectAnswers); }
+
+    public ArrayList<String> getIncorrectAnswers() { return incorrectAnswers; }
+
+    public void addStudentAnswer(String studentAnswer) { studentAnswers.add(studentAnswer); }
 
     public void removeStudentAnswer(String oldAnswer) {
         studentAnswers.remove(oldAnswer);
@@ -58,4 +81,8 @@ public class ExamQuestion {
     public ArrayList<String> getStudentAnswers() {
         return studentAnswers;
     }
+
+    public Integer getNumCorrectAnswers() { return correctAnswers.size(); }
+
+    public Integer getNumStudentAnswers() { return studentAnswers.size(); }
 }

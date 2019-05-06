@@ -61,16 +61,16 @@ public class LessonPageContent extends PageContent {
     void update(int pageIndex) {
         //Make sure we don't try to mark the quiz/test intro page as a lesson page (we'll get an out of bounds if we do)
         if (pageIndex < Main.lessonModel.getChapter(chapterIndex).getNumPages()) {
-            //Mark the page as visited
+            //Mark the page as visited (for calculating reading progress)
             Main.studentModel.getStudent().getChapter(chapterIndex).visitPage(pageIndex);
         }
-        //Last page visited
+        //Save chapter and page visited
         Main.studentModel.getStudent().setRecentPlace(chapterIndex, pageIndex);
         setScrollPaneContent(pageContentContainers.get(pageIndex).getMasterContent());
     }
 
     @Override
-    void buildPage(int pageIndex) {
+    boolean buildPage(int pageIndex) {
         ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
         PageContentContainer pageContentContainer = pageContentContainers.get(pageIndex);
         for (LessonModel.ChapterModel.PageModel.LessonContent lessonPageContent : lessonContents) {
@@ -98,6 +98,7 @@ public class LessonPageContent extends PageContent {
             }
         }
         pageContentContainer.buildAsLessonPage(pageIndex);
+        return true; //sucess
     }
 
     private void formatText(String content, PageContentContainer pageContentContainer, int chapterIndex, int pageIndex) {

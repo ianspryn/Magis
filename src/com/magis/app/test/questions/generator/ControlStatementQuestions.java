@@ -30,8 +30,12 @@ public class ControlStatementQuestions extends QuestionGenerator{
         }
     }
 
+    @Override
+    public int getNumUnique() {
+        return 60 + 20 + 6 + 5;
+    }
+
     public void getIfElseQuestion(){
-        question = "";
         answers.clear();
 
         int finalNum = 0;
@@ -43,7 +47,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
         int subtractor = rand.nextInt(10)+1;
         int product = rand.nextInt(10);
 
-        question += "int num = "+num+";\n\n";
+        question = "int num = "+num+";\n\n";
         question += "if (num == "+num2+") {\n\tnum = num + "+adder+";\n}";
         question += "else if (num == "+num3+") {\n\tnum = num - "+subtractor+";\n}";
         question += "else {\n\tnum = num * "+product+";\n}";
@@ -70,20 +74,17 @@ public class ControlStatementQuestions extends QuestionGenerator{
             answers.add(correctAnswer);
         }
 
-        answers.add("None of the Above");
-
         question+="\n\nWhat is the final result of \"num\"?";
     }
 
     public void whileLoopQuestions(){
-        question = "";
         answers.clear();
 
         int startingNum = rand.nextInt(10);
         int num = startingNum;
         int controller = rand.nextInt(10)+1;
 
-        question += "int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\t"+num+"--;\n}";
+        question = "int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\t"+num+"--;\n}";
         question += "\n\nHow many times will this while loop iterate?";
 
         int j = 0;
@@ -108,16 +109,14 @@ public class ControlStatementQuestions extends QuestionGenerator{
         }
 
         Collections.shuffle(answers);
-        answers.add("None of the Above");
     }
 
     public void forLoopQuestion(){
-        question = "";
         answers.clear();
 
         int num = rand.nextInt(6);
 
-        question += "int num = "+num+";\nint product = 0;\n\n";
+        question = "int num = "+num+";\nint product = 0;\n\n";
         question += "for (int i = num; i > 0; i--) {\n\tproduct *= i\n}\n\n";
         question += "What is the final value of \"product\"?";
 
@@ -138,8 +137,16 @@ public class ControlStatementQuestions extends QuestionGenerator{
             falseProduct3 *= i;
         }
 
-        correctAnswer = ""+product;
-        answers.add(correctAnswer);
+        int noneOfTheAbove = rand.nextInt(10);
+        if(noneOfTheAbove == 0){
+            correctAnswer = "None of the Above";
+            product++;
+            answers.add(""+product);
+        }
+        else {
+            correctAnswer = "" + product;
+            answers.add(correctAnswer);
+        }
         answers.add(""+falseProduct1);
         answers.add(""+falseProduct2);
         answers.add(""+falseProduct3);
@@ -149,7 +156,6 @@ public class ControlStatementQuestions extends QuestionGenerator{
     }
 
     public void forEachLoopQuestion(){
-        question = "";
         answers.clear();
 
         int length = rand.nextInt(5)+1;
@@ -172,8 +178,16 @@ public class ControlStatementQuestions extends QuestionGenerator{
             sum += num;
         }
 
-        correctAnswer += ""+sum;
-        answers.add(correctAnswer);
+        int noneOfTheAbove = rand.nextInt(10);
+        if(noneOfTheAbove == 0){
+            correctAnswer = "None of the Above";
+            sum+=numbers.length;
+            answers.add(""+sum);
+        }
+        else {
+            correctAnswer += "" + sum;
+            answers.add(correctAnswer);
+        }
         answers.add(""+(sum-numbers[length-1]));
         answers.add(""+(sum-numbers[0]));
         answers.add(""+(sum-numbers[length/2]));

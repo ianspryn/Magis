@@ -23,6 +23,10 @@
     -fx-background: #00838F; /* Cyan 800 */
 }
 
+.jfx-check-box {
+    -jfx-checked-color: #00ACC1; /* Cyan 600 */
+}
+
 .jfx-radio-button {
     -jfx-selected-color: #00ACC1; /* Cyan 600 */
 }

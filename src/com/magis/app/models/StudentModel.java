@@ -3,8 +3,6 @@ package com.magis.app.models;
 import com.magis.app.Main;
 import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.ExamSaver;
-import javafx.beans.property.BooleanProperty;
-import javafx.scene.layout.BorderPane;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -325,8 +323,14 @@ public class StudentModel {
 
         public boolean useAnimations() { return useAnimations; }
 
+        /**
+         * @return the most recent chapter the student visited, starting at index 0
+         */
         public int getRecentChapter() { return recentChapter; }
 
+        /**
+         * @return the most recent page the student visited, starting at index 0
+         */
         public int getRecentPage() { return recentPage; }
 
         public void setRecentPlace(int chapterIndex, int pageIndex) {
@@ -582,7 +586,7 @@ public class StudentModel {
                 for (int j = 0; j < pages.getLength(); j++) {
 
                     Node page = pages.item(j);
-                    page.setTextContent(Integer.toString(getChapter(i).getPageVisisted().get(j)));
+                    page.setTextContent(Integer.toString(getChapter(i).getPageVisited().get(j)));
                 }
             }
             //write to XML file
@@ -676,7 +680,7 @@ public class StudentModel {
                 }
             }
 
-            public ArrayList<Integer> getPageVisisted() {
+            public ArrayList<Integer> getPageVisited() {
                 return pageVisisted;
             }
 
@@ -848,7 +852,7 @@ public class StudentModel {
                 return attempts.get(index);
             }
 
-            Quiz(Node quiz) {
+            Quiz (Node quiz) {
                 this.quiz = quiz;
 
                 Element quizElement = (Element) quiz;
