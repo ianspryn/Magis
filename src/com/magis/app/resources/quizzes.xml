@@ -486,14 +486,11 @@ and returns some information about it, without changing the object</statement>
                         <question>
                             <level>3</level>
                             <written>true</written>
-                            <statement>
-                                ```
-                                //Rectangle length and width
-                                int width = 5;
-                                int length = 10;
-                                //Make a new object of the class "Rectangle" and send it its length and width
-                                ### simpleSquare = new ###(###, width);
-                                ```
+                            <statement>``` //Rectangle length and width
+int width = 5;
+int length = 10;
+//Make a new object of the class "Rectangle" and send it its length and width
+### simpleSquare = new ###(###, width);```
 
                                 Fill in the blanks</statement>
                             <answer id = "correct">Rectangle</answer>
@@ -618,7 +615,7 @@ the value of the integer cats\\```</statement>
                             <level>3</level>
                             <written>true</written>
                             <statement>``` ###This comment is a comment
-                                and it is big### ```
+and it is big### ```
 
                                 Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/*</answer>
@@ -628,9 +625,9 @@ the value of the integer cats\\```</statement>
                             <level>3</level>
                             <written>true</written>
                             <statement>``` ### Author: You
-                                Param: Num, a number
-                                Return Sum, the sum of two numbers
-                                ### ```
+Param: Num, a number
+Return Sum, the sum of two numbers
+###```
 
                                 Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/**</answer>
@@ -791,14 +788,14 @@ the value of the integer cats\\```</statement>
                             <written>true</written>
                             <statement>```//Initialize variables
 
-                                //Variable to hold user's pin ID
-                                ### pin;
+//Variable to hold user's pin ID
+### pin;
 
-                                //Variable to hold user's balance amount
-                                ### balance;
+//Variable to hold user's balance amount
+### balance;
 
-                                //Variable to hold user's name
-                                ### name;```
+//Variable to hold user's name
+### name;```
 
                                 Give the variables their proper data-type</statement>
                             <answer id = "correct">int</answer>
@@ -920,13 +917,12 @@ the value of the integer cats\\```</statement>
                         <question>
                             <level>3</level>
                             <written>true</written>
-                            <statement>
-                                ```//This method shall multiply two parameters together
-                                //and return their product as an int
-                                ### getProduct(int num1, num2) {
-                                int product = ### * num2;
-                                return ###;
-                                }```
+                            <statement>```//This method shall multiply two parameters together
+//and return their product as an int
+### getProduct(int num1, num2) {
+int product = ### * num2;
+return ###;
+}```
 
                             Complete the method above</statement>
                             <answer id = "correct">public int</answer>
@@ -936,12 +932,11 @@ the value of the integer cats\\```</statement>
                         <question>
                             <level>3</level>
                             <written>true</written>
-                            <statement>
-                                ```//This method will turn an int into a string and return it
-                                ### toString(int num) {
-                                String s = "" + ###;
-                                return ###;
-                                }```
+                            <statement>```//This method will turn an int into a string and return it
+### toString(int num) {
+String s = "" + ###;
+return ###;
+}```
 
                                 Complete the method above</statement>
                             <answer id = "correct">public String</answer>
@@ -951,15 +946,14 @@ the value of the integer cats\\```</statement>
                         <question>
                             <level>5</level>
                             <written>true</written>
-                            <statement>
-                                ```//This method will take an array of numbers and sum them up, returning the sum
-                                ### getSum(### numArray) {
-                                int sum = 0;
-                                for(int i = ###; i &lt; numArray.###; i++){
-                                sum += numArray[###];
-                                }
-                                return ###;
-                                }```
+                            <statement>```//This method will take an array of numbers and sum them up, returning the sum
+### getSum(### numArray) {
+int sum = 0;
+for(int i = ###; i &lt; numArray.###; i++){
+sum += numArray[###];
+}
+return ###;
+}```
 
                                 Complete the method above</statement>
                             <answer id = "correct">public int</answer>
