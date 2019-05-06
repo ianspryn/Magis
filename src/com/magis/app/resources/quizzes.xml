@@ -484,13 +484,11 @@ and returns some information about it, without changing the object</statement>
                             <level>3</level>
                             <written>true</written>
                             <statement>
-                                ```
-                                //Rectangle length and width
+                                ``` //Rectangle length and width
                                 int width = 5;
                                 int length = 10;
                                 //Make a new object of the class "Rectangle" and send it its length and width
-                                ### simpleSquare = new ###(###, width);
-                                ```
+                                ### simpleSquare = new ###(###, width); ```
 
                                 Fill in the blanks</statement>
                             <answer id = "correct">Rectangle</answer>
