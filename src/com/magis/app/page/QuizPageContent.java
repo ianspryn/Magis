@@ -56,10 +56,9 @@ public class QuizPageContent extends ExamPageContent {
                 //get and save the incorrect answers;
                 examQuestion.addIncorrectAnswers(exam.getQuestion(question).getIncorrectAnswers());
                 //get and save all of the answers
-                examQuestion.addAnswers(exam.getQuestion(question).getIncorrectAnswers());
-                examQuestion.addAnswers(exam.getQuestion(question).getCorrectAnswers());
-                //shuffle the order
-                Collections.shuffle(examQuestion.getAnswers());
+                examQuestion.addAnswers(exam.getQuestion(question).getAnswers());
+                //shuffle the order if we're allowed to
+                if (exam.getQuestion(question).isShuffle()) Collections.shuffle(examQuestion.getAnswers());
                 break;
             case 1:
                 numGeneratedQuestions++;

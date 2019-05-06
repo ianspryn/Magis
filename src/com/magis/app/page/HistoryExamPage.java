@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import static com.magis.app.home.StatsPage.goToChapterInsights;
 
@@ -17,9 +18,9 @@ public class HistoryExamPage {
 
     private VBox masterVBox;
     private StudentModel.Student.Attempt attempt;
-
+    private int chapterIndex;
     public HistoryExamPage(int chapterIndex, int index, String type) {
-
+        this.chapterIndex = chapterIndex;
         UIComponents.GenericPage page = new UIComponents.GenericPage();
         page.getBackButton().setOnMouseClicked(e -> goToChapterInsights(page.getMastervBox(), chapterIndex));
         page.getPageTitle().setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
@@ -53,12 +54,10 @@ public class HistoryExamPage {
         Label pointsAndQuestionIndex = new Label(examQuestion.getPointsAndQuestionIndex());
         pointsAndQuestionIndex.setPadding(new Insets(0,0,-10,0));
         pointsAndQuestionIndex.getStyleClass().addAll("lesson-text-small", "text-color");
+        pointsAndQuestionIndex.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
         questionBox.getChildren().add(pointsAndQuestionIndex);
 
-        Label statement = new Label(examQuestion.getQuestion());
-        statement.setWrapText(true);
-        statement.setPrefWidth(700);
-        questionBox.getChildren().add(statement);
+        ExamPageContent.buildStatement(questionBox, examQuestion, chapterIndex);
 
         if (examQuestion.getCorrectAnswers().size() == 1) {
             ToggleGroup toggleGroup = new ToggleGroup();
@@ -72,7 +71,7 @@ public class HistoryExamPage {
 
                 //if this is a correct answer, mark it as green
                 if (examQuestion.getCorrectAnswers().contains(answer)) {
-                    radioButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");
+                    radioButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a; -jfx-unselected-color: #00cd0a;");
                     radioButton.setUnderline(true);
                 }
 
@@ -83,35 +82,42 @@ public class HistoryExamPage {
 
                 //if this is an incorrect answer that the student selected, mark it as red
                 if (examQuestion.getStudentAnswers().contains(answer) && !examQuestion.getCorrectAnswers().contains(answer)) {
-                    radioButton.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336;");
+                    radioButton.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336; -jfx-unselected-color: #f44336;");
                 }
 
                 questionBox.getChildren().addAll(radioButton);
             }
         } else {
             for (String answer : examQuestion.getAnswers()) {
-                JFXCheckBox checkBoxButton = new JFXCheckBox();
-                checkBoxButton.setDisableVisualFocus(true); //fix first radio button on page appear to be highlighted (not selected, just highlighted)
-                checkBoxButton.getStyleClass().add("test-checkbox-button");
-                checkBoxButton.setText(answer);
-                checkBoxButton.setDisable(true);
+                JFXCheckBox checkBox = new JFXCheckBox();
+                checkBox.setDisableVisualFocus(true); //fix first radio button on page appear to be highlighted (not selected, just highlighted)
+                checkBox.getStyleClass().add("exam-checkbox-button");
+                checkBox.setText(answer);
+                checkBox.setDisable(true);
 
                 //if this is a correct answer, mark it as green
                 if (examQuestion.getCorrectAnswers().contains(answer)) {
-                    checkBoxButton.setStyle("-fx-text-fill: #00cd0a; -jfx-selected-color: #00cd0a;");
-                    checkBoxButton.setUnderline(true);
+                    checkBox.setStyle("-fx-text-fill: #00cd0a;");
+                    checkBox.setCheckedColor(Color.valueOf("#00cd0a"));
+                    checkBox.setUnCheckedColor(Color.valueOf("#00cd0a"));
+                    checkBox.setSelected(!checkBox.isSelected());
+                    checkBox.setSelected(!checkBox.isSelected());
+                    checkBox.setUnderline(true);
                 }
 
                 //if this was a selected answer, select the button
                 if (examQuestion.getStudentAnswers().contains(answer)) {
-                    checkBoxButton.setSelected(true);
+                    checkBox.setSelected(true);
                 }
 
                 //if this is an incorrect answer that the student selected, mark it as red
-                if (examQuestion.getStudentAnswers().contains(answer) && !examQuestion.getCorrectAnswers().contains(answer)) {
-                    checkBoxButton.setStyle("-fx-text-fill: #f44336; -jfx-selected-color: #f44336;");
+                if (!examQuestion.getCorrectAnswers().contains(answer)) {
+                    checkBox.setStyle("-fx-text-fill: #f44336;");
+                    checkBox.setCheckedColor(Color.valueOf("#f44336"));
+                    checkBox.setSelected(!checkBox.isSelected());
+                    checkBox.setSelected(!checkBox.isSelected());
                 }
-                questionBox.getChildren().add(checkBoxButton);
+                questionBox.getChildren().add(checkBox);
             }
         }
         return questionBox;

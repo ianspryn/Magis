@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-public class TestResult {
+public class ExamResultPage {
 
     private VBox vBox;
     private Button button;
@@ -21,7 +21,7 @@ public class TestResult {
     //F, D, C, B, A, A+ Perfect
     private static String[] colors = {"#f44336", "#f57c00", "#d4e157", "#9ccc65", "#36c246", "#00c853"};
 
-    public TestResult(Double grade) {
+    public ExamResultPage(Double grade) {
         vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
 

@@ -44,9 +44,9 @@ public class Grader {
             //update the points label to say " x/y points"
             String temp;
             if (total % 1 == 0) { //avoid showing 2.0/2 (make it 2/2 instead)
-                temp = (int) total + "/" + pointLabels.get(pointsLabelIndex).getText();
+                temp = (int) total + "/" + question.getPointsAndQuestionIndex();
             } else { //but do show things like: 1.5/2
-                temp = total + "/" + pointLabels.get(pointsLabelIndex).getText();
+                temp = total + "/" + question.getPointsAndQuestionIndex();
             }
             pointLabels.get(pointsLabelIndex).setText(temp);
             question.setPointsAndQuestionIndex(temp); //update examQuestion so the grading change is reflected when viewing history

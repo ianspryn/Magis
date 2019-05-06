@@ -115,17 +115,32 @@ public class IntelligentTutor {
         Populate the box
          */
         //if they are completely done with this chapter
-        if (progress == 100 && hasTakenQuiz && hasTakenTest) {
-            System.out.println("Progress == 100 and hasTakenQuiz and hasTakenTest");
-            recentActivityTitle.setText("Onward!");
-            text = new Text();
-            texts.add(text);
-            text.setText("You've completely finished this chapter! ");
-            text.getStyleClass().add("box-description");
+        if (hasTakenQuiz && hasTakenTest) {
+            System.out.println("hasTakenQuiz and hasTakenTest");
+            if (progress == 100) recentActivityTitle.setText("Onward!");
+            else recentActivityTitle.setText("Ready to move on?");
+
+            if (progress == 100) addText("You've completely finished this chapter! ");
+            else {
+                addText("You've finished ");
+                if (quizzesModel.hasQuiz(chapter.getTitle())) {
+                    addText("your quiz ");
+                }
+                if (testsModel.hasTest(chapter.getTitle())) {
+                    if (quizzesModel.hasQuiz(chapter.getTitle())) {
+                        addText("and ");
+                    }
+                   addText("your test ");
+                }
+                addText("for this chapter! ");
+            }
 
             //only suggest the user to continue learning if we're not 100% done with everything
             if (StatsPage.calculateOverallProgress() < 100) {
-                //Find the next chapter to suggest the user to pick up with
+                /*
+                Find the next chapter to suggest the user to pick up with
+                Find the first page of the earliest chapter that has not been read
+                 */
                 ArrayList<StudentModel.Student.ChapterModel> chapters = student.getChapters();
                 for (int chapter = 0; chapter < chapters.size(); chapter++) {
                     StudentModel.Student.ChapterModel chapterModel = chapters.get(chapter);
@@ -140,56 +155,30 @@ public class IntelligentTutor {
                         }
                         //if there's an unfinished chapter that is earlier than the current chapter
                         if (newChapter < student.getRecentChapter()) {
-                            text = new Text();
-                            texts.add(text);
                             if (student.getChapter(newChapter).getProgress() == 0) {
-                                text.setText("You haven't done ");
+                                addText("You haven't done ");
                             } else {
-                                text.setText("You haven't finished ");
+                                addText("You haven't finished ");
                             }
-                            text.getStyleClass().add("box-description");
 
-                            text = new Text();
-                            texts.add(text);
-                            text.setText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle());
-                            text.getStyleClass().add("box-description");
-                            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-
-                            text = new Text();
-                            texts.add(text);
-                            text.setText(" yet. Want to do it now?");
-                            text.getStyleClass().add("box-description");
+                            addText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle(), true);
+                            addText(" yet. Want to do it now?");
                         } else { //it's an unfinished chapter after their current chapter
-                            text = new Text();
-                            texts.add(text);
-                            text.setText("Ready for the next chapter? If so, click to go to ");
-                            text.getStyleClass().add("box-description");
-
-                            text = new Text();
-                            texts.add(text);
-                            text.setText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle());
-                            text.getStyleClass().add("box-description");
-                            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                            addText("Ready for the next chapter? If so, click to go to ");
+                            addText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle(), true);
 
                             //if the student already made progress in the next chapter, then indicate which page they should jump to
                             if (student.getChapter(newChapter).getProgress() > 0) {
                                 ArrayList<Integer> pagesVisited2 = student.getChapter(newChapter).getPageVisited();
                                 for (int page = 0; page < pagesVisited2.size(); page++) {
                                     if (pagesVisited2.get(page) == 0) {
-                                        text = new Text();
-                                        texts.add(text);
-                                        text.setText(" on ");
-                                        text.getStyleClass().add("box-description");
-
-                                        text = new Text();
-                                        texts.add(text);
-                                        if (Main.lessonModel.getChapter(newChapter).getPage(newPage).getTitle() != null) {
-                                            text.setText("page " + (page + 1) + ": " + Main.lessonModel.getChapter(newChapter).getPage(newPage).getTitle());
+                                        addText(" on ");
+                                        String title = Main.lessonModel.getChapter(newChapter).getPage(newPage).getTitle();
+                                        if (title != null) {
+                                            addText("page " + (page + 1) + ": " + title, true);
                                         } else {
-                                            text.setText("page " + (page + 1));
+                                            addText("page " + (page + 1), true);
                                         }
-                                        text.getStyleClass().add("box-description");
-                                        text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
                                         break;
                                     }
                                 }
@@ -201,42 +190,18 @@ public class IntelligentTutor {
                         newChapter = chapter;
 
                         //if there's an unfinished chapter that is earlier than the current chapter
-                        text = new Text();
-                        texts.add(text);
-                        text.setText("You haven't taken the quiz for ");
-                        text.getStyleClass().add("box-description");
-
-                        text = new Text();
-                        texts.add(text);
-                        text.setText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle());
-                        text.getStyleClass().add("box-description");
-                        text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-
-                        text = new Text();
-                        texts.add(text);
-                        text.setText(" yet. Want to do it now?");
-                        text.getStyleClass().add("box-description");
+                        addText("You haven't taken the quiz for ");
+                        addText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle(), true);
+                        addText(" yet. Want to do it now?");
                         break;
                     } else if (Main.testsModel.hasTest(Main.lessonModel.getChapter(chapter).getTitle()) && !student.hasTakenTest(chapter)) {
                         newPage = Main.lessonModel.getChapter(chapter).getNumPages() + (quizzesModel.hasQuiz(Main.lessonModel.getChapter(chapter).getTitle()) ? 1 : 0);
                         newChapter = chapter;
 
                         //if there's an unfinished chapter that is earlier than the current chapter
-                        text = new Text();
-                        texts.add(text);
-                        text.setText("You haven't taken the test for ");
-                        text.getStyleClass().add("box-description");
-
-                        text = new Text();
-                        texts.add(text);
-                        text.setText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle());
-                        text.getStyleClass().add("box-description");
-                        text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-
-                        text = new Text();
-                        texts.add(text);
-                        text.setText(" yet. Want to do it now?");
-                        text.getStyleClass().add("box-description");
+                        addText("You haven't taken the test for ");
+                        addText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle(), true);
+                        addText(" yet. Want to do it now?");
                         break;
                     }
                 }
@@ -244,65 +209,35 @@ public class IntelligentTutor {
             chapterTitleText.setText("Chapter " + (student.getRecentChapter() + 1) + " - " + chapter.getTitle());
         } else if ((onQuizPage && !hasTakenQuiz) || (progress == 100 && !hasTakenQuiz)) {
             System.out.println("onQuizPage || (progress == 100 && !hasTakenQuiz)");
-            if (!checkForIncompleteProgress("quiz")) {
+            if (checkForCompleteProgress("quiz")) {
+                //this code will only execute if progress == 100
                 newPage = chapter.getNumPages();
                 recentActivityTitle.setText("Ready to take your quiz?");
-                text = new Text();
-                texts.add(text);
-                text.setText("You finished reading ");
-                text.getStyleClass().add("box-description");
-
-                text = new Text();
-                texts.add(text);
-                text.setText(chapter.getTitle());
-                text.getStyleClass().add("box-description");
-                text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-
-                text = new Text();
-                texts.add(text);
-                text.setText(" chapter! If you're ready to take your quiz, click here.");
-                text.getStyleClass().add("box-description");
+                addText("You finished reading ");
+                addText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle(), true);
+                addText("! If you're ready to take your quiz, click here.");
             }
         } else if ((onTestPage && !hasTakenTest) || (progress == 100 && !hasTakenTest)) {
             System.out.println("onTestPage || (progress == 100 && !hasTakenTest)");
             //make sure the student has read everything first
-            if (!checkForIncompleteProgress("test")) {
+            if (checkForCompleteProgress("test")) {
+                //this code will only execute if progress == 100
                 //make sure the student has taken the quiz (if there is one)
                 if (!checkForIncompleteQuiz()) {
                     newPage = chapter.getNumPages() + (quizzesModel.hasQuiz(chapter.getTitle()) ? 1 : 0);
                     recentActivityTitle.setText("Ready to take your test?");
-                    text = new Text();
-                    texts.add(text);
-                    text.setText("You finished reading ");
-                    text.getStyleClass().add("box-description");
-
-                    text = new Text();
-                    texts.add(text);
-                    text.setText(chapter.getTitle());
-                    text.getStyleClass().add("box-description");
-                    text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-
-                    text = new Text();
-                    texts.add(text);
-                    text.setText(" chapter! If you're ready to take your test, click here.");
-                    text.getStyleClass().add("box-description");
+                    addText("You finished reading ");
+                    addText("Chapter " + (newChapter + 1) + ": " + Main.lessonModel.getChapter(newChapter).getTitle(), true);
+                    addText("! If you're ready to take your test, click here.");
                 }
             }
         } else if (onLessonPage) {
             System.out.println("onLessonPage");
             recentActivityTitle.setText("Pick up where you left off?");
             if (progress > 80) {
-                text = new Text();
-                texts.add(text);
-                text.setText("You're almost done with this chapter! ");
-                text.getStyleClass().add("box-description");
-                text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                addText("You're almost done with this chapter! ", true);
             }
-
-            text = new Text();
-            texts.add(text);
-            text.setText("Click here to return to your next page on ");
-            text.getStyleClass().add("box-description");
+            addText("Click here to return to your next page on ");
 
             ArrayList<Integer> pagesVisited = student.getChapter(student.getRecentChapter()).getPageVisited();
             for (int page = 0; page < pagesVisited.size(); page++) {
@@ -311,15 +246,10 @@ public class IntelligentTutor {
                     break;
                 }
             }
-
-            text = new Text();
-            texts.add(text);
-            text.getStyleClass().add("box-description");
-            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
             if (hasPageTitle) {
-                text.setText("Page " + (newPage + 1) + ": " + chapter.getPage(newPage).getTitle());
+                addText("Page " + (newPage + 1) + ": " + chapter.getPage(newPage).getTitle(), true);
             } else {
-                text.setText("Page " + (newPage + 1));
+                addText("Page " + (newPage + 1), true);
             }
         }
 
@@ -330,20 +260,27 @@ public class IntelligentTutor {
         return box;
     }
 
+    private static void addText(String string) {
+        text = new Text();
+        texts.add(text);
+        text.setText(string);
+        text.getStyleClass().add("box-description");
+    }
+
+    private static void addText(String string, boolean bold) {
+        text = new Text();
+        texts.add(text);
+        text.setText(string);
+        text.getStyleClass().add("box-description");
+        text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+    }
+
     private static boolean checkForIncompleteQuiz() {
         //if the student hasn't taken a quiz
         if (!hasTakenQuiz) {
             recentActivityTitle.setText("Before you take your test...");
-            text = new Text();
-            texts.add(text);
-            text.setText("\nYou also haven't taken your quiz yet.");
-            text.getStyleClass().add("box-description");
-            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
-
-            text = new Text();
-            texts.add(text);
-            text.setText(" Be sure to take it so you are fully prepared for the test!");
-            text.getStyleClass().add("box-description");
+            addText("\nYou also haven't taken your quiz yet.", true);
+            addText(" Be sure to take it so you are fully prepared for the test!");
             return true;
         }
         return false;
@@ -353,17 +290,14 @@ public class IntelligentTutor {
      * Checks for incomplete progress before taking an exam, and if there is incomplete progress, add text to encourage student to go back and read
      * @return true if there are pages that were not read, and false otherwise
      */
-    private static boolean checkForIncompleteProgress(String examType) {
+    private static boolean checkForCompleteProgress(String examType) {
         if (progress < 60) {
             recentActivityTitle.setText("Before you take your " + examType + "...");
-            text = new Text();
-            texts.add(text);
             if (progress < 40) {
-                text.setText("You haven't read much very material from this chapter. Unless you were already familiar with this material beforehand, it's best that you to continue reading. Pick up at ");
+                addText("You haven't read much very material from this chapter. Unless you were already familiar with this material beforehand, it's best that you to continue reading. Pick up at ");
             } else { //then we're between 40% and 60% progress
-                text.setText("You haven't read a considerable amount from this chapter. Unless you were already familiar with this material beforehand, it's best that you to continue reading. Pick up at ");
+                addText("You haven't read a considerable amount from this chapter. Unless you were already familiar with this material beforehand, it's best that you to continue reading. Pick up at ");
             }
-            text.getStyleClass().add("box-description");
 
             //find the earliest page that the student did NOT visit and set newPage to that
             for (int i = 0; i < visitedPages.size(); i++) {
@@ -372,26 +306,17 @@ public class IntelligentTutor {
                     break;
                 }
             }
-
-            text = new Text();
-            texts.add(text);
-            text.getStyleClass().add("box-description");
-            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
             if (chapter.getPage(newPage) != null && chapter.getPage(newPage).getTitle() != null) {
-                text.setText("page " + (newPage + 1) + ": " + chapter.getPage(newPage).getTitle());
+                addText("page " + (newPage + 1) + ": " + chapter.getPage(newPage).getTitle(), true);
             } else {
-                text.setText("page " + (newPage + 1));
+                addText("page " + (newPage + 1), true);
             }
         } else if (progress < 100) {
             recentActivityTitle.setText("Before you take your " + examType + "...");
-            text = new Text();
-            texts.add(text);
-            text.getStyleClass().add("box-description");
-
             if (progress < 80) {
-                text.setText("You haven't quite finished reading the material for this chapter. Unless you were already familiar with this material beforehand, it's best that you to continue reading. You skipped ");
+                addText("You haven't quite finished reading the material for this chapter. Unless you were already familiar with this material beforehand, it's best that you to continue reading. You skipped ");
             } else {
-                text.setText("You're so close to finishing reading! Unless you were already familiar with this material beforehand, why not finish up ");
+                addText("You're so close to finishing reading! Unless you were already familiar with this material beforehand, why not finish up ");
             }
 
 
@@ -399,17 +324,15 @@ public class IntelligentTutor {
             for (int i = 0; i < visitedPages.size(); i++) {
                 LessonModel.ChapterModel.PageModel page = chapter.getPage(i);
                 boolean hasPageTitle2 = page.getTitle() != null;
-
-                String pageTitle = "page " + (i + 1);
-
                 //if page not visited
                 if (visitedPages.get(i) == 0) {
+                    String pageTitle = "page " + (i + 1);
                     if (hasPageTitle2) {
-                        pageTitle += ": " + page.getTitle() + ", ";
+                        pageTitle += ": " + page.getTitle();
                     }
+                    pageTitle += ", ";
+                    pageTitles.add(pageTitle);
                 }
-
-                pageTitles.add(pageTitle);
             }
 
             //the last one is a special case, because we insert a non-bold word "and"
@@ -418,34 +341,18 @@ public class IntelligentTutor {
                 titles.append(pageTitles.get(i));
             }
 
-            text = new Text();
-            texts.add(text);
-            text.setText(titles.toString());
-            text.getStyleClass().add("box-description");
-            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+            addText(titles.toString(), true);
 
             //make sure we don't stick an "and" in if there's only one page! If that could ever happen...
             if (pageTitles.size() > 1) {
-                text = new Text();
-                texts.add(text);
-                text.setText(" and ");
-                text.getStyleClass().add("box-description");
+                addText(" and ");
             }
-
             //add the last page, now that we've stuck "and" between the list of pages
-            text = new Text();
-            texts.add(text);
-            text.setText(pageTitles.get(pageTitles.size() - 1));
-            text.getStyleClass().add("box-description");
-            text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+            addText(pageTitles.get(pageTitles.size() - 1), true);
 
             //a phrase to go with the beginning phrase that is more encouraging and light if the student is close to being done
             if (progress >= 80) {
-                text = new Text();
-                texts.add(text);
-                text.setText("real quick?");
-                text.getStyleClass().add("box-description");
-                text.setStyle("-fx-font-family: \"Roboto Mono Bold\"; -fx-font-size: 11px");
+                addText("real quick?");
             }
 
             //find the earliest page that the student did NOT visit and set newPage to that
@@ -456,7 +363,7 @@ public class IntelligentTutor {
                 }
             }
         }
-        return progress != 100;
+        return progress == 100;
     }
 
     public static VBox generateInsights() {

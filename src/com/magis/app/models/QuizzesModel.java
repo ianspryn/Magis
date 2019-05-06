@@ -1,5 +1,7 @@
 package com.magis.app.models;
 
+import com.magis.app.Main;
+
 public class QuizzesModel extends ExamsModel {
 
     public QuizzesModel() {
@@ -7,6 +9,6 @@ public class QuizzesModel extends ExamsModel {
     }
 
     public boolean hasQuiz(String chapterName) {
-        return chapters.containsKey(chapterName);
+        return chapters.containsKey(chapterName) || Main.questionGenerator.containsKey(Main.lessonModel.getChapterIndex(chapterName));
     }
 }

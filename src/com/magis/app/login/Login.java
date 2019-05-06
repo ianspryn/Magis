@@ -5,7 +5,9 @@ import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
+import com.magis.app.internet.InternetConnector;
 import com.magis.app.models.StudentModel;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -40,6 +42,9 @@ public class Login {
     private static JFXCheckBox containsNumberCheck;
 
     public static void Page() {
+        //check for internet connection in background, and it if fails, output a message to the user
+        new Thread(() -> Platform.runLater(InternetConnector::checkInternet)).start();
+
         VBox content = new VBox();
         content.setAlignment(Pos.CENTER);
 
@@ -66,6 +71,7 @@ public class Login {
         passwordVerifierGridPane.setHgap(10);
         passwordVerifierGridPane.setVgap(25);
 
+
         longEnoughCheck = passwordAssistantCheckBox();
         Label longEnoughLabel = passwordAssistantLabel("Greater than 8 characters", longEnoughCheck);
         containsUpperCaseCheck = passwordAssistantCheckBox();
@@ -88,7 +94,9 @@ public class Login {
         Sign-in area
          */
         userNameTextField = createJFXTextField("Username");
+        userNameTextField.getStyleClass().add("jfx-sign-in-field");
         passwordTextField = createJFXPasswordField("Password");
+        passwordTextField.getStyleClass().add("jfx-sign-in-field");
 
         passwordTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) attemptSignIn(userNameTextField.getText(), passwordTextField.getText());
@@ -98,7 +106,9 @@ public class Login {
         Sign-up area
          */
         firstNameTextField = createJFXTextField("First name");
+        firstNameTextField.getStyleClass().add("jfx-sign-in-field");
         lastNameTextField = createJFXTextField("Last name");
+        lastNameTextField.getStyleClass().add("jfx-sign-in-field");
 
         loginGridPane.add(userNameTextField, 0, 1);
         loginGridPane.add(passwordTextField,0,2);
@@ -156,7 +166,7 @@ public class Login {
      */
     private static JFXCheckBox passwordAssistantCheckBox() {
         JFXCheckBox checkBox = new JFXCheckBox();
-        checkBox.setUnCheckedColor(Color.valueOf("#FF1744")); //Red  A400
+        checkBox.setUnCheckedColor(Color.valueOf("#FF1744")); //Red A400
         checkBox.setCheckedColor(Color.valueOf("#00C853")); //Green A700
         checkBox.setDisable(true);
         return checkBox;

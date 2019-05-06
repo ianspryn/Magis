@@ -5,6 +5,7 @@ STRUCTURE:
 	<chapter id = "Chapter Name">
 		<questions>
                         <question>
+                                <level>{1, 2, 3, ... n}</level>
                                 <statement></statement>
                                 <answer id = "correct"></answer>
                                 <answer></answer>
@@ -62,8 +63,8 @@ Will x be exactly 435?
                                 <statement>What is roundoff error?</statement>
                                 <answer>When a integer tries to calculate a round surface and cannot get decimals</answer>
                                 <answer id = "correct">When a value cannot be converted exactly, so the computer rounds it to the nearest value</answer>
-                                <answer>When an integer cannot represent all decimal values</answer>
-                                <answer>4th answer</answer>
+                                <answer>When a variable is too large to fit into an integer but the user tries anyway</answer>
+                                <answer>When memory is full so the computer deletes previous variables</answer>
                         </question>
                         <question>
                                 <level>2</level>
@@ -304,17 +305,13 @@ double sum = a%b;```</statement>
                                 <level>2</level>
                                 <statement>Which one correctly converts the value of a double into an int?</statement>
                                 <answer>double balance = 100.5;
-int dollars = balance.cast.int;
-                                </answer>
+int dollars = balance.cast.int;</answer>
                                 <answer id = "correct">double balance = 100.5;
-int dollars = (int) balance;
-                                </answer>
+int dollars = (int) balance;</answer>
                                 <answer>double balance = 100.5;
-int dollars = int(balance);
-                                </answer>
+int dollars = int(balance);</answer>
                                 <answer>double balance = 100.5;
-int dollars = balance.int;
-                                </answer>
+int dollars = balance.int;</answer>
                         </question>
                 </questions>
         </chapter>
@@ -853,27 +850,71 @@ the value of the integer cats\\```</statement>
                 </questions>
         </chapter>
         <chapter id = "Arrays">
-            <questions>
-                <question>
-                    <level>1</level>
-                    <statement>Test</statement>
-                    <answer id = "correct">a</answer>
-                    <answer>b</answer>
-                    <answer>c</answer>
-                    <answer>d</answer>
-                </question>
-            </questions>
-        </chapter>
-        <chapter id = "Escape Sequences">
-            <questions>
-                <question>
-                    <level>1</level>
-                    <statement>Test</statement>
-                    <answer id = "correct">a</answer>
-                    <answer>b</answer>
-                    <answer>c</answer>
-                    <answer>d</answer>
-                </question>
-            </questions>
+                <questions>
+                        <question>
+                                <level>1</level>
+                                <statement>True or false: arrays can dynamically grow and shrink in size.</statement>
+                                <answer>True</answer>
+                                <answer id = "correct">False</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>True or false: ArrayLists can dynamically grow and shrink in size.</statement>
+                                <answer id = "correct">True</answer>
+                                <answer>False</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which delimeter do we use to indicate a datatype of array?</statement>
+                                <answer id = "correct">[] - brackets</answer>
+                                <answer>{} - braces</answer>
+                                <answer>() - parentheses</answer>
+                                <answer>&lt;&gt; - angle brackets</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <statement>```int[] values = new int[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <shuffle>false</shuffle>
+                                <answer id = "correct">0</answer>
+                                <answer>1</answer>
+                                <answer>null</answer>
+                                <answer>An error will be occur</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <statement>```boolean[] values = new boolean[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <answer id = "correct">true</answer>
+                                <shuffle>false</shuffle>
+                                <answer>false</answer>
+                                <answer>null</answer>
+                                <answer>An error will be occur</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <shuffle>false</shuffle>
+                                <statement>```MyClass[] values = new MyClass[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <answer id = "correct">null</answer>
+                                <answer>An empty string</answer>
+                                <answer>The name of the class</answer>
+                                <answer>An error will be occur</answer>
+                        </question>
+                        <question>
+                                <level>2</level>
+                                <shuffle>false</shuffle>
+                                <statement>```int[] values;
+values[1] = 23;```
+Will this code run?</statement>
+                                <answer>Yes</answer>
+                                <answer>Yes, but values[1] will remain null</answer>
+                                <answer>No, you need to set values[0] first</answer>
+                                <answer id = "correct">No, 'values' must be initialized</answer>
+                        </question>
+                </questions>
         </chapter>
 </quizzes>

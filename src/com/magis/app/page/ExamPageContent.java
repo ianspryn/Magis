@@ -2,6 +2,7 @@ package com.magis.app.page;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXScrollPane;
 import com.magis.app.Main;
 import com.magis.app.models.ExamsModel;
 import com.magis.app.test.ExamQuestion;
@@ -49,7 +50,7 @@ public abstract class ExamPageContent extends PageContent {
         this.chapterIndex = chapterIndex;
         this.numQuestions = numQuestions;
         this.exam = exam;
-        numAvailableBankQuestions = exam.getNumAvailableQuestions();
+        numAvailableBankQuestions = exam != null ? exam.getNumAvailableQuestions() : 0;
         questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
         grader = new Grader();
         toggleGroups = new HashMap<>();
@@ -64,6 +65,8 @@ public abstract class ExamPageContent extends PageContent {
     @Override
     void update(int pageIndex) {
         setScrollPaneContent(pageContents.get(pageIndex));
+        JFXScrollPane.smoothScrolling(getScrollPane());
+        getScrollPane().setVvalue(0);
     }
 
     @Override
@@ -97,12 +100,13 @@ public abstract class ExamPageContent extends PageContent {
             //add the number of points to the question
             Label pointsAndIndexLabel = new Label(pointsAndIndex);
             pointsAndIndexLabel.setPadding(new Insets(0, 0, -10, 0));
+            pointsAndIndexLabel.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
             pointsAndIndexLabel.getStyleClass().addAll("lesson-text-small", "text-color");
             grader.addPointLabel(pointsAndIndexLabel);
             questionBox.getChildren().add(pointsAndIndexLabel);
 
             //parse and add the statement for the question to the questionBox
-            buildStatement(questionBox);
+            buildStatement(questionBox, examQuestion, chapterIndex);
 
              /*
             Add each possible answer to a radio button or checkbox
@@ -132,18 +136,19 @@ public abstract class ExamPageContent extends PageContent {
                 ArrayList<JFXCheckBox> checkBoxes = new ArrayList<>();
                 checkboxGroups.put(questionIndex, checkBoxes);
                 for (String answer : examQuestion.getAnswers()) {
-                    JFXCheckBox checkboxButton = new JFXCheckBox();
-                    checkboxButton.setDisableVisualFocus(true); //fix first radio button on page appear to be highlighted (not selected, just highlighted)
-                    checkboxButton.setId(Integer.toString(questionIndex));
-                    checkboxButton.getStyleClass().add("test-checkbox-button");
-                    checkboxButton.setUserData(answer);
-                    checkboxButton.setText(answer);
-                    questionBox.getChildren().add(checkboxButton);
-                    checkBoxes.add(checkboxButton);
+                    JFXCheckBox checkBox = new JFXCheckBox();
+                    checkBox.getStyleClass().add("jfx-custom-check-box");
+                    checkBox.setDisableVisualFocus(true); //fix first radio button on page appear to be highlighted (not selected, just highlighted)
+                    checkBox.setId(Integer.toString(questionIndex));
+                    checkBox.getStyleClass().add("exam-checkbox-button");
+                    checkBox.setUserData(answer);
+                    checkBox.setText(answer);
+                    questionBox.getChildren().add(checkBox);
+                    checkBoxes.add(checkBox);
                     //every time the student clicks a radio button, update the examQuestion with the new answer the student selected
-                    checkboxButton.selectedProperty().addListener((observable, oldVal, newVal) -> {
-                        if (newVal) examQuestion.addStudentAnswer(checkboxButton.getUserData().toString());
-                        else examQuestion.removeStudentAnswer(checkboxButton.getUserData().toString());
+                    checkBox.selectedProperty().addListener((observable, oldVal, newVal) -> {
+                        if (newVal) examQuestion.addStudentAnswer(checkBox.getUserData().toString());
+                        else examQuestion.removeStudentAnswer(checkBox.getUserData().toString());
                     });
                 }
             }
@@ -154,9 +159,9 @@ public abstract class ExamPageContent extends PageContent {
         return true; //success
     }
 
-    public void buildStatement(VBox questionBox) {
+    public static void buildStatement(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
         String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)";
-        String[] splitStrings = statement.split(delimiter);
+        String[] splitStrings = examQuestion.getQuestion().split(delimiter);
         Stack<String> stack = new Stack<>();
         for (String subString : splitStrings) {
             Label label = new Label();
@@ -235,18 +240,22 @@ public abstract class ExamPageContent extends PageContent {
             } else { //then it's checkboxes with more than 1 correct answer
                 ArrayList<JFXCheckBox> checkBoxes = checkboxGroups.get(i);
                 for (JFXCheckBox checkBox : checkBoxes) {
+                    checkBox.getStyleClass().remove("jfx-custom-check-box");
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, checkBox.getText())) {
-//                        checkBox.setStyle("-fx-text-fill: #00cd0a; -jfx-checked-color: #00cd0a; -jfx-unchecked-color: #00cd0a;"); //Green A700
-                        checkBox.setStyle("-fx-text-fill: #00cd0a;");
+                        checkBox.setStyle("-fx-text-fill: #00cd0a;"); //Green A700
+                        checkBox.setCheckedColor(Color.valueOf("#00cd0a"));
+                        checkBox.setUnCheckedColor(Color.valueOf("#00cd0a"));
                         checkBox.setUnderline(true);
                     }
 
                     //if the user selected the wrong answer, highlight their answer as red
-                    if (!grader.isCorrect(questionIndex, checkBox.getText()) && checkBox.isSelected()) {
-//                        checkBox.setStyle("-fx-text-fill: #f44336; -jfx-checked-color: #f44336; -jfx-unchecked-color: #f44336;"); //Red A400
-                        checkBox.setStyle("-fx-text-fill: #f44336;");
+                    else if (!grader.isCorrect(questionIndex, checkBox.getText())) {
+                        checkBox.setStyle("-fx-text-fill: #f44336;"); //Red A400
+                        checkBox.setCheckedColor(Color.valueOf("#f44336"));
                     }
+                    checkBox.setSelected(!checkBox.isSelected());
+                    checkBox.setSelected(!checkBox.isSelected());
                 }
 
             }
