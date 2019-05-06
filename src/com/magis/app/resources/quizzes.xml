@@ -942,5 +942,12 @@ System.out.println("Normal\" Output \\");</statement>
                 </questions>
         </chapter>
         <chapter id = "Input/Output">
+                <questions>
+                        <question>
+                                <level>1</level>
+                                <statement>```File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);```</statement>
+                        </question>
+                </questions>
         </chapter>
 </quizzes>
