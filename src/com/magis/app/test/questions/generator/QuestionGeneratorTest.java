@@ -140,7 +140,7 @@ class QuestionGeneratorTest {
 
     @Test
     void testStringMethod(){
-        MethodQuestions objc  = new MethodQuestions();
+        ObjectComparisonQuestions objc  = new ObjectComparisonQuestions();
         objc.getStringMethodQuestion();
         String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
