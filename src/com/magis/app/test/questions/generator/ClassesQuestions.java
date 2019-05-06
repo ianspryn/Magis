@@ -33,7 +33,7 @@ public class ClassesQuestions extends QuestionGenerator{
     private ArrayList<String> eAnswers;
     private ArrayList<String> sAnswers;
 
-    public ConstructerQuestions(){
+    public ClassesQuestions(){
         super();
         cAnswers = new ArrayList<>(Arrays.asList(comparableStringAnswers));
         eAnswers = new ArrayList<>(Arrays.asList(equalsAnswers));
@@ -116,7 +116,7 @@ public class ClassesQuestions extends QuestionGenerator{
         answers = sAnswers;
         int random = rand.nextInt(2);
         String firstPart =  secondStrings[random];
-        
+
 
         question = "If class Example1 " + firstPart + " class Example2, what type of classes are Example1 and Example2?\n";
         correctAnswer = secondAnswers[random];
