@@ -17,6 +17,9 @@ STRUCTURE:
 	</chapter>
 </lesson>
 
+NOTES:
+any written-statement question MUST contain a <written>true</written> tag AND every answer must contain [id = "correct"].
+
 -->
 <quizzes>
         <chapter id = "Primitive Types">

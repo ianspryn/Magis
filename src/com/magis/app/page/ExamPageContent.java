@@ -377,7 +377,10 @@ public abstract class ExamPageContent extends PageContent {
     protected void colorize() {
         for (int i = 0; i < numQuestions; i++) {
             int questionIndex = i;
-            if (grader.getNumCorrectAnswers(i) == 1) { //then it's radio buttons with only 1 correct answer
+            if (grader.getExamQuestion(i).isWritten()) {
+                //TODO: colorize logic here for fill-in-the-blank
+            }
+            else if (grader.getExamQuestion(i).getNumCorrectAnswers() == 1) { //then it's radio buttons with only 1 correct answer
                 toggleGroups.get(i).getToggles().stream().map((toggle) -> (ToggleButton) toggle).forEach((button) -> {
                     //highlight the correct answer as green
                     if (grader.isCorrect(questionIndex, button.getText())) {

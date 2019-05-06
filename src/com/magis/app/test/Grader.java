@@ -71,6 +71,10 @@ public class Grader {
         questions.add(examQuestion);
     }
 
+    public ExamQuestion getExamQuestion(int index) {
+        return  questions.get(index);
+    }
+
     public void addPointLabel(Label label) {
         pointLabels.add(label);
     }
