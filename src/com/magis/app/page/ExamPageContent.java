@@ -3,6 +3,7 @@ package com.magis.app.page;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXScrollPane;
+import com.jfoenix.controls.JFXTextField;
 import com.magis.app.Main;
 import com.magis.app.models.ExamsModel;
 import com.magis.app.test.ExamQuestion;
@@ -10,12 +11,19 @@ import com.magis.app.test.ExamSaver;
 import com.magis.app.test.Grader;
 import com.magis.app.test.questions.generator.QuestionGenerator;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 import static com.magis.app.Configure.NUM_QUESTIONS_PER_PAGE;
@@ -30,6 +38,7 @@ public abstract class ExamPageContent extends PageContent {
     protected Grader grader;
     protected HashMap<Integer, ToggleGroup> toggleGroups;
     protected HashMap<Integer, ArrayList<JFXCheckBox>> checkboxGroups;
+    protected HashMap<Integer, VBox> writtenQuestionBoxes;
     protected ArrayList<Integer> usedBankQuestions;
     protected ArrayList<String> usedGeneratorQuestions;
     protected ArrayList<VBox> pageContents;
@@ -55,6 +64,7 @@ public abstract class ExamPageContent extends PageContent {
         grader = new Grader();
         toggleGroups = new HashMap<>();
         checkboxGroups = new HashMap<>();
+        writtenQuestionBoxes = new HashMap<>();
         usedBankQuestions = new ArrayList<>();
         usedGeneratorQuestions = new ArrayList<>();
         pageContents = new ArrayList<>();
@@ -108,12 +118,21 @@ public abstract class ExamPageContent extends PageContent {
             //parse and add the statement for the question to the questionBox
             buildStatement(questionBox, examQuestion, chapterIndex);
 
+
              /*
             Add each possible answer to a radio button or checkbox
              */
             //if there's only one correct answer, then use toggle buttons
             if (examQuestion.getNumCorrectAnswers() < 1) {
                 System.err.println("Error. No correct answer was marked for the question of \"" + examQuestion.getQuestion() + "\" for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\"");
+            }
+            /*
+            If this is an written response, then buildStatement() above handled creating the question
+            and we don't need to add any toggle buttons or checkboxes.
+             */
+            else if (examQuestion.isWritten()) {
+                //we will need to heavily modify this box after we grade it, so save it for future use
+                writtenQuestionBoxes.put(questionIndex, questionBox);
             } else if (examQuestion.getNumCorrectAnswers() == 1) {
                 ToggleGroup toggleGroup = new ToggleGroup();
                 toggleGroups.put(questionIndex, toggleGroup);
@@ -157,18 +176,148 @@ public abstract class ExamPageContent extends PageContent {
             grader.addQuestion(examQuestion);
         }
         return true; //success
+
+
     }
 
+    /**
+     * build the statement for thr given question
+     *
+     * @param questionBox  the box to add the statement to
+     * @param examQuestion the class instance to pull exam data from
+     * @param chapterIndex used for error output and easier debugging
+     */
     public static void buildStatement(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
-        String delimiter = "(?<=```)|(?=```)|(?<=###)|(?=###)";
-        String[] splitStrings = examQuestion.getQuestion().split(delimiter);
+        if (examQuestion.isWritten()) buildAsWrittenAnswer(questionBox, examQuestion, chapterIndex);
+        else buildAsChoiceAnswer(questionBox, examQuestion, chapterIndex);
+    }
+
+    private static void buildAsWrittenAnswer(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
+        String[] splitQuestion = splitQuestion(examQuestion.getQuestion());
+        //if the input field is in the middle of the question
+        if (Arrays.asList(splitQuestion).contains("###")) {
+            Label regularText = null;
+            TextFlow codeQuestion = new TextFlow();
+            Stack<String> stack = new Stack<>();
+            int textFieldCounter = 0;
+            for (String subString : splitQuestion) {
+                switch (subString) {
+                    case "```": //beginning or ending of code segment
+                        if (stack.isEmpty()) {
+                            /*
+                            If the last element was a regular text element, then we are about another code section
+                            Therefore, we need to create new TextFlow object and add it to the question box.
+                            Example of when this would happen:
+
+                            ```
+                            for () {
+                               ###
+                            }
+                            ```
+
+                            This is regular text    //<-- this is what would be the last item added to the questionBox
+
+                            ```                     //<-- this is where we would be right now
+                            if () {
+                               ###
+                            }
+                            ```
+
+                            OR
+
+                            If this is our first code segment of the question (the points and questionIndex is already in questionBox, so we check of size is 1)
+                             */
+                            if (questionBox.getChildren().get(questionBox.getChildren().size() - 1).equals(regularText) || questionBox.getChildren().size() == 1) {
+                                codeQuestion = new TextFlow();
+                                codeQuestion.setMaxWidth(TextFlow.USE_PREF_SIZE);
+                                codeQuestion.setLineSpacing(8);
+                                codeQuestion.getStyleClass().add("code-text");
+                                //we are not in any kind of formatting segment
+                                questionBox.getChildren().add(codeQuestion);
+                            }
+                            stack.push(subString);
+                        } else if (stack.peek().equals("```")) {
+                            stack.pop();
+                        } else
+                            System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
+                        break;
+                    case "###": //textField area
+                        if (stack.isEmpty()) {
+                            System.err.println("Error. Written segment of question is not inside a code block. [###] must be surrounded by [```]. Question in error: \"" + examQuestion.getQuestion() + "\"");
+                        }
+                        JFXTextField textField = new JFXTextField();
+                        int finalTextFieldCounter = textFieldCounter;
+                        textField.setOnKeyReleased(e -> examQuestion.addWrittenStudentAnswer(finalTextFieldCounter, textField.getText()));
+                        textField.setStyle("-fx-font-family: \"monospace\";");
+                        BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g2d = img.createGraphics();
+                        FontMetrics fm = g2d.getFontMetrics();
+                        /*
+                        calculate a good fitting size for the text based on the font size and type
+                        (and add an extra 1/3 so that the student doesn't catch on that the correct answer perfectly fits in the textField)
+                         */
+                        try {
+                            textField.setMinWidth(1.5 * fm.stringWidth(examQuestion.getCorrectAnswers().get(textFieldCounter)) + (double) fm.stringWidth(examQuestion.getCorrectAnswers().get(textFieldCounter)) / 3);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new IndexOutOfBoundsException("\n\nError. The number of answers for this question is less than the number of fill-in-the blanks.\nThere are " + Collections.frequency(Arrays.asList(splitQuestion), "###") +
+                                    " written statement segments, and yet only " + examQuestion.getNumCorrectAnswers() + " answer elements.\nAdd the remaining answers for the question:\n\n\"" + examQuestion.getQuestion() + "\"\n\n");
+                        }
+                        g2d.dispose();
+                        codeQuestion.getChildren().add(textField);
+                        textFieldCounter++;
+                        break;
+                    default: //text only
+                        String formatType = stack.isEmpty() ? "" : stack.peek();
+                        //we're in code segment
+                        if ("```".equals(formatType)) {
+                            Text codeText = new Text(subString);
+                            codeText.getStyleClass().addAll("lesson-text", "text-no-color");
+                            codeText.setStyle("-fx-font-family: \"monospace\";");
+                            codeQuestion.getChildren().add(codeText);
+                        //we are not in any kind of formatting segment
+                        } else {
+                            regularText = new Label(subString);
+                            regularText.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
+                            regularText.setWrapText(true);
+                            regularText.setPrefWidth(700);
+                            regularText.getStyleClass().addAll("lesson-text", "text-no-color");
+                            questionBox.getChildren().add(regularText);
+                        }
+                }
+            }
+            //else there is no input field, and therefore we should put an input field at the end of the question
+        } else {
+            Text text = new Text(examQuestion.getQuestion());
+            text.getStyleClass().addAll("lesson-text", "text-no-color");
+
+            HBox container = new HBox();
+            container.getStyleClass().add("code-text");
+            container.setMaxWidth(HBox.USE_PREF_SIZE);
+            JFXTextField textField = new JFXTextField();
+            textField.setOnKeyReleased(e -> examQuestion.addWrittenStudentAnswer(0, textField.getText()));
+            BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = img.createGraphics();
+            FontMetrics fm = g2d.getFontMetrics();
+            /*
+            calculate a good fitting size for the text based on the font size and type
+            (and add an extra 1/3 so that the student doesn't catch on that the correct answer perfectly fits in the textField)
+             */
+            textField.setPrefWidth(1.5 * fm.stringWidth(examQuestion.getCorrectAnswers().get(0)) + (double) fm.stringWidth(examQuestion.getCorrectAnswers().get(0)) / 3);
+            g2d.dispose();
+            container.getChildren().add(textField);
+            questionBox.getChildren().addAll(text, container);
+        }
+    }
+
+    private static void buildAsChoiceAnswer(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
+        String[] splitStrings = splitQuestion(examQuestion.getQuestion());
         Stack<String> stack = new Stack<>();
         for (String subString : splitStrings) {
             Label label = new Label();
             label.setWrapText(true);
             label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
             switch (subString) {
-                case "```": //beginning of code segment
+                case "```": //beginning or ending of code segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("```")) stack.pop();
                     else
@@ -178,7 +327,7 @@ public abstract class ExamPageContent extends PageContent {
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("###")) stack.pop();
                     else
-                        System.err.println("Non-balanced text formatting of type [```] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
+                        System.err.println("Non-balanced text formatting of type [###] for the quiz \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" with the question of \"" + examQuestion.getQuestion() + "\"");
                     break;
                 default: //text only
                     String formatType = stack.isEmpty() ? "" : stack.peek();
@@ -194,11 +343,15 @@ public abstract class ExamPageContent extends PageContent {
                             break;
                         default: //we are not in any kind of formatting segment
                             label.setPrefWidth(700);
-                            label.getStyleClass().addAll("lesson-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-text");
                     }
             }
             questionBox.getChildren().add(label);
         }
+    }
+
+    public static String[] splitQuestion(String statement) {
+        return statement.split("(?<=```)|(?=```)|(?<=###)|(?=###)");
     }
 
     protected abstract boolean buildQuestion();

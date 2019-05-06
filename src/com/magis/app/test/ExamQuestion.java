@@ -1,23 +1,27 @@
 package com.magis.app.test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ExamQuestion {
 
     private int level;
     private String pointsAndQuestionIndex;
+    private boolean isWritten;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
     private ArrayList<String> incorrectAnswers;
     private ArrayList<String> studentAnswers;
-
+    private HashMap<Integer, String> writtenStudentAnswers;
     public ExamQuestion() {
         level = 1;
+        isWritten = false; //default to false
         answers = new ArrayList<>();
         correctAnswers = new ArrayList<>();
         incorrectAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
+        writtenStudentAnswers = new HashMap<>();
     }
 
     public int getLevel() {
@@ -34,6 +38,14 @@ public class ExamQuestion {
 
     public void setPointsAndQuestionIndex(String pointsAndQuestionIndex) {
         this.pointsAndQuestionIndex = pointsAndQuestionIndex;
+    }
+
+    public boolean isWritten() {
+        return isWritten;
+    }
+
+    public void setWritten(boolean written) {
+        isWritten = written;
     }
 
     public void setQuestion(String question) {
@@ -64,6 +76,8 @@ public class ExamQuestion {
         studentAnswers.remove(oldAnswer);
     }
 
+    public void addWrittenStudentAnswer(int key, String val) { writtenStudentAnswers.put(key, val); }
+
     public String getQuestion() {
         return question;
     }
@@ -81,6 +95,8 @@ public class ExamQuestion {
     public ArrayList<String> getStudentAnswers() {
         return studentAnswers;
     }
+
+    public HashMap<Integer, String> getWrittenStudentAnswers() { return writtenStudentAnswers; }
 
     public Integer getNumCorrectAnswers() { return correctAnswers.size(); }
 

@@ -1,6 +1,7 @@
 package com.magis.app.test.questions.generator;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -19,6 +20,10 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
 
+    private String[] dataTypeString = {"Cat","DOG","Mouse","Bug","Tree","LIQUID","Programming","SUM",
+            "Four","ONE","Two","Ten","five","zero POINT four", "four and 4", "3 and 2 and 1", "c and c", "10.23 plus 10.30 equals 20.53"};
+
+
     private char[] characters = {'+','-','*','/','%','<','=','>'};
 
     public ObjectComparisonQuestions(){
@@ -29,8 +34,9 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
 
     @Override
     public void initialize() {
-        if (rand.nextInt(2) == 0) generateEqualsQuestion();
-        else generateComparableQuestion();
+        if (rand.nextInt(3) == 0) generateEqualsQuestion();
+        else if (rand.nextInt(3)==1) generateComparableQuestion();
+        else getStringMethodQuestion();
     }
 
     @Override
@@ -101,5 +107,56 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
                 correctAnswer = equalsAnswers[1];
             }
         }
+    }
+
+    public void getStringMethodQuestion(){
+        int methodSelector = rand.nextInt(4);
+        int stringSelector = rand.nextInt(dataTypeString.length);
+        String word = dataTypeString[stringSelector];
+        ArrayList<String> shuffler = new ArrayList<>();
+
+        switch(methodSelector){
+            case 0:
+                question = "\""+word+"\".length();\n\nWhat is the value returned by this method?";
+                correctAnswer = ""+word.length();
+                shuffler.add(correctAnswer);
+                shuffler.add(""+(word.length()-1));
+                shuffler.add(""+(word.length()+1));
+                shuffler.add(""+(word.length()+2));
+                break;
+            case 1:
+                question = "\""+word+"\".toUpperCase();\n\nWhat is the value returned by this method?";
+                correctAnswer = word.toUpperCase();
+                shuffler.add(correctAnswer);
+                shuffler.add(word+"!!!!!");
+                shuffler.add(word.toLowerCase());
+                shuffler.add("");
+                break;
+            case 2:
+                question = "\""+word+"\".toLowerCase();\n\nWhat is the value returned by this method?";
+                correctAnswer = word.toLowerCase();
+                shuffler.add(correctAnswer);
+                shuffler.add(word+"...");
+                shuffler.add(word.toUpperCase());
+                shuffler.add("");
+                break;
+            case 3:
+                stringSelector = rand.nextInt(dataTypeString.length);
+                String word2 = dataTypeString[stringSelector];
+                int endPoint = rand.nextInt(word.length());
+                int startPoint = 0;
+                if(endPoint != 0) startPoint = rand.nextInt(endPoint);
+                question = "\""+word+"\".replace(\'"+word.substring(startPoint, endPoint)+"\', \""+word2+"\");\n\nWhat is the value returned by this method?";
+                correctAnswer = word.replace(word.substring(startPoint,endPoint),word2);
+                shuffler.add(correctAnswer);
+                shuffler.add(word2);
+                shuffler.add(word+=word2);
+                shuffler.add("");
+                break;
+        }
+
+        Collections.shuffle(shuffler);
+        shuffler.add("None of the Above");
+        answers = shuffler;
     }
 }
