@@ -618,10 +618,8 @@ the value of the integer cats\\```</statement>
                             <level>3</level>
                             <written>true</written>
                             <statement>
-                                ```
-                                ###This comment is a comment
-                                and it is big###
-                                ```
+                                ``` ###This comment is a comment
+                                and it is big### ```
 
                                 Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/*</answer>
@@ -631,13 +629,11 @@ the value of the integer cats\\```</statement>
                             <level>3</level>
                             <written>true</written>
                             <statement>
-                                ```
-                                ###
+                                ``` ###
                                 Author: You
                                 Param: Num, a number
                                 Return Sum, the sum of two numbers
-                                ###
-                                ```
+                                ### ```
 
                                 Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/**</answer>
@@ -806,8 +802,7 @@ the value of the integer cats\\```</statement>
                                 ### balance;
 
                                 //Variable to hold user's name
-                                ### name;
-                                ```
+                                ### name;```
 
                                 Give the variables their proper data-type</statement>
                             <answer id = "correct">int</answer>
