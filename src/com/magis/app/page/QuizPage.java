@@ -21,7 +21,7 @@ public class QuizPage extends ExamPage {
                 examPageContent.disableInput();
                 examPageContent.colorize();
                 getExamPageContent().getExamSaver().save();
-                Main.takingTest = false;
+                Main.takingExam = false;
                 submitButton.setVisible(false);
                 updatePage(0);
             }
