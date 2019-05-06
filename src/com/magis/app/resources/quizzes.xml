@@ -945,8 +945,160 @@ System.out.println("Normal\" Output \\");</statement>
                 <questions>
                         <question>
                                 <level>1</level>
-                                <statement>```File inFile = new File("input.txt");
-Scanner in = new Scanner(inFile);```</statement>
+                                <statement>Which of the following will succesfully create a Scanner that reads from "input.txt"?</statement>
+                                <answer id = "correct">File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);</answer>
+                        </question>
+                        <question>
+                                <statement>If you desire to write output to a file, you construct what?</statement> 
+                                <answer id = "correct">PrintWriter object</answer>
+                        </question>
+                        <question>
+                                <statement>What can occur if your program exits without closing the PrintWriter?</statement>
+                                <answer id ="correct">The disk file may not contain all of the output</answer> 
+                        </question> 
+                        <question>
+                                <statement>If the output file already exists, what happens to it?</statement> 
+                                <answer id = "correct">It is emptied then overwritten</answer>
+                        </question>     
+                        <question>
+                                <statement>Which of the following is the correct way to make a PrintWriter</statement> 
+                                <answer id = "correct">PrintWriter out = new PrintWriter("output.txt");</answer>
+                        </question> 
+                        <question>
+                                <statement>What should you make sure to do after you finish with a PrintWriter.</statement> 
+                                <answer id = "correct">Close it</answer>
+                        </question>
+                        <question>
+                                <statement>What should you make sure to do after you finish with a PrintWriter?</statement> 
+                                <answer id = "correct">Close it</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following lines of code is the correct way to specify a file name as a string literal?</statement> 
+                                <answer id = "correct">inFile = new File("c:\\homework\\input.dat");</answer>
+                        </question>
+                        <question>
+                                <statement>In java a word is ___</statement>
+                                <answer id ="correct">any sequence of characters that is not white space.</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following Scanners will correctly only read words as letters?</statement>
+                                <answer id ="correct">'''Scanner in = new Scanner(. . .);
+in.useDelimiter("[^A-Za-z]+");'''</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following lines of code will correctly search a Scanner until it encounters a number?</statement>
+                                <answer id ="correct">'''String line = in.nextLine();
+int i = 0;
+while (!Character.isDigit(line.charAt(i))) { i++; }'''</answer>
+                        </question>
+                        <question>
+                                <statement>What does the trim method do?</statement>
+                                <answer id ="correct">The trim method returns the string with all white space at the beginning and end removed.</answer>
+                        </question>
+                        <question>
+                                <statement>What method will convert a string into a int?</statement>
+                                <answer id ="correct">parseInt(String a)</answer>
+                        </question>
+                        <question>
+                                <statement>What happens if you try to use parseInt on a String that doesn't contain integers?</statement>
+                                <answer id ="correct">A NumberFormatException occurs</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following Scanners will correctly read a file one character at a time?</statement>
+                                <answer id ="correct">Scanner in = new Scanner(. . .);
+in.useDelimiter("");</answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Exceptions">
+                <questions>
+                        <question>
+                                <statement>What are the two main aspects to exception handling</statement>
+                                <answer id ="correct">reporting and recovery</answer>
+                        </question>
+                        <question>
+                                <statement>When you throw an exception,  execution does not continue with the next statement but instead continues where?</statement>
+                                <answer id ="correct">With an exception handler.</answer>
+                        </question>
+                        <question>
+                                <statement>What are the two categories Java exceptios fall into?</statement>
+                                <answer id ="correct">Checked and unchecked</answer>
+                        </question>
+                        <question>
+                                <statement>The majority of checked exception occur when you deal with what?</statement>
+                                <answer id ="correct">Input/Output</answer>
+                        </question>
+                        <question>
+                                <statement>When designing your own exception class, it is a good idea to extend a class in the exception hierarchy why?</statement>
+                                <answer id ="correct">This enables other programmers to catch the exception even
+if they are not interested in the exact nature of the problem.</answer>
+                        </question>
+                        <question>
+                                <statement>I/O exceptions are typically what type of exception?</statement>
+                                <answer id ="correct">checked</answer>
+                        </question>
+                        <question>
+                                <statement>You can get a printout of the
+chain of method calls that lead to the exception by calling what?</statement>
+                                <answer id ="correct">exception.printStackTrace()</answer>
+                        </question>
+                        <question>
+                                <statement>What are the two constructors customarily included in an exception class?</statement>
+                                <answer id ="correct">A constructor with no parameters and a constructor that accepts a message string describing the reason for the exception.</answer>
+                        </question>
+                        <question>
+                                <statement>If an exception has no handler what occurs?</statement>
+                                <answer id ="correct">An error message is printed, and your program terminates.</answer>
+                        </question>
+                        <question>
+                                <statement>It is important to remember that you should place catch clauses only in methods
+in which you can what? </statement>
+                                <answer id ="correct">Competently handle the particular exception type.</answer>
+                        </question>
+                        <question>
+                                <statement>If none of the standard exception types describe your error condition well enough, what can you do?</statement>
+                                <answer id ="correct">Design your own exception class.</answer>
+                        </question>
+                        <question>
+                                <statement>FileNotFoundException is a subclass of what Exception?</statement>
+                                <answer id ="correct">IOException</answer>
+                        </question>
+                        <question>
+                                <statement>When is it best not to catch an exception?</statement>
+                                <answer id ="correct">If you don't know how to remedy the situation</answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Packages">
+                <questions>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
+                        </question>
+                        <question>
+                                <statement></statement>
+                                <answer id ="correct"></answer>
                         </question>
                 </questions>
         </chapter>
