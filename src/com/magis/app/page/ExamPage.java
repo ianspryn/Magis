@@ -70,10 +70,10 @@ public class ExamPage extends Page {
         else leftButton.setVisible(true);
         if (currentPage == numPages - 1) {
             rightButton.setVisible(false);
-            if (Main.takingTest) submitButton.setVisible(true);
+            if (Main.takingExam) submitButton.setVisible(true);
         } else {
             rightButton.setVisible(true);
-            if (Main.takingTest) submitButton.setVisible(false);
+            if (Main.takingExam) submitButton.setVisible(false);
         }
     }
 

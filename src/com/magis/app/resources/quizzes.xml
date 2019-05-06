@@ -849,71 +849,104 @@ the value of the integer cats\\```</statement>
                         </question>
                 </questions>
         </chapter>
-        <chapter id = "Arrays">
+               <chapter id = "Escape Sequences">
                 <questions>
                         <question>
                                 <level>1</level>
-                                <statement>True or false: arrays can dynamically grow and shrink in size.</statement>
-                                <answer>True</answer>
-                                <answer id = "correct">False</answer>
+                                <statement>Which of the following lines of code will output "Hello, World!" with the quotations around it?</statement>
+                                <answer>System.out.println(""Hello, World!"");</answer>
+                                <answer id = "correct">System.out.println("\"Hello, World!\"");</answer>
+                                <answer>System.out.println("/"Hello, World!/"");</answer>
+                                <answer>System.out.println("#"Hello, World!"#");</answer>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>True or false: ArrayLists can dynamically grow and shrink in size.</statement>
-                                <answer id = "correct">True</answer>
-                                <answer>False</answer>
+                                <statement>In the below code, what is the escape character?
+System.out.println("Hello, \"World\"!");</statement>
+                                <answer>System</answer>
+                                <answer>out</answer>
+                                <answer>\"</answer>
+                                <answer id = "correct">\</answer>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>Which delimeter do we use to indicate a datatype of array?</statement>
-                                <answer id = "correct">[] - brackets</answer>
-                                <answer>{} - braces</answer>
-                                <answer>() - parentheses</answer>
-                                <answer>&lt;&gt; - angle brackets</answer>
+                                <statement>In the below code, what is the escape sequence?
+System.out.println("Hello, \"World\"!");</statement>
+                                <answer>System</answer>
+                                <answer>out</answer>
+                                <answer id = "correct">\"</answer>
+                                <answer>\</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which of the following lines of code will output C:\Temp\File2.txt </statement>
+                                <answer>System.out.println("C:#\Temp#\File2.txt");</answer>
+                                <answer>System.out.println(""C:\Temp\File2.txt"");</answer>
+                                <answer id = "correct">System.out.println("C:\\Temp\\File2.txt");</answer>
+                                <answer>System.println("C:#\Temp#\File2.txt");</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which of the following lines of code will output C:\Temp\File2.txt</statement>
+                                <answer>System.out.println("C:#\Temp#\File2.txt");</answer>
+                                <answer>System.out.println(""C:\Temp\File2.txt"");</answer>
+                                <answer id = "correct">System.out.println("C:\\Temp\\File2.txt");</answer>
+                                <answer>System.println("C:#\Temp#\File2.txt");</answer>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>```int[] values = new int[5];
-System.out.println(values[3]);```
-What will the code output?</statement>
-                                <shuffle>false</shuffle>
-                                <answer id = "correct">0</answer>
-                                <answer>1</answer>
-                                <answer>null</answer>
-                                <answer>An error will be occur</answer>
+                                <statement>What will the following lines of code output?
+System.out.println("Normal\\" Output \\"");</statement>
+                                <answer>Normal\" Output \"</answer>
+                                <answer>Normal\\" Output \\""</answer>
+                                <answer>Normal Output</answer>
+                                <answer id = "correct">The above code will not work.</answer>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>```boolean[] values = new boolean[5];
-System.out.println(values[3]);```
-What will the code output?</statement>
-                                <answer id = "correct">true</answer>
-                                <shuffle>false</shuffle>
-                                <answer>false</answer>
-                                <answer>null</answer>
-                                <answer>An error will be occur</answer>
+                                <statement>What will the following lines of code output?
+System.out.println("Normal\" Output \\");</statement>
+                                <answer>Normal" Output \</answer>
+                                <answer>Normal\" Output \</answer>
+                                <answer>Normal\" Output \\</answer>
+                                <answer>The above code will not work.</answer>
                         </question>
                         <question>
-                                <level>2</level>
-                                <shuffle>false</shuffle>
-                                <statement>```MyClass[] values = new MyClass[5];
-System.out.println(values[3]);```
-What will the code output?</statement>
-                                <answer id = "correct">null</answer>
-                                <answer>An empty string</answer>
-                                <answer>The name of the class</answer>
-                                <answer>An error will be occur</answer>
+                                <level>1</level>
+                                <statement>Which of the following is the escape sequence that will output a newline?</statement>
+                                <answer>\newline\</answer>
+                                <answer>\n\</answer>
+                                <answer id = "correct">\n</answer>
+                                <answer>\newline</answer>
                         </question>
                         <question>
-                                <level>2</level>
-                                <shuffle>false</shuffle>
-                                <statement>```int[] values;
-values[1] = 23;```
-Will this code run?</statement>
-                                <answer>Yes</answer>
-                                <answer>Yes, but values[1] will remain null</answer>
-                                <answer>No, you need to set values[0] first</answer>
-                                <answer id = "correct">No, 'values' must be initialized</answer>
+                                <level>1</level>
+                                <statement>What will the output of the following code look like?
+                                System.out.print("*\n**\n***\n");</statement>
+                                <answer id = "correct">*
+**
+***
+</answer>
+                                <answer>*\n**\n***\n</answer>
+                                <answer>*       **      ***</answer>
+                                <answer>*\**\***\</answer>
+                        </question>
+                        <question>
+                                <level>1</level>
+                                <statement>Which of the following will output "All the way to San José!"</statement>
+                                <answer>System.out.println("All the way to San Jos\`e\!");</answer>
+                                <answer id = "correct">System.out.println("All the way to San Jos\u00E9!");</answer>
+                                <answer>System.out.println("All the way to San Jos_`e_!");</answer>
+                                <answer>There is no possible way to output that</answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Input/Output">
+                <questions>
+                        <question>
+                                <level>1</level>
+                                <statement>```File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);```</statement>
                         </question>
                 </questions>
         </chapter>

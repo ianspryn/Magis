@@ -36,6 +36,10 @@ public class StudentModel {
         return student;
     }
 
+    private void removeStudent() {
+        student = null;
+    }
+
     public StudentModel(LessonModel lessonModel) {
         this.lessonModel = lessonModel;
 
@@ -279,8 +283,8 @@ public class StudentModel {
         //write to XML file
         UpdateModel.updateXML(new DOMSource(document), filePath);
 
-        //Delete student from class
-        Main.studentModel = new StudentModel(Main.lessonModel);
+        //Delete student from the class
+        Main.studentModel.removeStudent();
         //remove the student's custom styling
         Main.scene.getStylesheets().removeAll();
         //default to light, with pink
