@@ -2129,6 +2129,16 @@ int quantity = in.nextInt();
 	</chapter>
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<title>Control Statements</title>
+		<description>Learn how to make decisions for various blocks of code.</description>
+		<pages>
+			<page title="">
+
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Arrays</title>
 		<description>Learn many new things about arrays</description>
 		<pages>
@@ -2669,6 +2679,125 @@ valuesSize--;
 The situation is more complex if the order of the elements matters. Then you must move all elements following the element to be removed to a lower index, and then decrement the variable holding the size of the array. (See Figure 10.)
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/40.png</image>
+				<text>
+```
+for (int i = pos; i &lt; valuesSize - 1; i++)
+{
+	values[i] = values[i + 1];
+}
+valuesSize--;
+```
+~H1~Inserting an Element~H1~
+To insert an element into an array list, simply use the add method.
+In this section, you will see how to insert an element into an array. Note that you
+need a companion variable for tracking the array size, as explained in Section 7.5.
+If the order of the elements does not matter, you can simply insert new elements at
+the end, incrementing the variable tracking the size.
+```
+if (valuesSize &lt; values.length)
+{
+	values[valuesSize] = newElement;
+	valuesSize++;
+}
+```
+It is more work to insert an element at a particular position in the middle of an
+array. First, move all elements above the insertion location to a higher index. Then
+insert the new element.
+
+Note the order of the movement: When you remove an element, you first move
+the next element down to a lower index, then the one after that, until you finally get
+to the end of the array. When you insert an element, you start at the end of the
+array, move that element to a higher index, then move the one before that, and so on
+until you finally get to the insertion location (see Figure 12).
+```
+if (valuesSize &lt; values.length)
+{
+	for (int i = valuesSize; i > pos; i--)
+	{
+		values[i] = values[i - 1];
+	}
+	values[pos] = newElement;
+	valuesSize++;
+}
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/44.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/45.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. What does the find method do if there are two bank accounts with a matching
+account number?
+
+2. Would it be possible to use a “for each” loop in the getMaximum method?
+
+3. When printing separators, we skipped the separator before the initial element.
+Rewrite the loop so that the separator is printed after each element, except for
+the last element.
+				</text>
+			</page>
+			<page title="Two-Dimensional Arrays">
+				<text>
+Arrays and array lists can store linear sequences. Occasionally you want to store
+collections that have a two-dimensional layout. The traditional example is the tictac-toe board (see Figure 15).
+Such an arrangement, consisting of rows and columns of values, is called a twodimensional array or matrix. When constructing a two-dimensional array, you
+specify how many rows and columns you need. In this case, ask for 3 rows and 3
+columns:
+```
+final int ROWS = 3;
+final int COLUMNS = 3;
+String[][] board = new String[ROWS][COLUMNS];
+```
+This yields a two-dimensional array with 9 elements
+###
+board[0][0]
+board[1][0]
+board[2][0]
+
+board[0][1]
+board[1][1]
+board[2][1]
+
+board[0][2]
+board[1][2]
+board[2][2]
+###
+To access a particular element, specify two index values in separate brackets. For
+example:
+```
+board[1][1] = "x";
+board[2][1] = "o";
+```
+When filling or searching a two-dimensional array, it is common to use two nested
+loops. For example, this pair of loops sets all elements in the array to spaces.
+```
+for (int i = 0; i &lt; ROWS; i++)
+	for (int j = 0; j &lt; COLUMNS; j++)
+		board[i][j] = " ";
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/48.png</image>
+				<text>
+In this loop, we used constants for the number of rows and columns. You can also
+recover the array dimensions from the array variable:
+
+• board.length is the number of rows.
+• board[0].length is the number of columns.
+
+You can rewrite the loop for filling the tic-tac-toe board as
+```
+for (int i = 0; i &lt; board.length; i++)
+	for (int j = 0; j &lt; board[0].length; j++)
+		board[i][j] = " ";
+```
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. How do you declare and initialize a 4-by-4 array of integers?
+
+2. How do you count the number of spaces in the tic-tac-toe board?
+				</text>
 			</page>
 		</pages>
 	</chapter>
