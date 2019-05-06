@@ -978,6 +978,9 @@ public class StudentModel {
                     Node pointsAndQuestionIndex = question.getElementsByTagName("PointsAndQuestionIndex").item(0);
                     examQuestion.setPointsAndQuestionIndex(pointsAndQuestionIndex.getTextContent());
 
+                    Node written = question.getElementsByTagName("written").item(0);
+                    examQuestion.setWritten(written != null && Boolean.parseBoolean(written.getTextContent()));
+
                     NodeList answers = question.getElementsByTagName("answer");
                     for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
                         Element answer = (Element) answers.item(answerIndex);
@@ -1080,6 +1083,10 @@ public class StudentModel {
                 Element pointsAndQuestionIndex = document.createElement("PointsAndQuestionIndex");
                 pointsAndQuestionIndex.appendChild(document.createTextNode(examQuestion.getPointsAndQuestionIndex()));
                 question.appendChild(pointsAndQuestionIndex);
+                //is this a written statement?
+                Element written = document.createElement("written");
+                written.appendChild(document.createTextNode(Boolean.toString(examQuestion.isWritten())));
+                question.appendChild(written);
                 //each part of the question
                 Element statement = document.createElement("statement");
                 statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
@@ -1100,7 +1107,7 @@ public class StudentModel {
                 }
             }
             UpdateModel.updateXML(new DOMSource(document), filePath);
-            return attempt; //because we don't know if this is a quiz or a test
+            return attempt; //so we can add it to either the quiz class or the test class (depending on who called this method)
         }
     }
 }

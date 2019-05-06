@@ -100,6 +100,7 @@ public abstract class ExamsModel {
         public class QuestionsModel {
 
             private String statement;
+            private boolean isWritten;
             private boolean shuffle;
             private int level;
             private ArrayList<String> answers;
@@ -132,13 +133,16 @@ public abstract class ExamsModel {
                 return level;
             }
 
-            public boolean isShuffle() {return shuffle; }
+            public boolean isShuffle() { return shuffle; }
+
+            public boolean isWritten() { return isWritten; }
 
             QuestionsModel(Node question) {
                 this.answers = new ArrayList<>();
                 this.incorrectAnswers = new ArrayList<>();
                 this.correctAnswers = new ArrayList<>();
                 Element questionElement = (Element) question;
+                this.isWritten = questionElement.getElementsByTagName("written").item(0) != null && Boolean.parseBoolean(questionElement.getElementsByTagName("written").item(0).getTextContent());
                 this.shuffle = questionElement.getElementsByTagName("shuffle").item(0) == null || Boolean.parseBoolean(questionElement.getElementsByTagName("shuffle").item(0).getTextContent());
                 this.level = questionElement.getElementsByTagName("level").item(0) != null ? Integer.parseInt(questionElement.getElementsByTagName("level").item(0).getTextContent()) : 1;
                 this.statement = questionElement.getElementsByTagName("statement").item(0).getTextContent();
@@ -155,6 +159,9 @@ public abstract class ExamsModel {
                     } else {
                         incorrectAnswers.add(answer.getTextContent());
                     }
+                }
+                if (isWritten && incorrectAnswers.size() > 1) {
+                    System.err.println("Question of type \"written\" should ALL be marked as correct answer. Please fix the question with the statement: \"" + statement + "\"");
                 }
 
             }

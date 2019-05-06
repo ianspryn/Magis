@@ -34,7 +34,7 @@ public class ExamPage extends Page {
             //build the page
             if (!examPageContent.buildPage(i)) { //if we failed fully the page because we ran out of questions
                 //recalculate the number of pages
-                System.err.println("Error. Ran out of unique questions to generate for chapter " + (chapterIndex + 1) + ". Requested " + numQuestions + " questions, only got " + examPageContent.numQuestions + " questions");
+                System.err.println("Heads up! Ran out of unique questions to generate for chapter " + (chapterIndex + 1) + ". Requested " + numQuestions + " questions, only got " + examPageContent.numQuestions + " questions");
                 numPages = (int) Math.ceil((double) examPageContent.numQuestions / NUM_QUESTIONS_PER_PAGE);
                 break;
             }

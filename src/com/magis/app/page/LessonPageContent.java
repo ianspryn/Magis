@@ -114,7 +114,7 @@ public class LessonPageContent extends PageContent {
             label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it contains
             pageContentContainer.add(label);
             switch (subString) {
-                case "```": //beginning of code segment
+                case "```": //beginning of or ending code segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("```")) stack.pop();
                     else System.err.println("Non-balanced text formatting of type [```] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
@@ -151,17 +151,17 @@ public class LessonPageContent extends PageContent {
                             label.getStyleClass().addAll("code-output-text", "drop-shadow");
                             break;
                         case "[H1]": //we're in a header 1 segment
-                            label.getStyleClass().addAll("lesson-header-one-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-header-one-text");
                             break;
                         case "[H2]": //we're in a header 2 segment
-                            label.getStyleClass().addAll("lesson-header-two-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-header-two-text");
                             break;
                         case "[H3]": //we're in a header 3 segment
-                            label.getStyleClass().addAll("lesson-header-three-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-header-three-text");
                             break;
                         default: //we are not in any kind of formatting segment
                             label.setPrefWidth(800);
-                            label.getStyleClass().addAll("lesson-text", "lesson-text-color");
+                            label.getStyleClass().add("lesson-text");
                     }
             }
         }

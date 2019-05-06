@@ -6,6 +6,7 @@ STRUCTURE:
 		<questions>
                         <question>
                                 <level>{1, 2, 3, ... n}</level>
+                                <written>{true, false}</written>
                                 <statement></statement>
                                 <answer id = "correct"></answer>
                                 <answer></answer>
@@ -947,6 +948,24 @@ System.out.println("Normal\" Output \\");</statement>
                                 <level>1</level>
                                 <statement>```File inFile = new File("input.txt");
 Scanner in = new Scanner(inFile);```</statement>
+                        </question>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
+                        </question>
+                        <question>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```
+Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.</statement>
+                                <answer id = "correct">int[]</answer>
+                                <answer id = "correct">new int[10];</answer>
+                                <answer id = "correct">myArray[i] = i;</answer>
                         </question>
                 </questions>
         </chapter>

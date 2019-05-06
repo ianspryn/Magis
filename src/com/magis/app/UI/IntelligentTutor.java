@@ -345,7 +345,7 @@ public class IntelligentTutor {
 
             //make sure we don't stick an "and" in if there's only one page! If that could ever happen...
             if (pageTitles.size() > 1) {
-                addText(" and ");
+                addText("and ");
             }
             //add the last page, now that we've stuck "and" between the list of pages
             addText(pageTitles.get(pageTitles.size() - 1), true);
