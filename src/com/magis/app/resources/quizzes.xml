@@ -480,6 +480,23 @@ and returns some information about it, without changing the object</statement>
                                 <answer>Slightly modified version of the original</answer>
                                 <answer>Replacement for the original</answer>
                         </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```
+                                //Rectangle length and width
+                                int width = 5;
+                                int length = 10;
+                                //Make a new object of the class "Rectangle" and send it its length and width
+                                ### simpleSquare = new ###(###, width);
+                                ```
+
+                                Fill in the blanks</statement>
+                            <answer id = "correct">Rectangle</answer>
+                            <answer id = "correct">Rectangle</answer>
+                            <answer id = "correct">length</answer>
+                        </question>
                 </questions>
         </chapter>
         <chapter id = "Comments">
@@ -585,6 +602,46 @@ the value of the integer cats\\```</statement>
                                 <answer>When the method isn't complicated</answer>
                                 <answer>If there are no parameter variables</answer>
                                 <answer id = "correct">Methods whose return type is void</answer>
+                        </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```
+                                ###This comment is a comment
+                                ```
+
+                                Fill in the blanks to make a comment</statement>
+                            <answer id = "correct">//</answer>
+                        </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```
+                                ###This comment is a comment
+                                and it is big###
+                                ```
+
+                                Fill in the blanks to make a comment</statement>
+                            <answer id = "correct">/*</answer>
+                            <answer id = "correct">*/</answer>
+                        </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```
+                                ###
+                                Author: You
+                                Param: Num, a number
+                                Return Sum, the sum of two numbers
+                                ###
+                                ```
+
+                                Fill in the blanks to make a comment</statement>
+                            <answer id = "correct">/**</answer>
+                            <answer id = "correct">*/</answer>
                         </question>
                 </questions>
         </chapter>
@@ -736,6 +793,27 @@ the value of the integer cats\\```</statement>
                                 <answer id = "correct">amount</answer>
                                 <answer>There is no explicit parameter</answer>
                         </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```//Initialize variables
+
+                                //Variable to hold user's pin ID
+                                ### pin;
+
+                                //Variable to hold user's balance amount
+                                ### balance;
+
+                                //Variable to hold user's name
+                                ### name;
+                                ```
+
+                                Give the variables their proper data-type</statement>
+                            <answer id = "correct">int</answer>
+                            <answer id = "correct">double</answer>
+                            <answer id = "correct">String</answer>
+                        </question>
                 </questions>
         </chapter>
         <chapter id = "Methods">
@@ -847,6 +925,58 @@ the value of the integer cats\\```</statement>
                                 <answer>access specifier stated before method name</answer>
                                 <answer>return type listed before parameter variable</answer>
                                 <answer>Nothing</answer>
+                        </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```//This method shall multiply two parameters together
+                                //and return their product as an int
+                                ### getProduct(int num1, num2) {
+                                int product = ### * num2;
+                                return ###;
+                                }```
+
+                            Complete the method above</statement>
+                            <answer id = "correct">public int</answer>
+                            <answer id = "correct">num1</answer>
+                            <answer id = "correct">product</answer>
+                        </question>
+                        <question>
+                            <level>3</level>
+                            <written>true</written>
+                            <statement>
+                                ```//This method will turn an int into a string and return it
+                                ### toString(int num) {
+                                String s = "" + ###;
+                                return ###;
+                                }```
+
+                                Complete the method above</statement>
+                            <answer id = "correct">public String</answer>
+                            <answer id = "correct">num</answer>
+                            <answer id = "correct">s</answer>
+                        </question>
+                        <question>
+                            <level>5</level>
+                            <written>true</written>
+                            <statement>
+                                ```//This method will take an array of numbers and sum them up, returning the sum
+                                ### getSum(### numArray) {
+                                int sum = 0;
+                                for(int i = ###; i &lt; numArray.###; i++){
+                                sum += numArray[###];
+                                }
+                                return ###;
+                                }```
+
+                                Complete the method above</statement>
+                            <answer id = "correct">public int</answer>
+                            <answer id = "correct">int[]</answer>
+                            <answer id = "correct">0</answer>
+                            <answer id = "correct">length</answer>
+                            <answer id = "correct">i</answer>
+                            <answer id = "correct">sum</answer>
                         </question>
                 </questions>
         </chapter>
