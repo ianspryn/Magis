@@ -1921,6 +1921,28 @@ public class CheckingAccount extends BankAccount
 The compiler will not complain. It thinks that you want to provide a deposit method just for int parameters, while inheriting another deposit method for double parameters. When overriding a method, be sure to check that the parameter types match exactly.
 				</text>
 			</page>
+			<page title="Not Invoking Super">
+				<text>
+A common error in extending the functionality of a superclass method is to forget the super
+qualifier. For example, to withdraw money from a checking account, update the transaction
+count and then withdraw the amount:
+```
+public void withdraw(double amount)
+{
+	transactionCount++;
+	withdraw(amount);
+	// Error—should be super.withdraw(amount)
+}
+```
+Here withdraw(amount) refers to the withdraw method applied to the implicit parameter of the
+method. The implicit parameter is of type CheckingAccount, and the CheckingAccount class has a
+withdraw method, so that method is called. Of course, that calls the current method all over
+again, which will call itself yet again, over and over, until the program runs out of memory.
+Instead, you must precisely identify which withdraw method you want to call.
+Another common error is to forget to call the superclass method altogether. Then the
+functionality of the superclass mysteriously vanishes.
+				</text>
+			</page>
 		</pages>
 	</chapter>
 	<chapter>
@@ -2197,8 +2219,522 @@ int quantity = in.nextInt();
 		<title>Control Statements</title>
 		<description>Learn how to make decisions for various blocks of code.</description>
 		<pages>
-			<page title="">
+			<page title="If Statements">
+				<text>
+	Computer programs often need to make decisions, taking different actions depending on a condition.
+Consider the bank account class from before. The withdraw method allows you to
+withdraw as much money from the account as you like. The balance just moves ever
+further into the negatives. That is not a realistic model for a bank account. Let’s
+implement the withdraw method so that you cannot withdraw more money than you
+have in the account. That is, the withdraw method must make a decision: whether to
+allow the withdrawal or not.
 
+The if statement is used to implement a decision. The if statement has two parts:
+a condition and a body. If the condition is true, the body of the statement is executed. The body of the if statement consists of a statement:
+```
+if (amount &lt; = balance) // Condition
+balance = balance - amount; // Body
+```
+The assignment statement is carried out only when the amount to be withdrawn is
+less than or equal to the balance (see Figure 1).
+Let us make the withdraw method of the BankAccount class even more realistic. Most
+banks not only disallow withdrawals that exceed your account balance; they also
+charge you a penalty for every attempt to do so.
+This operation can’t be programmed simply by providing two complementary if
+statements, such as:
+```
+if (amount &lt;= balance)
+balance = balance - amount;
+if (amount > balance) // Use if/else instead
+balance = balance - OVERDRAFT_PENALTY;
+				```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/2.png</image>
+				<text>
+There are two problems with this approach. First, if you need to modify the condition amount &lt;= balance for some reason, you must remember to update the condition
+amount > balance as well. If you do not, the logic of the program will no longer be
+correct. More importantly, if you modify the value of balance in the body of the first
+if statement (as in this example), then the second condition uses the new value.
+
+To implement a choice between alternatives, use the if/else statement:
+```
+if (amount &lt;= balance)
+balance = balance - amount;
+else
+balance = balance - OVERDRAFT_PENALTY;
+```
+Now there is only one condition. If it is satisfied, the first statement is executed.
+Otherwise, the second is executed. The flowchart in Figure 2 gives a graphical representation of the branching behavior.
+
+Quite often, however, the body of the if statement consists of multiple statements that must be executed in sequence whenever the condition is true. These
+statements must be grouped together to form a block statement by enclosing them
+in braces { }. Here is an example.
+```
+if (amount &lt;= balance)
+{
+double newBalance = balance - amount;
+balance = newBalance;
+}
+```
+In general, the body of an if statement must be a block statement, a simple statement, such as
+```
+balance = balance - amount;
+```
+or a compound statement (another if statement or a loop). The else
+alternative also must be a statement—that is, a simple statement, a compound statement, or a block statement.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/4.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Why did we use the condition amount &lt;= balance and not amount &lt; balance in the example for the if/else statement?
+
+2. What is logically wrong with the statement
+```
+if (amount &lt;= balance)
+newBalance = balance - amount; balance = newBalance;
+```
+and how do you fix it?
+				</text>
+			</page>
+			<page title="While Loops">
+				<text>
+In this chapter you will also learn how to write programs that repeatedly execute one or
+more statements. We will illustrate these concepts by looking at typical investment
+situations. Consider a bank account with an initial balance of $10,000 that earns 5
+percent interest. The interest is computed at the end of every year on the current
+balance and then deposited into the bank account. For example, after the ﬁrst year,
+the account has earned $500 (5 percent of $10,000) of interest. The interest gets
+added to the bank account. Next year, the interest is $525 (5 percent of $10,500),
+and the balance is $11,025.
+
+How many years does it take for the balance to reach $20,000? Of course, it
+won’t take longer than 20 years, because at least $500 is added to the bank account
+each year. But it will take less than 20 years, because interest is computed on
+increasingly larger balances. To know the exact answer, we will write a program that
+repeatedly adds interest until the balance is reached.
+In Java, the while statement implements such a repetition. The construct
+```
+while (condition)
+statement
+```
+keeps executing the statement while the condition is true.
+Most commonly, the statement is a block statement, that is, a set of statements
+delimited by { }.
+
+In our case, we want to know when the bank account has reached a particular
+balance. While the balance is less, we keep adding interest and incrementing the
+years counter:
+```
+while (balance &lt; targetBalance)
+{
+years++;
+double interest = balance * rate / 100;
+balance = balance + interest;
+}
+```
+Figure 1 shows the ﬂow of execution of this loop.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/7.png</image>
+				<text>
+A while statement is often called a loop. If you draw a ﬂowchart, you will see that
+the control loops backwards to the test after every iteration (see Figure 2).
+When you declare a variable inside the loop
+body, the variable is created for each iteration of
+the loop and removed after the end of each iteration. For example, consider the interest variable in
+this loop:
+```
+while (balance &lt; targetBalance)
+{
+years++;
+double interest = balance * rate / 100;
+// A new interest variable is created
+// in each iteration
+balance = balance + interest;
+} // interest no longer declared here
+```
+If a variable needs to be updated in multiple loop
+iterations, do not declare it inside the loop. For
+example, it would not make sense to declare the
+balance variable inside this loop.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/10.png</image>
+				<text>
+The following loop,
+```
+while (true)
+statement
+```
+executes the statement over and over, without terminating. Whoa! Why would you
+want that? The program would never stop. There are two reasons. Some programs
+indeed never stop; the software controlling an automated teller machine, a telephone switch, or a microwave oven doesn’t ever stop (at least not until the device is
+turned off). Our programs aren’t usually of that kind, but even if you can’t terminate the loop, you can exit from the method that contains it. This can be helpful
+when the termination test naturally falls in the middle of the loop.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/12.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. How many times is the following statement in the loop executed?
+```
+while (false) statement;
+```
+2. What would happen if RATE was set to 0 in the main method of the
+InvestmentRunner program?
+				</text>
+			</page>
+			<page title="Do Loops">
+				<text>
+Sometimes you want to execute the body of a loop at least once and perform the loop test
+after the body was executed. The do loop serves that purpose:
+```
+do
+statement
+while (condition);
+```
+The statement is executed while the condition is true. The condition is tested after the statement is executed, so the statement is executed at least once.
+For example, suppose you want to make sure that a user enters a positive number. As long
+as the user enters a negative number or zero, just keep prompting for a correct input. In this
+situation, a do loop makes sense, because you need to get a user input before you can test it.
+```
+double value;
+do
+{
+System.out.print("Please enter a positive number: ");
+value = in.nextDouble();
+}
+while (value &lt;= 0);
+```
+The ﬁgure shows a ﬂowchart of this loop.
+In practice, do loops are not very common. (The library code in Java 6 contains about
+10,000 loop statements, but only about 2 percent are do loops.) Consider again the example
+of prompting for a positive value. In practice, you also need to guard against users who provide an input that isn’t a number. Now the loop becomes so complex that you are better off
+controlling it with a Boolean variable:
+```
+boolean valid = false;
+while (!valid)
+{
+System.out.print("Please enter a positive number: ");
+if (in.hasNextDouble())
+{
+value = in.nextDouble();
+if (value > 0) valid = true;
+}
+else
+in.nextLine(); // Consume input
+}
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/15.png</image>
+			</page>
+			<page title="For Loops">
+				<text>
+One of the most common loop types has the form
+```
+i = start;
+while (i &lt;= end)
+{
+. . .
+i++;
+}
+```
+Because this loop is so common, there is a special form for it that emphasizes the
+pattern:
+```
+for (i = start; i &lt;= end; i++)
+{
+. . .
+}
+```
+You can also declare the loop counter variable inside the for loop header. That convenient shorthand restricts the use of the variable to the body of the loop (as will be
+discussed further in Special Topic 6.2 on page 234).
+```
+for (int i = start; i &lt;= end; i++)
+{
+. . .
+}
+```
+A for loop can be used to ﬁnd out the size of our
+$10,000 investment if 5 percent interest is compounded for 20 years. Of course, the balance will
+be larger than $20,000, because at least $500 is
+added every year. You may be surprised to ﬁnd
+out just how much larger the balance is.
+In our loop, we let i go from 1 to numberOfYears,
+the number of years for which we want to compound interest.
+```
+for (int i = 1; i &lt;= numberOfYears; i++)
+{
+double interest = balance * rate / 100;
+balance = balance + interest;
+}
+```
+Figure 3 shows the corresponding ﬂowchart.
+Figure 4 shows the ﬂow of execution. The complete program is on page 230.
+Another common use of the for loop is to
+traverse all characters of a string:
+```
+for (int i = 0; i &lt; str.length(); i++)
+{
+char ch = str.charAt(i);
+Process ch
+}
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/17.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/18.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/19.png</image>
+				<text>
+Note that the counter variable i starts at 0, and the loop is terminated when i
+reaches the length of the string. For example, if str has length 5, i takes on the values 0, 1, 2, 3, and 4. These are the valid positions in the string.
+Note too that the three slots in the for header can contain any three expressions.
+You can count down instead of up:
+```
+for (int i = 10; i &gt; 0; i–-)
+```
+The increment or decrement need not be in steps of 1:
+for (int i = -10; i &lt;= 10; i = i + 2) . . .
+
+It is possible—but a sign of unbelievably bad taste—to put unrelated conditions
+into the loop header:
+```
+for (rate = 5; years–- &lt; 0; System.out.println(balance))
+. . . // Bad taste
+```
+We won’t even begin to decipher what that might mean. You should stick with for
+loops that initialize, test, and update a single variable.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/21.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Rewrite the for loop in the waitYears method as a while loop.
+
+2. How many times does the following for loop execute?
+```
+for (i = 0; i &lt;= 10; i++)
+System.out.println(i * i);
+```
+				</text>
+			</page>
+			<page title="Break and Continue">
+				<text>
+You already encountered the break statement in Special Topic 5.2, where it was used to exit a
+switch statement. In addition to breaking out of a switch statement, a break statement can also
+be used to exit a while, for, or do loop. For example, the break statement in the following loop
+terminates the loop when the end of input is reached.
+```
+while (true)
+{
+String input = in.next();
+if (input.equalsIgnoreCase("Q"))
+break;
+double x = Double.parseDouble(input);
+data.add(x);
+}
+```
+In general, a break is a very poor way of exiting a loop.
+Using break statements also makes it difficult to use correctness proof techniques
+However, when faced with the bother of introducing a separate loop control variable,
+some programmers find that break statements are beneficial in the “loop and a half” case.
+This issue is often the topic of heated (and quite unproductive) debate. In this book, we
+won’t use the break statement, and we leave it to you to decide whether you like to use it in
+your own programs.
+In Java, there is a second form of the break statement that is used to break out of a nested
+statement. The statement break label; immediately jumps to the end of the statement that is
+tagged with a label. Any statement (including if and block statements) can be tagged with a
+label—the syntax is
+label: statement
+
+The labeled break statement was invented to break out of a set of nested loops.
+outerloop:
+```
+while (outer loop condition)
+{ . . .
+while (inner loop condition)
+{ . . .
+if (something really bad happened)
+break outerloop;
+}
+}
+```
+
+Jumps here if something really bad happened
+Naturally, this situation is quite rare. We recommend that you try to introduce additional
+methods instead of using complicated nested loops.
+Finally, there is the continue statement, which jumps to the end of the current iteration of
+the loop. Here is a possible use for this statement:
+```
+while (!done)
+{
+String input = in.next();
+if (input.equalsIgnoreCase("Q"))
+{
+done = true;
+continue; // Jump to the end of the loop body
+}
+double x = Double.parseDouble(input);
+data.add(x);
+// continue statement jumps here
+}
+```
+By using the continue statement, you don’t need to place the remainder of the loop code
+inside an else clause. This is a minor beneﬁt. Few programmers use this statement.
+				</text>
+			</page>
+			<page title="Nested Loops">
+				<text>
+Sometimes, the body of a loop is again a loop. We say that the inner loop is nested
+inside an outer loop. This happens often when you process two-dimensional structures, such as tables.
+Let’s look at an example that looks a bit more interesting than a table of numbers.
+We want to generate the following triangular shape:
+###
+[]
+[][]
+[][][]
+[][][][]
+[][][][][]
+[][][][][][]
+[][][][][][][]
+###
+The basic idea is simple. We generate a sequence of rows:
+```
+for (int i = 1; i &lt;= width; i++)
+{
+// Make triangle row
+. . .
+}
+```
+How do you make a triangle row? Use another loop to concatenate the squares []
+for that row. Then add a newline character at the end of the row. The ith row has i
+symbols, so the loop counter goes from 1 to i.
+```
+for (int j = 1; j &lt;= i; j++)
+r = r + "[]";
+r = r + "\n";
+```
+Putting both loops together yields two nested loops:
+```
+String r = "";
+for (int i = 1; i &lt;= width; i++)
+{
+// Make triangle row
+for (int j = 1; j &lt;= i; j++)
+r = r + "[]";
+r = r + "\n";
+}
+return r;
+```
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. How would you modify the nested loops so that you print a square instead of a
+triangle?
+
+2. What is the value of n after the following nested loops?
+```
+int n = 0;
+for (int i = 1; i &lt;= 5; i++)
+for (int j = 0; j &lt; i; j++)
+n = n + j;
+```
+				</text>
+			</page>
+			<page title="For Each Loop">
+				<text>
+Java version 5.0 introduces a very convenient shortcut for a common loop type.
+Often, you need to iterate through a sequence of elements—such as the elements of
+an array or array list. The enhanced for loop makes this process particularly easy to
+program.
+Suppose you want to total up all elements in an array values. Here is how you use
+the enhanced for loop to carry out that task.
+```
+double[] values = . . .;
+double sum = 0;
+for (double element : values)
+{
+sum = sum + element;
+}
+```
+The loop body is executed for each element in the array values. At the beginning of
+each loop iteration, the next element is assigned to the variable element. Then the
+loop body is executed. You should read this loop as “for each element in values”.
+You may wonder why Java doesn’t let you write “for each (element in values)”.
+Unquestionably, this would have been neater, and the Java language designers seriously considered this. However, the “for each” construct was added to Java several
+years after its initial release. Had new reserved words each and in been added to the
+language, then older programs that happened to use those identifiers as variable or
+method names (such as System.in) would no longer have compiled correctly.
+You don’t have to use the “for each” construct to loop through all elements in an
+array. You can implement the same loop with a straightforward for loop and an
+explicit index variable:
+```
+double[] values = . . .;
+double sum = 0;
+for (int i = 0; i &lt; values.length; i++)
+{
+double element = values[i];
+sum = sum + element;
+}
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Control%20Statements/27.png</image>
+				<text>
+Note an important difference between the “for each” loop and the ordinary for
+loop. In the “for each” loop, the loop variable e is assigned elements: values[0],
+values[1], and so on. In the ordinary for loop, the loop variable i is assigned index
+values: 0, 1, and so on.
+You can also use the enhanced for loop to visit all elements of an array list. For
+example, the following loop computes the total of the balances of all accounts:
+```
+ArrayList&lt;BankAccount&gt; accounts = . . . ;
+double sum = 0;
+for (BankAccount account : accounts)
+{
+sum = sum + account.getBalance();
+}
+```
+This loop is equivalent to the following ordinary for loop:
+```
+double sum = 0;
+for (int i = 0; i &lt; accounts.size(); i++)
+{
+BankAccount account = accounts.get(i);
+sum = sum + account.getBalance();
+}
+```
+Keep in mind that the “for each” loop has a very specific purpose: getting the elements of a collection, from the beginning to the end. It is not suitable for all array
+algorithms. In particular, the “for each” loop does not allow you to modify the contents of an array. The following loop does not fill an array with zeroes:
+```
+for (double element : values)
+{
+element = 0; // ERROR—this assignment does not modify array elements
+}
+```
+When the loop is executed, the variable element is first set to values[0]. Then element
+is set to 0, then to values[1], then to 0, and so on. The values array is not modified.
+The remedy is simple: Use an ordinary for loop
+```
+for (int i = 0; i &lt; values.length; i++)
+{
+values[i] = 0; // OK
+}
+```
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Write a “for each” loop that prints all elements in the array values.
+
+2. What does this “for each” loop do?
+```
+int counter = 0;
+for (BankAccount a : accounts)
+{
+if (a.getBalance() == 0) { counter++; }
+}
+```
+				</text>
 			</page>
 		</pages>
 	</chapter>
@@ -2860,7 +3396,7 @@ that is larger than 100.
 ```
 int pos = 0;
 boolean found = false;
-while (pos &lt; values.size() && !found)
+while (pos &lt; values.size() &amp;&amp; !found)
 {
 	if (values.get(pos) > 100)
 	{
@@ -3009,6 +3545,255 @@ for (int i = 0; i &lt; board.length; i++)
 1. How do you declare and initialize a 4-by-4 array of integers?
 
 2. How do you count the number of spaces in the tic-tac-toe board?
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<title>Inheritance</title>
+		<description>Learn more details about classes.</description>
+		<pages>
+			<page title="Subclass Construction">
+				<text>
+In this section, we discuss the implementation of constructors in subclasses. As an
+example, let’s declare a constructor to set the initial balance of a checking account.
+We want to invoke the BankAccount constructor to set the balance to the initial balance. There is a special instruction to call the superclass constructor from a subclass
+constructor. You use the reserved word super, followed by the construction parameters in parentheses:
+```
+public class CheckingAccount extends BankAccount
+{
+public CheckingAccount(double initialBalance)
+{
+// Construct superclass
+super(initialBalance);
+// Initialize transaction count
+transactionCount = 0;
+}
+. . .
+}
+```
+When the reserved word super is immediately followed by a parenthesis, it indicates
+a call to the superclass constructor. When used in this way, the constructor call must
+be the first statement of the subclass constructor. If super is followed by a period and
+a method name, on the other hand, it indicates a call to a superclass method, as you
+saw in the preceding section. Such a call can be made anywhere in any subclass
+method.
+
+The dual use of the super reserved word is analogous to the dual use of the this
+reserved word.
+
+If a subclass constructor does not call the superclass constructor, the superclass
+must have a constructor without parameters. That constructor is used to initialize
+the superclass data. However, if all constructors of the superclass require parameters, then the compiler reports an error.
+For example, you can implement the CheckingAccount constructor without calling
+the superclass constructor. Then the BankAccount class is constructed with its BankAccount() constructor, which sets the balance to zero. Of course, then the CheckingAccount constructor must explicitly deposit the initial balance.
+Most commonly, however, subclass constructors have some parameters that they
+pass on to the superclass and others that they use to initialize subclass instance
+variables.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/2.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/4.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+					1. Why didn’t the SavingsAccount constructor in Section 10.2 call its superclass
+					constructor?
+
+					2. When you invoke a superclass method with the super reserved word, does the
+					call have to be the first statement of the subclass method?
+				</text>
+			</page>
+			<page title="Converting Between Super/Subclass">
+				<text>
+It is often necessary to convert a subclass type to a superclass type. Occasionally,
+you need to carry out the conversion in the opposite direction. This section discusses the conversion rules.
+The class SavingsAccount extends the class BankAccount. In other words, a SavingsAccount object is a special case of a BankAccount object. Therefore, a reference to a
+SavingsAccount object can be converted to a BankAccount reference.
+```
+SavingsAccount collegeFund = new SavingsAccount(10);
+BankAccount anAccount = collegeFund; // OK
+```
+Furthermore, all references can be converted to the type Object.
+```
+Object anObject = collegeFund; // OK
+```
+Now the three object references stored in collegeFund, anAccount, and anObject all
+refer to the same object of type SavingsAccount (see Figure 6).
+However, the variables anAccount and anObject know less than the full story about
+the object references that they store. Because anAccount is a variable of type BankAccount, you can invoke the deposit and withdraw methods. You cannot use the addInterest method, though—it is not a method of the BankAccount class:
+```
+anAccount.deposit(1000); // OK
+anAccount.addInterest(); // No—not a method of the type of the anAccount variable
+```
+And, of course, the variable anObject knows even less. You can’t even invoke the
+deposit method on it—deposit is not a method of the Object class.
+Why would anyone want to know less about an object reference and use a variable whose type is a superclass? This can happen if you want to reuse code that
+knows about the superclass but not the subclass. Here is a typical example. Consider a transfer method that transfers money from one account to another:
+```
+public void transfer(double amount, BankAccount other)
+{
+withdraw(amount);
+other.deposit(amount);
+}
+
+You can use this method to transfer money from one bank account to another:
+BankAccount momsAccount = . . . ;
+BankAccount harrysAccount = . . . ;
+momsAccount.transfer(1000, harrysAccount);
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/7.png</image>
+				<text>
+You can also use the method to transfer money into a CheckingAccount:
+```
+CheckingAccount harrysChecking = . . . ;
+momsAccount.transfer(1000, harrysChecking);
+// OK to pass a CheckingAccount reference to a method expecting a BankAccount
+```
+The transfer method expects a reference to a BankAccount, and it gets a reference to a
+CheckingAccount object. That is perfectly legal. The transfer method doesn’t actually
+know that, in this case, the parameter variable other contains a reference to a CheckingAccount object. All it cares about is that the object can carry out the deposit
+method. This is assured because the other variable has the type BankAccount.
+Very occasionally, you need to carry out the opposite conversion, from a superclass type to a subclass type. For example, you may have a variable of type Object,
+and you know that it actually holds a BankAccount reference. In that case, you can use
+a cast to convert the type:
+```
+BankAccount anAccount = (BankAccount) anObject;
+```
+However, this cast is somewhat dangerous. If you are wrong, and anObject actually
+refers to an object of an unrelated type, then an exception is thrown.
+To protect against bad casts, you can use the instanceof operator. It tests whether
+an object belongs to a particular type. For example,
+
+anObject instanceof BankAccount
+
+returns
+
+true if the type of anObject is convertible to BankAccount. This happens if
+anObject refers to an actual BankAccount or a subclass such as SavingsAccount. Using the
+instanceof operator, a safe cast can be programmed as follows:
+```
+if (anObject instanceof BankAccount)
+{
+BankAccount anAccount = (BankAccount) anObject;
+. . .
+}
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/9.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Why did the second parameter of the transfer method have to be of type BankAccount and not, for example, SavingsAccount?
+
+2. Why can’t we change the second parameter of the transfer method to the type
+Object?
+				</text>
+			</page>
+			<page title="Polymorphism and Inheritance">
+				<text>
+In Java, the type of a variable does not determine the type of the object to which it
+refers. For example, a variable of type BankAccount can hold a reference to an actual
+BankAccount object or a subclass object such as SavingsAccount. You already encountered this phenomenon in Chapter 9 with variables whose type was an interface. A
+variable whose type is Measurable holds a reference to an object of a class that implements the Measurable interface, perhaps a Coin object or an object of an entirely different class.
+What happens when you invoke a method on a variable of type BankAccount? For
+example,
+```
+BankAccount anAccount = new CheckingAccount();
+anAccount.deposit(1000);
+```
+Which deposit method is called? The anAccount variable has type BankAccount, so it
+would appear as if BankAccount.deposit is called. On the other hand, the
+CheckingAccount class provides its own deposit method that updates the transaction
+count. The reference stored in the anAccount variable actually refers to an object of
+the subclass CheckingAccount, so it would be appropriate if the CheckingAccount.deposit
+method were called instead.
+Java uses dynamic method lookup to determine which method to invoke. The
+method to be called is always determined by the type of the actual object, not the
+type of the variable. That is, if the actual object has the type CheckingAccount, then the
+CheckingAccount.deposit method is called. It does not matter that the object reference
+is stored in a variable of type BankAccount.
+Have another look at the transfer method:
+```
+public void transfer(double amount, BankAccount other)
+{
+withdraw(amount);
+other.deposit(amount);
+}
+```
+Suppose you call
+```
+anAccount.transfer(1000, anotherAccount);
+```
+Two method calls are the result:
+```
+anAccount.withdraw(1000);
+anotherAccount.deposit(1000);
+```
+Depending on the actual types of the objects whose references are stored in anAccount and anotherAccount, different versions of the withdraw and deposit methods are
+called. This is an example of polymorphism. As we discussed in Chapter 9, polymorphism is the ability to treat objects with differences in behavior in a uniform way.
+
+If you look into the implementation of the transfer method, it may not be immediately obvious that the first method call
+```
+withdraw(amount);
+```
+depends on the type of an object. However, that call is a shortcut for
+```
+this.withdraw(amount);
+```
+The this parameter holds a reference to the implicit parameter, which can refer to a
+BankAccount or a subclass object.
+The following program calls the polymorphic withdraw and deposit methods. You
+should manually calculate what the program should print for each account balance,
+and confirm that the correct methods have in fact been called.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/12.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. If a is a variable of type BankAccount that holds a non-null reference, what do you
+know about the object to which a refers?
+
+2. If a refers to a checking account, what is the effect of calling a.transfer(1000,
+				</text>
+			</page>
+			<page title="Inheritance Structures">
+				<text>
+Developing an Inheritance Hierarchy
+When you work with a set of classes, some of which are more general and others more specialized, you want to organize them into an inheritance hierarchy. This enables you to process objects of different classes in a uniform way.
+To illustrate the design process, consider an application that presents a quiz and grades the
+user’s responses. A quiz consists of questions, and there are different kinds of questions:
+• Fill-in-the-blank
+• Choice (single or multiple)
+• Numeric (where an approximate answer is ok; e.g., 1.33 when the actual answer is 4/3)
+• Free response
+
+Step 1
+
+List the classes that are part of the hierarchy.
+From the problem description, we can find these classes:
+(fill in the blank)
+(offers answer choices to the user)
+MultiChoiceQuestion (offers answer choices to the user; user can pick more than one)
+FillInQuestion
+ChoiceQuestion
+
+NumericQuestion
+FreeResponseQuestion
+
+In addition, we introduce a common superclass Question to model the commonality among
+these classes.
+Step 2
+
+Organize the classes into an inheritance hierarchy.
+Draw a UML diagram that shows super- and subclasses. Here is the diagram for our example.
+
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/15.png</image>
+				<text>
+
 				</text>
 			</page>
 		</pages>
