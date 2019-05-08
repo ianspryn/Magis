@@ -490,12 +490,24 @@ and returns some information about it, without changing the object</statement>
 int width = 5;
 int length = 10;
 //Make a new object of the class "Rectangle" and send it its length and width
-### simpleSquare = new ###(###, width);```
+### simpleSquare = ###(###, width);```
 
                                 Fill in the blanks</statement>
                             <answer id = "correct">Rectangle</answer>
-                            <answer id = "correct">Rectangle</answer>
+                            <answer id = "correct">new Rectangle</answer>
                             <answer id = "correct">length</answer>
+                        </question>
+                        <question>
+                            <level>4</level>
+                            <written>true</written>
+                            <statement>```//Bank Account Starting Amount
+double account = 10.5;
+//Make a new object of the class "Account" and send it a starting account amount
+### myAccount = ###```
+
+Fill in the blanks</statement>
+                            <answer id = "correct">Account</answer>
+                            <answer id = "correct">new Account(account);</answer>
                         </question>
                 </questions>
         </chapter>

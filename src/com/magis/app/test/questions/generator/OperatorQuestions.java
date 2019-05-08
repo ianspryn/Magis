@@ -37,6 +37,8 @@ public class OperatorQuestions extends QuestionGenerator {
                 break;
             case 3:getIncrementalQuestion();
                 break;
+            case 4:getMathMethodQuestion();
+                break;
         }
     }
 
@@ -202,6 +204,37 @@ public class OperatorQuestions extends QuestionGenerator {
         Collections.shuffle(shuffler);
         shuffler.add("None of the Above");
 
+        answers = shuffler;
+    }
+
+    public void getMathMethodQuestion(){
+        int operationSelector = rand.nextInt(2);
+        ArrayList<String> shuffler = new ArrayList<>();
+
+        switch(operationSelector){
+            case 0:
+                double num1 = rand.nextInt(101);
+                question = "double root = Math.sqrt("+num1+");\n\nWhat is the value of \"root\"?";
+                correctAnswer = ""+df.format(Math.sqrt(num1));
+                shuffler.add(correctAnswer);
+                shuffler.add(""+(num1+1));
+                shuffler.add(""+df.format(Math.pow(num1,2)));
+                shuffler.add(""+df.format(Math.sin(num1)));
+                break;
+            case 1:
+                double num2 = rand.nextInt(11);
+                double power = rand.nextInt(3)+1;
+                question = "double power = Math.sqrt("+num2+", "+power+");\n\nWhat is the value of \"power\"?";
+                correctAnswer = ""+df.format(Math.pow(num2, power));
+                shuffler.add(correctAnswer);
+                shuffler.add(""+(num2+1));
+                shuffler.add(""+df.format(Math.sqrt(num2)));
+                shuffler.add(""+df.format(Math.sin(num2)));
+                break;
+        }
+
+        Collections.shuffle(shuffler);
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 }
