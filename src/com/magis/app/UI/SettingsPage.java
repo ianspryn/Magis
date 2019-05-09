@@ -348,7 +348,6 @@ public class SettingsPage {
             student.setTheme(name);
             //apply new theme
             Main.scene.getStylesheets().add("com/magis/app/css/" + name + ".css");
-            UIComponents.applyShadowColor();
         });
         rectangle.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         rectangle.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));

@@ -441,24 +441,4 @@ public class UIComponents {
 
         return translateTransition;
     }
-
-    public static void applyShadowColor() {
-        switch (Main.studentModel.getStudent().getTheme()) {
-            case "pink":
-                JFXDepthManager.setColor(Configure.PINK);
-                break;
-            case "purple":
-                JFXDepthManager.setColor(Configure.PURPLE);
-                break;
-            case "cyan":
-                JFXDepthManager.setColor(Configure.CYAN);
-                break;
-            case "green":
-                JFXDepthManager.setColor(Configure.GREEN);
-                break;
-            case "blue-gray":
-                JFXDepthManager.setColor(Configure.BLUE_GRAY);
-                break;
-        }
-    }
 }
