@@ -72,27 +72,38 @@ public class Grader {
         diff_match_patch dmp = new diff_match_patch();
         for (int answerIndex = 0; answerIndex < question.getNumCorrectAnswers(); answerIndex++) {
             String correctAnswer = question.getCorrectAnswers().get(answerIndex);
-            String studentAnswer = question.getStudentAnswers().get(answerIndex);
+            String studentAnswer = question.getWrittenStudentAnswer(answerIndex);
 
             LinkedList<diff_match_patch.Diff> diff = dmp.diff_main(correctAnswer, studentAnswer);
             dmp.diff_cleanupSemantic(diff);
-
-            int goodPart = 0;
             int badPart = 0;
-            for (diff_match_patch.Diff diff1 : diff) {
+            for (int i = 0; i < diff.size(); i++) {
+                diff_match_patch.Diff diff1 = diff.get(i);
                 System.out.println(diff1);
                 String type = diff1.operation.toString();
                 switch (type) {
-                    case "EQUAL":
-                        goodPart += diff1.text.length();
-                        break;
                     case "INSERT":
+                        /*
+                        If this is true, then this is a part of the code where the student just "deleted"
+                        the correct answer and "inserted" the wrong answer. Meaning, they are a pair.
+                        We should focus on how much they removed.
+                        CORRECT: int[] myVar = new int[5];
+                        STUDENT: int[] asdf asdf = new int[5];
+                        That way, the student is only deducted for missing "myVar"
+                        However, if this were the case:
+                        CORRECT: int[] myVar = new int[5];
+                        STUDENT: int[] myVar asdf = new int[5];
+                        The student would still be deducted for the extra "asdf"
+                         */
+                        if (i > 0 && diff.get(i - 1).operation.toString().equals("DELETE")) continue;
+                        badPart += Math.max(1, diff1.text.split("[.]| ").length);
+                            break;
                     case "DELETE":
-                        badPart += diff1.text.length();
+                        badPart += Math.max(1, diff1.text.split("[.]| ").length);
                         break;
                 }
             }
-            total += pointsPerAnswer * Math.max((double) goodPart / (double) correctAnswer.length() - (double) badPart / (double) correctAnswer.length(), 0);
+            total += pointsPerAnswer * Math.max(0, 1.0 - ((double) badPart / (double) correctAnswer.split("[.]| ").length));
         }
     }
 

@@ -49,6 +49,9 @@ public class QuizPageContent extends ExamPageContent {
                 pointsAndIndex = level == 1 ? level + " point" : level + " points";
                 pointsAndIndex += "\nQuestion " + (questionIndex + 1);
 
+                //save the points and question index
+                examQuestion.setPointsAndQuestionIndex(pointsAndIndex);
+
                 if (question.getNumCorrectAnswers() == 1) {
                     statement = question.getStatement();
                 } else { //if there is more than one correct answer, hint this to the student

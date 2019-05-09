@@ -96,7 +96,7 @@ public class ExamQuestion {
         return studentAnswers;
     }
 
-    public HashMap<Integer, String> getWrittenStudentAnswers() { return writtenStudentAnswers; }
+    public String getWrittenStudentAnswer(int key) { return writtenStudentAnswers.get(key); }
 
     public Integer getNumCorrectAnswers() { return correctAnswers.size(); }
 

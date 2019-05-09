@@ -249,6 +249,7 @@ public abstract class ExamPageContent extends PageContent {
                         }
                         JFXTextField textField = new JFXTextField();
                         int finalTextFieldCounter = textFieldCounter;
+                        examQuestion.addWrittenStudentAnswer(finalTextFieldCounter, ""); //prevent null
                         textField.setOnKeyReleased(e -> examQuestion.addWrittenStudentAnswer(finalTextFieldCounter, textField.getText()));
                         textField.setStyle("-fx-font-family: \"monospace\";");
                         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -296,6 +297,7 @@ public abstract class ExamPageContent extends PageContent {
             container.getStyleClass().add("code-text");
             container.setMaxWidth(HBox.USE_PREF_SIZE);
             JFXTextField textField = new JFXTextField();
+            examQuestion.addWrittenStudentAnswer(0, ""); //prevent null
             textField.setOnKeyReleased(e -> examQuestion.addWrittenStudentAnswer(0, textField.getText()));
             BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = img.createGraphics();
