@@ -163,6 +163,10 @@ public abstract class ExamsModel {
                 if (isWritten && incorrectAnswers.size() > 1) {
                     System.err.println("Question of type \"written\" should ALL be marked as correct answer. Please fix the question with the statement: \"" + statement + "\"");
                 }
+                if (incorrectAnswers.size() == 0  && !isWritten) {
+                    System.err.println("The following question: \"" + statement + "\"\n\n" +
+                            "does not have any incorrect answers, and yet there is no <written>true</written> associated with it. Verify the formatting of that question is correct.");
+                }
 
             }
         }
