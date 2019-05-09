@@ -96,10 +96,14 @@ public class Grader {
                         The student would still be deducted for the extra "asdf"
                          */
                         if (i > 0 && diff.get(i - 1).operation.toString().equals("DELETE")) continue;
+                        //grade off-by-one-character less harshly
+                        else if (diff.get(i).text.length() == 1) badPart += 1 / (correctAnswer.split("[.]| ").length * 2);
                         badPart += Math.max(1, diff1.text.split("[.]| ").length);
                         break;
                     case "DELETE":
-                        badPart += Math.max(1, diff1.text.split("[.]| ").length);
+                        //grade off-by-one-character less harshly
+                        if (diff.get(i).text.length() == 1) badPart += 1 / (correctAnswer.split("[.]| ").length * 2);
+                        else badPart += Math.max(1, diff1.text.split("[.]| ").length);
                         break;
                 }
             }
