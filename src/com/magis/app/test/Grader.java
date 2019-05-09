@@ -82,6 +82,7 @@ public class Grader {
     private void gradeAsWritten(ExamQuestion question) {
         diff_match_patch dmp = new diff_match_patch();
         for (int answerIndex = 0; answerIndex < question.getNumCorrectAnswers(); answerIndex++) {
+            //https://regex101.com/r/RpbPGc/3
             String regex = " +|(?<=[.|=|*|+|-|/|\"|\\[|\\]])|(?=[.|=|*|+|-|/|\"|\\[|\\]|;])";
             //for the fairness of grading, remove spaces that are allowed to be removed
             String[] formattedCorrectAnswer = question.getCorrectAnswers().get(answerIndex).split(regex);
