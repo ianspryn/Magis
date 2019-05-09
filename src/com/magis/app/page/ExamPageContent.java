@@ -119,10 +119,7 @@ public abstract class ExamPageContent extends PageContent {
             buildStatement(questionBox, examQuestion, chapterIndex);
 
 
-             /*
-            Add each possible answer to a radio button or checkbox
-             */
-            //if there's only one correct answer, then use toggle buttons
+
             if (examQuestion.getNumCorrectAnswers() < 1) {
                 System.err.println("Error. No correct answer was marked for the question of \"" + examQuestion.getQuestion() + "\" for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\"");
             }
@@ -133,7 +130,12 @@ public abstract class ExamPageContent extends PageContent {
             else if (examQuestion.isWritten()) {
                 //we will need to heavily modify this box after we grade it, so save it for future use
                 writtenQuestionBoxes.put(questionIndex, questionBox);
-            } else if (examQuestion.getNumCorrectAnswers() == 1) {
+            }
+             /*
+            Add each possible answer to a radio button or checkbox
+             */
+            //if there's only one correct answer, then use toggle buttons
+            else if (examQuestion.getNumCorrectAnswers() == 1) {
                 ToggleGroup toggleGroup = new ToggleGroup();
                 toggleGroups.put(questionIndex, toggleGroup);
                 for (String answer : examQuestion.getAnswers()) {
@@ -410,8 +412,8 @@ public abstract class ExamPageContent extends PageContent {
                         checkBox.setStyle("-fx-text-fill: #f44336;"); //Red A400
                         checkBox.setCheckedColor(Color.valueOf("#f44336"));
                     }
-                    checkBox.setSelected(!checkBox.isSelected());
-                    checkBox.setSelected(!checkBox.isSelected());
+//                    checkBox.setSelected(!checkBox.isSelected());
+//                    checkBox.setSelected(!checkBox.isSelected());
                 }
 
             }

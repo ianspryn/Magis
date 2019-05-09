@@ -36,7 +36,7 @@ public class StudentModel {
         return student;
     }
 
-    private void removeStudent() {
+    public void removeStudent() {
         student = null;
     }
 
@@ -327,6 +327,11 @@ public class StudentModel {
             writeSettings();
         }
 
+        public void setPasswordHash(String passwordHash) {
+            this.passwordHash = passwordHash;
+            writeSettings();
+        }
+
         public String getPasswordHash() { return passwordHash; }
 
         public String getSalt() { return salt; }
@@ -412,6 +417,8 @@ public class StudentModel {
             firstNameElement.setTextContent(firstName);
             Element  lastNameElement = (Element) studentElement.getElementsByTagName("lastname").item(0);
             lastNameElement.setTextContent(lastName);
+            Element hash = (Element) studentElement.getElementsByTagName("hash").item(0);
+            hash.setTextContent(passwordHash);
 
             Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
             Node darkmode = settingsElement.getElementsByTagName("darkmode").item(0);

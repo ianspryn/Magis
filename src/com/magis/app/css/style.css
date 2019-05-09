@@ -150,6 +150,10 @@
     -fx-font-size: 16px;
 }
 
+.password-verifier-checkbox {
+    -fx-opacity: 1;
+}
+
 .exam-radio-button:disabled, .exam-checkbox-button:disabled {
     -fx-opacity: 0.8;
 }
@@ -249,7 +253,7 @@ The greeting ("Hello, Ian!") on the home page
     -fx-spacing: 50px;
 }
 
-.recent-stats-box, .settings-box {
+.recent-stats-box, .small-box {
     -fx-padding: 20px;
     -fx-background-radius: 25px;
     -fx-alignment: center;
@@ -291,7 +295,7 @@ The greeting ("Hello, Ian!") on the home page
     -fx-font-family: "Roboto Mono Regular";
 }
 
-.settings-text {
+.bottom-home-text {
     -fx-font-size: 2em;
     -fx-font-family: "Roboto Mono Bold";
     -fx-padding: 0 0 0 23px;

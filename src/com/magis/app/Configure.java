@@ -2,6 +2,12 @@ package com.magis.app;
 
 public class Configure {
 
+    public static final String PINK = "#E91E63"; //Pink 500
+    public static final String PURPLE = "#9C27B0"; //Purple 500
+    public static final String CYAN = "#00BCD4"; //Pink 500
+    public static final String GREEN = "#8BC34A"; //Pink 500
+    public static final String BLUE_GRAY = "#607D8B"; //Pink 500
+
     /******************************************************************************
 
      Modify these variables before compiling the program to apply custom values

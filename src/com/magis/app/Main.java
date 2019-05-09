@@ -7,16 +7,23 @@ import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
+import com.magis.app.test.diff_match_patch;
 import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Stack;
 
 public class Main extends Application {
 
@@ -82,7 +89,7 @@ public class Main extends Application {
         questionGenerator.put(10, new InterfacesQuestions());
         questionGenerator.put(11, new MiscOOPQuestions());
 //        questionGenerator.put(8, new ExceptionsQuestions());
-//        questionGenerator.put(9, new PackagesQuestions());*/
+//        questionGenerator.put(9, new PackagesQuestions());
 
     }
 
@@ -107,15 +114,16 @@ public class Main extends Application {
         window.setTitle(windowTitle);
     }
 
-    public static void main(String[] args) { launch(args); }
+//    public static void main(String[] args) { launch(args); }
 
-//    public static void main(String[] args) {
-//        diff_match_patch dmp = new diff_match_patch();
-//        LinkedList<diff_match_patch.Diff> diff = dmp.diff_main("Hello World.", "Goodbye World.");
-//        // Result: [(-1, "Hell"), (1, "G"), (0, "o"), (1, "odbye"), (0, " World.")]
-//        dmp.diff_cleanupSemantic(diff);
-//        // Result: [(-1, "Hello"), (1, "Goodbye"), (0, " World.")]
-//        System.out.println(diff);
-//    }
+
+    public static void main(String[] args) {
+        diff_match_patch dmp = new diff_match_patch();
+        LinkedList<diff_match_patch.Diff> diff = dmp.diff_main("Hello my World.", "HHelloo my World.");
+        // Result: [(-1, "Hell"), (1, "G"), (0, "o"), (1, "odbye"), (0, " World.")]
+        dmp.diff_cleanupSemantic(diff);
+        // Result: [(-1, "Hello"), (1, "Goodbye"), (0, " World.")]
+        System.out.println(diff.get(1).toString());
+    }
 
 }
