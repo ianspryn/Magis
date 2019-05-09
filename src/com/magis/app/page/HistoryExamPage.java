@@ -43,6 +43,10 @@ public class HistoryExamPage {
         for (ExamQuestion examQuestion : attempt.getExamQuestions()) {
             VBox questionBox = rebuildQuestion(examQuestion);
             masterVBox.getChildren().add(questionBox);
+            if (examQuestion.isWritten()) {
+                VBox answerBox = rebuildQuestion(examQuestion);
+                //TODO: Finish this
+            }
         }
     }
 
@@ -53,11 +57,14 @@ public class HistoryExamPage {
 
         Label pointsAndQuestionIndex = new Label(examQuestion.getPointsAndQuestionIndex());
         pointsAndQuestionIndex.setPadding(new Insets(0,0,-10,0));
-        pointsAndQuestionIndex.getStyleClass().addAll("lesson-text-small", "text-color");
+        pointsAndQuestionIndex.getStyleClass().addAll("lesson-header-three-text", "text-color");
         pointsAndQuestionIndex.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
         questionBox.getChildren().add(pointsAndQuestionIndex);
 
         ExamPageContent.buildStatement(questionBox, examQuestion, chapterIndex);
+
+        //buildStatement() took care of everything else already
+        if (examQuestion.isWritten()) return questionBox;
 
         if (examQuestion.getCorrectAnswers().size() == 1) {
             ToggleGroup toggleGroup = new ToggleGroup();

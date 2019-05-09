@@ -1059,7 +1059,7 @@ for (int i = 0; i &lt; myArray.length; i++) {
 }```
 Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.</statement>
                                 <answer id = "correct">int[]</answer>
-                                <answer id = "correct">new int[10]</answer>
+                                <answer id = "correct">new int[5]</answer>
                                 <answer id = "correct">myArray[i] = i</answer>
                         </question>
                 </questions>
