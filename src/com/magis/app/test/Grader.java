@@ -84,12 +84,12 @@ public class Grader {
                 switch (type) {
                     case "INSERT":
                         /*
-                        If this is true, then this is a part of the code where the student just "deleted"
+                        If this if-statement is true, then this is a part of the exam's code where the student just "deleted"
                         the correct answer and "inserted" the wrong answer. Meaning, they are a pair.
-                        We should focus on how much they removed.
+                        We should focus on how much they removed. Consider the folllowing:
                         CORRECT: int[] myVar = new int[5];
                         STUDENT: int[] asdf asdf = new int[5];
-                        That way, the student is only deducted for missing "myVar"
+                        The student is only deducted for missing "myVar"
                         However, if this were the case:
                         CORRECT: int[] myVar = new int[5];
                         STUDENT: int[] myVar asdf = new int[5];
@@ -97,7 +97,7 @@ public class Grader {
                          */
                         if (i > 0 && diff.get(i - 1).operation.toString().equals("DELETE")) continue;
                         badPart += Math.max(1, diff1.text.split("[.]| ").length);
-                            break;
+                        break;
                     case "DELETE":
                         badPart += Math.max(1, diff1.text.split("[.]| ").length);
                         break;
