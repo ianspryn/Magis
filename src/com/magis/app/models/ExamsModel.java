@@ -165,7 +165,7 @@ public abstract class ExamsModel {
                 }
                 if (incorrectAnswers.size() == 0  && !isWritten) {
                     System.err.println("The following question: \"" + statement + "\"\n\n" +
-                            "does not have any incorrect answers, and yet there is no <written>true</written> associated with it. Verify the formatting of that question is correct.");
+                            "does not have any incorrect answers. Did you forget to add '<written>true</written>' ?");
                 }
 
             }
