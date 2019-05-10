@@ -26,6 +26,14 @@ public class Configure {
     The number of questions each page on a quiz or test will have
      */
     public static final int NUM_QUESTIONS_PER_PAGE = 2;
+    /*
+    The worst acceptable score a student can get on a test
+     */
+    public static final int MINIMUM_TEST_SCORE = 70;
+    /*
+    The worst acceptable score a student can get on a quiz
+     */
+    public static  final int MINIMUM_QUIZ_SCORE = 70;
 
     public static void values() {
         /*

@@ -207,7 +207,7 @@ public class UIComponents {
     public static JFXPasswordField createJFXPasswordField(String promptText) {
         JFXPasswordField passwordField = new JFXPasswordField();
         passwordField.setPromptText(promptText);
-        passwordField.getStyleClass().addAll("jfx-sign-in", "sign-in-field");
+        passwordField.getStyleClass().addAll("jfx-sign-in-field", "sign-in-field");
         return passwordField;
     }
 
