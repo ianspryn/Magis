@@ -118,27 +118,4 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) { launch(args); }
-
-//    @Override
-//    public void start(Stage primaryStage) {
-//        primaryStage.setTitle("Hello World!");
-//        TextFlow textFlow = new TextFlow();
-//
-//        Text correctPart = new Text("int lolol haha");
-//        Text incorrectPart = new Text ("u suk");
-//        Text correctPart2 = new Text("Emily suks too");
-//
-//        correctPart.setStyle("-fx-fill: #00ff00;");
-//        correctPart2.setStyle("-fx-fill: #00ff00;");
-//        incorrectPart.setStyle("-fx-fill: #ff0000;");
-//        textFlow.setStyle("-fx-background-color: #66BB6A;");
-//        textFlow.setMaxHeight(TextFlow.USE_PREF_SIZE);
-//        textFlow.setMaxWidth(TextFlow.USE_PREF_SIZE);
-//        textFlow.getChildren().addAll(correctPart, incorrectPart, correctPart2);
-//
-//        StackPane root = new StackPane();
-//        root.getChildren().add(textFlow);
-//        primaryStage.setScene(new Scene(root, 300, 250));
-//        primaryStage.show();
-//    }
 }

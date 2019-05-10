@@ -945,13 +945,13 @@ return ###;
                             <level>3</level>
                             <written>true</written>
                             <statement>```//This method will turn an int into a string and return it
-### toString(int num) {
+pubilc ### toString(int num) {
 String s = "" + ###;
 return ###;
 }```
 
                                 Complete the method above</statement>
-                            <answer id = "correct">public String</answer>
+                            <answer id = "correct">String</answer>
                             <answer id = "correct">num</answer>
                             <answer id = "correct">s</answer>
                         </question>
@@ -959,7 +959,7 @@ return ###;
                             <level>5</level>
                             <written>true</written>
                             <statement>```//This method will take an array of numbers and sum them up, returning the sum
-### getSum(### numArray) {
+public ### getSum(### numArray) {
 int sum = 0;
 for(int i = ###; i &lt; numArray.###; i++){
 sum += numArray[###];
@@ -968,7 +968,7 @@ return ###;
 }```
 
                                 Complete the method above</statement>
-                            <answer id = "correct">public int</answer>
+                            <answer id = "correct">int</answer>
                             <answer id = "correct">int[]</answer>
                             <answer id = "correct">0</answer>
                             <answer id = "correct">length</answer>
@@ -1059,8 +1059,8 @@ for (int i = 0; i &lt; myArray.length; i++) {
 }```
 Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.</statement>
                                 <answer id = "correct">int[]</answer>
-                                <answer id = "correct">new int[10];</answer>
-                                <answer id = "correct">myArray[i] = i;</answer>
+                                <answer id = "correct">new int[5]</answer>
+                                <answer id = "correct">myArray[i] = i</answer>
                         </question>
                 </questions>
         </chapter>
