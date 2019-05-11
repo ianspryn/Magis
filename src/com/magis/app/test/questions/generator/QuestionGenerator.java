@@ -7,6 +7,7 @@ public abstract class QuestionGenerator {
     protected ArrayList<String> answers;
     protected String correctAnswer;
     protected String question = "";
+    protected int level = 2;
     Random rand;
 
     public QuestionGenerator(){
@@ -25,4 +26,10 @@ public abstract class QuestionGenerator {
     public String getCorrectAnswer(){
         return correctAnswer;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public abstract int getNumUnique();
 }

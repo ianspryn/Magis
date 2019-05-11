@@ -1,6 +1,8 @@
 package com.magis.app.models;
 
 import com.magis.app.Main;
+import com.magis.app.test.ExamQuestion;
+import com.magis.app.test.ExamSaver;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -18,6 +20,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class StudentModel {
@@ -30,6 +34,10 @@ public class StudentModel {
 
     public Student getStudent() {
         return student;
+    }
+
+    public void removeStudent() {
+        student = null;
     }
 
     public StudentModel(LessonModel lessonModel) {
@@ -275,8 +283,8 @@ public class StudentModel {
         //write to XML file
         UpdateModel.updateXML(new DOMSource(document), filePath);
 
-        //Delete student from class
-        Main.studentModel = new StudentModel(Main.lessonModel);
+        //Delete student from the class
+        Main.studentModel.removeStudent();
         //remove the student's custom styling
         Main.scene.getStylesheets().removeAll();
         //default to light, with pink
@@ -305,7 +313,24 @@ public class StudentModel {
 
         public String getFirstName() { return firstName; }
 
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+            fullName = firstName + " " + lastName;
+            writeSettings();
+        }
+
         public String getLastName() { return lastName; }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+            fullName = firstName + " " + lastName;
+            writeSettings();
+        }
+
+        public void setPasswordHash(String passwordHash) {
+            this.passwordHash = passwordHash;
+            writeSettings();
+        }
 
         public String getPasswordHash() { return passwordHash; }
 
@@ -319,8 +344,14 @@ public class StudentModel {
 
         public boolean useAnimations() { return useAnimations; }
 
+        /**
+         * @return the most recent chapter the student visited, starting at index 0
+         */
         public int getRecentChapter() { return recentChapter; }
 
+        /**
+         * @return the most recent page the student visited, starting at index 0
+         */
         public int getRecentPage() { return recentPage; }
 
         public void setRecentPlace(int chapterIndex, int pageIndex) {
@@ -382,6 +413,12 @@ public class StudentModel {
             }
             Element studentElement = (Element) student;
             assert studentElement != null;
+            Element  firstNameElement = (Element) studentElement.getElementsByTagName("firstname").item(0);
+            firstNameElement.setTextContent(firstName);
+            Element  lastNameElement = (Element) studentElement.getElementsByTagName("lastname").item(0);
+            lastNameElement.setTextContent(lastName);
+            Element hash = (Element) studentElement.getElementsByTagName("hash").item(0);
+            hash.setTextContent(passwordHash);
 
             Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
             Node darkmode = settingsElement.getElementsByTagName("darkmode").item(0);
@@ -395,8 +432,40 @@ public class StudentModel {
             UpdateModel.updateXML(new DOMSource(document), filePath);
         }
 
+        public ArrayList<ChapterModel> getChapters() { return chapters; }
+
         public ChapterModel getChapter(int chapterIndex) {
             return chapters.get(chapterIndex);
+        }
+
+        /**
+         * Checks to see if a quiz node is associated with a chapter.
+         * The only way for the quiz node to exist is if getQuiz() was called and the node automatically created
+         * @param chapterIndex
+         * @return true if the quiz node exists (meaning the quiz exist) and false otherwise
+         */
+        public boolean hasTakenQuiz(int chapterIndex) {
+            for (Quiz quiz : quizzes) {
+                if (quiz.getExamChapterNumber() == chapterIndex) {
+                    return quiz.hasScore();
+                }
+            }
+            return false;
+        }
+
+        /**
+         * Checks to see if a test node is associated with a chapter.
+         * The only way for the test node to exist is if getTest() was called and the node automatically created
+         * @param chapterIndex
+         * @return true if the test node exists (meaning the test exist) and false otherwise
+         */
+        public boolean hasTakenTest(int chapterIndex) {
+            for (Test test : tests) {
+                if (test.getExamChapterNumber() == chapterIndex) {
+                    return test.hasScore();
+                }
+            }
+            return false;
         }
 
         /**
@@ -406,7 +475,7 @@ public class StudentModel {
          */
         public Quiz getQuiz(int chapterIndex) {
             for (Quiz quiz : quizzes) {
-                if (quiz.getQuizChapterNumber() == chapterIndex) {
+                if (quiz.getExamChapterNumber() == chapterIndex) {
                     return quiz;
                 }
             }
@@ -454,7 +523,7 @@ public class StudentModel {
          */
         public Test getTest(int chapterIndex) {
             for (Test test : tests) {
-                if (test.getTestChapterNumber() == chapterIndex) {
+                if (test.getExamChapterNumber() == chapterIndex) {
                     return test;
                 }
             }
@@ -544,7 +613,7 @@ public class StudentModel {
                 for (int j = 0; j < pages.getLength(); j++) {
 
                     Node page = pages.item(j);
-                    page.setTextContent(Integer.toString(getChapter(i).getPageVisisted().get(j)));
+                    page.setTextContent(Integer.toString(getChapter(i).getPageVisited().get(j)));
                 }
             }
             //write to XML file
@@ -638,7 +707,7 @@ public class StudentModel {
                 }
             }
 
-            public ArrayList<Integer> getPageVisisted() {
+            public ArrayList<Integer> getPageVisited() {
                 return pageVisisted;
             }
 
@@ -668,19 +737,41 @@ public class StudentModel {
             }
         }
 
-        public class Quiz {
-            Node quiz;
-            private int quizChapterNumber;
-            private ArrayList<Double> scores;
-            private double bestScore = -1.0;
-            private double worstScore = 1000.0;
+        public class Quiz extends Exam {
+            Quiz (Node quiz) {
+                super(quiz, "quiz");
+            }
+        }
 
-            private int getQuizChapterNumber() {
-                return quizChapterNumber;
+        public class Test extends Exam {
+            Test (Node test) {
+                super(test, "test");
+            }
+        }
+
+        public class Exam {
+            private String examType;
+            private String examTypePlural;
+            private int examChapterNumber;
+            private ArrayList<Double> scores;
+            private ArrayList<Attempt> attempts;
+            private double bestScore = -1.0;
+            private double worstScore = -1.0;
+
+            public int getExamChapterNumber() {
+                return examChapterNumber;
             }
 
             public ArrayList<Double> getScores() {
                 return scores;
+            }
+
+            /**
+             * Check to see if there exists a score in the scores ArrayList.
+             * @return true if there exists a score, false otherwise
+             */
+            public boolean hasScore() {
+                return scores.size() != 0;
             }
 
             /**
@@ -693,6 +784,7 @@ public class StudentModel {
                 }
                 return -1.0;
             }
+
 
             /**
              * This method calculates the average scores for a given test. If the test as not been taken, it will return 0.0
@@ -731,6 +823,7 @@ public class StudentModel {
                 return -1.0;
             }
 
+
             /**
              * Add a new score value to the test
              * @param scoreValue student's score on test
@@ -751,6 +844,7 @@ public class StudentModel {
                 if(scoreValue < worstScore) {
                     worstScore = scoreValue;
                 }
+
                 //add score to the XML file
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = null;
@@ -779,188 +873,275 @@ public class StudentModel {
                 }
                 Element studentElement = (Element) student;
                 assert studentElement != null;
-                Element quizzesElement = (Element) studentElement.getElementsByTagName("quizzes").item(0);
-                NodeList quizzes = quizzesElement.getElementsByTagName("quiz");
-                Node quiz = null;
-                for (int i = 0; i < quizzes.getLength(); i++) {
-                    quiz = quizzes.item(i);
+                Element examsElement = (Element) studentElement.getElementsByTagName(examTypePlural).item(0);
+                NodeList exams = examsElement.getElementsByTagName(examType);
+                Node exam = null;
+                for (int i = 0; i < exams.getLength(); i++) {
+                    exam = exams.item(i);
                     //find which test to add score to
-                    if (Integer.parseInt(quiz.getAttributes().getNamedItem("chapter").getNodeValue()) == quizChapterNumber) {
+                    if (Integer.parseInt(exam.getAttributes().getNamedItem("chapter").getNodeValue()) == examChapterNumber) {
                         break;
                     }
                 }
-                Element quizElement = (Element) quiz;
+                Element examElement = (Element) exam;
                 Element score = document.createElement("score");
                 score.appendChild(document.createTextNode(scoreValue.toString()));
-                assert quizElement != null;
-                quizElement.appendChild(score);
+                assert examElement != null;
+                examElement.appendChild(score);
                 //write to XML file
                 UpdateModel.updateXML(new DOMSource(document), filePath);
                 //add score to the scores ArrayList
                 scores.add(scoreValue);
             }
 
-            Quiz(Node quiz) {
-                this.quiz = quiz;
+            public ArrayList<Attempt> getAttempts() {
+                return attempts;
+            }
 
-                Element quizElement = (Element) quiz;
-                this.quizChapterNumber = Integer.parseInt(quizElement.getAttributes().getNamedItem("chapter").getNodeValue());
+            public Attempt getAttempt(int index) {
+                return attempts.get(index);
+            }
 
+            Exam (Node exam, String examType) {
+                this.examType = examType;
+                switch (examType) {
+                    case "quiz":
+                        this.examTypePlural = "quizzes";
+                        break;
+                    case "test":
+                        this.examTypePlural = "tests";
+                        break;
+                }
+                Element examElement = (Element) exam;
+                this.examChapterNumber = Integer.parseInt(examElement.getAttributes().getNamedItem("chapter").getNodeValue());
                 this.scores = new ArrayList<>();
-                if (quizElement.getElementsByTagName("score") != null) {
-                    NodeList scores = quizElement.getElementsByTagName("score");
+                if (examElement.getElementsByTagName("score") != null) {
+                    NodeList scores = examElement.getElementsByTagName("score");
                     for (int i = 0; i < scores.getLength(); i++) {
                         this.scores.add(Double.parseDouble(scores.item(i).getTextContent()));
+                    }
+                }
+
+                this.attempts = new ArrayList<>();
+                if (examElement.getElementsByTagName("attempt") != null) {
+                    NodeList attempts = examElement.getElementsByTagName("attempt");
+                    for (int i = 0; i < attempts.getLength(); i++) {
+                        Attempt attempt = new Attempt(attempts.item(i));
+                        this.attempts.add(attempt);
+                    }
+                }
+
+                for (double scoreValue : scores) {
+                    if(scoreValue > bestScore) {
+                        bestScore = scoreValue;
+                    }
+                    if(scoreValue < worstScore) {
+                        worstScore = scoreValue;
                     }
                 }
             }
         }
 
-        public class Test {
-            private int testChapterNumber;
-            private ArrayList<Double> scores;
-            private double bestScore = -1.0;
-            private double worstScore = 1000.0;
+        public class Attempt {
+            private String timestamp;
+            private ArrayList<ExamQuestion> examQuestions;
 
-            private int getTestChapterNumber() {
-                return testChapterNumber;
+            public void setTimestamp(String timestamp) {
+                this.timestamp = timestamp;
             }
 
-            public ArrayList<Double> getScores() {
-                return scores;
+            public void addExamQuestion(ExamQuestion examQuestion) {
+                examQuestions.add(examQuestion);
             }
 
-            /**
-             * This method returns the most recent score for a given test. If the test has not been taken, it will return -1.0
-             * @return a Double of the most recent score
-             */
-            public Double getLastScore() {
-                if (scores.size() > 0) {
-                    return scores.get(scores.size() - 1);
-                }
-                return -1.0;
+            public String getTimestamp() {
+                return timestamp;
             }
 
-
-            /**
-             * This method calculates the average scores for a given test. If the test as not been taken, it will return 0.0
-             * @return a Double of the average score
-             */
-            public Double getAverageScore() {
-                if (scores.size() == 0) {
-                    return 0.0;
-                }
-                Double scoreTotal = 0.0;
-                for (Double score : scores) {
-                    scoreTotal += score;
-                }
-                return scoreTotal / scores.size();
+            public ArrayList<ExamQuestion> getExamQuestions() {
+                return examQuestions;
             }
 
-            /**
-             * This method returns the best score for a given test. If the test has not been taken, it will return -1.0
-             * @return a Double of the best score
-             */
-            public Double getBestScore() {
-                if (scores.size() > 0) {
-                    return bestScore;
-                }
-                return -1.0;
+            Attempt () {
+                examQuestions = new ArrayList<>();
             }
 
-            /**
-             * This method returns the worst score for a given test. If the test has not been taken, it will return -1.0
-             * @return a Double of the worst score
-             */
-            public Double getWorstScore() {
-                if (scores.size() > 0) {
-                    return worstScore;
+            Attempt (Node attempt) {
+                examQuestions = new ArrayList<>();
+
+                Element attemptElement = (Element) attempt;
+
+                Node timestamp = attemptElement.getElementsByTagName("timestamp").item(0);
+                this.timestamp = timestamp.getTextContent();
+
+                NodeList questions = attemptElement.getElementsByTagName("question");
+                for (int i = 0; i < questions.getLength(); i++) {
+                    ExamQuestion examQuestion = new ExamQuestion();
+                    Element question = (Element) questions.item(i);
+
+                    Node statement = question.getElementsByTagName("statement").item(0);
+                    examQuestion.setQuestion(statement.getTextContent());
+
+                    Node pointsAndQuestionIndex = question.getElementsByTagName("PointsAndQuestionIndex").item(0);
+                    examQuestion.setPointsAndQuestionIndex(pointsAndQuestionIndex.getTextContent());
+
+                    Node written = question.getElementsByTagName("written").item(0);
+                    examQuestion.setWritten(written != null && Boolean.parseBoolean(written.getTextContent()));
+
+                    if (examQuestion.isWritten()) {
+                        NodeList answers = question.getElementsByTagName("answer");
+                        for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                            Element answer = (Element) answers.item(answerIndex);
+                            examQuestion.addCorrectAnswer(answer.getTextContent());
+                        }
+                        NodeList studentAnswers = question.getElementsByTagName("studentanswer");
+                        for (int studentAnswerIndex = 0; studentAnswerIndex < studentAnswers.getLength(); studentAnswerIndex++) {
+                            Element studentAnswer = (Element) studentAnswers.item(studentAnswerIndex);
+                            examQuestion.addStudentAnswer(studentAnswer.getTextContent());
+                        }
+                    } else {
+                        NodeList answers = question.getElementsByTagName("answer");
+                        for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                            Element answer = (Element) answers.item(answerIndex);
+                            if (answer.getAttributes().getNamedItem("id") != null) {
+                                if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
+                                    examQuestion.addCorrectAnswer(answer.getTextContent());
+                                }
+                            }
+                            if (answer.getAttributes().getNamedItem("selected") != null) {
+                                if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
+                                    examQuestion.addStudentAnswer(answer.getTextContent());
+                                }
+                            }
+                            examQuestion.addAnswer(answer.getTextContent());
+                        }
+                    }
+                    examQuestions.add(examQuestion);
                 }
-                return -1.0;
             }
+        }
 
+        public void saveQuiz(ExamSaver examSaver) {
+            Attempt attempt = saveExam(examSaver, "quiz");
+            //add the attempt to the Test class
+            getQuiz(examSaver.getChapterIndex()).getAttempts().add(attempt);
+        }
 
-            /**
-             * Add a new score value to the test
-             * @param scoreValue student's score on test
-             */
-            public void addScore(int scoreValue) {
-                addScore(new Double(scoreValue));
-            }
+        public void saveTest(ExamSaver examSaver) {
+            Attempt attempt = saveExam(examSaver, "test");
+            //add the attempt to the Quiz class
+            getTest(examSaver.getChapterIndex()).getAttempts().add(attempt);
+        }
 
-            /**
-             * Add a new score value to the test
-             * @param scoreValue student's score on test
-             */
-            public void addScore(Double scoreValue) {
-                // update best and worst scores
-                if(scoreValue > bestScore) {
-                    bestScore = scoreValue;
-                }
-                if(scoreValue < worstScore) {
-                    worstScore = scoreValue;
-                }
-
-                //add score to the XML file
-                DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder documentBuilder = null;
-                try {
-                    documentBuilder = documentBuilderFactory.newDocumentBuilder();
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                }
-                Document document = null;
-                try {
-                    assert documentBuilder != null;
-                    document = documentBuilder.parse(filePath);
-                } catch (SAXException | IOException e) {
-                    e.printStackTrace();
-                }
-                assert document != null;
-                Element root = document.getDocumentElement();
-                NodeList students = root.getElementsByTagName("student");
-                Node student = null;
-                for (int i = 0; i < students.getLength(); i++) {
-                    student = students.item(i);
-                    //find the current student
-                    if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+        Attempt saveExam(ExamSaver examSaver, String examType) {
+            String examTypePlural = "";
+            switch (examType) {
+                case "quiz":
+                    examTypePlural = "quizzes";
                         break;
-                    }
-                }
-                Element studentElement = (Element) student;
-                assert studentElement != null;
-                Element testsElement = (Element) studentElement.getElementsByTagName("tests").item(0);
-                NodeList tests = testsElement.getElementsByTagName("test");
-                Node test = null;
-                for (int i = 0; i < tests.getLength(); i++) {
-                    test = tests.item(i);
-                    //find which test to add score to
-                    if (Integer.parseInt(test.getAttributes().getNamedItem("chapter").getNodeValue()) == testChapterNumber) {
-                        break;
-                    }
-                }
-                Element testElement = (Element) test;
-                Element score = document.createElement("score");
-                score.appendChild(document.createTextNode(scoreValue.toString()));
-                assert testElement != null;
-                testElement.appendChild(score);
-                //write to XML file
-                UpdateModel.updateXML(new DOMSource(document), filePath);
-                //add score to the scores ArrayList
-                scores.add(scoreValue);
-            }
+                case "test":
+                    examTypePlural = "tests";
+                    break;
 
-            Test(Node test) {
-                Element testElement = (Element) test;
-                this.testChapterNumber = Integer.parseInt(testElement.getAttributes().getNamedItem("chapter").getNodeValue());
-                this.scores = new ArrayList<>();
-                if (testElement.getElementsByTagName("score") != null) {
-                    NodeList scores = testElement.getElementsByTagName("score");
-                    for (int i = 0; i < scores.getLength(); i++) {
-                        this.scores.add(Double.parseDouble(scores.item(i).getTextContent()));
+            }
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
+            try {
+                documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            }
+            Document document = null;
+            try {
+                assert documentBuilder != null;
+                document = documentBuilder.parse(filePath);
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            assert document != null;
+            Element root = document.getDocumentElement();
+            NodeList students = root.getElementsByTagName("student");
+            Node student = null;
+            for (int i = 0; i < students.getLength(); i++) {
+                student = students.item(i);
+                //find the current student
+                if (student.getAttributes().getNamedItem("username").getNodeValue().equals(username)) {
+                    break;
+                }
+            }
+            assert student != null;
+            Element studentElement = (Element) student;
+            Element examsElement = (Element) studentElement.getElementsByTagName(examTypePlural).item(0);
+            NodeList exams = examsElement.getElementsByTagName(examType);
+            Node exam = null;
+            for (int i = 0; i < exams.getLength(); i++) {
+                exam = exams.item(i);
+                //find which exam to add score to
+                if (Integer.parseInt(exam.getAttributes().getNamedItem("chapter").getNodeValue()) == examSaver.getChapterIndex()) {
+                    break;
+                }
+            }
+            Element examElement = (Element) exam;
+            Element attemptElement = document.createElement("attempt");
+            assert examElement != null;
+            examElement.appendChild(attemptElement);
+            Element timestamp = document.createElement("timestamp");
+            String timestampString = DateTimeFormatter.ofPattern("EEE, MMMM d, yyyy 'at' hh:mm a").format(LocalDateTime.now()); //Sun, April 28 2019 at 11:57 PM
+            timestamp.appendChild(document.createTextNode(timestampString));
+            attemptElement.appendChild(timestamp);
+
+            Attempt attempt = new Attempt();
+            attempt.setTimestamp(timestampString);
+
+            for (ExamQuestion examQuestion : examSaver.getExamQuestions()) {
+                //add to the attempt class
+                attempt.addExamQuestion(examQuestion);
+                //question element
+                Element question = document.createElement("question");
+                attemptElement.appendChild(question);
+                //pointsAndQuestionIndex
+                Element pointsAndQuestionIndex = document.createElement("PointsAndQuestionIndex");
+                pointsAndQuestionIndex.appendChild(document.createTextNode(examQuestion.getPointsAndQuestionIndex()));
+                question.appendChild(pointsAndQuestionIndex);
+                //is this a written statement?
+                Element written = document.createElement("written");
+                written.appendChild(document.createTextNode(Boolean.toString(examQuestion.isWritten())));
+                question.appendChild(written);
+                //each part of the question
+                Element statement = document.createElement("statement");
+                statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
+                question.appendChild(statement);
+
+                if (examQuestion.isWritten()) {
+                    for (String correctAnswer : examQuestion.getCorrectAnswers()) {
+                        Element answerElement = document.createElement("answer");
+                        answerElement.appendChild(document.createTextNode(correctAnswer));
+                        answerElement.setAttribute("id", "correct");
+                        question.appendChild(answerElement);
+                    }
+                    for (String studentAnswer : examQuestion.getStudentAnswers()) {
+                        Element answerElement = document.createElement("studentanswer");
+                        answerElement.appendChild(document.createTextNode(studentAnswer));
+                        question.appendChild(answerElement);
+                    }
+                } else {
+                    for (String answer : examQuestion.getAnswers()) {
+                        Element answerElement = document.createElement("answer");
+                        answerElement.appendChild(document.createTextNode(answer));
+                        //if this is a correct answer
+                        if (examQuestion.getCorrectAnswers().contains(answer)) {
+                            answerElement.setAttribute("id", "correct");
+                        }
+                        //if this is an answer the student selected
+                        if (examQuestion.getStudentAnswers().contains(answer)) {
+                            answerElement.setAttribute("selected", "true");
+                        }
+                        question.appendChild(answerElement);
                     }
                 }
             }
+            UpdateModel.updateXML(new DOMSource(document), filePath);
+            return attempt; //so we can add it to either the quiz class or the test class (depending on who called this method)
         }
     }
 }

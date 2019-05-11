@@ -56,6 +56,16 @@ public class LessonModel {
         return chapters.get(index);
     }
 
+    public Integer getChapterIndex(String chapterTitle) {
+        for (int i = 0; i < chapters.size(); i++) {
+            ChapterModel chapter = chapters.get(i);
+            if (chapter.getTitle().equals(chapterTitle)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     public class ChapterModel {
         private String image;
         private String title;
@@ -131,7 +141,7 @@ public class LessonModel {
             public String getTitle() {
                 if (title != null) {
                     if (title.length() > 24) {
-                        System.err.println("Lesson page title of \"" + title + "\" too long. Must be less than 25 characters. Title will be clipped.");
+                        System.err.println("Lesson page title of \"" + title + "\" is 26 or more characters. Must be less than 25 characters to show full title in side panel. Title will be clipped.");
                     }
                     return title;
                 } else {

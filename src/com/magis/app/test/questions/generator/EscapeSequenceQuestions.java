@@ -18,19 +18,23 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         getEscapeSequenceQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        return sentences.length*5;
+    }
+
     public void getEscapeSequenceQuestion(){
         answers.clear();
-        question = "";
 
         int sentencePicker = rand.nextInt(sentences.length);
         question = sentences[sentencePicker];
 
-        int sequenePicker = rand.nextInt(8);
+        int sequenePicker = rand.nextInt(5);
 
         switch(sequenePicker){
             case 0:
                 correctAnswer = question;
-                correctAnswer.replace('^', '\n');
+                correctAnswer = correctAnswer.replace('^', '\n');
                 answers.add(correctAnswer);
                 answers.add(question.replace('^','\t'));
                 answers.add(question.replace('^','\\'));
@@ -39,7 +43,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
             case 1:
                 correctAnswer = question;
-                correctAnswer.replace('^', '\t');
+                correctAnswer = correctAnswer.replace('^', '\t');
                 answers.add(correctAnswer);
                 answers.add(question.replace('^','\n'));
                 answers.add(question.replace('^','\\'));
@@ -48,7 +52,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
             case 2:
                 correctAnswer = question;
-                correctAnswer.replace('^', '\\');
+                correctAnswer = correctAnswer.replace('^', '\\');
                 answers.add(correctAnswer);
                 answers.add(question.replace('^','\t'));
                 answers.add(question.replace('^','\n'));
@@ -57,7 +61,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
             case 3:
                 correctAnswer = question;
-                correctAnswer.replace('^', '\"');
+                correctAnswer = correctAnswer.replace('^', '\"');
                 answers.add(correctAnswer);
                 answers.add(question.replace('^','\t'));
                 answers.add(question.replace('^','\n'));
@@ -66,24 +70,15 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
                 break;
             case 4:
                 correctAnswer = question;
-                correctAnswer.replace('^', '\'');
+                correctAnswer = correctAnswer.replace('^', '\'');
                 answers.add(correctAnswer);
                 answers.add(question.replace('^','\t'));
                 answers.add(question.replace('^','\n'));
                 answers.add(question.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \" \\\' \" do to the string?";
                 break;
-            case 5:
-                correctAnswer = question;
-                correctAnswer.replace('^', '\\');
-                answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
-                answers.add(question.replace('^','\n'));
-                answers.add("Turn the code into a single-line comment");
-                question+="\n\nWhat will replacing the \"^\"(s) with a \"\\\\\" do to the string?";
-                break;
         }
         Collections.shuffle(answers);
-        answers.add("Unknown");
+        answers.add("None of the Above");
     }
 }

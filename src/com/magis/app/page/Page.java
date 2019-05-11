@@ -5,11 +5,9 @@ import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public abstract class Page {
 
@@ -50,7 +48,7 @@ public abstract class Page {
         master borderPane
          */
         borderPane.getStyleClass().add("borderpane-page");
-        UIComponents.fadeAndTranslate(borderPane,0.2,0.2,-10,0,0,0);
+        UIComponents.fadeOnAndTranslate(borderPane,0.2,0.2,-10,0,0,0);
 
         /*
         sidebar
@@ -58,11 +56,11 @@ public abstract class Page {
         sideBar.getStyleClass().add("sidebar");
         homeHBox = UIComponents.createHomeBox();
         homeHBox.setOnMouseClicked(e -> {
-            if (Main.takingTest) {
+            if (Main.takingExam) {
                 String title = "Exit Test";
                 String content = "Are you sure you want to exit? All test progress will be lost!";
                 if (UIComponents.confirmMessage(title, content)) {
-                    Main.takingTest = false;
+                    Main.takingExam = false;
                     HomePage.goHome(borderPane);
                 }
             } else {
@@ -72,18 +70,42 @@ public abstract class Page {
         sideBar.setTop(homeHBox);
         sideBar.setLeft(pageSidePanel.getScrollPane());
         borderPane.setLeft(sideBar);
+        borderPane.getLeft().prefWidth(300);
 
         /*
         main area
          */
         mainArea.setCenter(pageContent.getScrollPane());
-        UIComponents.fadeAndTranslate(pageContent.getScrollPane(),0.15,0.2,0,0,-10,0);
+        UIComponents.fadeOnAndTranslate(pageContent.getScrollPane(),0.15,0.2,0,0,-10,0);
 
         /*
         navigation
          */
         bottomNavigation.getStyleClass().add("navigation-content");
         bottomNavigation.setPadding(new Insets(10,10,10,10));
+
+
+        //keyboard navigation
+        /*
+        Currently disabled because there is no known way to capture key presses when the scene isn't focused
+        Which, the scene immediately becomes out of focus the moment the user clicks anything
+         */
+//        Main.scene.setOnKeyPressed(e -> {
+//            if (e.getCode() == KeyCode.LEFT) {
+//                System.out.println(currentPage);
+//                System.out.println(currentPage > 0);
+//                System.out.println();
+//                if (currentPage > 0) updatePage(currentPage - 1);
+//            }
+//
+//            if (e.getCode() == KeyCode.RIGHT) {
+//                System.out.println(currentPage);
+//                System.out.println(numPages);
+//                System.out.println(currentPage < numPages - 1);
+//                System.out.println();
+//                if (currentPage < numPages - 1) updatePage(currentPage + 1);
+//            }
+//        });
 
         //left navigation
         leftButton = UIComponents.createNavigationButton("<");
@@ -99,7 +121,7 @@ public abstract class Page {
 
         bottomNavigation.setLeft(leftButton);
         bottomNavigation.setRight(rightButton);
-        UIComponents.fadeAndTranslate(bottomNavigation,0.15,0.3,0,0,0,0);
+        UIComponents.fadeOnAndTranslate(bottomNavigation,0.15,0.3,0,0,0,0);
 
         mainArea.setCenter(pageContent.getScrollPane());
         mainArea.setBottom(bottomNavigation);

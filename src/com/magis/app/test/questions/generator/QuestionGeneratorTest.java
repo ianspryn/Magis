@@ -122,25 +122,25 @@ class QuestionGeneratorTest {
         System.out.println("\nCorrect Answer: "+correctAnswer);
     }
 
-    @Test
-    void testMathMethod(){
-        MethodQuestions objc  = new MethodQuestions();
-        objc.getMathMethodQuestion();
-        String[] answers = objc.getAnswers().toArray(new String[0]);
-        String question = objc.getQuestion();
-        String correctAnswer = objc.getCorrectAnswer();
-        System.out.println(question+"\n");
-
-        for(int i=0; i<answers.length; i++){
-            System.out.println((i+1)+". "+answers[i]);
-        }
-
-        System.out.println("\nCorrect Answer: "+correctAnswer);
-    }
+//    @Test
+//    void testMathMethod(){
+//        MethodQuestions objc  = new MethodQuestions();
+//        objc.getMathMethodQuestion();
+//        String[] answers = objc.getAnswers().toArray(new String[0]);
+//        String question = objc.getQuestion();
+//        String correctAnswer = objc.getCorrectAnswer();
+//        System.out.println(question+"\n");
+//
+//        for(int i=0; i<answers.length; i++){
+//            System.out.println((i+1)+". "+answers[i]);
+//        }
+//
+//        System.out.println("\nCorrect Answer: "+correctAnswer);
+//    }
 
     @Test
     void testStringMethod(){
-        MethodQuestions objc  = new MethodQuestions();
+        ObjectComparisonQuestions objc  = new ObjectComparisonQuestions();
         objc.getStringMethodQuestion();
         String[] answers = objc.getAnswers().toArray(new String[0]);
         String question = objc.getQuestion();
@@ -186,5 +186,68 @@ class QuestionGeneratorTest {
         System.out.println("\nCorrect Answer: "+correctAnswer);
     }
 
+    @Test
+    void testArrays(){
+        ArraysQuestions objc  = new ArraysQuestions();
+        objc.getArrayIndexQuestion();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testArrays2(){
+        ArraysQuestions objc  = new ArraysQuestions();
+        objc.getIndexQuestion();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testEscapeSequences(){
+        EscapeSequenceQuestions objc  = new EscapeSequenceQuestions();
+        objc.getEscapeSequenceQuestion();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
+
+    @Test
+    void testConstructer(){
+        QuestionGenerator objc  = new ConstructerQuestions();
+        ((ConstructerQuestions) objc).generateContentQuestion();
+        String[] answers = objc.getAnswers().toArray(new String[0]);
+        String question = objc.getQuestion();
+        String correctAnswer = objc.getCorrectAnswer();
+        System.out.println(question+"\n");
+
+        for(int i=0; i<answers.length; i++){
+            System.out.println((i+1)+". "+answers[i]);
+        }
+
+        System.out.println("\nCorrect Answer: "+correctAnswer);
+    }
 
 }

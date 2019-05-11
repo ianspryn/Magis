@@ -1,5 +1,6 @@
 package com.magis.app.UI;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +21,8 @@ public class Alert {
 
         Label label = new Label();
         label.setText(contentText);
-        Button closeButton = new Button("Close");
+        JFXButton closeButton = new JFXButton("Close");
+        closeButton.getStyleClass().addAll("jfx-button-raised", "jfx-button-raised-color");
         closeButton.setOnAction(e -> window.close());
 
         VBox layout = new VBox(10);

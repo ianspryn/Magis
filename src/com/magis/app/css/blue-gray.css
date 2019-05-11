@@ -5,6 +5,11 @@
     -fx-text-fill: #B0BEC5; /* blue-gray 200*/
 }
 
+.text-color {
+    -fx-text-fill: #78909C; /* blue-gray 400 */
+    -fx-fill: #78909C; /* blue-gray 400 */
+}
+
 .circleindicator-container  {
 	circleindicator-color: #455A64; /* blue-gray 700 */
 }
@@ -16,6 +21,10 @@
 .sidebar, .sidebar-scrollpane {
     -fx-background-color: #37474F; /* blue-gray 800 */
     -fx-background: #37474F; /* blue-gray 800 */
+}
+
+.jfx-custom-check-box {
+    -jfx-checked-color: #78909C; /* blue-gray 400 */
 }
 
  .jfx-radio-button {
@@ -48,13 +57,68 @@
 
 .jfx-text-field, .jfx-password-field {
     -jfx-focus-color: #546E7A; /* blue-gray 600 */
-    -jfx-unfocus-color: #CFD8DC; /* blue-gray 100 */
+    -jfx-unfocus-color: #B0BEC5; /* blue-gray 200 */
 }
 
-.lesson-rectangle {
+.rectangle-color {
     -fx-fill: #78909C; /* blue-gray 400 */
 }
 
 .code-text {
     -fx-border-color: #78909C; /* blue-gray 400 */
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Scroll Bar			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.side-panel-scroll-bar .scroll-bar:vertical > .track-background, .side-panel-scroll-bar .scroll-bar:horizontal > .track-background {
+    -fx-background-color: #37474F; /* blue-gray 800 */
+    -fx-background-insets: 0.0;
+}
+
+.side-panel-scroll-bar .scroll-bar:vertical > .thumb, .side-panel-scroll-bar .scroll-bar:horizontal > .thumb {
+    -fx-background-color: #263238; /* blue-gray 900 */
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 1.0;
+}
+
+/* Up- and Down-Button Padding */
+.side-panel-scroll-bar .scroll-bar:vertical > .increment-button, .side-panel-scroll-bar .scroll-bar:vertical > .decrement-button {
+    -fx-padding: 5 2 5 2;
+}
+
+/* Left- and Right-Button Padding */
+.side-panel-scroll-bar .scroll-bar:horizontal > .increment-button, .side-panel-scroll-bar .scroll-bar:horizontal > .decrement-button {
+    -fx-padding: 2 5 2 5;
+}
+
+.side-panel-scroll-bar .scroll-bar > .increment-button, .side-panel-scroll-bar .scroll-bar > .decrement-button, .side-panel-scroll-bar .scroll-bar:hover > .increment-button, .side-panel-scroll-bar .scroll-bar:hover > .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.side-panel-scroll-bar .scroll-bar > .increment-button > .increment-arrow, .side-panel-scroll-bar .scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: #263238; /* blue-gray 900 */
+}
+
+/* Up Arrow */
+.side-panel-scroll-bar .scroll-bar:vertical > .increment-button > .increment-arrow {
+    -fx-shape: "M298 426h428l-214 214z";
+}
+
+/* Down Arrow */
+.side-panel-scroll-bar .scroll-bar:vertical > .decrement-button > .decrement-arrow {
+    -fx-shape: "M298 598l214-214 214 214h-428z";
+}
+
+/* Right Arrow */
+.side-panel-scroll-bar .scroll-bar:horizontal > .increment-button > .increment-arrow {
+    -fx-shape: "M0 428l0 -428l214 214l-214 214z";
+}
+
+/* Left Arrow */
+.side-panel-scroll-bar .scroll-bar:horizontal > .decrement-button > .decrement-arrow {
+    -fx-shape: "M214 0l0 428l-214 -214l214 -214z";
 }

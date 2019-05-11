@@ -1,8 +1,5 @@
 package com.magis.app.test.questions.generator;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 public class ExceptionsQuestions extends QuestionGenerator{
 
     public ExceptionsQuestions(){
@@ -12,5 +9,10 @@ public class ExceptionsQuestions extends QuestionGenerator{
     @Override
     public void initialize() {
         int selection = rand.nextInt(2);
+    }
+
+    @Override
+    public int getNumUnique() {
+        return 0;
     }
 }

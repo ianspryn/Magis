@@ -58,18 +58,6 @@ public abstract class ExamsModel {
         }
     }
 
-//    public void initializeQuiz(String chapterName) {
-//        NodeList chapters = document.getElementsByTagName("chapter");
-//        ChapterModel chapterModel = null;
-//        for (int i = 0; i < chapters.getLength(); i++) {
-//            Node chapterNode = chapters.item(i);
-//            if (chapterName.equals(chapterNode.getAttributes().getNamedItem("id").getNodeValue())) {
-//                chapterModel = new ChapterModel(chapterNode);
-//            }
-//        }
-//        this.chapters.add(chapterModel);
-//    }
-
     public class ChapterModel {
         private String chapterName;
         private ArrayList<QuestionsModel> questions;
@@ -112,6 +100,10 @@ public abstract class ExamsModel {
         public class QuestionsModel {
 
             private String statement;
+            private boolean isWritten;
+            private boolean shuffle;
+            private int level;
+            private ArrayList<String> answers;
             private ArrayList<String> correctAnswers;
             private ArrayList<String> incorrectAnswers;
 
@@ -123,9 +115,11 @@ public abstract class ExamsModel {
                 return incorrectAnswers.size() + correctAnswers.size();
             }
 
-            public int getNumIncorrectAnswers() {
-                return incorrectAnswers.size();
-            }
+            public int getNumIncorrectAnswers() { return incorrectAnswers.size(); }
+
+            public int getNumCorrectAnswers() { return correctAnswers.size(); }
+
+            public ArrayList<String> getAnswers() { return answers; }
 
             public ArrayList<String> getCorrectAnswers() {
                 return correctAnswers;
@@ -135,14 +129,27 @@ public abstract class ExamsModel {
                 return incorrectAnswers;
             }
 
+            public int getLevel() {
+                return level;
+            }
+
+            public boolean isShuffle() { return shuffle; }
+
+            public boolean isWritten() { return isWritten; }
+
             QuestionsModel(Node question) {
+                this.answers = new ArrayList<>();
                 this.incorrectAnswers = new ArrayList<>();
                 this.correctAnswers = new ArrayList<>();
                 Element questionElement = (Element) question;
+                this.isWritten = questionElement.getElementsByTagName("written").item(0) != null && Boolean.parseBoolean(questionElement.getElementsByTagName("written").item(0).getTextContent());
+                this.shuffle = questionElement.getElementsByTagName("shuffle").item(0) == null || Boolean.parseBoolean(questionElement.getElementsByTagName("shuffle").item(0).getTextContent());
+                this.level = questionElement.getElementsByTagName("level").item(0) != null ? Integer.parseInt(questionElement.getElementsByTagName("level").item(0).getTextContent()) : 1;
                 this.statement = questionElement.getElementsByTagName("statement").item(0).getTextContent();
                 NodeList answers = questionElement.getElementsByTagName("answer");
                 for (int i = 0; i < answers.getLength(); i++) {
                     Element answer = (Element) answers.item(i);
+                    this.answers.add(answer.getTextContent());
                     if (answer.hasAttribute("id")) {
                         if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
                             this.correctAnswers.add(answer.getTextContent());
@@ -152,6 +159,13 @@ public abstract class ExamsModel {
                     } else {
                         incorrectAnswers.add(answer.getTextContent());
                     }
+                }
+                if (isWritten && incorrectAnswers.size() > 1) {
+                    System.err.println("Question of type \"written\" should ALL be marked as correct answer. Please fix the question with the statement: \"" + statement + "\"");
+                }
+                if (incorrectAnswers.size() == 0  && !isWritten) {
+                    System.err.println("The following question: \"" + statement + "\"\n\n" +
+                            "does not have any incorrect answers. Did you forget to add '<written>true</written>' ?");
                 }
 
             }

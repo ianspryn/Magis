@@ -31,12 +31,17 @@ public class VariableQuestions extends QuestionGenerator{
         else getInstanceVariableQuestion();
     }
 
+    @Override
+    public int getNumUnique() {
+        int answer = names1.length + names2.length;
+        return answer;
+    }
+
     public void getVariableNameQuestion(){
         answers.clear();
-        question = "";
         answers.add("True");
         answers.add("False");
-        answers.add("Unknown");
+        answers.add("None of the Above");
 
         int rightWrong = rand.nextInt(2);
         int selector;
@@ -62,7 +67,6 @@ public class VariableQuestions extends QuestionGenerator{
     }
 
     public void getInstanceVariableQuestion(){
-        question = "";
         ArrayList<String> shuffler = new ArrayList<>();
 
         int selector = rand.nextInt(names1.length);
@@ -77,7 +81,7 @@ public class VariableQuestions extends QuestionGenerator{
         shuffler.add("int value = "+word+";\n"+word+" = value;");
         correctAnswer = shuffler.get(0);
         Collections.shuffle(shuffler);
-        shuffler.add("Unknown");
+        shuffler.add("None of the Above");
 
         answers = shuffler;
     }

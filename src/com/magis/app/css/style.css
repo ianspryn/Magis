@@ -82,6 +82,11 @@
     -fx-font-family: "Roboto Mono Light";
 }
 
+.lesson-text-small {
+    -fx-font-size: 12px;
+    -fx-font-family: "Roboto Mono Regular";
+ }
+
 .lesson-text {
     -fx-font-size: 15px;
     -fx-font-family: "Roboto Mono Regular";
@@ -145,7 +150,11 @@
     -fx-font-size: 16px;
 }
 
-.exam-radio-button:disabled, .test-checkbox-button:disabled {
+.password-verifier-checkbox {
+    -fx-opacity: 1;
+}
+
+.exam-radio-button:disabled, .exam-checkbox-button:disabled {
     -fx-opacity: 0.8;
 }
 
@@ -154,9 +163,17 @@
 }
 
 .jfx-text-field, .jfx-password-field {
-    -fx-font-weight: BOLD;
     -fx-alignment: top-left;
     -fx-max-width: 300;
+}
+
+.jfx-sign-in-field {
+    -fx-font-weight: BOLD;
+}
+
+.jfx-edit-name-field {
+    -fx-font-family: "Roboto Mono Regular";
+    -fx-font-size: 30px;
 }
 
 .sign-in-field {
@@ -236,34 +253,61 @@ The greeting ("Hello, Ian!") on the home page
     -fx-spacing: 50px;
 }
 
-.recent-box, .settings-box {
+.recent-stats-box, .small-box {
     -fx-padding: 20px;
     -fx-background-radius: 25px;
+    -fx-alignment: center;
 }
 
 .chapter-box {
-    -fx-padding: 20px;
-    -fx-alignment: center;
     -fx-background-radius: 25px;
 }
 
-.chapter-title-text {
+.inner-chapter-box {
+    -fx-background-radius: 25px;
+}
+
+.home-chapter-box {
+    -fx-padding: 20px;
+}
+
+.stats-box {
+    -fx-padding: 15px;
+}
+
+.section-title {
+    -fx-font-size: 2em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.box-title {
     -fx-font-size: 1.5em;
     -fx-font-family: "Roboto Mono Bold";
 }
 
-.settings-text {
+.stats-box-title {
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Roboto Mono Bold";
+}
+
+.insight-text {
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Roboto Mono Regular";
+}
+
+.bottom-home-text {
     -fx-font-size: 2em;
     -fx-font-family: "Roboto Mono Bold";
     -fx-padding: 0 0 0 23px;
 }
 
-.page-title-text {
+.page-box-title {
     -fx-font-size: 2.5em;
     -fx-font-family: "Roboto Mono Bold";
 }
 
-.chapter-description-text {
+.box-description {
+    -fx-font-size: 1.2em;
     -fx-font-family: "Roboto Mono Regular";
 }
 

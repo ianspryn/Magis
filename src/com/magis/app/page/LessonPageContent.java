@@ -61,16 +61,16 @@ public class LessonPageContent extends PageContent {
     void update(int pageIndex) {
         //Make sure we don't try to mark the quiz/test intro page as a lesson page (we'll get an out of bounds if we do)
         if (pageIndex < Main.lessonModel.getChapter(chapterIndex).getNumPages()) {
-            //Mark the page as visited
+            //Mark the page as visited (for calculating reading progress)
             Main.studentModel.getStudent().getChapter(chapterIndex).visitPage(pageIndex);
         }
-        //Last page visited
+        //Save chapter and page visited
         Main.studentModel.getStudent().setRecentPlace(chapterIndex, pageIndex);
         setScrollPaneContent(pageContentContainers.get(pageIndex).getMasterContent());
     }
 
     @Override
-    void buildPage(int pageIndex) {
+    boolean buildPage(int pageIndex) {
         ArrayList<LessonModel.ChapterModel.PageModel.LessonContent> lessonContents = Main.lessonModel.getChapter(chapterIndex).getPage(pageIndex).getLessonContent();
         PageContentContainer pageContentContainer = pageContentContainers.get(pageIndex);
         for (LessonModel.ChapterModel.PageModel.LessonContent lessonPageContent : lessonContents) {
@@ -79,18 +79,16 @@ public class LessonPageContent extends PageContent {
                 case "image":
                     ImageView image = new ImageView();
                     image.setPreserveRatio(true);
-                    image.getStyleClass().addAll("lesson-image", "drop-shadow");
-                    HBox imageContainer = new HBox();
-                    imageContainer.getChildren().add(image);
-//                    imageContainer.maxWidthProperty().bind(getScrollPane().widthProperty());
-                    imageContainer.widthProperty().addListener((observable, oldVal, newVal) -> {
-                        image.maxWidth(newVal.doubleValue());
+                    //scale the image to a max of either 800px or whatever thw width of the scroll pane is (compensating for the scrollbar's thickness itself)
+                    image.setFitWidth(Math.min(800, getScrollPane().widthProperty().doubleValue() - 50));
+                    getScrollPane().widthProperty().addListener((observable, oldVal, newVal) -> {
+                        image.setFitWidth(Math.min(800, newVal.doubleValue() - 50));
                     });
-                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent()))); //load images in the background
+                    //load images in the background
+                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent())));
                     thread.setDaemon(true);
                     thread.start();
-                    image.setPreserveRatio(true);
-                    pageContentContainer.add(imageContainer);
+                    pageContentContainer.add(image);
                     break;
                 default:
                     System.err.println("Unrecognized XML tag <" + type + ">. Defaulting to text field.");
@@ -100,6 +98,7 @@ public class LessonPageContent extends PageContent {
             }
         }
         pageContentContainer.buildAsLessonPage(pageIndex);
+        return true; //sucess
     }
 
     private void formatText(String content, PageContentContainer pageContentContainer, int chapterIndex, int pageIndex) {
@@ -112,9 +111,10 @@ public class LessonPageContent extends PageContent {
         for (String subString : splitStrings) {
             Label label = new Label();
             label.setWrapText(true);
+            label.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it contains
             pageContentContainer.add(label);
             switch (subString) {
-                case "```": //beginning of code segment
+                case "```": //beginning of or ending code segment
                     if (stack.isEmpty()) stack.push(subString);
                     else if (stack.peek().equals("```")) stack.pop();
                     else System.err.println("Non-balanced text formatting of type [```] for the chapter \"" + Main.lessonModel.getChapter(chapterIndex).getTitle() + "\" on page " + (pageIndex + 1));
@@ -160,6 +160,7 @@ public class LessonPageContent extends PageContent {
                             label.getStyleClass().add("lesson-header-three-text");
                             break;
                         default: //we are not in any kind of formatting segment
+                            label.setPrefWidth(800);
                             label.getStyleClass().add("lesson-text");
                     }
             }

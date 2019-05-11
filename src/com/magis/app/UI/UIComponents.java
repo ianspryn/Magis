@@ -1,28 +1,120 @@
 package com.magis.app.UI;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXScrollPane;
+import com.jfoenix.effects.JFXDepthManager;
+import com.magis.app.Configure;
 import com.magis.app.Main;
-import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import javafx.animation.*;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.*;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.util.concurrent.ConcurrentNavigableMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UIComponents {
 
+    public static class GenericPage {
+
+        private StackPane master;
+
+        private ScrollPane scrollPane;
+        private VBox mastervBox;
+        private JFXButton backButton;
+        private Label pageTitle;
+        public GenericPage() {
+            /*
+            Master
+             */
+            master = new StackPane();
+            master.getStyleClass().add("background");
+            scrollPane = new ScrollPane();
+            UIComponents.fadeOnAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
+            scrollPane.getStyleClass().add("master-scrollpane");
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setFitToWidth(true);
+
+
+
+            /*
+            Middle
+             */
+            mastervBox = new VBox();
+            mastervBox.setPadding(new Insets(25, 25, 25, 25));
+            mastervBox.setMaxWidth(1500);
+            //Center the content in the scrollpane
+            StackPane contentHolder = new StackPane(mastervBox);
+            contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
+                    scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
+
+            scrollPane.setContent(contentHolder);
+            JFXScrollPane.smoothScrolling(scrollPane);
+
+            /*
+            Back button and Page title
+             */
+            AnchorPane top = new AnchorPane();
+            top.setPadding(new Insets(0, 0, 50, 0));
+
+            //back button
+            backButton = new JFXButton("Back");
+            backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
+            backButton.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
+            backButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+            backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
+
+            //page title
+            pageTitle = new Label("Generic Title");
+            pageTitle.getStyleClass().add("section-title");
+
+            top.getChildren().addAll(backButton, pageTitle);
+            AnchorPane.setLeftAnchor(backButton, 0.0);
+            AnchorPane.setRightAnchor(pageTitle, 0.0);
+
+            mastervBox.getChildren().add(top);
+
+            master.getChildren().add(scrollPane);
+            StackPane.setAlignment(scrollPane, Pos.CENTER);
+        }
+
+        public StackPane getMaster() {
+            return master;
+        }
+
+        public ScrollPane getScrollPane() {
+            return scrollPane;
+        }
+
+        public VBox getMastervBox() {
+            return mastervBox;
+        }
+
+        public JFXButton getBackButton() {
+            return backButton;
+        }
+
+        public Label getPageTitle() {
+            return pageTitle;
+        }
+
+    }
     public static HBox CreateTitleBar() {
         HBox hBox = new HBox();
 
@@ -43,6 +135,80 @@ public class UIComponents {
         hBox.getChildren().addAll(minimize, maximize, close);
 
         return hBox;
+    }
+
+    public static GridPane createPasswordVerifierHelper() {
+        GridPane passwordVerifierGridPane = new GridPane();
+        passwordVerifierGridPane.setAlignment(Pos.CENTER);
+        passwordVerifierGridPane.setHgap(10);
+        passwordVerifierGridPane.setVgap(25);
+
+        JFXCheckBox longEnoughCheck = generatePasswordAssistantCheckBox();
+        Label longEnoughLabel = bindWithCheckBox("Greater than 8 characters", longEnoughCheck);
+        JFXCheckBox containsUpperCaseCheck = generatePasswordAssistantCheckBox();
+        Label containsUpperCaseLabel = bindWithCheckBox("Contains at least one uppercase letter", containsUpperCaseCheck);
+        JFXCheckBox containsLowerCaseCheck = generatePasswordAssistantCheckBox();
+        Label containsLowerCaseLabel = bindWithCheckBox("Contains at least one lowercase letter", containsLowerCaseCheck);
+        JFXCheckBox containsNumberCheck = generatePasswordAssistantCheckBox();
+        Label containsNumberLabel = bindWithCheckBox("Contains at least one number", containsNumberCheck);
+
+        Label notSatisfied = new Label("Please meet these standards!");
+        notSatisfied.setStyle("-fx-text-fill: #FF1744"); //Red A400
+        notSatisfied.setVisible(false);
+
+        passwordVerifierGridPane.add(longEnoughCheck,0,1);
+        passwordVerifierGridPane.add(longEnoughLabel,1,1);
+        passwordVerifierGridPane.add(containsUpperCaseCheck,0,2);
+        passwordVerifierGridPane.add(containsUpperCaseLabel,1,2);
+        passwordVerifierGridPane.add(containsLowerCaseCheck,0,3);
+        passwordVerifierGridPane.add(containsLowerCaseLabel,1,3);
+        passwordVerifierGridPane.add(containsNumberCheck,0,4);
+        passwordVerifierGridPane.add(containsNumberLabel,1,4);
+        passwordVerifierGridPane.add(notSatisfied,1,5);
+
+        return passwordVerifierGridPane;
+    }
+
+    /**
+     * Create a JFXCheckBox that is used in the password verifier assistant
+     * @return a disabled JFXCheckBox that is colored red for unchecked, and green for checked
+     */
+    private static JFXCheckBox generatePasswordAssistantCheckBox() {
+        JFXCheckBox checkBox = new JFXCheckBox();
+        checkBox.getStyleClass().add("password-verifier-checkbox");
+        checkBox.setUnCheckedColor(Color.valueOf("#FF1744")); //Red A400
+        checkBox.setCheckedColor(Color.valueOf("#00C853")); //Green A700
+        checkBox.setDisable(true);
+        return checkBox;
+    }
+
+    /**
+     * Create a Label that is used in the password verifier assistant
+     * @param requirement the text that presents one of the requirements for the password
+     * @param checkBox the checkbox associated with the label. The state of the checkbox controls the color of the label
+     * @return a label
+     */
+    private static Label bindWithCheckBox(String requirement, JFXCheckBox checkBox) {
+        Label label = new Label(requirement);
+        label.setStyle("-fx-text-fill: #FF1744"); //Red A400 (default)
+        label.setAlignment(Pos.CENTER_RIGHT);
+        checkBox.selectedProperty().addListener((observable, oldVal, newVal) -> {
+            if (newVal) label.setStyle("-fx-text-fill: #00C853"); //Green A700
+            else label.setStyle("-fx-text-fill: #FF1744"); //Red A400
+        });
+        return label;
+    }
+
+    /**
+     * create a JFXPasswordField that is used in the sign-in and sign-up gridpane
+     * @param promptText the text inside the text field to indicate to the user the purpose of the text field
+     * @return a JFXPasswordField
+     */
+    public static JFXPasswordField createJFXPasswordField(String promptText) {
+        JFXPasswordField passwordField = new JFXPasswordField();
+        passwordField.setPromptText(promptText);
+        passwordField.getStyleClass().addAll("jfx-sign-in-field", "sign-in-field");
+        return passwordField;
     }
 
     public static StackPane createNavigationButton(String chevron) {
@@ -89,6 +255,14 @@ public class UIComponents {
         return button;
     }
 
+    public static Rectangle createRectangle(double width, double height) {
+        Rectangle rectangle = new Rectangle();
+        rectangle.setWidth(width);
+        rectangle.setHeight(height);
+        rectangle.getStyleClass().add("rectangle-color");
+        return rectangle;
+    }
+
     /**
      * build the home box that goes in the top left corner
      * @return the HBox object that holds the home box
@@ -111,7 +285,7 @@ public class UIComponents {
 
 
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/Magis/magis-white-small-v2.png");
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-white-small.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 
@@ -147,13 +321,13 @@ public class UIComponents {
      * @param node the current label to fade in
      * @param index the current index of the label. Used to add incremental delay of fade in
      * @param delay how long before the animation begins
-     * @param duration how long to fadeAndTranslate
+     * @param duration how long to fadeOnAndTranslate
      * @param fromX where the node should start in its animation for the x-axis
      * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      * @param toY where the node should end in its animation for the y-axis
      */
-    public static void fadeAndTranslate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+    public static void fadeOnAndTranslate(Node node, int index, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         if (!Main.useAnimations) return;
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
@@ -176,22 +350,22 @@ public class UIComponents {
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
-        //wait a certain delay, then fadeAndTranslate in
+        //wait a certain delay, then fadeOnAndTranslate in
         SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay + ((float)index / 30))), parallelTransition);
         sequentialTransition.play();
     }
 
     /**
      * Animate a node
-     * @param node the node to fadeAndTranslate
+     * @param node the node to fadeOnAndTranslate
      * @param delay how long before the animation begins
-     * @param duration how long to fadeAndTranslate
+     * @param duration how long to fadeOnAndTranslate
      * @param fromX where the node should start in its animation for the x-axis
      * @param toX where the node should end in its animation for the x-axis
      * @param fromY where the node should start in its animation for the y-axis
      * @param toY where the node should end in its animation for the y-axis
      */
-    public static void fadeAndTranslate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
+    public static void fadeOnAndTranslate(Node node, double delay, double duration, float fromX, float toX, float fromY, float toY) {
         if (!Main.useAnimations) return;
         //fade in
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), node);
@@ -214,7 +388,7 @@ public class UIComponents {
         ParallelTransition parallelTransition = new ParallelTransition();
         parallelTransition.getChildren().addAll(fadeTransition, translateTransition);
 
-        //wait a certain delay, then fadeAndTranslate in
+        //wait a certain delay, then fadeOnAndTranslate in
         SequentialTransition sequentialTransition = new SequentialTransition(new PauseTransition(Duration.seconds(delay)), parallelTransition);
         sequentialTransition.play();
     }
@@ -244,5 +418,27 @@ public class UIComponents {
         scaleTransition.setToY(scaleToY);
 
         scaleTransition.play();
+    }
+
+    public static ParallelTransition transitionPage(Node node) {
+        ParallelTransition parallelTransition = new ParallelTransition(getFadeTransition(node), getTranslateTransition(node));
+        parallelTransition.play();
+        return parallelTransition;
+    }
+
+    public static FadeTransition getFadeTransition(Node node) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.2), node);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        return fadeTransition;
+    }
+
+    public static TranslateTransition getTranslateTransition(Node node) {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.2), node);
+        translateTransition.setFromY(0);
+        translateTransition.setToY(-10); //move up
+
+        return translateTransition;
     }
 }

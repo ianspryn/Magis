@@ -5,21 +5,22 @@
     -fx-background: #111;
 }
 
-.chapter-description-text {
+.box-description {
     -fx-text-fill: #eee;
     -fx-fill: #eee;
 }
 
-.settings-icon {
+.icon-no-color {
     -fx-fill: #fff;
 }
 
-.page-title-text {
+.page-box-title {
     -fx-fill: #eee;
 }
 
-.lesson-text {
-    -fx-text-fill: #fff1f7;
+.text-no-color {
+    -fx-text-fill: #fff;
+    -fx-fill: #fff;
 }
 
 .code-text {
@@ -40,7 +41,8 @@
 }
 
 .jfx-text-field, .jfx-password-field {
-    -fx-prompt-text-fill: #181818;
+    -fx-prompt-text-fill: #fff;
+    -fx-text-fill: #fff;
 }
 
 /*
@@ -70,7 +72,11 @@ The greeting ("Hello, Ian!") on the home page
     -fx-fill: #ccc;
 }
 
-.chapter-box, .recent-box, .settings-box {
+.inner-chapter-box {
+    -fx-background-color: #404040;
+}
+
+.chapter-box, .recent-stats-box, .small-box {
     -fx-background-color: #272727;
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }

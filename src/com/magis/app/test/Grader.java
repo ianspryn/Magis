@@ -1,80 +1,168 @@
 package com.magis.app.test;
 
-import java.lang.reflect.Array;
+import com.jfoenix.controls.JFXTextField;
+import javafx.scene.control.Label;
+
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Grader {
 
-    private HashMap<Integer, ArrayList<String>> studentAnswers;
-    private HashMap<Integer, ArrayList<String>> correctAnswers;
-    private double numCorrectAnswers; //double because you might only get 0.5 points on a question with multiple correct answers
-    private int numQuestions;
+    private ArrayList<ExamQuestion> questions;
+    private ArrayList<Label> pointLabels;
+    private double totalStudentOverall; //double because you might only get 0.5 points on a question with multiple correct answers
+    private double totalPoints;
     private double grade;
+    private static double pointsPerAnswer;
+    private static double total;
 
-    public Grader(int numQuestions) {
-        studentAnswers = new HashMap<>();
-        correctAnswers = new HashMap<>();
-        numCorrectAnswers = 0;
-        this.numQuestions = numQuestions;
+    public Grader() {
+        questions = new ArrayList<>();
+        pointLabels = new ArrayList<>();
+        totalStudentOverall = 0;
+        totalPoints = 0;
     }
 
-    public Integer getNumCorrectAnswer(int key) {
-        return correctAnswers.get(key).size();
+    public int getNumCorrectAnswers(int key) {
+        return questions.get(key).getCorrectAnswers().size();
     }
 
-    public void addStudentAnswer(int key, String answer) {
-        if (!studentAnswers.containsKey(key)) {
-            ArrayList<String> temp = new ArrayList<>();
-            temp.add(answer);
-            studentAnswers.put(key, temp);
-        } else {
-            studentAnswers.get(key).add(answer);
-//            studentAnswers.put(key, temp);
-        }
-    }
-
-    public void removeStudentAnswer(int key, String answer) {
-        studentAnswers.get(key).remove(answer);
-    }
-
-    public void addCorrectAnswer(int key, ArrayList<String> answer) {
-        correctAnswers.put(key, answer);
-    }
-
-    public ArrayList<String> getCorrectAnswer(int key) {
-        return correctAnswers.get(key);
-    }
-    
     public void grade() {
-        for (Map.Entry<Integer, ArrayList<String>> student : studentAnswers.entrySet()) {
-
-            ArrayList<String> correctAnswer = correctAnswers.get(student.getKey());
-            ArrayList<String> studentAnswer = student.getValue();
-            int counter = 0;
-            for (String string : correctAnswer) {
-                if (studentAnswer.contains(string)) {
-                    counter++;
+        collectTextFields();
+        int pointsLabelIndex = 0;
+        for (ExamQuestion question : questions) {
+            pointsPerAnswer = (double) question.getLevel() / question.getNumCorrectAnswers();
+            total = 0;
+            if (question.isWritten()) {
+                gradeAsWritten(question);
+            } else {
+                for (String studentAnswer : question.getStudentAnswers()) {
+                    if (question.getCorrectAnswers().contains(studentAnswer)) {
+                        total += pointsPerAnswer;
+                    }
+                    if (question.getIncorrectAnswers().contains(studentAnswer)) {
+                        total -= pointsPerAnswer;
+                    }
                 }
             }
-            numCorrectAnswers += (double) counter / (double) correctAnswer.size();
-            //if the student's answer matches the correct answer
-//            if (student.getValue().equals(correctAnswers.get(student.getKey()))) {
-//                numCorrectAnswers++;
-//            }
+
+            total = Double.parseDouble(new DecimalFormat("#.##").format(total)); //don't let 0.3333333333333333 be a thing. Make it 0.33.
+            total = Math.max(0, total); //don't let the score be negative
+
+            //update the points label to say " x/y points"
+            String temp;
+            if (total % 1 == 0) { //avoid showing 2.0/2 (make it 2/2 instead)
+                temp = (int) total + "/" + question.getPointsAndQuestionIndex();
+            } else { //but do show things like: 1.5/2
+                temp = total + "/" + question.getPointsAndQuestionIndex();
+            }
+            if (pointLabels.size() > pointsLabelIndex) pointLabels.get(pointsLabelIndex).setText(temp);
+            else System.err.println("Error. Missing pointsAndQuestionIndex label for question \"" + question.getQuestion() + "\" to update the score");
+            question.setPointsAndQuestionIndex(temp); //update examQuestion so the grading change is reflected when viewing history
+
+            totalStudentOverall += total;
+            totalPoints += question.getLevel();
+            pointsLabelIndex++;
         }
-        grade = 100.0 * numCorrectAnswers / (double) numQuestions;
+        grade = 100.0 * totalStudentOverall / totalPoints;
         grade = Double.parseDouble(new DecimalFormat("#.##").format(grade));
     }
-    
+
+    private void collectTextFields() {
+        for (ExamQuestion question : questions) {
+            if (!question.isWritten()) continue;
+
+            HashMap<Integer, JFXTextField> textFields = question.getTextFields();
+            for (Map.Entry<Integer, JFXTextField> iter : textFields.entrySet()) {
+                question.addStudentAnswer(iter.getValue().getText());
+            }
+        }
+    }
+
+    private void gradeAsWritten(ExamQuestion question) {
+        diff_match_patch dmp = new diff_match_patch();
+        for (int answerIndex = 0; answerIndex < question.getNumCorrectAnswers(); answerIndex++) {
+            //https://regex101.com/r/RpbPGc/3
+            String regex = " +|(?<=[.|=|*|+|-|/|\"|\\[|\\]])|(?=[.|=|*|+|-|/|\"|\\[|\\]|;])";
+            //for the fairness of grading, remove spaces that are allowed to be removed
+            String[] formattedCorrectAnswer = question.getCorrectAnswers().get(answerIndex).split(regex);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String str : formattedCorrectAnswer) {
+                if (str.length() == 0) continue;
+                stringBuilder.append(str);
+            }
+            String correctAnswer = stringBuilder.toString();
+            String[] formattedStudentAnswer = question.getStudentAnswers().get(answerIndex).split(regex);
+            stringBuilder = new StringBuilder();
+            for (String str : formattedStudentAnswer) {
+                if (str.length() == 0) continue;
+                stringBuilder.append(str);
+            }
+            String studentAnswer = stringBuilder.toString();
+            //Now that we've cleaned it up, we can get the number of components to the question
+            int numParts = correctAnswer.split(regex).length;
+
+
+            LinkedList<diff_match_patch.Diff> diff = dmp.diff_main(correctAnswer, studentAnswer);
+            dmp.diff_cleanupSemantic(diff);
+            int badPart = 0;
+            for (int i = 0; i < diff.size(); i++) {
+                diff_match_patch.Diff diff1 = diff.get(i);
+                String type = diff1.operation.toString();
+                switch (type) {
+                    case "INSERT":
+                        /*
+                        If this if-statement is true, then this is a part of the exam's code where the student just "deleted"
+                        the correct answer and "inserted" the wrong answer. Meaning, they are a pair.
+                        We should focus on how much they removed. Consider the folllowing:
+                        CORRECT: int[] myVar = new int[5];
+                        STUDENT: int[] asdf asdf = new int[5];
+                        The student is only deducted for missing "myVar"
+                        However, if this were the case:
+                        CORRECT: int[] myVar = new int[5];
+                        STUDENT: int[] myVar asdf = new int[5];
+                        The student would still be deducted for the extra "asdf"
+                         */
+//                        if (i > 0 && diff.get(i - 1).operation.toString().equals("DELETE")) continue;
+                        //grade off-by-one-character less harshly
+                        if (diff.get(i).text.length() == 1) badPart += 1.0 / (numParts * 2);
+                        badPart += Math.max(1, diff1.text.split(regex).length);
+                        break;
+                    case "DELETE":
+                        //grade off-by-one-character less harshly
+                        if (diff.get(i).text.length() == 1) {
+                            badPart += 1.0 / (numParts * 2);
+                        } else {
+                            badPart += Math.max(1, diff1.text.split(regex).length);
+                        }
+                        break;
+                }
+            }
+            total += pointsPerAnswer * Math.max(0, 1.0 - ((double) badPart / (double) numParts));
+        }
+    }
+
     public Double getGrade() {
         return grade;
     }
 
-    public boolean contains(int index, String text) {
-        return correctAnswers.get(index).contains(text);
+    public boolean isCorrect(int key, String text) {
+        return questions.get(key).getCorrectAnswers().contains(text);
+    }
+
+    public void addQuestion(ExamQuestion examQuestion) {
+        questions.add(examQuestion);
+    }
+
+    public ExamQuestion getExamQuestion(int index) {
+        return  questions.get(index);
+    }
+
+    public ArrayList<ExamQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void addPointLabel(Label label) {
+        pointLabels.add(label);
     }
 }
