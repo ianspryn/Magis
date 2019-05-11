@@ -980,165 +980,131 @@ the value of the integer cats\\```</statement>
                         </question>
                 </questions>
         </chapter>
-               <chapter id = "Escape Sequences">
+        <chapter id = "Arrays">
                 <questions>
                         <question>
                                 <level>1</level>
-                                <statement>Which of the following lines of code will output "Hello, World!" with the quotations around it?</statement>
-                                <answer>System.out.println(""Hello, World!"");</answer>
-                                <answer id = "correct">System.out.println("\"Hello, World!\"");</answer>
-                                <answer>System.out.println("/"Hello, World!/"");</answer>
-                                <answer>System.out.println("#"Hello, World!"#");</answer>
+                                <statement>True or false: arrays can dynamically grow and shrink in size.</statement>
+                                <answer>True</answer>
+                                <answer id = "correct">False</answer>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>In the below code, what is the escape character?
-System.out.println("Hello, \"World\"!");</statement>
-                                <answer>System</answer>
-                                <answer>out</answer>
-                                <answer>\"</answer>
-                                <answer id = "correct">\</answer>
+                                <statement>True or false: ArrayLists can dynamically grow and shrink in size.</statement>
+                                <answer id = "correct">True</answer>
+                                <answer>False</answer>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>In the below code, what is the escape sequence?
-System.out.println("Hello, \"World\"!");</statement>
-                                <answer>System</answer>
-                                <answer>out</answer>
-                                <answer id = "correct">\"</answer>
-                                <answer>\</answer>
-                        </question>
-                        <question>
-                                <level>1</level>
-                                <statement>Which of the following lines of code will output C:\Temp\File2.txt </statement>
-                                <answer>System.out.println("C:#\Temp#\File2.txt");</answer>
-                                <answer>System.out.println(""C:\Temp\File2.txt"");</answer>
-                                <answer id = "correct">System.out.println("C:\\Temp\\File2.txt");</answer>
-                                <answer>System.println("C:#\Temp#\File2.txt");</answer>
-                        </question>
-                        <question>
-                                <level>1</level>
-                                <statement>Which of the following lines of code will output C:\Temp\File2.txt</statement>
-                                <answer>System.out.println("C:#\Temp#\File2.txt");</answer>
-                                <answer>System.out.println(""C:\Temp\File2.txt"");</answer>
-                                <answer id = "correct">System.out.println("C:\\Temp\\File2.txt");</answer>
-                                <answer>System.println("C:#\Temp#\File2.txt");</answer>
+                                <statement>Which delimeter do we use to indicate a datatype of array?</statement>
+                                <answer id = "correct">[] - brackets</answer>
+                                <answer>{} - braces</answer>
+                                <answer>() - parentheses</answer>
+                                <answer>&lt;&gt; - angle brackets</answer>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>What will the following lines of code output?
-System.out.println("Normal\\" Output \\"");</statement>
-                                <answer>Normal\" Output \"</answer>
-                                <answer>Normal\\" Output \\""</answer>
-                                <answer>Normal Output</answer>
-                                <answer id = "correct">The above code will not work.</answer>
+                                <statement>```int[] values = new int[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <shuffle>false</shuffle>
+                                <answer id = "correct">0</answer>
+                                <answer>1</answer>
+                                <answer>null</answer>
+                                <answer>An error will be occur</answer>
                         </question>
                         <question>
                                 <level>2</level>
-                                <statement>What will the following lines of code output?
-System.out.println("Normal\" Output \\");</statement>
-                                <answer>Normal" Output \</answer>
-                                <answer>Normal\" Output \</answer>
-                                <answer>Normal\" Output \\</answer>
-                                <answer>The above code will not work.</answer>
+                                <statement>```boolean[] values = new boolean[5];
+System.out.println(values[3]);```
+What will the code output?</statement>
+                                <shuffle>false</shuffle>
+                                <answer>true</answer>
+                                <answer id = "correct">false</answer>
+                                <answer>null</answer>
+                                <answer>An error will be occur</answer>
                         </question>
                         <question>
-                                <level>1</level>
-                                <statement>Which of the following is the escape sequence that will output a newline?</statement>
-                                <answer>\newline\</answer>
-                                <answer>\n\</answer>
-                                <answer id = "correct">\n</answer>
-                                <answer>\newline</answer>
+                                <level>2</level>
+                                <shuffle>false</shuffle>
+                                <statement>```MyClass[] values = new MyClass[5];
+System.out.println(values[3]);```
+What will the code output?
+Assume MyClass has been implemented.</statement>
+                                <answer id = "correct">null</answer>
+                                <answer>An empty string</answer>
+                                <answer>The name of the class</answer>
+                                <answer>An error will be occur</answer>
                         </question>
                         <question>
-                                <level>1</level>
-                                <statement>What will the output of the following code look like?
-                                System.out.print("*\n**\n***\n");</statement>
-                                <answer id = "correct">*
-**
-***
-</answer>
-                                <answer>*\n**\n***\n</answer>
-                                <answer>*       **      ***</answer>
-                                <answer>*\**\***\</answer>
+                                <level>2</level>
+                                <shuffle>false</shuffle>
+                                <statement>```int[] values;
+values[1] = 23;```
+Will this code run normally?</statement>
+                                <answer>Yes</answer>
+                                <answer>Yes, but values[1] will remain null</answer>
+                                <answer>No, you need to set values[0] first</answer>
+                                <answer id = "correct">No, 'values' must be initialized</answer>
                         </question>
                         <question>
-                                <level>1</level>
-                                <statement>Which of the following will output "All the way to San José!"</statement>
-                                <answer>System.out.println("All the way to San Jos\`e\!");</answer>
-                                <answer id = "correct">System.out.println("All the way to San Jos\u00E9!");</answer>
-                                <answer>System.out.println("All the way to San Jos_`e_!");</answer>
-                                <answer>There is no possible way to output that</answer>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
+                        </question>
+                        <question>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```
+Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.</statement>
+                                <answer id = "correct">int[]</answer>
+                                <answer id = "correct">new int[10];</answer>
+                                <answer id = "correct">myArray[i] = i;</answer>
                         </question>
                 </questions>
         </chapter>
-        <chapter id = "Input/Output">
+        <chapter id = "Packages">
                 <questions>
                         <question>
-                                <level>1</level>
-                                <statement>Which of the following will succesfully create a Scanner that reads from "input.txt"?</statement>
-                                <answer id = "correct">File inFile = new File("input.txt");
-Scanner in = new Scanner(inFile);</answer>
+                                <statement>A java package is a ___</statement>
+                                <answer id ="correct">set of related classes</answer>
                         </question>
                         <question>
-                                <statement>If you desire to write output to a file, you construct what?</statement> 
-                                <answer id = "correct">PrintWriter object</answer>
+                                <statement>To put a class into a package you must ____ as the first instruction in the source file</statement>
+                                <answer id ="correct">place a line 
+```package packageName;```</answer>
                         </question>
                         <question>
-                                <statement>What can occur if your program exits without closing the PrintWriter?</statement>
-                                <answer id ="correct">The disk file may not contain all of the output</answer> 
-                        </question> 
-                        <question>
-                                <statement>If the output file already exists, what happens to it?</statement> 
-                                <answer id = "correct">It is emptied then overwritten</answer>
-                        </question>     
-                        <question>
-                                <statement>Which of the following is the correct way to make a PrintWriter</statement> 
-                                <answer id = "correct">PrintWriter out = new PrintWriter("output.txt");</answer>
-                        </question> 
-                        <question>
-                                <statement>What should you make sure to do after you finish with a PrintWriter.</statement> 
-                                <answer id = "correct">Close it</answer>
+                                <statement>A package name consists of one or more identifiers seperated by ___</statement>
+                                <answer id ="correct">periods</answer>
                         </question>
                         <question>
-                                <statement>What should you make sure to do after you finish with a PrintWriter?</statement> 
-                                <answer id = "correct">Close it</answer>
+                                <statement>How do you use a class from a package?</statement>
+                                <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
                         </question>
                         <question>
-                                <statement>Which of the following lines of code is the correct way to specify a file name as a string literal?</statement> 
-                                <answer id = "correct">inFile = new File("c:\\homework\\input.dat");</answer>
+                                <statement>An important reason for packages is to help to avoid ___</statement>
+                                <answer id = "correct">Name clashes</answer>
                         </question>
                         <question>
-                                <statement>In java a word is ___</statement>
-                                <answer id ="correct">any sequence of characters that is not white space.</answer>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
                         </question>
                         <question>
-                                <statement>Which of the following Scanners will correctly only read words as letters?</statement>
-                                <answer id ="correct">'''Scanner in = new Scanner(. . .);
-in.useDelimiter("[^A-Za-z]+");'''</answer>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
                         </question>
                         <question>
-                                <statement>Which of the following lines of code will correctly search a Scanner until it encounters a number?</statement>
-                                <answer id ="correct">'''String line = in.nextLine();
-int i = 0;
-while (!Character.isDigit(line.charAt(i))) { i++; }'''</answer>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
                         </question>
                         <question>
-                                <statement>What does the trim method do?</statement>
-                                <answer id ="correct">The trim method returns the string with all white space at the beginning and end removed.</answer>
-                        </question>
-                        <question>
-                                <statement>What method will convert a string into a int?</statement>
-                                <answer id ="correct">parseInt(String a)</answer>
-                        </question>
-                        <question>
-                                <statement>What happens if you try to use parseInt on a String that doesn't contain integers?</statement>
-                                <answer id ="correct">A NumberFormatException occurs</answer>
-                        </question>
-                        <question>
-                                <statement>Which of the following Scanners will correctly read a file one character at a time?</statement>
-                                <answer id ="correct">Scanner in = new Scanner(. . .);
-in.useDelimiter("");</answer>
+                                <statement>How do you use a class from a package?</statement>
+                                <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
                         </question>
                 </questions>
         </chapter>
@@ -1201,66 +1167,73 @@ in which you can what? </statement>
                         </question>
                 </questions>
         </chapter>
-        <chapter id = "Packages">
+        <chapter id = "Input/Output">
                 <questions>
                         <question>
-                                <statement>A java package is a ___</statement>
-                                <answer id ="correct">set of related classes</answer>
+                                <level>1</level>
+                                <statement>Which of the following will succesfully create a Scanner that reads from "input.txt"?</statement>
+                                <answer id = "correct">File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);</answer>
                         </question>
                         <question>
-                                <statement>To put a class into a package you must ____ as the first instruction in the source file</statement>
-                                <answer id ="correct">place a line 
-'''package packageName;'''</answer>
+                                <statement>If you desire to write output to a file, you construct what?</statement> 
+                                <answer id = "correct">PrintWriter object</answer>
                         </question>
                         <question>
-                                <statement>A package name consists of one or more identifiers seperated by ___</statement>
-                                <answer id ="correct">periods</answer>
+                                <statement>What can occur if your program exits without closing the PrintWriter?</statement>
+                                <answer id ="correct">The disk file may not contain all of the output</answer> 
+                        </question> 
+                        <question>
+                                <statement>If the output file already exists, what happens to it?</statement> 
+                                <answer id = "correct">It is emptied then overwritten</answer>
+                        </question>     
+                        <question>
+                                <statement>Which of the following is the correct way to make a PrintWriter</statement> 
+                                <answer id = "correct">PrintWriter out = new PrintWriter("output.txt");</answer>
+                        </question> 
+                        <question>
+                                <statement>What should you make sure to do after you finish with a PrintWriter.</statement> 
+                                <answer id = "correct">Close it</answer>
                         </question>
                         <question>
-                                <statement>How do you use a class from a package?</statement>
-                                <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
+                                <statement>What should you make sure to do after you finish with a PrintWriter?</statement> 
+                                <answer id = "correct">Close it</answer>
                         </question>
                         <question>
-                                <statement>An important reason for packages is to help to avoid ___</statement>
-                                <answer id = "correct">Name clashes</answer>
+                                <statement>Which of the following lines of code is the correct way to specify a file name as a string literal?</statement> 
+                                <answer id = "correct">inFile = new File("c:\\homework\\input.dat");</answer>
                         </question>
                         <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
+                                <statement>In java a word is ___</statement>
+                                <answer id ="correct">any sequence of characters that is not white space.</answer>
                         </question>
                         <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
+                                <statement>Which of the following Scanners will correctly only read words as letters?</statement>
+                                <answer id ="correct">```Scanner in = new Scanner(. . .);
+in.useDelimiter("[^A-Za-z]+");```</answer>
                         </question>
                         <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
+                                <statement>Which of the following lines of code will correctly search a Scanner until it encounters a number?</statement>
+                                <answer id ="correct">```String line = in.nextLine();
+int i = 0;
+while (!Character.isDigit(line.charAt(i))) { i++; }```</answer>
                         </question>
                         <question>
-                                <statement>How do you use a class from a package?</statement>
-                                <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
-                        </question>
-                </questions>
-        </chapter>
-        <chapter id = "Arrays">
-		<questions>
-                        <question>
-                                <level>3</level>
-                                <written>true</written>
-                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
-                                <answer id = "correct">int[] myVariable = new int[10];</answer>
+                                <statement>What does the trim method do?</statement>
+                                <answer id ="correct">The trim method returns the string with all white space at the beginning and end removed.</answer>
                         </question>
                         <question>
-                                <level>4</level>
-                                <written>true</written>
-                                <statement>```### myArray = ###;
-for (int i = 0; i &lt; myArray.length; i++) {
-        ###;
-}```
-Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.</statement>
-                                <answer id = "correct">int[]</answer>
-                                <answer id = "correct">new int[10];</answer>
-                                <answer id = "correct">myArray[i] = i;</answer>
+                                <statement>What method will convert a string into a int?</statement>
+                                <answer id ="correct">parseInt(String a)</answer>
+                        </question>
+                        <question>
+                                <statement>What happens if you try to use parseInt on a String that doesn't contain integers?</statement>
+                                <answer id ="correct">A NumberFormatException occurs</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following Scanners will correctly read a file one character at a time?</statement>
+                                <answer id ="correct">Scanner in = new Scanner(. . .);
+in.useDelimiter("");</answer>
                         </question>
                 </questions>
         </chapter>
