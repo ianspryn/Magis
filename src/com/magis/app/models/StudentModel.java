@@ -36,6 +36,10 @@ public class StudentModel {
         return student;
     }
 
+    public void removeStudent() {
+        student = null;
+    }
+
     public StudentModel(LessonModel lessonModel) {
         this.lessonModel = lessonModel;
 
@@ -279,8 +283,8 @@ public class StudentModel {
         //write to XML file
         UpdateModel.updateXML(new DOMSource(document), filePath);
 
-        //Delete student from class
-        Main.studentModel = new StudentModel(Main.lessonModel);
+        //Delete student from the class
+        Main.studentModel.removeStudent();
         //remove the student's custom styling
         Main.scene.getStylesheets().removeAll();
         //default to light, with pink
@@ -320,6 +324,11 @@ public class StudentModel {
         public void setLastName(String lastName) {
             this.lastName = lastName;
             fullName = firstName + " " + lastName;
+            writeSettings();
+        }
+
+        public void setPasswordHash(String passwordHash) {
+            this.passwordHash = passwordHash;
             writeSettings();
         }
 
@@ -408,6 +417,8 @@ public class StudentModel {
             firstNameElement.setTextContent(firstName);
             Element  lastNameElement = (Element) studentElement.getElementsByTagName("lastname").item(0);
             lastNameElement.setTextContent(lastName);
+            Element hash = (Element) studentElement.getElementsByTagName("hash").item(0);
+            hash.setTextContent(passwordHash);
 
             Element settingsElement = (Element) studentElement.getElementsByTagName("settings").item(0);
             Node darkmode = settingsElement.getElementsByTagName("darkmode").item(0);
@@ -974,20 +985,36 @@ public class StudentModel {
                     Node pointsAndQuestionIndex = question.getElementsByTagName("PointsAndQuestionIndex").item(0);
                     examQuestion.setPointsAndQuestionIndex(pointsAndQuestionIndex.getTextContent());
 
-                    NodeList answers = question.getElementsByTagName("answer");
-                    for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
-                        Element answer = (Element) answers.item(answerIndex);
-                        if (answer.getAttributes().getNamedItem("id") != null) {
-                            if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
-                                examQuestion.addCorrectAnswer(answer.getTextContent());
-                            }
+                    Node written = question.getElementsByTagName("written").item(0);
+                    examQuestion.setWritten(written != null && Boolean.parseBoolean(written.getTextContent()));
+
+                    if (examQuestion.isWritten()) {
+                        NodeList answers = question.getElementsByTagName("answer");
+                        for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                            Element answer = (Element) answers.item(answerIndex);
+                            examQuestion.addCorrectAnswer(answer.getTextContent());
                         }
-                        if (answer.getAttributes().getNamedItem("selected") != null) {
-                            if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
-                                examQuestion.addStudentAnswer(answer.getTextContent());
-                            }
+                        NodeList studentAnswers = question.getElementsByTagName("studentanswer");
+                        for (int studentAnswerIndex = 0; studentAnswerIndex < studentAnswers.getLength(); studentAnswerIndex++) {
+                            Element studentAnswer = (Element) studentAnswers.item(studentAnswerIndex);
+                            examQuestion.addStudentAnswer(studentAnswer.getTextContent());
                         }
-                        examQuestion.addAnswer(answer.getTextContent());
+                    } else {
+                        NodeList answers = question.getElementsByTagName("answer");
+                        for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                            Element answer = (Element) answers.item(answerIndex);
+                            if (answer.getAttributes().getNamedItem("id") != null) {
+                                if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
+                                    examQuestion.addCorrectAnswer(answer.getTextContent());
+                                }
+                            }
+                            if (answer.getAttributes().getNamedItem("selected") != null) {
+                                if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
+                                    examQuestion.addStudentAnswer(answer.getTextContent());
+                                }
+                            }
+                            examQuestion.addAnswer(answer.getTextContent());
+                        }
                     }
                     examQuestions.add(examQuestion);
                 }
@@ -1076,27 +1103,45 @@ public class StudentModel {
                 Element pointsAndQuestionIndex = document.createElement("PointsAndQuestionIndex");
                 pointsAndQuestionIndex.appendChild(document.createTextNode(examQuestion.getPointsAndQuestionIndex()));
                 question.appendChild(pointsAndQuestionIndex);
+                //is this a written statement?
+                Element written = document.createElement("written");
+                written.appendChild(document.createTextNode(Boolean.toString(examQuestion.isWritten())));
+                question.appendChild(written);
                 //each part of the question
                 Element statement = document.createElement("statement");
                 statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
                 question.appendChild(statement);
 
-                for (String answer : examQuestion.getAnswers()) {
-                    Element answerElement = document.createElement("answer");
-                    answerElement.appendChild(document.createTextNode(answer));
-                    //if this is a correct answer
-                    if (examQuestion.getCorrectAnswers().contains(answer)) {
+                if (examQuestion.isWritten()) {
+                    for (String correctAnswer : examQuestion.getCorrectAnswers()) {
+                        Element answerElement = document.createElement("answer");
+                        answerElement.appendChild(document.createTextNode(correctAnswer));
                         answerElement.setAttribute("id", "correct");
+                        question.appendChild(answerElement);
                     }
-                    //if this is an answer the student selected
-                    if (examQuestion.getStudentAnswers().contains(answer)) {
-                        answerElement.setAttribute("selected", "true");
+                    for (String studentAnswer : examQuestion.getStudentAnswers()) {
+                        Element answerElement = document.createElement("studentanswer");
+                        answerElement.appendChild(document.createTextNode(studentAnswer));
+                        question.appendChild(answerElement);
                     }
-                    question.appendChild(answerElement);
+                } else {
+                    for (String answer : examQuestion.getAnswers()) {
+                        Element answerElement = document.createElement("answer");
+                        answerElement.appendChild(document.createTextNode(answer));
+                        //if this is a correct answer
+                        if (examQuestion.getCorrectAnswers().contains(answer)) {
+                            answerElement.setAttribute("id", "correct");
+                        }
+                        //if this is an answer the student selected
+                        if (examQuestion.getStudentAnswers().contains(answer)) {
+                            answerElement.setAttribute("selected", "true");
+                        }
+                        question.appendChild(answerElement);
+                    }
                 }
             }
             UpdateModel.updateXML(new DOMSource(document), filePath);
-            return attempt; //because we don't know if this is a quiz or a test
+            return attempt; //so we can add it to either the quiz class or the test class (depending on who called this method)
         }
     }
 }

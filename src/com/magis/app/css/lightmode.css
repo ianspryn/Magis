@@ -10,7 +10,7 @@
     -fx-fill: #939393;
 }
 
-.settings-icon {
+.icon-no-color {
     -fx-fill: #181818;
 }
 
@@ -42,6 +42,7 @@
 
 .jfx-text-field, .jfx-password-field {
     -fx-prompt-text-fill: #aaa;
+    -fx-text-fill: #181818;
 }
 
 /*
@@ -80,7 +81,7 @@ The greeting ("Hello, Ian!") on the home page
     -fx-background-color: #ddd;
 }
 
-.chapter-box, .recent-stats-box, .settings-box {
+.chapter-box, .recent-stats-box, .small-box {
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 15, 0, 0, 8);
 }

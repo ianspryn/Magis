@@ -1,6 +1,13 @@
 package com.magis.app.page;
-import com.magis.app.Main;
 
+import com.jfoenix.controls.JFXTextField;
+import com.magis.app.Main;
+import com.magis.app.models.ExamsModel;
+import javafx.scene.text.TextFlow;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Collections;
 
 import static com.magis.app.Configure.*;
@@ -18,47 +25,57 @@ public class QuizPageContent extends ExamPageContent {
         //if we have available bank questions and there exists a question generator (and still have unique questions to generate)
         if (usedBankQuestions.size() < numAvailableBankQuestions && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = rand.nextInt(2); //0 or 1
-        //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
+            //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
         } else if (numAvailableBankQuestions > usedBankQuestions.size() && (questionGenerator == null || numGeneratedQuestions >= questionGenerator.getNumUnique())) {
             typeOfQuestion = 0;
-        //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
+            //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
         } else if (numAvailableBankQuestions <= usedBankQuestions.size() && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = 1;
         } else { //if we don't have either, we're out of unique questions
             return false;
         }
 
-        switch(typeOfQuestion) {
+        switch (typeOfQuestion) {
             case 0:
                 //grab a random question from the question bank that hasn't been used before
-                int question;
-                do question = rand.nextInt(numAvailableBankQuestions);
-                while (usedBankQuestions.contains(question));
-                usedBankQuestions.add(question); //add the question to the used bank of questions
+                int questionNumber;
+                do questionNumber = rand.nextInt(numAvailableBankQuestions);
+                while (usedBankQuestions.contains(questionNumber));
+                usedBankQuestions.add(questionNumber); //add the question to the used bank of questions
                 //set the question statement
-                int level = exam.getQuestion(question).getLevel();
+                ExamsModel.ChapterModel.QuestionsModel question = exam.getQuestion(questionNumber);
+                int level = question.getLevel();
                 //Determine if it should be "point" or "points". i.e. "1 point" vs. "2 points"
                 pointsAndIndex = level == 1 ? level + " point" : level + " points";
                 pointsAndIndex += "\nQuestion " + (questionIndex + 1);
-                if (exam.getQuestion(question).getNumCorrectAnswers() == 1) {
-                    statement = exam.getQuestion(question).getStatement();
+
+                //save the points and question index
+                examQuestion.setPointsAndQuestionIndex(pointsAndIndex);
+
+                if (question.getNumCorrectAnswers() == 1) {
+                    statement = question.getStatement();
                 } else { //if there is more than one correct answer, hint this to the student
-                    String statement = exam.getQuestion(question).getStatement();
+                    String statement = question.getStatement();
                     statement += "\n\nNote: There may be more than one correct answer.";
                     this.statement = statement;
                 }
                 //save the question
-                examQuestion.setQuestion(exam.getQuestion(question).getStatement());
+                examQuestion.setQuestion(question.getStatement());
                 //get and save the level
-                examQuestion.setLevel(exam.getQuestion(question).getLevel());
+                examQuestion.setLevel(question.getLevel());
+                //set the type
+                examQuestion.setWritten(question.isWritten());
                 //get and save the correct answers
-                examQuestion.addCorrectAnswers(exam.getQuestion(question).getCorrectAnswers());
+                examQuestion.addCorrectAnswers(question.getCorrectAnswers());
                 //get and save the incorrect answers;
-                examQuestion.addIncorrectAnswers(exam.getQuestion(question).getIncorrectAnswers());
+                examQuestion.addIncorrectAnswers(question.getIncorrectAnswers());
                 //get and save all of the answers
-                examQuestion.addAnswers(exam.getQuestion(question).getAnswers());
-                //shuffle the order if we're allowed to
-                if (exam.getQuestion(question).isShuffle()) Collections.shuffle(examQuestion.getAnswers());
+                examQuestion.addAnswers(question.getAnswers());
+                /*
+                shuffle the order if we're allowed to
+                the order for the answer of written questions is essential!
+                 */
+                if (question.isShuffle() && !question.isWritten()) Collections.shuffle(examQuestion.getAnswers());
                 break;
             case 1:
                 numGeneratedQuestions++;

@@ -2,6 +2,12 @@ package com.magis.app;
 
 public class Configure {
 
+    public static final String PINK = "#E91E63"; //Pink 500
+    public static final String PURPLE = "#9C27B0"; //Purple 500
+    public static final String CYAN = "#00BCD4"; //Pink 500
+    public static final String GREEN = "#8BC34A"; //Pink 500
+    public static final String BLUE_GRAY = "#607D8B"; //Pink 500
+
     /******************************************************************************
 
      Modify these variables before compiling the program to apply custom values
@@ -11,7 +17,7 @@ public class Configure {
     /*
     The default number of questions each quiz will have
      */
-    public static final int DEFAULT_NUM_QUIZ_QUESTIONS = 15;
+    public static final int DEFAULT_NUM_QUIZ_QUESTIONS = 100;
     /*
     The default number of question each test will have
      */
@@ -20,6 +26,14 @@ public class Configure {
     The number of questions each page on a quiz or test will have
      */
     public static final int NUM_QUESTIONS_PER_PAGE = 2;
+    /*
+    The worst acceptable score a student can get on a test
+     */
+    public static final int MINIMUM_TEST_SCORE = 70;
+    /*
+    The worst acceptable score a student can get on a quiz
+     */
+    public static  final int MINIMUM_QUIZ_SCORE = 70;
 
     public static void values() {
         /*

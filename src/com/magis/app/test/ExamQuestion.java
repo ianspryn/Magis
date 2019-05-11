@@ -1,23 +1,29 @@
 package com.magis.app.test;
 
+import com.jfoenix.controls.JFXTextField;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ExamQuestion {
 
     private int level;
     private String pointsAndQuestionIndex;
+    private boolean isWritten;
     private String question;
     private ArrayList<String> answers;
     private ArrayList<String> correctAnswers;
     private ArrayList<String> incorrectAnswers;
     private ArrayList<String> studentAnswers;
-
+    private HashMap<Integer, JFXTextField> textFields;
     public ExamQuestion() {
         level = 1;
+        isWritten = false; //default to false
         answers = new ArrayList<>();
         correctAnswers = new ArrayList<>();
         incorrectAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
+        textFields = new HashMap<>();
     }
 
     public int getLevel() {
@@ -34,6 +40,14 @@ public class ExamQuestion {
 
     public void setPointsAndQuestionIndex(String pointsAndQuestionIndex) {
         this.pointsAndQuestionIndex = pointsAndQuestionIndex;
+    }
+
+    public boolean isWritten() {
+        return isWritten;
+    }
+
+    public void setWritten(boolean written) {
+        isWritten = written;
     }
 
     public void setQuestion(String question) {
@@ -64,12 +78,16 @@ public class ExamQuestion {
         studentAnswers.remove(oldAnswer);
     }
 
+    public void addTextField(int key, JFXTextField textField) { textFields.put(key, textField); }
+
+    public HashMap<Integer, JFXTextField> getTextFields() { return textFields; }
+
     public String getQuestion() {
         return question;
     }
 
     public ArrayList<String> getAnswers() {
-        return answers;
+            return answers;
     }
 
     public ArrayList<String> getCorrectAnswers() {

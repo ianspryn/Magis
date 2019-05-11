@@ -26,6 +26,84 @@ STRUCTURE:
                                 <answer>There is no difference</answer>
                                 <answer>"0" is a double, 0 is a int</answer>
                         </question>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>```//Variables
+### var1 = 0.54;
+### var2 = 0.43;
+### var3 = 43;
+### var4 = 'c';```
+
+Assign the proper data-types to these values</statement>
+                                <answer id = "correct">double</answer>
+                                <answer id = "correct">double</answer>
+                                <answer id = "correct">int</answer>
+                                <answer id = "correct">char</answer>
+                        </question>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>```//This value will hold the amount of money the user will have
+### money;
+
+//This value will hold the ID of the user
+### id;
+
+//This value will hold the initials of the user
+### initials;
+
+//This value will hold the letter of the division the user works at
+### divisionLetter;```
+
+Assign the proper data-types to these values</statement>
+                                <answer id = "correct">double</answer>
+                                <answer id = "correct">int</answer>
+                                <answer id = "correct">String</answer>
+                                <answer id = "correct">char</answer>
+                        </question>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>```//This value will hold the total sales of the store
+### sales;
+
+//This value will hold the store's street number
+### sNum;
+
+//This value will hold the number of shirts in the store
+### numShirts;
+
+//This value will hold the letter grade of the store in reviews
+### grade;```
+
+                                        Assign the proper data-types to these values</statement>
+                                <answer id = "correct">double</answer>
+                                <answer id = "correct">int</answer>
+                                <answer id = "correct">int</answer>
+                                <answer id = "correct">char</answer>
+                        </question>
+                                                <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>```//This value will be used to sum two decimals
+### sum;
+
+//This value will hold the product of the two decimals
+### product;
+
+//This value will hold the remainder of two numbers
+### remainder;
+
+//This value will hold a random alphabet value
+### alphabetValue;```
+
+                                        Assign the proper data-types to these values</statement>
+                                <answer id = "correct">double</answer>
+                                <answer id = "correct">double</answer>
+                                <answer id = "correct">int</answer>
+                                <answer id = "correct">char</answer>
+                        </question>
                 </questions>
         </chapter>
 </tests>
