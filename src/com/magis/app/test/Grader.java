@@ -74,7 +74,7 @@ public class Grader {
 
             HashMap<Integer, JFXTextField> textFields = question.getTextFields();
             for (Map.Entry<Integer, JFXTextField> iter : textFields.entrySet()) {
-                question.addWrittenStudentAnswer(iter.getKey(), iter.getValue().getText());
+                question.addStudentAnswer(iter.getValue().getText());
             }
         }
     }
@@ -92,7 +92,7 @@ public class Grader {
                 stringBuilder.append(str);
             }
             String correctAnswer = stringBuilder.toString();
-            String[] formattedStudentAnswer = question.getWrittenStudentAnswer(answerIndex).split(regex);
+            String[] formattedStudentAnswer = question.getStudentAnswers().get(answerIndex).split(regex);
             stringBuilder = new StringBuilder();
             for (String str : formattedStudentAnswer) {
                 if (str.length() == 0) continue;

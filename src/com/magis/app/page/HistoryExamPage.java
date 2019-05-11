@@ -2,16 +2,27 @@ package com.magis.app.page;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import com.magis.app.Main;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.models.StudentModel;
 import com.magis.app.test.ExamQuestion;
+import com.magis.app.test.diff_match_patch;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.regex.Pattern;
+
+import static com.magis.app.Configure.NUM_QUESTIONS_PER_PAGE;
 import static com.magis.app.home.StatsPage.goToChapterInsights;
 
 public class HistoryExamPage {
@@ -43,10 +54,6 @@ public class HistoryExamPage {
         for (ExamQuestion examQuestion : attempt.getExamQuestions()) {
             VBox questionBox = rebuildQuestion(examQuestion);
             masterVBox.getChildren().add(questionBox);
-            if (examQuestion.isWritten()) {
-                VBox answerBox = rebuildQuestion(examQuestion);
-                //TODO: Finish this
-            }
         }
     }
 
@@ -56,17 +63,61 @@ public class HistoryExamPage {
         questionBox.setPadding(new Insets(20,0,20,20));
 
         Label pointsAndQuestionIndex = new Label(examQuestion.getPointsAndQuestionIndex());
-        pointsAndQuestionIndex.setPadding(new Insets(0,0,-10,0));
+        pointsAndQuestionIndex.setPadding(new Insets(0,0,-10,-10));
         pointsAndQuestionIndex.getStyleClass().addAll("lesson-header-three-text", "text-color");
         pointsAndQuestionIndex.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
         questionBox.getChildren().add(pointsAndQuestionIndex);
 
         ExamPageContent.buildStatement(questionBox, examQuestion, chapterIndex);
 
-        //buildStatement() took care of everything else already
-        if (examQuestion.isWritten()) return questionBox;
+        //replace the content by marking the student's answer as correct/incorrect
+        if (examQuestion.isWritten()) {
+            for (int answerIndex = 0; answerIndex < examQuestion.getNumCorrectAnswers(); answerIndex++) {
+                HBox answerContainer = new HBox();
+                answerContainer.setMaxHeight(TextFlow.USE_PREF_SIZE);
+                answerContainer.setMaxWidth(TextFlow.USE_PREF_SIZE);
+                ExamPageContent.replaceTextFieldWithNode(questionBox, answerContainer);
+                ExamPageContent.applyDiffing(examQuestion, answerContainer, answerIndex);
+            }
 
-        if (examQuestion.getCorrectAnswers().size() == 1) {
+            /*
+            We will now build the second box that contains the actual correct answer
+             */
+            VBox answerBox = new VBox();
+//            ExamPageContent.buildWrittenAnswerStatement(answerBox, examQuestion, chapterIndex); //create it again
+
+            //fill the textFlow with text of the correct answer (it will all be green as a result)
+            if (Arrays.asList(ExamPageContent.splitQuestion(examQuestion.getQuestion())).contains("###")) {
+                ExamPageContent.buildWithTextFlow(answerBox, examQuestion, chapterIndex, true);
+            }
+            //else it's a fill-in-the-blank at the end and we are guaranteed it's only one fill-in-the-blank
+            else {
+                HBox container = new HBox();
+                container.getStyleClass().add("code-text");
+                container.setMaxWidth(HBox.USE_PREF_SIZE);
+
+                TextFlow textFlow = new TextFlow();
+                textFlow.setStyle("-fx-background-color: #00C853"); //Green A700
+                Text text = new Text(examQuestion.getCorrectAnswers().get(0));
+                text.setStyle("-fx-fill: #004c05"); //Dark Green
+                textFlow.getChildren().add(text);
+                //Constrain it to the size of the text inside of it
+                textFlow.setMaxHeight(TextFlow.USE_PREF_SIZE);
+                textFlow.setMaxWidth(TextFlow.USE_PREF_SIZE);
+                container.getChildren().add(textFlow);
+                answerBox.getChildren().add(container);
+            }
+
+
+
+            Label correctAnswerText = new Label("Correct Answer");
+            correctAnswerText.setPadding(new Insets(40,0,0,20));
+            correctAnswerText.getStyleClass().add("lesson-header-three-text");
+            correctAnswerText.setStyle("-fx-text-fill: #00C853;");
+
+            questionBox.getChildren().addAll(correctAnswerText, answerBox);
+        }
+        else if (examQuestion.getCorrectAnswers().size() == 1) {
             ToggleGroup toggleGroup = new ToggleGroup();
             for (String answer : examQuestion.getAnswers()) {
                 JFXRadioButton radioButton = new JFXRadioButton();

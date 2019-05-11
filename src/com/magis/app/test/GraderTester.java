@@ -29,7 +29,7 @@ public class GraderTester {
         examQuestion.setPointsAndQuestionIndex("2 points\nQuestion 1");
         examQuestion.setQuestion("Why am I doing this?");
         examQuestion.addCorrectAnswer("int[] myArray = new int[5];");
-        examQuestion.addWrittenStudentAnswer(0,"int[] myArray = new int[5];");
+        examQuestion.addStudentAnswer("int[] myArray = new int[5];");
 
         Grader grader = new Grader();
         grader.addQuestion(examQuestion);

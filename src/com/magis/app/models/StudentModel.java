@@ -988,20 +988,33 @@ public class StudentModel {
                     Node written = question.getElementsByTagName("written").item(0);
                     examQuestion.setWritten(written != null && Boolean.parseBoolean(written.getTextContent()));
 
-                    NodeList answers = question.getElementsByTagName("answer");
-                    for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
-                        Element answer = (Element) answers.item(answerIndex);
-                        if (answer.getAttributes().getNamedItem("id") != null) {
-                            if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
-                                examQuestion.addCorrectAnswer(answer.getTextContent());
-                            }
+                    if (examQuestion.isWritten()) {
+                        NodeList answers = question.getElementsByTagName("answer");
+                        for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                            Element answer = (Element) answers.item(answerIndex);
+                            examQuestion.addCorrectAnswer(answer.getTextContent());
                         }
-                        if (answer.getAttributes().getNamedItem("selected") != null) {
-                            if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
-                                examQuestion.addStudentAnswer(answer.getTextContent());
-                            }
+                        NodeList studentAnswers = question.getElementsByTagName("studentanswer");
+                        for (int studentAnswerIndex = 0; studentAnswerIndex < studentAnswers.getLength(); studentAnswerIndex++) {
+                            Element studentAnswer = (Element) studentAnswers.item(studentAnswerIndex);
+                            examQuestion.addStudentAnswer(studentAnswer.getTextContent());
                         }
-                        examQuestion.addAnswer(answer.getTextContent());
+                    } else {
+                        NodeList answers = question.getElementsByTagName("answer");
+                        for (int answerIndex = 0; answerIndex < answers.getLength(); answerIndex++) {
+                            Element answer = (Element) answers.item(answerIndex);
+                            if (answer.getAttributes().getNamedItem("id") != null) {
+                                if (answer.getAttributes().getNamedItem("id").getNodeValue().equals("correct")) {
+                                    examQuestion.addCorrectAnswer(answer.getTextContent());
+                                }
+                            }
+                            if (answer.getAttributes().getNamedItem("selected") != null) {
+                                if (Boolean.parseBoolean(answer.getAttributes().getNamedItem("selected").getNodeValue())) {
+                                    examQuestion.addStudentAnswer(answer.getTextContent());
+                                }
+                            }
+                            examQuestion.addAnswer(answer.getTextContent());
+                        }
                     }
                     examQuestions.add(examQuestion);
                 }
@@ -1099,18 +1112,32 @@ public class StudentModel {
                 statement.appendChild(document.createTextNode(examQuestion.getQuestion()));
                 question.appendChild(statement);
 
-                for (String answer : examQuestion.getAnswers()) {
-                    Element answerElement = document.createElement("answer");
-                    answerElement.appendChild(document.createTextNode(answer));
-                    //if this is a correct answer
-                    if (examQuestion.getCorrectAnswers().contains(answer)) {
+                if (examQuestion.isWritten()) {
+                    for (String correctAnswer : examQuestion.getCorrectAnswers()) {
+                        Element answerElement = document.createElement("answer");
+                        answerElement.appendChild(document.createTextNode(correctAnswer));
                         answerElement.setAttribute("id", "correct");
+                        question.appendChild(answerElement);
                     }
-                    //if this is an answer the student selected
-                    if (examQuestion.getStudentAnswers().contains(answer)) {
-                        answerElement.setAttribute("selected", "true");
+                    for (String studentAnswer : examQuestion.getStudentAnswers()) {
+                        Element answerElement = document.createElement("studentanswer");
+                        answerElement.appendChild(document.createTextNode(studentAnswer));
+                        question.appendChild(answerElement);
                     }
-                    question.appendChild(answerElement);
+                } else {
+                    for (String answer : examQuestion.getAnswers()) {
+                        Element answerElement = document.createElement("answer");
+                        answerElement.appendChild(document.createTextNode(answer));
+                        //if this is a correct answer
+                        if (examQuestion.getCorrectAnswers().contains(answer)) {
+                            answerElement.setAttribute("id", "correct");
+                        }
+                        //if this is an answer the student selected
+                        if (examQuestion.getStudentAnswers().contains(answer)) {
+                            answerElement.setAttribute("selected", "true");
+                        }
+                        question.appendChild(answerElement);
+                    }
                 }
             }
             UpdateModel.updateXML(new DOMSource(document), filePath);

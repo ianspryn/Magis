@@ -187,27 +187,32 @@ public abstract class ExamPageContent extends PageContent {
 
     /**
      * build the statement for thr given question
-     *
      * @param questionBox  the box to add the statement to
      * @param examQuestion the class instance to pull exam data from
      * @param chapterIndex used for error output and easier debugging
      */
-    public static void  buildStatement(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
-        if (examQuestion.isWritten()) buildAsWrittenAnswer(questionBox, examQuestion, chapterIndex);
+    public static void buildStatement(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
+        if (examQuestion.isWritten()) buildAsWrittenAnswer(questionBox, examQuestion, chapterIndex, false);
         else buildAsChoiceAnswer(questionBox, examQuestion, chapterIndex);
     }
 
-    public static void buildAsWrittenAnswer(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
+    public static void buildWrittenAnswerStatement(VBox answerBox, ExamQuestion examQuestion, int chapterIndex) {
+        buildAsWrittenAnswer(answerBox, examQuestion, chapterIndex, true);
+    }
+
+    public static void buildAsWrittenAnswer(VBox questionBox, ExamQuestion examQuestion, int chapterIndex, boolean historyPage) {
         String[] splitQuestion = splitQuestion(examQuestion.getQuestion());
         //if the input field is in the middle of the question
         if (Arrays.asList(splitQuestion).contains("###")) {
-            buildWithTextField(questionBox, examQuestion, chapterIndex);
+            buildWithTextField(questionBox, examQuestion, chapterIndex, historyPage);
         }
         //else there is no input field, and therefore we should put an input field at the end of the question
         else {
-            Text text = new Text(examQuestion.getQuestion());
-            text.getStyleClass().addAll("lesson-text", "text-no-color");
-
+            if (!historyPage) {
+                Text text = new Text(examQuestion.getQuestion());
+                text.getStyleClass().addAll("lesson-text", "text-no-color");
+                questionBox.getChildren().add(text);
+            }
             HBox container = new HBox();
             container.getStyleClass().add("code-text");
             container.setMaxWidth(HBox.USE_PREF_SIZE);
@@ -224,20 +229,20 @@ public abstract class ExamPageContent extends PageContent {
             textField.setPrefWidth(1.5 * fm.stringWidth(examQuestion.getCorrectAnswers().get(0)) + (double) fm.stringWidth(examQuestion.getCorrectAnswers().get(0)) / 3);
             g2d.dispose();
             container.getChildren().add(textField);
-            questionBox.getChildren().addAll(text, container);
+            questionBox.getChildren().add(container);
         }
     }
 
-    private static void buildWithTextFlow(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
-        buildWritten(questionBox, examQuestion, chapterIndex, "TEXTFLOW");
+    static void buildWithTextFlow(VBox questionBox, ExamQuestion examQuestion, int chapterIndex, boolean historyPage) {
+        buildWritten(questionBox, examQuestion, chapterIndex, "TEXTFLOW", historyPage);
 
     }
 
-    private static void buildWithTextField(VBox questionBox, ExamQuestion examQuestion, int chapterIndex) {
-        buildWritten(questionBox, examQuestion, chapterIndex, "TEXTFIELD");
+    private static void buildWithTextField(VBox questionBox, ExamQuestion examQuestion, int chapterIndex, boolean historyPage) {
+        buildWritten(questionBox, examQuestion, chapterIndex, "TEXTFIELD", historyPage);
     }
 
-    private static void buildWritten (VBox questionBox, ExamQuestion examQuestion, int chapterIndex, String mode) {
+    private static void buildWritten (VBox questionBox, ExamQuestion examQuestion, int chapterIndex, String mode, boolean historyPage) {
         String[] splitQuestion = splitQuestion(examQuestion.getQuestion());
         Label regularText = null;
         TextFlow codeQuestion = new TextFlow();
@@ -270,7 +275,7 @@ public abstract class ExamPageContent extends PageContent {
 
                             If this is our first code segment of the question (the points and questionIndex is already in questionBox, so we check of size is 1)
                              */
-                        if (mode.equals("TEXTFIELD") && questionBox.getChildren().get(questionBox.getChildren().size() - 1).equals(regularText) || questionBox.getChildren().size() == 1) {
+                        if (!historyPage && mode.equals("TEXTFIELD") && questionBox.getChildren().get(questionBox.getChildren().size() - 1).equals(regularText) || questionBox.getChildren().size() == 1) {
                             codeQuestion = new TextFlow();
                             codeQuestion.setMaxWidth(TextFlow.USE_PREF_SIZE);
                             codeQuestion.setLineSpacing(8);
@@ -318,7 +323,6 @@ public abstract class ExamPageContent extends PageContent {
                         TextFlow textFlow = new TextFlow();
                         textFlow.setStyle("-fx-background-color: #00C853"); //Green A700
                         Text text = new Text(examQuestion.getCorrectAnswers().get(textFieldCounter));
-                        System.out.println(examQuestion.getCorrectAnswers().get(textFieldCounter));
                         text.setStyle("-fx-fill: #004c05"); //Dark Green
                         textFlow.getChildren().add(text);
                         codeQuestion.getChildren().add(textFlow);
@@ -333,13 +337,14 @@ public abstract class ExamPageContent extends PageContent {
                         codeText.getStyleClass().addAll("lesson-text", "text-no-color");
                         codeText.setStyle("-fx-font-family: \"monospace\";");
                         codeQuestion.getChildren().add(codeText);
-                        //we are not in any kind of formatting segment
-                    } else {
+                    }
+                    //we are not in any kind of formatting segment
+                    else {
                         /*
                         if true, then this is a question on a quiz that the student will fill out
                         and it is NOT after the quiz has been submitted.
                          */
-                        if (mode.equals("TEXTFIELD")) {
+                        if (!historyPage && mode.equals("TEXTFIELD")) {
                             regularText = new Label(subString);
                             regularText.setMinHeight(Label.BASELINE_OFFSET_SAME_AS_HEIGHT); //force the label's height to match that of the text it
                             regularText.setWrapText(true);
@@ -425,89 +430,13 @@ public abstract class ExamPageContent extends PageContent {
             int questionIndexFinal = questionIndex;
             if (examQuestion.isWritten()) {
                 VBox questionBox = writtenQuestionBoxes.get(questionIndex);
-                diff_match_patch dmp = new diff_match_patch();
                 for (int answerIndex = 0; answerIndex < examQuestion.getNumCorrectAnswers(); answerIndex++) {
                     HBox answerContainer = new HBox();
                     answerContainer.setMaxHeight(TextFlow.USE_PREF_SIZE);
                     answerContainer.setMaxWidth(TextFlow.USE_PREF_SIZE);
-                    int numChildren = questionBox.getChildren().size();
-                    /*
-                    For the questions that have multiple fill-in-the-blanks
-                    Find the first (or next) textField and replace it with a TextFlow
-                     */
-                    for (int i = 0; i < numChildren; i++) {
-                        Node node = questionBox.getChildren().get(i);
-                        if (node instanceof TextFlow) {
-                            TextFlow textFlow = (TextFlow) node;
-                            int numTextParts = textFlow.getChildren().size();
-                            for (int i2 = 0; i2 < numTextParts; i2++) {
-                                Node node2 = textFlow.getChildren().get(i2);
-                                if (node2 instanceof  JFXTextField) {
-                                    textFlow.getChildren().remove(i2);
-                                    textFlow.getChildren().add(i2, answerContainer);
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                        //for the questions with a single fill-in-the-blank at the end
-                        if (node instanceof HBox) {
-                            HBox hBox = (HBox) node;
-                            int numHBoxParts = hBox.getChildren().size();
-                            for (int i2 = 0; i2 < numHBoxParts; i2++) {
-                                Node node2 = hBox.getChildren().get(i2);
-                                if (node2 instanceof JFXTextField) {
-                                    hBox.getChildren().remove(i2);
-                                    hBox.getChildren().add(i2, answerContainer);
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
+                    replaceTextFieldWithNode(questionBox, answerContainer);
 
-                    String correctAnswer = examQuestion.getCorrectAnswers().get(answerIndex);
-                    String studentAnswer = examQuestion.getWrittenStudentAnswer(answerIndex);
-                    LinkedList<diff_match_patch.Diff> diff = dmp.diff_main(correctAnswer, studentAnswer);
-                    System.out.println(diff);
-                    for (int i = 0; i < diff.size(); i++) {
-                        diff_match_patch.Diff diffPart = diff.get(i);
-                        String type = diffPart.operation.toString();
-                        TextFlow textFlow = new TextFlow();
-                        //Constrain it to the size of the text inside of it
-                        textFlow.setMaxHeight(TextFlow.USE_PREF_SIZE);
-                        textFlow.setMaxWidth(TextFlow.USE_PREF_SIZE);
-                        Text text = new Text();
-                        textFlow.getChildren().add(text);
-                        answerContainer.getChildren().add(textFlow);
-                        switch (type) {
-                            case "EQUAL":
-                                text.setText(diffPart.text);
-                                textFlow.setStyle("-fx-background-color: #00C853"); //Green A700
-                                text.setStyle("-fx-fill: #004c05"); //Dark Green
-                                break;
-                            case "INSERT":
-                                //let the extra white space slide, but indicate it's unnecessary
-                                text.setText(diffPart.text);
-                                if (Pattern.matches((" +"), diffPart.text)) {
-                                    textFlow.setStyle("-fx-background-color: #00E676"); //Green A400
-                                    text.setStyle("-fx-fill: #004c05"); //Dark Green
-                                } else {
-                                    textFlow.setStyle("-fx-background-color: #EF9A9A"); //Red 200
-                                    text.setStyle("-fx-fill: #D50000"); //Red A700
-                                }
-                                break;
-                            case "DELETE":
-                                //ignore extra whitespace
-                                if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
-                                if (Pattern.matches((" +"), diffPart.text)) continue;
-                                text.setText(" ");
-                                textFlow.setStyle("-fx-background-color: #80DEEA"); //Cyan 200
-                                text.setStyle("-fx-fill: #00B8D4"); //Cyan A700
-                                break;
-                        }
-                    }
-                    answerContainer.setMaxWidth(HBox.USE_PREF_SIZE);
+                   applyDiffing(examQuestion, answerContainer, answerIndex);
                 }
                 /*
                 Create a duplicate "question" to show the student the correct answer
@@ -521,7 +450,7 @@ public abstract class ExamPageContent extends PageContent {
 
 
                 if (Arrays.asList(splitQuestion(examQuestion.getQuestion())).contains("###")) {
-                    buildWithTextFlow(questionBox, examQuestion, chapterIndex);
+                    buildWithTextFlow(questionBox, examQuestion, chapterIndex, false);
                 }
                 //else it's a fill-in-the-blank at the end and we are guaranteed it's only one fill-in-the-blank
                 else {
@@ -603,6 +532,89 @@ public abstract class ExamPageContent extends PageContent {
                 insertionTracker = 0;
             }
         }
+    }
+
+    public static void replaceTextFieldWithNode(VBox box, Node toReplaceWith) {
+        int numChildren = box.getChildren().size();
+         /*
+        For the questions that have multiple fill-in-the-blanks
+        Find the first (or next) textField and replace it with a TextFlow
+         */
+        for (int i = 0; i < numChildren; i++) {
+            Node node = box.getChildren().get(i);
+            if (node instanceof TextFlow) {
+                TextFlow textFlow = (TextFlow) node;
+                int numTextParts = textFlow.getChildren().size();
+                for (int i2 = 0; i2 < numTextParts; i2++) {
+                    Node node2 = textFlow.getChildren().get(i2);
+                    if (node2 instanceof JFXTextField) {
+                        textFlow.getChildren().remove(i2);
+                        textFlow.getChildren().add(i2, toReplaceWith);
+                        break;
+                    }
+                }
+                break;
+            }
+            //for the questions with a single fill-in-the-blank at the end
+            if (node instanceof HBox) {
+                HBox hBox = (HBox) node;
+                int numHBoxParts = hBox.getChildren().size();
+                for (int i2 = 0; i2 < numHBoxParts; i2++) {
+                    Node node2 = hBox.getChildren().get(i2);
+                    if (node2 instanceof JFXTextField) {
+                        hBox.getChildren().remove(i2);
+                        hBox.getChildren().add(i2, toReplaceWith);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public static void applyDiffing(ExamQuestion examQuestion, HBox answerContainer, int answerIndex) {
+        String correctAnswer = examQuestion.getCorrectAnswers().get(answerIndex);
+        String studentAnswer = examQuestion.getStudentAnswers().get(answerIndex);
+        diff_match_patch dmp = new diff_match_patch();
+        LinkedList<diff_match_patch.Diff> diff = dmp.diff_main(correctAnswer, studentAnswer);
+        for (int i = 0; i < diff.size(); i++) {
+            diff_match_patch.Diff diffPart = diff.get(i);
+            String type = diffPart.operation.toString();
+            TextFlow textFlow = new TextFlow();
+            //Constrain it to the size of the text inside of it
+            textFlow.setMaxHeight(TextFlow.USE_PREF_SIZE);
+            textFlow.setMaxWidth(TextFlow.USE_PREF_SIZE);
+            Text text = new Text();
+            textFlow.getChildren().add(text);
+            answerContainer.getChildren().add(textFlow);
+            switch (type) {
+                case "EQUAL":
+                    text.setText(diffPart.text);
+                    textFlow.setStyle("-fx-background-color: #00C853"); //Green A700
+                    text.setStyle("-fx-fill: #004c05"); //Dark Green
+                    break;
+                case "INSERT":
+                    //let the extra white space slide, but indicate it's unnecessary
+                    text.setText(diffPart.text);
+                    if (Pattern.matches((" +"), diffPart.text)) {
+                        textFlow.setStyle("-fx-background-color: #00E676"); //Green A400
+                        text.setStyle("-fx-fill: #004c05"); //Dark Green
+                    } else {
+                        textFlow.setStyle("-fx-background-color: #EF9A9A"); //Red 200
+                        text.setStyle("-fx-fill: #D50000"); //Red A700
+                    }
+                    break;
+                case "DELETE":
+                    //ignore extra whitespace
+                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
+                    if (Pattern.matches((" +"), diffPart.text)) continue;
+                    text.setText(" ");
+                    textFlow.setStyle("-fx-background-color: #80DEEA"); //Cyan 200
+                    text.setStyle("-fx-fill: #00B8D4"); //Cyan A700
+                    break;
+            }
+        }
+        answerContainer.setMaxWidth(HBox.USE_PREF_SIZE);
     }
 
     public ExamSaver getExamSaver() {
