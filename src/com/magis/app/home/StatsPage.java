@@ -110,42 +110,16 @@ public class StatsPage {
          /*
         Middle
          */
-        VBox mastervBox = new VBox();
-        mastervBox.setAlignment(Pos.TOP_CENTER);
-        mastervBox.setPadding(new Insets(25, 25, 25, 25));
-        mastervBox.setMaxWidth(1500);
-        //Center the content in the scrollpane
-        StackPane contentHolder = new StackPane(mastervBox);
-        contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
-                scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
-        scrollPane.setContent(contentHolder);
-        JFXScrollPane.smoothScrolling(scrollPane);
+        UIComponents.GenericPage page = new UIComponents.GenericPage();
+        master = page.getMaster();
+        scrollPane = page.getScrollPane();
         scrollPane.setVvalue(0); //reset to top every time
-
-        /*
-        Back button and Page title
-         */
-        AnchorPane top = new AnchorPane();
-        top.setPadding(new Insets(0, 0, 50, 0));
-
-        //back button
-        JFXButton backButton = new JFXButton("Back");
-        backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
-        backButton.setOnMouseClicked(e -> goToStats(scrollPane));
-        backButton.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        backButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
-
-        //page title
-        Label pageTitle = new Label("Chapter " + (chapterIndex + 1) + " - " + Main.lessonModel.getChapter(chapterIndex).getTitle());
-        pageTitle.getStyleClass().add("section-title");
-
-        top.getChildren().addAll(backButton, pageTitle);
-        AnchorPane.setLeftAnchor(backButton, 0.0);
-        AnchorPane.setRightAnchor(pageTitle, 0.0);
-
-        mastervBox.getChildren().add(top);
+        page.getMastervBox().setAlignment(Pos.TOP_CENTER);
+        mastervBox = page.getMastervBox();
+        mastervBox.setAlignment(Pos.TOP_CENTER);
+        page.getBackButton().setOnMouseClicked(e -> goToStats(scrollPane));
+        page.getPageTitle().setText("Chapter " + (chapterIndex + 1) + " - " + Main.lessonModel.getChapter(chapterIndex).getTitle());
 
         /*
         Overall Progress
@@ -327,7 +301,6 @@ public class StatsPage {
         }
 
         mastervBox.getChildren().add(insightsVBox);
-        UIComponents.fadeOnAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
         Main.setScene(master);
     }
 
@@ -348,7 +321,6 @@ public class StatsPage {
 
     /**
      * Build the chapter box to house the title, completion and scores. Also configure its clicking action
-     *
      * @param chapterIndex the chapter's index
      * @return a build vBox for the chapter
      */

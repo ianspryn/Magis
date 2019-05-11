@@ -54,7 +54,7 @@ public abstract class Page {
         sidebar
          */
         sideBar.getStyleClass().add("sidebar");
-        homeHBox = UIComponents.createHomeBox();
+        homeHBox = UIComponents.createCornerWhiteHomeBox();
         homeHBox.setOnMouseClicked(e -> {
             if (Main.takingExam) {
                 String title = "Exit Test";

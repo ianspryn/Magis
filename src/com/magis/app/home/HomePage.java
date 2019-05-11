@@ -218,7 +218,7 @@ public class HomePage {
 
         SVGPath settingsIcon = new SVGPath();
         settingsIcon.getStyleClass().add("icon-no-color");
-        settingsIcon.setContent(MaterialIcons.settings);
+        settingsIcon.setContent(MaterialIcons.SETTINGS);
         // scale to size 350x350
         Bounds settingsBounds = settingsIcon.getBoundsInLocal();
         double settingsScaleFactor = 50 / Math.max(settingsBounds.getWidth(), settingsBounds.getHeight());
@@ -261,7 +261,7 @@ public class HomePage {
 
         SVGPath personIcon = new SVGPath();
         personIcon.getStyleClass().add("icon-no-color");
-        personIcon.setContent(MaterialIcons.person);
+        personIcon.setContent(MaterialIcons.PERSON);
         // scale to size 350x350
         Bounds signOutBounds = personIcon.getBoundsInLocal();
         double signOutScaleFactor = 40 / Math.max(signOutBounds.getWidth(), signOutBounds.getHeight());

@@ -118,7 +118,6 @@ public class IntelligentTutor {
          */
         //if they are completely done with this chapter
         if (hasTakenQuiz && hasTakenTest) {
-            System.out.println("hasTakenQuiz and hasTakenTest");
             if (progress == 100) recentActivityTitle.setText("Onward!");
             else recentActivityTitle.setText("Ready to move on?");
 
@@ -210,7 +209,6 @@ public class IntelligentTutor {
             }
             chapterTitleText.setText("Chapter " + (student.getRecentChapter() + 1) + " - " + chapter.getTitle());
         } else if ((onQuizPage && !hasTakenQuiz) || (progress == 100 && !hasTakenQuiz)) {
-            System.out.println("onQuizPage || (progress == 100 && !hasTakenQuiz)");
             if (checkForCompleteProgress("quiz")) {
                 //this code will only execute if progress == 100
                 newPage = chapter.getNumPages();
@@ -220,7 +218,6 @@ public class IntelligentTutor {
                 addText("! If you're ready to take your quiz, click here.");
             }
         } else if ((onTestPage && !hasTakenTest) || (progress == 100 && !hasTakenTest)) {
-            System.out.println("onTestPage || (progress == 100 && !hasTakenTest)");
             //make sure the student has read everything first
             if (checkForCompleteProgress("test")) {
                 //this code will only execute if progress == 100
@@ -234,7 +231,6 @@ public class IntelligentTutor {
                 }
             }
         } else if (onLessonPage) {
-            System.out.println("onLessonPage");
             recentActivityTitle.setText("Pick up where you left off?");
             if (progress > 80) {
                 addText("You're almost done with this chapter! ", true);

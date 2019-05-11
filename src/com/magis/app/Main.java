@@ -7,26 +7,15 @@ import com.magis.app.models.LessonModel;
 import com.magis.app.models.QuizzesModel;
 import com.magis.app.models.StudentModel;
 import com.magis.app.models.TestsModel;
-import com.magis.app.test.diff_match_patch;
 import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Stack;
 
 public class Main extends Application {
 
@@ -43,16 +32,14 @@ public class Main extends Application {
     public static boolean takingExam = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
     public static boolean useAnimations = true; //used because we animate the login page, and we need a default state (because the variable is before the student gets initialized)
-    public static double width = -1, height = -1;
 
 
     @Override
     public void start(Stage primaryStage) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width = screenSize.width;
-        width = width * 3 / 4;
-        height = screenSize.height;
-        height = height * 3 / 4;
+        double width = (int) Screen.getPrimary().getBounds().getWidth();
+        double height = (int) Screen.getPrimary().getBounds().getHeight();
+        width = width * 4 / 5;
+        height = height * 4 / 5;
 
         window = primaryStage;
         window.setOnCloseRequest(e -> {
