@@ -1237,4 +1237,21 @@ in.useDelimiter("");</answer>
                         </question>
                 </questions>
         </chapter>
+        <chapter id = "Inheritance">
+                <questions>
+                        <question>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Control Statements">
+                <questions>
+                        <question>
+                                <statement></statement>
+                                <answer id = "correct"></answer>
+                        <question>
+                </questions>
+        </chapter>
+        
 </quizzes>
