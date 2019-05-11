@@ -3314,39 +3314,23 @@ for (int i = 0; i &lt; board.length; i++)
 		<pages>
 			<page title="Subclass Construction">
 				<text>
-In this section, we discuss the implementation of constructors in subclasses. As an
-example, let’s declare a constructor to set the initial balance of a checking account.
-We want to invoke the BankAccount constructor to set the balance to the initial balance. There is a special instruction to call the superclass constructor from a subclass
-constructor. You use the reserved word super, followed by the construction parameters in parentheses:
+In this section, we discuss the implementation of constructors in subclasses. As an example, let’s declare a constructor to set the initial balance of a checking account. We want to invoke the BankAccount constructor to set the balance to the initial balance. There is a special instruction to call the superclass constructor from a subclass constructor. You use the reserved word super, followed by the construction parameters in parentheses:
 ```
 public class CheckingAccount extends BankAccount {
-public CheckingAccount(double initialBalance) {
-// Construct superclass
-super(initialBalance);
-// Initialize transaction count
-transactionCount = 0;
-}
-. . .
+	public CheckingAccount(double initialBalance) {
+		// Construct superclass
+		super(initialBalance);
+		// Initialize transaction count
+		transactionCount = 0;
+	}
+	. . .
 }
 ```
-When the reserved word super is immediately followed by a parenthesis, it indicates
-a call to the superclass constructor. When used in this way, the constructor call must
-be the first statement of the subclass constructor. If super is followed by a period and
-a method name, on the other hand, it indicates a call to a superclass method, as you
-saw in the preceding section. Such a call can be made anywhere in any subclass
-method.
+When the reserved word super is immediately followed by a parenthesis, it indicates a call to the superclass constructor. When used in this way, the constructor call must be the first statement of the subclass constructor. If super is followed by a period and a method name, on the other hand, it indicates a call to a superclass method, as you saw in the preceding section. Such a call can be made anywhere in any subclass method.
 
-The dual use of the super reserved word is analogous to the dual use of the this
-reserved word.
+The dual use of the super reserved word is analogous to the dual use of the this reserved word.
 
-If a subclass constructor does not call the superclass constructor, the superclass
-must have a constructor without parameters. That constructor is used to initialize
-the superclass data. However, if all constructors of the superclass require parameters, then the compiler reports an error.
-For example, you can implement the CheckingAccount constructor without calling
-the superclass constructor. Then the BankAccount class is constructed with its BankAccount() constructor, which sets the balance to zero. Of course, then the CheckingAccount constructor must explicitly deposit the initial balance.
-Most commonly, however, subclass constructors have some parameters that they
-pass on to the superclass and others that they use to initialize subclass instance
-variables.
+If a subclass constructor does not call the superclass constructor, the superclass must have a constructor without parameters. That constructor is used to initialize the superclass data. However, if all constructors of the superclass require parameters, then the compiler reports an error. For example, you can implement the CheckingAccount constructor without calling the superclass constructor. Then the BankAccount class is constructed with its BankAccount() constructor, which sets the balance to zero. Of course, then the CheckingAccount constructor must explicitly deposit the initial balance. Most commonly, however, subclass constructors have some parameters that they pass on to the superclass and others that they use to initialize subclass instance variables.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/2.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/3.png</image>
@@ -3354,19 +3338,14 @@ variables.
 			</page>
 			<page title="Self Check">
 				<text>
-					1. Why didn’t the SavingsAccount constructor in Section 10.2 call its superclass
-					constructor?
+1. Why didn’t the SavingsAccount constructor call its superclass constructor?
 
-					2. When you invoke a superclass method with the super reserved word, does the
-					call have to be the first statement of the subclass method?
+2. When you invoke a superclass method with the super reserved word, does the call have to be the first statement of the subclass method?
 				</text>
 			</page>
 			<page title="Converting Between Super/Subclass">
 				<text>
-It is often necessary to convert a subclass type to a superclass type. Occasionally,
-you need to carry out the conversion in the opposite direction. This section discusses the conversion rules.
-The class SavingsAccount extends the class BankAccount. In other words, a SavingsAccount object is a special case of a BankAccount object. Therefore, a reference to a
-SavingsAccount object can be converted to a BankAccount reference.
+It is often necessary to convert a subclass type to a superclass type. Occasionally, you need to carry out the conversion in the opposite direction. This section discusses the conversion rules. The class SavingsAccount extends the class BankAccount. In other words, a SavingsAccount object is a special case of a BankAccount object. Therefore, a reference to a SavingsAccount object can be converted to a BankAccount reference.
 ```
 SavingsAccount collegeFund = new SavingsAccount(10);
 BankAccount anAccount = collegeFund; // OK
@@ -3375,25 +3354,22 @@ Furthermore, all references can be converted to the type Object.
 ```
 Object anObject = collegeFund; // OK
 ```
-Now the three object references stored in collegeFund, anAccount, and anObject all
-refer to the same object of type SavingsAccount (see Figure 6).
-However, the variables anAccount and anObject know less than the full story about
-the object references that they store. Because anAccount is a variable of type BankAccount, you can invoke the deposit and withdraw methods. You cannot use the addInterest method, though—it is not a method of the BankAccount class:
+Now the three object references stored in collegeFund, anAccount, and anObject all refer to the same object of type SavingsAccount (see Figure 6). However, the variables anAccount and anObject know less than the full story about the object references that they store. Because anAccount is a variable of type BankAccount, you can invoke the deposit and withdraw methods. You cannot use the addInterest method, though—it is not a method of the BankAccount class:
 ```
 anAccount.deposit(1000); // OK
 anAccount.addInterest(); // No—not a method of the type of the anAccount variable
 ```
 And, of course, the variable anObject knows even less. You can’t even invoke the
 deposit method on it—deposit is not a method of the Object class.
-Why would anyone want to know less about an object reference and use a variable whose type is a superclass? This can happen if you want to reuse code that
-knows about the superclass but not the subclass. Here is a typical example. Consider a transfer method that transfers money from one account to another:
+Why would anyone want to know less about an object reference and use a variable whose type is a superclass? This can happen if you want to reuse code that knows about the superclass but not the subclass. Here is a typical example. Consider a transfer method that transfers money from one account to another:
 ```
 public void transfer(double amount, BankAccount other) {
-withdraw(amount);
-other.deposit(amount);
+	withdraw(amount);
+	other.deposit(amount);
 }
-
+```
 You can use this method to transfer money from one bank account to another:
+```
 BankAccount momsAccount = . . . ;
 BankAccount harrysAccount = . . . ;
 momsAccount.transfer(1000, harrysAccount);
@@ -3407,31 +3383,23 @@ CheckingAccount harrysChecking = . . . ;
 momsAccount.transfer(1000, harrysChecking);
 // OK to pass a CheckingAccount reference to a method expecting a BankAccount
 ```
-The transfer method expects a reference to a BankAccount, and it gets a reference to a
-CheckingAccount object. That is perfectly legal. The transfer method doesn’t actually
-know that, in this case, the parameter variable other contains a reference to a CheckingAccount object. All it cares about is that the object can carry out the deposit
-method. This is assured because the other variable has the type BankAccount.
-Very occasionally, you need to carry out the opposite conversion, from a superclass type to a subclass type. For example, you may have a variable of type Object,
-and you know that it actually holds a BankAccount reference. In that case, you can use
+The transfer method expects a reference to a BankAccount, and it gets a reference to a CheckingAccount object. That is perfectly legal. The transfer method doesn’t actually know that, in this case, the parameter variable other contains a reference to a CheckingAccount object. All it cares about is that the object can carry out the deposit method. This is assured because the other variable has the type BankAccount. Very occasionally, you need to carry out the opposite conversion, from a superclass type to a subclass type. For example, you may have a variable of type Object, and you know that it actually holds a BankAccount reference. In that case, you can use
 a cast to convert the type:
 ```
 BankAccount anAccount = (BankAccount) anObject;
 ```
-However, this cast is somewhat dangerous. If you are wrong, and anObject actually
-refers to an object of an unrelated type, then an exception is thrown.
-To protect against bad casts, you can use the instanceof operator. It tests whether
-an object belongs to a particular type. For example,
-
+However, this cast is somewhat dangerous. If you are wrong, and anObject actually refers to an object of an unrelated type, then an exception is thrown. To protect against bad casts, you can use the instanceof operator. It tests whether an object belongs to a particular type. For example,
+```
 anObject instanceof BankAccount
-
+```
 returns
-
-true if the type of anObject is convertible to BankAccount. This happens if
-anObject refers to an actual BankAccount or a subclass such as SavingsAccount. Using the
-instanceof operator, a safe cast can be programmed as follows:
+###
+true 
+###
+if the type of anObject is convertible to BankAccount. This happens if anObject refers to an actual BankAccount or a subclass such as SavingsAccount. Using the instanceof operator, a safe cast can be programmed as follows:
 ```
 if (anObject instanceof BankAccount) {
-BankAccount anAccount = (BankAccount) anObject;
+	BankAccount anAccount = (BankAccount) anObject;
 . . .
 }
 ```
@@ -3442,38 +3410,24 @@ BankAccount anAccount = (BankAccount) anObject;
 				<text>
 1. Why did the second parameter of the transfer method have to be of type BankAccount and not, for example, SavingsAccount?
 
-2. Why can’t we change the second parameter of the transfer method to the type
-Object?
+2. Why can’t we change the second parameter of the transfer method to the type Object?
 				</text>
 			</page>
 			<page title="Polymorphism and Inheritance">
 				<text>
-In Java, the type of a variable does not determine the type of the object to which it
-refers. For example, a variable of type BankAccount can hold a reference to an actual
-BankAccount object or a subclass object such as SavingsAccount. You already encountered this phenomenon in Chapter 9 with variables whose type was an interface. A
-variable whose type is Measurable holds a reference to an object of a class that implements the Measurable interface, perhaps a Coin object or an object of an entirely different class.
-What happens when you invoke a method on a variable of type BankAccount? For
-example,
+In Java, the type of a variable does not determine the type of the object to which it refers. For example, a variable of type BankAccount can hold a reference to an actual BankAccount object or a subclass object such as SavingsAccount. You already encountered this phenomenon in Chapter 9 with variables whose type was an interface. A variable whose type is Measurable holds a reference to an object of a class that implements the Measurable interface, perhaps a Coin object or an object of an entirely different class. What happens when you invoke a method on a variable of type BankAccount? For example,
 ```
 BankAccount anAccount = new CheckingAccount();
 anAccount.deposit(1000);
 ```
-Which deposit method is called? The anAccount variable has type BankAccount, so it
-would appear as if BankAccount.deposit is called. On the other hand, the
-CheckingAccount class provides its own deposit method that updates the transaction
-count. The reference stored in the anAccount variable actually refers to an object of
-the subclass CheckingAccount, so it would be appropriate if the CheckingAccount.deposit
-method were called instead.
-Java uses dynamic method lookup to determine which method to invoke. The
-method to be called is always determined by the type of the actual object, not the
-type of the variable. That is, if the actual object has the type CheckingAccount, then the
-CheckingAccount.deposit method is called. It does not matter that the object reference
-is stored in a variable of type BankAccount.
+Which deposit method is called? The anAccount variable has type BankAccount, so it would appear as if BankAccount.deposit is called. On the other hand, the CheckingAccount class provides its own deposit method that updates the transaction count. The reference stored in the anAccount variable actually refers to an object of the subclass CheckingAccount, so it would be appropriate if the checkingAccount.deposit method were called instead.
+
+Java uses dynamic method lookup to determine which method to invoke. The method to be called is always determined by the type of the actual object, not the type of the variable. That is, if the actual object has the type CheckingAccount, then the CheckingAccount.deposit method is called. It does not matter that the object reference is stored in a variable of type BankAccount.
 Have another look at the transfer method:
 ```
 public void transfer(double amount, BankAccount other) {
-withdraw(amount);
-other.deposit(amount);
+	withdraw(amount);
+	other.deposit(amount);
 }
 ```
 Suppose you call
@@ -3485,8 +3439,7 @@ Two method calls are the result:
 anAccount.withdraw(1000);
 anotherAccount.deposit(1000);
 ```
-Depending on the actual types of the objects whose references are stored in anAccount and anotherAccount, different versions of the withdraw and deposit methods are
-called. This is an example of polymorphism. As we discussed in Chapter 9, polymorphism is the ability to treat objects with differences in behavior in a uniform way.
+Depending on the actual types of the objects whose references are stored in anAccount and anotherAccount, different versions of the withdraw and deposit methods are called. This is an example of polymorphism. As we discussed in Chapter 9, polymorphism is the ability to treat objects with differences in behavior in a uniform way.
 
 If you look into the implementation of the transfer method, it may not be immediately obvious that the first method call
 ```
@@ -3496,11 +3449,8 @@ depends on the type of an object. However, that call is a shortcut for
 ```
 this.withdraw(amount);
 ```
-The this parameter holds a reference to the implicit parameter, which can refer to a
-BankAccount or a subclass object.
-The following program calls the polymorphic withdraw and deposit methods. You
-should manually calculate what the program should print for each account balance,
-and confirm that the correct methods have in fact been called.
+The this parameter holds a reference to the implicit parameter, which can refer to a BankAccount or a subclass object.
+The following program calls the polymorphic withdraw and deposit methods. You should manually calculate what the program should print for each account balance, and confirm that the correct methods have in fact been called.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/12.png</image>
 			</page>
@@ -3509,13 +3459,13 @@ and confirm that the correct methods have in fact been called.
 1. If a is a variable of type BankAccount that holds a non-null reference, what do you
 know about the object to which a refers?
 
-2. If a refers to a checking account, what is the effect of calling a.transfer(1000,
+2. If a refers to a checking account, what is the effect of calling a.transfer(1000, other)?
 				</text>
 			</page>
 			<page title="Inheritance Hierarchy">
 				<text>
-When you work with a set of classes, some of which are more general and others more specialized, you want to organize them into an inheritance hierarchy. This enables you to process objects of different classes in a uniform way.
-To illustrate the design process, consider an application that presents a quiz and grades the user’s responses. A quiz consists of questions, and there are different kinds of questions:
+When you work with a set of classes, some of which are more general and others more specialized, you want to organize them into an inheritance hierarchy. This enables you to process objects of different classes in a uniform way. To illustrate the design process, consider an application that presents a quiz and grades the user’s responses. A quiz consists of questions, and there are different kinds of questions:
+
 	• Fill-in-the-blank
 	• Choice (single or multiple)
 	• Numeric (where an approximate answer is ok; e.g., 1.33 when the actual answer is 4/3)
@@ -3523,32 +3473,27 @@ To illustrate the design process, consider an application that presents a quiz a
 
 [H1]Step 1[H1]
 
-List the classes that are part of the hierarchy.
-From the problem description, we can find these classes:
+List the classes that are part of the hierarchy. From the problem description, we can find these classes:
 
-	MultiChoiceQuestion (offers answer choices to the user; user can pick more than one)
-	FillInQuestion (fill in the blank)
-	ChoiceQuestion (offers answer choices to the user)
-	NumericQuestion
-	FreeResponseQuestion
+	• MultiChoiceQuestion (offers answer choices to the user; user can pick more than one)
+	• FillInQuestion (fill in the blank)
+	• ChoiceQuestion (offers answer choices to the user)
+	• NumericQuestion
+	• FreeResponseQuestion
 
-In addition, we introduce a common superclass Question to model the commonality among
-these classes.
+In addition, we introduce a common superclass Question to model the commonality among these classes.
 
 [H1]Step 2[H1]
 
 	• Organize the classes into an inheritance hierarchy.
 	• Draw a UML diagram that shows super- and subclasses. Here is the diagram for our example.
-
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/15.png</image>
 				<text>
 [H1]Step 3[H1]
 
 Determine the common responsibilities. In Step 2, you will have identified a class at the root of the hierarchy. That class needs to have
-sufficient responsibilities to carry out the tasks at hand.
-
-To find out what those tasks are, write pseudocode for processing the objects.
+sufficient responsibilities to carry out the tasks at hand. To find out what those tasks are, write pseudocode for processing the objects.
 
 For each question:
 
@@ -3556,17 +3501,14 @@ For each question:
 	2. Get the user response.
 	3. Check whether the response is correct.
 
-From the pseudocode, we obtain the following list of common responsibilities that every
-question must carry out:
+From the pseudocode, we obtain the following list of common responsibilities that every question must carry out:
 
 	1. Display the question.
 	2. Check the response.
 
 [H1]Step 4[H1]
 
-Decide which methods are overridden in subclasses. For each subclass and each of the common responsibilities, decide whether the inherited
-behavior is appropriate or whether it needs to be overridden. Be sure to declare any methods that are inherited or overridden in the root of the hierarchy.
-We place the responsibilities common to all questions into the Question superclass.
+Decide which methods are overridden in subclasses. For each subclass and each of the common responsibilities, decide whether the inherited behavior is appropriate or whether it needs to be overridden. Be sure to declare any methods that are inherited or overridden in the root of the hierarchy. We place the responsibilities common to all questions into the Question superclass.
 ```
 public class Question {
 	. . .
@@ -3584,14 +3526,11 @@ public class Question {
 	public boolean checkAnswer(String response) { . . . }
 }
 ```
-The ChoiceQuestion class will need to override the display method to display all the choices. The NumericQuestion class will need to override the checkAnswer method, converting the
-response to a number and checking that it is approximately the same as the expected answer. From now on, we will only consider the ChoiceQuestion in detail. For the other question
-types, see the programming exercises at the end of this chapter.
+The ChoiceQuestion class will need to override the display method to display all the choices. The NumericQuestion class will need to override the checkAnswer method, converting the response to a number and checking that it is approximately the same as the expected answer. From now on, we will only consider the ChoiceQuestion in detail. For the other question types, see the programming exercises at the end of this chapter.
 
 [H1]Step 5[H1]
 
-Define the public interface of each subclass. Typically, subclasses have responsibilities other than those of the superclass. List those, as
-well as the methods that need to be overridden. You also need to specify how the objects of the subclasses should be constructed. With the ChoiceQuestion, we need a way of adding choices, like this:
+Define the public interface of each subclass. Typically, subclasses have responsibilities other than those of the superclass. List those, as well as the methods that need to be overridden. You also need to specify how the objects of the subclasses should be constructed. With the ChoiceQuestion, we need a way of adding choices, like this:
 ```
 ChoiceQuestion question = new ChoiceQuestion("In which country was the inventor of Java born?");
 question.addChoice("Australia", false);
@@ -3622,10 +3561,7 @@ public class ChoiceQuestion extends Question {
 ```
 [H1]Step 6[H1]
 
-Identify instance variables.
-
-List the instance variables for each class. If you find a instance variable that is common to all classes, be sure to place it in the base of the hierarchy.
-All questions have a question text and an answer. We store those values in the Question superclass.
+Identify instance variables. List the instance variables for each class. If you find a instance variable that is common to all classes, be sure to place it in the base of the hierarchy. All questions have a question text and an answer. We store those values in the Question superclass.
 ```
 public class Question {
 	private String text;
@@ -3640,9 +3576,7 @@ public class ChoiceQuestion extends Question {
 	. . .
 }
 ```
-We need to spend some thought on how question objects are constructed. We can supply the
-question text in the constructor. However, the answer for a choice question is only known
-when the correct choice is added, so we need a setter method for it:
+We need to spend some thought on how question objects are constructed. We can supply the question text in the constructor. However, the answer for a choice question is only known when the correct choice is added, so we need a setter method for it:
 ```
 public class Question {
 	. . .
@@ -3663,8 +3597,7 @@ public class Question {
 ```
 [H1]Step 7[H1]
 
-Implement constructors and methods.
-The methods of the Question class are very straightforward:
+Implement constructors and methods. The methods of the Question class are very straightforward:
 ```
 public class Question {
 	. . .
@@ -3704,8 +3637,7 @@ public void addChoice(String choice, boolean correct) {
 	}
 }
 ```
-Finally, the display method of the ChoiceQuestion class displays the question text, then the
-choices. Note the call to the superclass method.
+Finally, the display method of the ChoiceQuestion class displays the question text, then the choices. Note the call to the superclass method.
 ```
 public void display() {
 	super.display();
@@ -3717,8 +3649,7 @@ public void display() {
 ```
 [H1]Step 8[H1]
 
-Construct objects of different subclasses and process them.
-In our sample program, we construct two questions and present them to the user.
+Construct objects of different subclasses and process them. In our sample program, we construct two questions and present them to the user.
 ```
 public class QuestionDemo {
 	public static void main(String[] args) {
@@ -3769,14 +3700,7 @@ false
 		<pages>
 			<page title="Interfaces for Algorithm Reuse">
 				<text>
-It is often possible to make a service available to a wider set of inputs by focusing on
-the essential operations that the service requires. Interface types are used to express
-these common operations.
-That class provides a service, namely
-computing the average and maximum of a set of input values. Unfortunately, the
-class is suitable only for computing the average of a set of numbers. If we wanted to
-process bank accounts to find the bank account with the highest balance, we could
-not use the class in its current form. We could modify the class, like this:
+It is often possible to make a service available to a wider set of inputs by focusing on the essential operations that the service requires. Interface types are used to express these common operations. That class provides a service, namely computing the average and maximum of a set of input values. Unfortunately, the class is suitable only for computing the average of a set of numbers. If we wanted to process bank accounts to find the bank account with the highest balance, we could not use the class in its current form. We could modify the class, like this:
 ```
 public class DataSet // Modified for BankAccount objects {
 	private double sum;
@@ -3795,8 +3719,7 @@ public class DataSet // Modified for BankAccount objects {
 	}
 }
 ```
-Or suppose we wanted to find the coin with the highest value among a set of coins.
-We would need to modify the DataSet class again.
+Or suppose we wanted to find the coin with the highest value among a set of coins. We would need to modify the DataSet class again.
 ```
 public class DataSet // Modified for Coin objects {
 	private double sum;
@@ -3814,33 +3737,20 @@ public class DataSet // Modified for Coin objects {
 	}
 }
 ```
-Clearly, the algorithm for the data analysis service is the same in all cases, but the
-details of measurement differ. We would like to provide a single class that provides
-this service to any objects that can be measured.
-Suppose that the various classes agree on a method getMeasure that obtains the
-measure to be used in the data analysis. For bank accounts, getMeasure returns the
-balance. For coins, getMeasure returns the coin value, and so on. Then we can implement a DataSet class whose add method looks like this:
+Clearly, the algorithm for the data analysis service is the same in all cases, but the details of measurement differ. We would like to provide a single class that provides this service to any objects that can be measured. Suppose that the various classes agree on a method getMeasure that obtains the measure to be used in the data analysis. For bank accounts, getMeasure returns the balance. For coins, getMeasure returns the coin value, and so on. Then we can implement a DataSet class whose add method looks like this:
 ```
 sum = sum + x.getMeasure();
 if (count == 0 || maximum.getMeasure() &lt; x.getMeasure())
 maximum = x;
 count++;
 ```
-What is the type of the variable x? Ideally, x should refer to any class that has a
-getMeasure method.
-In Java, an interface type is used to specify required operations. We will declare
-an interface type that we call Measurable:
+What is the type of the variable x? Ideally, x should refer to any class that has a getMeasure method. In Java, an interface type is used to specify required operations. We will declare an interface type that we call Measurable:
 ```
 public interface Measurable {
 	double getMeasure();
 }
 ```
-The interface declaration lists all methods that the interface type requires. The
-Measurable interface type requires a single method, but in general, an interface type
-can require multiple methods.
-Note that the Measurable type is not a type in the standard library—it is a type
-that was created specifically for this book, in order to make the DataSet class more
-reusable.
+The interface declaration lists all methods that the interface type requires. The Measurable interface type requires a single method, but in general, an interface type can require multiple methods. Note that the Measurable type is not a type in the standard library—it is a type that was created specifically for this book, in order to make the DataSet class more reusable.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/2.png</image>
 				<text>
@@ -3849,6 +3759,7 @@ An interface type is similar to a class, but there are several important differe
 • All methods in an interface type are abstract; that is, they have a name, parameters, and a return type, but they don’t have an implementation.
 • All methods in an interface type are automatically public.
 • An interface type does not have instance variables.
+
 Now we can use the interface type Measurable to declare the variables x and maximum.
 ```
 public class DataSet {
@@ -3867,10 +3778,7 @@ public class DataSet {
 	}
 }
 ```
-This DataSet class is usable for analyzing objects of any class that implements the
-Measurable interface. A class implements an interface type if it declares the interface
-in an implements clause. It should then implement the method or methods that the
-interface requires.
+This DataSet class is usable for analyzing objects of any class that implements the Measurable interface. A class implements an interface type if it declares the interface in an implements clause. It should then implement the method or methods that the interface requires.
 ```
 public class BankAccount implements Measurable {
 	. . .
@@ -3879,10 +3787,7 @@ public class BankAccount implements Measurable {
 	}
 }
 ```
-Note that the class must declare the method as public, whereas the interface need
-not—all methods in an interface are public.
-Similarly, it is an easy matter to modify the Coin class to implement the Measurable
-interface.
+Note that the class must declare the method as public, whereas the interface need not—all methods in an interface are public. Similarly, it is an easy matter to modify the Coin class to implement the Measurable interface.
 ```
 public class Coin implements Measurable {
 	public double getMeasure() {
@@ -3891,22 +3796,15 @@ public class Coin implements Measurable {
 	. . .
 }
 ```
-In summary, the Measurable interface expresses what all measurable objects have in
-common. This commonality makes the flexibility of the improved DataSet class possible. A data set can analyze objects of any class that implements the Measurable
-interface.
-This is a typical usage for interface types. A service provider—in this case, the
-DataSet—specifies an interface for participating in the service. Any class that conforms to that interface can then be used with the service. This is similar to the way a
-mixer will provide rotation to any attachment that fits its interface (see Figure 1).
+In summary, the Measurable interface expresses what all measurable objects have in common. This commonality makes the flexibility of the improved DataSet class possible. A data set can analyze objects of any class that implements the Measurable interface. This is a typical usage for interface types. A service provider—in this case, the DataSet—specifies an interface for participating in the service. Any class that conforms to that interface can then be used with the service. This is similar to the way a mixer will provide rotation to any attachment that fits its interface (see Figure 1).
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/4.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/5.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/6.png</image>
 				<text>
-Figure 2 shows the relationships between the DataSet class, the Measurable interface, and the classes that implement the interface. Note that the DataSet class
-depends only on the Measurable interface. It is decoupled from the BankAccount and Coin classes.
+Figure 2 shows the relationships between the DataSet class, the Measurable interface, and the classes that implement the interface. Note that the DataSet class depends only on the Measurable interface. It is decoupled from the BankAccount and Coin classes.
 
-In the UML notation, interfaces are tagged with an indicator «interface». A dotted arrow with a triangular tip denotes the “is-a” relationship between a class and
-an interface. You have to look carefully at the arrow tips—a dotted line with an open arrow tip ( ) denotes the “uses” relationship or dependency.
+In the UML notation, interfaces are tagged with an indicator «interface». A dotted arrow with a triangular tip denotes the “is-a”  relationship between a class and an interface. You have to look carefully at the arrow tips—a dotted line with an open arrow tip ( ) denotes the “uses” relationship or dependency.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/8.png</image>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/9.png</image>
@@ -3922,10 +3820,7 @@ an interface. You have to look carefully at the arrow tips—a dotted line with 
 				<text>
 [H1]Forgetting to Declare Implementing Methods as Public[H1]
 
-The methods in an interface are not declared as public, because they are public by default.
-However, the methods in a class are not public by default—their default access level is
-“package” access. It is a common error to forget the public
-reserved word when declaring a method from an interface:
+The methods in an interface are not declared as public, because they are public by default. However, the methods in a class are not public by default—their default access level is “package” access. It is a common error to forget the public reserved word when declaring a method from an interface:
 ```
 public class BankAccount implements Measurable {
 	. . .
@@ -3934,16 +3829,11 @@ public class BankAccount implements Measurable {
 	}
 }
 ```
-Then the compiler complains that the method has a weaker access level, namely package
-access instead of public access. The remedy is to declare the method as public.
+Then the compiler complains that the method has a weaker access level, namely package access instead of public access. The remedy is to declare the method as public.
 
 [H1]Constants in Interfaces[H1]
 
-Interfaces cannot have instance variables, but it is legal to specify constants. For example, the
-SwingConstants interface declares various constants, such as SwingConstants.NORTH ,
-SwingConstants.EAST, and so on.
-When declaring a constant in an interface, you can (and should) omit the reserved words
-public static final, because all variables in an interface are automatically public static final.
+Interfaces cannot have instance variables, but it is legal to specify constants. For example, the SwingConstants interface declares various constants, such as SwingConstants.NORTH , SwingConstants.EAST, and so on. When declaring a constant in an interface, you can (and should) omit the reserved words public static final, because all variables in an interface are automatically public static final.
 
 For example,
 ```
@@ -3958,21 +3848,15 @@ public interface SwingConstants {
 			</page>
 			<page title="Converting Between Class and Interface Types">
 				<text>
-Interfaces are used to express the commonality between classes. In this section, we
-discuss when it is legal to convert between class and interface types.
-Have a close look at the call
+Interfaces are used to express the commonality between classes. In this section, we discuss when it is legal to convert between class and interface types. Have a close look at the call
 ```
 bankData.add(new BankAccount(1000));
 ```
-from the test program of the preceding section. Here we pass an object of type
-BankAccount to the add method of the DataSet class. However, that method has a
-parameter of type Measurable:
+from the test program of the preceding section. Here we pass an object of type BankAccount to the add method of the DataSet class. However, that method has a parameter of type Measurable:
 ```
 public void add(Measurable x)
 ```
-It it legal to convert from the BankAccount type to the Measurable type. In general, you
-can convert from a class type to the type of any interface that the class implements.
-For example,
+It it legal to convert from the BankAccount type to the Measurable type. In general, you can convert from a class type to the type of any interface that the class implements. For example,
 ```
 BankAccount account = new BankAccount(1000);
 Measurable meas = account; // OK
@@ -3982,18 +3866,14 @@ Alternatively, a Measurable variable can refer to an object of the Coin class of
 Coin dime = new Coin(0.1, "dime");
 Measurable meas = dime; // Also OK
 ```
-However, the Rectangle class from the standard library doesn’t implement the
-Measurable interface. Therefore, the following assignment is an error:
+However, the Rectangle class from the standard library doesn’t implement the Measurable interface. Therefore, the following assignment is an error:
 ```
 Measurable meas = new Rectangle(5, 10, 20, 30); // Error
 ```
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/13.png</image>
 				<text>
-Occasionally, it happens that you store an object in an interface reference and you
-need to convert its type back. This happens in the getMaximum method of the DataSet
-class. The DataSet stores the object with the largest measure, as a Measurable
-reference.
+Occasionally, it happens that you store an object in an interface reference and you need to convert its type back. This happens in the getMaximum method of the DataSet class. The DataSet stores the object with the largest measure, as a Measurable reference.
 ```
 DataSet coinData = new DataSet();
 coinData.add(new Coin(0.25, "quarter"));
@@ -4001,26 +3881,16 @@ coinData.add(new Coin(0.1, "dime"));
 coinData.add(new Coin(0.05, "nickel"));
 Measurable max = coinData.getMaximum();
 ```
-Now what can you do with the max reference? You know it refers to a Coin object,
-but the compiler doesn’t. For example, you cannot call the getName method:
+Now what can you do with the max reference? You know it refers to a Coin object, but the compiler doesn’t. For example, you cannot call the getName method:
 ```
 String coinName = max.getName(); // Error
 ```
-That call is an error, because the Measurable type has no getName method.
-However, as long as you are absolutely sure that max refers to a Coin object, you
-can use the cast notation to convert its type back:
+That call is an error, because the Measurable type has no getName method. However, as long as you are absolutely sure that max refers to a Coin object, you can use the cast notation to convert its type back:
 ```
 Coin maxCoin = (Coin) max;
 String name = maxCoin.getName();
 ```
-If you are wrong, and the object doesn’t actually refer to a coin, a run-time exception will occur.
-This cast notation is the same notation used to convert
-between number types. For example, if x is a floating-point number, then (int) x is
-the integer part of the number. The intent is similar—to convert from one type to
-another. However, there is one big difference between casting of number types and
-casting of class types. When casting number types, you may lose information, and
-you use the cast to tell the compiler that you agree to the potential information loss.
-When casting object types, on the other hand, you take a risk of causing an exception, and you tell the compiler that you agree to that risk.
+If you are wrong, and the object doesn’t actually refer to a coin, a run-time exception will occur. This cast notation is the same notation used to convert between number types. For example, if x is a floating-point number, then (int) x is the integer part of the number. The intent is similar—to convert from one type to another. However, there is one big difference between casting of number types and casting of class types. When casting number types, you may lose information, and you use the cast to tell the compiler that you agree to the potential information loss. When casting object types, on the other hand, you take a risk of causing an exception, and you tell the compiler that you agree to that risk.
 				</text>
 			</page>
 			<page title="Self Check">
@@ -4049,44 +3919,23 @@ Measurable meas = new BankAccount(); // OK
 			</page>
 			<page title="Polymorphism">
 				<text>
-When multiple classes implement the same interface, each class can implement the
-methods of the interface in different ways. How is the correct method executed
-when the interface method is invoked? We will answer that question in this section.
-It is worth emphasizing once again that it is perfectly legal—and in fact very
-common—to have variables whose type is an interface, such as
-Measurable meas;
+When multiple classes implement the same interface, each class can implement the methods of the interface in different ways. How is the correct method executed when the interface method is invoked? We will answer that question in this section. It is worth emphasizing once again that it is perfectly legal—and in fact very common—to have variables whose type is an interface, such as Measurable meas;
 
-Just remember that the object to which meas refers doesn’t have type Measurable. In
-fact, no object has type Measurable. Instead, the type of the object is some class that
-implements the Measurable interface. This might be an object of the BankAccount or
-Coin class, or some other class with a getMeasure method.
+Just remember that the object to which meas refers doesn’t have type Measurable. In fact, no object has type Measurable. Instead, the type of the object is some class that implements the Measurable interface. This might be an object of the BankAccount or Coin class, or some other class with a getMeasure method.
 ```
 meas = new BankAccount(1000); // OK
 meas = new Coin(0.1, "dime"); // OK
 ```
-What can you do with an interface variable, given that you don’t know the class of
-the object that it references? You can invoke the methods of the interface:
+What can you do with an interface variable, given that you don’t know the class of the object that it references? You can invoke the methods of the interface:
 ```
 double m = meas.getMeasure();
 ```
-The DataSet class took advantage of this capability by computing the measure of the
-added object, without knowing exactly what kind of object was added.
-Now let’s think through the call to the getMeasure method more carefully. Which
-getMeasure method? The BankAccount and Coin classes provide two different implementations of that method. How did the correct method get called if the caller
-didn’t even know the exact class to which meas belongs?
-The Java virtual machine locates the correct method by first looking at the class
-of the actual object, and then calling the method with the given name in that class.
-That is, if meas refers to a BankAccount object, then the BankAccount.getMeasure method
-is called. If meas refers to a Coin object, then the Coin.getMeasure method is called. This
+The DataSet class took advantage of this capability by computing the measure of the added object, without knowing exactly what kind of object was added. Now let’s think through the call to the getMeasure method more carefully. Which getMeasure method? The BankAccount and Coin classes provide two different implementations of that method. How did the correct method get called if the caller didn’t even know the exact class to which meas belongs? The Java virtual machine locates the correct method by first looking at the class of the actual object, and then calling the method with the given name in that class. That is, if meas refers to a BankAccount object, then the BankAccount.getMeasure method is called. If meas refers to a Coin object, then the Coin.getMeasure method is called. This
 means that one method call
 ```
 double m = meas.getMeasure();
 ```
-can invoke different methods depending on the momentary contents of meas. This
-mechanism for locating the appropriate method is called dynamic method lookup.
-Dynamic method lookup enables a programming technique called polymorphism. The term “polymorphism” comes from the Greek words for “many
-shapes”. The same computation works for objects of many shapes, and adapts itself
-to the nature of the objects.
+can invoke different methods depending on the momentary contents of meas. This mechanism for locating the appropriate method is called dynamic method lookup. Dynamic method lookup enables a programming technique called polymorphism. The term “polymorphism” comes from the Greek words for “many shapes”. The same computation works for objects of many shapes, and adapts itself to the nature of the objects.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/18.png</image>
 			</page>
