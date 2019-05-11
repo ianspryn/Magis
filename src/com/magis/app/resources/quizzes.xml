@@ -1113,57 +1113,96 @@ Finish this code so that it creates an array of type int with size 5, and each i
                         <question>
                                 <statement>What are the two main aspects to exception handling</statement>
                                 <answer id ="correct">Reporting and recovery</answer>
+                                <answer>Trying and Catching</answer>
+                                <answer>Finding and Removing</answer>
+                                <answer>Observing and Reporting</answer>
                         </question>
                         <question>
                                 <statement>When you throw an exception,  execution does not continue with the next statement but instead continues where?</statement>
                                 <answer id ="correct">With an exception handler.</answer>
+                                <answer>A crash</answer>
+                                <answer>The start of the program</answer>
+                                <answer>An infinite loop</answer>
                         </question>
                         <question>
-                                <statement>What are the two categories Java exceptios fall into?</statement>
+                                <statement>What are the two categories Java exceptions fall into?</statement>
                                 <answer id ="correct">Checked and unchecked</answer>
+                                <answer>Tried and Caught</answer>
+                                <answer>Removed and Un-removed</answer>
+                                <answer>Inherited and Un-Inherited</answer>
                         </question>
                         <question>
                                 <statement>The majority of checked exception occur when you deal with what?</statement>
                                 <answer id ="correct">Input/Output</answer>
+                                <answer>Math Operations</answer>
+                                <answer>List Manipulation</answer>
+                                <answer>String Operations</answer>
                         </question>
                         <question>
                                 <statement>When designing your own exception class, it is a good idea to extend a class in the exception hierarchy why?</statement>
-                                <answer id ="correct">This enables other programmers to catch the exception even
+                                <answer id ="correct">Enables other programmers to catch the exception even
 if they are not interested in the exact nature of the problem.</answer>
+                                <answer>Allows for more exceptions to be caught</answer>
+                                <answer>Ensures that other programmers know what exceptions you were looking for</answer>
+                                <answer>Ensures that other programmers know what exceptions were unsolved</answer>
                         </question>
                         <question>
                                 <statement>I/O exceptions are typically what type of exception?</statement>
-                                <answer id ="correct">checked</answer>
+                                <answer id ="correct">Checked</answer>
+                                <answer>Unchecked</answer>
+                                <answer>Caught</answer>
+                                <answer>Un-Removed</answer>
                         </question>
                         <question>
                                 <statement>You can get a printout of the
 chain of method calls that lead to the exception by calling what?</statement>
-                                <answer id ="correct">exception.printStackTrace()</answer>
+                                <answer id ="correct">exception.printStackTrace();</answer>
+                                <answer>exception.printOut();</answer>
+                                <answer>exception.Trace();</answer>
+                                <answer>exception.console();</answer>
                         </question>
                         <question>
                                 <statement>What are the two constructors customarily included in an exception class?</statement>
                                 <answer id ="correct">A constructor with no parameters and a constructor that accepts a message string describing the reason for the exception.</answer>
+                                <answer>A constructor with no parameters and a constructor that accepts the stack-trace of the exception</answer>
+                                <answer>A constructor with the exception message and a constructor that accepts the strack-trace of the exception</answer>
+                                <answer>A constructor with no parameters and another constructor with no parameters</answer>
                         </question>
                         <question>
                                 <statement>If an exception has no handler what occurs?</statement>
                                 <answer id ="correct">An error message is printed, and your program terminates.</answer>
+                                <answer>The program stops until you handle the exception</answer>
+                                <answer>The program crashes with no message</answer>
+                                <answer>A warning is displayed saying such an exception was caught</answer>
                         </question>
                         <question>
                                 <statement>It is important to remember that you should place catch clauses only in methods
 in which you can what? </statement>
                                 <answer id ="correct">Competently handle the particular exception type.</answer>
+                                <answer>Find that exceptions are a common occurrence in it</answer>
+                                <answer>Quickly remove the exception as the program is running</answer>
+                                <answer>Run the method multiple times over</answer>
                         </question>
                         <question>
                                 <statement>If none of the standard exception types describe your error condition well enough, what can you do?</statement>
                                 <answer id ="correct">Design your own exception class.</answer>
+                                <answer>Keep looking for a standard exception type</answer>
+                                <answer>Use a generic exception class</answer>
+                                <answer>Default to simple error messages</answer>
                         </question>
                         <question>
                                 <statement>FileNotFoundException is a subclass of what Exception?</statement>
                                 <answer id ="correct">IOException</answer>
+                                <answer>IllegalArgumentException</answer>
+                                <answer>NullPointerException</answer>
+                                <answer>DivideByZeroException</answer>
                         </question>
                         <question>
                                 <statement>When is it best not to catch an exception?</statement>
                                 <answer id ="correct">If you don't know how to remedy the situation</answer>
+                                <answer>When there are not exceptions to catch</answer>
+                                <answer>When you don't have a way to quickly fix the program while it is running</answer>
+                                <answer>When the exceptions are too numerous to handle</answer>
                         </question>
                 </questions>
         </chapter>
