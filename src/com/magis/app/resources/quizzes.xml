@@ -1248,7 +1248,25 @@ in.useDelimiter("");</answer>
                                 <answer id = "correct">The parameters of the superclasses constructor</answer>
                         </question>
                         <question>
-                            <statement></statement>
+                                <statement>If the keyword super is followed by a period, what is it calling?</statement>
+                                <answer id = "correct">A superclass method</answer>
+                        </question>
+                        <question>
+                                <statement>If the keyword super is followed by a period, what is it calling?</statement>
+                                <answer id = "correct">A superclass constructor</answer>
+                        </question>
+                        <question>
+                                <statement>If a subclass doesn't call a superclass constructor, the superclass must contain what?</statement>
+                                <answer id = "correct">A constructor with no parameters</answer>
+                        </question>
+                        <question>
+                                <statement>The following code
+```anObject instanceof BankAccount```
+returns true if</statement>
+                                <answer id = "correct">the type of anObject is convertible to a BankAccount</answer>
+                        </question>
+                        <question>
+
                         </question>
                 </questions>
         </chapter>
