@@ -3763,6 +3763,370 @@ false
 		</pages>
 	</chapter>
 	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<title>Interfaces</title>
+		<description>yayayayaya! you get to use those interfaces!</description>
+		<pages>
+			<page title="Interfaces for Algorithm Reuse">
+				<text>
+It is often possible to make a service available to a wider set of inputs by focusing on
+the essential operations that the service requires. Interface types are used to express
+these common operations.
+That class provides a service, namely
+computing the average and maximum of a set of input values. Unfortunately, the
+class is suitable only for computing the average of a set of numbers. If we wanted to
+process bank accounts to find the bank account with the highest balance, we could
+not use the class in its current form. We could modify the class, like this:
+```
+public class DataSet // Modified for BankAccount objects {
+	private double sum;
+	private BankAccount maximum;
+	private int count;
+	. . .
+	public void add(BankAccount x) {
+		sum = sum + x.getBalance();
+		if (count == 0 || maximum.getBalance()  x.getBalance())
+		maximum = x;
+		count++;
+	}
+
+	public BankAccount getMaximum() {
+		return maximum;
+	}
+}
+```
+Or suppose we wanted to find the coin with the highest value among a set of coins.
+We would need to modify the DataSet class again.
+```
+public class DataSet // Modified for Coin objects {
+	private double sum;
+	private Coin maximum;
+	private int count;
+	. . .
+	public void add(Coin x) {
+		sum = sum + x.getValue();
+		if (count == 0 || maximum.getValue() &lt; x.getValue())
+		maximum = x;
+		count++;
+	}
+	public Coin getMaximum() {
+		return maximum;
+	}
+}
+```
+Clearly, the algorithm for the data analysis service is the same in all cases, but the
+details of measurement differ. We would like to provide a single class that provides
+this service to any objects that can be measured.
+Suppose that the various classes agree on a method getMeasure that obtains the
+measure to be used in the data analysis. For bank accounts, getMeasure returns the
+balance. For coins, getMeasure returns the coin value, and so on. Then we can implement a DataSet class whose add method looks like this:
+```
+sum = sum + x.getMeasure();
+if (count == 0 || maximum.getMeasure() &lt; x.getMeasure())
+maximum = x;
+count++;
+```
+What is the type of the variable x? Ideally, x should refer to any class that has a
+getMeasure method.
+In Java, an interface type is used to specify required operations. We will declare
+an interface type that we call Measurable:
+```
+public interface Measurable {
+	double getMeasure();
+}
+```
+The interface declaration lists all methods that the interface type requires. The
+Measurable interface type requires a single method, but in general, an interface type
+can require multiple methods.
+Note that the Measurable type is not a type in the standard library—it is a type
+that was created specifically for this book, in order to make the DataSet class more
+reusable.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/2.png</image>
+				<text>
+An interface type is similar to a class, but there are several important differences:
+
+• All methods in an interface type are abstract; that is, they have a name, parameters, and a return type, but they don’t have an implementation.
+• All methods in an interface type are automatically public.
+• An interface type does not have instance variables.
+Now we can use the interface type Measurable to declare the variables x and maximum.
+```
+public class DataSet {
+	private double sum;
+	private Measurable maximum;
+	private int count;
+	. . .
+	public void add(Measurable x) {
+		sum = sum + x.getMeasure();
+		if (count == 0 || maximum.getMeasure() &lt; x.getMeasure())
+		maximum = x;
+		count++;
+	}
+	public Measurable getMaximum() {
+		return maximum;
+	}
+}
+```
+This DataSet class is usable for analyzing objects of any class that implements the
+Measurable interface. A class implements an interface type if it declares the interface
+in an implements clause. It should then implement the method or methods that the
+interface requires.
+```
+public class BankAccount implements Measurable {
+	. . .
+	public double getMeasure() {
+		return balance;
+	}
+}
+```
+Note that the class must declare the method as public, whereas the interface need
+not—all methods in an interface are public.
+Similarly, it is an easy matter to modify the Coin class to implement the Measurable
+interface.
+```
+public class Coin implements Measurable {
+	public double getMeasure() {
+		return value;
+	}
+	. . .
+}
+```
+In summary, the Measurable interface expresses what all measurable objects have in
+common. This commonality makes the flexibility of the improved DataSet class possible. A data set can analyze objects of any class that implements the Measurable
+interface.
+This is a typical usage for interface types. A service provider—in this case, the
+DataSet—specifies an interface for participating in the service. Any class that conforms to that interface can then be used with the service. This is similar to the way a
+mixer will provide rotation to any attachment that fits its interface (see Figure 1).
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/5.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/6.png</image>
+				<text>
+Figure 2 shows the relationships between the DataSet class, the Measurable interface, and the classes that implement the interface. Note that the DataSet class
+depends only on the Measurable interface. It is decoupled from the BankAccount and Coin classes.
+
+In the UML notation, interfaces are tagged with an indicator «interface». A dotted arrow with a triangular tip denotes the “is-a” relationship between a class and
+an interface. You have to look carefully at the arrow tips—a dotted line with an open arrow tip ( ) denotes the “uses” relationship or dependency.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/8.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/9.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Suppose you want to use the DataSet class to find the Country object with the largest population. What condition must the Country class fulfill?
+
+2. Why can’t the add method of the DataSet class have a parameter of type Object?
+				</text>
+			</page>
+			<page title="Common Errors">
+				<text>
+[H1]Forgetting to Declare Implementing Methods as Public[H1]
+
+The methods in an interface are not declared as public, because they are public by default.
+However, the methods in a class are not public by default—their default access level is
+“package” access. It is a common error to forget the public
+reserved word when declaring a method from an interface:
+```
+public class BankAccount implements Measurable {
+	. . .
+	double getMeasure() // Oops—should be public {
+		return balance;
+	}
+}
+```
+Then the compiler complains that the method has a weaker access level, namely package
+access instead of public access. The remedy is to declare the method as public.
+
+[H1]Constants in Interfaces[H1]
+
+Interfaces cannot have instance variables, but it is legal to specify constants. For example, the
+SwingConstants interface declares various constants, such as SwingConstants.NORTH ,
+SwingConstants.EAST, and so on.
+When declaring a constant in an interface, you can (and should) omit the reserved words
+public static final, because all variables in an interface are automatically public static final.
+
+For example,
+```
+public interface SwingConstants {
+	int NORTH = 1;
+	int NORTHEAST = 2;
+	int EAST = 3;
+	. . .
+}
+```
+				</text>
+			</page>
+			<page title="Converting Between Class and Interface Types">
+				<text>
+Interfaces are used to express the commonality between classes. In this section, we
+discuss when it is legal to convert between class and interface types.
+Have a close look at the call
+```
+bankData.add(new BankAccount(1000));
+```
+from the test program of the preceding section. Here we pass an object of type
+BankAccount to the add method of the DataSet class. However, that method has a
+parameter of type Measurable:
+```
+public void add(Measurable x)
+```
+It it legal to convert from the BankAccount type to the Measurable type. In general, you
+can convert from a class type to the type of any interface that the class implements.
+For example,
+```
+BankAccount account = new BankAccount(1000);
+Measurable meas = account; // OK
+```
+Alternatively, a Measurable variable can refer to an object of the Coin class of the preceding section because that class also implements the Measurable interface.
+```
+Coin dime = new Coin(0.1, "dime");
+Measurable meas = dime; // Also OK
+```
+However, the Rectangle class from the standard library doesn’t implement the
+Measurable interface. Therefore, the following assignment is an error:
+```
+Measurable meas = new Rectangle(5, 10, 20, 30); // Error
+```
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/13.png</image>
+				<text>
+Occasionally, it happens that you store an object in an interface reference and you
+need to convert its type back. This happens in the getMaximum method of the DataSet
+class. The DataSet stores the object with the largest measure, as a Measurable
+reference.
+```
+DataSet coinData = new DataSet();
+coinData.add(new Coin(0.25, "quarter"));
+coinData.add(new Coin(0.1, "dime"));
+coinData.add(new Coin(0.05, "nickel"));
+Measurable max = coinData.getMaximum();
+```
+Now what can you do with the max reference? You know it refers to a Coin object,
+but the compiler doesn’t. For example, you cannot call the getName method:
+```
+String coinName = max.getName(); // Error
+```
+That call is an error, because the Measurable type has no getName method.
+However, as long as you are absolutely sure that max refers to a Coin object, you
+can use the cast notation to convert its type back:
+```
+Coin maxCoin = (Coin) max;
+String name = maxCoin.getName();
+```
+If you are wrong, and the object doesn’t actually refer to a coin, a run-time exception will occur.
+This cast notation is the same notation used to convert
+between number types. For example, if x is a floating-point number, then (int) x is
+the integer part of the number. The intent is similar—to convert from one type to
+another. However, there is one big difference between casting of number types and
+casting of class types. When casting number types, you may lose information, and
+you use the cast to tell the compiler that you agree to the potential information loss.
+When casting object types, on the other hand, you take a risk of causing an exception, and you tell the compiler that you agree to that risk.
+				</text>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Can you use a cast (BankAccount) meas to convert a Measurable variable meas to a BankAccount reference?
+
+2. If both BankAccount and Coin implement the Measurable interface, can a Coin reference be converted to a BankAccount reference?
+				</text>
+			</page>
+			<page title="Error: Instantiating Interfaces">
+				<text>
+You can declare variables whose type is an interface, for example:
+```
+Measurable meas;
+```
+However, you can never construct an object of an interface type:
+```
+Measurable meas = new Measurable(); // Error
+```
+Interfaces aren’t classes. There are no objects whose types are interfaces. If an interface variable refers to an object, then the object must belong to some class—a class that implements
+the interface:
+```
+Measurable meas = new BankAccount(); // OK
+```
+				</text>
+			</page>
+			<page title="Polymorphism">
+				<text>
+When multiple classes implement the same interface, each class can implement the
+methods of the interface in different ways. How is the correct method executed
+when the interface method is invoked? We will answer that question in this section.
+It is worth emphasizing once again that it is perfectly legal—and in fact very
+common—to have variables whose type is an interface, such as
+Measurable meas;
+
+Just remember that the object to which meas refers doesn’t have type Measurable. In
+fact, no object has type Measurable. Instead, the type of the object is some class that
+implements the Measurable interface. This might be an object of the BankAccount or
+Coin class, or some other class with a getMeasure method.
+```
+meas = new BankAccount(1000); // OK
+meas = new Coin(0.1, "dime"); // OK
+```
+What can you do with an interface variable, given that you don’t know the class of
+the object that it references? You can invoke the methods of the interface:
+```
+double m = meas.getMeasure();
+```
+The DataSet class took advantage of this capability by computing the measure of the
+added object, without knowing exactly what kind of object was added.
+Now let’s think through the call to the getMeasure method more carefully. Which
+getMeasure method? The BankAccount and Coin classes provide two different implementations of that method. How did the correct method get called if the caller
+didn’t even know the exact class to which meas belongs?
+The Java virtual machine locates the correct method by first looking at the class
+of the actual object, and then calling the method with the given name in that class.
+That is, if meas refers to a BankAccount object, then the BankAccount.getMeasure method
+is called. If meas refers to a Coin object, then the Coin.getMeasure method is called. This
+means that one method call
+```
+double m = meas.getMeasure();
+```
+can invoke different methods depending on the momentary contents of meas. This
+mechanism for locating the appropriate method is called dynamic method lookup.
+Dynamic method lookup enables a programming technique called polymorphism. The term “polymorphism” comes from the Greek words for “many
+shapes”. The same computation works for objects of many shapes, and adapts itself
+to the nature of the objects.
+				</text>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Interfaces/18.png</image>
+			</page>
+			<page title="Self Check">
+				<text>
+1. Why is it impossible to construct a Measurable object?
+
+2. Why can you nevertheless declare a variable whose type is Measurable?
+
+3. What does this code fragment print? Why is this an example of polymorphism?
+```
+DataSet data = new DataSet();
+data.add(new BankAccount(1000));
+data.add(new Coin(0.1, "dime"));
+System.out.println(data.getAverage());
+```
+				</text>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<title>Standard Java Library</title>
+		<description>Learn some helpful tricks</description>
+		<pages>
+			<page title="String Class">
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/8.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/9.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/10.png</image>
+			</page>
+			<page title="Math Class">
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/3.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/4.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/5.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/6.png</image>
+				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/7.png</image>
+			</page>
+		</pages>
+	</chapter>
+	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/exceptions.png</image>
 		<title>Exceptions</title>
 		<description>Become comfortable with handling and throwing and catching and creating exceptions</description>
