@@ -1112,7 +1112,7 @@ Finish this code so that it creates an array of type int with size 5, and each i
                 <questions>
                         <question>
                                 <statement>What are the two main aspects to exception handling</statement>
-                                <answer id ="correct">reporting and recovery</answer>
+                                <answer id ="correct">Reporting and recovery</answer>
                         </question>
                         <question>
                                 <statement>When you throw an exception,  execution does not continue with the next statement but instead continues where?</statement>
@@ -1293,8 +1293,15 @@ in.useDelimiter(Character);</answer>
         <chapter id = "Inheritance">
                 <questions>
                         <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
+                                <statement>If you want to call the constructor of a superclass, what keyword do you use?</statement>
+                                <answer id = "correct">super</answer>
+                        </question>
+                        <question>
+                                <statement>What does the super call require as parameters?</statement>
+                                <answer id = "correct">The parameters of the superclasses constructor</answer>
+                        </question>
+                        <question>
+                            <statement></statement>
                         </question>
                 </questions>
         </chapter>
@@ -1306,5 +1313,5 @@ in.useDelimiter(Character);</answer>
                         </question>
                 </questions>
         </chapter>
-        
+
 </quizzes>
