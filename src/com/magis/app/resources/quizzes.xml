@@ -1174,22 +1174,38 @@ in which you can what? </statement>
                                 <statement>Which of the following will succesfully create a Scanner that reads from "input.txt"?</statement>
                                 <answer id = "correct">File inFile = new File("input.txt");
 Scanner in = new Scanner(inFile);</answer>
+                                <answer>Scanner in = new Scanner(System.in);</answer>
+                                <answer>Scanner in = new Scanner(File.read("input.txt");</answer>
+                                <answer>File inFile = new File("input.txt");
+Scanner in = new Scanner(read(inFile));</answer>
                         </question>
                         <question>
                                 <statement>If you desire to write output to a file, you construct what?</statement> 
                                 <answer id = "correct">PrintWriter object</answer>
+                                <answer>Scanner object</answer>
+                                <answer>Writer object</answer>
+                                <answer>File object</answer>
                         </question>
                         <question>
                                 <statement>What can occur if your program exits without closing the PrintWriter?</statement>
-                                <answer id ="correct">The disk file may not contain all of the output</answer> 
+                                <answer id ="correct">The disk file may not contain all of the output</answer>
+                                <answer>The program crashes while running</answer>
+                                <answer>You wont be able to run the program cause the compiler will throw an error</answer>
+                                <answer>Nothing. Program will run as normal</answer>
                         </question> 
                         <question>
                                 <statement>If the output file already exists, what happens to it?</statement> 
                                 <answer id = "correct">It is emptied then overwritten</answer>
+                                <answer>A new file with the same name but (copy) attached to it will appear</answer>
+                                <answer>There will be a conflict and the file wont be written to</answer>
+                                <answer>There will be a conflict and the file will be edited to change information</answer>
                         </question>     
                         <question>
                                 <statement>Which of the following is the correct way to make a PrintWriter</statement> 
                                 <answer id = "correct">PrintWriter out = new PrintWriter("output.txt");</answer>
+                                <answer>PrintWriter out = new PrintWriter(System.in);</answer>
+                                <answer>PrintWriter out = new PrintWriter(File("output.txt"));</answer>
+                                <answer>PrintWriter out = new PrintWriter(Scanner sc = new Scanner("output.txt"));</answer>
                         </question> 
                         <question>
                                 <statement>What should you make sure to do after you finish with a PrintWriter.</statement> 
@@ -1198,42 +1214,79 @@ Scanner in = new Scanner(inFile);</answer>
                         <question>
                                 <statement>What should you make sure to do after you finish with a PrintWriter?</statement> 
                                 <answer id = "correct">Close it</answer>
+                                <answer>Nothing</answer>
+                                <answer>Delete it</answer>
+                                <answer>Make sure there is a PrintReader with it</answer>
                         </question>
                         <question>
                                 <statement>Which of the following lines of code is the correct way to specify a file name as a string literal?</statement> 
                                 <answer id = "correct">inFile = new File("c:\\homework\\input.dat");</answer>
+                                <answer>inFile = new File(FilePath("input.dat"));</answer>
+                                <answer>inFile = new File("input.dat");</answer>
+                                <answer>inFile = new File(directory(c:\\));</answer>
                         </question>
                         <question>
                                 <statement>In java a word is ___</statement>
                                 <answer id ="correct">any sequence of characters that is not white space.</answer>
+                                <answer>A part of a sentence</answer>
+                                <answer>any sequence of characters</answer>
+                                <answer>any sequence of characters that is not white space or numbers</answer>
                         </question>
                         <question>
                                 <statement>Which of the following Scanners will correctly only read words as letters?</statement>
                                 <answer id ="correct">```Scanner in = new Scanner(. . .);
 in.useDelimiter("[^A-Za-z]+");```</answer>
+                                <answer>```Scanner in = new Scanner(useDelimiter("[^A-Za-z]+");```</answer>
+                                <answer>```Scanner in = new Scanner(. . .);
+in.useDelimiter(String);```</answer>
+                                <answer>```Scanner in = new Scanner(String);```</answer>
                         </question>
                         <question>
                                 <statement>Which of the following lines of code will correctly search a Scanner until it encounters a number?</statement>
                                 <answer id ="correct">```String line = in.nextLine();
 int i = 0;
 while (!Character.isDigit(line.charAt(i))) { i++; }```</answer>
+                                <answer>```String line = in.nextLine();
+int i = 0;
+while (Character.hasNext()) { i++; }```</answer>
+                                <answer>```String line = in.nextLine();
+int i = 0;
+while (Character.hasNext() - int) { i++; }```</answer>
+                                <answer>```String line = in.nextLine();
+int i = 0;
+while (line) { i++; }```</answer>
                         </question>
                         <question>
                                 <statement>What does the trim method do?</statement>
-                                <answer id ="correct">The trim method returns the string with all white space at the beginning and end removed.</answer>
+                                <answer id ="correct">Returns the string with all white space at the beginning and end removed.</answer>
+                                <answer>Trims down Strings to a certain amount</answer>
+                                <answer>Trims down numbers to round them off</answer>
+                                <answer>Returns the String with no spaces</answer>
                         </question>
                         <question>
                                 <statement>What method will convert a string into a int?</statement>
                                 <answer id ="correct">parseInt(String a)</answer>
+                                <answer>makeInt(String a)</answer>
+                                <answer>convertInt(String a)</answer>
+                                <answer>Integer(String a)</answer>
                         </question>
                         <question>
                                 <statement>What happens if you try to use parseInt on a String that doesn't contain integers?</statement>
                                 <answer id ="correct">A NumberFormatException occurs</answer>
+                                <answer>Nothing happens</answer>
+                                <answer>The characters are changed to their ASCII numbers and summed</answer>
+                                <answer>The ASCII value of the first character is returned</answer>
                         </question>
                         <question>
                                 <statement>Which of the following Scanners will correctly read a file one character at a time?</statement>
                                 <answer id ="correct">Scanner in = new Scanner(. . .);
 in.useDelimiter("");</answer>
+                                <answer id ="correct">Scanner in = new Scanner(. . .);
+in.useDelimiter(" ");</answer>
+                                <answer id ="correct">Scanner in = new Scanner(. . .);
+in.useDelimiter(char);</answer>
+                                <answer id ="correct">Scanner in = new Scanner(. . .);
+in.useDelimiter(Character);</answer>
                         </question>
                 </questions>
         </chapter>
@@ -1250,7 +1303,7 @@ in.useDelimiter("");</answer>
                         <question>
                                 <statement></statement>
                                 <answer id = "correct"></answer>
-                        <question>
+                        </question>
                 </questions>
         </chapter>
         
