@@ -1867,8 +1867,7 @@ A common error in extending the functionality of a superclass method is to forge
 qualifier. For example, to withdraw money from a checking account, update the transaction
 count and then withdraw the amount:
 ```
-public void withdraw(double amount)
-{
+public void withdraw(double amount) {
 	transactionCount++;
 	withdraw(amount);
 	// Error—should be super.withdraw(amount)
@@ -2205,8 +2204,7 @@ Quite often, however, the body of the if statement consists of multiple statemen
 statements must be grouped together to form a block statement by enclosing them
 in braces { }. Here is an example.
 ```
-if (amount &lt;= balance)
-{
+if (amount &lt;= balance) {
 double newBalance = balance - amount;
 balance = newBalance;
 }
@@ -2261,8 +2259,7 @@ In our case, we want to know when the bank account has reached a particular
 balance. While the balance is less, we keep adding interest and incrementing the
 years counter:
 ```
-while (balance &lt; targetBalance)
-{
+while (balance &lt; targetBalance) {
 years++;
 double interest = balance * rate / 100;
 balance = balance + interest;
@@ -2279,8 +2276,7 @@ body, the variable is created for each iteration of
 the loop and removed after the end of each iteration. For example, consider the interest variable in
 this loop:
 ```
-while (balance &lt; targetBalance)
-{
+while (balance &lt; targetBalance) {
 years++;
 double interest = balance * rate / 100;
 // A new interest variable is created
@@ -2334,8 +2330,7 @@ as the user enters a negative number or zero, just keep prompting for a correct 
 situation, a do loop makes sense, because you need to get a user input before you can test it.
 ```
 double value;
-do
-{
+do {
 System.out.print("Please enter a positive number: ");
 value = in.nextDouble();
 }
@@ -2348,11 +2343,9 @@ of prompting for a positive value. In practice, you also need to guard against u
 controlling it with a Boolean variable:
 ```
 boolean valid = false;
-while (!valid)
-{
+while (!valid) {
 System.out.print("Please enter a positive number: ");
-if (in.hasNextDouble())
-{
+if (in.hasNextDouble()) {
 value = in.nextDouble();
 if (value > 0) valid = true;
 }
@@ -2368,8 +2361,7 @@ in.nextLine(); // Consume input
 One of the most common loop types has the form
 ```
 i = start;
-while (i &lt;= end)
-{
+while (i &lt;= end) {
 . . .
 i++;
 }
@@ -2377,16 +2369,14 @@ i++;
 Because this loop is so common, there is a special form for it that emphasizes the
 pattern:
 ```
-for (i = start; i &lt;= end; i++)
-{
+for (i = start; i &lt;= end; i++) {
 . . .
 }
 ```
 You can also declare the loop counter variable inside the for loop header. That convenient shorthand restricts the use of the variable to the body of the loop (as will be
 discussed further in Special Topic 6.2 on page 234).
 ```
-for (int i = start; i &lt;= end; i++)
-{
+for (int i = start; i &lt;= end; i++) {
 . . .
 }
 ```
@@ -2398,8 +2388,7 @@ out just how much larger the balance is.
 In our loop, we let i go from 1 to numberOfYears,
 the number of years for which we want to compound interest.
 ```
-for (int i = 1; i &lt;= numberOfYears; i++)
-{
+for (int i = 1; i &lt;= numberOfYears; i++) {
 double interest = balance * rate / 100;
 balance = balance + interest;
 }
@@ -2409,8 +2398,7 @@ Figure 4 shows the ﬂow of execution. The complete program is on page 230.
 Another common use of the for loop is to
 traverse all characters of a string:
 ```
-for (int i = 0; i &lt; str.length(); i++)
-{
+for (int i = 0; i &lt; str.length(); i++) {
 char ch = str.charAt(i);
 Process ch
 }
@@ -2459,8 +2447,7 @@ switch statement. In addition to breaking out of a switch statement, a break sta
 be used to exit a while, for, or do loop. For example, the break statement in the following loop
 terminates the loop when the end of input is reached.
 ```
-while (true)
-{
+while (true) {
 String input = in.next();
 if (input.equalsIgnoreCase("Q"))
 break;
@@ -2484,10 +2471,8 @@ label: statement
 The labeled break statement was invented to break out of a set of nested loops.
 outerloop:
 ```
-while (outer loop condition)
-{ . . .
-while (inner loop condition)
-{ . . .
+while (outer loop condition) { . . .
+while (inner loop condition) { . . .
 if (something really bad happened)
 break outerloop;
 }
@@ -2500,11 +2485,9 @@ methods instead of using complicated nested loops.
 Finally, there is the continue statement, which jumps to the end of the current iteration of
 the loop. Here is a possible use for this statement:
 ```
-while (!done)
-{
+while (!done) {
 String input = in.next();
-if (input.equalsIgnoreCase("Q"))
-{
+if (input.equalsIgnoreCase("Q")) {
 done = true;
 continue; // Jump to the end of the loop body
 }
@@ -2534,8 +2517,7 @@ We want to generate the following triangular shape:
 ###
 The basic idea is simple. We generate a sequence of rows:
 ```
-for (int i = 1; i &lt;= width; i++)
-{
+for (int i = 1; i &lt;= width; i++) {
 // Make triangle row
 . . .
 }
@@ -2551,8 +2533,7 @@ r = r + "\n";
 Putting both loops together yields two nested loops:
 ```
 String r = "";
-for (int i = 1; i &lt;= width; i++)
-{
+for (int i = 1; i &lt;= width; i++) {
 // Make triangle row
 for (int j = 1; j &lt;= i; j++)
 r = r + "[]";
@@ -2587,8 +2568,7 @@ the enhanced for loop to carry out that task.
 ```
 double[] values = . . .;
 double sum = 0;
-for (double element : values)
-{
+for (double element : values) {
 sum = sum + element;
 }
 ```
@@ -2606,8 +2586,7 @@ explicit index variable:
 ```
 double[] values = . . .;
 double sum = 0;
-for (int i = 0; i &lt; values.length; i++)
-{
+for (int i = 0; i &lt; values.length; i++) {
 double element = values[i];
 sum = sum + element;
 }
@@ -2624,16 +2603,14 @@ example, the following loop computes the total of the balances of all accounts:
 ```
 ArrayList&lt;BankAccount&gt; accounts = . . . ;
 double sum = 0;
-for (BankAccount account : accounts)
-{
+for (BankAccount account : accounts) {
 sum = sum + account.getBalance();
 }
 ```
 This loop is equivalent to the following ordinary for loop:
 ```
 double sum = 0;
-for (int i = 0; i &lt; accounts.size(); i++)
-{
+for (int i = 0; i &lt; accounts.size(); i++) {
 BankAccount account = accounts.get(i);
 sum = sum + account.getBalance();
 }
@@ -2641,8 +2618,7 @@ sum = sum + account.getBalance();
 Keep in mind that the “for each” loop has a very specific purpose: getting the elements of a collection, from the beginning to the end. It is not suitable for all array
 algorithms. In particular, the “for each” loop does not allow you to modify the contents of an array. The following loop does not fill an array with zeroes:
 ```
-for (double element : values)
-{
+for (double element : values) {
 element = 0; // ERROR—this assignment does not modify array elements
 }
 ```
@@ -2650,8 +2626,7 @@ When the loop is executed, the variable element is first set to values[0]. Then 
 is set to 0, then to values[1], then to 0, and so on. The values array is not modified.
 The remedy is simple: Use an ordinary for loop
 ```
-for (int i = 0; i &lt; values.length; i++)
-{
+for (int i = 0; i &lt; values.length; i++) {
 values[i] = 0; // OK
 }
 ```
@@ -2664,8 +2639,7 @@ values[i] = 0; // OK
 2. What does this “for each” loop do?
 ```
 int counter = 0;
-for (BankAccount a : accounts)
-{
+for (BankAccount a : accounts) {
 if (a.getBalance() == 0) { counter++; }
 }
 ```
@@ -3217,8 +3191,7 @@ The situation is more complex if the order of the elements matters. Then you mus
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Arrays/40.png</image>
 				<text>
 ```
-for (int i = pos; i &lt; valuesSize - 1; i++)
-{
+for (int i = pos; i &lt; valuesSize - 1; i++) {
 	values[i] = values[i + 1];
 }
 valuesSize--;
@@ -3230,8 +3203,7 @@ need a companion variable for tracking the array size, as explained in Section 7
 If the order of the elements does not matter, you can simply insert new elements at
 the end, incrementing the variable tracking the size.
 ```
-if (valuesSize &lt; values.length)
-{
+if (valuesSize &lt; values.length) {
 	values[valuesSize] = newElement;
 	valuesSize++;
 }
@@ -3246,10 +3218,8 @@ to the end of the array. When you insert an element, you start at the end of the
 array, move that element to a higher index, then move the one before that, and so on
 until you finally get to the insertion location (see Figure 12).
 ```
-if (valuesSize &lt; values.length)
-{
-	for (int i = valuesSize; i > pos; i--)
-	{
+if (valuesSize &lt; values.length) {
+	for (int i = valuesSize; i > pos; i--) {
 		values[i] = values[i - 1];
 	}
 	values[pos] = newElement;
@@ -3349,10 +3319,8 @@ example, let’s declare a constructor to set the initial balance of a checking 
 We want to invoke the BankAccount constructor to set the balance to the initial balance. There is a special instruction to call the superclass constructor from a subclass
 constructor. You use the reserved word super, followed by the construction parameters in parentheses:
 ```
-public class CheckingAccount extends BankAccount
-{
-public CheckingAccount(double initialBalance)
-{
+public class CheckingAccount extends BankAccount {
+public CheckingAccount(double initialBalance) {
 // Construct superclass
 super(initialBalance);
 // Initialize transaction count
@@ -3420,8 +3388,7 @@ deposit method on it—deposit is not a method of the Object class.
 Why would anyone want to know less about an object reference and use a variable whose type is a superclass? This can happen if you want to reuse code that
 knows about the superclass but not the subclass. Here is a typical example. Consider a transfer method that transfers money from one account to another:
 ```
-public void transfer(double amount, BankAccount other)
-{
+public void transfer(double amount, BankAccount other) {
 withdraw(amount);
 other.deposit(amount);
 }
@@ -3463,8 +3430,7 @@ true if the type of anObject is convertible to BankAccount. This happens if
 anObject refers to an actual BankAccount or a subclass such as SavingsAccount. Using the
 instanceof operator, a safe cast can be programmed as follows:
 ```
-if (anObject instanceof BankAccount)
-{
+if (anObject instanceof BankAccount) {
 BankAccount anAccount = (BankAccount) anObject;
 . . .
 }
@@ -3505,8 +3471,7 @@ CheckingAccount.deposit method is called. It does not matter that the object ref
 is stored in a variable of type BankAccount.
 Have another look at the transfer method:
 ```
-public void transfer(double amount, BankAccount other)
-{
+public void transfer(double amount, BankAccount other) {
 withdraw(amount);
 other.deposit(amount);
 }
@@ -3556,7 +3521,7 @@ To illustrate the design process, consider an application that presents a quiz a
 	• Numeric (where an approximate answer is ok; e.g., 1.33 when the actual answer is 4/3)
 	• Free response
 
-Step 1
+[H1]Step 1[H1]
 
 List the classes that are part of the hierarchy.
 From the problem description, we can find these classes:
@@ -3569,15 +3534,230 @@ From the problem description, we can find these classes:
 
 In addition, we introduce a common superclass Question to model the commonality among
 these classes.
-Step 2
 
-Organize the classes into an inheritance hierarchy.
-Draw a UML diagram that shows super- and subclasses. Here is the diagram for our example.
+[H1]Step 2[H1]
+
+	• Organize the classes into an inheritance hierarchy.
+	• Draw a UML diagram that shows super- and subclasses. Here is the diagram for our example.
 
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Inheritance/15.png</image>
 				<text>
+[H1]Step 3[H1]
 
+Determine the common responsibilities. In Step 2, you will have identified a class at the root of the hierarchy. That class needs to have
+sufficient responsibilities to carry out the tasks at hand.
+
+To find out what those tasks are, write pseudocode for processing the objects.
+
+For each question:
+
+	1. Display the question to the user.
+	2. Get the user response.
+	3. Check whether the response is correct.
+
+From the pseudocode, we obtain the following list of common responsibilities that every
+question must carry out:
+
+	1. Display the question.
+	2. Check the response.
+
+[H1]Step 4[H1]
+
+Decide which methods are overridden in subclasses. For each subclass and each of the common responsibilities, decide whether the inherited
+behavior is appropriate or whether it needs to be overridden. Be sure to declare any methods that are inherited or overridden in the root of the hierarchy.
+We place the responsibilities common to all questions into the Question superclass.
+```
+public class Question {
+	. . .
+	/**
+	Displays this question.
+	*/
+	public void display() { . . . }
+
+	/**
+	Checks a given response for correctness.
+	@param response the response to check
+	@return true if the response was correct,
+	false otherwise
+	*/
+	public boolean checkAnswer(String response) { . . . }
+}
+```
+The ChoiceQuestion class will need to override the display method to display all the choices. The NumericQuestion class will need to override the checkAnswer method, converting the
+response to a number and checking that it is approximately the same as the expected answer. From now on, we will only consider the ChoiceQuestion in detail. For the other question
+types, see the programming exercises at the end of this chapter.
+
+[H1]Step 5[H1]
+
+Define the public interface of each subclass. Typically, subclasses have responsibilities other than those of the superclass. List those, as
+well as the methods that need to be overridden. You also need to specify how the objects of the subclasses should be constructed. With the ChoiceQuestion, we need a way of adding choices, like this:
+```
+ChoiceQuestion question = new ChoiceQuestion("In which country was the inventor of Java born?");
+question.addChoice("Australia", false);
+question.addChoice("Canada", true);
+question.addChoice("Denmark", false);
+question.addChoice("United States", false);
+```
+We then override the display method to display those choices in the form
+###
+	1: Australia
+	2: Canada
+	3: Denmark
+	4: United States
+###
+Here are the methods that we just discovered for the ChoiceQuestion class:
+```
+public class ChoiceQuestion extends Question {
+	. . .
+	/**
+	Adds an answer choice to this question.
+	@param choice the choice to add
+	@param correct true if this is the
+	correct choice, false otherwise
+	*/
+	public void addChoice(String choice, boolean correct)
+	public void display() { . . . } // Overrides superclass method
+}
+```
+[H1]Step 6[H1]
+
+Identify instance variables.
+
+List the instance variables for each class. If you find a instance variable that is common to all classes, be sure to place it in the base of the hierarchy.
+All questions have a question text and an answer. We store those values in the Question superclass.
+```
+public class Question {
+	private String text;
+	private String answer;
+	. . .
+}
+```
+The ChoiceQuestion class needs to store the list of choices.
+```
+public class ChoiceQuestion extends Question {
+	private ArrayList&lt;String&gt; choices;
+	. . .
+}
+```
+We need to spend some thought on how question objects are constructed. We can supply the
+question text in the constructor. However, the answer for a choice question is only known
+when the correct choice is added, so we need a setter method for it:
+```
+public class Question {
+	. . .
+	/**
+	Constructs a question with a given text and an empty answer.
+	the text of this question
+	@param questionText
+	*/
+	public Question(String questionText) { . . . }
+
+	/**
+	Sets the answer for this question.
+	the answer
+	@param correctResponse
+	*/
+	public void setAnswer(String correctResponse) { . . . }
+}
+```
+[H1]Step 7[H1]
+
+Implement constructors and methods.
+The methods of the Question class are very straightforward:
+```
+public class Question {
+	. . .
+	public Question(String questionText) {
+		text = questionText;
+		answer = "";
+	}
+
+	public void setAnswer(String correctResponse) {
+		answer = correctResponse;
+	}
+
+	public boolean checkAnswer(String response) {
+		return response.equals(answer);
+	}
+
+	public void display() {
+		System.out.println(text);
+	}
+}
+```
+The ChoiceQuestion constructor must call the superclass constructor to set the question text:
+```
+public ChoiceQuestion(String questionText) {
+	super(questionText);
+	choices = new ArrayList&lt;String&gt;();
+}
+```
+The addChoice method sets the answer when the correct choice is added.
+```
+public void addChoice(String choice, boolean correct) {
+	choices.add(choice);
+	if (correct) {
+		// Convert choices.size() to string
+		String choiceString = "" + choices.size();
+		setAnswer(choiceString);
+	}
+}
+```
+Finally, the display method of the ChoiceQuestion class displays the question text, then the
+choices. Note the call to the superclass method.
+```
+public void display() {
+	super.display();
+	for (int i = 0; i &lt; choices.size(); i++) {
+		int choiceNumber = i + 1;
+		System.out.println(choiceNumber + ": " + choices.get(i));
+	}
+}
+```
+[H1]Step 8[H1]
+
+Construct objects of different subclasses and process them.
+In our sample program, we construct two questions and present them to the user.
+```
+public class QuestionDemo {
+	public static void main(String[] args) {
+		Question[] quiz = new Question[2];
+		quiz[0] = new Question("Who was the inventor of Java?");
+		quiz[0].setAnswer("James Gosling");
+		ChoiceQuestion question = new ChoiceQuestion("In which country was the inventor of Java born?");
+		question.addChoice("Australia", false);
+		question.addChoice("Canada", true);
+		question.addChoice("Denmark", false);
+		question.addChoice("United States", false);
+		quiz[1] = question;
+		Scanner in = new Scanner(System.in);
+
+		for (Question q : quiz) {
+			q.display();
+			System.out.print("Your answer: ");
+			String response = in.nextLine();
+			System.out.println(q.checkAnswer(response));
+		}
+	}
+}
+```
+###
+Program Output
+
+Who was the inventor of Java?
+Your answer: James Gosling
+true
+In which country was the inventor of Java born?
+
+1: Australia
+2: Canada
+3: Denmark
+4: United States
+
+Your answer: 4
+false
+###
 				</text>
 			</page>
 		</pages>
