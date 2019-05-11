@@ -3759,29 +3759,25 @@ know about the object to which a refers?
 2. If a refers to a checking account, what is the effect of calling a.transfer(1000,
 				</text>
 			</page>
-			<page title="Inheritance Structures">
+			<page title="Inheritance Hierarchy">
 				<text>
-Developing an Inheritance Hierarchy
 When you work with a set of classes, some of which are more general and others more specialized, you want to organize them into an inheritance hierarchy. This enables you to process objects of different classes in a uniform way.
-To illustrate the design process, consider an application that presents a quiz and grades the
-user’s responses. A quiz consists of questions, and there are different kinds of questions:
-• Fill-in-the-blank
-• Choice (single or multiple)
-• Numeric (where an approximate answer is ok; e.g., 1.33 when the actual answer is 4/3)
-• Free response
+To illustrate the design process, consider an application that presents a quiz and grades the user’s responses. A quiz consists of questions, and there are different kinds of questions:
+	• Fill-in-the-blank
+	• Choice (single or multiple)
+	• Numeric (where an approximate answer is ok; e.g., 1.33 when the actual answer is 4/3)
+	• Free response
 
 Step 1
 
 List the classes that are part of the hierarchy.
 From the problem description, we can find these classes:
-(fill in the blank)
-(offers answer choices to the user)
-MultiChoiceQuestion (offers answer choices to the user; user can pick more than one)
-FillInQuestion
-ChoiceQuestion
 
-NumericQuestion
-FreeResponseQuestion
+	MultiChoiceQuestion (offers answer choices to the user; user can pick more than one)
+	FillInQuestion (fill in the blank)
+	ChoiceQuestion (offers answer choices to the user)
+	NumericQuestion
+	FreeResponseQuestion
 
 In addition, we introduce a common superclass Question to model the commonality among
 these classes.
