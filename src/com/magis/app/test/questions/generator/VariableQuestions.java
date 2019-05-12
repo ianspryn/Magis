@@ -41,7 +41,6 @@ public class VariableQuestions extends QuestionGenerator{
         answers.clear();
         answers.add("True");
         answers.add("False");
-        answers.add("None of the Above");
 
         int rightWrong = rand.nextInt(2);
         int selector;
@@ -53,14 +52,14 @@ public class VariableQuestions extends QuestionGenerator{
                 word = correctVariables.get(selector);
                 correctVariables.remove(selector);
                 correctAnswer = answers.get(0);
-                question = "<datatype> "+word+" = ...;\n\n";
+                question = "```<datatype> "+word+" = ...;```\n";
                 break;
             case 1:
                 selector = rand.nextInt(wrongVariables.size());
                 word = wrongVariables.get(selector);
                 wrongVariables.remove(selector);
                 correctAnswer = answers.get(1);
-                question = "<datatype> "+word+" = ...;\n\n";
+                question = "```<datatype> "+word+" = ...;```\n";
                 break;
         }
         question+="True or False, is \""+word+"\" a proper name for a variable?";
@@ -72,8 +71,8 @@ public class VariableQuestions extends QuestionGenerator{
         int selector = rand.nextInt(names1.length);
         String word = names1[selector];
 
-        question = "private int "+word+";\n\n" +
-                "public void setThing(int "+word+"){\n\n}\n\n" +
+        question = "```private int "+word+";\n\n" +
+                "public void setThing(int "+word+"){\n\n}```\n" +
                 "How would you set the instance variable \""+word+"\" equal to the local variable \""+word+"\"?";
 
         shuffler.add("this."+word+" = " +word+";");

@@ -47,7 +47,7 @@ public class InterfacesQuestions extends QuestionGenerator {
         int num = rand.nextInt(methods.length);
         String methodUsed = methodList.get(num);
 
-        question = "public interface in1 {\n";
+        question = "```public interface in1 {\n";
 
         int limit = rand.nextInt(methods.length);
 
@@ -58,8 +58,8 @@ public class InterfacesQuestions extends QuestionGenerator {
                 correctAnswer = answers.get(0);
             }
         }
-        question += "\n}";
-        question += "\n\nIs \""+methodUsed+"\" a method required in any class that implements interface \"in1\"?";
+        question += "\n}```";
+        question += "\nIs \""+methodUsed+"\" a method required in any class that implements interface \"in1\"?";
     }
 
     public void interfaceVariableQuestion(){
@@ -77,12 +77,12 @@ public class InterfacesQuestions extends QuestionGenerator {
 
         int rightNum = numbers[rand.nextInt(numbers.length)];
 
-        question = "public interface in1 {\n\tpublic static final int a = "+a;
+        question = "```public interface in1 {\n\tpublic static final int a = "+a;
         question += ";\n\tpublic static final int b = "+b+";\n\n\tpublic void display();\n}";
         question += "\n\n public class QuestionClass(){\n\tpublic void display(){\n\t\tint c = "+c+";\n\t\tint d = "+d+";\n\t\t"+
                 "System.out.println("+rightNum+");\n\t}";
-        question += "\n\tpublic static void main(String[] args){\n\t\tQuestionClass q = new QuestionClass();\n\t\tq.display();\n\t}\n}";
-        question += "\n\nWhat is the result of this code?";
+        question += "\n\tpublic static void main(String[] args){\n\t\tQuestionClass q = new QuestionClass();\n\t\tq.display();\n\t}\n}```";
+        question += "\nWhat is the result of this code?";
 
         answers.add(""+a);
         answers.add(""+b);

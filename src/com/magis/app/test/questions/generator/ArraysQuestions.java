@@ -37,7 +37,7 @@ public class ArraysQuestions extends QuestionGenerator{
             int index = rand.nextInt(singleArray.length);
             question = "Suppose we have a 1D array \"numList\" with the following elements inside it: \n";
             singleArray[0] = rand.nextInt(10);
-            question+= ""+singleArray[0];
+            question+= "```"+singleArray[0];
             for(int i=1; i<singleArray.length; i++){
                 boolean uniqueIndex = false;
                 while(uniqueIndex == false){
@@ -52,7 +52,7 @@ public class ArraysQuestions extends QuestionGenerator{
 
                 question += ", "+singleArray[i];
             }
-            question += "\n\nWhat is the value at \"numList["+index+"]\"?";
+            question += "```\nWhat is the value at \"numList["+index+"]\"?";
             correctAnswer = ""+singleArray[index];
             answers.add(correctAnswer);
             answers.add("Null");
@@ -81,7 +81,7 @@ public class ArraysQuestions extends QuestionGenerator{
         else{
             int indexRow = rand.nextInt(doubleArray.length);
             int indexColumn = rand.nextInt(doubleArray[0].length);
-            question = "Suppose we have a 2D array \"numList\" with the following elements inside it: \n";
+            question = "Suppose we have a 2D array \"numList\" with the following elements inside it: \n```";
 
             for(int i=0; i<doubleArray.length; i++){
                 question+=""+doubleArray[i][0];
@@ -101,7 +101,7 @@ public class ArraysQuestions extends QuestionGenerator{
                 }
                 question+="\n";
             }
-            question += "\n\nWhat is the value at \"numList["+indexRow+"]["+indexColumn+"]\"?";
+            question += "```\nWhat is the value at \"numList["+indexRow+"]["+indexColumn+"]\"?";
             correctAnswer = ""+doubleArray[indexRow][indexColumn];
             answers.add(correctAnswer);
             answers.add("Null");
@@ -147,9 +147,9 @@ public class ArraysQuestions extends QuestionGenerator{
         int sum = 0;
 
         if(doubleOrSingle == 0){
-            question = "int[] numList = new numList["+num+"];\nint sum = 0;\n\n";
+            question = "```int[] numList = new numList["+num+"];\nint sum = 0;\n\n";
             question += "for(int i = 0; i < numList.length; i++){\n\tnumList[i] = i;\n}\n";
-            question += "for(int i = 0; i < numList.length; i++){\n\tsum += numList[i];\n}\n\n";
+            question += "for(int i = 0; i < numList.length; i++){\n\tsum += numList[i];\n}```\n";
             question += "What is the value of \"sum\"?";
 
             for(int i = 0; i<singleArray.length; i++){

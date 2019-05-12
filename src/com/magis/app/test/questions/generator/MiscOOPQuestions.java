@@ -35,7 +35,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
         answers.add("True");
         answers.add("False");
 
-        question = "public class "+mainClass+" {...}\n";
+        question = "```public class "+mainClass+" {...}\n";
 
         for(int i=0; i<classes.length; i++) {
             question += "public class "+classes[i]+ " extends "+mainClass+" {...}\n";
@@ -44,7 +44,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
         question += "public class "+carClass+ " extends "+classes[0]+" {...}\n";
         question += "public class "+bikeClass+ " extends "+classes[1]+" {...}\n";
         question += "public class "+boatClass+ " extends "+classes[2]+" {...}\n";
-        question += "public class "+planeClass+ " extends "+classes[3]+" {...}\n\n";
+        question += "public class "+planeClass+ " extends "+classes[3]+" {...}\n\n```";
 
         int isAHasA = rand.nextInt();
 
@@ -184,7 +184,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
             maxSpeed2 = rand.nextInt(200)+1;
         }
 
-        question = "public class Vehicle {\n\tint maxSpeed = "+maxSpeed1+";\n}\n\n";
+        question = "```public class Vehicle {\n\tint maxSpeed = "+maxSpeed1+";\n}\n\n";
 
         answers.add(""+maxSpeed1);
         answers.add(""+maxSpeed2);
@@ -197,32 +197,32 @@ public class MiscOOPQuestions extends QuestionGenerator{
 
         if(thisOrSuper == 0) {
             question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}";
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(1);
         }
         else if(thisOrSuper == 1){
             question += "public class Car extends Vehicle {\n\tint maxSpeed;"+maxSpeed1+";"+
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.maxSpeed);\n\t}\n}";
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(0);
         }
         else if(thisOrSuper == 2){
             question += "public class Car extends Vehicle {\n\tint maxSpeed;" +
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}";
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(2);
         }
         else if(thisOrSuper == 3){
             question+=question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.minimumSpeed);\n\t}\n}";
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.minimumSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(3);
         }
         else{
             int maxSpeed3 = rand.nextInt(10)+maxSpeed1+maxSpeed2;
             question+=question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed3+ ";" +
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}";
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(4);
         }
