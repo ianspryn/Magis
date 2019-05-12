@@ -6,7 +6,6 @@ import com.magis.app.test.questions.generator.QuestionGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import static com.magis.app.Configure.DEFAULT_NUM_TEST_QUESTIONS;
 
@@ -20,6 +19,7 @@ public class TestPageContent extends ExamPageContent {
     private ArrayList<QuestionGenerator> questionGenerators;
     private ArrayList<Integer> numGeneratedQuizQuestions;
     private ArrayList<Integer> maxedOutQuizzes;
+    private int numChaptersOnTest;
 
     public TestPageContent(int chapterIndex) {
         super(chapterIndex, Main.numQuestionsPerTest.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_TEST_QUESTIONS));
@@ -38,20 +38,26 @@ public class TestPageContent extends ExamPageContent {
         for (int i = chapterIndex; i >= 0; i--) {
             String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
             if (i != chapterIndex && Main.testsModel.hasTest(chapterTitle)) break;
+            numChaptersOnTest++;
             //static quiz questions
-            ExamsModel.ChapterModel quiz = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle())        ;
+            ExamsModel.ChapterModel quiz = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(i).getTitle());
             int numAvailableQuizQuestionsForChapter = quiz != null ? quiz.getNumAvailableQuestions() : 0;
             if (numAvailableQuizQuestionsForChapter > 0) {
                 usedQuizBankQuestions.put(mapCounter, new ArrayList<>()); //to keep track of which quiz question from each chapter we've used
                 quizzes.add(quiz);
                 numAvailableQuizBankQuestions.add(numAvailableQuizQuestionsForChapter);
-                mapCounter++;
+            } else {
+                //we have to keep everything in line
+                usedQuizBankQuestions.put(mapCounter, new ArrayList<>());
+                numAvailableQuizBankQuestions.add(0);
             }
+            mapCounter++;
             //generated quiz questions
             if (Main.questionGenerator.get(i) != null) {
                 questionGenerators.add(Main.questionGenerator.get(i));
-                numGeneratedQuizQuestions.add(0);
+                numGeneratedQuizQuestions.add(0); //initialize to 0
             } else {
+                numGeneratedQuizQuestions.add(0);
                 questionGenerators.add(null); //we have to keep everything in line
             }
         }
@@ -61,7 +67,6 @@ public class TestPageContent extends ExamPageContent {
     @Override
     protected boolean buildQuestion() {
         int quizQuestionOrTestQuestion;
-
         if (checkForAvailableQuizQuestions() && numAvailableTestBankQuestions > usedTestBankQuestions.size()) {
             quizQuestionOrTestQuestion = rand.nextInt(2); //increase to make it more likely to pull from test bank
         } else if (checkForAvailableQuizQuestions() && numAvailableTestBankQuestions <= usedTestBankQuestions.size()) {
@@ -137,13 +142,13 @@ public class TestPageContent extends ExamPageContent {
                 case 1:
                     numGeneratedQuizQuestions.set(whichQuiz, numGeneratedQuizQuestions.get(whichQuiz) + 1);
                     do {
-                        questionGenerator.initialize();
-                        generatedQuestion = questionGenerator.getQuestion();
+                        questionGenerators.get(whichQuiz).initialize();
+                        generatedQuestion = questionGenerators.get(whichQuiz).getQuestion();
                     }
                     while (usedGeneratorQuestions.contains(generatedQuestion));
                     usedGeneratorQuestions.add(generatedQuestion);
                     //set the points and question index
-                    int questionLevel = questionGenerator.getLevel();
+                    int questionLevel = questionGenerators.get(whichQuiz).getLevel();
                     pointsAndIndex = questionLevel == 1 ? questionLevel + " point" : questionLevel + " points";
                     pointsAndIndex += "\nQuestion " + (questionIndex + 1);
                     //save the points and question index
@@ -152,11 +157,11 @@ public class TestPageContent extends ExamPageContent {
                     //save the question
                     examQuestion.setQuestion(generatedQuestion);
                     //save the level
-                    examQuestion.setLevel(questionGenerator.getLevel());
+                    examQuestion.setLevel(questionGenerators.get(whichQuiz).getLevel());
                     //get and save the correct answer
-                    examQuestion.addCorrectAnswer(questionGenerator.getCorrectAnswer());
+                    examQuestion.addCorrectAnswer(questionGenerators.get(whichQuiz).getCorrectAnswer());
                     //get and save all of the answers (correct and incorrect)
-                    examQuestion.addAnswers(questionGenerator.getAnswers());
+                    examQuestion.addAnswers(questionGenerators.get(whichQuiz).getAnswers());
                     break;
             }
 
@@ -208,9 +213,9 @@ public class TestPageContent extends ExamPageContent {
 
     private boolean checkForAvailableQuizQuestions() {
         boolean available = false;
-        for (int i = 0; i < usedQuizBankQuestions.size(); i++) {
-            if (usedQuizBankQuestions.get(i).size() < numAvailableQuizBankQuestions.get(i) ||
-                    questionGenerators.get(i) != null && numGeneratedQuizQuestions.get(i) < questionGenerators.get(i).getNumUnique()) {
+        for (int i = 0; i < numChaptersOnTest; i++) {
+            if ((usedQuizBankQuestions.get(i).size() < numAvailableQuizBankQuestions.get(i)) ||
+                    (questionGenerators.get(i) != null && numGeneratedQuizQuestions.get(i) < questionGenerators.get(i).getNumUnique())) {
                 available = true;
             } else {
                 if (!maxedOutQuizzes.contains(i)) maxedOutQuizzes.add(i);

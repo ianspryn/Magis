@@ -28,13 +28,13 @@ public class QuizPageContent extends ExamPageContent {
         //decide if the question is pulled from a bank (0) or generated (1)
         int typeOfQuestion;
         //if we have available bank questions and there exists a question generator (and still have unique questions to generate)
-        if (usedQuizBankQuestions.get(0).size() < numAvailableBankQuestions && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
+        if (usedQuizBankQuestions.get(0).size() < numAvailableBankQuestions && (quizQuestionGenerator != null && numGeneratedQuestions < quizQuestionGenerator.getNumUnique())) {
             typeOfQuestion = rand.nextInt(2); //0 or 1
             //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
-        } else if (numAvailableBankQuestions > usedQuizBankQuestions.get(0).size() && (questionGenerator == null || numGeneratedQuestions >= questionGenerator.getNumUnique())) {
+        } else if (numAvailableBankQuestions > usedQuizBankQuestions.get(0).size() && (quizQuestionGenerator == null || numGeneratedQuestions >= quizQuestionGenerator.getNumUnique())) {
             typeOfQuestion = 0;
             //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
-        } else if (numAvailableBankQuestions <= usedQuizBankQuestions.get(0).size() && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
+        } else if (numAvailableBankQuestions <= usedQuizBankQuestions.get(0).size() && (quizQuestionGenerator != null && numGeneratedQuestions < quizQuestionGenerator.getNumUnique())) {
             typeOfQuestion = 1;
         } else { //if we don't have either, we're out of unique questions
             return false;
@@ -85,13 +85,13 @@ public class QuizPageContent extends ExamPageContent {
             case 1:
                 numGeneratedQuestions++;
                 do {
-                    questionGenerator.initialize();
-                    generatedQuestion = questionGenerator.getQuestion();
+                    quizQuestionGenerator.initialize();
+                    generatedQuestion = quizQuestionGenerator.getQuestion();
                 }
                 while (usedGeneratorQuestions.contains(generatedQuestion));
                 usedGeneratorQuestions.add(generatedQuestion);
                 //set the points and question index
-                int questionLevel = questionGenerator.getLevel();
+                int questionLevel = quizQuestionGenerator.getLevel();
                 pointsAndIndex = questionLevel == 1 ? questionLevel + " point" : questionLevel + " points";
                 pointsAndIndex += "\nQuestion " + (questionIndex + 1);
                 //save the points and question index
@@ -100,11 +100,11 @@ public class QuizPageContent extends ExamPageContent {
                 //save the question
                 examQuestion.setQuestion(generatedQuestion);
                 //save the level
-                examQuestion.setLevel(questionGenerator.getLevel());
+                examQuestion.setLevel(quizQuestionGenerator.getLevel());
                 //get and save the correct answer
-                examQuestion.addCorrectAnswer(questionGenerator.getCorrectAnswer());
+                examQuestion.addCorrectAnswer(quizQuestionGenerator.getCorrectAnswer());
                 //get and save all of the answers (correct and incorrect)
-                examQuestion.addAnswers(questionGenerator.getAnswers());
+                examQuestion.addAnswers(quizQuestionGenerator.getAnswers());
                 break;
         }
         return true;

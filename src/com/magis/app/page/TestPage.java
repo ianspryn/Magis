@@ -8,7 +8,7 @@ import static com.magis.app.Configure.*;
 
 public class TestPage extends ExamPage {
     public TestPage(int chapterIndex) {
-        super(chapterIndex, new TestSidePanel(chapterIndex), new com.magis.app.page.TestPageContent(chapterIndex), Main.numQuestionsPerTest.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_TEST_QUESTIONS), Main.lessonModel.getChapter(chapterIndex).getTitle());
+        super(chapterIndex, new TestSidePanel(chapterIndex), new TestPageContent(chapterIndex), Main.numQuestionsPerTest.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_TEST_QUESTIONS), Main.lessonModel.getChapter(chapterIndex).getTitle());
         pageSidePanel.setPageClass(this);
 
         submitButton.setOnMouseClicked(e -> {
@@ -27,5 +27,4 @@ public class TestPage extends ExamPage {
             }
         });
     }
-
 }

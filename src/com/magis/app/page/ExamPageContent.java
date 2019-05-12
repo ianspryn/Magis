@@ -32,7 +32,7 @@ public abstract class ExamPageContent extends PageContent {
 
     protected int chapterIndex;
     protected int numQuestions;
-    protected QuestionGenerator questionGenerator;
+    protected QuestionGenerator quizQuestionGenerator;
     protected Grader grader;
     protected HashMap<Integer, ToggleGroup> toggleGroups;
     protected HashMap<Integer, ArrayList<JFXCheckBox>> checkboxGroups;
@@ -56,7 +56,7 @@ public abstract class ExamPageContent extends PageContent {
     public ExamPageContent(int chapterIndex, int numQuestions) {
         this.chapterIndex = chapterIndex;
         this.numQuestions = numQuestions;
-        questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
+        quizQuestionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
         grader = new Grader();
         toggleGroups = new HashMap<>();
         checkboxGroups = new HashMap<>();
