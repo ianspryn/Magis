@@ -258,6 +258,88 @@ public class IntelligentTutor {
         return box;
     }
 
+    public static VBox generateInsights() {
+        VBox insights = new VBox();
+        insights.getStyleClass().addAll("chapter-box", "stats-box");
+        texts = new ArrayList<>();
+        subText = new TextFlow();
+        subText.setPadding(new Insets(25));
+        subText.setTextAlignment(TextAlignment.CENTER);
+        double worstTestScore = 0;
+        int worstTestIndex = -1; //holds which chapter number the worst test is associated with
+        double worstQuizScore = 0;
+        int worstQuizIndex = -1; //holds which chapter number the worst quiz is associated with
+        student = Main.studentModel.getStudent();
+        quizzesModel = Main.quizzesModel;
+        testsModel = Main.testsModel;
+        int numChapters = Main.lessonModel.getNumChapters();
+
+        for (int i = 0; i < numChapters; i++) {
+            /*
+            Find which test they did the worst on (as long as it's below the minimum test score threshold defined in Configure.java)
+             */
+            if (student.hasTakenTest(i) && student.getTest(i).getBestScore() < Configure.MINIMUM_TEST_SCORE) {
+                double score = student.getTest(i).getBestScore() / 100.0;
+                if ((1 - score) * 3 > worstTestScore) {
+                    worstTestScore = (1 - score) * 3;
+                    worstTestIndex = i;
+                }
+            }
+             /*
+            Find which quiz they did the worst on (as long as it's below the minimum test score threshold defined in Configure.java)
+             */
+            if (student.hasTakenQuiz(i) && student.getTest(i).getBestScore() < Configure.MINIMUM_QUIZ_SCORE) {
+                double score = student.getQuiz(i).getBestScore() / 100.0;
+                if ((1 - score) * 2 > worstTestScore) {
+                    worstQuizScore = (1 - score) * 2;
+                    worstQuizIndex = i;
+                }
+            }
+        }
+
+        if (true) {
+            addText("Nice job! You've been doing well on your quizzes and your tests. Keep up the great work!", true);
+            int numChaptersNotDoneReading = 0;
+            for (int i = 0; i < numChapters; i++) {
+                String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
+                boolean hasTakenQuiz = !quizzesModel.hasQuiz(chapterTitle) || student.hasTakenQuiz(i);
+                boolean hasTakenTest = !testsModel.hasTest(chapterTitle) || student.hasTakenTest(i);
+                if (hasTakenQuiz && hasTakenTest && student.getChapter(i).getProgress() < 100) {
+                    numChaptersNotDoneReading++;
+                }
+            }
+            if (numChaptersNotDoneReading > 0) {
+                addText("\n\nJust as a heads up, you finished your exams for ");
+                for (int i = 0; i < numChapters; i++) {
+                    String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
+                    boolean hasTakenQuiz = !quizzesModel.hasQuiz(chapterTitle) || student.hasTakenQuiz(i);
+                    boolean hasTakenTest = !testsModel.hasTest(chapterTitle) || student.hasTakenTest(i);
+                    if (hasTakenQuiz && hasTakenTest && student.getChapter(i).getProgress() < 100) {
+                        addText(" chapter " + (i + 1) + ": " + chapterTitle + ", ", true);
+                        numChaptersNotDoneReading--;
+                        if (numChaptersNotDoneReading == 1) {
+                            addText("and");
+                        }
+                    }
+                }
+                addText(" but you never finished the reading for them. If you want the best mastery of the material, why don't you go back and finish those readings?" +
+                        "\n\nYou can view your progress of reading on the homepage next to every chapter, or right below");
+            }
+        }
+        //if true, there's a quiz the student did really poorly on (worst than any of the more heavily-weighted tests, if the exist)
+        else if (worstQuizScore > worstTestScore) {
+
+        }
+
+
+
+        for (Text text : texts) {
+            subText.getChildren().add(text);
+        }
+        insights.getChildren().add(subText);
+        return insights;
+    }
+
     private static void addText(String string) {
         text = new Text();
         texts.add(text);
@@ -362,88 +444,6 @@ public class IntelligentTutor {
             }
         }
         return progress == 100;
-    }
-
-    public static VBox generateInsights() {
-        VBox insights = new VBox();
-        insights.getStyleClass().addAll("chapter-box", "stats-box");
-        texts = new ArrayList<>();
-        subText = new TextFlow();
-        subText.setPadding(new Insets(25));
-        subText.setTextAlignment(TextAlignment.CENTER);
-        double worstTestScore = 0;
-        int worstTestIndex = -1; //holds which chapter number the worst test is associated with
-        double worstQuizScore = 0;
-        int worstQuizIndex = -1; //holds which chapter number the worst quiz is associated with
-        student = Main.studentModel.getStudent();
-        quizzesModel = Main.quizzesModel;
-        testsModel = Main.testsModel;
-        int numChapters = Main.lessonModel.getNumChapters();
-
-        for (int i = 0; i < numChapters; i++) {
-            /*
-            Find which test they did the worst on (as long as it's below the minimum test score threshold defined in Configure.java)
-             */
-            if (student.hasTakenTest(i) && student.getTest(i).getBestScore() < Configure.MINIMUM_TEST_SCORE) {
-                double score = student.getTest(i).getBestScore() / 100.0;
-                if ((1 - score) * 3 > worstTestScore) {
-                    worstTestScore = (1 - score) * 3;
-                    worstTestIndex = i;
-                }
-            }
-             /*
-            Find which quiz they did the worst on (as long as it's below the minimum test score threshold defined in Configure.java)
-             */
-            if (student.hasTakenQuiz(i) && student.getTest(i).getBestScore() < Configure.MINIMUM_QUIZ_SCORE) {
-                double score = student.getQuiz(i).getBestScore() / 100.0;
-                if ((1 - score) * 2 > worstTestScore) {
-                    worstQuizScore = (1 - score) * 2;
-                    worstQuizIndex = i;
-                }
-            }
-        }
-
-        if (worstQuizScore == 0 && worstTestScore == 0) {
-            addText("Nice job! You've been doing well on your quizzes and your tests. Keep up the great work!", true);
-            int numChaptersNotDoneReading = 0;
-            for (int i = 0; i < numChapters; i++) {
-                String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
-                boolean hasTakenQuiz = !quizzesModel.hasQuiz(chapterTitle) || student.hasTakenQuiz(i);
-                boolean hasTakenTest = !testsModel.hasTest(chapterTitle) || student.hasTakenTest(i);
-                if (hasTakenQuiz && hasTakenTest && student.getChapter(i).getProgress() < 100) {
-                    numChaptersNotDoneReading++;
-                }
-            }
-            if (numChaptersNotDoneReading > 0) {
-                addText("\n\nJust as a heads up, you finished your exams for ");
-                for (int i = 0; i < numChapters; i++) {
-                    String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
-                    boolean hasTakenQuiz = !quizzesModel.hasQuiz(chapterTitle) || student.hasTakenQuiz(i);
-                    boolean hasTakenTest = !testsModel.hasTest(chapterTitle) || student.hasTakenTest(i);
-                    if (hasTakenQuiz && hasTakenTest && student.getChapter(i).getProgress() < 100) {
-                        addText(" chapter " + (i + 1) + ": " + chapterTitle + ", ", true);
-                        numChaptersNotDoneReading--;
-                        if (numChaptersNotDoneReading == 1) {
-                            addText("and");
-                        }
-                    }
-                }
-                addText(" but you never finished the reading for them. If you want the best mastery of the material, why don't you go back and finish those readings?" +
-                        "\n\nYou can view your progress of reading on the homepage next to every chapter, or right below");
-            }
-        }
-        //if true, there's a quiz the student did really poorly on (worst than any of the more heavily-weighted tests, if the exist)
-        else if (worstQuizScore > worstTestScore) {
-
-        }
-
-
-
-        for (Text text : texts) {
-            subText.getChildren().add(text);
-        }
-        insights.getChildren().add(subText);
-        return insights;
     }
 
     public static int getNewPage() {
