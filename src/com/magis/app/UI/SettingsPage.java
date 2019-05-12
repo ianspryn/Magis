@@ -103,8 +103,9 @@ public class SettingsPage {
             if (firstName.getText().length() == 0 || lastName.getText().length() == 0) {
                 Alert.showAlert("Error", "Name cannot be empty!");
             } else {
-                student.setFirstName(firstName.getText());
-                student.setLastName(lastName.getText());
+
+                student.setFirstName(firstName.getText().substring(0,1).toUpperCase() + firstName.getText().substring(1).toLowerCase());
+                student.setLastName(lastName.getText().substring(0,1).toUpperCase() + lastName.getText().substring(1).toLowerCase());
                 nameSettings.getChildren().clear();
                 nameSettings.getChildren().addAll(fullName, editName);
                 fullName.setText(student.getFullName());
