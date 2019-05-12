@@ -39,7 +39,6 @@ public class InterfacesQuestions extends QuestionGenerator {
         answers.clear();
         answers.add("Yes");
         answers.add("No");
-        answers.add("None of the Above");
 
         correctAnswer = answers.get(1);
 
@@ -48,7 +47,7 @@ public class InterfacesQuestions extends QuestionGenerator {
         int num = rand.nextInt(methods.length);
         String methodUsed = methodList.get(num);
 
-        question = "public interface in1 {\n\t";
+        question = "public interface in1 {\n";
 
         int limit = rand.nextInt(methods.length);
 
