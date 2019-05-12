@@ -114,7 +114,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
     public void forLoopQuestion(){
         answers.clear();
 
-        int num = rand.nextInt(6);
+        int num = rand.nextInt(5)+5;
 
         question = "int num = "+num+";\nint product = 0;\n\n";
         question += "for (int i = num; i > 0; i--) {\n\tproduct *= i\n}\n\n";
