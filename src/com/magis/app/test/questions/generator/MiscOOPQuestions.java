@@ -202,7 +202,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
             correctAnswer = answers.get(1);
         }
         else if(thisOrSuper == 1){
-            question += "public class Car extends Vehicle {\n\tint maxSpeed;"+maxSpeed1+";"+
+            question += "public class Car extends Vehicle {\n\tint maxSpeed = "+maxSpeed1+";"+
                     "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(0);
