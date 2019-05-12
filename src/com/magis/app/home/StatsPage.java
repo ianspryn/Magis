@@ -270,7 +270,7 @@ public class StatsPage {
                 score.setAlignment(Pos.CENTER);
 
                 RingProgressIndicator rpi = new RingProgressIndicator();
-                rpi.setProgress(student.getQuiz(chapterIndex).getScores().get(counter).intValue());
+                rpi.setProgress(student.getTest(chapterIndex).getScores().get(counter).intValue());
                 Label scoreLabel = new Label("Score");
                 scoreLabel.getStyleClass().addAll("text-color", "box-description");
 
@@ -386,7 +386,7 @@ public class StatsPage {
             quizScore.setAlignment(Pos.CENTER);
 
             RingProgressIndicator rpi2 = new RingProgressIndicator();
-            rpi2.setProgress(student.getQuiz(chapterIndex).getBestScore().intValue());
+            rpi2.setProgress((int) student.getQuiz(chapterIndex).getBestScore());
 
             Label quizScoreLabel = new Label("Quiz Score");
             quizScoreLabel.setWrapText(true);
@@ -402,7 +402,7 @@ public class StatsPage {
             testScore.setAlignment(Pos.CENTER);
 
             RingProgressIndicator rpi2 = new RingProgressIndicator();
-            rpi2.setProgress(student.getQuiz(chapterIndex).getBestScore().intValue());
+            rpi2.setProgress(((int) student.getTest(chapterIndex).getBestScore()));
 
             Label testScoreLabel = new Label("Test Score");
             testScoreLabel.setWrapText(true);

@@ -5,21 +5,17 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import com.magis.app.Main;
-import com.magis.app.models.ExamsModel;
 import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.ExamSaver;
 import com.magis.app.test.Grader;
 import com.magis.app.test.diff_match_patch;
 import com.magis.app.test.questions.generator.QuestionGenerator;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -28,23 +24,20 @@ import javafx.scene.text.TextFlow;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Pattern;
 
 import static com.magis.app.Configure.NUM_QUESTIONS_PER_PAGE;
 
 public abstract class ExamPageContent extends PageContent {
 
-    protected ExamsModel.ChapterModel exam;
     protected int chapterIndex;
-    protected int numAvailableBankQuestions;
     protected int numQuestions;
     protected QuestionGenerator questionGenerator;
     protected Grader grader;
     protected HashMap<Integer, ToggleGroup> toggleGroups;
     protected HashMap<Integer, ArrayList<JFXCheckBox>> checkboxGroups;
     protected HashMap<Integer, VBox> writtenQuestionBoxes;
-    protected ArrayList<Integer> usedBankQuestions;
+    protected HashMap<Integer, ArrayList<Integer>> usedQuizBankQuestions;
     protected ArrayList<String> usedGeneratorQuestions;
     protected ArrayList<VBox> pageContents;
     protected ExamSaver examSaver;
@@ -58,23 +51,21 @@ public abstract class ExamPageContent extends PageContent {
     protected ArrayList<String> answers;
     protected int questionIndex;
     protected String generatedQuestion;
-    protected int numGeneratedQuestions;
 
-    public ExamPageContent(int chapterIndex, int numQuestions, ExamsModel.ChapterModel exam) {
+
+    public ExamPageContent(int chapterIndex, int numQuestions) {
         this.chapterIndex = chapterIndex;
         this.numQuestions = numQuestions;
-        this.exam = exam;
-        numAvailableBankQuestions = exam != null ? exam.getNumAvailableQuestions() : 0;
         questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
         grader = new Grader();
         toggleGroups = new HashMap<>();
         checkboxGroups = new HashMap<>();
         writtenQuestionBoxes = new HashMap<>();
-        usedBankQuestions = new ArrayList<>();
+        usedQuizBankQuestions = new HashMap<>();
         usedGeneratorQuestions = new ArrayList<>();
         pageContents = new ArrayList<>();
         examSaver = new ExamSaver(chapterIndex);
-        numGeneratedQuestions = 0;
+
     }
 
     @Override

@@ -1,20 +1,25 @@
 package com.magis.app.page;
 
-import com.jfoenix.controls.JFXTextField;
 import com.magis.app.Main;
 import com.magis.app.models.ExamsModel;
-import javafx.scene.text.TextFlow;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.magis.app.Configure.*;
 
 public class QuizPageContent extends ExamPageContent {
+
+    private ExamsModel.ChapterModel quiz;
+    private int numAvailableBankQuestions;
+    private int numGeneratedQuestions;
+
     public QuizPageContent(int chapterIndex) {
-        super(chapterIndex, Main.numQuestionsPerQuiz.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_QUIZ_QUESTIONS), Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle()));
+        super(chapterIndex, Main.numQuestionsPerQuiz.getOrDefault(Main.lessonModel.getChapter(chapterIndex).getTitle(), DEFAULT_NUM_QUIZ_QUESTIONS));
+        this.quiz = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        numAvailableBankQuestions = quiz != null ? quiz.getNumAvailableQuestions() : 0;
+        usedQuizBankQuestions.put(0, new ArrayList<>());
+        numGeneratedQuestions = 0;
         examSaver.setType("quiz");
     }
 
@@ -23,13 +28,13 @@ public class QuizPageContent extends ExamPageContent {
         //decide if the question is pulled from a bank (0) or generated (1)
         int typeOfQuestion;
         //if we have available bank questions and there exists a question generator (and still have unique questions to generate)
-        if (usedBankQuestions.size() < numAvailableBankQuestions && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
+        if (usedQuizBankQuestions.get(0).size() < numAvailableBankQuestions && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = rand.nextInt(2); //0 or 1
             //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
-        } else if (numAvailableBankQuestions > usedBankQuestions.size() && (questionGenerator == null || numGeneratedQuestions >= questionGenerator.getNumUnique())) {
+        } else if (numAvailableBankQuestions > usedQuizBankQuestions.get(0).size() && (questionGenerator == null || numGeneratedQuestions >= questionGenerator.getNumUnique())) {
             typeOfQuestion = 0;
             //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
-        } else if (numAvailableBankQuestions <= usedBankQuestions.size() && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
+        } else if (numAvailableBankQuestions <= usedQuizBankQuestions.get(0).size() && (questionGenerator != null && numGeneratedQuestions < questionGenerator.getNumUnique())) {
             typeOfQuestion = 1;
         } else { //if we don't have either, we're out of unique questions
             return false;
@@ -40,10 +45,10 @@ public class QuizPageContent extends ExamPageContent {
                 //grab a random question from the question bank that hasn't been used before
                 int questionNumber;
                 do questionNumber = rand.nextInt(numAvailableBankQuestions);
-                while (usedBankQuestions.contains(questionNumber));
-                usedBankQuestions.add(questionNumber); //add the question to the used bank of questions
+                while (usedQuizBankQuestions.get(0).contains(questionNumber));
+                usedQuizBankQuestions.get(0).add(questionNumber); //add the question to the used bank of questions
                 //set the question statement
-                ExamsModel.ChapterModel.QuestionsModel question = exam.getQuestion(questionNumber);
+                ExamsModel.ChapterModel.QuestionsModel question = quiz.getQuestion(questionNumber);
                 int level = question.getLevel();
                 //Determine if it should be "point" or "points". i.e. "1 point" vs. "2 points"
                 pointsAndIndex = level == 1 ? level + " point" : level + " points";
