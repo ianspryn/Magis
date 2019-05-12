@@ -58,6 +58,8 @@ public class HomePage {
         return homePage;
     }
 
+    public static void clearHomePage() { homePage = null; }
+
     private static void update() {
         int numChapters = Main.lessonModel.getNumChapters();
         StudentModel.Student student = Main.studentModel.getStudent();
@@ -460,6 +462,8 @@ public class HomePage {
         /*
         Reset stuff
          */
+        //Since it's an instance, we need to remove it
+        HomePage.clearHomePage();
         //Delete student from the class
         Main.studentModel.removeStudent();
         Main.studentModel = new StudentModel(Main.lessonModel);

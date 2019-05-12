@@ -1,5 +1,9 @@
 package com.magis.app;
 
+import com.magis.app.test.questions.generator.QuestionGenerator;
+
+import java.util.Map;
+
 public class Configure {
 
     public static final String PINK = "#E91E63"; //Pink 500
@@ -50,5 +54,13 @@ public class Configure {
         The value is the the number of questions
          */
 //        Main.numQuestionsPerTest.put(Main.lessonModel.getChapter(0).getTitle(), 50);
+    }
+
+    public static void calculateNumUniqueQuestions() {
+        int totalGeneratedQuestions = 0;
+        for (Map.Entry<Integer, QuestionGenerator> iterate : Main.questionGenerator.entrySet()) {
+           if (iterate.getValue().getNumUnique() == Integer.MAX_VALUE) continue;
+
+        }
     }
 }

@@ -178,10 +178,26 @@ public class StatsPage {
             quizBox.setAlignment(Pos.CENTER);
             quizBox.setSpacing(25);
 
-            Label quizLabel = new Label("Your Quiz Results. Tap to view your previous answers");
-            quizLabel.setWrapText(true);
-            quizLabel.getStyleClass().add("box-title");
-            quizBox.getChildren().add(quizLabel);
+            if (student.getQuiz(chapterIndex).getAttempts().size() == 1) {
+                Text quizText = new Text("Your Quiz Results. Tap to view your previous answers");
+                quizText.getStyleClass().addAll("box-title", "text-no-color");
+                quizBox.getChildren().add(quizText);
+            } else {
+                TextFlow textFlow = new TextFlow();
+                textFlow.setTextAlignment(TextAlignment.CENTER);
+                Text quizText = new Text("Your Quiz Results.\nYour average is ");
+                quizText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(quizText);
+
+                quizText = new Text(student.getQuiz(chapterIndex).getAverageScore() + "%.");
+                quizText.getStyleClass().addAll("box-title", "text-color");
+                textFlow.getChildren().add(quizText);
+
+                quizText = new Text("\nTap to view your previous answers.");
+                quizText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(quizText);
+                quizBox.getChildren().add(textFlow);
+            }
 
             int counter = 0;
             for (StudentModel.Student.Attempt attempt : student.getQuiz(chapterIndex).getAttempts()) {
@@ -245,10 +261,27 @@ public class StatsPage {
             testBox.setAlignment(Pos.CENTER);
             testBox.setSpacing(25);
 
-            Label testLabel = new Label("Your Test Results. Tap to view your previous answers");
-            testLabel.setWrapText(true);
-            testLabel.getStyleClass().add("box-title");
-            testBox.getChildren().add(testLabel);
+            if (student.getTest(chapterIndex).getAttempts().size() == 1) {
+                Text testText = new Text("Your Test Results. Tap to view your previous answers");
+                testText.getStyleClass().addAll("box-title", "text-no-color");
+                testBox.getChildren().add(testText);
+            } else {
+                TextFlow textFlow = new TextFlow();
+                textFlow.setTextAlignment(TextAlignment.CENTER);
+                Text testText = new Text("Your Test Results.\nYour average is ");
+                testText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(testText);
+
+                testText = new Text(student.getTest(chapterIndex).getAverageScore() + "%.");
+                testText.getStyleClass().addAll("box-title", "text-color");
+                textFlow.getChildren().add(testText);
+
+                testText = new Text("\nTap to view your previous answers.");
+                testText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(testText);
+                testBox.getChildren().add(textFlow);
+            }
+
 
             int counter = 0;
             for (StudentModel.Student.Attempt attempt : student.getTest(chapterIndex).getAttempts()) {
@@ -264,7 +297,7 @@ public class StatsPage {
                     UIComponents.scale(test, 0.1, 1, 1);
                 });
                 test.setSpacing(50);
-                test.getStyleClass().addAll("chapter-box", "stats-box");
+                test.getStyleClass().addAll("inner-chapter-box", "stats-box");
 
                 VBox score = new VBox();
                 score.setAlignment(Pos.CENTER);

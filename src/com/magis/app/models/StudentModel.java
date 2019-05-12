@@ -1,6 +1,7 @@
 package com.magis.app.models;
 
 import com.magis.app.Main;
+import com.magis.app.home.HomePage;
 import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.ExamSaver;
 import org.w3c.dom.*;
@@ -283,6 +284,11 @@ public class StudentModel {
         //write to XML file
         UpdateModel.updateXML(new DOMSource(document), filePath);
 
+        /*
+        Reset stuff
+         */
+        //Since it's an instance, we need to remove it
+        HomePage.clearHomePage();
         //Delete student from the class
         Main.studentModel.removeStudent();
         //remove the student's custom styling
@@ -798,7 +804,7 @@ public class StudentModel {
                 for (double score : scores) {
                     scoreTotal += score;
                 }
-                return scoreTotal / scores.size();
+                return Double.parseDouble(String.format("%.2f", scoreTotal / scores.size()));
             }
 
             /**

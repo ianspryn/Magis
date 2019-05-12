@@ -98,7 +98,7 @@ Assign the proper data-types to these values</statement>
 //This value will hold a random alphabet value
 ### alphabetValue;```
 
-                                        Assign the proper data-types to these values</statement>
+Assign the proper data-types to these values</statement>
                                 <answer id = "correct">double</answer>
                                 <answer id = "correct">double</answer>
                                 <answer id = "correct">int</answer>

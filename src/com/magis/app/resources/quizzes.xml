@@ -492,7 +492,7 @@ int length = 10;
 //Make a new object of the class "Rectangle" and send it its length and width
 ### simpleSquare = ###(###, width);```
 
-                                Fill in the blanks</statement>
+Fill in the blanks</statement>
                             <answer id = "correct">Rectangle</answer>
                             <answer id = "correct">new Rectangle</answer>
                             <answer id = "correct">length</answer>
@@ -606,32 +606,32 @@ the value of the integer cats\\```</statement>
                                 <answer id = "correct">Methods whose return type is void</answer>
                         </question>
                         <question>
-                            <level>3</level>
+                            <level>2</level>
                             <written>true</written>
                             <statement>``` ###This comment is a comment ```
 
-                                Fill in the blanks to make a comment</statement>
+Fill in the blanks to make a comment</statement>
                             <answer id = "correct">//</answer>
                         </question>
                         <question>
-                            <level>3</level>
+                            <level>2</level>
                             <written>true</written>
                             <statement>``` ###This comment is a comment
 and it is big### ```
 
-                                Fill in the blanks to make a comment</statement>
+Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/*</answer>
                             <answer id = "correct">*/</answer>
                         </question>
                         <question>
-                            <level>3</level>
+                            <level>2</level>
                             <written>true</written>
                             <statement>``` ### Author: You
 Param: Num, a number
 Return Sum, the sum of two numbers
 ###```
 
-                                Fill in the blanks to make a comment</statement>
+Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/**</answer>
                             <answer id = "correct">*/</answer>
                         </question>

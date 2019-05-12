@@ -12,10 +12,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class IntelligentTutor {
@@ -214,7 +211,7 @@ public class IntelligentTutor {
                 }
             }
             chapterTitleText.setText("Chapter " + (student.getRecentChapter() + 1) + " - " + chapter.getTitle());
-        } else if (hasTakenTest && !hasTakenQuiz && quizzesModel.hasQuiz(chapter.getTitle())) {
+        } else if (testsModel.hasTest(chapter.getTitle()) && hasTakenTest && !hasTakenQuiz && quizzesModel.hasQuiz(chapter.getTitle())) {
             //if on the quizzes page (edge case)
             if (student.getRecentPage() == chapter.getNumPages()) {
                 recentActivityTitle.setText("Take your quiz real quick?");
@@ -334,13 +331,22 @@ public class IntelligentTutor {
             }
         }
 
-        if (worstQuizScore == 0 && worstTestScore == 0) {
-            addTextBold("Nice job! You've been doing well on your quizzes and your tests. Keep up the great work!");
+        boolean hasTakenAnyExam = false;
+        for (int i = 0; i < numChapters; i++) {
+            if (student.hasTakenTest(i) || student.hasTakenQuiz(i)) {
+                hasTakenAnyExam = true;
+                break;
+            }
+        }
+        if (!hasTakenAnyExam) {
+            addText("Come back here when you've taken a quiz or a test for insights. Until then, go learn some Java!");
+        } else if (worstQuizScore == 0 && worstTestScore == 0) {
+            addTextBold("Nice job! You've been doing well on your quizzes and your tests so far. Keep up the great work!");
             int numChaptersNotDoneReading = 0;
             for (int i = 0; i < numChapters; i++) {
                 String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
-                boolean hasTakenQuiz = !quizzesModel.hasQuiz(chapterTitle) || student.hasTakenQuiz(i);
-                boolean hasTakenTest = !testsModel.hasTest(chapterTitle) || student.hasTakenTest(i);
+                boolean hasTakenQuiz = quizzesModel.hasQuiz(chapterTitle) && student.hasTakenQuiz(i);
+                boolean hasTakenTest = testsModel.hasTest(chapterTitle) && student.hasTakenTest(i);
                 if (hasTakenQuiz && hasTakenTest && student.getChapter(i).getProgress() < 100) {
                     numChaptersNotDoneReading++;
                 }
@@ -371,7 +377,7 @@ public class IntelligentTutor {
             addText("It looks like your biggest struggle is with ");
             addTextColor("Chapter " + (worstQuizIndex + 1) + ": " + chapter.getTitle());
             addText(". You achieved a");
-            addTextBold(" quiz score ");
+            addTextColor(" quiz score ");
             addText("of ");
             addTextRed(student.getQuiz(worstQuizIndex).getBestScore() + "%. ");
             int progress = student.getChapter(worstQuizIndex).getProgress();
@@ -410,7 +416,7 @@ public class IntelligentTutor {
             addText("It looks like your biggest struggle is with ");
             addTextColor("Chapter " + (worstTestIndex + 1) + ": " + chapter.getTitle());
             addText(". You achieved a");
-            addTextBold(" test score ");
+            addTextColor(" test score ");
             addText("of ");
             addTextRed(student.getTest(worstTestIndex).getBestScore() + "%. ");
 
@@ -464,14 +470,19 @@ public class IntelligentTutor {
                 addText("Before continuing, be sure to go back and finish the readings. ");
             }
             if (missedQuiz) {
-                addTextColor("You did not even take all of the quizzes leading up the exam. ");
+                if (hasLowProgress) {
+                    addTextColor("Additionally, you");
+                } else {
+                    addTextColor("You");
+                }
+                addTextColor(" did not even take all of the quizzes leading up the test. ");
                 int numMissedQuizzes = missedQuizzes.size();
-                for (int chapterIndex : missedQuizzes) {
-                    String chapterTitle = Main.lessonModel.getChapter(chapterIndex).getTitle();
-                    addTextRed("Chapter " + (chapterIndex + 1) + ": " + chapterTitle);
+                for (int i = missedQuizzes.size() - 1; i >= 0; i--) {
+                    String chapterTitle = Main.lessonModel.getChapter(missedQuizzes.get(i)).getTitle();
+                    addTextRed("Chapter " + (missedQuizzes.get(i) + 1) + ": " + chapterTitle);
                     numMissedQuizzes--;
                     if (numMissedQuizzes > 0) {
-                        addText(", ");
+                        addTextRed(", ");
                     }
                     if (numMissedQuizzes == 1) {
                         addText("and ");
@@ -531,9 +542,9 @@ public class IntelligentTutor {
             then moves onto the next chapter, we want to catch that.
             However, if the student visited the first page (and only the first page), we ignore that.
              */
-            if (student.getChapter(i).getProgress() <= 1 / student.getChapter(i).getPageVisited().size() &&
+            if (student.getChapter(i).getProgress() > (1.0 / student.getChapter(i).getPageVisited().size()) * 100 &&
                     student.getChapter(i).getProgress() < 80 &&
-                    student.getChapter(i + 1).getProgress() <= 1 / student.getChapter(i).getPageVisited().size() &&
+                    student.getChapter(i + 1).getProgress() > (1.0 / student.getChapter(i + 1).getPageVisited().size()) * 100 &&
                     student.getChapter(i + 1).getProgress() < 80) {
                 fragmentation++;
             }
