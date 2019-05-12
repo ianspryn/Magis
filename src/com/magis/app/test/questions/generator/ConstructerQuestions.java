@@ -13,14 +13,14 @@ public class ConstructerQuestions extends QuestionGenerator{
     private String[] comparableStringAnswers = {"A", "B", "C", "D"};
 
     private String[] equalsStrings = {"int", "String", "Double","char"};
-    private String[] equalsAnswers = {"```public example(int x){}```", "```public example(String word){}```",
-            "```public example(Double y){}```","```public example(char c){}```"};
+    private String[] equalsAnswers = {"public example(int x){}", "public example(String word){}",
+            "public example(Double y){}","public example(char c){}"};
     private String[] secondAnswers = {"int x = 3, int y = 5", "int x = 3",
             "int y = 3","nothing at all"};
-    private String[] secondStrings = {"```pubic class child extends parent{\n     public child{\n           super();\n        int y = 5;\n      }\n}```",
-            "```pubic class child extends parent{\n     public child{\n           super();\n}\n}```",
-            "```pubic class child extends parent{\n     public child{\n        int y = 5;\n      }\n}```",
-            "```pubic class child extends parent{\n     public child{\n      }\n}```"};
+    private String[] secondStrings = {"```pubic class child extends parent{\n\tpublic child{\n\t\tsuper();\n\t\tint y = 5;\n\t}\n}```",
+            "```pubic class child extends parent{\n\tpublic child{\n\t\tsuper();\n\t}\n}```",
+            "```pubic class child extends parent{\n\tpublic child{\n\t\tint y = 5;\n\t}\n}```",
+            "```pubic class child extends parent{\n\tpublic child{\n\t}\n}```"};
     private ArrayList<String> cAnswers;
     private ArrayList<String> eAnswers;
     private ArrayList<String> sAnswers;
@@ -76,9 +76,9 @@ public class ConstructerQuestions extends QuestionGenerator{
 
 
 
-        question = "Which is the correct constructor for: public class "+four.get(fourAnswer)+"(){}\n";
-        question += "A. public "+four.get(0)+"(){}\n"+"B. public "+four.get(1)+"(){}\n";
-        question +="C. public "+four.get(2)+"(){}\n"+"D. public "+four.get(3)+"(){}\n";
+        question = "Which is the correct constructor for: ```public class "+four.get(fourAnswer)+"(){. . .}```\n";
+        question += "A. ```public "+four.get(0)+"(){. . .}```\n"+"B. ```public "+four.get(1)+"(){. . . }```\n";
+        question +="C. ```public "+four.get(2)+"(){. . .}```\n"+"D. ```public "+four.get(3)+"(){. . .}```\n";
 
         correctAnswer = comparableStringAnswers[fourAnswer];
 
@@ -91,7 +91,7 @@ public class ConstructerQuestions extends QuestionGenerator{
         String firstPart =  equalsStrings[random];
 
 
-        question = "Which is the correct constructor for class example if we want the paramater to be a "+firstPart+"?\n";
+        question = "Which is the correct constructor for class example if we want the parameter to be a "+firstPart+"?\n";
         correctAnswer = equalsAnswers[random];
 
     }
@@ -101,9 +101,9 @@ public class ConstructerQuestions extends QuestionGenerator{
         String firstPart =  secondStrings[random];
 
 
-        question = "For constructor \n"+firstPart+"\n with parent class\n " +
-                "pubic class parent{\n     public parent{\n           int x = 3;\n" +
-                "   }\n}\nwhat variables will be initialized in the constructor?\n";
+        question = "For constructor \n"+firstPart+"\nWith parent class:\n " +
+                "```pubic class parent{\n     public parent{\n           int x = 3;\n" +
+                "   }\n}```\nWhat variables will be initialized in the constructor?\n";
         correctAnswer = secondAnswers[random];
 
 
