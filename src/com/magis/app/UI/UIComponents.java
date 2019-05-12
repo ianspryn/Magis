@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -85,6 +86,13 @@ public class UIComponents {
             //page title
             pageTitle = new Label("Generic Title");
             pageTitle.getStyleClass().add("section-title");
+            pageTitle.setTextAlignment(TextAlignment.RIGHT);
+            pageTitle.setWrapText(true);
+            pageTitle.setMaxWidth(Main.window.getWidth() / 2.0 - 150);
+
+            Main.window.widthProperty().addListener((obs, oldVal, newVal) -> {
+                pageTitle.setMaxWidth(newVal.intValue() / 2.0 - 150);
+            });
 
             corners.getChildren().addAll(backButton, pageTitle);
             AnchorPane.setLeftAnchor(backButton, 0.0);
@@ -308,7 +316,7 @@ public class UIComponents {
      */
     public static HBox createCenterColorHomeBox() {
         HBox home = new HBox();
-        home.setPadding(new Insets(0,0,0,30));
+        home.setPadding(new Insets(0,0,0,45));
         home.setMaxWidth(HBox.USE_PREF_SIZE);
         home.setSpacing(20);
         home.setMinWidth(300);
