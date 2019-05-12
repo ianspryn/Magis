@@ -209,7 +209,7 @@ Fill in the blanks</statement>
 Fill in the blanks</statement>
                     <answer id = "correct">import</answer>
                     <answer id = "correct">util</answer>
-                    <answer id = "correct">Random</answer>
+                    <answer id = "correct">Random;</answer>
                 </question>
                                 <question>
                     <level>3</level>
@@ -219,7 +219,7 @@ Fill in the blanks</statement>
 Fill in the blanks</statement>
                     <answer id = "correct">import</answer>
                     <answer id = "correct">lang</answer>
-                    <answer id = "correct">Math</answer>
+                    <answer id = "correct">Math;</answer>
                 </question>
                 <question>
                     <level>3</level>
@@ -229,7 +229,7 @@ Fill in the blanks</statement>
 Fill in the blanks</statement>
                     <answer id = "correct">import</answer>
                     <answer id = "correct">io</answer>
-                    <answer id = "correct">PrintStream</answer>
+                    <answer id = "correct">PrintStream;</answer>
                 </question>
                 <question>
                     <level>5</level>
@@ -239,7 +239,7 @@ Fill in the blanks</statement>
 Fill in the blanks</statement>
                     <answer id = "correct">import</answer>
                     <answer id = "correct">net</answer>
-                    <answer id = "correct">Socket</answer>
+                    <answer id = "correct">Socket;</answer>
                 </question>
                 <question>
                     <level>3</level>
@@ -249,7 +249,7 @@ Fill in the blanks</statement>
 Fill in the blanks</statement>
                     <answer id = "correct">import</answer>
                     <answer id = "correct">util</answer>
-                    <answer id = "correct">Scanner</answer>
+                    <answer id = "correct">Scanner;</answer>
                 </question>
                 <question>
                     <level>5</level>
