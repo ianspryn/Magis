@@ -167,7 +167,7 @@ Fill in the blanks</statement>
     //Code
 }```
 Fill in the blanks</statement>
-                    <answer id = "correct">try;</answer>
+                    <answer id = "correct">try</answer>
                     <answer id = "correct">catch</answer>
                     <answer id = "correct">Exception</answer>
                 </question>
@@ -182,7 +182,7 @@ Fill in the blanks</statement>
     //Code
 }```
 Fill in the blanks</statement>
-                    <answer id = "correct">try;</answer>
+                    <answer id = "correct">try</answer>
                     <answer id = "correct">catch</answer>
                     <answer id = "correct">ArithmeticException</answer>
                 </question>
@@ -197,7 +197,7 @@ Fill in the blanks</statement>
     //Code
 }```
 Fill in the blanks</statement>
-                    <answer id = "correct">try;</answer>
+                    <answer id = "correct">try</answer>
                     <answer id = "correct">catch</answer>
                     <answer id = "correct">NullPointerException</answer>
                 </question>
