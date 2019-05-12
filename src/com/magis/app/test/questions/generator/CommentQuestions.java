@@ -39,7 +39,7 @@ public class CommentQuestions extends QuestionGenerator{
                 break;
             case 2: correctAnswer = generalCommentAnswers[2];
                 break;
-            case 3: correctAnswer = generalCommentAnswers[0];
+            case 3: correctAnswer = generalCommentAnswers[2];
                 break;
             case 4: correctAnswer = generalCommentAnswers[2];
                 break;

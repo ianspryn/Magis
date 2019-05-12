@@ -84,7 +84,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
         int num = startingNum;
         int controller = rand.nextInt(10)+1;
 
-        question = "int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\t"+num+"--;\n}";
+        question = "int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\tnum--;\n}";
         question += "\n\nHow many times will this while loop iterate?";
 
         int j = 0;
