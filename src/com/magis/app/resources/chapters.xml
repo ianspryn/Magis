@@ -2149,7 +2149,7 @@ int quantity = in.nextInt();
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/control-statements.png</image>
 		<title>Control Statements</title>
 		<description>Learn how to control the flow of your code, and learn the basics of how loops work.</description>
 		<pages>
@@ -2648,7 +2648,7 @@ if (a.getBalance() == 0) { counter++; }
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/arrays.png</image>
 		<title>Arrays</title>
 		<description>Learn about Arrays, both Single and Double; Java's equivalent of a list!</description>
 		<pages>
@@ -3308,7 +3308,7 @@ for (int i = 0; i &lt; board.length; i++)
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/inheritance.png</image>
 		<title>Inheritance</title>
 		<description>Learn about how classes can extend each other to save resources and time while creating multiple classes.</description>
 		<pages>
@@ -3694,7 +3694,7 @@ false
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/interfaces.png</image>
 		<title>Interfaces</title>
 		<description>Interfaces are ways to ensure classes have the same methods implemented across all of them</description>
 		<pages>
@@ -3957,7 +3957,7 @@ System.out.println(data.getAverage());
 		</pages>
 	</chapter>
 	<chapter>
-		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
+		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/standard-java-library.png</image>
 		<title>Standard Java Library</title>
 		<description>Java is very extensive, and its extensive library can provide what is needed to show you how to improve coding</description>
 		<pages>

@@ -11,6 +11,7 @@ import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -47,6 +48,8 @@ public class Main extends Application {
             closeProgram();
         });
 
+        primaryStage.getIcons().add(new Image("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-color-tiny-small.png"));
+
         scene = new Scene(new BorderPane(), width, height);
         window.setScene(scene);
         //default to light, with pink
@@ -60,6 +63,7 @@ public class Main extends Application {
         numQuestionsPerTest = new HashMap<>();
         populateQuestionGenerator();
         Configure.values(); //apply any custom settings to the program
+        Configure.calculateNumUniqueQuestions();
         Login.Page();
         primaryStage.show();
     }

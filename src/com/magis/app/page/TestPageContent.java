@@ -34,11 +34,10 @@ public class TestPageContent extends ExamPageContent {
         numGeneratedQuizQuestions = new ArrayList<>();
         maxedOutQuizzes = new ArrayList<>();
         int mapCounter = 0;
+        //add all of the quiz banks and generators from the current chapter and previous chapters (but not any before the previous test)
         for (int i = chapterIndex; i >= 0; i--) {
             String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
             if (i != chapterIndex && Main.testsModel.hasTest(chapterTitle)) break;
-
-
             //static quiz questions
             ExamsModel.ChapterModel quiz = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(chapterIndex).getTitle())        ;
             int numAvailableQuizQuestionsForChapter = quiz != null ? quiz.getNumAvailableQuestions() : 0;
@@ -82,7 +81,7 @@ public class TestPageContent extends ExamPageContent {
             while (maxedOutQuizzes.contains(whichQuiz));
 
             //decide if the question is pulled from a bank (0) or generated (1)
-            int typeOfQuestion = 0;
+            int typeOfQuestion = -1; //this is promised to change
             //if we have available bank questions and there exists a question generator (and still have unique questions to generate)
             if (usedQuizBankQuestions.get(whichQuiz).size() < numAvailableQuizBankQuestions.get(whichQuiz) && (questionGenerators.get(whichQuiz) != null && numGeneratedQuizQuestions.get(whichQuiz) < questionGenerators.get(whichQuiz).getNumUnique())) {
                 typeOfQuestion = rand.nextInt(2); //0 or 1
@@ -129,10 +128,10 @@ public class TestPageContent extends ExamPageContent {
                     examQuestion.addIncorrectAnswers(question.getIncorrectAnswers());
                     //get and save all of the answers
                     examQuestion.addAnswers(question.getAnswers());
-                /*
-                shuffle the order if we're allowed to
-                the order for the answer of written questions is essential!
-                 */
+                    /*
+                    shuffle the order if we're allowed to
+                    the order for the answer of written questions is essential!
+                     */
                     if (question.isShuffle() && !question.isWritten()) Collections.shuffle(examQuestion.getAnswers());
                     break;
                 case 1:

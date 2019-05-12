@@ -1,5 +1,6 @@
 package com.magis.app;
 
+import com.magis.app.models.LessonModel;
 import com.magis.app.test.questions.generator.QuestionGenerator;
 
 import java.util.Map;
@@ -58,9 +59,24 @@ public class Configure {
 
     public static void calculateNumUniqueQuestions() {
         int totalGeneratedQuestions = 0;
+        int totalStaticQuestions = 0;
         for (Map.Entry<Integer, QuestionGenerator> iterate : Main.questionGenerator.entrySet()) {
            if (iterate.getValue().getNumUnique() == Integer.MAX_VALUE) continue;
-
+            totalGeneratedQuestions += iterate.getValue().getNumUnique();
         }
+        int numChapters = Main.lessonModel.getNumChapters();
+        for (int i = 0; i < numChapters; i++) {
+            String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
+            if (Main.quizzesModel.getChapter(chapterTitle) != null) {
+                totalStaticQuestions += Main.quizzesModel.getChapter(chapterTitle).getNumAvailableQuestions();
+            }
+            if (Main.testsModel.getChapter(chapterTitle) != null) {
+                totalStaticQuestions += Main.testsModel.getChapter(chapterTitle).getNumAvailableQuestions();
+            }
+        }
+        System.out.println("Not counting question generators who use random integers (resulting in basically infinite number of unique qusetions), the number of unique questions for " +
+                "question generators is " + totalGeneratedQuestions);
+        System.out.println("The number of static questions, both quizzes and tests is " + totalStaticQuestions);
+        System.out.println("This is a grand total of " + (totalGeneratedQuestions + totalStaticQuestions));
     }
 }

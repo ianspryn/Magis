@@ -475,7 +475,7 @@ public class IntelligentTutor {
                 } else {
                     addTextColor("You");
                 }
-                addTextColor(" did not even take all of the quizzes leading up the test. ");
+                addTextColor(" did not even take all of the quizzes leading up to the test. ");
                 int numMissedQuizzes = missedQuizzes.size();
                 for (int i = missedQuizzes.size() - 1; i >= 0; i--) {
                     String chapterTitle = Main.lessonModel.getChapter(missedQuizzes.get(i)).getTitle();
