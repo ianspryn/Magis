@@ -54,8 +54,8 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
         random = rand.nextInt(comparableStrings.length);
         String secondPart = comparableStrings[random];
 
-        question = "String sent1 = \""+firstPart+"\";\nString sent2 = \""+secondPart+"\";\n";
-        question += "sent1.compareTo(sent2);\n\nWhat would be the value of the number returned from this compareTo?";
+        question = "```String sent1 = \""+firstPart+"\";\nString sent2 = \""+secondPart+"\";\n";
+        question += "sent1.compareTo(sent2);```\nWhat would be the value of the number returned from this compareTo?";
 
         if(firstPart.compareTo(secondPart)>0){
             correctAnswer = comparableStringAnswers[0];
@@ -76,12 +76,12 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
         random = rand.nextInt(equalsStrings.length);
         String secondPart = equalsStrings[random];
 
-        question = "String sent1 = \""+firstPart+"\";\nString sent2 = \""+secondPart+"\";\n";
+        question = "```String sent1 = \""+firstPart+"\";\nString sent2 = \""+secondPart+"\";\n";
 
         random = rand.nextInt(3);
 
         if(random == 0) {
-            question += "sent1.equals(sent2);\n\nWill this statement return true or false?";
+            question += "sent1.equals(sent2);```\nWill this statement return true or false?";
             if(firstPart.equals(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
@@ -90,7 +90,7 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
             }
         }
         else if(random == 1){
-            question += "sent1 == sent2\n\nWill this statement return true or false?";
+            question += "sent1 == sent2;```\nWill this statement return true or false?";
             if(firstPart.equals(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
@@ -99,7 +99,7 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
             }
         }
         else{
-            question += "sent1.equalsIgnoreCase(sent2);\n\nWill this statement return true or false?";
+            question += "sent1.equalsIgnoreCase(sent2);```\nWill this statement return true or false?";
             if(firstPart.equalsIgnoreCase(secondPart)){
                 correctAnswer = equalsAnswers[0];
             }
@@ -117,7 +117,7 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
 
         switch(methodSelector){
             case 0:
-                question = "\""+word+"\".length();\n\nWhat is the value returned by this method?";
+                question = "```\""+word+"\".length();```\nWhat is the value returned by this method?";
                 correctAnswer = ""+word.length();
                 shuffler.add(correctAnswer);
                 shuffler.add(""+(word.length()-1));
@@ -125,7 +125,7 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
                 shuffler.add(""+(word.length()+2));
                 break;
             case 1:
-                question = "\""+word+"\".toUpperCase();\n\nWhat is the value returned by this method?";
+                question = "```\""+word+"\".toUpperCase();```\nWhat is the value returned by this method?";
                 correctAnswer = word.toUpperCase();
                 shuffler.add(correctAnswer);
                 shuffler.add(word+"!!!!!");
@@ -133,7 +133,7 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
                 shuffler.add("");
                 break;
             case 2:
-                question = "\""+word+"\".toLowerCase();\n\nWhat is the value returned by this method?";
+                question = "```\""+word+"\".toLowerCase();```\nWhat is the value returned by this method?";
                 correctAnswer = word.toLowerCase();
                 shuffler.add(correctAnswer);
                 shuffler.add(word+"...");
@@ -146,7 +146,7 @@ public class ObjectComparisonQuestions extends QuestionGenerator {
                 int endPoint = rand.nextInt(word.length());
                 int startPoint = 0;
                 if(endPoint != 0) startPoint = rand.nextInt(endPoint);
-                question = "\""+word+"\".replace(\'"+word.substring(startPoint, endPoint)+"\', \""+word2+"\");\n\nWhat is the value returned by this method?";
+                question = "```\""+word+"\".replace(\'"+word.substring(startPoint, endPoint)+"\', \""+word2+"\");```\nWhat is the value returned by this method?";
                 correctAnswer = word.replace(word.substring(startPoint,endPoint),word2);
                 shuffler.add(correctAnswer);
                 shuffler.add(word2);

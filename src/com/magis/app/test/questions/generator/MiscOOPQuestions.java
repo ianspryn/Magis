@@ -34,9 +34,8 @@ public class MiscOOPQuestions extends QuestionGenerator{
         answers.clear();
         answers.add("True");
         answers.add("False");
-        answers.add("None of the Above");
 
-        question = "public class "+mainClass+" {...}\n";
+        question = "```public class "+mainClass+" {...}\n";
 
         for(int i=0; i<classes.length; i++) {
             question += "public class "+classes[i]+ " extends "+mainClass+" {...}\n";
@@ -45,7 +44,7 @@ public class MiscOOPQuestions extends QuestionGenerator{
         question += "public class "+carClass+ " extends "+classes[0]+" {...}\n";
         question += "public class "+bikeClass+ " extends "+classes[1]+" {...}\n";
         question += "public class "+boatClass+ " extends "+classes[2]+" {...}\n";
-        question += "public class "+planeClass+ " extends "+classes[3]+" {...}\n\n";
+        question += "public class "+planeClass+ " extends "+classes[3]+" {...}\n\n```";
 
         int isAHasA = rand.nextInt();
 
@@ -179,32 +178,54 @@ public class MiscOOPQuestions extends QuestionGenerator{
     public void getSuperMethodQuestion(){
         answers.clear();
 
-        int maxSpeed1 = rand.nextInt(200);
-        int maxSpeed2 = rand.nextInt(200);
+        int maxSpeed1 = rand.nextInt(200)+1;
+        int maxSpeed2 = rand.nextInt(200)+1;
+        while(maxSpeed2==maxSpeed1){
+            maxSpeed2 = rand.nextInt(200)+1;
+        }
 
-        question = "public class Vehicle {\n\tint maxSpeed = "+maxSpeed1+";\n}\n\n";
+        question = "```public class Vehicle {\n\tint maxSpeed = "+maxSpeed1+";\n}\n\n";
 
         answers.add(""+maxSpeed1);
         answers.add(""+maxSpeed2);
+        answers.add("0");
+        answers.add("Error");
+        answers.add("None of the Above");
 
-        int thisOrSuper = rand.nextInt();
+
+        int thisOrSuper = rand.nextInt(5);
 
         if(thisOrSuper == 0) {
             question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}";
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(1);
         }
-        else {
-            question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
-                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.maxSpeed);\n\t}\n}";
+        else if(thisOrSuper == 1){
+            question += "public class Car extends Vehicle {\n\tint maxSpeed;"+maxSpeed1+";"+
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(0);
         }
+        else if(thisOrSuper == 2){
+            question += "public class Car extends Vehicle {\n\tint maxSpeed;" +
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
 
-        answers.add("Null");
-        answers.add("IllegalArgumentException");
-        answers.add("None of the Above");
+            correctAnswer = answers.get(2);
+        }
+        else if(thisOrSuper == 3){
+            question+=question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.minimumSpeed);\n\t}\n}```";
+
+            correctAnswer = answers.get(3);
+        }
+        else{
+            int maxSpeed3 = rand.nextInt(10)+maxSpeed1+maxSpeed2;
+            question+=question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed3+ ";" +
+                    "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
+
+            correctAnswer = answers.get(4);
+        }
 
         question += "\n\nWhat is the result of calling \"display\" in the \"Car\" class?";
     }
