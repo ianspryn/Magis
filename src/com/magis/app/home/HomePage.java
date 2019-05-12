@@ -132,10 +132,10 @@ public class HomePage {
 
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
 
         if (student.getRecentChapter() > -1) {
             recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
-            recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
         }
 
         //Activity and Statistics Page

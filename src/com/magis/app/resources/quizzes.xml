@@ -552,16 +552,6 @@ the value of the integer dogs *\```</statement>
                         <question>
                                 <level>2</level>
                                 <statement>Is the following code properly commented?
-```/*This code adds 1 to
-the value of the integer dogs */```</statement>
-                                <answer>No, \* and *\ locations should be switched</answer>
-                                <answer>No, \* and *\ only span over 1 line not multiples</answer>
-                                <answer>No, \* and *\ should be /* and */</answer>
-                                <answer id = "correct">Yes</answer>
-                        </question>
-                        <question>
-                                <level>2</level>
-                                <statement>Is the following code properly commented?
 ```\\This code adds 1 to
 the value of the integer cats\\```</statement>
                                 <answer>No, \\ works for only one line, and must be at the beginning of the line</answer>
@@ -982,6 +972,7 @@ return ###;
                         <question>
                                 <level>1</level>
                                 <statement>True or false: arrays can dynamically grow and shrink in size.</statement>
+                                <shuffle>false</shuffle>
                                 <answer>True</answer>
                                 <answer id = "correct">False</answer>
                         </question>
@@ -993,11 +984,11 @@ return ###;
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>Which delimeter do we use to indicate a datatype of array?</statement>
-                                <answer id = "correct">[] - brackets</answer>
-                                <answer>{} - braces</answer>
-                                <answer>() - parentheses</answer>
-                                <answer>&lt;&gt; - angle brackets</answer>
+                                <statement>Which delimeter do we use to indicate we are an array datatype?</statement>
+                                <answer id = "correct">[ ] - brackets</answer>
+                                <answer>{ } - braces</answer>
+                                <answer>( ) - parentheses</answer>
+                                <answer>&lt; &gt; - angle brackets</answer>
                         </question>
                         <question>
                                 <level>2</level>

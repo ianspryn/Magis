@@ -527,7 +527,7 @@ public abstract class ExamPageContent extends PageContent {
 
             }
             questionIndex++;
-            if (questionIndex % NUM_QUESTIONS_PER_PAGE == 0) {
+            if ((questionIndex + 1) % NUM_QUESTIONS_PER_PAGE == 0) {
                 //reset, because we're on a new page
                 insertionTracker = 0;
             }
