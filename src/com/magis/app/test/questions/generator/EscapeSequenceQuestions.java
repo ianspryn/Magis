@@ -27,7 +27,7 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
         answers.clear();
 
         int sentencePicker = rand.nextInt(sentences.length);
-        question = sentences[sentencePicker];
+        question = "```String s = \""+sentences[sentencePicker]+"\";```";
 
         int sequenePicker = rand.nextInt(5);
 

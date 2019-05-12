@@ -3,6 +3,7 @@ package com.magis.app.page;
 import com.magis.app.Main;
 import com.magis.app.UI.PageContentContainer;
 import com.magis.app.models.LessonModel;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -80,6 +81,7 @@ public class LessonPageContent extends PageContent {
                     ImageView image = new ImageView();
                     image.setPreserveRatio(true);
                     //load images in the background
+                    String pageContent = lessonPageContent.getContent();
                     Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent())));
                     thread.setDaemon(true);
                     thread.start();

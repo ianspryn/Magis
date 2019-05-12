@@ -53,7 +53,7 @@ public class PageSidePanel {
         masterVBox.setSpacing(10);
 
         //chapter title
-        title.setText(Main.lessonModel.getChapter(chapterIndex).getTitle());
+        title.setText((chapterIndex + 1) + " - " + Main.lessonModel.getChapter(chapterIndex).getTitle());
         title.getStyleClass().add("side-panel-title");
         title.setMaxWidth(300);
         title.setWrapText(true);

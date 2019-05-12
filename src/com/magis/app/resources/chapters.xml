@@ -2151,7 +2151,7 @@ int quantity = in.nextInt();
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Control Statements</title>
-		<description>Learn how to make decisions for various blocks of code.</description>
+		<description>Learn how to control the flow of your code, and learn the basics of how loops work.</description>
 		<pages>
 			<page title="If Statements">
 				<text>
@@ -2650,7 +2650,7 @@ if (a.getBalance() == 0) { counter++; }
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Arrays</title>
-		<description>Learn many new things about arrays</description>
+		<description>Learn about Arrays, both Single and Double; Java's equivalent of a list!</description>
 		<pages>
 			<page title="Introduction to Arrays">
 				<text>
@@ -3310,7 +3310,7 @@ for (int i = 0; i &lt; board.length; i++)
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Inheritance</title>
-		<description>Learn more details about classes.</description>
+		<description>Learn about how classes can extend each other to save resources and time while creating multiple classes.</description>
 		<pages>
 			<page title="Subclass Construction">
 				<text>
@@ -3696,7 +3696,7 @@ false
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Interfaces</title>
-		<description>yayayayaya! you get to use those interfaces!</description>
+		<description>Interfaces are ways to ensure classes have the same methods implemented across all of them</description>
 		<pages>
 			<page title="Interfaces for Algorithm Reuse">
 				<text>
@@ -3959,7 +3959,7 @@ System.out.println(data.getAverage());
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/comments.png</image>
 		<title>Standard Java Library</title>
-		<description>Learn some helpful tricks</description>
+		<description>Java is very extensive, and its extensive library can provide what is needed to show you how to improve coding</description>
 		<pages>
 			<page title="String Class">
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/8.png</image>
