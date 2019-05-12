@@ -76,12 +76,14 @@ public class IntelligentTutor {
         if (quizzesModel.hasQuiz(chapter.getTitle())) {
             hasTakenQuiz = student.hasTakenQuiz(student.getRecentChapter());
         } else {
+            //if it doesn't exist
             hasTakenQuiz = true; //default to true
         }
         //if there exists a test
         if (testsModel.hasTest(chapter.getTitle())) {
             hasTakenTest = student.hasTakenTest(student.getRecentChapter());
         } else {
+            //if it doesn't exist
             hasTakenTest = true; //default to true
         }
 
@@ -136,7 +138,7 @@ public class IntelligentTutor {
                 addText("for this chapter! ");
             }
 
-            //only suggest the user to continue learning if we're not 100% done with everything
+            //only suggest the user to continue learning Java from Magis if we're not 100% done with everything ever
             if (StatsPage.calculateOverallProgress() < 100) {
                 /*
                 Find the next chapter to suggest the user to pick up with
