@@ -171,6 +171,96 @@ Fill in the blanks</statement>
                     <answer id = "correct">catch</answer>
                     <answer id = "correct">Exception</answer>
                 </question>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//For an Arithmetic exception
+###{
+    //Code
+}
+###(### e){
+    //Code
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">try;</answer>
+                    <answer id = "correct">catch</answer>
+                    <answer id = "correct">ArithmeticException</answer>
+                </question>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//For a NullPointer exception
+###{
+    //Code
+}
+###(### e){
+    //Code
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">try;</answer>
+                    <answer id = "correct">catch</answer>
+                    <answer id = "correct">NullPointerException</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Random
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">util</answer>
+                    <answer id = "correct">Random;</answer>
+                </question>
+                                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Math
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">lang</answer>
+                    <answer id = "correct">Math;</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for PrintStream
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">io</answer>
+                    <answer id = "correct">PrintStream;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Socket
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">net</answer>
+                    <answer id = "correct">Socket;</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Scanner
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">util</answer>
+                    <answer id = "correct">Scanner;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Implement the sqrt method. Assume there are no imports
+//Value to be rooted
+double num = 25.0;
+double root = ###```
+Fill in the blanks</statement>
+                    <answer id = "correct">java.lang.Math.sqrt(num);</answer>
+                </question>
             </questions>
         </chapter>
 </tests>
