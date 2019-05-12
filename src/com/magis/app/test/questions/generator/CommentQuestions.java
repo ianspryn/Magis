@@ -9,7 +9,7 @@ public class CommentQuestions extends QuestionGenerator{
     private String[] commentQuestions = {
             "```This is a comment```",
             "```This is\nA comment```",
-            "```@Author: Student\nClass: COMP 101\nDescription: ---```",
+            "```@Author: Student\n@Param: numItems\nDescription: ---```",
             "```@Param: Number, number to be summed```",
             "```@Return: Sum, sum of all the numbers added together```",
             "```This code will do [x]```",

@@ -96,6 +96,6 @@ public class StandardJavaLibraryQuestions extends QuestionGenerator{
 
     @Override
     public int getNumUnique() {
-        return 0;
+        return manipulativeStrings.length + 101 + (11*3);
     }
 }
