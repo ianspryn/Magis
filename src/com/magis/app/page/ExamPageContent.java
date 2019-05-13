@@ -575,12 +575,11 @@ public abstract class ExamPageContent extends PageContent {
                     }
                     break;
                 case "DELETE":
+//                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
                     //ignore extra whitespace
-                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
-                    if (Pattern.matches((" +"), diffPart.text)) continue;
+                    if (Pattern.matches((" {2,}"), diffPart.text)) continue;
                     text.setText(" ");
-                    textFlow.setStyle("-fx-background-color: #80DEEA"); //Cyan 200
-                    text.setStyle("-fx-fill: #00B8D4"); //Cyan A700
+                    textFlow.setStyle("-fx-background-color: #18FFFF"); //Cyan A200
                     break;
             }
         }
