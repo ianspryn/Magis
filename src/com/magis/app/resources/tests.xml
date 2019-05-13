@@ -20,11 +20,12 @@ STRUCTURE:
         <chapter id = "Operators">
                 <questions>
                         <question>
+                                <level>2</level>
                                 <statement>How is 0 different from "0"?</statement>
-                                <answer id = "correct"> "0" is a string, 0 is an int</answer>
-                                <answer>"0" is an int, 0 is a string</answer>
+                                <answer>0 is a string, "0" is an int</answer>
+                                <answer id = "correct">0 is an int, "0" is a string</answer>
                                 <answer>There is no difference</answer>
-                                <answer>"0" is a double, 0 is a int</answer>
+                                <answer>0 is a double, "0" is a int</answer>
                         </question>
                         <question>
                                 <level>3</level>
