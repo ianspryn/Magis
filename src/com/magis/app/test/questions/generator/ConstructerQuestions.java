@@ -66,7 +66,11 @@ public class ConstructerQuestions extends QuestionGenerator{
     }
 
     public void generateConstructerQuestion(){
-        answers = cAnswers;
+        answers.clear();
+        for(int i = 0; i<4; i++){
+            answers.add(cAnswers.get(i));
+        }
+
         ArrayList<String> four = new ArrayList();
         for (int i = 0; i < 4; i++) {
             String answer = "";
@@ -99,7 +103,10 @@ public class ConstructerQuestions extends QuestionGenerator{
     }
 
     public void generateContentQuestion(){
-        answers = eAnswers;
+        answers.clear();
+        for(int i = 0; i<4; i++){
+            answers.add(eAnswers.get(i));
+        }
 
         int random = rand.nextInt(4);
         String firstPart =  equalsStrings[random];
@@ -110,7 +117,11 @@ public class ConstructerQuestions extends QuestionGenerator{
 
     }
     public void generateSecondContructerQuestions(){
-        answers = sAnswers;
+        answers.clear();
+        for(int i = 0; i<4; i++){
+            answers.add(sAnswers.get(i));
+        }
+
         int random = rand.nextInt(4);
         String firstPart =  secondStrings[random];
 
@@ -138,10 +149,10 @@ public class ConstructerQuestions extends QuestionGenerator{
         question += "public class "+boatClass+ " extends "+classes[2]+" {...}\n";
         question += "public class "+planeClass+ " extends "+classes[3]+" {...}```\n";
 
-        int isAHasA = rand.nextInt();
+        int isAHasA = rand.nextInt(2);
 
         if(isAHasA == 0){
-            int trueOrFalse = rand.nextInt();
+            int trueOrFalse = rand.nextInt(2);
             if(trueOrFalse == 0){
                 correctAnswer = answers.get(0);
                 int mainOrSub = rand.nextInt();
@@ -203,7 +214,7 @@ public class ConstructerQuestions extends QuestionGenerator{
             }
         }
         else{
-            int trueOrFalse = rand.nextInt();
+            int trueOrFalse = rand.nextInt(2);
             if(trueOrFalse == 0){
                 correctAnswer = answers.get(0);
                 int mainOrSub = rand.nextInt();
@@ -306,14 +317,14 @@ public class ConstructerQuestions extends QuestionGenerator{
             correctAnswer = answers.get(2);
         }
         else if(thisOrSuper == 3){
-            question+=question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
+            question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed2+ ";" +
                     "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+super.minimumSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(3);
         }
         else{
             int maxSpeed3 = rand.nextInt(10)+maxSpeed1+maxSpeed2;
-            question+=question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed3+ ";" +
+            question += "public class Car extends Vehicle {\n\tint maxSpeed = " +maxSpeed3+ ";" +
                     "\n\n\tpublic void display(){\n\t\tSystem.out.println(\"Max Speed: \"+this.maxSpeed);\n\t}\n}```";
 
             correctAnswer = answers.get(4);
