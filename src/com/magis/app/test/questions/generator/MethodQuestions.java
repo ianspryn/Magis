@@ -30,6 +30,7 @@ public class MethodQuestions extends QuestionGenerator{
     }
 
     public void getReturnType(){
+        answers.clear();
         int dataType = rand.nextInt(dataTypes.length);
         answers.add("int");
         answers.add("double");
