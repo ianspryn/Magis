@@ -1062,39 +1062,32 @@ for (int i = 0; i &lt; myArray.length; i++) {
                         <question>
                                 <statement>A java package is a ___</statement>
                                 <answer id ="correct">set of related classes</answer>
+                                <answer>default set of classes included in every project</answer>
+                                <answer>fancy name for a method</answer>
+                                <answer>class containing multiple methods</answer>
                         </question>
                         <question>
                                 <statement>To put a class into a package you must ____ as the first instruction in the source file</statement>
                                 <answer id ="correct">place a line 
 ```package packageName;```</answer>
+                            <answer>import a package reader</answer>
+                            <answer>place a line
+```Scanner scan = new Scanner(packageName)</answer>
+                            <answer>call all its methods</answer>
                         </question>
                         <question>
-                                <statement>A package name consists of one or more identifiers seperated by ___</statement>
+                                <statement>A package name consists of one or more identifiers separated by ___</statement>
                                 <answer id ="correct">periods</answer>
+                                <answer>Pound signs</answer>
+                                <answer>Method names</answer>
+                                <answer>Class names</answer>
                         </question>
                         <question>
                                 <statement>How do you use a class from a package?</statement>
                                 <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
-                        </question>
-                        <question>
-                                <statement>An important reason for packages is to help to avoid ___</statement>
-                                <answer id = "correct">Name clashes</answer>
-                        </question>
-                        <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
-                        </question>
-                        <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
-                        </question>
-                        <question>
-                                <statement></statement>
-                                <answer id = "correct"></answer>
-                        </question>
-                        <question>
-                                <statement>How do you use a class from a package?</statement>
-                                <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
+                                <answer>simply refer to its class name</answer>
+                                <answer>just call it's methods by names</answer>
+                                <answer>You cannot use a class from a package</answer>
                         </question>
                 </questions>
         </chapter>
