@@ -1232,6 +1232,9 @@ Scanner in = new Scanner(read(inFile));</answer>
                         <question>
                                 <statement>What should you make sure to do after you finish with a PrintWriter.</statement> 
                                 <answer id = "correct">Close it</answer>
+                                <answer>Scan it</answer>
+                                <answer>Delete it</answer>
+                                <answer>End the program</answer>
                         </question>
                         <question>
                                 <statement>What should you make sure to do after you finish with a PrintWriter?</statement> 
@@ -1303,11 +1306,11 @@ while (line) { i++; }```</answer>
                                 <statement>Which of the following Scanners will correctly read a file one character at a time?</statement>
                                 <answer id ="correct">Scanner in = new Scanner(. . .);
 in.useDelimiter("");</answer>
-                                <answer id ="correct">Scanner in = new Scanner(. . .);
+                                <answer>Scanner in = new Scanner(. . .);
 in.useDelimiter(" ");</answer>
-                                <answer id ="correct">Scanner in = new Scanner(. . .);
+                                <answer>Scanner in = new Scanner(. . .);
 in.useDelimiter(char);</answer>
-                                <answer id ="correct">Scanner in = new Scanner(. . .);
+                                <answer>Scanner in = new Scanner(. . .);
 in.useDelimiter(Character);</answer>
                         </question>
                 </questions>
