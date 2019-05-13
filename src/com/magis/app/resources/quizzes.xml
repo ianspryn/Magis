@@ -27,10 +27,10 @@ any written-statement question MUST contain a <written>true</written> tag AND ev
                         <question>
                                 <level>1</level>
                                 <statement>How is 0 different from "0"?</statement>
-                                <answer id = "correct"> "0" is a string, 0 is an int</answer>
-                                <answer>"0" is an int, 0 is a string</answer>
+                                <answer>0 is a string, "0" is an int</answer>
+                                <answer id = "correct">0 is an int, "0" is a string</answer>
                                 <answer>There is no difference</answer>
-                                <answer>"0" is a double, 0 is a int</answer>
+                                <answer>0 is a double, "0" is a int</answer>
                         </question>
                         <question>
                                 <level>2</level>
@@ -577,7 +577,7 @@ the value of the integer cats\\```</statement>
                         </question>
                         <question>
                                 <level>1</level>
-                                <statement>What symbols the start of a documentation </statement>
+                                <statement>What symbols the start of a documentation?</statement>
                                 <answer>/*</answer>
                                 <answer>*/</answer>
                                 <answer>**/</answer>
@@ -608,7 +608,7 @@ the value of the integer cats\\```</statement>
                         <question>
                             <level>2</level>
                             <written>true</written>
-                            <statement>``` ###This comment is a comment ```
+                            <statement>```###This comment is a comment```
 
 Fill in the blanks to make a comment</statement>
                             <answer id = "correct">//</answer>
@@ -616,8 +616,8 @@ Fill in the blanks to make a comment</statement>
                         <question>
                             <level>2</level>
                             <written>true</written>
-                            <statement>``` ###This comment is a comment
-and it is big### ```
+                            <statement>```###This comment is a comment
+and it is big###```
 
 Fill in the blanks to make a comment</statement>
                             <answer id = "correct">/*</answer>
@@ -626,12 +626,14 @@ Fill in the blanks to make a comment</statement>
                         <question>
                             <level>2</level>
                             <written>true</written>
-                            <statement>``` ### Author: You
-Param: Num, a number
-Return Sum, the sum of two numbers
-###```
-
-Fill in the blanks to make a comment</statement>
+                            <statement>```
+###
+Author: You
+@Param: Num, a number
+@Return Sum, the sum of two numbers
+###
+```
+Fill in the blanks to make a proper comment type</statement>
                             <answer id = "correct">/**</answer>
                             <answer id = "correct">*/</answer>
                         </question>

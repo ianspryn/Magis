@@ -297,7 +297,7 @@ public class UIComponents {
 
 
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-white-small.png");
+        ImageView magisLogo = new ImageView("com/magis/app/resources/magis-white-small.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 
@@ -343,7 +343,7 @@ public class UIComponents {
 
 
         //Magis logo
-        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-color-small.png");
+        ImageView magisLogo = new ImageView("com/magis/app/resources/magis-color-small.png");
         magisLogo.setPreserveRatio(true);
         magisLogo.setFitWidth(175);
 

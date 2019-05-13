@@ -60,7 +60,7 @@ public class Login {
         rectangle.setWidth(450);
         rectangle.setFill(Color.valueOf("#ddd")); //#ededed
 
-        magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-color-small.png");
+        magisLogo = new ImageView("com/magis/app/resources/magis-color-small.png");
         magisLogo.getStyleClass().addAll("drop-shadow");
 
         loginGridPane = new GridPane();

@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Grader {
 
@@ -141,8 +142,8 @@ public class Grader {
                         STUDENT: int[] myVar asdf = new int[5];
                         The student would still be deducted for the extra "asdf"
                          */
-                        //grade off-by-one-character less harshly
-                        if (diff1.text.length() == 1) {
+                        //grade off-by-one-characters (that are in the alphabet) less harshly
+                        if (diff1.text.length() == 1 && Pattern.matches("[a-zA-z]", diff1.text)) {
                             badPart += 1.0 / (numParts * 2.0);
                         } else {
                             badPart += Math.max(1, diff1.text.split(regex).length);
@@ -150,10 +151,10 @@ public class Grader {
                         break;
                     case "DELETE":
                         /*
-                        grade off-by-one-character less harshly AS LONG AS it's not a space
+                        grade off-by-one-character less harshly AS LONG AS it's an alphabet character
                         because the student might have done newint[]; or something
                          */
-                        if (diff1.text.length() == 1 && !diff1.text.equals(" ")) {
+                        if (diff1.text.length() == 1 && Pattern.matches("[a-zA-z]", diff1.text)) {
                             badPart += 1.0 / (numParts * 2.0);
                         } else {
                             badPart += Math.max(1, diff1.text.split(regex).length);
