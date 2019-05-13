@@ -3168,15 +3168,8 @@ You often need to locate the position of an element so that you can replace or r
 ```
 int pos = 0;
 boolean found = false;
-<<<<<<< HEAD
-while (pos &lt; values.size() &amp;&amp; !found)
-{
-	if (values.get(pos) > 100)
-	{
-=======
 while (pos &lt; values.size() &amp;&amp; !found) {
 	if (values.get(pos) > 100) {
->>>>>>> master
 		found = true;
 	}
 	else {
