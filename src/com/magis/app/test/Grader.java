@@ -125,8 +125,11 @@ public class Grader {
                          */
 //                        if (i > 0 && diff.get(i - 1).operation.toString().equals("DELETE")) continue;
                         //grade off-by-one-character less harshly
-                        if (diff.get(i).text.length() == 1) badPart += 1.0 / (numParts * 2);
-                        badPart += Math.max(1, diff1.text.split(regex).length);
+                        if (diff.get(i).text.length() == 1) {
+                            badPart += 1.0 / (numParts * 2);
+                        } else {
+                            badPart += Math.max(1, diff1.text.split(regex).length);
+                        }
                         break;
                     case "DELETE":
                         //grade off-by-one-character less harshly
