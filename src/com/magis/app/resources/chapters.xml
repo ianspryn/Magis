@@ -3168,8 +3168,15 @@ You often need to locate the position of an element so that you can replace or r
 ```
 int pos = 0;
 boolean found = false;
+<<<<<<< HEAD
+while (pos &lt; values.size() &amp;&amp; !found)
+{
+	if (values.get(pos) > 100)
+	{
+=======
 while (pos &lt; values.size() &amp;&amp; !found) {
 	if (values.get(pos) > 100) {
+>>>>>>> master
 		found = true;
 	}
 	else {
@@ -3959,7 +3966,7 @@ System.out.println(data.getAverage());
 	<chapter>
 		<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Homepage/standard-java-library.png</image>
 		<title>Standard Java Library</title>
-		<description>Java has a very extensive library, a library that can provide many unique tools for use in coding</description>
+		<description>Java is very extensive, and its extensive library can provide what is needed to show you how to improve coding</description>
 		<pages>
 			<page title="String Class">
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Standard%20Java%20Library/8.png</image>
