@@ -23,7 +23,7 @@ If <level> or <written> are not provided, they will default to 1 and false, resp
 
 Surround with 3 backtics to format as code
 
-``
+```
 int code = 0;
 ```
 
