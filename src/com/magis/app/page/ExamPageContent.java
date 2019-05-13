@@ -421,9 +421,7 @@ public abstract class ExamPageContent extends PageContent {
             if (examQuestion.isWritten()) {
                 VBox questionBox = writtenQuestionBoxes.get(questionIndex);
                 for (int answerIndex = 0; answerIndex < examQuestion.getNumCorrectAnswers(); answerIndex++) {
-                    HBox answerContainer = new HBox();
-                    answerContainer.setMaxHeight(TextFlow.USE_PREF_SIZE);
-                    answerContainer.setMaxWidth(TextFlow.USE_PREF_SIZE);
+                    TextFlow answerContainer = new TextFlow();
                     replaceTextFieldWithNode(questionBox, answerContainer);
 
                    applyDiffing(examQuestion, answerContainer, answerIndex);
@@ -545,7 +543,7 @@ public abstract class ExamPageContent extends PageContent {
         }
     }
 
-    public static void applyDiffing(ExamQuestion examQuestion, HBox answerContainer, int answerIndex) {
+    public static void applyDiffing(ExamQuestion examQuestion, TextFlow answerContainer, int answerIndex) {
         String correctAnswer = examQuestion.getCorrectAnswers().get(answerIndex);
         String studentAnswer = examQuestion.getStudentAnswers().get(answerIndex);
         diff_match_patch dmp = new diff_match_patch();
@@ -575,9 +573,9 @@ public abstract class ExamPageContent extends PageContent {
                     }
                     break;
                 case "DELETE":
-//                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
+                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
                     //ignore extra whitespace
-                    if (Pattern.matches((" {2,}"), diffPart.text)) continue;
+                    if (Pattern.matches((" {2,}]"), diffPart.text)) continue;
                     text.setText(" ");
                     textFlow.setStyle("-fx-background-color: #18FFFF"); //Cyan A200
                     break;

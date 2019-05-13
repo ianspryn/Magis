@@ -198,8 +198,7 @@ Fill in the blanks so that variable c is equal to the next double inputted from 
                     <level>5</level>
                     <written>true</written>
                     <statement>```//Loop that prints out 0 through 10 excluding 10
-int sum = 0;
-###(### i = ###; ### &lt; ###; ###){
+###(### i = ###; ### &lt; ###; ###) {
     ###
 }```
 Fill in the blanks</statement>
@@ -214,8 +213,9 @@ Fill in the blanks</statement>
                 <question>
                     <level>5</level>
                     <written>true</written>
-                    <statement>```//Loop that adds up 1-10 inclusively into variable "sum"
-###(### i = ###; ### &lt;= ###; ###){
+                    <statement>```//Loop that adds up 1 through 10 inclusively into variable "sum"
+int sum = 0;
+###(### i = ###; ### &lt;= ###; ###) {
     sum += ###
 }
 
@@ -233,30 +233,33 @@ Fill in the blanks</statement>
                 <question>
                     <level>5</level>
                     <written>true</written>
-                    <statement>```//Use Scanner sc (already initialized) to ask the user for a num
+                    <statement>```//Load into num the user's first input
+Scanner sc = new Scanner(System.in);
 double num = ###
 
-//Use a loop to ensure that the number inputted is 0 or greater
-###(### ### ###){
+/*
+Use a while loop to keep setting num to user's input. Stop once the user enters
+a number greater than -1
+*/
+### (###) {
     num = ###;
 }```
 Fill in the blanks</statement>
                     <answer id = "correct">sc.nextDouble();</answer>
                     <answer id = "correct">while</answer>
-                    <answer id = "correct">num</answer>
-                    <answer id = "correct">&lt;</answer>
-                    <answer id = "correct">0</answer>
+                    <answer id = "correct">num &lt; 0</answer>
                     <answer id = "correct">sc.nextDouble();</answer>
                 </question>
                 <question>
                     <level>4</level>
                     <written>true</written>
                     <statement>```//Method that accepts the amount in a person's balance and how much they want to deposit and returns the new balance
-public ### deposit(### balance, ### deposit){
+public ### deposit(### balance, ### deposit) {
     balance = balance + ###;
     ###
 }```
-Fill in the blanks</statement>
+Fill in the blanks.
+Do not worry about error checking.</statement>
                     <answer id = "correct">double</answer>
                     <answer id = "correct">double</answer>
                     <answer id = "correct">double</answer>
@@ -266,23 +269,22 @@ Fill in the blanks</statement>
                 <question>
                     <level>5</level>
                     <written>true</written>
-                    <statement>```//This method will do a factorial formula and return it
-public ### getFactorial(### num){
-    int factorial = 1;
-    ###(int i = ###; i &gt; ###; ###){
-        factorial *= ###;
+                    <statement>```//This method will perform a factorial formula and return it
+public ### getFactorial(int num) {
+    int factorialTotal = 1;
+    ###(int i = ###; i &gt; ###; ###) {
+        factorialTotal *= ###;
     }
-    ###
+    return ###
 }```
 Fill in the blanks</statement>
-                    <answer id = "correct">int</answer>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">for</answer>
                     <answer id = "correct">num</answer>
                     <answer id = "correct">0</answer>
                     <answer id = "correct">i--</answer>
                     <answer id = "correct">i</answer>
-                    <answer id = "correct">return factorial;</answer>
+                    <answer id = "correct">factorialTotal;</answer>
                 </question>
             </questions>
         </chapter>
@@ -292,7 +294,7 @@ Fill in the blanks</statement>
                     <level>5</level>
                     <written>true</written>
                     <statement>```//Create a new interface
-public ### myInterface(){
+public ### myInterface() {
     //All implements of interface should include void method to display the values in the class
     public ### display()###
 
@@ -320,12 +322,12 @@ Fill in the blanks</statement>
 //Class that inherits from MyClass
 public class SecondClass ### {
     //Constructor that will get the variables from its super class
-    public SecondClass(){
+    public SecondClass() {
         ###
     }
 
     //Setter for num
-    public ### setNum(### num){
+    public ### setNum(### num) {
         ### = ###
     }
 }```
@@ -353,22 +355,22 @@ Fill in the blanks</statement>
 //Class that inherits from MyClass
 public class SecondClass ### {
     //Constructor that will get the variables from its super class
-    public SecondClass(){
+    public SecondClass() {
         ###
     }
 
     //Setter for num1
-    public ### setNum1(### num1){
+    public ### setNum1(### num1) {
         ### = ###
     }
 
     //Setter for num2
-    public ### setNum2(### num2){
+    public ### setNum2(### num2) {
         ### = ###
     }
 
     //Get Sum for num1 and num2 and return it
-    public ### getSum(){
+    public ### getSum() {
         int sum = ### + ###;
         ###
     }
@@ -401,7 +403,7 @@ Fill in the blanks</statement>
 ###{
     //Code
 }
-###(### e){
+###(### e) {
     //Code
 }```
 Fill in the blanks</statement>
@@ -416,7 +418,7 @@ Fill in the blanks</statement>
 ###{
     //Code
 }
-###(### e){
+###(### e) {
     //Code
 }```
 Fill in the blanks</statement>
@@ -431,7 +433,7 @@ Fill in the blanks</statement>
 ###{
     //Code
 }
-###(### e){
+###(### e) {
     //Code
 }```
 Fill in the blanks</statement>
