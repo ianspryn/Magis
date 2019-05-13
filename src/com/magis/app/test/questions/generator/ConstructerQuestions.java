@@ -62,7 +62,7 @@ public class ConstructerQuestions extends QuestionGenerator{
 
     @Override
     public int getNumUnique() {
-        return equalsAnswers.length + secondAnswers.length + comparableStringAnswers.length;
+        return equalsAnswers.length + secondAnswers.length + comparableStringAnswers.length + 4 + 4 + 4 + 4 + (4*4);
     }
 
     public void generateConstructerQuestion(){
