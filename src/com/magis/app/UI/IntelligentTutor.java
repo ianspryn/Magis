@@ -322,7 +322,7 @@ public class IntelligentTutor {
              /*
             Find which quiz they did the worst on (as long as it's below the minimum test score threshold defined in Configure.java)
              */
-            if (student.hasTakenQuiz(i) && student.getTest(i).getBestScore() < Configure.MINIMUM_QUIZ_SCORE) {
+            if (student.hasTakenQuiz(i) && student.getQuiz(i).getBestScore() < Configure.MINIMUM_QUIZ_SCORE) {
                 double score = student.getQuiz(i).getBestScore() / 100.0;
                 if ((1 - score) * 2 > worstTestScore) {
                     worstQuizScore = (1 - score) * 2;

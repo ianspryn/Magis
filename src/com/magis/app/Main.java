@@ -48,7 +48,7 @@ public class Main extends Application {
             closeProgram();
         });
 
-        primaryStage.getIcons().add(new Image("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-color-tiny-small.png"));
+        primaryStage.getIcons().add(new Image("com/magis/app/resources/magis-color-tiny-small.png"));
 
         scene = new Scene(new BorderPane(), width, height);
         window.setScene(scene);
