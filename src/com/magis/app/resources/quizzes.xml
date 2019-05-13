@@ -19,6 +19,19 @@ STRUCTURE:
 
 NOTES:
 any written-statement question MUST contain a <written>true</written> tag AND every answer must contain [id = "correct"].
+If <level> or <written> are not provided, they will default to 1 and false, respectively.
+
+Surround with 3 backtics to format as code
+
+``
+int code = 0;
+```
+
+Insert 3 pound signs to represent a fill-in-the-blank
+
+if(###) {
+
+}
 
 -->
 <quizzes>
