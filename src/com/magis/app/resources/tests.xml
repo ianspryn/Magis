@@ -162,6 +162,7 @@ Fill in the blanks so that variable c is equal to the next double inputted from 
                     <level>5</level>
                     <written>true</written>
                     <statement>```//Loop that prints out 0 through 10 excluding 10
+int sum = 0;
 ###(### i = ###; ### &lt; ###; ###){
     ###
 }```
