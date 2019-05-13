@@ -127,7 +127,7 @@ How would you make new lines at requested?</statement>
                     <written>true</written>
                     <statement>```Scanner sc = ###
 String s = sc.###```
-Fill in the blanks</statement>
+Fill in the blanks so that variable c is equal to the next line inputted from the user.</statement>
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextLine();</answer>
                 </question>
@@ -136,7 +136,7 @@ Fill in the blanks</statement>
                     <written>true</written>
                     <statement>```Scanner sc = ###
 char c = sc.###```
-Fill in the blanks</statement>
+Fill in the blanks so that variable c is equal to the next character inputted from the user.</statement>
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">next();</answer>
                 </question>
@@ -145,7 +145,7 @@ Fill in the blanks</statement>
                     <written>true</written>
                     <statement>```Scanner sc = ###
 int num = sc.###```
-Fill in the blanks</statement>
+Fill in the blanks so that variable c is equal to the next integer inputted from the user.</statement>
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextInt();</answer>
                 </question>
@@ -154,7 +154,7 @@ Fill in the blanks</statement>
                     <written>true</written>
                     <statement>```Scanner sc = ###
 double num = sc.###```
-Fill in the blanks</statement>
+Fill in the blanks so that variable c is equal to the next double inputted from the user.</statement>
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextDouble();</answer>
                 </question>
