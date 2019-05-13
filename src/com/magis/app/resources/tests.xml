@@ -5,6 +5,8 @@ STRUCTURE:
 	<chapter id = "Chapter Name">
 		<questions>
                         <question>
+                                <level>{1, 2, 3, ... n}</level>
+                                <written>{true, false}</written>
                                 <statement></statement>
                                 <answer id = "correct"></answer>
                                 <answer></answer>
@@ -14,6 +16,10 @@ STRUCTURE:
                 </questions>
 	</chapter>
 </tests>
+
+NOTES:
+any written-statement question MUST contain a <written>true</written> tag AND every answer must contain [id = "correct"].
+if <level> or <written> are not provided, they will default to 1 and false, respectively.
 
 -->
 <tests>
@@ -233,9 +239,9 @@ Fill in the blanks</statement>
                 <question>
                     <level>5</level>
                     <written>true</written>
-                    <statement>```//Load into num the user's first input
+                    <statement>```
 Scanner sc = new Scanner(System.in);
-double num = ###
+double num = -1
 
 /*
 Use a while loop to keep setting num to user's input. Stop once the user enters
@@ -244,8 +250,8 @@ a number greater than -1
 ### (###) {
     num = ###;
 }```
-Fill in the blanks</statement>
-                    <answer id = "correct">sc.nextDouble();</answer>
+Fill in the blanks.
+Do not worry about error checking.</statement>
                     <answer id = "correct">while</answer>
                     <answer id = "correct">num &lt; 0</answer>
                     <answer id = "correct">sc.nextDouble();</answer>
@@ -254,17 +260,14 @@ Fill in the blanks</statement>
                     <level>4</level>
                     <written>true</written>
                     <statement>```//Method that accepts the amount in a person's balance and how much they want to deposit and returns the new balance
-public ### deposit(### balance, ### deposit) {
+public ### deposit(double balance, double deposit) {
     balance = balance + ###;
-    ###
+    return ###
 }```
-Fill in the blanks.
-Do not worry about error checking.</statement>
-                    <answer id = "correct">double</answer>
-                    <answer id = "correct">double</answer>
+Fill in the blanks.</statement>
                     <answer id = "correct">double</answer>
                     <answer id = "correct">deposit</answer>
-                    <answer id = "correct">return balance;</answer>
+                    <answer id = "correct">balance;</answer>
                 </question>
                 <question>
                     <level>5</level>

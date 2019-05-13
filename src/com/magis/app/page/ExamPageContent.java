@@ -136,6 +136,7 @@ public abstract class ExamPageContent extends PageContent {
                 toggleGroups.put(questionIndex, toggleGroup);
                 for (String answer : examQuestion.getAnswers()) {
                     JFXRadioButton radioButton = new JFXRadioButton();
+                    radioButton.setMinHeight(JFXRadioButton.BASELINE_OFFSET_SAME_AS_HEIGHT);
                     radioButton.setDisableVisualFocus(true); //fix first radio button on page appear to be highlighted (not selected, just highlighted)
                     radioButton.setId(Integer.toString(questionIndex));
                     radioButton.getStyleClass().addAll("exam-radio-button", "jfx-radio-button");
@@ -155,6 +156,7 @@ public abstract class ExamPageContent extends PageContent {
                 for (String answer : examQuestion.getAnswers()) {
                     JFXCheckBox checkBox = new JFXCheckBox();
                     checkBox.getStyleClass().add("jfx-custom-check-box");
+                    checkBox.setMinHeight(JFXCheckBox.BASELINE_OFFSET_SAME_AS_HEIGHT);
                     checkBox.setDisableVisualFocus(true); //fix first radio button on page appear to be highlighted (not selected, just highlighted)
                     checkBox.setId(Integer.toString(questionIndex));
                     checkBox.getStyleClass().add("exam-checkbox-button");
