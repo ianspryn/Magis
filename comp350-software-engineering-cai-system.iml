@@ -10,7 +10,7 @@
     <content url="file://$MODULE_DIR$/../magis-resources">
       <sourceFolder url="file://$MODULE_DIR$/../magis-resources" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="12 (2)" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="module-library">
