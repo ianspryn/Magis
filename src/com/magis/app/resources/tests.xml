@@ -167,7 +167,7 @@ Fill in the blanks so that variable c is equal to the next line inputted from th
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextLine();</answer>
                 </question>
-                                <question>
+                <question>
                     <level>3</level>
                     <written>true</written>
                     <statement>```Scanner sc = ###
@@ -176,7 +176,7 @@ Fill in the blanks so that variable c is equal to the next character inputted fr
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">next();</answer>
                 </question>
-                                <question>
+                <question>
                     <level>3</level>
                     <written>true</written>
                     <statement>```Scanner sc = ###
@@ -229,7 +229,7 @@ Fill in the blanks</statement>
                     <answer id = "correct">i;</answer>
                     <answer id = "correct">55</answer>
                 </question>
-                                <question>
+                <question>
                     <level>5</level>
                     <written>true</written>
                     <statement>```//Use Scanner sc (already initialized) to ask the user for a num
@@ -377,11 +377,13 @@ Fill in the blanks</statement>
                     <answer id = "correct">extends MyClass</answer>
                     <answer id = "correct">super();</answer>
                     <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
                     <answer id = "correct">this.num1</answer>
                     <answer id = "correct">num1;</answer>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">this.num2</answer>
                     <answer id = "correct">num2;</answer>
+                    <answer id = "correct">int</answer>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">num1</answer>
                     <answer id = "correct">num2</answer>
