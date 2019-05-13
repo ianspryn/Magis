@@ -6,9 +6,10 @@ import com.magis.app.UI.RingProgressIndicator;
 import com.magis.app.UI.IntelligentTutor;
 import com.magis.app.UI.UIComponents;
 import com.magis.app.icons.MaterialIcons;
+import com.magis.app.login.Login;
 import com.magis.app.models.StudentModel;
 import com.magis.app.page.LessonPage;
-import com.magis.app.settings.SettingsPage;
+import com.magis.app.UI.SettingsPage;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -41,7 +42,9 @@ public class HomePage {
     private static HBox topBox;
     private static VBox statsBox;
     private static HBox recentBox;
+    private HBox bottomBox;
     private HBox settingsBox;
+    private HBox signOutBox;
     private VBox masterVbox;
     private VBox vBox;
     private StudentModel.Student student;
@@ -54,6 +57,8 @@ public class HomePage {
         else update();
         return homePage;
     }
+
+    public static void clearHomePage() { homePage = null; }
 
     private static void update() {
         int numChapters = Main.lessonModel.getNumChapters();
@@ -82,7 +87,7 @@ public class HomePage {
         UIComponents.fadeOnAndTranslate(greetingLabel, 0, 0.2, 0, 0, -10, 0);
         if (student.getRecentChapter() > -1) UIComponents.fadeOnAndTranslate(topBox, 0, 0.2, 0, 0, -10, 0);
         for (HBox chapterBox : chapterBoxes) UIComponents.fadeOnAndTranslate(chapterBox, 0, 0.2, 0, 0, -10, 0);
-        UIComponents.fadeOnAndTranslate(settingsBox, 0,0.2,0,0,-10,0);
+        UIComponents.fadeOnAndTranslate(bottomBox, 0,0.2,0,0,-10,0);
     }
 
     private void animate() {
@@ -91,7 +96,7 @@ public class HomePage {
         UIComponents.fadeOnAndTranslate(greetingLabel, 0.3, 0.2, 0, 0, -10, 0);
         if (student.getRecentChapter() > -1) UIComponents.fadeOnAndTranslate(topBox, 0.3, 0.2, 0, 0, -10, 0);
         for (int i = 0; i < chapterBoxes.size(); i++) UIComponents.fadeOnAndTranslate(chapterBoxes.get(i), i, 0.5, 0.2, 0, 0, -10, 0);
-        UIComponents.fadeOnAndTranslate(settingsBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
+        UIComponents.fadeOnAndTranslate(bottomBox, chapterBoxes.size(), 0.5,0.2,0,0,-10,0);
     }
 
     private HomePage() {
@@ -129,10 +134,10 @@ public class HomePage {
 
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
 
         if (student.getRecentChapter() > -1) {
             recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
-            recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
         }
 
         //Activity and Statistics Page
@@ -183,19 +188,23 @@ public class HomePage {
             buildChapterBox(i, chapterBoxes.get(i));
         }
 
+        /*
+        Bottom box
+         */
+        bottomBox = new HBox();
+        bottomBox.setSpacing(25);
+        bottomBox.setAlignment(Pos.CENTER);
+
          /*
         Settings box
          */
         settingsBox = new HBox();
-        settingsBox.getStyleClass().add("settings-box");
+        settingsBox.getStyleClass().add("small-box");
         settingsBox.setMaxWidth(250);
         settingsBox.setMinHeight(75);
         settingsBox.setAlignment(Pos.CENTER_LEFT);
 
         settingsBox.setOnMouseClicked(e -> goToSettings(masterVbox));
-        settingsBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        settingsBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-
         settingsBox.setOnMouseEntered(e -> {
             Main.scene.setCursor(Cursor.HAND);
             UIComponents.scale(settingsBox, 0.1,1.02,1.02);
@@ -210,26 +219,74 @@ public class HomePage {
         settingsIconContainer.setPadding(new Insets(7,12,0,20));
 
         SVGPath settingsIcon = new SVGPath();
-        settingsIcon.getStyleClass().add("settings-icon");
-        settingsIcon.setContent(MaterialIcons.settings);
+        settingsIcon.getStyleClass().add("icon-no-color");
+        settingsIcon.setContent(MaterialIcons.SETTINGS);
         // scale to size 350x350
-        Bounds bounds = settingsIcon.getBoundsInLocal();
-        double scaleFactor = 50 / Math.max(bounds.getWidth(), bounds.getHeight());
-        settingsIcon.setScaleX(scaleFactor);
-        settingsIcon.setScaleY(scaleFactor);
+        Bounds settingsBounds = settingsIcon.getBoundsInLocal();
+        double settingsScaleFactor = 50 / Math.max(settingsBounds.getWidth(), settingsBounds.getHeight());
+        settingsIcon.setScaleX(settingsScaleFactor);
+        settingsIcon.setScaleY(settingsScaleFactor);
 
         settingsIconContainer.getChildren().add(settingsIcon);
 
         //Text description
-        Label description = new Label("Settings");
-        description.setPrefWidth(350);
-        description.setWrapText(true);
-        description.getStyleClass().add("settings-text");
-        description.setTextAlignment(TextAlignment.CENTER);
+        Label settingsDescription = new Label("Settings");
+        settingsDescription.setPrefWidth(350);
+        settingsDescription.setWrapText(true);
+        settingsDescription.getStyleClass().add("bottom-home-text");
+        settingsDescription.setTextAlignment(TextAlignment.CENTER);
 
-        settingsBox.getChildren().addAll(settingsIconContainer, description);
+        settingsBox.getChildren().addAll(settingsIconContainer, settingsDescription);
 
-        vBox.getChildren().add(settingsBox);
+         /*
+        Sign out box
+         */
+        signOutBox = new HBox();
+        signOutBox.getStyleClass().add("small-box");
+        signOutBox.setMaxWidth(250);
+        signOutBox.setMinHeight(75);
+        signOutBox.setAlignment(Pos.CENTER);
+
+        signOutBox.setOnMouseClicked(e -> signOut(masterVbox));
+        signOutBox.setOnMouseEntered(e -> {
+            Main.scene.setCursor(Cursor.HAND);
+            UIComponents.scale(signOutBox, 0.1,1.02,1.02);
+        });
+        signOutBox.setOnMouseExited(e -> {
+            Main.scene.setCursor(Cursor.DEFAULT);
+            UIComponents.scale(signOutBox,0.1, 1,1);
+        });
+
+        //Left image
+        HBox signOutContainer = new HBox();
+        signOutContainer.setPadding(new Insets(7,12,0,20));
+
+        SVGPath personIcon = new SVGPath();
+        personIcon.getStyleClass().add("icon-no-color");
+        personIcon.setContent(MaterialIcons.PERSON);
+        // scale to size 350x350
+        Bounds signOutBounds = personIcon.getBoundsInLocal();
+        double signOutScaleFactor = 40 / Math.max(signOutBounds.getWidth(), signOutBounds.getHeight());
+        personIcon.setScaleX(signOutScaleFactor);
+        personIcon.setScaleY(signOutScaleFactor);
+
+        signOutContainer.getChildren().add(personIcon);
+
+        //Text description
+        Label signOutDescription = new Label("Sign out");
+        signOutDescription.setPrefWidth(350);
+        signOutDescription.setWrapText(true);
+        signOutDescription.getStyleClass().add("bottom-home-text");
+        signOutDescription.setTextAlignment(TextAlignment.CENTER);
+
+        signOutBox.getChildren().addAll(signOutContainer, signOutDescription);
+
+        /*
+        Add to the bottom box
+         */
+        bottomBox.getChildren().addAll(settingsBox, signOutBox);
+
+        vBox.getChildren().add(bottomBox);
 
         masterVbox.getChildren().add(vBox);
 
@@ -389,5 +446,32 @@ public class HomePage {
         } else {
             getInstance().Page();
         }
+    }
+
+    /**
+     * Sign out of the app
+     * @param node the node to transition and fade out before go to the sign in page
+     */
+    private void signOut(Node node) {
+
+        if (Main.useAnimations) {
+            transitionPage(node).setOnFinished(e -> Login.Page());
+        } else {
+            Login.Page();
+        }
+        /*
+        Reset stuff
+         */
+        //Since it's an instance, we need to remove it
+        HomePage.clearHomePage();
+        //Delete student from the class
+        Main.studentModel.removeStudent();
+        Main.studentModel = new StudentModel(Main.lessonModel);
+        //remove the student's custom styling
+        Main.scene.getStylesheets().removeAll();
+        //default to light, with pink
+        Main.scene.getStylesheets().addAll("com/magis/app/css/style.css", "com/magis/app/css/lightmode.css", "com/magis/app/css/pink.css");
+        Main.isLoggedIn = false;
+        Main.useAnimations = true;
     }
 }

@@ -47,10 +47,10 @@ public class ControlStatementQuestions extends QuestionGenerator{
         int subtractor = rand.nextInt(10)+1;
         int product = rand.nextInt(10);
 
-        question = "int num = "+num+";\n\n";
+        question = "```int num = "+num+";\n\n";
         question += "if (num == "+num2+") {\n\tnum = num + "+adder+";\n}";
         question += "else if (num == "+num3+") {\n\tnum = num - "+subtractor+";\n}";
-        question += "else {\n\tnum = num * "+product+";\n}";
+        question += "else {\n\tnum = num * "+product+";\n}```";
 
         if(num == num2){
             finalNum = num + adder;
@@ -74,7 +74,7 @@ public class ControlStatementQuestions extends QuestionGenerator{
             answers.add(correctAnswer);
         }
 
-        question+="\n\nWhat is the final result of \"num\"?";
+        question+="\nWhat is the final result of \"num\"?";
     }
 
     public void whileLoopQuestions(){
@@ -84,8 +84,8 @@ public class ControlStatementQuestions extends QuestionGenerator{
         int num = startingNum;
         int controller = rand.nextInt(10)+1;
 
-        question = "int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\t"+num+"--;\n}";
-        question += "\n\nHow many times will this while loop iterate?";
+        question = "```int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\tnum--;\n}```";
+        question += "\nHow many times will this while loop iterate?";
 
         int j = 0;
         while(num > controller){
@@ -114,10 +114,10 @@ public class ControlStatementQuestions extends QuestionGenerator{
     public void forLoopQuestion(){
         answers.clear();
 
-        int num = rand.nextInt(6);
+        int num = rand.nextInt(5)+5;
 
-        question = "int num = "+num+";\nint product = 0;\n\n";
-        question += "for (int i = num; i > 0; i--) {\n\tproduct *= i\n}\n\n";
+        question = "```int num = "+num+";\nint product = 0;\n\n";
+        question += "for (int i = num; i > 0; i--) {\n\tproduct *= i\n}```\n";
         question += "What is the final value of \"product\"?";
 
         int falseProduct1 = 0;

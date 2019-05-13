@@ -1,6 +1,17 @@
 package com.magis.app;
 
+import com.magis.app.models.LessonModel;
+import com.magis.app.test.questions.generator.QuestionGenerator;
+
+import java.util.Map;
+
 public class Configure {
+
+    public static final String PINK = "#E91E63"; //Pink 500
+    public static final String PURPLE = "#9C27B0"; //Purple 500
+    public static final String CYAN = "#00BCD4"; //Pink 500
+    public static final String GREEN = "#8BC34A"; //Pink 500
+    public static final String BLUE_GRAY = "#607D8B"; //Pink 500
 
     /******************************************************************************
 
@@ -20,6 +31,14 @@ public class Configure {
     The number of questions each page on a quiz or test will have
      */
     public static final int NUM_QUESTIONS_PER_PAGE = 2;
+    /*
+    The worst acceptable score a student can get on a test
+     */
+    public static final int MINIMUM_TEST_SCORE = 70;
+    /*
+    The worst acceptable score a student can get on a quiz
+     */
+    public static  final int MINIMUM_QUIZ_SCORE = 70;
 
     public static void values() {
         /*
@@ -36,5 +55,28 @@ public class Configure {
         The value is the the number of questions
          */
 //        Main.numQuestionsPerTest.put(Main.lessonModel.getChapter(0).getTitle(), 50);
+    }
+
+    public static void calculateNumUniqueQuestions() {
+        int totalGeneratedQuestions = 0;
+        int totalStaticQuestions = 0;
+        for (Map.Entry<Integer, QuestionGenerator> iterate : Main.questionGenerator.entrySet()) {
+           if (iterate.getValue().getNumUnique() == Integer.MAX_VALUE) continue;
+            totalGeneratedQuestions += iterate.getValue().getNumUnique();
+        }
+        int numChapters = Main.lessonModel.getNumChapters();
+        for (int i = 0; i < numChapters; i++) {
+            String chapterTitle = Main.lessonModel.getChapter(i).getTitle();
+            if (Main.quizzesModel.getChapter(chapterTitle) != null) {
+                totalStaticQuestions += Main.quizzesModel.getChapter(chapterTitle).getNumAvailableQuestions();
+            }
+            if (Main.testsModel.getChapter(chapterTitle) != null) {
+                totalStaticQuestions += Main.testsModel.getChapter(chapterTitle).getNumAvailableQuestions();
+            }
+        }
+        System.out.println("Not counting question generators who use random integers (resulting in basically infinite number of unique qusetions), the number of unique questions for " +
+                "question generators is " + totalGeneratedQuestions);
+        System.out.println("The number of static questions, both quizzes and tests is " + totalStaticQuestions);
+        System.out.println("This is a grand total of " + (totalGeneratedQuestions + totalStaticQuestions));
     }
 }

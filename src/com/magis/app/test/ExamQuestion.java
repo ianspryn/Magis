@@ -1,5 +1,7 @@
 package com.magis.app.test;
 
+import com.jfoenix.controls.JFXTextField;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +15,7 @@ public class ExamQuestion {
     private ArrayList<String> correctAnswers;
     private ArrayList<String> incorrectAnswers;
     private ArrayList<String> studentAnswers;
-    private HashMap<Integer, String> writtenStudentAnswers;
+    private HashMap<Integer, JFXTextField> textFields;
     public ExamQuestion() {
         level = 1;
         isWritten = false; //default to false
@@ -21,7 +23,7 @@ public class ExamQuestion {
         correctAnswers = new ArrayList<>();
         incorrectAnswers = new ArrayList<>();
         studentAnswers = new ArrayList<>();
-        writtenStudentAnswers = new HashMap<>();
+        textFields = new HashMap<>();
     }
 
     public int getLevel() {
@@ -76,14 +78,16 @@ public class ExamQuestion {
         studentAnswers.remove(oldAnswer);
     }
 
-    public void addWrittenStudentAnswer(int key, String val) { writtenStudentAnswers.put(key, val); }
+    public void addTextField(int key, JFXTextField textField) { textFields.put(key, textField); }
+
+    public HashMap<Integer, JFXTextField> getTextFields() { return textFields; }
 
     public String getQuestion() {
         return question;
     }
 
     public ArrayList<String> getAnswers() {
-        return answers;
+            return answers;
     }
 
     public ArrayList<String> getCorrectAnswers() {
@@ -95,8 +99,6 @@ public class ExamQuestion {
     public ArrayList<String> getStudentAnswers() {
         return studentAnswers;
     }
-
-    public HashMap<Integer, String> getWrittenStudentAnswers() { return writtenStudentAnswers; }
 
     public Integer getNumCorrectAnswers() { return correctAnswers.size(); }
 

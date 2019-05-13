@@ -3,20 +3,16 @@ package com.magis.app;
 
 import com.magis.app.UI.UIComponents;
 import com.magis.app.login.Login;
-import com.magis.app.models.LessonModel;
-import com.magis.app.models.QuizzesModel;
-import com.magis.app.models.StudentModel;
 import com.magis.app.models.*;
-import com.magis.app.test.diff_match_patch;
 import com.magis.app.test.questions.generator.*;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-
-import java.awt.*;
 import java.util.HashMap;
 
 public class Main extends Application {
@@ -34,22 +30,22 @@ public class Main extends Application {
     public static boolean takingExam = false; //if true, prompt the user with an alert asking when they click to leave the test
     public static boolean isLoggedIn = false; //used to prevent writing to XML file when only on login page (else errors will occur)
     public static boolean useAnimations = true; //used because we animate the login page, and we need a default state (because the variable is before the student gets initialized)
-    public static double width = -1, height = -1;
 
 
     @Override
     public void start(Stage primaryStage) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width = screenSize.width;
-        width = width * 3 / 4;
-        height = screenSize.height;
-        height = height * 3 / 4;
+        double width = (int) Screen.getPrimary().getBounds().getWidth();
+        double height = (int) Screen.getPrimary().getBounds().getHeight();
+        width = width * 4 / 5;
+        height = height * 4 / 5;
 
         window = primaryStage;
         window.setOnCloseRequest(e -> {
             e.consume();
             closeProgram();
         });
+
+        primaryStage.getIcons().add(new Image("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-color-tiny-small.png"));
 
         scene = new Scene(new BorderPane(), width, height);
         window.setScene(scene);
@@ -64,6 +60,7 @@ public class Main extends Application {
         numQuestionsPerTest = new HashMap<>();
         populateQuestionGenerator();
         Configure.values(); //apply any custom settings to the program
+        Configure.calculateNumUniqueQuestions();
         Login.Page();
         primaryStage.show();
     }
@@ -78,12 +75,15 @@ public class Main extends Application {
         questionGenerator.put(5, new EscapeSequenceQuestions());
         questionGenerator.put(6, new MethodQuestions());
         questionGenerator.put(7, new InputOutputQuestions());
-        questionGenerator.put(8, new ArraysQuestions());
-        questionGenerator.put(9, new ControlStatementQuestions());
-        questionGenerator.put(10, new InterfacesQuestions());
-        questionGenerator.put(11, new MiscOOPQuestions());
+        questionGenerator.put(8, new ControlStatementQuestions());
+        questionGenerator.put(9, new ArraysQuestions());
+        questionGenerator.put(10, new ConstructerQuestions());
+        questionGenerator.put(11, new InterfacesQuestions());
+        questionGenerator.put(12, new StandardJavaLibraryQuestions());
+
+        //questionGenerator.put(13, new MiscOOPQuestions());
 //        questionGenerator.put(8, new ExceptionsQuestions());
-//        questionGenerator.put(9, new PackagesQuestions());*/
+//        questionGenerator.put(9, new PackagesQuestions());
 
     }
 
@@ -109,5 +109,4 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) { launch(args); }
-
 }

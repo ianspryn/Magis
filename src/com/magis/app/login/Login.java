@@ -1,6 +1,7 @@
 package com.magis.app.login;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.effects.JFXDepthManager;
 import com.magis.app.Main;
 import com.magis.app.UI.Alert;
 import com.magis.app.UI.UIComponents;
@@ -39,10 +40,10 @@ public class Login {
     private static JFXButton bottomButton;
     private static boolean signUpVisible;
 
-    private static JFXCheckBox longEnoughCheck;
-    private static JFXCheckBox containsUpperCaseCheck;
-    private static JFXCheckBox containsLowerCaseCheck;
-    private static JFXCheckBox containsNumberCheck;
+//    private static JFXCheckBox longEnoughCheck;
+//    private static JFXCheckBox containsUpperCaseCheck;
+//    private static JFXCheckBox containsLowerCaseCheck;
+//    private static JFXCheckBox containsNumberCheck;
 
     public static void Page() {
         //check for internet connection in background, and it if fails, output a message to the user
@@ -68,41 +69,44 @@ public class Login {
         loginGridPane.setVgap(25);
         loginGridPane.setPadding(new Insets(25,25,25,25));
 
-        passwordVerifierGridPane = new GridPane();
+        passwordVerifierGridPane = UIComponents.createPasswordVerifierHelper();
         passwordVerifierGridPane.setVisible(false);
-        passwordVerifierGridPane.setAlignment(Pos.CENTER);
-        passwordVerifierGridPane.setHgap(10);
-        passwordVerifierGridPane.setVgap(25);
+        notSatisfied = (Label) passwordVerifierGridPane.getChildren().get(8);
+//        passwordVerifierGridPane = new GridPane();
+//        passwordVerifierGridPane.setVisible(false);
+//        passwordVerifierGridPane.setAlignment(Pos.CENTER);
+//        passwordVerifierGridPane.setHgap(10);
+//        passwordVerifierGridPane.setVgap(25);
 
 
-        longEnoughCheck = passwordAssistantCheckBox();
-        Label longEnoughLabel = passwordAssistantLabel("Greater than 8 characters", longEnoughCheck);
-        containsUpperCaseCheck = passwordAssistantCheckBox();
-        Label containsUpperCaseLabel = passwordAssistantLabel("Contains at least one uppercase letter", containsUpperCaseCheck);
-        containsLowerCaseCheck = passwordAssistantCheckBox();
-        Label containsLowerCaseLabel = passwordAssistantLabel("Contains at least one lowercase letter", containsLowerCaseCheck);
-        containsNumberCheck = passwordAssistantCheckBox();
-        Label containsNumberLabel = passwordAssistantLabel("Contains at least one number", containsNumberCheck);
+//        longEnoughCheck = passwordAssistantCheckBox();
+//        Label longEnoughLabel = passwordAssistantLabel("Greater than 8 characters", longEnoughCheck);
+//        containsUpperCaseCheck = passwordAssistantCheckBox();
+//        Label containsUpperCaseLabel = passwordAssistantLabel("Contains at least one uppercase letter", containsUpperCaseCheck);
+//        containsLowerCaseCheck = passwordAssistantCheckBox();
+//        Label containsLowerCaseLabel = passwordAssistantLabel("Contains at least one lowercase letter", containsLowerCaseCheck);
+//        containsNumberCheck = passwordAssistantCheckBox();
+//        Label containsNumberLabel = passwordAssistantLabel("Contains at least one number", containsNumberCheck);
 
-        notSatisfied = new Label("Please meet these standards!");
-        notSatisfied.setStyle("-fx-text-fill: #FF1744"); //Red A400
-        notSatisfied.setVisible(false);
+//        notSatisfied = new Label("Please meet these standards!");
+//        notSatisfied.setStyle("-fx-text-fill: #FF1744"); //Red A400
+//        notSatisfied.setVisible(false);
 
-        passwordVerifierGridPane.add(longEnoughCheck,0,1);
-        passwordVerifierGridPane.add(longEnoughLabel,1,1);
-        passwordVerifierGridPane.add(containsUpperCaseCheck,0,2);
-        passwordVerifierGridPane.add(containsUpperCaseLabel,1,2);
-        passwordVerifierGridPane.add(containsLowerCaseCheck,0,3);
-        passwordVerifierGridPane.add(containsLowerCaseLabel,1,3);
-        passwordVerifierGridPane.add(containsNumberCheck,0,4);
-        passwordVerifierGridPane.add(containsNumberLabel,1,4);
-        passwordVerifierGridPane.add(notSatisfied,1,5);
+//        passwordVerifierGridPane.add(longEnoughCheck,0,1);
+//        passwordVerifierGridPane.add(longEnoughLabel,1,1);
+//        passwordVerifierGridPane.add(containsUpperCaseCheck,0,2);
+//        passwordVerifierGridPane.add(containsUpperCaseLabel,1,2);
+//        passwordVerifierGridPane.add(containsLowerCaseCheck,0,3);
+//        passwordVerifierGridPane.add(containsLowerCaseLabel,1,3);
+//        passwordVerifierGridPane.add(containsNumberCheck,0,4);
+//        passwordVerifierGridPane.add(containsNumberLabel,1,4);
+//        passwordVerifierGridPane.add(notSatisfied,1,5);
 
         /*
         Sign-in area
          */
         userNameTextField = createJFXTextField("Username");
-        passwordTextField = createJFXPasswordField("Password");
+        passwordTextField = UIComponents.createJFXPasswordField("Password");
 
         passwordTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) attemptSignIn(userNameTextField.getText(), passwordTextField.getText());
@@ -175,46 +179,36 @@ public class Login {
         Main.setScene(content, "Magis");
     }
 
-    /**
-     * Create a Label that is used in the password verifier assistant
-     * @param requirement the text that presents one of the requirements for the password
-     * @param checkBox the checkbox associated with the label. The state of the checkbox controls the color of the label
-     * @return a label
-     */
-    private static Label passwordAssistantLabel(String requirement, JFXCheckBox checkBox) {
-        Label label = new Label(requirement);
-        label.setStyle("-fx-text-fill: #FF1744"); //Red A400 (default)
-        label.setAlignment(Pos.CENTER_RIGHT);
-        checkBox.selectedProperty().addListener((observable, oldVal, newVal) -> {
-            if (newVal) label.setStyle("-fx-text-fill: #00C853"); //Green A700
-            else label.setStyle("-fx-text-fill: #FF1744"); //Red A400
-        });
-        return label;
-    }
+//    /**
+//     * Create a Label that is used in the password verifier assistant
+//     * @param requirement the text that presents one of the requirements for the password
+//     * @param checkBox the checkbox associated with the label. The state of the checkbox controls the color of the label
+//     * @return a label
+//     */
+//    private static Label passwordAssistantLabel(String requirement, JFXCheckBox checkBox) {
+//        Label label = new Label(requirement);
+//        label.setStyle("-fx-text-fill: #FF1744"); //Red A400 (default)
+//        label.setAlignment(Pos.CENTER_RIGHT);
+//        checkBox.selectedProperty().addListener((observable, oldVal, newVal) -> {
+//            if (newVal) label.setStyle("-fx-text-fill: #00C853"); //Green A700
+//            else label.setStyle("-fx-text-fill: #FF1744"); //Red A400
+//        });
+//        return label;
+//    }
 
-    /**
-     * Create a JFXCheckBox that is used in the password verifier assistant
-     * @return a disabled JFXCheckBox that is colored red for unchecked, and green for checked
-     */
-    private static JFXCheckBox passwordAssistantCheckBox() {
-        JFXCheckBox checkBox = new JFXCheckBox();
-        checkBox.setUnCheckedColor(Color.valueOf("#FF1744")); //Red A400
-        checkBox.setCheckedColor(Color.valueOf("#00C853")); //Green A700
-        checkBox.setDisable(true);
-        return checkBox;
-    }
 
-    /**
-     * create a JFXPasswordField that is used in the sign-in and sign-up gridpane
-     * @param promptText the text inside the text field to indicate to the user the purpose of the text field
-     * @return a JFXPasswordField
-     */
-    private static JFXPasswordField createJFXPasswordField(String promptText) {
-        JFXPasswordField passwordField = new JFXPasswordField();
-        passwordField.setPromptText(promptText);
-        passwordField.getStyleClass().add("sign-in-field");
-        return passwordField;
-    }
+
+//    /**
+//     * create a JFXPasswordField that is used in the sign-in and sign-up gridpane
+//     * @param promptText the text inside the text field to indicate to the user the purpose of the text field
+//     * @return a JFXPasswordField
+//     */
+//    private static JFXPasswordField createJFXPasswordField(String promptText) {
+//        JFXPasswordField passwordField = new JFXPasswordField();
+//        passwordField.setPromptText(promptText);
+//        passwordField.getStyleClass().add("sign-in-field");
+//        return passwordField;
+//    }
 
     /**
      * Create a JFXTextField that is used in the sign-in and sign-up grid pane
@@ -243,6 +237,8 @@ public class Login {
         Main.scene.getStylesheets().remove("com/magis/app/css/pink.css");
         //apply the student's selected color
         Main.scene.getStylesheets().add("com/magis/app/css/" + student.getTheme() + ".css");
+
+//        UIComponents.applyShadowColor();
     }
 
     /**
@@ -258,7 +254,7 @@ public class Login {
         } else if (student != null) { //if that student exists
             if (password.length() == 0) { //blank password
               Alert.showAlert("Error", "Please enter a password");
-            } else if (passwordMatches(student, password)) { //success
+            } else if (Password.passwordMatches(student, password)) { //success
                 Main.username = username;
                 Main.useAnimations = student.useAnimations();
                 Main.isLoggedIn = true;
@@ -270,16 +266,6 @@ public class Login {
         } else { //no username
             Alert.showAlert("Error", "Username not found. Please try again.");
         }
-    }
-
-    /**
-     * Check of the password string matches the hashed version associated with the account
-     * @param student the student to check the password against
-     * @param password the password in string literal form
-     * @return true if it matches, false otherwise
-     */
-    private static boolean passwordMatches(StudentModel.Student student, String password) {
-        return student.getPasswordHash().equals(Password.hash(password, student.getSalt()));
     }
 
     /**
@@ -331,15 +317,16 @@ public class Login {
         Else the user might be confused as to why they can't click "sign in" when all the fields are already filled
          */
         if (passwordTextField.getText().length() > 0) {
-            if (Password.longEnough(passwordTextField.getText())) longEnoughCheck.setSelected(true);
-            else longEnoughCheck.setSelected(false);
-            if (Password.containsUpperCase(passwordTextField.getText())) containsUpperCaseCheck.setSelected(true);
-            else containsUpperCaseCheck.setSelected(false);
-            if (Password.containsLowerCase(passwordTextField.getText())) containsLowerCaseCheck.setSelected(true);
-            else containsLowerCaseCheck.setSelected(false);
-            if (Password.containsDigit(passwordTextField.getText())) containsNumberCheck.setSelected(true);
-            else containsNumberCheck.setSelected(false);
-            validPassword.set(longEnoughCheck.isSelected() && containsUpperCaseCheck.isSelected() && containsLowerCaseCheck.isSelected() && containsNumberCheck.isSelected());
+            validPassword.set(Password.checkRequirements(passwordTextField.getText(), passwordVerifierGridPane));
+//            if (Password.longEnough(passwordTextField.getText())) longEnoughCheck.setSelected(true);
+//            else longEnoughCheck.setSelected(false);
+//            if (Password.containsUpperCase(passwordTextField.getText())) containsUpperCaseCheck.setSelected(true);
+//            else containsUpperCaseCheck.setSelected(false);
+//            if (Password.containsLowerCase(passwordTextField.getText())) containsLowerCaseCheck.setSelected(true);
+//            else containsLowerCaseCheck.setSelected(false);
+//            if (Password.containsDigit(passwordTextField.getText())) containsNumberCheck.setSelected(true);
+//            else containsNumberCheck.setSelected(false);
+//            validPassword.set(longEnoughCheck.isSelected() && containsUpperCaseCheck.isSelected() && containsLowerCaseCheck.isSelected() && containsNumberCheck.isSelected());
 
             passwordVerifierGridPane.setVisible(true);
             passwordBox.setVisible(true);
@@ -365,15 +352,15 @@ public class Login {
 
         //for every key typed, check if the password is valid
         passwordTextField.setOnKeyReleased(e -> {
-            if (Password.longEnough(passwordTextField.getText())) longEnoughCheck.setSelected(true);
-            else longEnoughCheck.setSelected(false);
-            if (Password.containsUpperCase(passwordTextField.getText())) containsUpperCaseCheck.setSelected(true);
-            else containsUpperCaseCheck.setSelected(false);
-            if (Password.containsLowerCase(passwordTextField.getText())) containsLowerCaseCheck.setSelected(true);
-            else containsLowerCaseCheck.setSelected(false);
-            if (Password.containsDigit(passwordTextField.getText())) containsNumberCheck.setSelected(true);
-            else containsNumberCheck.setSelected(false);
-            validPassword.set(longEnoughCheck.isSelected() && containsUpperCaseCheck.isSelected() && containsLowerCaseCheck.isSelected() && containsNumberCheck.isSelected());
+//            if (Password.longEnough(passwordTextField.getText())) longEnoughCheck.setSelected(true);
+//            else longEnoughCheck.setSelected(false);
+//            if (Password.containsUpperCase(passwordTextField.getText())) containsUpperCaseCheck.setSelected(true);
+//            else containsUpperCaseCheck.setSelected(false);
+//            if (Password.containsLowerCase(passwordTextField.getText())) containsLowerCaseCheck.setSelected(true);
+//            else containsLowerCaseCheck.setSelected(false);
+//            if (Password.containsDigit(passwordTextField.getText())) containsNumberCheck.setSelected(true);
+//            else containsNumberCheck.setSelected(false);
+            validPassword.set(Password.checkRequirements(passwordTextField.getText(), passwordVerifierGridPane));
             if (validPassword.get()) {
                 notSatisfied.setVisible(false);
             }

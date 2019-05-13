@@ -39,7 +39,7 @@ public class DataTypeQuestions extends QuestionGenerator{
     }
 
     public void datatypeMatchingQuestion(){
-        question = "<x> = ";
+        question = "```<x> = ";
 
         int dataTypeSelector = rand.nextInt(4);
 
@@ -59,16 +59,14 @@ public class DataTypeQuestions extends QuestionGenerator{
         else if(dataTypeSelector == 2){
             int stringSelector = rand.nextInt(dataTypeMatchingString.size());
             question = question + "\"" + dataTypeMatchingString.get(stringSelector) + "\"";
-            dataTypeMatchingString.remove(stringSelector);
             correctAnswer = dataTypeMatchingAnswers[2];
         }
         else{
             int charSelector = rand.nextInt(dataTypeMatchingChar.size());
             question = question + "\'" + dataTypeMatchingChar.get(charSelector)+"\'";
-            dataTypeMatchingChar.remove(charSelector);
             correctAnswer = dataTypeMatchingAnswers[3];
         }
 
-        question = question + "\n\nWhat data type would best be used to initialize this value?";
+        question = question + "```\nWhat data type would best be used to initialize this value?";
     }
 }

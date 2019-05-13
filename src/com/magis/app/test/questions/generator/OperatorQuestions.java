@@ -37,6 +37,8 @@ public class OperatorQuestions extends QuestionGenerator {
                 break;
             case 3:getIncrementalQuestion();
                 break;
+            case 4:getMathMethodQuestion();
+                break;
         }
     }
 
@@ -51,7 +53,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
         ArrayList<String> shuffler = new ArrayList<>();
 
-        question = "int value1 = "+secondInt+";\n";
+        question = "```int value1 = "+secondInt+";\n";
 
         int firstData = rand.nextInt(2);
         if(firstData>0){
@@ -77,7 +79,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
         answers = shuffler;
 
-        question+="quotient = value1 / value2; \n\nWhat is the value of \"quotient\"?";
+        question+="quotient = value1 / value2;```\nWhat is the value of \"quotient\"?";
     }
 
     public void getIncrementalQuestion(){
@@ -86,7 +88,7 @@ public class OperatorQuestions extends QuestionGenerator {
         number = rand.nextInt(11);
         ArrayList<String> shuffler = new ArrayList<>();
 
-        question = "int value = " + number;
+        question = "```int value = " + number;
 
         int incrementSelector = rand.nextInt(incrementalEquations.length+1);
 
@@ -149,7 +151,7 @@ public class OperatorQuestions extends QuestionGenerator {
 
         answers = shuffler;
 
-        question+="\n\nWhat is the value of \"value\" after this incremental equation?";
+        question+="```\nWhat is the value of \"value\" after this incremental equation?";
     }
 
     public void getModularQuestion(){
@@ -157,7 +159,7 @@ public class OperatorQuestions extends QuestionGenerator {
         int divider = rand.nextInt(divisor)+1;
         ArrayList<String> shuffler = new ArrayList<>();
 
-        question = ""+divisor+" % "+divider+"\n\nWhat is the result of this operation?";
+        question = "```"+divisor+" % "+divider+"```\nWhat is the result of this operation?";
         correctAnswer = ""+(divisor%divider);
         shuffler.add(correctAnswer);
         shuffler.add((""+(divisor+divider)));
@@ -176,8 +178,8 @@ public class OperatorQuestions extends QuestionGenerator {
         int endPoint = rand.nextInt(message.length()-1)+1;
         int startPoint = rand.nextInt(endPoint);
 
-        question = "String message = \""+message+"\".substring("+startPoint+", "+endPoint+");" +
-                "\n\nWhat does message equal after this method?";
+        question = "```String message = \""+message+"\".substring("+startPoint+", "+endPoint+");```" +
+                "\nWhat does message equal after this method?";
 
         correctAnswer = "\""+message.substring(startPoint, endPoint)+"\"";
         shuffler.add(correctAnswer);
@@ -202,6 +204,37 @@ public class OperatorQuestions extends QuestionGenerator {
         Collections.shuffle(shuffler);
         shuffler.add("None of the Above");
 
+        answers = shuffler;
+    }
+
+    public void getMathMethodQuestion(){
+        int operationSelector = rand.nextInt(2);
+        ArrayList<String> shuffler = new ArrayList<>();
+
+        switch(operationSelector){
+            case 0:
+                double num1 = rand.nextInt(101);
+                question = "```double root = Math.sqrt("+num1+");```\nWhat is the value of \"root\"?";
+                correctAnswer = ""+df.format(Math.sqrt(num1));
+                shuffler.add(correctAnswer);
+                shuffler.add(""+(num1+1));
+                shuffler.add(""+df.format(Math.pow(num1,2)));
+                shuffler.add(""+df.format(Math.sin(num1)));
+                break;
+            case 1:
+                double num2 = rand.nextInt(11);
+                double power = rand.nextInt(3)+1;
+                question = "```double power = Math.sqrt("+num2+", "+power+");```\nWhat is the value of \"power\"?";
+                correctAnswer = ""+df.format(Math.pow(num2, power));
+                shuffler.add(correctAnswer);
+                shuffler.add(""+(num2+1));
+                shuffler.add(""+df.format(Math.sqrt(num2)));
+                shuffler.add(""+df.format(Math.sin(num2)));
+                break;
+        }
+
+        Collections.shuffle(shuffler);
+        shuffler.add("None of the Above");
         answers = shuffler;
     }
 }

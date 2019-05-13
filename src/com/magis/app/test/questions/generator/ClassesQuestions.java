@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 public class ClassesQuestions extends QuestionGenerator{
 
-    private String[] comparableStrings = {"Private class Example;", "Public class Example;", "it is visble.\n","it is not visble.\n"};
+    private String[] comparableStrings = {"```Private class Example;```", "```Public class Example;```", "it is visble.\n","it is not visble.\n"};
 
     private String[] comparableStringAnswers = {"True", "False"};
 
-    private String[] equalsStrings = {"Getter", "Setter","public String getName() {\n" +
+    private String[] equalsStrings = {"Getter", "Setter","```public String getName() {\n" +
             "    return name;\n" +
-            "  }","public void setName(String newName) {\n" +
+            "  }```","```public void setName(String newName) {\n" +
             "    this.name = newName;\n" +
-            "  }","public String getName(String newName) {\n" +
+            "  }```","```public String getName(String newName) {\n" +
             "    this.name = newName;\n" +
-            "  }","public void setName() {\n" +
+            "  }```","```public void setName() {\n" +
             "    return name;\n" +
-            "  }"};
+            "  }```"};
     private String[] equalsAnswers = {"It provides a level of protection to a variabel by returning the contents of"+
             " the variable through a function, rather then pulling the contents of the variable from the variable directly.",
             "It provides a level of protection to a variabel by changing the contents of the variable"+

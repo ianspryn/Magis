@@ -110,42 +110,16 @@ public class StatsPage {
          /*
         Middle
          */
-        VBox mastervBox = new VBox();
-        mastervBox.setAlignment(Pos.TOP_CENTER);
-        mastervBox.setPadding(new Insets(25, 25, 25, 25));
-        mastervBox.setMaxWidth(1500);
-        //Center the content in the scrollpane
-        StackPane contentHolder = new StackPane(mastervBox);
-        contentHolder.minWidthProperty().bind(Bindings.createDoubleBinding(() ->
-                scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
 
-        scrollPane.setContent(contentHolder);
-        JFXScrollPane.smoothScrolling(scrollPane);
+        UIComponents.GenericPage page = new UIComponents.GenericPage();
+        master = page.getMaster();
+        scrollPane = page.getScrollPane();
         scrollPane.setVvalue(0); //reset to top every time
-
-        /*
-        Back button and Page title
-         */
-        AnchorPane top = new AnchorPane();
-        top.setPadding(new Insets(0, 0, 50, 0));
-
-        //back button
-        JFXButton backButton = new JFXButton("Back");
-        backButton.setDisableVisualFocus(true); //fix button appear to be highlighted (not selected, just highlighted)
-        backButton.setOnMouseClicked(e -> goToStats(scrollPane));
-        backButton.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
-        backButton.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
-        backButton.getStyleClass().addAll("jfx-button-flat", "jfx-button-flat-color");
-
-        //page title
-        Label pageTitle = new Label("Chapter " + (chapterIndex + 1) + " - " + Main.lessonModel.getChapter(chapterIndex).getTitle());
-        pageTitle.getStyleClass().add("section-title");
-
-        top.getChildren().addAll(backButton, pageTitle);
-        AnchorPane.setLeftAnchor(backButton, 0.0);
-        AnchorPane.setRightAnchor(pageTitle, 0.0);
-
-        mastervBox.getChildren().add(top);
+        page.getMastervBox().setAlignment(Pos.TOP_CENTER);
+        mastervBox = page.getMastervBox();
+        mastervBox.setAlignment(Pos.TOP_CENTER);
+        page.getBackButton().setOnMouseClicked(e -> goToStats(scrollPane));
+        page.getPageTitle().setText("Chapter " + (chapterIndex + 1) + " - " + Main.lessonModel.getChapter(chapterIndex).getTitle());
 
         /*
         Overall Progress
@@ -204,10 +178,26 @@ public class StatsPage {
             quizBox.setAlignment(Pos.CENTER);
             quizBox.setSpacing(25);
 
-            Label quizLabel = new Label("Your Quiz Results. Tap to view your previous answers");
-            quizLabel.setWrapText(true);
-            quizLabel.getStyleClass().add("box-title");
-            quizBox.getChildren().add(quizLabel);
+            if (student.getQuiz(chapterIndex).getAttempts().size() == 1) {
+                Text quizText = new Text("Your Quiz Results. Tap to view your previous answers");
+                quizText.getStyleClass().addAll("box-title", "text-no-color");
+                quizBox.getChildren().add(quizText);
+            } else {
+                TextFlow textFlow = new TextFlow();
+                textFlow.setTextAlignment(TextAlignment.CENTER);
+                Text quizText = new Text("Your Quiz Results.\nYour average is ");
+                quizText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(quizText);
+
+                quizText = new Text(student.getQuiz(chapterIndex).getAverageScore() + "%.");
+                quizText.getStyleClass().addAll("box-title", "text-color");
+                textFlow.getChildren().add(quizText);
+
+                quizText = new Text("\nTap to view your previous answers.");
+                quizText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(quizText);
+                quizBox.getChildren().add(textFlow);
+            }
 
             int counter = 0;
             for (StudentModel.Student.Attempt attempt : student.getQuiz(chapterIndex).getAttempts()) {
@@ -271,10 +261,27 @@ public class StatsPage {
             testBox.setAlignment(Pos.CENTER);
             testBox.setSpacing(25);
 
-            Label testLabel = new Label("Your Test Results. Tap to view your previous answers");
-            testLabel.setWrapText(true);
-            testLabel.getStyleClass().add("box-title");
-            testBox.getChildren().add(testLabel);
+            if (student.getTest(chapterIndex).getAttempts().size() == 1) {
+                Text testText = new Text("Your Test Results. Tap to view your previous answers");
+                testText.getStyleClass().addAll("box-title", "text-no-color");
+                testBox.getChildren().add(testText);
+            } else {
+                TextFlow textFlow = new TextFlow();
+                textFlow.setTextAlignment(TextAlignment.CENTER);
+                Text testText = new Text("Your Test Results.\nYour average is ");
+                testText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(testText);
+
+                testText = new Text(student.getTest(chapterIndex).getAverageScore() + "%.");
+                testText.getStyleClass().addAll("box-title", "text-color");
+                textFlow.getChildren().add(testText);
+
+                testText = new Text("\nTap to view your previous answers.");
+                testText.getStyleClass().addAll("box-title", "text-no-color");
+                textFlow.getChildren().add(testText);
+                testBox.getChildren().add(textFlow);
+            }
+
 
             int counter = 0;
             for (StudentModel.Student.Attempt attempt : student.getTest(chapterIndex).getAttempts()) {
@@ -290,13 +297,13 @@ public class StatsPage {
                     UIComponents.scale(test, 0.1, 1, 1);
                 });
                 test.setSpacing(50);
-                test.getStyleClass().addAll("chapter-box", "stats-box");
+                test.getStyleClass().addAll("inner-chapter-box", "stats-box");
 
                 VBox score = new VBox();
                 score.setAlignment(Pos.CENTER);
 
                 RingProgressIndicator rpi = new RingProgressIndicator();
-                rpi.setProgress(student.getQuiz(chapterIndex).getScores().get(counter).intValue());
+                rpi.setProgress(student.getTest(chapterIndex).getScores().get(counter).intValue());
                 Label scoreLabel = new Label("Score");
                 scoreLabel.getStyleClass().addAll("text-color", "box-description");
 
@@ -327,7 +334,6 @@ public class StatsPage {
         }
 
         mastervBox.getChildren().add(insightsVBox);
-        UIComponents.fadeOnAndTranslate(scrollPane, 0.2, 0.2, 0, 0, -10, 0);
         Main.setScene(master);
     }
 
@@ -348,7 +354,6 @@ public class StatsPage {
 
     /**
      * Build the chapter box to house the title, completion and scores. Also configure its clicking action
-     *
      * @param chapterIndex the chapter's index
      * @return a build vBox for the chapter
      */
@@ -414,7 +419,7 @@ public class StatsPage {
             quizScore.setAlignment(Pos.CENTER);
 
             RingProgressIndicator rpi2 = new RingProgressIndicator();
-            rpi2.setProgress(student.getQuiz(chapterIndex).getBestScore().intValue());
+            rpi2.setProgress((int) student.getQuiz(chapterIndex).getBestScore());
 
             Label quizScoreLabel = new Label("Quiz Score");
             quizScoreLabel.setWrapText(true);
@@ -430,7 +435,7 @@ public class StatsPage {
             testScore.setAlignment(Pos.CENTER);
 
             RingProgressIndicator rpi2 = new RingProgressIndicator();
-            rpi2.setProgress(student.getQuiz(chapterIndex).getBestScore().intValue());
+            rpi2.setProgress(((int) student.getTest(chapterIndex).getBestScore()));
 
             Label testScoreLabel = new Label("Test Score");
             testScoreLabel.setWrapText(true);
