@@ -28,53 +28,54 @@ public class EscapeSequenceQuestions extends QuestionGenerator{
 
         int sentencePicker = rand.nextInt(sentences.length);
         question = "```String s = \""+sentences[sentencePicker]+"\";```";
+        String s = sentences[sentencePicker];
 
         int sequenePicker = rand.nextInt(5);
 
         switch(sequenePicker){
             case 0:
-                correctAnswer = question;
-                correctAnswer = correctAnswer.replace('^', '\n');
+                correctAnswer = s;
+                correctAnswer = correctAnswer.replace("^","     ");
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
-                answers.add(question.replace('^','\\'));
-                answers.add(question.replace('^','\"'));
+                answers.add(s.replace('^','\t'));
+                answers.add(s.replace('^','\\'));
+                answers.add(s.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \"\\n\" do to the string?";
                 break;
             case 1:
-                correctAnswer = question;
-                correctAnswer = correctAnswer.replace('^', '\t');
+                correctAnswer = s;
+                correctAnswer = correctAnswer.replace("^","     ");
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\n'));
-                answers.add(question.replace('^','\\'));
-                answers.add(question.replace('^','\"'));
+                answers.add(s.replace('^','\n'));
+                answers.add(s.replace('^','\\'));
+                answers.add(s.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \"\\t\" do to the string?";
                 break;
             case 2:
-                correctAnswer = question;
+                correctAnswer = s;
                 correctAnswer = correctAnswer.replace('^', '\\');
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
-                answers.add(question.replace('^','\n'));
-                answers.add(question.replace('^','\"'));
+                answers.add(s.replace("^","     "));
+                answers.add(s.replace('^','\n'));
+                answers.add(s.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \"\\\\\" do to the string?";
                 break;
             case 3:
-                correctAnswer = question;
+                correctAnswer = s;
                 correctAnswer = correctAnswer.replace('^', '\"');
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
-                answers.add(question.replace('^','\n'));
-                answers.add(question.replace('^','\''));
+                answers.add(s.replace("^","     "));
+                answers.add(s.replace('^','\n'));
+                answers.add(s.replace('^','\''));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \" \\\" \" do to the string?";
                 break;
             case 4:
-                correctAnswer = question;
+                correctAnswer = s;
                 correctAnswer = correctAnswer.replace('^', '\'');
                 answers.add(correctAnswer);
-                answers.add(question.replace('^','\t'));
-                answers.add(question.replace('^','\n'));
-                answers.add(question.replace('^','\"'));
+                answers.add(s.replace("^","     "));
+                answers.add(s.replace('^','\n'));
+                answers.add(s.replace('^','\"'));
                 question+="\n\nWhat will replacing the \"^\"(s) with a \" \\\' \" do to the string?";
                 break;
         }
