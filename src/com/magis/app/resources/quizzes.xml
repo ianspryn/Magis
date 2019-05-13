@@ -1322,28 +1322,39 @@ in.useDelimiter(Character);</answer>
                         <question>
                                 <statement>If you want to call the constructor of a superclass, what keyword do you use?</statement>
                                 <answer id = "correct">super</answer>
+                                <answer>superclass</answer>
+                                <answer>construct</answer>
+                                <answer>upconstruct</answer>
                         </question>
                         <question>
                                 <statement>What does the super call require as parameters?</statement>
                                 <answer id = "correct">The parameters of the superclasses constructor</answer>
+                                <answer>nothing ever</answer>
+                                <answer>An integer</answer>
+                                <answer>A string to name the object</answer>
                         </question>
                         <question>
                                 <statement>If the keyword super is followed by a period, what is it calling?</statement>
                                 <answer id = "correct">A superclass method</answer>
-                        </question>
-                        <question>
-                                <statement>If the keyword super is followed by a period, what is it calling?</statement>
-                                <answer id = "correct">A superclass constructor</answer>
+                                <answer>A superclass constructor</answer>
+                                <answer>A method from the super library</answer>
+                                <answer>You cannot follow super with a period</answer>
                         </question>
                         <question>
                                 <statement>If a subclass doesn't call a superclass constructor, the superclass must contain what?</statement>
                                 <answer id = "correct">A constructor with no parameters</answer>
+                                <answer>No member variables</answer>
+                                <answer>No global variables</answer>
+                                <answer>No methods</answer>
                         </question>
                         <question>
                                 <statement>The following code
 ```anObject instanceof BankAccount```
 returns true if</statement>
-                                <answer id = "correct">the type of anObject is convertible to a BankAccount</answer>
+                                <answer id = "correct">The type of anObject is convertible to a BankAccount</answer>
+                                <answer>The type of anObject is a BankAccount</answer>
+                                <answer>There exists a method for conversion</answer>
+                                <answer>It will never return true</answer>
                         </question>
                         <question>
 
