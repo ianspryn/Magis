@@ -118,6 +118,42 @@ How would you make new lines at requested?</statement>
                     <answer id = "correct">\n</answer>
                     <answer id = "correct">\n</answer>
                 </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Compare two strings, word1 and word2, and put if they are equal into the boolean
+boolean theyAreEqual = word1###```
+Fill in the blanks</statement>
+                    <answer id = "correct">.equals(word2);</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Set the global variable num equal to the local variable num
+### = ###;```
+Fill in the blanks</statement>
+                    <answer id = "correct">this.num</answer>
+                    <answer id = "correct">num</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Set the global string "mainWord" to the local string "localWord", and then compare it to word2 for equality
+### = ###;
+boolean theyAreEqual = word2###```
+Fill in the blanks</statement>
+                    <answer id = "correct">mainWord</answer>
+                    <answer id = "correct">localWord</answer>
+                    <answer id = "correct">.equals(mainWord);</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Compare word1 and word2 for sorting later
+int sorting = word2###```
+Fill in the blanks</statement>
+                    <answer id = "correct">.compareTo(word1)</answer>
+                </question>
             </questions>
         </chapter>
         <chapter id = "Control Statements">
@@ -131,7 +167,7 @@ Fill in the blanks so that variable c is equal to the next line inputted from th
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextLine();</answer>
                 </question>
-                                <question>
+                <question>
                     <level>3</level>
                     <written>true</written>
                     <statement>```Scanner sc = ###
@@ -140,7 +176,7 @@ Fill in the blanks so that variable c is equal to the next character inputted fr
                     <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">next();</answer>
                 </question>
-                                <question>
+                <question>
                     <level>3</level>
                     <written>true</written>
                     <statement>```Scanner sc = ###
@@ -194,7 +230,7 @@ Fill in the blanks</statement>
                     <answer id = "correct">i;</answer>
                     <answer id = "correct">55</answer>
                 </question>
-                                <question>
+                <question>
                     <level>5</level>
                     <written>true</written>
                     <statement>```//Use Scanner sc (already initialized) to ask the user for a num
@@ -211,6 +247,42 @@ Fill in the blanks</statement>
                     <answer id = "correct">&lt;</answer>
                     <answer id = "correct">0</answer>
                     <answer id = "correct">sc.nextDouble();</answer>
+                </question>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//Method that accepts the amount in a person's balance and how much they want to deposit and returns the new balance
+public ### deposit(### balance, ### deposit){
+    balance = balance + ###;
+    ###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">double</answer>
+                    <answer id = "correct">double</answer>
+                    <answer id = "correct">double</answer>
+                    <answer id = "correct">deposit</answer>
+                    <answer id = "correct">return balance;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//This method will do a factorial formula and return it
+public ### getFactorial(### num){
+    int factorial = 1;
+    ###(int i = ###; i &gt; ###; ###){
+        factorial *= ###;
+    }
+    ###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">for</answer>
+                    <answer id = "correct">num</answer>
+                    <answer id = "correct">0</answer>
+                    <answer id = "correct">i--</answer>
+                    <answer id = "correct">i</answer>
+                    <answer id = "correct">return factorial;</answer>
                 </question>
             </questions>
         </chapter>
@@ -306,11 +378,13 @@ Fill in the blanks</statement>
                     <answer id = "correct">extends MyClass</answer>
                     <answer id = "correct">super();</answer>
                     <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
                     <answer id = "correct">this.num1</answer>
                     <answer id = "correct">num1;</answer>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">this.num2</answer>
                     <answer id = "correct">num2;</answer>
+                    <answer id = "correct">int</answer>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">num1</answer>
                     <answer id = "correct">num2</answer>
