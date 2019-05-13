@@ -1351,9 +1351,6 @@ returns true if</statement>
                                 <answer>There exists a method for conversion</answer>
                                 <answer>It will never return true</answer>
                         </question>
-                        <question>
-
-                        </question>
                 </questions>
         </chapter>
         <chapter id = "Control Statements">
