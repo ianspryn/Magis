@@ -124,11 +124,88 @@ How would you make new lines at requested?</statement>
                 <question>
                     <level>3</level>
                     <written>true</written>
-                    <statement>```Scanner sc = new ###
+                    <statement>```Scanner sc = ###
 String s = sc.###```
 Fill in the blanks</statement>
-                    <answer id = "correct">Scanner(System.in);</answer>
+                    <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextLine();</answer>
+                </question>
+                                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = ###
+char c = sc.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
+                    <answer id = "correct">next();</answer>
+                </question>
+                                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = ###
+int num = sc.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
+                    <answer id = "correct">nextInt();</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = ###
+double num = sc.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
+                    <answer id = "correct">nextDouble();</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Loop that prints out the contents of array myArray
+###(### i = ###; ### &lt; ###; ###){
+    ###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">for</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">0</answer>
+                    <answer id = "correct">i</answer>
+                    <answer id = "correct">myArray.length</answer>
+                    <answer id = "correct">i++</answer>
+                    <answer id = "correct">System.out.println(myArray[i]);</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Loop that adds up the elements of myArray into variable "sum"
+###(### i = ###; ### &lt; ###; ###){
+    sum += ###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">for</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">0</answer>
+                    <answer id = "correct">i</answer>
+                    <answer id = "correct">myArray.length</answer>
+                    <answer id = "correct">i++</answer>
+                    <answer id = "correct">myArray[i];</answer>
+                </question>
+                                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Use Scanner sc (already initialized) to ask the user for a num
+double num = ###
+
+//Use a loop to ensure that the number inputted is 0 or greater
+###(### ### ###){
+    num = ###;
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">sc.nextDouble();</answer>
+                    <answer id = "correct">while</answer>
+                    <answer id = "correct">num</answer>
+                    <answer id = "correct">&lt;</answer>
+                    <answer id = "correct">0</answer>
+                    <answer id = "correct">sc.nextDouble();</answer>
                 </question>
             </questions>
         </chapter>
@@ -151,6 +228,88 @@ Fill in the blanks</statement>
                     <answer id = "correct">;</answer>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```public class MyClass {
+    //Constructor
+    protected int num;
+    public MyClass() {
+        num = 24;
+    }
+}
+
+//Class that inherits from MyClass
+public class SecondClass ### {
+    //Constructor that will get the variables from its super class
+    public SecondClass(){
+        ###
+    }
+
+    //Setter for num
+    public ### setNum(### num){
+        ### = ###
+    }
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">extends MyClass</answer>
+                    <answer id = "correct">super();</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">this.num</answer>
+                    <answer id = "correct">num;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```public class MyClass {
+    //Constructor
+    protected int num1;
+    protected int num2;
+
+    public MyClass() {
+        num1 = 24;
+        num2 = 5;
+    }
+}
+
+//Class that inherits from MyClass
+public class SecondClass ### {
+    //Constructor that will get the variables from its super class
+    public SecondClass(){
+        ###
+    }
+
+    //Setter for num1
+    public ### setNum1(### num1){
+        ### = ###
+    }
+
+    //Setter for num2
+    public ### setNum2(### num2){
+        ### = ###
+    }
+
+    //Get Sum for num1 and num2 and return it
+    public ### getSum(){
+        int sum = ### + ###;
+        ###
+    }
+
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">extends MyClass</answer>
+                    <answer id = "correct">super();</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">this.num1</answer>
+                    <answer id = "correct">num1;</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">this.num2</answer>
+                    <answer id = "correct">num2;</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">num1</answer>
+                    <answer id = "correct">num2</answer>
+                    <answer id = "correct">return sum;</answer>
                 </question>
             </questions>
         </chapter>
