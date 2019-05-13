@@ -161,7 +161,7 @@ Fill in the blanks</statement>
                 <question>
                     <level>5</level>
                     <written>true</written>
-                    <statement>```//Loop that prints out the contents of array myArray
+                    <statement>```//Loop that prints out 0 through 10 excluding 10
 ###(### i = ###; ### &lt; ###; ###){
     ###
 }```
@@ -170,25 +170,28 @@ Fill in the blanks</statement>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">0</answer>
                     <answer id = "correct">i</answer>
-                    <answer id = "correct">myArray.length</answer>
+                    <answer id = "correct">10</answer>
                     <answer id = "correct">i++</answer>
-                    <answer id = "correct">System.out.println(myArray[i]);</answer>
+                    <answer id = "correct">System.out.println(i);</answer>
                 </question>
                 <question>
                     <level>5</level>
                     <written>true</written>
-                    <statement>```//Loop that adds up the elements of myArray into variable "sum"
-###(### i = ###; ### &lt; ###; ###){
+                    <statement>```//Loop that adds up 1-10 inclusively into variable "sum"
+###(### i = ###; ### &lt;= ###; ###){
     sum += ###
-}```
+}
+
+//Value of Sum: ###```
 Fill in the blanks</statement>
                     <answer id = "correct">for</answer>
                     <answer id = "correct">int</answer>
-                    <answer id = "correct">0</answer>
+                    <answer id = "correct">1</answer>
                     <answer id = "correct">i</answer>
-                    <answer id = "correct">myArray.length</answer>
+                    <answer id = "correct">10</answer>
                     <answer id = "correct">i++</answer>
-                    <answer id = "correct">myArray[i];</answer>
+                    <answer id = "correct">i;</answer>
+                    <answer id = "correct">55</answer>
                 </question>
                                 <question>
                     <level>5</level>
@@ -213,7 +216,7 @@ Fill in the blanks</statement>
         <chapter id = "Interfaces">
             <questions>
                 <question>
-                    <level>3</level>
+                    <level>5</level>
                     <written>true</written>
                     <statement>```//Create a new interface
 public ### myInterface(){
