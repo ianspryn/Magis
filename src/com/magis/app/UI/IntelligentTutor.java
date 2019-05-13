@@ -401,9 +401,7 @@ public class IntelligentTutor {
                 addText("\n\nIf you are still not comfortable with the material, it might be necessary to use additional " +
                         "resources or simply practice more. If you were to retake the quiz, it may present new and " +
                         "different questions to help you with your learning." +
-                        "\n\n You can always review your history under ");
-                addTextBold("Statistics");
-                addText(" to previous quiz attempts in helping you study.");
+                        "\n\n You can always review your history to previous quiz attempts under each chapter on this page to help you study");
             }
         }
         /*
