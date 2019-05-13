@@ -4,9 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXScrollPane;
-import com.jfoenix.effects.JFXDepthManager;
-import com.magis.app.Configure;
 import com.magis.app.Main;
+import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import javafx.animation.*;
 import javafx.beans.binding.Bindings;
@@ -22,10 +21,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-import java.util.concurrent.ConcurrentNavigableMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UIComponents {
@@ -70,8 +68,13 @@ public class UIComponents {
             /*
             Back button and Page title
              */
-            AnchorPane top = new AnchorPane();
-            top.setPadding(new Insets(0, 0, 50, 0));
+
+            HBox homeBox = createCenterColorHomeBox();
+            homeBox.setOnMouseClicked(e -> HomePage.goHome(scrollPane));
+
+            StackPane top = new StackPane();
+            AnchorPane corners = new AnchorPane();
+            corners.setPadding(new Insets(0, 0, 50, 0));
 
             //back button
             backButton = new JFXButton("Back");
@@ -83,12 +86,21 @@ public class UIComponents {
             //page title
             pageTitle = new Label("Generic Title");
             pageTitle.getStyleClass().add("section-title");
+            pageTitle.setTextAlignment(TextAlignment.RIGHT);
+            pageTitle.setWrapText(true);
+            pageTitle.setMaxWidth(Main.window.getWidth() / 2.0 - 150);
 
-            top.getChildren().addAll(backButton, pageTitle);
+            Main.window.widthProperty().addListener((obs, oldVal, newVal) -> {
+                pageTitle.setMaxWidth(newVal.intValue() / 2.0 - 150);
+            });
+
+            corners.getChildren().addAll(backButton, pageTitle);
             AnchorPane.setLeftAnchor(backButton, 0.0);
             AnchorPane.setRightAnchor(pageTitle, 0.0);
 
-            mastervBox.getChildren().add(top);
+            top.getChildren().addAll(corners, homeBox);
+            StackPane.setAlignment(homeBox, Pos.CENTER);
+            mastervBox.getChildren().addAll(top);
 
             master.getChildren().add(scrollPane);
             StackPane.setAlignment(scrollPane, Pos.CENTER);
@@ -123,13 +135,13 @@ public class UIComponents {
         hBox.setSpacing(5);
         hBox.getStyleClass().add("title-bar");
 
-        Button minimize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.minimize, 12);
+        Button minimize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.MINIMIZE, 12);
         minimize.getStyleClass().add("material-icons-light");
         minimize.setOnAction(e -> Main.window.setIconified(true));
-        Button maximize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.maximize, 12);
+        Button maximize = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.MAXIMIZE, 12);
         maximize.getStyleClass().add("material-icons-light");
         maximize.setOnAction(e -> Main.window.setFullScreen(!Main.window.isFullScreen()));
-        Button close = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.close, 12);
+        Button close = UIComponents.CreateSVGIconButton(com.magis.app.icons.MaterialIcons.CLOSE, 12);
         close.getStyleClass().add("material-icons-light");
 
         hBox.getChildren().addAll(minimize, maximize, close);
@@ -248,7 +260,7 @@ public class UIComponents {
     }
 
     public static Button getHomeButton() {
-        Button button = CreateSVGIconButton(MaterialIcons.home, 50);
+        Button button = CreateSVGIconButton(MaterialIcons.HOME, 50);
         button.getStyleClass().add("material-icons-light-solid");
         button.setDisable(true);
         button.setStyle("-fx-opacity: 1.0");
@@ -267,7 +279,7 @@ public class UIComponents {
      * build the home box that goes in the top left corner
      * @return the HBox object that holds the home box
      */
-    public static HBox createHomeBox() {
+    public static HBox createCornerWhiteHomeBox() {
         HBox home = new HBox();
         home.setSpacing(20);
         home.setMinWidth(300);
@@ -293,6 +305,51 @@ public class UIComponents {
         home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
         home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
+
+        home.getChildren().addAll(homeVBox, magisLogo);
+        return home;
+    }
+
+    /**
+     * build the home box that goes in the top left corner
+     * @return the HBox object that holds the home box
+     */
+    public static HBox createCenterColorHomeBox() {
+        HBox home = new HBox();
+        home.setPadding(new Insets(0,0,0,45));
+        home.setMaxWidth(HBox.USE_PREF_SIZE);
+        home.setSpacing(20);
+        home.setMinWidth(300);
+
+        //Home icon and text
+        VBox homeVBox = new VBox();
+
+        HBox settingsIconContainer = new HBox();
+        settingsIconContainer.setPadding(new Insets(7,0,0,0));
+        SVGPath homeIcon = new SVGPath();
+        homeIcon.getStyleClass().add("icon-no-color");
+        homeIcon.setContent(MaterialIcons.HOME);
+        Bounds settingsBounds = homeIcon.getBoundsInLocal();
+        double settingsScaleFactor = 50 / Math.max(settingsBounds.getWidth(), settingsBounds.getHeight());
+        homeIcon.setScaleX(settingsScaleFactor);
+        homeIcon.setScaleY(settingsScaleFactor);
+
+        settingsIconContainer.getChildren().add(homeIcon);
+
+//        Label text = new Label("Home");
+//        text.getStyleClass().add("home-text");
+
+        homeVBox.getChildren().add(settingsIconContainer);
+
+
+        //Magis logo
+        ImageView magisLogo = new ImageView("https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/magis-color-small.png");
+        magisLogo.setPreserveRatio(true);
+        magisLogo.setFitWidth(175);
+
+        //listeners
+        home.setOnMouseEntered(e -> Main.scene.setCursor(javafx.scene.Cursor.HAND));
+        home.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
 
         home.getChildren().addAll(homeVBox, magisLogo);
         return home;

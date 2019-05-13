@@ -54,11 +54,11 @@ public abstract class Page {
         sidebar
          */
         sideBar.getStyleClass().add("sidebar");
-        homeHBox = UIComponents.createHomeBox();
+        homeHBox = UIComponents.createCornerWhiteHomeBox();
         homeHBox.setOnMouseClicked(e -> {
             if (Main.takingExam) {
-                String title = "Exit Test";
-                String content = "Are you sure you want to exit? All test progress will be lost!";
+                String title = "Exit exam";
+                String content = "Are you sure you want to exit? All exam progress will be lost!";
                 if (UIComponents.confirmMessage(title, content)) {
                     Main.takingExam = false;
                     HomePage.goHome(borderPane);

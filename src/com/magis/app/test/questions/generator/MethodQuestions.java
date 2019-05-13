@@ -37,7 +37,7 @@ public class MethodQuestions extends QuestionGenerator{
         answers.add("char");
         answers.add("Nothing");
         answers.add("None of the Above");
-        question = "public ";
+        question = "```public ";
 
         switch(dataType){
             case 0:
@@ -65,6 +65,6 @@ public class MethodQuestions extends QuestionGenerator{
                 correctAnswer = answers.get(5);
                 break;
         }
-        question+= " myMethod(){\n\t.\n\t.\n\t.\n}\n\nWhat is the return of this method?";
+        question+= " myMethod(){\n\t.\n\t.\n\t.\n}```\nWhat is the return of this method?";
     }
 }

@@ -17,7 +17,7 @@ STRUCTURE:
 
 -->
 <tests>
-        <chapter id = "Primitive Types">
+        <chapter id = "Operators">
                 <questions>
                         <question>
                                 <statement>How is 0 different from "0"?</statement>
@@ -77,13 +77,13 @@ Assign the proper data-types to these values</statement>
 //This value will hold the letter grade of the store in reviews
 ### grade;```
 
-                                        Assign the proper data-types to these values</statement>
+Assign the proper data-types to these values</statement>
                                 <answer id = "correct">double</answer>
                                 <answer id = "correct">int</answer>
                                 <answer id = "correct">int</answer>
                                 <answer id = "correct">char</answer>
                         </question>
-                                                <question>
+                        <question>
                                 <level>3</level>
                                 <written>true</written>
                                 <statement>```//This value will be used to sum two decimals
@@ -98,12 +98,169 @@ Assign the proper data-types to these values</statement>
 //This value will hold a random alphabet value
 ### alphabetValue;```
 
-                                        Assign the proper data-types to these values</statement>
+Assign the proper data-types to these values</statement>
                                 <answer id = "correct">double</answer>
                                 <answer id = "correct">double</answer>
                                 <answer id = "correct">int</answer>
                                 <answer id = "correct">char</answer>
                         </question>
                 </questions>
+        </chapter>
+        <chapter id = "Escape Sequences">
+            <questions>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```String s = "This line ###Needs a new line here ###And here ###And here";```
+How would you make new lines at requested?</statement>
+                    <answer id = "correct">\n</answer>
+                    <answer id = "correct">\n</answer>
+                    <answer id = "correct">\n</answer>
+                </question>
+            </questions>
+        </chapter>
+        <chapter id = "Control Statements">
+            <questions>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = new ###
+String s = sc.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">Scanner(System.in);</answer>
+                    <answer id = "correct">nextLine();</answer>
+                </question>
+            </questions>
+        </chapter>
+        <chapter id = "Interfaces">
+            <questions>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Create a new interface
+public ### myInterface(){
+    //All implements of interface should include void method to display the values in the class
+    public ### display()###
+
+    //All implements of interface should include method to return an int sum
+    public ### getSum()###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">interface;</answer>
+                    <answer id = "correct">void</answer>
+                    <answer id = "correct">;</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">;</answer>
+                </question>
+            </questions>
+        </chapter>
+        <chapter id = "Packages">
+            <questions>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//For a generic exception
+###{
+    //Code
+}
+###(### e){
+    //Code
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">try</answer>
+                    <answer id = "correct">catch</answer>
+                    <answer id = "correct">Exception</answer>
+                </question>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//For an Arithmetic exception
+###{
+    //Code
+}
+###(### e){
+    //Code
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">try</answer>
+                    <answer id = "correct">catch</answer>
+                    <answer id = "correct">ArithmeticException</answer>
+                </question>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//For a NullPointer exception
+###{
+    //Code
+}
+###(### e){
+    //Code
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">try</answer>
+                    <answer id = "correct">catch</answer>
+                    <answer id = "correct">NullPointerException</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Random
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">util</answer>
+                    <answer id = "correct">Random;</answer>
+                </question>
+                                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Math
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">lang</answer>
+                    <answer id = "correct">Math;</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for PrintStream
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">io</answer>
+                    <answer id = "correct">PrintStream;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Socket
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">net</answer>
+                    <answer id = "correct">Socket;</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Import the java package for Scanner
+### java.###.###```
+Fill in the blanks</statement>
+                    <answer id = "correct">import</answer>
+                    <answer id = "correct">util</answer>
+                    <answer id = "correct">Scanner;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Implement the sqrt method. Assume there are no imports
+//Value to be rooted
+double num = 25.0;
+double root = ###```
+Fill in the blanks</statement>
+                    <answer id = "correct">java.lang.Math.sqrt(num);</answer>
+                </question>
+            </questions>
         </chapter>
 </tests>

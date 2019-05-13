@@ -3,6 +3,7 @@ package com.magis.app.page;
 import com.magis.app.Main;
 import com.magis.app.UI.PageContentContainer;
 import com.magis.app.models.LessonModel;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -79,15 +80,16 @@ public class LessonPageContent extends PageContent {
                 case "image":
                     ImageView image = new ImageView();
                     image.setPreserveRatio(true);
+                    //load images in the background
+                    String pageContent = lessonPageContent.getContent();
+                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent())));
+                    thread.setDaemon(true);
+                    thread.start();
                     //scale the image to a max of either 800px or whatever thw width of the scroll pane is (compensating for the scrollbar's thickness itself)
                     image.setFitWidth(Math.min(800, getScrollPane().widthProperty().doubleValue() - 50));
                     getScrollPane().widthProperty().addListener((observable, oldVal, newVal) -> {
                         image.setFitWidth(Math.min(800, newVal.doubleValue() - 50));
                     });
-                    //load images in the background
-                    Thread thread = new Thread(() -> image.setImage(new Image(lessonPageContent.getContent())));
-                    thread.setDaemon(true);
-                    thread.start();
                     pageContentContainer.add(image);
                     break;
                 default:

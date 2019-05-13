@@ -81,9 +81,29 @@ public class Grader {
 
     private void gradeAsWritten(ExamQuestion question) {
         diff_match_patch dmp = new diff_match_patch();
+        //https://regex101.com/r/RpbPGc/6
+        String javaLangWordsNoSpace = "(abstract)|(assert)|(boolean)|(break)|(byte)|(case)|(catch)|" +
+                "(char)|(class)|(continue)|(default)|(do)|(double)|(else)|(enum)|(extends)|(final)|(finally)" +
+                "|(float)|(for)|(if)|(implements)|(import)|(instanceof)|(int)|(interface)|(long)|(native)" +
+                "|(new)|(package)|(private)|(protected)|(public)|(return)|(short)|(static)|(strictfp)" +
+                "|(super)|(switch)|(synchronized)|(this)|(throw)|(throws)|(transient)|(try)|(void)|(volatile)|(while)";
+
+        String javaLangWordsWithSpace = "(abstract\\s)|(assert\\s)|(boolean\\s)|(break\\s)|(byte\\s)|(case\\s)|" +
+                "(catch\\s)|(char\\s)|(class\\s)|(continue\\s)|(default\\s)|(do\\s)|(double\\s)|(else\\s)|(enum\\s)|" +
+                "(extends\\s)|(final\\s)|(finally\\s)|(float\\s)|(for\\s)|(if\\s)|(implements\\s)|(import\\s)|" +
+                "(instanceof\\s)|(int\\s)|(interface\\s)|(long\\s)|(native\\s)|(new\\s)|(package\\s)|(private\\s)|" +
+                "(protected\\s)|(public\\s)|(return\\s)|(short\\s)|(static\\s)|(strictfp\\s)|(super\\s)|(switch\\s)|" +
+                "(synchronized\\s)|(this\\s)|(throw\\s)|(throws\\s)|(transient\\s)|(try\\s)|(void\\s)|(volatile\\s)|(while\\s)";
+
+        String specialCharacters = " +|(?<=[.|=*+-/\"\\[\\][(]|[)]])|(?=[.|=*+-/\"\\[\\];[(]|[)]])";
+
+        String regex = "(?<!" + javaLangWordsNoSpace + ")" + specialCharacters + "|" +
+                //positive lookbehind
+                "(?<=" + javaLangWordsWithSpace + ")|" +
+                //positive lookahead
+                "(?=" + javaLangWordsWithSpace + ")";
+
         for (int answerIndex = 0; answerIndex < question.getNumCorrectAnswers(); answerIndex++) {
-            //https://regex101.com/r/RpbPGc/3
-            String regex = " +|(?<=[.|=|*|+|-|/|\"|\\[|\\]])|(?=[.|=|*|+|-|/|\"|\\[|\\]|;])";
             //for the fairness of grading, remove spaces that are allowed to be removed
             String[] formattedCorrectAnswer = question.getCorrectAnswers().get(answerIndex).split(regex);
             StringBuilder stringBuilder = new StringBuilder();
@@ -102,10 +122,8 @@ public class Grader {
             //Now that we've cleaned it up, we can get the number of components to the question
             int numParts = correctAnswer.split(regex).length;
 
-
             LinkedList<diff_match_patch.Diff> diff = dmp.diff_main(correctAnswer, studentAnswer);
-            dmp.diff_cleanupSemantic(diff);
-            int badPart = 0;
+            double badPart = 0;
             for (int i = 0; i < diff.size(); i++) {
                 diff_match_patch.Diff diff1 = diff.get(i);
                 String type = diff1.operation.toString();
@@ -123,22 +141,27 @@ public class Grader {
                         STUDENT: int[] myVar asdf = new int[5];
                         The student would still be deducted for the extra "asdf"
                          */
-//                        if (i > 0 && diff.get(i - 1).operation.toString().equals("DELETE")) continue;
                         //grade off-by-one-character less harshly
-                        if (diff.get(i).text.length() == 1) badPart += 1.0 / (numParts * 2);
-                        badPart += Math.max(1, diff1.text.split(regex).length);
+                        if (diff1.text.length() == 1) {
+                            badPart += 1.0 / (numParts * 2.0);
+                        } else {
+                            badPart += Math.max(1, diff1.text.split(regex).length);
+                        }
                         break;
                     case "DELETE":
-                        //grade off-by-one-character less harshly
-                        if (diff.get(i).text.length() == 1) {
-                            badPart += 1.0 / (numParts * 2);
+                        /*
+                        grade off-by-one-character less harshly AS LONG AS it's not a space
+                        because the student might have done newint[]; or something
+                         */
+                        if (diff1.text.length() == 1 && !diff1.text.equals(" ")) {
+                            badPart += 1.0 / (numParts * 2.0);
                         } else {
                             badPart += Math.max(1, diff1.text.split(regex).length);
                         }
                         break;
                 }
             }
-            total += pointsPerAnswer * Math.max(0, 1.0 - ((double) badPart / (double) numParts));
+            total += pointsPerAnswer * Math.max(0, 1.0 - (badPart / (double) numParts));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.magis.app.models;
 
 import com.magis.app.Main;
+import com.magis.app.home.HomePage;
 import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.ExamSaver;
 import org.w3c.dom.*;
@@ -283,6 +284,11 @@ public class StudentModel {
         //write to XML file
         UpdateModel.updateXML(new DOMSource(document), filePath);
 
+        /*
+        Reset stuff
+         */
+        //Since it's an instance, we need to remove it
+        HomePage.clearHomePage();
         //Delete student from the class
         Main.studentModel.removeStudent();
         //remove the student's custom styling
@@ -778,7 +784,7 @@ public class StudentModel {
              * This method returns the most recent score for a given test. If the test has not been taken, it will return -1.0
              * @return a Double of the most recent score
              */
-            public Double getLastScore() {
+            public double getLastScore() {
                 if (scores.size() > 0) {
                     return scores.get(scores.size() - 1);
                 }
@@ -790,22 +796,22 @@ public class StudentModel {
              * This method calculates the average scores for a given test. If the test as not been taken, it will return 0.0
              * @return a Double of the average score
              */
-            public Double getAverageScore() {
+            public double getAverageScore() {
                 if (scores.size() == 0) {
                     return 0.0;
                 }
-                Double scoreTotal = 0.0;
-                for (Double score : scores) {
+                double scoreTotal = 0.0;
+                for (double score : scores) {
                     scoreTotal += score;
                 }
-                return scoreTotal / scores.size();
+                return Double.parseDouble(String.format("%.2f", scoreTotal / scores.size()));
             }
 
             /**
              * This method returns the best score for a given test. If the test has not been taken, it will return -1.0
              * @return a Double of the best score
              */
-            public Double getBestScore() {
+            public double getBestScore() {
                 if (scores.size() > 0) {
                     return bestScore;
                 }
@@ -816,7 +822,7 @@ public class StudentModel {
              * This method returns the worst score for a given test. If the test has not been taken, it will return -1.0
              * @return a Double of the worst score
              */
-            public Double getWorstScore() {
+            public double getWorstScore() {
                 if (scores.size() > 0) {
                     return worstScore;
                 }
@@ -836,7 +842,7 @@ public class StudentModel {
              * Add a new score value to the test
              * @param scoreValue student's score on test
              */
-            public void addScore(Double scoreValue) {
+            public void addScore(double scoreValue) {
                 // update best and worst scores
                 if(scoreValue > bestScore) {
                     bestScore = scoreValue;
@@ -885,7 +891,7 @@ public class StudentModel {
                 }
                 Element examElement = (Element) exam;
                 Element score = document.createElement("score");
-                score.appendChild(document.createTextNode(scoreValue.toString()));
+                score.appendChild(document.createTextNode(Double.toString(scoreValue)));
                 assert examElement != null;
                 examElement.appendChild(score);
                 //write to XML file

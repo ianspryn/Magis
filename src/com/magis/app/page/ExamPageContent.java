@@ -5,21 +5,17 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import com.magis.app.Main;
-import com.magis.app.models.ExamsModel;
 import com.magis.app.test.ExamQuestion;
 import com.magis.app.test.ExamSaver;
 import com.magis.app.test.Grader;
 import com.magis.app.test.diff_match_patch;
 import com.magis.app.test.questions.generator.QuestionGenerator;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -28,23 +24,20 @@ import javafx.scene.text.TextFlow;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Pattern;
 
 import static com.magis.app.Configure.NUM_QUESTIONS_PER_PAGE;
 
 public abstract class ExamPageContent extends PageContent {
 
-    protected ExamsModel.ChapterModel exam;
     protected int chapterIndex;
-    protected int numAvailableBankQuestions;
     protected int numQuestions;
-    protected QuestionGenerator questionGenerator;
+    protected QuestionGenerator quizQuestionGenerator;
     protected Grader grader;
     protected HashMap<Integer, ToggleGroup> toggleGroups;
     protected HashMap<Integer, ArrayList<JFXCheckBox>> checkboxGroups;
     protected HashMap<Integer, VBox> writtenQuestionBoxes;
-    protected ArrayList<Integer> usedBankQuestions;
+    protected HashMap<Integer, ArrayList<Integer>> usedQuizBankQuestions;
     protected ArrayList<String> usedGeneratorQuestions;
     protected ArrayList<VBox> pageContents;
     protected ExamSaver examSaver;
@@ -58,23 +51,21 @@ public abstract class ExamPageContent extends PageContent {
     protected ArrayList<String> answers;
     protected int questionIndex;
     protected String generatedQuestion;
-    protected int numGeneratedQuestions;
 
-    public ExamPageContent(int chapterIndex, int numQuestions, ExamsModel.ChapterModel exam) {
+
+    public ExamPageContent(int chapterIndex, int numQuestions) {
         this.chapterIndex = chapterIndex;
         this.numQuestions = numQuestions;
-        this.exam = exam;
-        numAvailableBankQuestions = exam != null ? exam.getNumAvailableQuestions() : 0;
-        questionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
+        quizQuestionGenerator = Main.questionGenerator.getOrDefault(chapterIndex, null);
         grader = new Grader();
         toggleGroups = new HashMap<>();
         checkboxGroups = new HashMap<>();
         writtenQuestionBoxes = new HashMap<>();
-        usedBankQuestions = new ArrayList<>();
+        usedQuizBankQuestions = new HashMap<>();
         usedGeneratorQuestions = new ArrayList<>();
         pageContents = new ArrayList<>();
         examSaver = new ExamSaver(chapterIndex);
-        numGeneratedQuestions = 0;
+
     }
 
     @Override
@@ -425,7 +416,6 @@ public abstract class ExamPageContent extends PageContent {
      */
     protected void colorize() {
         int questionIndex = 0;
-        int insertionTracker = 0;
         for (ExamQuestion examQuestion : grader.getQuestions()) {
             int questionIndexFinal = questionIndex;
             if (examQuestion.isWritten()) {
@@ -445,8 +435,6 @@ public abstract class ExamPageContent extends PageContent {
                 questionBox = new VBox();
                 questionBox.setSpacing(15);
                 questionBox.setPadding(new Insets(0, 0, 20, 20));
-                int page = questionIndex / NUM_QUESTIONS_PER_PAGE;
-                int questionOnPage = (questionIndex + insertionTracker) % NUM_QUESTIONS_PER_PAGE;
 
 
                 if (Arrays.asList(splitQuestion(examQuestion.getQuestion())).contains("###")) {
@@ -470,26 +458,17 @@ public abstract class ExamPageContent extends PageContent {
                     questionBox.getChildren().add(container);
                 }
 
-                VBox pageContent = new VBox();
+                VBox answerBox = new VBox();
+                answerBox.setPadding(new Insets(0,0,0,-20));
 
                 Label correctAnswerText = new Label("Correct Answer");
                 correctAnswerText.setPadding(new Insets(0,0,0,20));
                 correctAnswerText.getStyleClass().add("lesson-header-three-text");
                 correctAnswerText.setStyle("-fx-text-fill: #00C853;");
 
-                /*
-                Since we add new boxes to pageContent, that pushes everything down
-                So we need to keep track of that so we can insert the correct answers
-                at the right position
-                 */
-                insertionTracker++;
-                pageContent.getChildren().addAll(correctAnswerText, questionBox);
-
-                /*
-                page + 1 because we added "Results" page at the beginning
-                questionOnPage + 1 because we want to show the correct answer right after the original answer
-                 */
-                pageContents.get(page + 1).getChildren().add(questionOnPage + 1, pageContent);
+                answerBox.getChildren().addAll(correctAnswerText, questionBox);
+                //Add the answer to the pre-existing questionBox
+                writtenQuestionBoxes.get(questionIndex).getChildren().add(answerBox);
             }
             else if (examQuestion.getNumCorrectAnswers() == 1) { //then it's radio buttons with only 1 correct answer
                 toggleGroups.get(questionIndex).getToggles().stream().map((toggle) -> (ToggleButton) toggle).forEach((button) -> {
@@ -521,16 +500,10 @@ public abstract class ExamPageContent extends PageContent {
                         checkBox.setStyle("-fx-text-fill: #f44336;"); //Red A400
                         checkBox.setCheckedColor(Color.valueOf("#f44336"));
                     }
-//                    checkBox.setSelected(!checkBox.isSelected());
-//                    checkBox.setSelected(!checkBox.isSelected());
                 }
 
             }
             questionIndex++;
-            if (questionIndex % NUM_QUESTIONS_PER_PAGE == 0) {
-                //reset, because we're on a new page
-                insertionTracker = 0;
-            }
         }
     }
 
@@ -581,9 +554,6 @@ public abstract class ExamPageContent extends PageContent {
             diff_match_patch.Diff diffPart = diff.get(i);
             String type = diffPart.operation.toString();
             TextFlow textFlow = new TextFlow();
-            //Constrain it to the size of the text inside of it
-            textFlow.setMaxHeight(TextFlow.USE_PREF_SIZE);
-            textFlow.setMaxWidth(TextFlow.USE_PREF_SIZE);
             Text text = new Text();
             textFlow.getChildren().add(text);
             answerContainer.getChildren().add(textFlow);
@@ -605,12 +575,11 @@ public abstract class ExamPageContent extends PageContent {
                     }
                     break;
                 case "DELETE":
+//                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
                     //ignore extra whitespace
-                    if (i < diff.size() - 1 && diff.get(i + 1).operation.toString().equals("INSERT")) continue;
-                    if (Pattern.matches((" +"), diffPart.text)) continue;
+                    if (Pattern.matches((" {2,}"), diffPart.text)) continue;
                     text.setText(" ");
-                    textFlow.setStyle("-fx-background-color: #80DEEA"); //Cyan 200
-                    text.setStyle("-fx-fill: #00B8D4"); //Cyan A700
+                    textFlow.setStyle("-fx-background-color: #18FFFF"); //Cyan A200
                     break;
             }
         }

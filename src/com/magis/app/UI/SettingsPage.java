@@ -5,8 +5,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import com.magis.app.Main;
-import com.magis.app.UI.Alert;
-import com.magis.app.UI.UIComponents;
 import com.magis.app.home.HomePage;
 import com.magis.app.icons.MaterialIcons;
 import com.magis.app.login.Login;
@@ -22,7 +20,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SettingsPage {
@@ -66,7 +63,7 @@ public class SettingsPage {
 
         //declare
         Label fullName = new Label(student.getFullName());
-        Button editName = UIComponents.CreateSVGIconButton(MaterialIcons.edit, 20);
+        Button editName = UIComponents.CreateSVGIconButton(MaterialIcons.EDIT, 20);
         JFXTextField firstName = new JFXTextField(student.getFirstName());
         firstName.getStyleClass().add("jfx-edit-name-field");
         JFXTextField lastName = new JFXTextField(student.getLastName());
@@ -106,8 +103,9 @@ public class SettingsPage {
             if (firstName.getText().length() == 0 || lastName.getText().length() == 0) {
                 Alert.showAlert("Error", "Name cannot be empty!");
             } else {
-                student.setFirstName(firstName.getText());
-                student.setLastName(lastName.getText());
+
+                student.setFirstName(firstName.getText().substring(0,1).toUpperCase() + firstName.getText().substring(1).toLowerCase());
+                student.setLastName(lastName.getText().substring(0,1).toUpperCase() + lastName.getText().substring(1).toLowerCase());
                 nameSettings.getChildren().clear();
                 nameSettings.getChildren().addAll(fullName, editName);
                 fullName.setText(student.getFullName());

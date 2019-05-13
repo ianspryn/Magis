@@ -58,6 +58,8 @@ public class HomePage {
         return homePage;
     }
 
+    public static void clearHomePage() { homePage = null; }
+
     private static void update() {
         int numChapters = Main.lessonModel.getNumChapters();
         StudentModel.Student student = Main.studentModel.getStudent();
@@ -132,10 +134,10 @@ public class HomePage {
 
         recentBox.setOnMouseEntered(e -> Main.scene.setCursor(Cursor.HAND));
         recentBox.setOnMouseExited(e -> Main.scene.setCursor(Cursor.DEFAULT));
+        recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
 
         if (student.getRecentChapter() > -1) {
             recentBox.getChildren().add(IntelligentTutor.generateRecentActivity());
-            recentBox.setOnMouseClicked(e -> goToLesson(masterVbox, IntelligentTutor.getNewChapter(), IntelligentTutor.getNewPage()));
         }
 
         //Activity and Statistics Page
@@ -218,7 +220,7 @@ public class HomePage {
 
         SVGPath settingsIcon = new SVGPath();
         settingsIcon.getStyleClass().add("icon-no-color");
-        settingsIcon.setContent(MaterialIcons.settings);
+        settingsIcon.setContent(MaterialIcons.SETTINGS);
         // scale to size 350x350
         Bounds settingsBounds = settingsIcon.getBoundsInLocal();
         double settingsScaleFactor = 50 / Math.max(settingsBounds.getWidth(), settingsBounds.getHeight());
@@ -261,7 +263,7 @@ public class HomePage {
 
         SVGPath personIcon = new SVGPath();
         personIcon.getStyleClass().add("icon-no-color");
-        personIcon.setContent(MaterialIcons.person);
+        personIcon.setContent(MaterialIcons.PERSON);
         // scale to size 350x350
         Bounds signOutBounds = personIcon.getBoundsInLocal();
         double signOutScaleFactor = 40 / Math.max(signOutBounds.getWidth(), signOutBounds.getHeight());
@@ -460,6 +462,8 @@ public class HomePage {
         /*
         Reset stuff
          */
+        //Since it's an instance, we need to remove it
+        HomePage.clearHomePage();
         //Delete student from the class
         Main.studentModel.removeStudent();
         Main.studentModel = new StudentModel(Main.lessonModel);
