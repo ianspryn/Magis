@@ -31,6 +31,7 @@ public class SettingsPage {
     private static Label notSatisfied;
     private static JFXPasswordField oldPassword;
     private static JFXPasswordField newPassword;
+    private static GridPane passwordVerifierGridPane;
 
     public static void Page() {
         student = Main.studentModel.getStudent();
@@ -123,7 +124,7 @@ public class SettingsPage {
         /*
         Password Settings
          */
-        GridPane passwordVerifierGridPane = UIComponents.createPasswordVerifierHelper();
+        passwordVerifierGridPane = UIComponents.createPasswordVerifierHelper();
         notSatisfied = (Label) passwordVerifierGridPane.getChildren().get(8);
 
         passwordSettings = new VBox();
@@ -324,6 +325,7 @@ public class SettingsPage {
         }
         //success
         else {
+            Password.checkRequirements("", passwordVerifierGridPane); //reset to all red
             String salt = student.getSalt();
             String passwordHash = Password.hash(newPassword.getText(), salt); //hash the password
             student.setPasswordHash(passwordHash);
