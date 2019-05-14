@@ -1114,7 +1114,7 @@ for (int i = 0; i &lt; myArray.length; i++) {
                                 <answer>Observing and Reporting</answer>
                         </question>
                         <question>
-                                <statement>When you throw an exception,  execution does not continue with the next statement but instead continues where?</statement>
+                                <statement>When you throw an exception, execution does not continue with the next statement but instead continues where?</statement>
                                 <answer id ="correct">With an exception handler.</answer>
                                 <answer>A crash</answer>
                                 <answer>The start of the program</answer>
