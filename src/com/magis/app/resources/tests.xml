@@ -5,6 +5,8 @@ STRUCTURE:
 	<chapter id = "Chapter Name">
 		<questions>
                         <question>
+                                <level>{1, 2, 3, ... n}</level>
+                                <written>{true, false}</written>
                                 <statement></statement>
                                 <answer id = "correct"></answer>
                                 <answer></answer>
@@ -15,16 +17,21 @@ STRUCTURE:
 	</chapter>
 </tests>
 
+NOTES:
+any written-statement question MUST contain a <written>true</written> tag AND every answer must contain [id = "correct"].
+if <level> or <written> are not provided, they will default to 1 and false, respectively.
+
 -->
 <tests>
         <chapter id = "Operators">
                 <questions>
                         <question>
+                                <level>2</level>
                                 <statement>How is 0 different from "0"?</statement>
-                                <answer id = "correct"> "0" is a string, 0 is an int</answer>
-                                <answer>"0" is an int, 0 is a string</answer>
+                                <answer>0 is a string, "0" is an int</answer>
+                                <answer id = "correct">0 is an int, "0" is a string</answer>
                                 <answer>There is no difference</answer>
-                                <answer>"0" is a double, 0 is a int</answer>
+                                <answer>0 is a double, "0" is a int</answer>
                         </question>
                         <question>
                                 <level>3</level>
@@ -117,6 +124,42 @@ How would you make new lines at requested?</statement>
                     <answer id = "correct">\n</answer>
                     <answer id = "correct">\n</answer>
                 </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Compare two strings, word1 and word2, and put if they are equal into the boolean
+boolean theyAreEqual = word1###```
+Fill in the blanks</statement>
+                    <answer id = "correct">.equals(word2);</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Set the global variable num equal to the local variable num
+### = ###;```
+Fill in the blanks</statement>
+                    <answer id = "correct">this.num</answer>
+                    <answer id = "correct">num</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Set the global string "mainWord" to the local string "localWord", and then compare it to word2 for equality
+### = ###;
+boolean theyAreEqual = word2###```
+Fill in the blanks</statement>
+                    <answer id = "correct">mainWord</answer>
+                    <answer id = "correct">localWord</answer>
+                    <answer id = "correct">.equals(mainWord);</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```//Compare word1 and word2 for sorting later
+int sorting = word2###```
+Fill in the blanks</statement>
+                    <answer id = "correct">.compareTo(word1)</answer>
+                </question>
             </questions>
         </chapter>
         <chapter id = "Control Statements">
@@ -124,21 +167,137 @@ How would you make new lines at requested?</statement>
                 <question>
                     <level>3</level>
                     <written>true</written>
-                    <statement>```Scanner sc = new ###
+                    <statement>```Scanner sc = ###
 String s = sc.###```
-Fill in the blanks</statement>
-                    <answer id = "correct">Scanner(System.in);</answer>
+Fill in the blanks so that variable c is equal to the next line inputted from the user.</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
                     <answer id = "correct">nextLine();</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = ###
+char c = sc.###```
+Fill in the blanks so that variable c is equal to the next character inputted from the user.</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
+                    <answer id = "correct">next();</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = ###
+int num = sc.###```
+Fill in the blanks so that variable c is equal to the next integer inputted from the user.</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
+                    <answer id = "correct">nextInt();</answer>
+                </question>
+                <question>
+                    <level>3</level>
+                    <written>true</written>
+                    <statement>```Scanner sc = ###
+double num = sc.###```
+Fill in the blanks so that variable c is equal to the next double inputted from the user.</statement>
+                    <answer id = "correct">new Scanner(System.in);</answer>
+                    <answer id = "correct">nextDouble();</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Loop that prints out 0 through 10 excluding 10
+###(### i = ###; ### &lt; ###; ###) {
+    ###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">for</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">0</answer>
+                    <answer id = "correct">i</answer>
+                    <answer id = "correct">10</answer>
+                    <answer id = "correct">i++</answer>
+                    <answer id = "correct">System.out.println(i);</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//Loop that adds up 1 through 10 inclusively into variable "sum"
+int sum = 0;
+###(### i = ###; ### &lt;= ###; ###) {
+    sum += ###
+}
+
+//Value of Sum: ###```
+Fill in the blanks</statement>
+                    <answer id = "correct">for</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">1</answer>
+                    <answer id = "correct">i</answer>
+                    <answer id = "correct">10</answer>
+                    <answer id = "correct">i++</answer>
+                    <answer id = "correct">i;</answer>
+                    <answer id = "correct">55</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```
+Scanner sc = new Scanner(System.in);
+double num = -1
+
+/*
+Use a while loop to keep setting num to user's input. Stop once the user enters
+a number greater than -1
+*/
+### (###) {
+    num = ###;
+}```
+Fill in the blanks.
+Do not worry about error checking.</statement>
+                    <answer id = "correct">while</answer>
+                    <answer id = "correct">num &lt; 0</answer>
+                    <answer id = "correct">sc.nextDouble();</answer>
+                </question>
+                <question>
+                    <level>4</level>
+                    <written>true</written>
+                    <statement>```//Method that accepts the amount in a person's balance and how much they want to deposit and returns the new balance
+public ### deposit(double balance, double deposit) {
+    balance = balance + ###;
+    return ###
+}```
+Fill in the blanks.</statement>
+                    <answer id = "correct">double</answer>
+                    <answer id = "correct">deposit</answer>
+                    <answer id = "correct">balance;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```//This method will perform a factorial formula and return it
+public ### getFactorial(int num) {
+    int factorialTotal = 1;
+    ###(int i = ###; i &gt; ###; ###) {
+        factorialTotal *= ###;
+    }
+    return ###
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">for</answer>
+                    <answer id = "correct">num</answer>
+                    <answer id = "correct">0</answer>
+                    <answer id = "correct">i--</answer>
+                    <answer id = "correct">i</answer>
+                    <answer id = "correct">factorialTotal;</answer>
                 </question>
             </questions>
         </chapter>
         <chapter id = "Interfaces">
             <questions>
                 <question>
-                    <level>3</level>
+                    <level>5</level>
                     <written>true</written>
                     <statement>```//Create a new interface
-public ### myInterface(){
+public ### myInterface() {
     //All implements of interface should include void method to display the values in the class
     public ### display()###
 
@@ -152,6 +311,90 @@ Fill in the blanks</statement>
                     <answer id = "correct">int</answer>
                     <answer id = "correct">;</answer>
                 </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```public class MyClass {
+    //Constructor
+    protected int num;
+    public MyClass() {
+        num = 24;
+    }
+}
+
+//Class that inherits from MyClass
+public class SecondClass ### {
+    //Constructor that will get the variables from its super class
+    public SecondClass() {
+        ###
+    }
+
+    //Setter for num
+    public ### setNum(### num) {
+        ### = ###
+    }
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">extends MyClass</answer>
+                    <answer id = "correct">super();</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">this.num</answer>
+                    <answer id = "correct">num;</answer>
+                </question>
+                <question>
+                    <level>5</level>
+                    <written>true</written>
+                    <statement>```public class MyClass {
+    //Constructor
+    protected int num1;
+    protected int num2;
+
+    public MyClass() {
+        num1 = 24;
+        num2 = 5;
+    }
+}
+
+//Class that inherits from MyClass
+public class SecondClass ### {
+    //Constructor that will get the variables from its super class
+    public SecondClass() {
+        ###
+    }
+
+    //Setter for num1
+    public ### setNum1(### num1) {
+        ### = ###
+    }
+
+    //Setter for num2
+    public ### setNum2(### num2) {
+        ### = ###
+    }
+
+    //Get Sum for num1 and num2 and return it
+    public ### getSum() {
+        int sum = num1 + ###;
+        ###
+    }
+
+}```
+Fill in the blanks</statement>
+                    <answer id = "correct">extends MyClass</answer>
+                    <answer id = "correct">super();</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">this.num1</answer>
+                    <answer id = "correct">num1;</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">this.num2</answer>
+                    <answer id = "correct">num2;</answer>
+                    <answer id = "correct">int</answer>
+                    <answer id = "correct">num2</answer>
+                    <answer id = "correct">return sum;</answer>
+                </question>
             </questions>
         </chapter>
         <chapter id = "Packages">
@@ -163,7 +406,7 @@ Fill in the blanks</statement>
 ###{
     //Code
 }
-###(### e){
+###(### e) {
     //Code
 }```
 Fill in the blanks</statement>
@@ -178,7 +421,7 @@ Fill in the blanks</statement>
 ###{
     //Code
 }
-###(### e){
+###(### e) {
     //Code
 }```
 Fill in the blanks</statement>
@@ -193,7 +436,7 @@ Fill in the blanks</statement>
 ###{
     //Code
 }
-###(### e){
+###(### e) {
     //Code
 }```
 Fill in the blanks</statement>

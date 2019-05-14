@@ -322,7 +322,7 @@ public class IntelligentTutor {
              /*
             Find which quiz they did the worst on (as long as it's below the minimum test score threshold defined in Configure.java)
              */
-            if (student.hasTakenQuiz(i) && student.getTest(i).getBestScore() < Configure.MINIMUM_QUIZ_SCORE) {
+            if (student.hasTakenQuiz(i) && student.getQuiz(i).getBestScore() < Configure.MINIMUM_QUIZ_SCORE) {
                 double score = student.getQuiz(i).getBestScore() / 100.0;
                 if ((1 - score) * 2 > worstTestScore) {
                     worstQuizScore = (1 - score) * 2;
@@ -401,9 +401,7 @@ public class IntelligentTutor {
                 addText("\n\nIf you are still not comfortable with the material, it might be necessary to use additional " +
                         "resources or simply practice more. If you were to retake the quiz, it may present new and " +
                         "different questions to help you with your learning." +
-                        "\n\n You can always review your history under ");
-                addTextBold("Statistics");
-                addText(" to previous quiz attempts in helping you study.");
+                        "\n\n You can always review your history to previous quiz attempts under each chapter on this page to help you study");
             }
         }
         /*

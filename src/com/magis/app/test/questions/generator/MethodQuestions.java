@@ -30,6 +30,7 @@ public class MethodQuestions extends QuestionGenerator{
     }
 
     public void getReturnType(){
+        answers.clear();
         int dataType = rand.nextInt(dataTypes.length);
         answers.add("int");
         answers.add("double");
@@ -65,6 +66,6 @@ public class MethodQuestions extends QuestionGenerator{
                 correctAnswer = answers.get(5);
                 break;
         }
-        question+= " myMethod(){\n\t.\n\t.\n\t.\n}```\nWhat is the return of this method?";
+        question+= "myMethod(){\n\t.\n\t.\n\t.\n}```\nWhat is the return type of this method?";
     }
 }

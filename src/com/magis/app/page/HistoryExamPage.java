@@ -73,9 +73,7 @@ public class HistoryExamPage {
         //replace the content by marking the student's answer as correct/incorrect
         if (examQuestion.isWritten()) {
             for (int answerIndex = 0; answerIndex < examQuestion.getNumCorrectAnswers(); answerIndex++) {
-                HBox answerContainer = new HBox();
-                answerContainer.setMaxHeight(TextFlow.USE_PREF_SIZE);
-                answerContainer.setMaxWidth(TextFlow.USE_PREF_SIZE);
+                TextFlow answerContainer = new TextFlow();
                 ExamPageContent.replaceTextFieldWithNode(questionBox, answerContainer);
                 ExamPageContent.applyDiffing(examQuestion, answerContainer, answerIndex);
             }

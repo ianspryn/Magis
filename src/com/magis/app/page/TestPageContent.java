@@ -43,11 +43,12 @@ public class TestPageContent extends ExamPageContent {
             ExamsModel.ChapterModel quiz = Main.quizzesModel.getChapter(Main.lessonModel.getChapter(i).getTitle());
             int numAvailableQuizQuestionsForChapter = quiz != null ? quiz.getNumAvailableQuestions() : 0;
             if (numAvailableQuizQuestionsForChapter > 0) {
-                usedQuizBankQuestions.put(mapCounter, new ArrayList<>()); //to keep track of which quiz question from each chapter we've used
                 quizzes.add(quiz);
+                usedQuizBankQuestions.put(mapCounter, new ArrayList<>()); //to keep track of which quiz question from each chapter we've used
                 numAvailableQuizBankQuestions.add(numAvailableQuizQuestionsForChapter);
             } else {
                 //we have to keep everything in line
+                quizzes.add(null);
                 usedQuizBankQuestions.put(mapCounter, new ArrayList<>());
                 numAvailableQuizBankQuestions.add(0);
             }
@@ -82,7 +83,7 @@ public class TestPageContent extends ExamPageContent {
             //pick a quiz
             int whichQuiz;
             //we are only guaranteed to get to this point if there still exists a quiz that is NOT in maxedOutQuizzes
-            do whichQuiz = rand.nextInt(usedQuizBankQuestions.size());
+            do whichQuiz = rand.nextInt(quizzes.size());
             while (maxedOutQuizzes.contains(whichQuiz));
 
             //decide if the question is pulled from a bank (0) or generated (1)
@@ -91,7 +92,7 @@ public class TestPageContent extends ExamPageContent {
             if (usedQuizBankQuestions.get(whichQuiz).size() < numAvailableQuizBankQuestions.get(whichQuiz) && (questionGenerators.get(whichQuiz) != null && numGeneratedQuizQuestions.get(whichQuiz) < questionGenerators.get(whichQuiz).getNumUnique())) {
                 typeOfQuestion = rand.nextInt(2); //0 or 1
                 //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
-            } else if (numAvailableQuizBankQuestions.get(whichQuiz) > usedQuizBankQuestions.get(whichQuiz).size() && (questionGenerators.get(whichQuiz) != null || numGeneratedQuizQuestions.get(whichQuiz) >= questionGenerators.get(whichQuiz).getNumUnique())) {
+            } else if (numAvailableQuizBankQuestions.get(whichQuiz) > usedQuizBankQuestions.get(whichQuiz).size() && (questionGenerators.get(whichQuiz) == null || numGeneratedQuizQuestions.get(whichQuiz) >= questionGenerators.get(whichQuiz).getNumUnique())) {
                 typeOfQuestion = 0;
                 //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
             } else if (numAvailableQuizBankQuestions.get(whichQuiz) <= usedQuizBankQuestions.get(whichQuiz).size() && (questionGenerators.get(whichQuiz) != null && numGeneratedQuizQuestions.get(whichQuiz) < questionGenerators.get(whichQuiz).getNumUnique())) {
@@ -214,7 +215,7 @@ public class TestPageContent extends ExamPageContent {
     private boolean checkForAvailableQuizQuestions() {
         boolean available = false;
         for (int i = 0; i < numChaptersOnTest; i++) {
-            if ((usedQuizBankQuestions.get(i).size() < numAvailableQuizBankQuestions.get(i)) ||
+            if ((quizzes.get(i) != null && (usedQuizBankQuestions.get(i).size() < numAvailableQuizBankQuestions.get(i))) ||
                     (questionGenerators.get(i) != null && numGeneratedQuizQuestions.get(i) < questionGenerators.get(i).getNumUnique())) {
                 available = true;
             } else {
