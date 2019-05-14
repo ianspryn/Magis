@@ -80,9 +80,9 @@ public class ControlStatementQuestions extends QuestionGenerator{
     public void whileLoopQuestions(){
         answers.clear();
 
-        int startingNum = rand.nextInt(10);
+        int startingNum = rand.nextInt(10)+1;
         int num = startingNum;
-        int controller = rand.nextInt(10)+1;
+        int controller = rand.nextInt(startingNum);
 
         question = "```int num = "+num+";\n\nwhile ("+num+" > "+controller+") {\n\tnum--;\n}```";
         question += "\nHow many times will this while loop iterate?";
@@ -162,16 +162,16 @@ public class ControlStatementQuestions extends QuestionGenerator{
         int[] numbers = new int[length];
         int sum = 0;
 
-        question = "int[] numbers = {";
+        question = "```int[] numbers = {";
 
         for(int i = 0; i<numbers.length; i++){
-            numbers[i] = rand.nextInt();
+            numbers[i] = rand.nextInt(10)+1;
             question += ""+numbers[i]+", ";
         }
 
         question +="};\nint sum = 0;\n";
 
-        question += "for(int num : numbers){\n\tsum += num\n}\n\n";
+        question += "for(int num : numbers){\n\tsum += num\n}```\n";
         question += "What is the final value of \"sum\"?";
 
         for(int num: numbers){
