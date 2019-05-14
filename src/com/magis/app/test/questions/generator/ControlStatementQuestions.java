@@ -114,27 +114,36 @@ public class ControlStatementQuestions extends QuestionGenerator{
     public void forLoopQuestion(){
         answers.clear();
 
-        int num = rand.nextInt(5)+5;
+        int num = rand.nextInt(3)+3;
 
-        question = "```int num = "+num+";\nint product = 0;\n\n";
+        question = "```int num = "+num+";\nint product = 1;\n\n";
         question += "for (int i = num; i > 0; i--) {\n\tproduct *= i\n}```\n";
         question += "What is the final value of \"product\"?";
 
-        int falseProduct1 = 0;
-        int falseProduct2 = 0;
-        int falseProduct3 = 0;
+        int falseProduct1 = 1;
+        int falseProduct2 = 1;
+        int falseProduct3 = 1;
 
-        int product = 0;
+        int product = 1;
         for(int i = num; i>0; i--){
             product *= i;
         }
 
-        for(int i = num; i>1; i--){
+        for(int i = (num-1); i>0; i--){
+            falseProduct1 *= i;
+        }
+
+        for(int i = (num-2); i>0; i--){
             falseProduct2 *= i;
         }
 
-        for(int i = num; i>2; i--){
-            falseProduct3 *= i;
+        if((num-3) == 0){
+            falseProduct3 = 0;
+        }
+        else {
+            for (int i = (num - 3); i > 0; i--) {
+                falseProduct3 *= i;
+            }
         }
 
         int noneOfTheAbove = rand.nextInt(10);
@@ -163,10 +172,12 @@ public class ControlStatementQuestions extends QuestionGenerator{
         int sum = 0;
 
         question = "```int[] numbers = {";
+        numbers[0] = rand.nextInt(10)+1;
+        question += ""+numbers[0];
 
-        for(int i = 0; i<numbers.length; i++){
+        for(int i = 1; i<numbers.length; i++){
             numbers[i] = rand.nextInt(10)+1;
-            question += ""+numbers[i]+", ";
+            question += ", "+numbers[i];
         }
 
         question +="};\nint sum = 0;\n";
@@ -178,19 +189,21 @@ public class ControlStatementQuestions extends QuestionGenerator{
             sum += num;
         }
 
-        int noneOfTheAbove = rand.nextInt(10);
+        int noneOfTheAbove = rand.nextInt(2);
         if(noneOfTheAbove == 0){
             correctAnswer = "None of the Above";
             sum+=numbers.length;
             answers.add(""+sum);
+            answers.add(""+(sum+1));
         }
         else {
-            correctAnswer += "" + sum;
+            correctAnswer = ""+sum;
             answers.add(correctAnswer);
+            answers.add(""+(sum+1));
         }
         answers.add(""+(sum-numbers[length-1]));
-        answers.add(""+(sum-numbers[0]));
-        answers.add(""+(sum-numbers[length/2]));
+        answers.add("0");
+
         Collections.shuffle(answers);
         answers.add("None of the Above");
     }
