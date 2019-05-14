@@ -453,7 +453,8 @@ public class HomePage {
      * @param node the node to transition and fade out before go to the sign in page
      */
     private void signOut(Node node) {
-
+        //write student progress
+        Main.studentModel.getStudent().writePageProgress();
         if (Main.useAnimations) {
             transitionPage(node).setOnFinished(e -> Login.Page());
         } else {
