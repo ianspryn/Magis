@@ -985,71 +985,89 @@ return ###;
         <chapter id = "Arrays">
                 <questions>
                         <question>
-                                <level>1</level>
-                                <statement>True or false: arrays can dynamically grow and shrink in size.</statement>
-                                <shuffle>false</shuffle>
-                                <answer>True</answer>
-                                <answer id = "correct">False</answer>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
                         </question>
                         <question>
-                                <level>1</level>
-                                <statement>True or false: ArrayLists can dynamically grow and shrink in size.</statement>
-                                <answer id = "correct">True</answer>
-                                <answer>False</answer>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.
+```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```</statement>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
                         </question>
                         <question>
-                                <level>1</level>
-                                <statement>Which delimeter do we use to indicate we are an array datatype?</statement>
-                                <answer id = "correct">[ ] - brackets</answer>
-                                <answer>{ } - braces</answer>
-                                <answer>( ) - parentheses</answer>
-                                <answer>&lt; &gt; - angle brackets</answer>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.
+```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```</statement>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
                         </question>
                         <question>
-                                <level>2</level>
-                                <statement>```int[] values = new int[5];
-System.out.println(values[3]);```
-What will the code output?</statement>
-                                <shuffle>false</shuffle>
-                                <answer id = "correct">0</answer>
-                                <answer>1</answer>
-                                <answer>null</answer>
-                                <answer>An error will be occur</answer>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.
+```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```</statement>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
                         </question>
                         <question>
-                                <level>2</level>
-                                <statement>```boolean[] values = new boolean[5];
-System.out.println(values[3]);```
-What will the code output?</statement>
-                                <shuffle>false</shuffle>
-                                <answer>true</answer>
-                                <answer id = "correct">false</answer>
-                                <answer>null</answer>
-                                <answer>An error will be occur</answer>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.
+```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```</statement>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
                         </question>
                         <question>
-                                <level>2</level>
-                                <shuffle>false</shuffle>
-                                <statement>```MyClass[] values = new MyClass[5];
-System.out.println(values[3]);```
-What will the code output?
-Assume MyClass has been implemented.</statement>
-                                <answer id = "correct">null</answer>
-                                <answer>An empty string</answer>
-                                <answer>The name of the class</answer>
-                                <answer>An error will be occur</answer>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.
+```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```</statement>
+                        <question>
+                                <level>3</level>
+                                <written>true</written>
+                                <statement>Declare and initialize an integer array called "myVariable" and of size 10.</statement>
+                                <answer id = "correct">int[] myVariable = new int[10];</answer>
                         </question>
                         <question>
-                                <level>2</level>
-                                <shuffle>false</shuffle>
-                                <statement>```int[] values;
-values[1] = 23;```
-Will this code run normally?</statement>
-                                <answer>Yes</answer>
-                                <answer>Yes, but values[1] will remain null</answer>
-                                <answer>No, you need to set values[0] first</answer>
-                                <answer id = "correct">No, 'values' must be initialized</answer>
-                        </question>
+                                <level>4</level>
+                                <written>true</written>
+                                <statement>Finish this code so that it creates an array of type int with size 5, and each index of the array is equal to the i-index value of the for-loop.
+```### myArray = ###;
+for (int i = 0; i &lt; myArray.length; i++) {
+        ###;
+}```</statement>
                         <question>
                                 <level>3</level>
                                 <written>true</written>
