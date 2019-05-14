@@ -47,7 +47,7 @@ Format as H3 header:
 		<title>Comments</title>
 		<description>Become familiar with the three types of Java comments</description>
 		<pages>
-			<page>
+			<page title = "Introduction to Comments">
 				<text>
 This line inside the main method is a comment:
 ```
@@ -133,7 +133,7 @@ public int getAccountNumber()
 		<title>Primitive Types</title>
 		<description>Become familiar with basic programming terminology and learn about the concepts of types, variables, and assignment</description>
 		<pages>
-			<page>
+			<page title = "Introduction to Primitive Types">
 				<text>
 A computer program processes values: numbers, strings, and more complex data items. In Java, every value has a TYPE. (A type speciﬁes a set of values and  the operations that can be carried out with the values.) For example, the number 13 has the type int (an abbreviation for “integer”), "Hello, World" has the type String, and the object System.out has the type PrintStream. The type tells you what operations you can carry
 out with the values. For example, you can compute the sum or product of any two integers. You can call println on any object of type PrintStream. Java has separate types for INTEGERS and FLOATING-POINT numbers. Integers are whole numbers; floating-point numbers can have fractional parts. For example, 13 is an integer and 1.3 is a floating-point number.
@@ -142,7 +142,7 @@ If you need to process numbers with a fractional part, you should use the type c
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Primitive%20Types/2.png</image>
 			</page>
-			<page>
+			<page title = "Number Literals">
 				<text>
 When a value such as 13 or 1.3 occurs in a Java program, it is called a number literal. Do not use commas when you write number literals in Java. For example, 13,000 must be written as 13000. To write numbers in exponential notation in Java, use the notation En instead of “ × 10n ”. For example, 1.3 × 10^–4 is written as 1.3E-4. Table 1 shows how to write integer and floating-point literals in Java. You may wonder why Java has separate integer and floating-point number types.
 Pocket calculators don’t need a separate integer type; they use floating-point numbers for all calculations. However, integers have several advantages over floating point numbers. They take less storage space, are processed faster, and don’t cause rounding errors. You will want to use the int type for quantities that can never have fractional parts, such as the length of a string. Use the double type for quantities that
@@ -168,7 +168,7 @@ Self Check
 4. Write an expression to compute the average of the values x and y.
 				</text>
 			</page>
-			<page>
+			<page title = "Integer Overflow">
 				<text>
 In Java, every value is either a reference to an object, or it belongs to one of the eight primitive types shown in Table 1. Six of the primitive types are number types; four of them for integers and two for ﬂoating-point numbers.
 
@@ -186,7 +186,7 @@ Overﬂow is not usually a problem for double-precision ﬂoating-point numbers.
 				</text>
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Primitive%20Types/2.png</image>
 			</page>
-			<page>
+			<page title = "Rounding Errors">
 				<text>
 Rounding errors are a more serious issue with ﬂoating-point values. Rounding errors can occur when you convert between binary and decimal numbers, or between integers and ﬂoating-point numbers. When a value cannot be converted exactly, it is rounded to the nearest match. Consider this example:
 ```
@@ -217,12 +217,12 @@ int dollars = balance; // Error
 	b. ```double balance = 100;```
 				</text>
 			</page>
-			<page>
+			<page title = "Strings">
 				<text>
 In Java, strings are objects that belong to the class String (You can tell that String is a class name because it starts with an uppercase letter. The primitive types int and double start with lowercase letters.) You do not need to call a constructor to create a string object. You can obtain a string literal simply by enclosing a sequence of characters in double quotation marks. For example, the string literal "Harry" is an object of the String class. The number of characters in a string is called the length of the string. As you have seen, you can use the length method to obtain the length of a string. For example, "Hello".length() is 5, and the length of "Hello, World!" is 13. (The quotation marks are not part of the string and do not contribute to the length, but you must count spaces and punctuation marks.) A string of length zero, containing no characters, is called the empty string and is written as "".
 				</text>
 			</page>
-			<page>
+			<page title = "Booleans">
 				<text>
 In Java, an expression such as amount &lt; 1000 has a value, just as the expression amount + 1000 has a value. The value of a relational expression is either true or false. For example, if amount is 500, then the value of amount &lt; 1000 is true. Try it out: The program fragment
 ```
@@ -987,7 +987,7 @@ double y = 3 * (1.0 / 3);
 		<title>Variables</title>
 		<description>Explore parameter, local, instance, and class variables</description>
 		<pages>
-			<page>
+			<page title = "Introduction to Variables">
 				<text>
 You often want to store values so that you can use them at a later time. To remember a value, you need to hold it in a variable. A variable is a storage location in the computer’s memory that has a type, name, and contents. For example, here we declare three variables:
 ```
@@ -1533,7 +1533,7 @@ public void println(String output)
 		<title>Escape Sequences</title>
 		<description>Learn how to properly employ escape sequences.</description>
 		<pages>
-			<page>
+			<page title = "Introduction to Escape Sequences">
 				<text>
 Suppose you want to display a string containing quotation marks, such as
 ###
@@ -1580,7 +1580,7 @@ System.out.println("All the way to San Jos\u00E9!");
 		<title>Methods</title>
 		<description>Learn about public, private, and static methods. Also, consider overloading, parameter passing, and overriding.</description>
 		<pages>
-			<page >
+			<page title = "Introduction to Methods">
 				<image>https://res.cloudinary.com/ianspryn/image/upload/v1/Magis/Methods/0.png</image>
 				<text>
 Imagine that you are a member of a team that works on banking software. A fundamental concept in banking is a bank account. Your task is to understand the design of a BankAccount class so that you can implement it, which in turn allows other programmers on the team to use it.
@@ -4169,7 +4169,7 @@ When the exception is caught, its message string can be retrieved using the getM
 		<title>Packages</title>
 		<description>Learn how packages can help you in Java land!</description>
 		<pages>
-			<page>
+			<page title = "Introduction to Packages">
 				<text>
 A Java program consists of a collection of classes. So far, most of your programs have consisted of a small number of classes. As programs get larger, however, simply distributing the classes over multiple ﬁles isn’t enough. An additional structuring mechanism is needed.
 
