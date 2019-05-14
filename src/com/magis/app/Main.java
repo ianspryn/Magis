@@ -83,6 +83,11 @@ public class Main extends Application {
         questionGenerator.put(11, new MiscOOPQuestions());
 //        questionGenerator.put(8, new ExceptionsQuestions());
 //        questionGenerator.put(9, new PackagesQuestions());*/
+        questionGenerator.put(12, new ConstructerQuestions());
+        questionGenerator.put(13, new ClassesQuestions());
+ //       questionGenerator.put(14, new InheritanceQuestions());
+
+
 
     }
 

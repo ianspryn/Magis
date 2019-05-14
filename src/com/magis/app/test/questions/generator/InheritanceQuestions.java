@@ -1,10 +1,10 @@
-package com.magis.app.test.questions.generator;
+/*package com.magis.app.test.questions.generator;
 
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class InheritanceQuestions extends QuestionGenerator{
+public class InheritanceQuestions extends QuestionGenerator {
 
     private String[] secondAnswers = {"Example1 is a super class and Example2 is a sub class",
             "Example1 is a sub class and Example2 is a super class",
@@ -15,7 +15,7 @@ public class InheritanceQuestions extends QuestionGenerator{
     private ArrayList<String> eAnswers;
     private ArrayList<String> sAnswers;
 
-    public InheritanceQuestions(){
+    public InheritanceQuestions() {
         super();
         sAnswers = new ArrayList<>(Arrays.asList(secondAnswers));
     }
@@ -25,12 +25,12 @@ public class InheritanceQuestions extends QuestionGenerator{
         generateSecondContructerQuestions();
     }
 
-   
-    public void generateSecondContructerQuestions(){
+
+    public void generateSecondContructerQuestions() {
         question = "";
         answers = sAnswers;
         int random = rand.nextInt(2);
-        String firstPart =  secondStrings[random];
+        String firstPart = secondStrings[random];
 
 
         question = "If class Example1 " + firstPart + " class Example2, what type of classes are Example1 and Example2?\n";
@@ -38,3 +38,5 @@ public class InheritanceQuestions extends QuestionGenerator{
 
 
     }
+}
+*/

@@ -138,21 +138,21 @@ class QuestionGeneratorTest {
         System.out.println("\nCorrect Answer: "+correctAnswer);
     }
 
-    @Test
-    void testStringMethod(){
-        MethodQuestions objc  = new MethodQuestions();
-        objc.getStringMethodQuestion();
-        String[] answers = objc.getAnswers().toArray(new String[0]);
-        String question = objc.getQuestion();
-        String correctAnswer = objc.getCorrectAnswer();
-        System.out.println(question+"\n");
-
-        for(int i=0; i<answers.length; i++){
-            System.out.println((i+1)+". "+answers[i]);
-        }
-
-        System.out.println("\nCorrect Answer: "+correctAnswer);
-    }
+//    @Test
+//    void testStringMethod(){
+//        MethodQuestions objc  = new MethodQuestions();
+//        objc.getStringMethodQuestion();
+//        String[] answers = objc.getAnswers().toArray(new String[0]);
+//        String question = objc.getQuestion();
+//        String correctAnswer = objc.getCorrectAnswer();
+//        System.out.println(question+"\n");
+//
+//        for(int i=0; i<answers.length; i++){
+//            System.out.println((i+1)+". "+answers[i]);
+//        }
+//
+//        System.out.println("\nCorrect Answer: "+correctAnswer);
+//    }
 
     @Test
     void testVariableNames(){
