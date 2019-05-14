@@ -92,7 +92,7 @@ public class TestPageContent extends ExamPageContent {
             if (usedQuizBankQuestions.get(whichQuiz).size() < numAvailableQuizBankQuestions.get(whichQuiz) && (questionGenerators.get(whichQuiz) != null && numGeneratedQuizQuestions.get(whichQuiz) < questionGenerators.get(whichQuiz).getNumUnique())) {
                 typeOfQuestion = rand.nextInt(2); //0 or 1
                 //if we have a bank of questions, but don't have a question generator (or we're out of unique generated questions)
-            } else if (numAvailableQuizBankQuestions.get(whichQuiz) > usedQuizBankQuestions.get(whichQuiz).size() && (questionGenerators.get(whichQuiz) != null || numGeneratedQuizQuestions.get(whichQuiz) >= questionGenerators.get(whichQuiz).getNumUnique())) {
+            } else if (numAvailableQuizBankQuestions.get(whichQuiz) > usedQuizBankQuestions.get(whichQuiz).size() && (questionGenerators.get(whichQuiz) == null || numGeneratedQuizQuestions.get(whichQuiz) >= questionGenerators.get(whichQuiz).getNumUnique())) {
                 typeOfQuestion = 0;
                 //if we don't have a bank of questions, but do have a question generator (and still have unique questions to generate)
             } else if (numAvailableQuizBankQuestions.get(whichQuiz) <= usedQuizBankQuestions.get(whichQuiz).size() && (questionGenerators.get(whichQuiz) != null && numGeneratedQuizQuestions.get(whichQuiz) < questionGenerators.get(whichQuiz).getNumUnique())) {
