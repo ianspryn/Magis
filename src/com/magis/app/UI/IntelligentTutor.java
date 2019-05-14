@@ -222,7 +222,7 @@ public class IntelligentTutor {
             }
             newPage = chapter.getNumPages();
             addText("You haven't taken the quiz for ");
-            addTextBold("Chapter " + (student.getRecentChapter() + 1) + ": " + Main.lessonModel.getChapter(student.getRecentPage()).getTitle());
+            addTextBold("Chapter " + (student.getRecentChapter() + 1) + ": " + Main.lessonModel.getChapter(student.getRecentChapter()).getTitle());
             addText(" yet, even though you already took the test. Want to do it now?");
         }
         else if ((onQuizPage && !hasTakenQuiz) || (progress == 100 && !hasTakenQuiz)) {
