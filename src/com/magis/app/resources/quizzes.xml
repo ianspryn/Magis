@@ -1371,7 +1371,75 @@ returns true if</statement>
         </chapter>
         <chapter id = "Control Statements">
                 <questions>
-
+                    <question>
+                        <statement>In the following code what is the condition?
+                            ```if (amount &lt;= balance)
+                            balance = balance - amount;
+                            ```</statement>
+                        <answer id = "correct">if (amount &lt;= balance)</answer>
+                        <answer>balance = balance - amount;</answer>
+                        <answer>both lines are the condition</answer>
+                        <answer>neither lines are the condition</answer>
+                    </question>
+                    <question>
+                        <statement>An if statement has two parts, what are they?</statement>
+                        <answer id = "correct">Condition and body</answer>
+                        <answer>Condition and result</answer>
+                        <answer>body and result</answer>
+                        <answer>result and control</answer>
+                    </question>
+                    <question>
+                        <statement>If you want to implement a choice between two alternatives, what control statement should you use?</statement>
+                        <answer id = "correct">if/else statement</answer>
+                        <answer>Double if statement</answer>
+                        <answer>While loop</answer>
+                        <answer>Switch statement</answer>
+                    </question>
+                    <question>
+                        <statement>What loop executes over and over again until a condition becomes no longer true?</statement>
+                            <answer id = "correct">while</answer>
+                            <answer>if</answer>
+                            <answer>for</answer>
+                            <answer>None of the Above</answer>
+                    </question>
+                    <question>
+                        <statement>When will the following loop end?
+```while (true){
+update = 1+1;
+}                        </statement>
+                        <answer id = "correct">Only when the program is terminated</answer>
+                        <answer>After 10 loops</answer>
+                        <answer>After 1 loop</answer>
+                        <answer>After 1000 loops</answer>
+                    </question>
+                    <question>
+                        <statement>If you want to execute a statement once before checking the condition, what loop should you use?</statement>
+                        <answer>While</answer>
+                        <answer id = "correct">Do-while</answer>
+                        <answer>For</answer>
+                        <answer>If</answer>
+                    </question>
+                    <question>
+                        <statement>What is the special form of a while loop that executes a set amount of times?</statement>
+                        <answer id = "correct">For</answer>
+                        <answer>Switch</answer>
+                        <answer>Do-While</answer>
+                        <answer>None of the above</answer>
+                    </question>
+                    <question>
+                        <statement>What statement is used to exit a switch, while, for, or do loop?</statement>
+                        <answer id = "correct">Break</answer>
+                        <answer>exit</answer>
+                        <answer>terminate</answer>
+                        <answer>None of the above</answer>
+                    </question>
+                    <question>
+                        <statement>In general, a break is a ____ way of exiting a loop</statement>
+                        <answer>good</answer>
+                        <answer>fantastic</answer>
+                        <answer id = "correct">very poor</answer>
+                        <answer>None of the above</answer>
+                    </question>
                 </questions>
         </chapter>
 
