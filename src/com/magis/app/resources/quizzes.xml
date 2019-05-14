@@ -1070,4 +1070,377 @@ for (int i = 0; i &lt; myArray.length; i++) {
                         </question>
                 </questions>
         </chapter>
+        <chapter id = "Packages">
+                <questions>
+                        <question>
+                                <statement>A java package is a ___</statement>
+                                <answer id ="correct">set of related classes</answer>
+                                <answer>default set of classes included in every project</answer>
+                                <answer>fancy name for a method</answer>
+                                <answer>class containing multiple methods</answer>
+                        </question>
+                        <question>
+                                <statement>To put a class into a package you must ____ as the first instruction in the source file</statement>
+                                <answer id ="correct">place a line 
+```package packageName;```</answer>
+                            <answer>import a package reader</answer>
+                            <answer>place a line
+```Scanner scan = new Scanner(packageName)</answer>
+                            <answer>call all its methods</answer>
+                        </question>
+                        <question>
+                                <statement>A package name consists of one or more identifiers separated by ___</statement>
+                                <answer id ="correct">periods</answer>
+                                <answer>Pound signs</answer>
+                                <answer>Method names</answer>
+                                <answer>Class names</answer>
+                        </question>
+                        <question>
+                                <statement>How do you use a class from a package?</statement>
+                                <answer id = "correct">Refer to it by its full name (package name plus class name)</answer>
+                                <answer>simply refer to its class name</answer>
+                                <answer>just call it's methods by names</answer>
+                                <answer>You cannot use a class from a package</answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Exceptions">
+                <questions>
+                        <question>
+                                <statement>What are the two main aspects to exception handling</statement>
+                                <answer id ="correct">Reporting and recovery</answer>
+                                <answer>Trying and Catching</answer>
+                                <answer>Finding and Removing</answer>
+                                <answer>Observing and Reporting</answer>
+                        </question>
+                        <question>
+                                <statement>When you throw an exception,  execution does not continue with the next statement but instead continues where?</statement>
+                                <answer id ="correct">With an exception handler.</answer>
+                                <answer>A crash</answer>
+                                <answer>The start of the program</answer>
+                                <answer>An infinite loop</answer>
+                        </question>
+                        <question>
+                                <statement>What are the two categories Java exceptions fall into?</statement>
+                                <answer id ="correct">Checked and unchecked</answer>
+                                <answer>Tried and Caught</answer>
+                                <answer>Removed and Un-removed</answer>
+                                <answer>Inherited and Un-Inherited</answer>
+                        </question>
+                        <question>
+                                <statement>The majority of checked exception occur when you deal with what?</statement>
+                                <answer id ="correct">Input/Output</answer>
+                                <answer>Math Operations</answer>
+                                <answer>List Manipulation</answer>
+                                <answer>String Operations</answer>
+                        </question>
+                        <question>
+                                <statement>When designing your own exception class, it is a good idea to extend a class in the exception hierarchy why?</statement>
+                                <answer id ="correct">Enables other programmers to catch the exception even
+if they are not interested in the exact nature of the problem.</answer>
+                                <answer>Allows for more exceptions to be caught</answer>
+                                <answer>Ensures that other programmers know what exceptions you were looking for</answer>
+                                <answer>Ensures that other programmers know what exceptions were unsolved</answer>
+                        </question>
+                        <question>
+                                <statement>I/O exceptions are typically what type of exception?</statement>
+                                <answer id ="correct">Checked</answer>
+                                <answer>Unchecked</answer>
+                                <answer>Caught</answer>
+                                <answer>Un-Removed</answer>
+                        </question>
+                        <question>
+                                <statement>You can get a printout of the
+chain of method calls that lead to the exception by calling what?</statement>
+                                <answer id ="correct">exception.printStackTrace();</answer>
+                                <answer>exception.printOut();</answer>
+                                <answer>exception.Trace();</answer>
+                                <answer>exception.console();</answer>
+                        </question>
+                        <question>
+                                <statement>What are the two constructors customarily included in an exception class?</statement>
+                                <answer id ="correct">A constructor with no parameters and a constructor that accepts a message string describing the reason for the exception.</answer>
+                                <answer>A constructor with no parameters and a constructor that accepts the stack-trace of the exception</answer>
+                                <answer>A constructor with the exception message and a constructor that accepts the strack-trace of the exception</answer>
+                                <answer>A constructor with no parameters and another constructor with no parameters</answer>
+                        </question>
+                        <question>
+                                <statement>If an exception has no handler what occurs?</statement>
+                                <answer id ="correct">An error message is printed, and your program terminates.</answer>
+                                <answer>The program stops until you handle the exception</answer>
+                                <answer>The program crashes with no message</answer>
+                                <answer>A warning is displayed saying such an exception was caught</answer>
+                        </question>
+                        <question>
+                                <statement>It is important to remember that you should place catch clauses only in methods
+in which you can what? </statement>
+                                <answer id ="correct">Competently handle the particular exception type.</answer>
+                                <answer>Find that exceptions are a common occurrence in it</answer>
+                                <answer>Quickly remove the exception as the program is running</answer>
+                                <answer>Run the method multiple times over</answer>
+                        </question>
+                        <question>
+                                <statement>If none of the standard exception types describe your error condition well enough, what can you do?</statement>
+                                <answer id ="correct">Design your own exception class.</answer>
+                                <answer>Keep looking for a standard exception type</answer>
+                                <answer>Use a generic exception class</answer>
+                                <answer>Default to simple error messages</answer>
+                        </question>
+                        <question>
+                                <statement>FileNotFoundException is a subclass of what Exception?</statement>
+                                <answer id ="correct">IOException</answer>
+                                <answer>IllegalArgumentException</answer>
+                                <answer>NullPointerException</answer>
+                                <answer>DivideByZeroException</answer>
+                        </question>
+                        <question>
+                                <statement>When is it best not to catch an exception?</statement>
+                                <answer id ="correct">If you don't know how to remedy the situation</answer>
+                                <answer>When there are not exceptions to catch</answer>
+                                <answer>When you don't have a way to quickly fix the program while it is running</answer>
+                                <answer>When the exceptions are too numerous to handle</answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Input/Output">
+                <questions>
+                        <question>
+                                <level>1</level>
+                                <statement>Which of the following will succesfully create a Scanner that reads from "input.txt"?</statement>
+                                <answer id = "correct">File inFile = new File("input.txt");
+Scanner in = new Scanner(inFile);</answer>
+                                <answer>Scanner in = new Scanner(System.in);</answer>
+                                <answer>Scanner in = new Scanner(File.read("input.txt");</answer>
+                                <answer>File inFile = new File("input.txt");
+Scanner in = new Scanner(read(inFile));</answer>
+                        </question>
+                        <question>
+                                <statement>If you desire to write output to a file, you construct what?</statement> 
+                                <answer id = "correct">PrintWriter object</answer>
+                                <answer>Scanner object</answer>
+                                <answer>Writer object</answer>
+                                <answer>File object</answer>
+                        </question>
+                        <question>
+                                <statement>What can occur if your program exits without closing the PrintWriter?</statement>
+                                <answer id ="correct">The disk file may not contain all of the output</answer>
+                                <answer>The program crashes while running</answer>
+                                <answer>You wont be able to run the program cause the compiler will throw an error</answer>
+                                <answer>Nothing. Program will run as normal</answer>
+                        </question> 
+                        <question>
+                                <statement>If the output file already exists, what happens to it?</statement> 
+                                <answer id = "correct">It is emptied then overwritten</answer>
+                                <answer>A new file with the same name but (copy) attached to it will appear</answer>
+                                <answer>There will be a conflict and the file wont be written to</answer>
+                                <answer>There will be a conflict and the file will be edited to change information</answer>
+                        </question>     
+                        <question>
+                                <statement>Which of the following is the correct way to make a PrintWriter</statement> 
+                                <answer id = "correct">PrintWriter out = new PrintWriter("output.txt");</answer>
+                                <answer>PrintWriter out = new PrintWriter(System.in);</answer>
+                                <answer>PrintWriter out = new PrintWriter(File("output.txt"));</answer>
+                                <answer>PrintWriter out = new PrintWriter(Scanner sc = new Scanner("output.txt"));</answer>
+                        </question> 
+                        <question>
+                                <statement>What should you make sure to do after you finish with a PrintWriter.</statement> 
+                                <answer id = "correct">Close it</answer>
+                                <answer>Scan it</answer>
+                                <answer>Delete it</answer>
+                                <answer>End the program</answer>
+                        </question>
+                        <question>
+                                <statement>What should you make sure to do after you finish with a PrintWriter?</statement> 
+                                <answer id = "correct">Close it</answer>
+                                <answer>Nothing</answer>
+                                <answer>Delete it</answer>
+                                <answer>Make sure there is a PrintReader with it</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following lines of code is the correct way to specify a file name as a string literal?</statement> 
+                                <answer id = "correct">inFile = new File("c:\\homework\\input.dat");</answer>
+                                <answer>inFile = new File(FilePath("input.dat"));</answer>
+                                <answer>inFile = new File("input.dat");</answer>
+                                <answer>inFile = new File(directory(c:\\));</answer>
+                        </question>
+                        <question>
+                                <statement>In java a word is ___</statement>
+                                <answer id ="correct">any sequence of characters that is not white space.</answer>
+                                <answer>A part of a sentence</answer>
+                                <answer>any sequence of characters</answer>
+                                <answer>any sequence of characters that is not white space or numbers</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following Scanners will correctly only read words as letters?</statement>
+                                <answer id ="correct">```Scanner in = new Scanner(. . .);
+in.useDelimiter("[^A-Za-z]+");```</answer>
+                                <answer>```Scanner in = new Scanner(useDelimiter("[^A-Za-z]+");```</answer>
+                                <answer>```Scanner in = new Scanner(. . .);
+in.useDelimiter(String);```</answer>
+                                <answer>```Scanner in = new Scanner(String);```</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following lines of code will correctly search a Scanner until it encounters a number?</statement>
+                                <answer id ="correct">```String line = in.nextLine();
+int i = 0;
+while (!Character.isDigit(line.charAt(i))) { i++; }```</answer>
+                                <answer>```String line = in.nextLine();
+int i = 0;
+while (Character.hasNext()) { i++; }```</answer>
+                                <answer>```String line = in.nextLine();
+int i = 0;
+while (Character.hasNext() - int) { i++; }```</answer>
+                                <answer>```String line = in.nextLine();
+int i = 0;
+while (line) { i++; }```</answer>
+                        </question>
+                        <question>
+                                <statement>What does the trim method do?</statement>
+                                <answer id ="correct">Returns the string with all white space at the beginning and end removed.</answer>
+                                <answer>Trims down Strings to a certain amount</answer>
+                                <answer>Trims down numbers to round them off</answer>
+                                <answer>Returns the String with no spaces</answer>
+                        </question>
+                        <question>
+                                <statement>What method will convert a string into a int?</statement>
+                                <answer id ="correct">parseInt(String a)</answer>
+                                <answer>makeInt(String a)</answer>
+                                <answer>convertInt(String a)</answer>
+                                <answer>Integer(String a)</answer>
+                        </question>
+                        <question>
+                                <statement>What happens if you try to use parseInt on a String that doesn't contain integers?</statement>
+                                <answer id ="correct">A NumberFormatException occurs</answer>
+                                <answer>Nothing happens</answer>
+                                <answer>The characters are changed to their ASCII numbers and summed</answer>
+                                <answer>The ASCII value of the first character is returned</answer>
+                        </question>
+                        <question>
+                                <statement>Which of the following Scanners will correctly read a file one character at a time?</statement>
+                                <answer id ="correct">Scanner in = new Scanner(. . .);
+in.useDelimiter("");</answer>
+                                <answer>Scanner in = new Scanner(. . .);
+in.useDelimiter(" ");</answer>
+                                <answer>Scanner in = new Scanner(. . .);
+in.useDelimiter(char);</answer>
+                                <answer>Scanner in = new Scanner(. . .);
+in.useDelimiter(Character);</answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Inheritance">
+                <questions>
+                        <question>
+                                <statement>If you want to call the constructor of a superclass, what keyword do you use?</statement>
+                                <answer id = "correct">super</answer>
+                                <answer>superclass</answer>
+                                <answer>construct</answer>
+                                <answer>upconstruct</answer>
+                        </question>
+                        <question>
+                                <statement>What does the super call require as parameters?</statement>
+                                <answer id = "correct">The parameters of the superclasses constructor</answer>
+                                <answer>nothing ever</answer>
+                                <answer>An integer</answer>
+                                <answer>A string to name the object</answer>
+                        </question>
+                        <question>
+                                <statement>If the keyword super is followed by a period, what is it calling?</statement>
+                                <answer id = "correct">A superclass method</answer>
+                                <answer>A superclass constructor</answer>
+                                <answer>A method from the super library</answer>
+                                <answer>You cannot follow super with a period</answer>
+                        </question>
+                        <question>
+                                <statement>If a subclass doesn't call a superclass constructor, the superclass must contain what?</statement>
+                                <answer id = "correct">A constructor with no parameters</answer>
+                                <answer>No member variables</answer>
+                                <answer>No global variables</answer>
+                                <answer>No methods</answer>
+                        </question>
+                        <question>
+                                <statement>The following code
+```anObject instanceof BankAccount```
+returns true if</statement>
+                                <answer id = "correct">The type of anObject is convertible to a BankAccount</answer>
+                                <answer>The type of anObject is a BankAccount</answer>
+                                <answer>There exists a method for conversion</answer>
+                                <answer>It will never return true</answer>
+                        </question>
+                </questions>
+        </chapter>
+        <chapter id = "Control Statements">
+                <questions>
+                    <question>
+                        <statement>In the following code what is the condition?
+                            ```if (amount &lt;= balance)
+                            balance = balance - amount;
+                            ```</statement>
+                        <answer id = "correct">if (amount &lt;= balance)</answer>
+                        <answer>balance = balance - amount;</answer>
+                        <answer>both lines are the condition</answer>
+                        <answer>neither lines are the condition</answer>
+                    </question>
+                    <question>
+                        <statement>An if statement has two parts, what are they?</statement>
+                        <answer id = "correct">Condition and body</answer>
+                        <answer>Condition and result</answer>
+                        <answer>body and result</answer>
+                        <answer>result and control</answer>
+                    </question>
+                    <question>
+                        <statement>If you want to implement a choice between two alternatives, what control statement should you use?</statement>
+                        <answer id = "correct">if/else statement</answer>
+                        <answer>Double if statement</answer>
+                        <answer>While loop</answer>
+                        <answer>Switch statement</answer>
+                    </question>
+                    <question>
+                        <statement>What loop executes over and over again until a condition becomes no longer true?</statement>
+                            <answer id = "correct">while</answer>
+                            <answer>if</answer>
+                            <answer>for</answer>
+                            <answer>None of the Above</answer>
+                    </question>
+                    <question>
+                        <statement>When will the following loop end?
+```while (true){
+update = 1+1;
+}                        </statement>
+                        <answer id = "correct">Only when the program is terminated</answer>
+                        <answer>After 10 loops</answer>
+                        <answer>After 1 loop</answer>
+                        <answer>After 1000 loops</answer>
+                    </question>
+                    <question>
+                        <statement>If you want to execute a statement once before checking the condition, what loop should you use?</statement>
+                        <answer>While</answer>
+                        <answer id = "correct">Do-while</answer>
+                        <answer>For</answer>
+                        <answer>If</answer>
+                    </question>
+                    <question>
+                        <statement>What is the special form of a while loop that executes a set amount of times?</statement>
+                        <answer id = "correct">For</answer>
+                        <answer>Switch</answer>
+                        <answer>Do-While</answer>
+                        <answer>None of the above</answer>
+                    </question>
+                    <question>
+                        <statement>What statement is used to exit a switch, while, for, or do loop?</statement>
+                        <answer id = "correct">Break</answer>
+                        <answer>exit</answer>
+                        <answer>terminate</answer>
+                        <answer>None of the above</answer>
+                    </question>
+                    <question>
+                        <statement>In general, a break is a ____ way of exiting a loop</statement>
+                        <answer>good</answer>
+                        <answer>fantastic</answer>
+                        <answer id = "correct">very poor</answer>
+                        <answer>None of the above</answer>
+                    </question>
+                </questions>
+        </chapter>
+
 </quizzes>
