@@ -275,6 +275,10 @@ public class IntelligentTutor {
         return box;
     }
 
+    /**
+     * Generate a box that will dynamically suggest to the student how to improve their Java abilities
+     * @return a VBox filled with dynamically generated text
+     */
     public static VBox generateInsights() {
         /*
         METHOD OF CALCULATION:
