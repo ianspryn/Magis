@@ -338,6 +338,7 @@ Fill in the blanks</statement>
                     <answer id = "correct">extends MyClass</answer>
                     <answer id = "correct">super();</answer>
                     <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
                     <answer id = "correct">this.num</answer>
                     <answer id = "correct">num;</answer>
                 </question>
@@ -374,7 +375,7 @@ public class SecondClass ### {
 
     //Get Sum for num1 and num2 and return it
     public ### getSum() {
-        int sum = ### + ###;
+        int sum = num1 + ###;
         ###
     }
 
@@ -387,11 +388,10 @@ Fill in the blanks</statement>
                     <answer id = "correct">this.num1</answer>
                     <answer id = "correct">num1;</answer>
                     <answer id = "correct">int</answer>
+                    <answer id = "correct">int</answer>
                     <answer id = "correct">this.num2</answer>
                     <answer id = "correct">num2;</answer>
                     <answer id = "correct">int</answer>
-                    <answer id = "correct">int</answer>
-                    <answer id = "correct">num1</answer>
                     <answer id = "correct">num2</answer>
                     <answer id = "correct">return sum;</answer>
                 </question>
