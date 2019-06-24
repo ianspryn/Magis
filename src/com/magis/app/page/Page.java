@@ -123,7 +123,6 @@ public abstract class Page {
         bottomNavigation.setRight(rightButton);
         UIComponents.fadeOnAndTranslate(bottomNavigation,0.15,0.3,0,0,0,0);
 
-        mainArea.setCenter(pageContent.getScrollPane());
         mainArea.setBottom(bottomNavigation);
         borderPane.setCenter(mainArea);
         master.getChildren().add(borderPane);
