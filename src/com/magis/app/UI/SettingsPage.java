@@ -54,7 +54,6 @@ public class SettingsPage {
         /*
         Profile
          */
-        AnchorPane profileAnchorPane = new AnchorPane();
 
         /*
         Name settings
@@ -200,9 +199,6 @@ public class SettingsPage {
 
         });
 
-        profileAnchorPane.getChildren().addAll(nameSettings, passwordSettings);
-        AnchorPane.setLeftAnchor(nameSettings,0.0);
-        AnchorPane.setRightAnchor(changePassword,0.0);
 
         vBox.getChildren().addAll(nameSettings, passwordSettings);
 

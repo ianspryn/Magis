@@ -130,7 +130,7 @@ public class Login {
         bottomButton.setOnMouseClicked(e -> showSignUp());
 
         /*
-        Create a "box" to show what the requirements go to for better UX
+        Create a "box" to show where the requirements go to for better UX
                           3
                        ________________________
         username      | password requirement #1
